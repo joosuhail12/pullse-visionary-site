@@ -34,10 +34,10 @@ const PlatformOverview = () => {
 
         {/* Main screenshot container */}
         <div className="max-w-6xl mx-auto">
-          {/* Screenshot with animated glow and LaserFlow */}
+          {/* LaserFlow wrapper with screenshot overlay */}
           <div className="relative group">
-            {/* LaserFlow container - positioned behind */}
-            <div className="relative rounded-3xl overflow-hidden" style={{ height: '700px' }}>
+            {/* LaserFlow container */}
+            <div className="relative rounded-3xl overflow-hidden bg-background" style={{ height: '700px' }}>
               <LaserFlow
                 horizontalBeamOffset={0.1}
                 verticalBeamOffset={0.0}
@@ -46,11 +46,11 @@ const PlatformOverview = () => {
                 wispDensity={1.2}
               />
               
-              {/* Screenshot container on top */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] z-10">
-                <div className="relative rounded-2xl border-2 border-primary/30 bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
+              {/* Screenshot box overlay - positioned on top */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[86%] h-[70%] z-10">
+                <div className="relative h-full rounded-2xl border-2 border-primary/40 bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
                   {/* Screenshot */}
-                  <div className="relative">
+                  <div className="relative h-full overflow-auto">
                     <img 
                       src={inboxScreenshot} 
                       alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
