@@ -128,6 +128,7 @@ const Navigation = () => {
   const bgOpacity = 0.5 + scrollProgress * 0.2; // 0.5 to 0.7
   const borderOpacity = 0.05 + scrollProgress * 0.05; // 0.05 to 0.1
   const fontSize = 0.75 + (scrollProgress * 0.125); // 0.75rem to 0.875rem (12px to 14px)
+  const navItemFontSize = 0.75 + (scrollProgress * 0.1875); // 0.75rem to 0.9375rem (12px to 15px)
   
   return <nav className="fixed top-0 left-0 right-0 z-50" style={{ paddingTop: `${16 - scrollProgress * 8}px`, paddingLeft: '1rem', paddingRight: '1rem' }}>
       <div 
@@ -183,8 +184,9 @@ const Navigation = () => {
             className="hidden lg:flex items-center relative"
             style={{ 
               gap: `${gapValue * 4}px`,
-              transition: 'gap 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'gap'
+              fontSize: `${navItemFontSize}rem`,
+              transition: 'gap 0.3s cubic-bezier(0.4, 0, 0.2, 1), font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'gap, font-size'
             }}
           >
             <NavDropdown title="Product" links={productLinks} />
