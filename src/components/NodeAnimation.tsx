@@ -41,7 +41,7 @@ const ParticleField = () => {
     </points>;
 };
 
-// Black curved arrow paths like in reference image
+// Black curved arrow paths like in reference image with enhanced flowy movement
 const BlackArrowPath = ({
   start,
   end,
@@ -58,6 +58,8 @@ const BlackArrowPath = ({
   delay?: number;
 }) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  
   const points = useMemo(() => {
     const startVec = new THREE.Vector3(...start);
     const endVec = new THREE.Vector3(...end);
@@ -66,12 +68,21 @@ const BlackArrowPath = ({
     return curve.getPoints(50);
   }, [start, end, controlOffset]);
 
-  // Animate the flow with faster speed
+  // Add flowy organic movement to the entire line
   useFrame(state => {
     if (materialRef.current) {
       materialRef.current.uniforms.time.value = (state.clock.elapsedTime + delay) * 1.5;
     }
+    
+    // Add gentle wave motion to the whole line group
+    if (groupRef.current) {
+      const time = state.clock.elapsedTime * 0.5 + delay;
+      groupRef.current.position.y = Math.sin(time) * 0.15;
+      groupRef.current.position.z = Math.cos(time * 0.7) * 0.1;
+      groupRef.current.rotation.z = Math.sin(time * 0.3) * 0.02;
+    }
   });
+  
   const shaderMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
@@ -121,7 +132,8 @@ const BlackArrowPath = ({
       blending: THREE.AdditiveBlending
     });
   }, []);
-  return <group>
+  
+  return <group ref={groupRef}>
       {/* Base line with subtle glow */}
       <Line points={points} color="#5b21b6" lineWidth={6} transparent opacity={0.3} />
       
@@ -162,7 +174,7 @@ const BlackArrowPath = ({
     </group>;
 };
 
-// Animated Gradient Flow Lines with Arrows
+// Animated Gradient Flow Lines with Arrows and enhanced organic movement
 const AnimatedFlowLine = ({
   start,
   end,
@@ -176,15 +188,26 @@ const AnimatedFlowLine = ({
 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  
   const points = useMemo(() => {
     const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(...start), new THREE.Vector3((start[0] + end[0]) / 2, (start[1] + end[1]) / 2, (start[2] + end[2]) / 2 - 1), new THREE.Vector3(...end)]);
     return curve.getPoints(50);
   }, [start, end]);
+  
   useFrame(state => {
     if (materialRef.current) {
       materialRef.current.uniforms.time.value = direction === "forward" ? state.clock.elapsedTime : -state.clock.elapsedTime;
     }
+    
+    // Add smooth organic movement
+    if (groupRef.current) {
+      const time = state.clock.elapsedTime * 0.3;
+      groupRef.current.position.y = Math.sin(time + start[0]) * 0.2;
+      groupRef.current.position.z = Math.cos(time * 1.3 + start[1]) * 0.15;
+      groupRef.current.rotation.x = Math.sin(time * 0.5) * 0.03;
+    }
   });
+  
   const shaderMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
@@ -216,6 +239,7 @@ const AnimatedFlowLine = ({
       blending: THREE.AdditiveBlending
     });
   }, [color]);
+  
   return <group ref={groupRef}>
       <Line points={points} color={color} lineWidth={3} transparent opacity={0.4} />
       <mesh>
