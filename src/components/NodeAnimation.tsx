@@ -1010,15 +1010,9 @@ const NodeAnimation = () => {
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 via-transparent to-background/10"></div>
         
         {/* Minimalistic Apple-style text at bottom */}
-        <div className="absolute bottom-8 left-0 right-0 text-center space-y-6 px-8">
-          <div>
-            <div className="text-sm font-medium text-muted-foreground mb-1">One inbox. Every message in one place.</div>
-          </div>
-          <div>
-            <div className="text-sm font-medium text-muted-foreground mb-1">AI + human, together. Bots handle routine, humans own edge cases.</div>
-          </div>
-          <div>
-            <div className="text-sm font-medium text-muted-foreground">Better outcomes. First-contact resolutions, less busywork.</div>
+        <div className="absolute bottom-8 left-0 right-0 text-center px-8">
+          <div className="text-sm font-medium text-muted-foreground">
+            One inbox. Every message in one place. • AI + human, together. Bots handle routine, humans own edge cases. • Better outcomes. First-contact resolutions, less busywork.
           </div>
         </div>
       </div>
