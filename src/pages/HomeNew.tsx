@@ -183,7 +183,7 @@ const HomeNew = () => {
 
             {/* Right - Video */}
             <div className="fade-in-scroll">
-              <VideoEmbed videoId="dQw4w9WgXcQ" title="Pullse Product Demo" />
+              <VideoEmbed videoId="ceBpscp6jIY" title="Pullse Product Demo" />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, MeshTransmissionMaterial, Instances, Instance, Line } from "@react-three/drei";
 import * as THREE from "three";
-import logoPurple from "@/assets/logo-purple.png";
+import logoIcon from "@/assets/logo-icon-purple.png";
 
 // Envelope/Chat glyph component
 const InputGlyph = ({ position, delay }: { position: [number, number, number]; delay: number }) => {
@@ -92,7 +92,7 @@ const CenterOrb = () => {
       
       <Html center distanceFactor={1.5}>
         <div className="flex items-center justify-center w-16 h-16 bg-white/90 rounded-full p-3 backdrop-blur-sm">
-          <img src={logoPurple} alt="Pullse" className="w-full h-full" />
+          <img src={logoIcon} alt="Pullse" className="w-full h-full" />
         </div>
       </Html>
     </group>
@@ -187,7 +187,7 @@ const NodeAnimation = () => {
   if (prefersReducedMotion) {
     return (
       <div className="w-full h-[400px] flex items-center justify-center">
-        <img src={logoPurple} alt="Pullse Node" className="w-32 h-32 opacity-50" />
+        <img src={logoIcon} alt="Pullse Node" className="w-32 h-32 opacity-50" />
       </div>
     );
   }

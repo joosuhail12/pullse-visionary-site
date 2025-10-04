@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Github, Twitter, Linkedin } from "lucide-react";
-import logoNavy from "@/assets/logo-navy.png";
+import logoIcon from "@/assets/logo-icon-purple.png";
+import logoText from "@/assets/logo-text-navy.png";
 
 const Footer = () => {
   const footerSections = [
@@ -46,11 +47,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {/* Logo & Social */}
           <div className="col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logoNavy} alt="Pullse" className="h-10 w-10" />
-              <span className="text-2xl font-bold text-foreground">
-                Pullse
-              </span>
+            <Link to="/" className="flex items-center gap-3 mb-4">
+              <img src={logoIcon} alt="Pullse" className="h-10 w-10" />
+              <img src={logoText} alt="Pullse" className="h-8" />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               AI-powered customer support platform for modern teams.
