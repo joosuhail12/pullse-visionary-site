@@ -205,10 +205,27 @@ const HomeNew = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-20" />
         
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
+        
+        {/* LiquidEther overlay */}
+        <div className="absolute inset-0 -z-10 opacity-50">
+          <LiquidEther
+            colors={['#FF00C8', '#A805FF', '#D3A9EA']}
+            mouseForce={25}
+            cursorSize={120}
+            isViscous={false}
+            resolution={0.5}
+            autoDemo={true}
+            autoSpeed={0.3}
+            autoIntensity={1.8}
+            takeoverDuration={0.3}
+            autoResumeDelay={4000}
+            autoRampDuration={0.8}
+          />
+        </div>
 
         <div className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
