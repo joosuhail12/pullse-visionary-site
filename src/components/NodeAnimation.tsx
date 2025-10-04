@@ -819,7 +819,9 @@ const HumanAugmentationEngine = ({
           <div className="absolute inset-0 blur-3xl bg-primary rounded-full scale-[2.5] opacity-40 animate-pulse"></div>
           <div className="absolute inset-0 blur-2xl bg-primary/60 rounded-full scale-[1.8]"></div>
           
-          <img src={logoIcon} alt="Pullse" className="w-[400px] h-[400px] drop-shadow-2xl" style={{ filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.5))' }} />
+          <div className="relative flex items-center justify-center w-[600px] h-[600px] bg-primary rounded-full p-32 shadow-2xl border-4 border-primary/50">
+            <img src={logoIcon} alt="Pullse" className="w-full h-full drop-shadow-2xl" />
+          </div>
         </div>
       </Html>
     </group>;
