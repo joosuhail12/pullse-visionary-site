@@ -8,24 +8,24 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pullse Brand Colors - Purple & Navy */
-    --background: 222 47% 5%;
-    --foreground: 0 0% 100%;
+    /* Pullse Brand Colors - Light Mode with Purple & Navy Accents */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
     --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 11%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 220 13% 95%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 222 47% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 13% 95%;
+    --muted-foreground: 222 47% 40%;
 
     --accent: 262 83% 58%;
     --accent-foreground: 0 0% 100%;
@@ -33,36 +33,41 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 15%;
-    --input: 222 47% 15%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 262 83% 58%;
 
     --radius: 0.75rem;
 
-    /* Glassmorphism */
-    --glass-bg: 222 47% 11% / 0.4;
-    --glass-border: 0 0% 100% / 0.1;
-    --glass-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.15);
+    /* Glassmorphism - Light Mode */
+    --glass-bg: 0 0% 100% / 0.7;
+    --glass-border: 262 83% 58% / 0.15;
+    --glass-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.12);
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(222 47% 11%));
-    --gradient-radial: radial-gradient(circle at top right, hsl(262 83% 58% / 0.2), transparent 50%);
+    /* Flowy Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 95%), hsl(220 70% 95%));
+    --gradient-radial: radial-gradient(circle at top right, hsl(262 83% 95% / 0.5), transparent 70%);
     --gradient-mesh: 
-      radial-gradient(at 40% 20%, hsl(262 83% 58% / 0.3) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsl(222 47% 11% / 0.4) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsl(262 83% 58% / 0.2) 0px, transparent 50%);
+      radial-gradient(at 20% 30%, hsl(262 83% 95% / 0.4) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(220 70% 95% / 0.5) 0px, transparent 50%),
+      radial-gradient(at 40% 80%, hsl(262 83% 92% / 0.3) 0px, transparent 50%),
+      radial-gradient(at 90% 70%, hsl(220 70% 92% / 0.4) 0px, transparent 50%);
+    
+    /* Glow effects */
+    --glow-primary: 0 0 40px hsl(262 83% 58% / 0.3);
+    --glow-subtle: 0 0 60px hsl(262 83% 70% / 0.2);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 0 0% 100%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222 47% 11%;
     --sidebar-primary: 262 83% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 15%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 222 47% 15%;
+    --sidebar-accent: 220 13% 95%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 262 83% 58%;
   }
 }
@@ -77,9 +82,10 @@ All colors MUST be HSL.
     background: hsl(var(--background));
     background-image: var(--gradient-mesh);
     background-attachment: fixed;
+    min-height: 100vh;
   }
 
-  /* Glassmorphism utility classes */
+  /* Glassmorphism utility classes - Light Mode */
   .glass {
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(20px);
@@ -89,11 +95,20 @@ All colors MUST be HSL.
   }
 
   .glass-strong {
-    background: hsl(222 47% 11% / 0.6);
+    background: hsl(0 0% 100% / 0.8);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid hsl(0 0% 100% / 0.15);
-    box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.25);
+    border: 1px solid hsl(262 83% 58% / 0.2);
+    box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.15);
+  }
+
+  /* Glow effects */
+  .glow {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-subtle {
+    box-shadow: var(--glow-subtle);
   }
 
   /* Smooth scrolling */
@@ -101,21 +116,36 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - Light Mode */
   ::-webkit-scrollbar {
     width: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(222 47% 8%);
+    background: hsl(220 13% 95%);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(262 83% 58% / 0.5);
+    background: hsl(262 83% 58% / 0.4);
     border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(262 83% 58%);
+    background: hsl(262 83% 58% / 0.6);
+  }
+
+  /* Flowy background animation */
+  @keyframes flow {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .bg-flow {
+    background-size: 200% 200%;
+    animation: flow 15s ease infinite;
   }
 }

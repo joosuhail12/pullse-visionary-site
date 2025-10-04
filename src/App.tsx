@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import HomeNew from "./pages/HomeNew";
 import Product from "./pages/Product";
 import ProductInboxChannels from "./pages/ProductInboxChannels";
 import Pricing from "./pages/Pricing";
@@ -21,7 +21,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeNew />} />
           <Route path="/product" element={<Product />} />
           <Route path="/product/inbox-channels" element={<ProductInboxChannels />} />
           <Route path="/product/workflows-routing" element={<GenericPage title="Visual Workflows & Routing" description="Design complex automation flows with our drag-and-drop workflow builder." />} />

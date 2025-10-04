@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Github, Twitter, Linkedin } from "lucide-react";
-import logoPurple from "@/assets/logo-purple.png";
+import logoNavy from "@/assets/logo-navy.png";
 
 const Footer = () => {
   const footerSections = [
@@ -47,8 +47,8 @@ const Footer = () => {
           {/* Logo & Social */}
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logoPurple} alt="Pullse" className="h-10 w-10" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              <img src={logoNavy} alt="Pullse" className="h-10 w-10" />
+              <span className="text-2xl font-bold text-foreground">
                 Pullse
               </span>
             </Link>
