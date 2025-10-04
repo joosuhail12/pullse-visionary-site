@@ -387,18 +387,24 @@ const HomeNew = () => {
                       <div className="h-0.5 w-full bg-gradient-to-r from-primary to-accent" />
                       
                       <div className="p-6 flex-1 flex flex-col">
-                        {/* Icon & Metric Row */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className={`relative h-12 w-12 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
-                            index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
-                            index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
-                            index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
-                            'bg-gradient-to-br from-accent-pink to-primary'
-                          }`}>
-                            <Icon className="h-6 w-6 text-white" />
+                        {/* Icon, Title & Metric Row */}
+                        <div className="flex items-start justify-between mb-4 gap-3">
+                          <div className="flex items-center gap-3 flex-1">
+                            <div className={`relative h-12 w-12 flex-shrink-0 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
+                              index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
+                              index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
+                              index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
+                              'bg-gradient-to-br from-accent-pink to-primary'
+                            }`}>
+                              <Icon className="h-6 w-6 text-white" />
+                            </div>
+                            
+                            <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
+                              {feature.title}
+                            </h3>
                           </div>
                           
-                          <div className="text-right">
+                          <div className="text-right flex-shrink-0">
                             <div className={`text-2xl font-black ${
                               index === 0 ? 'text-accent-teal' :
                               index === 1 ? 'text-accent-orange' :
@@ -412,11 +418,6 @@ const HomeNew = () => {
                             </div>
                           </div>
                         </div>
-                        
-                        {/* Title */}
-                        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                          {feature.title}
-                        </h3>
                         
                         {/* Description */}
                         <p className="text-sm text-muted-foreground leading-relaxed flex-1">
