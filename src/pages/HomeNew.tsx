@@ -185,9 +185,6 @@ const HomeNew = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
-        {/* 3D Floating Elements */}
-        <HeroFloating3D />
-
         <div className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Copy */}
