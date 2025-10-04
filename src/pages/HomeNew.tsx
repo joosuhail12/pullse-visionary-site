@@ -10,7 +10,6 @@ import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
 import HeroFloating3D from "@/components/HeroFloating3D";
 import MagicBento, { CardData } from "@/components/MagicBento";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import antlerLogo from "@/assets/antler-logo.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -369,19 +368,13 @@ const HomeNew = () => {
           </div>
 
           {/* Benefits Grid - Symmetrical & Sleek */}
-          <ScrollStack 
-            className="max-w-4xl mx-auto"
-            itemDistance={180}
-            itemStackDistance={40}
-            baseScale={0.9}
-            rotationAmount={1.5}
-            blurAmount={2}
-            useWindowScroll={true}
-          >
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
             const Icon = feature.icon;
             const metrics = ['45%', '3.2x', '92%', '68%'];
-            return <ScrollStackItem key={index} itemClassName="!h-[320px]">
+            return <div key={index} className="group relative h-[280px]" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   {/* Main card with border gradient effect */}
                   <div className="relative h-full rounded-xl p-[1px] bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/30 hover:to-accent/30 transition-all duration-300">
                     <div className="relative h-full rounded-xl bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col">
@@ -389,24 +382,18 @@ const HomeNew = () => {
                       <div className="h-0.5 w-full bg-gradient-to-r from-primary to-accent" />
                       
                       <div className="p-6 flex-1 flex flex-col">
-                        {/* Icon, Title & Metric Row */}
-                        <div className="flex items-start justify-between mb-4 gap-3">
-                          <div className="flex items-center gap-3 flex-1">
-                            <div className={`relative h-12 w-12 flex-shrink-0 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
-                              index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
-                              index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
-                              index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
-                              'bg-gradient-to-br from-accent-pink to-primary'
-                            }`}>
-                              <Icon className="h-6 w-6 text-white" />
-                            </div>
-                            
-                            <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
-                              {feature.title}
-                            </h3>
+                        {/* Icon & Metric Row */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`relative h-12 w-12 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
+                            index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
+                            index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
+                            index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
+                            'bg-gradient-to-br from-accent-pink to-primary'
+                          }`}>
+                            <Icon className="h-6 w-6 text-white" />
                           </div>
                           
-                          <div className="text-right flex-shrink-0">
+                          <div className="text-right">
                             <div className={`text-2xl font-black ${
                               index === 0 ? 'text-accent-teal' :
                               index === 1 ? 'text-accent-orange' :
@@ -420,6 +407,11 @@ const HomeNew = () => {
                             </div>
                           </div>
                         </div>
+                        
+                        {/* Title */}
+                        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                          {feature.title}
+                        </h3>
                         
                         {/* Description */}
                         <p className="text-sm text-muted-foreground leading-relaxed flex-1">
@@ -437,9 +429,9 @@ const HomeNew = () => {
                       <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
-                </ScrollStackItem>;
+                </div>;
           })}
-          </ScrollStack>
+          </div>
         </div>
       </section>
 
