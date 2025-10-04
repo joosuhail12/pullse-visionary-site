@@ -121,7 +121,6 @@ const BlackArrowPath = ({
       blending: THREE.AdditiveBlending
     });
   }, []);
-
   return <group>
       {/* Base line with subtle glow */}
       <Line points={points} color="#5b21b6" lineWidth={6} transparent opacity={0.3} />
@@ -1596,8 +1595,8 @@ const NodeAnimation = () => {
                 <Bot className="h-4 w-4 text-purple-500" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-foreground">Smart Collaboration</div>
-                <div className="text-xs text-muted-foreground">AI + Human synergy</div>
+                <div className="text-sm font-semibold text-foreground">Smart Synergy</div>
+                <div className="text-xs text-muted-foreground">AI Augmented Human Support</div>
               </div>
             </div>
             
@@ -1607,7 +1606,7 @@ const NodeAnimation = () => {
                 <CheckCircle2 className="h-4 w-4 text-green-500" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-foreground">Excellence</div>
+                <div className="text-sm font-semibold text-foreground">Excellent Outcomes</div>
                 <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
               </div>
             </div>
