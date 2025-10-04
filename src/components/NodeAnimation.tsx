@@ -282,8 +282,8 @@ const ChannelIcon = ({ position, icon, color, label, count }: { position: [numbe
   );
 };
 
-// Enhanced ticket with cooler colors, depth, and processing
-const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: { 
+// Enhanced ticket component with cooler colors, depth, and processing states
+const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
   delay: number; 
   startY: number; 
   ticketInfo: { 
