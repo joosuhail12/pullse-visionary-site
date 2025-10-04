@@ -42,11 +42,11 @@ const PlatformOverview = () => {
               
               <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
                 {/* Screenshot */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-background to-muted/20">
+                <div className="relative">
                   <img 
                     src={inboxScreenshot} 
                     alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
-                    className="w-full h-full object-contain" 
+                    className="w-full h-auto" 
                     loading="lazy" 
                   />
                 </div>
