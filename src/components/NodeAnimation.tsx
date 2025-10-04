@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, MeshTransmissionMaterial, Trail, Sparkles, Float, PerspectiveCamera, Environment, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2 } from "lucide-react";
-import logoIcon from "@/assets/logo-icon-purple.png";
+import logoIcon from "@/assets/logo-white.svg";
 
 // Optimized particle field background
 const ParticleField = () => {
@@ -819,7 +819,7 @@ const HumanAugmentationEngine = ({
           <div className="absolute inset-0 blur-3xl bg-primary rounded-full scale-[2.5] opacity-40 animate-pulse"></div>
           <div className="absolute inset-0 blur-2xl bg-primary/60 rounded-full scale-[1.8]"></div>
           
-          <div className="relative flex items-center justify-center w-44 h-44 bg-white rounded-full p-9 shadow-2xl border-4 border-primary/50">
+          <div className="relative flex items-center justify-center w-44 h-44 bg-primary rounded-full p-9 shadow-2xl border-4 border-primary/50">
             <img src={logoIcon} alt="Pullse" className="w-full h-full drop-shadow-2xl" />
           </div>
         </div>
