@@ -9,11 +9,24 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
+  
   useEffect(() => {
+    let ticking = false;
+    let lastScrollY = window.scrollY;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      lastScrollY = window.scrollY;
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(lastScrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const productLinks = [{
@@ -104,8 +117,14 @@ const Navigation = () => {
           </div>}
       </div>;
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`}>
-      <div className={`mx-auto transition-all duration-700 ease-in-out ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"} rounded-[1.25rem] px-4`}>
+  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-[800ms] ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`} style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}>
+      <div 
+        className={`mx-auto rounded-[1.25rem] px-4 ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"}`}
+        style={{ 
+          transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          willChange: isScrolled ? 'auto' : 'transform, width, padding'
+        }}
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -114,24 +133,38 @@ const Navigation = () => {
               <img 
                 src={logoIcon} 
                 alt="Pullse" 
-                className={`relative transform group-hover:scale-110 transition-all duration-700 ease-in-out ${
+                className={`relative transform group-hover:scale-110 ${
                   isScrolled ? 'h-7 w-7' : 'h-9 w-9'
-                }`} 
+                }`}
+                style={{ 
+                  transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: isScrolled ? 'auto' : 'width, height'
+                }}
               />
             </div>
             <img 
               src={logoText} 
               alt="Pullse" 
-              className={`transform group-hover:scale-105 transition-all duration-700 ease-in-out ${
+              className={`transform group-hover:scale-105 ${
                 isScrolled ? 'h-0 w-0 opacity-0' : 'h-5 opacity-100'
-              }`} 
+              }`}
+              style={{ 
+                transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: isScrolled ? 'auto' : 'opacity, width, height'
+              }}
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className={`hidden lg:flex items-center relative transition-all duration-700 ease-in-out ${
-            isScrolled ? 'gap-3' : 'gap-6'
-          }`}>
+          <div 
+            className={`hidden lg:flex items-center relative ${
+              isScrolled ? 'gap-3' : 'gap-6'
+            }`}
+            style={{ 
+              transition: 'gap 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: isScrolled ? 'auto' : 'gap'
+            }}
+          >
             <NavDropdown title="Product" links={productLinks} />
             <Link to="/integrations" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Integrations
@@ -148,9 +181,16 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-2.5">
-            <Button asChild className={`text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-700 ease-in-out shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 ${
-              isScrolled ? 'h-7 px-3' : 'h-8 px-4'
-            }`}>
+            <Button 
+              asChild 
+              className={`text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 ${
+                isScrolled ? 'h-7 px-3' : 'h-8 px-4'
+              }`}
+              style={{ 
+                transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: isScrolled ? 'auto' : 'height, padding'
+              }}
+            >
               <Link to="/contact-sales">
                 <span className="relative z-10">Book a Demo</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/20 to-primary/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></span>
