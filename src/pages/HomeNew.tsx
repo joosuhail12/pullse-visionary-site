@@ -111,19 +111,39 @@ const HomeNew = () => {
   const solutions = {
     "b2b-saas": {
       title: "B2B SaaS",
-      items: ["Plan changes & billing", "Provisioning/SSO", "Usage/quota tracking", "Incident comms", "Account management", "API support"]
+      items: [
+        { benefit: "Reduce churn instantly", detail: "Handle plan changes & billing disputes before customers leave" },
+        { benefit: "Onboard faster", detail: "Automated provisioning and SSO setup cuts wait times" },
+        { benefit: "Prevent overages", detail: "Proactive usage & quota alerts keep customers happy" },
+        { benefit: "Turn incidents into trust", detail: "Real-time status updates and transparent communication" }
+      ]
     },
     ecommerce: {
       title: "Ecommerce",
-      items: ["WISMO/status updates", "Returns & exchanges", "Refunds & loyalty", "Order tracking", "Product inquiries", "Shipping issues"]
+      items: [
+        { benefit: "Stop WISMO flooding", detail: "Automated order tracking updates reduce repeat inquiries" },
+        { benefit: "Streamline returns", detail: "Self-service exchanges & refunds with instant confirmations" },
+        { benefit: "Boost loyalty retention", detail: "Smart refund routing to store credit increases LTV" },
+        { benefit: "Recover abandoned carts", detail: "Proactive shipping issue resolution saves revenue" }
+      ]
     },
     edtech: {
       title: "Edtech",
-      items: ["Student onboarding", "Course enrollment", "Technical support", "Payment processing", "Assignment help", "Account access"]
+      items: [
+        { benefit: "Enroll more students", detail: "Instant onboarding support removes friction at signup" },
+        { benefit: "Reduce drop-off", detail: "24/7 course access help keeps learners engaged" },
+        { benefit: "Process payments faster", detail: "Automated billing support prevents enrollment delays" },
+        { benefit: "Increase completion rates", detail: "Real-time assignment help reduces frustration" }
+      ]
     },
     fintech: {
       title: "Fintech",
-      items: ["Transaction disputes", "Account verification", "Payment issues", "Fraud alerts", "Compliance queries", "Feature requests"]
+      items: [
+        { benefit: "Resolve disputes in minutes", detail: "Automated transaction lookups and instant resolutions" },
+        { benefit: "Speed up verification", detail: "Smart document validation cuts approval times by 80%" },
+        { benefit: "Prevent payment failures", detail: "Proactive issue detection before transactions fail" },
+        { benefit: "Build trust instantly", detail: "Real-time fraud alerts with transparent explanations" }
+      ]
     }
   };
   const integrations = [{
@@ -629,8 +649,8 @@ const HomeNew = () => {
                     </div>
                   </div>
 
-                  {/* Right Side - Use Cases */}
-                  <div className="p-8">
+                  {/* Right Side - Benefits & Use Cases */}
+                  <div className="p-8 lg:p-12">
                     {Object.entries(solutions).map(([key, solution], index) => {
                       const isActive = activeSolution === key;
                       const icons = [Zap, Shield, Users, BarChart3];
@@ -649,34 +669,56 @@ const HomeNew = () => {
                               <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                                 {solution.title}
                               </h3>
-                              <p className="text-sm text-muted-foreground mt-1">Key capabilities</p>
+                              <p className="text-sm text-muted-foreground mt-1">How Pullse drives results</p>
                             </div>
                           </div>
 
-                          {/* Use Cases Grid */}
-                          <div className="flex-1 grid md:grid-cols-2 gap-4 content-start">
+                          {/* Benefits Grid */}
+                          <div className="flex-1 space-y-4 content-start">
                             {solution.items.map((item, i) => (
                               <div 
                                 key={i}
-                                className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10 hover:border-primary/30 hover:shadow-md transition-all group"
+                                className="group p-5 rounded-xl bg-gradient-to-br from-background to-primary/5 border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all"
                                 style={{ animationDelay: `${i * 50}ms` }}
                               >
-                                <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                                  <CheckCircle2 className="h-4 w-4 text-white" />
+                                <div className="flex items-start gap-4">
+                                  {/* Number badge */}
+                                  <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                                    <span className="text-sm font-bold text-white">{i + 1}</span>
+                                  </div>
+                                  
+                                  <div className="flex-1 space-y-1">
+                                    {/* Benefit - bold and prominent */}
+                                    <h4 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                                      {item.benefit}
+                                    </h4>
+                                    {/* Detail - supporting explanation */}
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                      {item.detail}
+                                    </p>
+                                  </div>
+
+                                  {/* Arrow indicator */}
+                                  <ArrowRight className="flex-shrink-0 h-5 w-5 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                                 </div>
-                                <span className="text-sm font-medium leading-relaxed">{item}</span>
                               </div>
                             ))}
                           </div>
 
                           {/* CTA */}
-                          <div className="mt-8 pt-6 border-t border-primary/10 flex justify-center">
-                            <Button size="lg" className="group/btn" asChild>
-                              <Link to="/contact-sales">
-                                Get started with {solution.title}
-                                <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                              </Link>
-                            </Button>
+                          <div className="mt-8 pt-6 border-t border-primary/10">
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                              <div className="text-center sm:text-left">
+                                <p className="text-sm font-semibold text-foreground">Ready to see it in action?</p>
+                                <p className="text-xs text-muted-foreground">Get a personalized demo for {solution.title}</p>
+                              </div>
+                              <Button size="lg" className="group/btn" asChild>
+                                <Link to="/contact-sales">
+                                  Book a demo
+                                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                </Link>
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       );
