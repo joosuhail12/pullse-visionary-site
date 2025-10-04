@@ -1009,27 +1009,16 @@ const NodeAnimation = () => {
         
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 via-transparent to-background/10"></div>
         
-        {/* Minimalistic integrated info cards */}
-        <div className="absolute bottom-6 left-6 right-6 grid grid-cols-1 md:grid-cols-3 gap-3 pointer-events-none">
-          <div className="glass-strong px-4 py-3 rounded-xl border border-border/50">
-            <div className="text-2xl mb-1">📧💬📞</div>
-            <strong className="text-foreground block text-sm mb-1">One inbox.</strong>
-            <span className="text-muted-foreground text-xs">Every message in one place.</span>
+        {/* Minimalistic Apple-style text at bottom */}
+        <div className="absolute bottom-8 left-0 right-0 text-center space-y-6 px-8">
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">One inbox. Every message in one place.</div>
           </div>
-          
-          <div className="glass-strong px-4 py-3 rounded-xl border border-border/50">
-            <div className="flex items-center gap-2 mb-1">
-              <Bot className="h-5 w-5 text-primary" />
-              <Users className="h-5 w-5 text-orange-500" />
-            </div>
-            <strong className="text-foreground block text-sm mb-1">AI + human, together.</strong>
-            <span className="text-muted-foreground text-xs">Bots handle routine; humans own edge cases.</span>
+          <div>
+            <div className="text-sm font-medium text-muted-foreground mb-1">AI + human, together. Bots handle routine, humans own edge cases.</div>
           </div>
-          
-          <div className="glass-strong px-4 py-3 rounded-xl border border-border/50">
-            <div className="text-2xl mb-1">😊⭐❤️</div>
-            <strong className="text-foreground block text-sm mb-1">Better outcomes.</strong>
-            <span className="text-muted-foreground text-xs">First-contact resolutions, less busywork.</span>
+          <div>
+            <div className="text-sm font-medium text-muted-foreground">Better outcomes. First-contact resolutions, less busywork.</div>
           </div>
         </div>
       </div>
