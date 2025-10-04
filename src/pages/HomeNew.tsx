@@ -370,11 +370,11 @@ const HomeNew = () => {
 
           {/* Benefits Grid - Symmetrical & Sleek */}
           <ScrollStack 
-            className="max-w-4xl mx-auto h-screen"
+            className="max-w-4xl mx-auto"
             itemDistance={150}
             itemStackDistance={80}
             baseScale={0.92}
-            useWindowScroll={false}
+            useWindowScroll={true}
           >
             {featureBento.map((feature, index) => {
             const Icon = feature.icon;
