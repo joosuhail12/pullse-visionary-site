@@ -46,13 +46,13 @@ const BlackArrowPath = ({
   start,
   end,
   controlOffset = [0, 0, -1.5],
-  startEmoji,
+  startQuestion,
   endEmoji
 }: {
   start: [number, number, number];
   end: [number, number, number];
   controlOffset?: [number, number, number];
-  startEmoji?: string;
+  startQuestion?: string;
   endEmoji?: string;
 }) => {
   const points = useMemo(() => {
@@ -86,18 +86,20 @@ const BlackArrowPath = ({
         opacity={0.8}
       />
       
-      {/* Start emoji/icon */}
-      {startEmoji && (
+      {/* Start question pill */}
+      {startQuestion && (
         <Html 
           position={[points[0].x, points[0].y, points[0].z]} 
           center 
           distanceFactor={10}
         >
-          <div style={{ 
-            fontSize: '28px',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
-          }}>
-            {startEmoji}
+          <div 
+            className="px-3 py-1.5 rounded-full backdrop-blur-sm border border-gray-800 bg-gray-100/90 whitespace-nowrap text-xs font-medium text-gray-800"
+            style={{
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+            }}
+          >
+            {startQuestion}
           </div>
         </Html>
       )}
@@ -1399,31 +1401,31 @@ const Scene = () => {
       <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
       {/* Multiple curved black arrow paths flowing into center - inspired by reference */}
-      {/* Top group - with problem emojis */}
-      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startEmoji="😤" />
-      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startEmoji="😰" />
-      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startEmoji="😩" />
+      {/* Top group - with question pills */}
+      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startQuestion="Need refund help" />
+      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startQuestion="Billing issue?" />
+      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startQuestion="Order status?" />
       
       {/* Middle-top group */}
-      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startEmoji="😣" />
-      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startEmoji="😖" />
+      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startQuestion="Payment failed" />
+      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startQuestion="Account locked" />
       
       {/* Center group */}
-      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startEmoji="😫" />
-      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startEmoji="😟" />
+      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startQuestion="Can't login" />
+      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startQuestion="Bug report" />
       
       {/* Middle-bottom group */}
-      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startEmoji="😕" />
-      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startEmoji="😔" />
+      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startQuestion="Upgrade plan?" />
+      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startQuestion="Cancel subscription" />
       
       {/* Bottom group */}
-      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startEmoji="😞" />
-      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startEmoji="😢" />
-      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startEmoji="😠" />
+      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startQuestion="Wrong charge" />
+      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startQuestion="Delivery delayed" />
+      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startQuestion="Product broken" />
       
       {/* Additional varied curves for richness */}
-      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startEmoji="😵" />
-      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startEmoji="😖" />
+      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startQuestion="Technical issue" />
+      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startQuestion="Reset password" />
       
       {/* Curved black arrows from center to outcome emojis on the right - with happy emojis */}
       {/* Upper outcomes */}
