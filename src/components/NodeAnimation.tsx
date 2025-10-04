@@ -819,7 +819,7 @@ const HumanAugmentationEngine = ({
           <div className="absolute inset-0 blur-3xl bg-primary rounded-full scale-[2.5] opacity-40 animate-pulse"></div>
           <div className="absolute inset-0 blur-2xl bg-primary/60 rounded-full scale-[1.8]"></div>
           
-          <div className="relative flex items-center justify-center w-[600px] h-[600px] bg-primary rounded-full p-32 shadow-2xl border-4 border-primary/50">
+          <div className="relative flex items-center justify-center w-[3000px] h-[3000px] bg-primary rounded-full p-[160px] shadow-2xl border-4 border-primary/50">
             <img src={logoIcon} alt="Pullse" className="w-full h-full drop-shadow-2xl" />
           </div>
         </div>
