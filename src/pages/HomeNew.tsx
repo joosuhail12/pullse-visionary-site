@@ -507,17 +507,10 @@ const HomeNew = () => {
             </p>
           </div>
 
-          {/* Benefits Grid - Modern Design */}
+          {/* Benefits Grid - Symmetrical Design */}
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
               const Icon = feature.icon;
-              const colors = [
-                { bg: 'from-violet-500/10 to-purple-500/10', icon: 'bg-violet-500', text: 'text-violet-500' },
-                { bg: 'from-blue-500/10 to-cyan-500/10', icon: 'bg-blue-500', text: 'text-blue-500' },
-                { bg: 'from-emerald-500/10 to-green-500/10', icon: 'bg-emerald-500', text: 'text-emerald-500' },
-                { bg: 'from-orange-500/10 to-amber-500/10', icon: 'bg-orange-500', text: 'text-orange-500' }
-              ];
-              const color = colors[index % colors.length];
               const metrics = ['45%', '3.2x', '92%', '68%'];
               
               return (
@@ -530,18 +523,18 @@ const HomeNew = () => {
                   <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-primary/20 via-transparent to-accent/20 hover:from-primary/40 hover:to-accent/40 transition-all duration-500">
                     <div className="relative rounded-2xl bg-background/95 backdrop-blur-xl overflow-hidden">
                       {/* Top accent bar */}
-                      <div className={`h-1 w-full bg-gradient-to-r ${color.bg}`} />
+                      <div className="h-1 w-full bg-gradient-to-r from-primary to-accent" />
                       
                       <div className="p-8">
                         {/* Icon & Metric Row */}
                         <div className="flex items-center justify-between mb-6">
-                          <div className={`relative h-14 w-14 rounded-xl ${color.icon} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                          <div className="relative h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                             <Icon className="h-7 w-7 text-white" />
-                            <div className={`absolute inset-0 rounded-xl ${color.icon} blur-xl opacity-50 group-hover:opacity-75 transition-opacity`} />
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-accent blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
                           </div>
                           
                           <div className="text-right">
-                            <div className={`text-3xl font-black ${color.text} mb-1`}>
+                            <div className="text-3xl font-black text-primary mb-1">
                               {metrics[index]}
                             </div>
                             <div className="text-xs text-muted-foreground uppercase tracking-wider">
@@ -568,8 +561,8 @@ const HomeNew = () => {
                       </div>
                       
                       {/* Decorative circles */}
-                      <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${color.bg} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                      <div className={`absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br ${color.bg} rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     </div>
                   </div>
                 </div>
