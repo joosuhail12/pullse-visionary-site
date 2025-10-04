@@ -179,162 +179,103 @@ const HomeNew = () => {
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
-        {/* Animated background elements */}
+        {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-10" />
         
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10 animate-grid-flow" />
-        
-        {/* Floating gradient orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float -z-10" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float -z-10" style={{ animationDelay: '2s' }} />
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
         <div className="container mx-auto px-4 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Copy */}
             <div className="z-10 space-y-8">
-              {/* Badge with enhanced animation */}
-              <div className="inline-flex items-center gap-2 glass-strong px-5 py-2.5 rounded-full text-sm group hover:scale-105 transition-all duration-300 cursor-default border border-primary/20">
-                <div className="relative">
-                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                  <div className="absolute inset-0 blur-sm bg-primary/50 animate-ping" />
-                </div>
-                <span className="font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Powered by AI Agents
-                </span>
-                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
+                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                <span>Powered by AI Agents</span>
               </div>
 
-              {/* Title with enhanced typography */}
               <h1 
                 ref={titleRef}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
               >
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">AI</span>{" "}
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">support</span>{" "}
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">that</span>{" "}
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">doesn't</span>{" "}
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">just</span>{" "}
-                <span className="word inline-block hover:scale-105 transition-transform cursor-default">reply</span>{" "}
-                <span className="word inline-block">—</span>
-                <br className="hidden md:block" />
-                <span className="word inline-block text-primary glow-text hover:scale-110 transition-transform cursor-default">it</span>{" "}
-                <span className="word inline-block text-primary glow-text hover:scale-110 transition-transform cursor-default relative">
-                  acts.
-                  <div className="absolute -inset-1 bg-primary/20 blur-xl rounded-lg -z-10" />
-                </span>
+                <span className="word inline-block">AI</span>{" "}
+                <span className="word inline-block">support</span>{" "}
+                <span className="word inline-block">that</span>{" "}
+                <span className="word inline-block">doesn't</span>{" "}
+                <span className="word inline-block">just</span>{" "}
+                <span className="word inline-block">reply</span>{" "}
+                <span className="word inline-block">—</span>{" "}
+                <span className="word inline-block text-primary">it</span>{" "}
+                <span className="word inline-block text-primary">acts.</span>
               </h1>
 
-              {/* Description with better spacing */}
-              <p ref={descRef} className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                Endless tickets, manual work, disconnected tools? 
-                <span className="block mt-2 text-foreground/90 font-medium">
-                  Pullse unifies every message, automates the busywork, and lets AI answer and take real actions
-                </span>
-                —while your team stays in control.
+              <p ref={descRef} className="text-xl text-muted-foreground leading-relaxed">
+                Endless tickets, manual work, disconnected tools? Pullse unifies every message, automates the busywork, and lets AI answer and take real actions—while your team stays in control.
               </p>
 
-              {/* CTA Buttons with enhanced effects */}
-              <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 pt-2">
+              <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg" 
-                  className="text-lg px-10 py-7 glow group relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105" 
+                  className="text-lg px-8 py-6 glow group" 
                   asChild
                 >
                   <Link to="/contact-sales">
-                    <span className="relative z-10 flex items-center font-semibold">
-                      Book a demo
-                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
+                    Book a demo
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="text-lg px-10 py-7 group border-2 border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl" 
+                  className="text-lg px-8 py-6 border-primary/20" 
                   asChild
                 >
                   <Link to="/pricing">
-                    <span className="flex items-center font-semibold">
-                      Request pricing
-                      <Sparkles className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
-                    </span>
+                    Request pricing
                   </Link>
                 </Button>
               </div>
 
-              {/* Trust indicators with icons */}
-              <div className="flex flex-wrap gap-8 pt-6 border-t border-border/50">
+              <div className="flex flex-wrap gap-6 pt-4">
                 {[
-                  { icon: CheckCircle2, text: "Founder-led onboarding", color: "text-primary" },
-                  { icon: Shield, text: "Design-partner seats open", color: "text-accent" },
-                  { icon: Zap, text: "Enterprise-grade controls", color: "text-primary" }
+                  { icon: CheckCircle2, text: "Founder-led onboarding" },
+                  { icon: CheckCircle2, text: "Design-partner seats open" },
+                  { icon: CheckCircle2, text: "Enterprise-grade controls" }
                 ].map((item, index) => (
                   <div 
                     key={index}
-                    className="flex items-center gap-3 text-sm group cursor-default hover:scale-105 transition-all duration-300"
+                    className="flex items-center gap-2 text-sm text-muted-foreground"
                   >
-                    <div className="relative">
-                      <item.icon className={`h-5 w-5 ${item.color} group-hover:scale-110 transition-transform`} />
-                      <div className="absolute inset-0 blur-md bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                    <span className="text-foreground/80 group-hover:text-foreground font-medium transition-colors">
-                      {item.text}
-                    </span>
+                    <item.icon className="h-4 w-4 text-primary" />
+                    {item.text}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right - Video with enhanced floating elements */}
-            <div className="relative group/video">
-              {/* Main video container with hover effect */}
-              <div className="relative z-10 transform transition-transform duration-500 group-hover/video:scale-[1.02]">
-                <div className="relative rounded-3xl overflow-hidden ring-1 ring-primary/20 shadow-2xl">
-                  <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
-                  {/* Play indicator overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent pointer-events-none" />
-                </div>
+            {/* Right - Video */}
+            <div className="relative">
+              <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
+              
+              {/* Simple floating stats */}
+              <div className="absolute -top-4 -right-4 glass-strong p-4 rounded-xl shadow-xl">
+                <div className="text-2xl font-bold text-primary">87%</div>
+                <div className="text-xs text-muted-foreground">Automation</div>
               </div>
 
-              {/* Enhanced floating stats cards */}
-              <div className="absolute -top-8 -right-8 glass-strong p-5 rounded-2xl animate-float shadow-2xl z-20 border border-primary/20 hover:scale-110 transition-transform duration-300 cursor-default group/stat">
-                <Zap className="h-5 w-5 text-primary mb-2 group-hover/stat:rotate-12 transition-transform" />
-                <div className="text-3xl font-bold text-primary group-hover/stat:scale-110 transition-transform">87%</div>
-                <div className="text-xs text-muted-foreground font-medium">Automation</div>
-                <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover/stat:opacity-100 transition-opacity -z-10" />
+              <div className="absolute -bottom-4 -left-4 glass-strong p-4 rounded-xl shadow-xl">
+                <div className="text-2xl font-bold text-primary">+42%</div>
+                <div className="text-xs text-muted-foreground">FCR Rate</div>
               </div>
-
-              <div className="absolute -bottom-8 -left-8 glass-strong p-5 rounded-2xl animate-float shadow-2xl z-20 border border-primary/20 hover:scale-110 transition-transform duration-300 cursor-default group/stat" style={{ animationDelay: '1s' }}>
-                <BarChart3 className="h-5 w-5 text-primary mb-2 group-hover/stat:rotate-12 transition-transform" />
-                <div className="text-3xl font-bold text-primary group-hover/stat:scale-110 transition-transform">-35%</div>
-                <div className="text-xs text-muted-foreground font-medium">Handle Time</div>
-                <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover/stat:opacity-100 transition-opacity -z-10" />
-              </div>
-
-              <div className="absolute top-1/2 -translate-y-1/2 -right-10 glass-strong p-5 rounded-2xl animate-float shadow-2xl z-20 border border-primary/20 hover:scale-110 transition-transform duration-300 cursor-default group/stat" style={{ animationDelay: '2s' }}>
-                <Bot className="h-5 w-5 text-primary mb-2 group-hover/stat:rotate-12 transition-transform" />
-                <div className="text-3xl font-bold text-primary group-hover/stat:scale-110 transition-transform">+42%</div>
-                <div className="text-xs text-muted-foreground font-medium">FCR Rate</div>
-                <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover/stat:opacity-100 transition-opacity -z-10" />
-              </div>
-
-              {/* Animated decorative elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-3xl blur-3xl -z-10 animate-pulse" />
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl blur-2xl -z-10 opacity-50" />
             </div>
           </div>
         </div>
 
-        {/* Enhanced scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group/scroll">
-          <div className="w-7 h-11 border-2 border-primary/40 rounded-full flex justify-center pt-2 group-hover/scroll:border-primary transition-colors">
-            <div className="w-1.5 h-2.5 bg-primary rounded-full animate-pulse group-hover/scroll:h-3.5 transition-all" />
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
           </div>
-          <p className="text-xs text-muted-foreground mt-2 opacity-0 group-hover/scroll:opacity-100 transition-opacity text-center">
-            Scroll
-          </p>
         </div>
       </section>
 
