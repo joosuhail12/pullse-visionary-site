@@ -269,18 +269,101 @@ const HomeNew = () => {
       </section>
 
       {/* Taxonomy */}
-      <section className="py-20 fade-in-scroll">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">What Pullse is</h2>
-            <p className="text-xl text-muted-foreground">10-second taxonomy</p>
+      <section className="min-h-screen flex items-center py-20 fade-in-scroll relative overflow-hidden">
+        {/* Background accents */}
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
+              <span className="text-sm font-semibold text-primary">Complete Platform</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              What Pullse is
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Everything you need in one unified platform
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {taxonomy.map((item, index) => <div key={index} className="glass-strong p-6 rounded-xl hover:scale-105 transition-all">
-                <h3 className="font-bold mb-2 text-primary">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>)}
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto auto-rows-[280px]">
+            {/* Large card - spans 2 cols & 2 rows */}
+            <div className="glass-strong p-8 rounded-2xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors" />
+              <div className="relative z-10 h-full flex flex-col justify-between">
+                <div>
+                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4 text-primary">{taxonomy[0].title}</h3>
+                  <p className="text-lg text-muted-foreground leading-relaxed">{taxonomy[0].desc}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tall card - spans 2 rows */}
+            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:row-span-2 relative overflow-hidden">
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-colors" />
+              <div className="relative z-10 h-full flex flex-col">
+                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Bot className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-accent">{taxonomy[2].title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Regular card */}
+            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:col-span-1 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full blur-xl" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Zap className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[1].title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Wide card - spans 2 cols */}
+            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden">
+              <div className="absolute bottom-0 right-0 w-28 h-28 bg-primary/5 rounded-full blur-2xl" />
+              <div className="relative z-10 flex flex-col md:flex-row items-start gap-4">
+                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[3].title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[3].desc}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Regular card */}
+            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-20 h-20 bg-accent/5 rounded-full blur-xl" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Shield className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-accent">{taxonomy[4].title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[4].desc}</p>
+              </div>
+            </div>
+
+            {/* Regular card */}
+            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all relative overflow-hidden">
+              <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <BarChart3 className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[5].title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[5].desc}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
