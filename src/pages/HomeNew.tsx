@@ -207,7 +207,7 @@ const HomeNew = () => {
         {/* LiquidEther Background */}
         <div className="absolute inset-0 -z-10">
           <LiquidEther
-            colors={['hsl(var(--primary))', 'hsl(var(--accent))', 'hsl(var(--primary))']}
+            colors={['#8B5CF6', '#029FAF', '#F472B6', '#F97316']}
             mouseForce={25}
             cursorSize={120}
             isViscous={false}
