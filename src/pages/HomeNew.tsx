@@ -191,6 +191,9 @@ const HomeNew = () => {
         <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-primary/5 rounded-full blur-3xl animate-float -z-10" />
         <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-primary/15 rounded-full blur-xl animate-float-slow -z-10" />
         <div className="absolute bottom-20 right-10 w-36 h-36 bg-accent/8 rounded-full blur-2xl animate-float-slower -z-10" />
+        <div className="absolute top-1/2 left-1/3 w-28 h-28 bg-primary/12 rounded-full blur-2xl animate-float -z-10" />
+        <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-accent/10 rounded-full blur-xl animate-float-slow -z-10" />
+        <div className="absolute top-3/4 left-20 w-24 h-24 bg-primary/8 rounded-full blur-2xl animate-float-slower -z-10" />
         
         {/* Floating icons */}
         <div className="absolute top-32 right-1/3 animate-float opacity-20 -z-10">
@@ -204,6 +207,24 @@ const HomeNew = () => {
         </div>
         <div className="absolute bottom-1/3 right-20 animate-float opacity-15 -z-10">
           <Shield className="h-7 w-7 text-primary" />
+        </div>
+        <div className="absolute top-24 left-1/4 animate-float-slower opacity-20 -z-10">
+          <BarChart3 className="h-7 w-7 text-accent" />
+        </div>
+        <div className="absolute bottom-40 right-1/4 animate-float-slow opacity-18 -z-10">
+          <Users className="h-8 w-8 text-primary" />
+        </div>
+        <div className="absolute top-2/3 right-12 animate-float opacity-15 -z-10">
+          <Sparkles className="h-6 w-6 text-primary" />
+        </div>
+        <div className="absolute bottom-1/2 left-16 animate-float-slower opacity-18 -z-10">
+          <CheckCircle2 className="h-7 w-7 text-accent" />
+        </div>
+        <div className="absolute top-40 left-1/2 animate-float-slow opacity-12 -z-10">
+          <Zap className="h-5 w-5 text-primary" />
+        </div>
+        <div className="absolute bottom-24 left-2/3 animate-float opacity-16 -z-10">
+          <Bot className="h-6 w-6 text-accent" />
         </div>
 
         <div className="container mx-auto px-4 py-20">
