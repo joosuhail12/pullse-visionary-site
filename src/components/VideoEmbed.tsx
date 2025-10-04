@@ -30,6 +30,7 @@ const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
       <lite-youtube
         videoid={videoId}
         playlabel={`Play: ${title}`}
+        params="vq=hd1080"
         style={{ width: "100%", height: "100%" }}
       />
     </div>
@@ -46,6 +47,7 @@ declare global {
         React.HTMLAttributes<HTMLElement> & {
           videoid: string;
           playlabel?: string;
+          params?: string;
         },
         HTMLElement
       >;
