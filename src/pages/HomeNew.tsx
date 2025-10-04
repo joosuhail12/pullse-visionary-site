@@ -815,26 +815,119 @@ const HomeNew = () => {
         
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 fade-in-scroll">
-        <div className="container mx-auto px-4">
-          <div className="glass-strong p-12 rounded-3xl text-center max-w-3xl mx-auto glow">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Ship your first automated resolution in days.
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              We'll map your top intents, connect systems, and go live together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-6" asChild>
-                <Link to="/contact-sales">
-                  Book a demo
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
-                <Link to="/pricing">Request pricing</Link>
-              </Button>
+      {/* Final CTA - Hero Style */}
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
+        {/* Dramatic background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_100%)]" />
+        
+        {/* Animated orbs */}
+        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            {/* Main CTA Card */}
+            <div className="relative">
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse" />
+              
+              <div className="relative glass-strong rounded-3xl p-12 md:p-16 text-center">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 backdrop-blur-sm mb-8">
+                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                  <span className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Limited Design Partner Spots Available
+                  </span>
+                </div>
+
+                {/* Headline */}
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                  <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                    Ship your first
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    automated resolution
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-foreground via-accent to-foreground bg-clip-text text-transparent">
+                    in days, not months.
+                  </span>
+                </h2>
+
+                {/* Subheadline */}
+                <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                  We'll map your top intents, wire your systems, and go live together. 
+                  <span className="text-primary font-semibold"> Founder-led onboarding included.</span>
+                </p>
+
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                  <Button size="lg" className="text-lg px-10 py-7 glow group shadow-2xl shadow-primary/25" asChild>
+                    <Link to="/contact-sales">
+                      Book a demo
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" className="text-lg px-10 py-7 border-primary/30 hover:bg-primary/5" asChild>
+                    <Link to="/pricing">
+                      Request pricing
+                    </Link>
+                  </Button>
+                </div>
+
+                {/* Social Proof */}
+                <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-primary/10">
+                  <div className="space-y-2">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      87%
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Average automation rate
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      &lt;2 weeks
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Time to first resolution
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      24/7
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      AI-powered coverage
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating trust indicators */}
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {[
+                { icon: Shield, text: "Enterprise-grade security" },
+                { icon: Zap, text: "Deploy in days, not quarters" },
+                { icon: CheckCircle2, text: "Cancel anytime" }
+              ].map((item, i) => (
+                <div 
+                  key={i}
+                  className="glass-strong p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
+                    <item.icon className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="text-sm font-medium">{item.text}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
