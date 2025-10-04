@@ -601,34 +601,94 @@ const HomeNew = () => {
         </div>
       </section>
 
-      {/* Analytics Preview */}
-      <section className="py-20 fade-in-scroll">
+      {/* Integration Ticker */}
+      <section className="py-20 fade-in-scroll relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="glass-strong p-12 rounded-3xl max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4 text-center">See what's driving resolution</h2>
-            <p className="text-center text-muted-foreground mb-12">Real-time insights into automation and outcomes</p>
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6">
+              <span className="text-sm font-semibold text-primary">Trusted Partners</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Integrates with your stack
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Connect seamlessly with the tools you already use
+            </p>
+          </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="text-center p-6 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl">
-                <div className="text-4xl font-bold text-primary mb-2">87%</div>
-                <div className="text-sm text-muted-foreground">Automation coverage</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl">
-                <div className="text-4xl font-bold text-primary mb-2">+42%</div>
-                <div className="text-sm text-muted-foreground">First-contact resolution</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl">
-                <div className="text-4xl font-bold text-primary mb-2">-35%</div>
-                <div className="text-sm text-muted-foreground">Average handle time</div>
-              </div>
-              <div className="text-center p-6 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl">
-                <div className="text-4xl font-bold text-primary mb-2">94%</div>
-                <div className="text-sm text-muted-foreground">Copilot adoption</div>
+          {/* Ticker container */}
+          <div className="relative">
+            {/* Gradient masks */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+            
+            {/* Scrolling ticker */}
+            <div className="overflow-hidden py-8">
+              <div className="flex animate-scroll">
+                {/* First set of logos */}
+                {[
+                  'Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom',
+                  'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon',
+                  'Atlassian', 'Twilio'
+                ].map((company, index) => (
+                  <div 
+                    key={`first-${index}`}
+                    className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-muted-foreground group-hover:text-primary transition-colors">
+                        {company}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {[
+                  'Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom',
+                  'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon',
+                  'Atlassian', 'Twilio'
+                ].map((company, index) => (
+                  <div 
+                    key={`second-${index}`}
+                    className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group"
+                  >
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-muted-foreground group-hover:text-primary transition-colors">
+                        {company}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+
+          <div className="text-center mt-8">
+            <p className="text-sm text-muted-foreground">
+              Plus 100+ more integrations
+            </p>
+          </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 40s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       {/* Integrations */}
       <section className="py-20 fade-in-scroll">
