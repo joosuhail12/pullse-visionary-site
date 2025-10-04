@@ -33,44 +33,35 @@ const PlatformOverview = () => {
 
         {/* Main screenshot container */}
         <div className="max-w-6xl mx-auto">
-          {/* Screenshot with animated glow */}
+          {/* Screenshot */}
           <div className="relative group">
-            {/* Animated glow wrapper */}
-            <div className="relative rounded-3xl p-[3px] animate-glow">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent-teal via-primary to-accent-orange opacity-75 blur-xl group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent-teal via-primary to-accent-orange animate-pulse" />
-              
-              <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
-                {/* Screenshot */}
-                <div className="relative">
-                  <img 
-                    src={inboxScreenshot} 
-                    alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
-                    className="w-full h-auto" 
-                    loading="lazy" 
-                  />
-                </div>
+            <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
+              <img 
+                src={inboxScreenshot} 
+                alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
+                className="w-full h-auto" 
+                loading="lazy" 
+              />
 
-                {/* Full-screen button overlay */}
-                <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <Dialog open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
-                    <DialogTrigger asChild>
-                      <Button size="sm" variant="secondary" className="glass-strong shadow-xl hover:scale-105 transition-transform">
-                        <Maximize2 className="h-4 w-4 mr-2" />
-                        Full screen
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-[95vw] max-h-[95vh] p-0" aria-modal="true">
-                      <div className="relative w-full h-full">
-                        <img 
-                          src={inboxScreenshot} 
-                          alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar - Full screen view" 
-                          className="w-full h-full object-contain" 
-                        />
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
+              {/* Full-screen button overlay */}
+              <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <Dialog open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
+                  <DialogTrigger asChild>
+                    <Button size="sm" variant="secondary" className="glass-strong shadow-xl hover:scale-105 transition-transform">
+                      <Maximize2 className="h-4 w-4 mr-2" />
+                      Full screen
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-[95vw] max-h-[95vh] p-0" aria-modal="true">
+                    <div className="relative w-full h-full">
+                      <img 
+                        src={inboxScreenshot} 
+                        alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar - Full screen view" 
+                        className="w-full h-full object-contain" 
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
