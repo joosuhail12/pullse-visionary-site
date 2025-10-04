@@ -317,20 +317,18 @@ const HomeNew = () => {
               </div>
             </div>
 
-            {/* Vertical Feature (3 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-2 relative overflow-hidden border border-accent/10">
+            {/* Vertical Feature (3 cols x 3 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-3 relative overflow-hidden border border-accent/10">
               <div className="absolute inset-0 bg-gradient-to-tl from-accent/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col md:flex-row gap-6 p-8">
-                <div className="md:w-1/2 flex flex-col justify-between">
-                  <div>
-                    <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center mb-4 shadow-lg shadow-accent/25">
-                      <Bot className="h-7 w-7 text-accent-foreground" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                      {taxonomy[2].title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[2].desc}</p>
+              <div className="relative z-10 h-full flex flex-col gap-6 p-8">
+                <div>
+                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center mb-4 shadow-lg shadow-accent/25">
+                    <Bot className="h-7 w-7 text-accent-foreground" />
                   </div>
+                  <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                    {taxonomy[2].title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[2].desc}</p>
                 </div>
                 
                 {/* Screenshot placeholder */}
@@ -345,7 +343,7 @@ const HomeNew = () => {
               </div>
             </div>
 
-            {/* Compact card (2 cols x 1 row) */}
+            {/* Compact card 1 (2 cols x 1 row) */}
             <div className="glass-strong rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden border border-primary/10">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
               <div className="relative z-10 h-full p-6 flex items-center gap-4">
@@ -359,33 +357,7 @@ const HomeNew = () => {
               </div>
             </div>
 
-            {/* Square feature with preview (2 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-md shadow-primary/20">
-                    <Sparkles className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-primary">{taxonomy[3].title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[3].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-10 h-10 mx-auto rounded-lg bg-primary/20 flex items-center justify-center">
-                      <Sparkles className="h-5 w-5 text-primary" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">AI Agents Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Compact card (2 cols x 1 row) */}
+            {/* Compact card 2 (2 cols x 1 row) */}
             <div className="glass-strong rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden border border-accent/10">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
               <div className="relative z-10 h-full p-6 flex items-center gap-4">
@@ -395,6 +367,20 @@ const HomeNew = () => {
                 <div className="flex-1 min-w-0">
                   <h3 className="text-lg font-bold mb-1 text-accent truncate">{taxonomy[4].title}</h3>
                   <p className="text-xs text-muted-foreground line-clamp-2">{taxonomy[4].desc}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Compact card 3 (2 cols x 1 row) */}
+            <div className="glass-strong rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10 h-full p-6 flex items-center gap-4">
+                <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Sparkles className="h-7 w-7 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-bold mb-1 text-primary truncate">{taxonomy[3].title}</h3>
+                  <p className="text-xs text-muted-foreground line-clamp-2">{taxonomy[3].desc}</p>
                 </div>
               </div>
             </div>
@@ -420,6 +406,32 @@ const HomeNew = () => {
                       <BarChart3 className="h-8 w-8 text-primary" />
                     </div>
                     <p className="text-sm text-muted-foreground">Analytics Dashboard Screenshot</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Square feature with preview (2 cols x 2 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-accent/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+              <div className="relative z-10 h-full flex flex-col p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-md shadow-accent/20">
+                    <Users className="h-6 w-6 text-accent-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-2 text-accent">Platform Overview</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">Complete visibility across all features</p>
+                  </div>
+                </div>
+                
+                {/* Screenshot placeholder */}
+                <div className="flex-1 rounded-xl bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
+                  <div className="text-center space-y-2 opacity-60">
+                    <div className="w-10 h-10 mx-auto rounded-lg bg-accent/20 flex items-center justify-center">
+                      <Users className="h-5 w-5 text-accent" />
+                    </div>
+                    <p className="text-xs text-muted-foreground">Platform Screenshot</p>
                   </div>
                 </div>
               </div>
