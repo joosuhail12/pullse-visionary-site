@@ -795,119 +795,42 @@ const Scene = () => {
   ], []);
 
   const tickets = useMemo(() => [
-    // Wave 1 - Email burst
-    { 
-      delay: 0, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Refund request", 
-        subtitle: "Order #45821",
-        color: "#3b82f6",
-        priority: "high" as const
-      } 
-    },
-    { 
-      delay: 0.3, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Billing error", 
-        subtitle: "Duplicate charge",
-        color: "#3b82f6",
-        priority: "high" as const
-      } 
-    },
-    { 
-      delay: 0.6, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Order update", 
-        subtitle: "Shipping status",
-        color: "#3b82f6",
-        priority: "medium" as const
-      } 
-    },
-    // Wave 2 - Chat burst
-    { 
-      delay: 2.5, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Login issue", 
-        subtitle: "Password reset",
-        color: "#10b981",
-        priority: "medium" as const
-      } 
-    },
-    { 
-      delay: 2.8, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Product question", 
-        subtitle: "Feature inquiry",
-        color: "#10b981",
-        priority: "low" as const
-      } 
-    },
-    { 
-      delay: 3.1, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Technical support", 
-        subtitle: "Setup help",
-        color: "#10b981",
-        priority: "high" as const
-      } 
-    },
-    // Wave 3 - Mixed burst
-    { 
-      delay: 5.0, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Account help", 
-        subtitle: "Setup assistance",
-        color: "#3b82f6",
-        priority: "medium" as const
-      } 
-    },
-    { 
-      delay: 5.2, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Feature request", 
-        subtitle: "API integration",
-        color: "#10b981",
-        priority: "low" as const
-      } 
-    },
-    { 
-      delay: 5.5, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Payment inquiry", 
-        subtitle: "Invoice request",
-        color: "#3b82f6",
-        priority: "medium" as const
-      } 
-    },
-    { 
-      delay: 5.8, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Quick question", 
-        subtitle: "General inquiry",
-        color: "#10b981",
-        priority: "low" as const
-      } 
-    },
+    // Wave 1 - Email burst (0-1.5s)
+    { delay: 0, startY: 1.5, ticketInfo: { emoji: "📧", text: "Refund request", subtitle: "Order #45821", color: "#3b82f6", priority: "high" as const } },
+    { delay: 0.2, startY: 1.5, ticketInfo: { emoji: "📧", text: "Billing error", subtitle: "Duplicate charge", color: "#3b82f6", priority: "high" as const } },
+    { delay: 0.4, startY: 1.5, ticketInfo: { emoji: "📧", text: "Order update", subtitle: "Shipping status", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 0.6, startY: 1.5, ticketInfo: { emoji: "📧", text: "Payment inquiry", subtitle: "Invoice request", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 0.8, startY: 1.5, ticketInfo: { emoji: "📧", text: "Account help", subtitle: "Setup assistance", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 1.0, startY: 1.5, ticketInfo: { emoji: "📧", text: "Delivery issue", subtitle: "Track package", color: "#3b82f6", priority: "high" as const } },
+    { delay: 1.2, startY: 1.5, ticketInfo: { emoji: "📧", text: "Return request", subtitle: "RMA needed", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 1.4, startY: 1.5, ticketInfo: { emoji: "📧", text: "Price match", subtitle: "Competitor pricing", color: "#3b82f6", priority: "low" as const } },
+    
+    // Wave 2 - Chat burst (1.5-3s)
+    { delay: 1.6, startY: -1.5, ticketInfo: { emoji: "💬", text: "Login issue", subtitle: "Password reset", color: "#10b981", priority: "high" as const } },
+    { delay: 1.8, startY: -1.5, ticketInfo: { emoji: "💬", text: "Product question", subtitle: "Feature inquiry", color: "#10b981", priority: "low" as const } },
+    { delay: 2.0, startY: -1.5, ticketInfo: { emoji: "💬", text: "Technical support", subtitle: "Setup help", color: "#10b981", priority: "high" as const } },
+    { delay: 2.2, startY: -1.5, ticketInfo: { emoji: "💬", text: "Feature request", subtitle: "API integration", color: "#10b981", priority: "low" as const } },
+    { delay: 2.4, startY: -1.5, ticketInfo: { emoji: "💬", text: "Quick question", subtitle: "General inquiry", color: "#10b981", priority: "low" as const } },
+    { delay: 2.6, startY: -1.5, ticketInfo: { emoji: "💬", text: "Bug report", subtitle: "UI glitch", color: "#10b981", priority: "medium" as const } },
+    { delay: 2.8, startY: -1.5, ticketInfo: { emoji: "💬", text: "Mobile app", subtitle: "Download help", color: "#10b981", priority: "low" as const } },
+    
+    // Wave 3 - Mixed burst (3-4.5s)
+    { delay: 3.0, startY: 1.5, ticketInfo: { emoji: "📧", text: "Subscription", subtitle: "Cancel plan", color: "#3b82f6", priority: "high" as const } },
+    { delay: 3.2, startY: -1.5, ticketInfo: { emoji: "💬", text: "Live chat", subtitle: "Sales inquiry", color: "#10b981", priority: "medium" as const } },
+    { delay: 3.4, startY: 1.5, ticketInfo: { emoji: "📧", text: "Invoice copy", subtitle: "Tax records", color: "#3b82f6", priority: "low" as const } },
+    { delay: 3.6, startY: -1.5, ticketInfo: { emoji: "💬", text: "Demo request", subtitle: "Product tour", color: "#10b981", priority: "medium" as const } },
+    { delay: 3.8, startY: 1.5, ticketInfo: { emoji: "📧", text: "Data export", subtitle: "GDPR request", color: "#3b82f6", priority: "high" as const } },
+    { delay: 4.0, startY: -1.5, ticketInfo: { emoji: "💬", text: "Integration", subtitle: "API setup", color: "#10b981", priority: "medium" as const } },
+    { delay: 4.2, startY: 1.5, ticketInfo: { emoji: "📧", text: "Upgrade plan", subtitle: "Pro features", color: "#3b82f6", priority: "medium" as const } },
+    
+    // Wave 4 - Heavy traffic (4.5-6s)
+    { delay: 4.5, startY: -1.5, ticketInfo: { emoji: "💬", text: "Urgent issue", subtitle: "Service down", color: "#10b981", priority: "high" as const } },
+    { delay: 4.7, startY: 1.5, ticketInfo: { emoji: "📧", text: "Warranty claim", subtitle: "Product defect", color: "#3b82f6", priority: "high" as const } },
+    { delay: 4.9, startY: -1.5, ticketInfo: { emoji: "💬", text: "Pricing info", subtitle: "Quote request", color: "#10b981", priority: "medium" as const } },
+    { delay: 5.1, startY: 1.5, ticketInfo: { emoji: "📧", text: "Change address", subtitle: "Shipping update", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 5.3, startY: -1.5, ticketInfo: { emoji: "💬", text: "Documentation", subtitle: "Guide needed", color: "#10b981", priority: "low" as const } },
+    { delay: 5.5, startY: 1.5, ticketInfo: { emoji: "📧", text: "Credit note", subtitle: "Store credit", color: "#3b82f6", priority: "medium" as const } },
+    { delay: 5.7, startY: -1.5, ticketInfo: { emoji: "💬", text: "Feedback", subtitle: "Suggestion", color: "#10b981", priority: "low" as const } },
   ], []);
 
   const outcomes = useMemo(() => [
@@ -917,108 +840,36 @@ const Scene = () => {
 
   const happiness = useMemo(() => [
     // Outcomes from Wave 1
-    { 
-      delay: 1.2, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Refund processed", 
-        metric: "Resolved in 45s",
-        color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 1.5, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Billing fixed", 
-        metric: "98% satisfaction",
-        color: "#fbbf24" 
-      } 
-    },
-    { 
-      delay: 1.8, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Order updated", 
-        metric: "First contact",
-        color: "#10b981" 
-      } 
-    },
+    { delay: 1.2, endY: 1.5, happiness: { emoji: "😊", text: "Refund processed", metric: "Resolved in 45s", color: "#10b981" } },
+    { delay: 1.4, endY: 1.5, happiness: { emoji: "⭐", text: "Billing fixed", metric: "98% satisfaction", color: "#fbbf24" } },
+    { delay: 1.6, endY: 1.5, happiness: { emoji: "😊", text: "Order updated", metric: "First contact", color: "#10b981" } },
+    { delay: 1.8, endY: 1.5, happiness: { emoji: "⭐", text: "Payment sorted", metric: "Quick fix", color: "#fbbf24" } },
+    { delay: 2.0, endY: 1.5, happiness: { emoji: "😊", text: "Account setup", metric: "Easy process", color: "#10b981" } },
+    { delay: 2.2, endY: 1.5, happiness: { emoji: "⭐", text: "Package tracked", metric: "Real-time", color: "#fbbf24" } },
+    
     // Outcomes from Wave 2
-    { 
-      delay: 3.7, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Login restored", 
-        metric: "Quick resolution",
-        color: "#fbbf24" 
-      } 
-    },
-    { 
-      delay: 4.0, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Question answered", 
-        metric: "Instant help",
-        color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 4.3, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Support excellent", 
-        metric: "Highly rated",
-        color: "#fbbf24" 
-      } 
-    },
+    { delay: 2.8, endY: -1.5, happiness: { emoji: "😊", text: "Login restored", metric: "Quick resolution", color: "#10b981" } },
+    { delay: 3.0, endY: -1.5, happiness: { emoji: "⭐", text: "Question answered", metric: "Instant help", color: "#fbbf24" } },
+    { delay: 3.2, endY: -1.5, happiness: { emoji: "😊", text: "Support excellent", metric: "Highly rated", color: "#10b981" } },
+    { delay: 3.4, endY: -1.5, happiness: { emoji: "⭐", text: "Feature noted", metric: "Feedback logged", color: "#fbbf24" } },
+    { delay: 3.6, endY: -1.5, happiness: { emoji: "😊", text: "Issue resolved", metric: "Fast response", color: "#10b981" } },
+    { delay: 3.8, endY: -1.5, happiness: { emoji: "⭐", text: "Bug fixed", metric: "Same day", color: "#fbbf24" } },
+    
     // Outcomes from Wave 3
-    { 
-      delay: 6.2, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Account ready", 
-        metric: "Quick onboard",
-        color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 6.4, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Feature delivered", 
-        metric: "Under 24h",
-        color: "#fbbf24" 
-      } 
-    },
-    { 
-      delay: 6.7, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Payment complete", 
-        metric: "Invoice sent",
-        color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 7.0, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Issue resolved", 
-        metric: "Same day",
-        color: "#fbbf24" 
-      } 
-    },
+    { delay: 4.2, endY: 1.5, happiness: { emoji: "😊", text: "Plan cancelled", metric: "No hassle", color: "#10b981" } },
+    { delay: 4.4, endY: -1.5, happiness: { emoji: "⭐", text: "Sales helped", metric: "Perfect match", color: "#fbbf24" } },
+    { delay: 4.6, endY: 1.5, happiness: { emoji: "😊", text: "Invoice sent", metric: "Instant email", color: "#10b981" } },
+    { delay: 4.8, endY: -1.5, happiness: { emoji: "⭐", text: "Demo booked", metric: "Tomorrow", color: "#fbbf24" } },
+    { delay: 5.0, endY: 1.5, happiness: { emoji: "😊", text: "Data exported", metric: "Complete", color: "#10b981" } },
+    { delay: 5.2, endY: -1.5, happiness: { emoji: "⭐", text: "API working", metric: "Connected", color: "#fbbf24" } },
+    
+    // Outcomes from Wave 4
+    { delay: 5.7, endY: -1.5, happiness: { emoji: "😊", text: "Service up", metric: "5min downtime", color: "#10b981" } },
+    { delay: 5.9, endY: 1.5, happiness: { emoji: "⭐", text: "Warranty approved", metric: "Free replace", color: "#fbbf24" } },
+    { delay: 6.1, endY: -1.5, happiness: { emoji: "😊", text: "Quote ready", metric: "Best price", color: "#10b981" } },
+    { delay: 6.3, endY: 1.5, happiness: { emoji: "⭐", text: "Address changed", metric: "Updated", color: "#fbbf24" } },
+    { delay: 6.5, endY: -1.5, happiness: { emoji: "😊", text: "Guide sent", metric: "Step by step", color: "#10b981" } },
+    { delay: 6.7, endY: 1.5, happiness: { emoji: "⭐", text: "Credit issued", metric: "$50 added", color: "#fbbf24" } },
   ], []);
 
   return (
