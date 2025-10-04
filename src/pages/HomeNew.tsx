@@ -510,15 +510,11 @@ const HomeNew = () => {
           {/* Benefits Grid - Symmetrical & Sleek */}
           <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
-              const Icon = feature.icon;
-              const metrics = ['45%', '3.2x', '92%', '68%'];
-              
-              return (
-                <div 
-                  key={index}
-                  className="group relative h-[280px]"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
+            const Icon = feature.icon;
+            const metrics = ['45%', '3.2x', '92%', '68%'];
+            return <div key={index} className="group relative h-[280px]" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   {/* Main card with border gradient effect */}
                   <div className="relative h-full rounded-xl p-[1px] bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/30 hover:to-accent/30 transition-all duration-300">
                     <div className="relative h-full rounded-xl bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col">
@@ -563,9 +559,8 @@ const HomeNew = () => {
                       <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
         </div>
       </section>
@@ -626,39 +621,21 @@ const HomeNew = () => {
             <div className="overflow-hidden py-8">
               <div className="flex animate-scroll">
                 {/* First set of logos */}
-                {[
-                  'Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom',
-                  'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon',
-                  'Atlassian', 'Twilio'
-                ].map((company, index) => (
-                  <div 
-                    key={`first-${index}`}
-                    className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group"
-                  >
+                {['Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom', 'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon', 'Atlassian', 'Twilio'].map((company, index) => <div key={`first-${index}`} className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-muted-foreground group-hover:text-primary transition-colors">
                         {company}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
                 {/* Duplicate set for seamless loop */}
-                {[
-                  'Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom',
-                  'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon',
-                  'Atlassian', 'Twilio'
-                ].map((company, index) => (
-                  <div 
-                    key={`second-${index}`}
-                    className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group"
-                  >
+                {['Salesforce', 'Zendesk', 'Slack', 'HubSpot', 'Intercom', 'Shopify', 'Stripe', 'Microsoft', 'Google', 'Amazon', 'Atlassian', 'Twilio'].map((company, index) => <div key={`second-${index}`} className="flex-shrink-0 mx-6 w-40 h-24 glass-strong rounded-xl flex items-center justify-center hover:scale-105 transition-transform group">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-muted-foreground group-hover:text-primary transition-colors">
                         {company}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
           </div>
@@ -691,62 +668,11 @@ const HomeNew = () => {
       `}</style>
 
       {/* Integrations */}
-      <section className="py-20 fade-in-scroll">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Connect your stack. Extend with actions.</h2>
-            <p className="text-muted-foreground">See exactly where Pullse can safely take write-ops</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
-            {integrations.map((integration, index) => <div key={index} className="glass-strong p-6 rounded-xl text-center hover:scale-105 transition-all">
-                <div className="font-bold mb-3">{integration.name}</div>
-                <div className="flex flex-wrap gap-1 justify-center">
-                  {integration.capabilities.map(cap => <span key={cap} className={`text-xs px-2 py-1 rounded ${cap === "Actions" ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}>
-                      {cap}
-                    </span>)}
-                </div>
-              </div>)}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Trust & FAQ */}
       <section className="py-20 fade-in-scroll">
-        <div className="container mx-auto px-4">
-          {/* Trust Strip */}
-          <div className="glass-strong p-8 rounded-2xl mb-12 max-w-4xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-8 text-center">
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="font-medium">SSO/SAML</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="font-medium">RBAC</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="font-medium">Audit trails</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span className="font-medium">Data handling</span>
-              </div>
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h3>
-            <div className="space-y-4">
-              {faqs.map((faq, index) => <div key={index} className="glass-strong p-6 rounded-xl">
-                  <h4 className="font-bold mb-2">{faq.q}</h4>
-                  <p className="text-muted-foreground">{faq.a}</p>
-                </div>)}
-            </div>
-          </div>
-        </div>
+        
       </section>
 
       {/* Final CTA */}
