@@ -105,7 +105,7 @@ const Navigation = () => {
       </div>;
   };
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`}>
-      <div className={`mx-auto transition-all duration-500 ${isScrolled ? "max-w-5xl backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"} rounded-[1.25rem] px-4`}>
+      <div className={`mx-auto transition-all duration-500 ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"} rounded-[1.25rem] px-4`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
