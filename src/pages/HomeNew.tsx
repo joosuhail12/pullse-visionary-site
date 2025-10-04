@@ -192,9 +192,11 @@ const HomeNew = () => {
       {/* Node Animation */}
       <section className="py-20 relative fade-in-scroll">
         <div className="container mx-auto px-4">
-          <div className="glass-strong rounded-3xl p-8 overflow-hidden">
-            <NodeAnimation />
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold mb-4">Watch Pullse in Action</h2>
+            <p className="text-xl text-muted-foreground">See how conversations flow through our AI-powered platform</p>
           </div>
+          <NodeAnimation />
         </div>
       </section>
 
