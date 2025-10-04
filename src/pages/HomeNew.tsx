@@ -204,8 +204,13 @@ const HomeNew = () => {
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
-        {/* LiquidEther Background */}
-        <div className="absolute inset-0 -z-10">
+        {/* Three.js Background - Bottom Layer */}
+        <div className="absolute inset-0 -z-20">
+          <HeroFloating3D />
+        </div>
+        
+        {/* LiquidEther Background - Top Layer with transparency */}
+        <div className="absolute inset-0 -z-10 opacity-60">
           <LiquidEther
             colors={['#FF00C8', '#A805FF', '#D3A9EA']}
             mouseForce={25}
@@ -222,7 +227,7 @@ const HomeNew = () => {
         </div>
         
         {/* Overlay gradient for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/40 to-background/60 -z-5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/50 via-background/30 to-background/50 -z-5" />
 
         <div className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
