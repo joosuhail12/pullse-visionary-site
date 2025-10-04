@@ -507,8 +507,8 @@ const HomeNew = () => {
             </p>
           </div>
 
-          {/* Benefits Grid - Symmetrical Design */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Benefits Grid - Symmetrical & Sleek */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
               const Icon = feature.icon;
               const metrics = ['45%', '3.2x', '92%', '68%'];
@@ -516,53 +516,51 @@ const HomeNew = () => {
               return (
                 <div 
                   key={index}
-                  className="group relative"
+                  className="group relative h-[280px]"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Main card with border gradient effect */}
-                  <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-primary/20 via-transparent to-accent/20 hover:from-primary/40 hover:to-accent/40 transition-all duration-500">
-                    <div className="relative rounded-2xl bg-background/95 backdrop-blur-xl overflow-hidden">
+                  <div className="relative h-full rounded-xl p-[1px] bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/30 hover:to-accent/30 transition-all duration-300">
+                    <div className="relative h-full rounded-xl bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col">
                       {/* Top accent bar */}
-                      <div className="h-1 w-full bg-gradient-to-r from-primary to-accent" />
+                      <div className="h-0.5 w-full bg-gradient-to-r from-primary to-accent" />
                       
-                      <div className="p-8">
+                      <div className="p-6 flex-1 flex flex-col">
                         {/* Icon & Metric Row */}
-                        <div className="flex items-center justify-between mb-6">
-                          <div className="relative h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                            <Icon className="h-7 w-7 text-white" />
-                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-accent blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="relative h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <Icon className="h-6 w-6 text-white" />
                           </div>
                           
                           <div className="text-right">
-                            <div className="text-3xl font-black text-primary mb-1">
+                            <div className="text-2xl font-black text-primary">
                               {metrics[index]}
                             </div>
-                            <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                              Improvement
+                            <div className="text-[10px] text-muted-foreground uppercase tracking-wide">
+                              Faster
                             </div>
                           </div>
                         </div>
                         
                         {/* Title */}
-                        <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
+                        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
                           {feature.title}
                         </h3>
                         
                         {/* Description */}
-                        <p className="text-muted-foreground leading-relaxed mb-6">
+                        <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                           {feature.desc}
                         </p>
                         
                         {/* Bottom CTA */}
-                        <div className="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
+                        <div className="flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:gap-2 transition-all mt-4">
                           <span>Learn more</span>
-                          <ArrowRight className="h-4 w-4" />
+                          <ArrowRight className="h-3 w-3" />
                         </div>
                       </div>
                       
-                      {/* Decorative circles */}
-                      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      {/* Subtle decorative glow */}
+                      <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
                 </div>
