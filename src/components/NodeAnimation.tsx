@@ -305,12 +305,12 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
     
     setProgress(t / 10);
     
-    // Enhanced Bezier curve with dramatic z-depth
+    // Enhanced Bezier curve flowing from left (channels) to right (outcomes)
     const curve = new THREE.CubicBezierCurve3(
-      new THREE.Vector3(-8, startY, 3),
-      new THREE.Vector3(-4, startY + 2, 0),
-      new THREE.Vector3(-2, startY - 1, -3),
-      new THREE.Vector3(0, 0, -1)
+      new THREE.Vector3(-8, startY, 3),           // Start at channels (left)
+      new THREE.Vector3(-3, startY + 1, 0),       // Curve towards center
+      new THREE.Vector3(3, startY - 1, 0),        // Continue through center
+      new THREE.Vector3(9, startY, 3)             // End at outcomes (right)
     );
     
     const point = curve.getPoint(progress);
