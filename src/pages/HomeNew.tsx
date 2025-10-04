@@ -12,7 +12,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 const HomeNew = () => {
-  const [activeSolution, setActiveSolution] = useState("b2b-saas");
+  const [activeSolution, setActiveSolution] = useState<"b2b-saas" | "ecommerce" | "edtech" | "fintech">("b2b-saas");
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
@@ -111,23 +111,19 @@ const HomeNew = () => {
   const solutions = {
     "b2b-saas": {
       title: "B2B SaaS",
-      items: ["Plan changes & billing", "Provisioning/SSO", "Usage/quota tracking", "Incident comms"]
+      items: ["Plan changes & billing", "Provisioning/SSO", "Usage/quota tracking", "Incident comms", "Account management", "API support"]
     },
     ecommerce: {
       title: "Ecommerce",
-      items: ["WISMO/status updates", "Returns & exchanges", "Refunds & loyalty", "Order tracking"]
+      items: ["WISMO/status updates", "Returns & exchanges", "Refunds & loyalty", "Order tracking", "Product inquiries", "Shipping issues"]
     },
-    "head-of-support": {
-      title: "Head of Support",
-      items: ["CSAT tracking", "First-contact resolution", "Average handle time", "Team performance"]
+    edtech: {
+      title: "Edtech",
+      items: ["Student onboarding", "Course enrollment", "Technical support", "Payment processing", "Assignment help", "Account access"]
     },
-    "ops-lead": {
-      title: "Ops Lead",
-      items: ["Coverage by intent", "SLA compliance", "Automation metrics", "Workflow optimization"]
-    },
-    "cto-ciso": {
-      title: "CTO/CISO",
-      items: ["Security policies", "Audit trails", "Data handling", "Trust Center access"]
+    fintech: {
+      title: "Fintech",
+      items: ["Transaction disputes", "Account verification", "Payment issues", "Fraud alerts", "Compliance queries", "Feature requests"]
     }
   };
   const integrations = [{
@@ -597,13 +593,13 @@ const HomeNew = () => {
                     <div className="space-y-2">
                       {Object.entries(solutions).map(([key, solution], index) => {
                         const isActive = activeSolution === key;
-                        const icons = [Users, Shield, Zap, BarChart3, Bot];
+                        const icons = [Zap, Shield, Users, BarChart3];
                         const Icon = icons[index] || Users;
                         
                         return (
                           <button
                             key={key}
-                            onClick={() => setActiveSolution(key)}
+                            onClick={() => setActiveSolution(key as "b2b-saas" | "ecommerce" | "edtech" | "fintech")}
                             className={`w-full text-left p-4 rounded-xl transition-all duration-300 group ${
                               isActive 
                                 ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-[1.02]' 
@@ -637,7 +633,7 @@ const HomeNew = () => {
                   <div className="p-8">
                     {Object.entries(solutions).map(([key, solution], index) => {
                       const isActive = activeSolution === key;
-                      const icons = [Users, Shield, Zap, BarChart3, Bot];
+                      const icons = [Zap, Shield, Users, BarChart3];
                       const Icon = icons[index] || Users;
                       
                       if (!isActive) return null;
