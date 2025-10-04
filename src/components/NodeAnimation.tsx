@@ -1584,7 +1584,7 @@ const NodeAnimation = () => {
                 <Mail className="h-4 w-4 text-blue-500" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-foreground">Unified Inbox</div>
+                <div className="text-sm font-semibold text-foreground">Unified Communication</div>
                 <div className="text-xs text-muted-foreground">All channels, one place</div>
               </div>
             </div>
