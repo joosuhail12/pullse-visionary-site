@@ -12,7 +12,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { 
-  Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2
+  Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2, AlertTriangle, Timer
 } from "lucide-react";
 import logoIcon from "@/assets/logo-icon-purple.png";
 
@@ -176,6 +176,174 @@ const ProgressRing = ({ radius, progress, color }: { radius: number; progress: n
       <ringGeometry args={[radius, radius + 0.1, 64, 1, 0, Math.PI * 2 * progress]} />
       <meshBasicMaterial color={color} transparent opacity={0.6} side={THREE.DoubleSide} />
     </mesh>
+  );
+};
+
+// Progress Counter Component
+const ProgressCounter = ({ 
+  position, 
+  count, 
+  label, 
+  color 
+}: { 
+  position: [number, number, number]; 
+  count: number; 
+  label: string; 
+  color: string;
+}) => {
+  return (
+    <Float speed={1.2} floatIntensity={0.2}>
+      <group position={position}>
+        <Html center distanceFactor={12}>
+          <div 
+            className="glass-strong px-4 py-3 rounded-xl border-2 shadow-lg"
+            style={{ 
+              borderColor: color,
+              boxShadow: `0 8px 32px ${color}40`
+            }}
+          >
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-1" style={{ color }}>
+                {count}
+              </div>
+              <div className="text-[10px] text-muted-foreground font-semibold">
+                {label}
+              </div>
+            </div>
+          </div>
+        </Html>
+      </group>
+    </Float>
+  );
+};
+
+// Section with tooltip
+const SectionWithTooltip = ({ 
+  position, 
+  title, 
+  subtitle,
+  tooltip,
+  onHover
+}: { 
+  position: [number, number, number]; 
+  title: string; 
+  subtitle: string;
+  tooltip: string;
+  onHover?: (hovered: boolean) => void;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  
+  return (
+    <group position={position}>
+      <Html center distanceFactor={10}>
+        <div 
+          className="glass-strong px-8 py-4 rounded-2xl shadow-2xl border-2 border-primary/30 transition-all duration-300 cursor-pointer"
+          onMouseEnter={() => {
+            setHovered(true);
+            onHover?.(true);
+          }}
+          onMouseLeave={() => {
+            setHovered(false);
+            onHover?.(false);
+          }}
+          style={{
+            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+            borderColor: hovered ? 'hsl(var(--primary))' : undefined
+          }}
+        >
+          <div className="text-center">
+            <div className="text-base font-bold text-foreground mb-1">{title}</div>
+            <div className="text-xs text-muted-foreground">{subtitle}</div>
+          </div>
+          {hovered && (
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 glass-strong p-3 rounded-lg border border-primary/40 text-xs text-center animate-fade-in z-50">
+              {tooltip}
+            </div>
+          )}
+        </div>
+      </Html>
+    </group>
+  );
+};
+
+// Escalation ticket that goes to human
+const EscalatedTicket = ({ delay, startY, ticketInfo }: { 
+  delay: number; 
+  startY: number; 
+  ticketInfo: { 
+    emoji: string; 
+    text: string; 
+    subtitle: string;
+    color: string;
+  };
+}) => {
+  const groupRef = useRef<THREE.Group>(null);
+  const [progress, setProgress] = useState(0);
+
+  useFrame((state) => {
+    if (!groupRef.current) return;
+    const t = (state.clock.elapsedTime * 0.35 + delay) % 7;
+    setProgress(t / 7);
+    
+    // Different path - stays longer at engine, indicates escalation
+    const curve = new THREE.CubicBezierCurve3(
+      new THREE.Vector3(-8, startY, 3),
+      new THREE.Vector3(-3, startY + 1, 0),
+      new THREE.Vector3(-1, startY, -2),
+      new THREE.Vector3(0, 0.5, -1) // Ends slightly higher
+    );
+    
+    const point = curve.getPoint(progress);
+    groupRef.current.position.copy(point);
+    
+    const baseScale = 0.4 + progress * 0.7;
+    groupRef.current.scale.setScalar(baseScale);
+  });
+
+  if (progress < 0.05 || progress > 0.95) return null;
+
+  return (
+    <group ref={groupRef}>
+      <mesh position={[0, -0.2, -0.1]}>
+        <sphereGeometry args={[0.2, 16, 16]} />
+        <meshBasicMaterial color="#000000" transparent opacity={0.2} />
+      </mesh>
+      <Trail
+        width={2}
+        length={12}
+        color={ticketInfo.color}
+        attenuation={(t) => t * t * t}
+      >
+        <mesh>
+          <sphereGeometry args={[0.15, 16, 16]} />
+          <meshStandardMaterial
+            color={ticketInfo.color}
+            emissive={ticketInfo.color}
+            emissiveIntensity={2}
+          />
+        </mesh>
+      </Trail>
+      <Html center distanceFactor={12}>
+        <div 
+          className="glass-strong px-4 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap border-l-4 animate-pulse"
+          style={{ 
+            borderColor: ticketInfo.color,
+            boxShadow: `0 4px 24px ${ticketInfo.color}40`,
+            background: 'linear-gradient(90deg, rgba(255,193,7,0.1), transparent)'
+          }}
+        >
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="h-3 w-3 text-yellow-500" />
+              <span className="text-xl">{ticketInfo.emoji}</span>
+              <span className="text-xs font-semibold">{ticketInfo.text}</span>
+            </div>
+            <span className="text-[10px] text-muted-foreground">{ticketInfo.subtitle}</span>
+            <span className="text-[9px] text-yellow-500 font-bold">→ Escalated to Human</span>
+          </div>
+        </div>
+      </Html>
+    </group>
   );
 };
 
@@ -820,9 +988,22 @@ const SectionLabel = ({ position, title, subtitle, align = "center" }: { positio
   );
 };
 
-// Enhanced main scene with all visual improvements
+// Enhanced main scene with all improvements
 const Scene = () => {
   const [processingTicket, setProcessingTicket] = useState<string | undefined>();
+  const [ticketsIncoming, setTicketsIncoming] = useState(6);
+  const [ticketsProcessing, setTicketsProcessing] = useState(0);
+  const [happyCustomers, setHappyCustomers] = useState(0);
+  const [sectionPaused, setSectionPaused] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTicketsIncoming(prev => (prev % 12) + 1);
+      setTicketsProcessing(prev => (prev % 5) + 1);
+      setHappyCustomers(prev => prev + 1);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   
   const channels = useMemo(() => [
     { position: [-8, 2.5, 0] as [number, number, number], icon: Mail, color: "#60a5fa", label: "Email", count: 12 },
@@ -837,7 +1018,7 @@ const Scene = () => {
       ticketInfo: { 
         emoji: "📧", 
         text: "Refund request", 
-        subtitle: "Order #45821",
+        subtitle: "Order #45821 • Sentiment: Frustrated",
         color: "#3b82f6",
         priority: "high" as const
       } 
@@ -848,7 +1029,7 @@ const Scene = () => {
       ticketInfo: { 
         emoji: "💬", 
         text: "Login issue", 
-        subtitle: "Password reset",
+        subtitle: "Password reset • Status: New",
         color: "#10b981",
         priority: "medium" as const
       } 
@@ -859,7 +1040,7 @@ const Scene = () => {
       ticketInfo: { 
         emoji: "📞", 
         text: "Upgrade plan", 
-        subtitle: "Enterprise tier",
+        subtitle: "Enterprise tier • Sentiment: Positive",
         color: "#8b5cf6",
         priority: "low" as const
       } 
@@ -870,20 +1051,32 @@ const Scene = () => {
       ticketInfo: { 
         emoji: "📧", 
         text: "Billing error", 
-        subtitle: "Duplicate charge",
+        subtitle: "Duplicate charge • Status: Urgent",
         color: "#3b82f6",
         priority: "high" as const
       } 
     },
+  ], []);
+
+  const escalatedTickets = useMemo(() => [
     { 
-      delay: 4.8, 
-      startY: -0.5, 
+      delay: 1.8, 
+      startY: 1.2, 
       ticketInfo: { 
-        emoji: "💬", 
-        text: "Feature request", 
-        subtitle: "API integration",
-        color: "#10b981",
-        priority: "low" as const
+        emoji: "⚠️", 
+        text: "Complex inquiry", 
+        subtitle: "Requires human expertise",
+        color: "#fbbf24"
+      } 
+    },
+    { 
+      delay: 4.2, 
+      startY: -0.8, 
+      ticketInfo: { 
+        emoji: "🔒", 
+        text: "Legal question", 
+        subtitle: "Needs specialist review",
+        color: "#f97316"
       } 
     },
   ], []);
@@ -901,7 +1094,7 @@ const Scene = () => {
       happiness: { 
         emoji: "😊", 
         text: "Refund processed", 
-        metric: "Resolved in 45 seconds",
+        metric: "Resolved in 47s • CSAT: 95%",
         color: "#10b981" 
       } 
     },
@@ -911,7 +1104,7 @@ const Scene = () => {
       happiness: { 
         emoji: "⭐", 
         text: "5-star review", 
-        metric: "98% satisfaction score",
+        metric: "Response time: 1m 12s • NPS: 9",
         color: "#fbbf24" 
       } 
     },
@@ -921,7 +1114,7 @@ const Scene = () => {
       happiness: { 
         emoji: "❤️", 
         text: "Plan upgraded", 
-        metric: "Customer retained",
+        metric: "Customer retained • Revenue: +$299",
         color: "#ec4899" 
       } 
     },
@@ -931,18 +1124,8 @@ const Scene = () => {
       happiness: { 
         emoji: "😊", 
         text: "Issue resolved", 
-        metric: "First contact resolution",
+        metric: "First contact resolution • 42s",
         color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 5.6, 
-      endY: -0.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Feature delivered", 
-        metric: "Under 24 hours",
-        color: "#fbbf24" 
       } 
     },
   ], []);
@@ -991,13 +1174,28 @@ const Scene = () => {
         direction="forward" 
       />
 
-      {/* Section 1: Channels (Left) */}
-      <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
+      {/* Section 1: Channels (Left) with tooltip */}
+      <SectionWithTooltip 
+        position={[-8, 4.5, 0]} 
+        title="1. CHANNELS" 
+        subtitle="Multi-channel support"
+        tooltip="Customer issues arrive from multiple channels including email, chat, and phone"
+        onHover={(hovered) => setSectionPaused(hovered ? 'channels' : null)}
+      />
+      
+      {/* Progress counter for incoming tickets */}
+      <ProgressCounter 
+        position={[-8, -3.5, 0]} 
+        count={ticketsIncoming} 
+        label="Tickets Incoming" 
+        color="#60a5fa"
+      />
+      
       {channels.map((channel, i) => (
         <ChannelIcon key={`channel-${i}`} {...channel} />
       ))}
 
-      {/* Tickets flowing from channels to engine */}
+      {/* Regular tickets flowing from channels to engine */}
       {tickets.map((ticket, i) => (
         <FlowingTicket 
           key={`ticket-${i}`} 
@@ -1005,9 +1203,41 @@ const Scene = () => {
           onProcess={() => setProcessingTicket(ticket.ticketInfo.text)}
         />
       ))}
+      
+      {/* Escalated tickets */}
+      {escalatedTickets.map((ticket, i) => (
+        <EscalatedTicket key={`escalated-${i}`} {...ticket} />
+      ))}
 
-      {/* Section 2: Human Augmentation Engine (Center) */}
-      <SectionLabel position={[0, 5.8, 0]} title="2. HUMAN AUGMENTATION ENGINE" subtitle="AI + Human collaboration" align="center" />
+      {/* Section 2: Human Augmentation Engine (Center) with tooltip */}
+      <SectionWithTooltip 
+        position={[0, 5.8, 0]} 
+        title="2. HUMAN AUGMENTATION ENGINE" 
+        subtitle="AI + Human collaboration"
+        tooltip="AI and human experts work together to analyze, route, and resolve customer issues in real-time"
+        onHover={(hovered) => setSectionPaused(hovered ? 'engine' : null)}
+      />
+      
+      {/* Processing counter */}
+      <ProgressCounter 
+        position={[0, -5, 0]} 
+        count={ticketsProcessing} 
+        label="Processing Now" 
+        color="#7c3aed"
+      />
+      
+      {/* Speed indicator */}
+      <Float speed={1.3} floatIntensity={0.3}>
+        <group position={[0, -5.8, 0]}>
+          <Html center distanceFactor={12}>
+            <div className="glass-strong px-4 py-2 rounded-xl border border-primary/30 flex items-center gap-2">
+              <Timer className="h-4 w-4 text-primary animate-pulse" />
+              <span className="text-xs font-bold">{"< 2 min avg"}</span>
+            </div>
+          </Html>
+        </group>
+      </Float>
+      
       <HumanAugmentationEngine activeTicketType={processingTicket} />
 
       {/* Happiness flowing from engine to outcomes */}
@@ -1015,8 +1245,23 @@ const Scene = () => {
         <FlowingHappiness key={`happy-${i}`} {...happy} />
       ))}
 
-      {/* Section 3: Outcomes (Right) */}
-      <SectionLabel position={[9, 4.5, 0]} title="3. OUTCOMES" subtitle="Delighted customers" align="center" />
+      {/* Section 3: Outcomes (Right) with tooltip */}
+      <SectionWithTooltip 
+        position={[9, 4.5, 0]} 
+        title="3. OUTCOMES" 
+        subtitle="Delighted customers"
+        tooltip="Customers receive fast, accurate solutions resulting in high satisfaction and loyalty"
+        onHover={(hovered) => setSectionPaused(hovered ? 'outcomes' : null)}
+      />
+      
+      {/* Happy customers counter */}
+      <ProgressCounter 
+        position={[9, -3.5, 0]} 
+        count={happyCustomers} 
+        label="Happy Customers" 
+        color="#10b981"
+      />
+      
       {outcomes.map((outcome, i) => (
         <OutcomeIcon key={`outcome-${i}`} {...outcome} />
       ))}
