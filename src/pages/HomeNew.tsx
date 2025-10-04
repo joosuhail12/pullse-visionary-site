@@ -9,6 +9,7 @@ import VideoEmbed from "@/components/VideoEmbed";
 import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
 import HeroFloating3D from "@/components/HeroFloating3D";
+import MagicBento, { CardData } from "@/components/MagicBento";
 import antlerLogo from "@/assets/antler-logo.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -64,33 +65,47 @@ const HomeNew = () => {
       });
     });
   }, []);
-  const taxonomy = [{
+  const taxonomy: CardData[] = [{
     title: "Unified Inbox",
-    desc: "One place for email & chat with SLAs, assignments, and full context.",
+    description: "One place for email & chat with SLAs, assignments, and full context.",
+    label: "Communication",
+    color: "hsl(var(--background))",
     icon: MessageSquare
   }, {
     title: "Workflow Automation",
-    desc: "Visual routing, tagging, SLAs, escalations.",
+    description: "Visual routing, tagging, SLAs, escalations.",
+    label: "Automation",
+    color: "hsl(var(--background))",
     icon: Zap
   }, {
     title: "AI Chatbots",
-    desc: "Deflect known intents with intelligent automated responses.",
+    description: "Deflect known intents with intelligent automated responses.",
+    label: "AI Agent",
+    color: "hsl(var(--background))",
     icon: Bot
   }, {
     title: "AI Copilots",
-    desc: "Draft, summarize, translate—AI assistance for your team.",
+    description: "Draft, summarize, translate—AI assistance for your team.",
+    label: "AI Assistant",
+    color: "hsl(var(--background))",
     icon: Sparkles
   }, {
     title: "AI Tools",
-    desc: "Refunds, plan changes, order status—with guardrails & audit trails.",
+    description: "Refunds, plan changes, order status—with guardrails & audit trails.",
+    label: "Actions",
+    color: "hsl(var(--background))",
     icon: Users
   }, {
     title: "Auto-QA",
-    desc: "Score 100% of conversations for accuracy, empathy, policy.",
+    description: "Score 100% of conversations for accuracy, empathy, policy.",
+    label: "Quality",
+    color: "hsl(var(--background))",
     icon: Shield
   }, {
     title: "Analytics",
-    desc: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
+    description: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
+    label: "Insights",
+    color: "hsl(var(--background))",
     icon: BarChart3
   }];
   const featureBento = [{
@@ -316,194 +331,20 @@ const HomeNew = () => {
             </p>
           </div>
 
-          {/* Bento Grid - 7 Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 max-w-7xl mx-auto auto-rows-[200px]">
-            {/* Unified Inbox - Large showcase (3 cols x 3 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-3 relative overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-              <div className="relative z-10 h-full flex flex-col p-8">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-lg shadow-primary/25">
-                    <MessageSquare className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      {taxonomy[0].title}
-                    </h3>
-                    <p className="text-muted-foreground">{taxonomy[0].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center backdrop-blur-sm group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-16 h-16 mx-auto rounded-xl bg-primary/20 flex items-center justify-center">
-                      <MessageSquare className="h-8 w-8 text-primary" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{taxonomy[0].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* AI Chatbots - Large showcase (3 cols x 3 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-3 relative overflow-hidden border border-accent/10">
-              <div className="absolute inset-0 bg-gradient-to-tl from-accent/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-8">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-lg shadow-accent/25">
-                    <Bot className="h-8 w-8 text-accent-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                      {taxonomy[2].title}
-                    </h3>
-                    <p className="text-muted-foreground">{taxonomy[2].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-2xl bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-16 h-16 mx-auto rounded-xl bg-accent/20 flex items-center justify-center">
-                      <Bot className="h-8 w-8 text-accent" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{taxonomy[2].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Workflow Automation - Medium (2 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-md shadow-primary/20">
-                    <Zap className="h-7 w-7 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-primary">{taxonomy[1].title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[1].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-12 h-12 mx-auto rounded-lg bg-primary/20 flex items-center justify-center">
-                      <Zap className="h-6 w-6 text-primary" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">{taxonomy[1].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* AI Copilots - Medium (2 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-accent/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-md shadow-accent/20">
-                    <Sparkles className="h-7 w-7 text-accent-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-accent">{taxonomy[3].title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[3].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-xl bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-12 h-12 mx-auto rounded-lg bg-accent/20 flex items-center justify-center">
-                      <Sparkles className="h-6 w-6 text-accent" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">{taxonomy[3].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* AI Tools - Medium (2 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-md shadow-primary/20">
-                    <Users className="h-7 w-7 text-primary-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-primary">{taxonomy[4].title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[4].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-12 h-12 mx-auto rounded-lg bg-primary/20 flex items-center justify-center">
-                      <Users className="h-6 w-6 text-primary" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">{taxonomy[4].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Auto-QA - Medium (2 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-accent/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center shadow-md shadow-accent/20">
-                    <Shield className="h-7 w-7 text-accent-foreground" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2 text-accent">{taxonomy[5].title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[5].desc}</p>
-                  </div>
-                </div>
-                
-                {/* Screenshot placeholder */}
-                <div className="flex-1 rounded-xl bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
-                  <div className="text-center space-y-2 opacity-60">
-                    <div className="w-12 h-12 mx-auto rounded-lg bg-accent/20 flex items-center justify-center">
-                      <Shield className="h-6 w-6 text-accent" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">{taxonomy[5].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Analytics - Wide showcase (4 cols x 2 rows) */}
-            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-4 md:row-span-2 relative overflow-hidden border border-primary/10">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
-              <div className="relative z-10 h-full flex flex-col md:flex-row gap-6 p-8">
-                <div className="md:w-2/5 flex flex-col justify-center">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 shadow-lg shadow-primary/25">
-                    <BarChart3 className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                    {taxonomy[6].title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">{taxonomy[6].desc}</p>
-                </div>
-                
-                {/* Screenshot placeholder - wide */}
-                <div className="flex-1 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.01] transition-transform">
-                  <div className="text-center space-y-3 opacity-60">
-                    <div className="w-16 h-16 mx-auto rounded-xl bg-primary/20 flex items-center justify-center">
-                      <BarChart3 className="h-8 w-8 text-primary" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{taxonomy[6].title} Screenshot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Magic Bento Grid */}
+          <MagicBento
+            cardData={taxonomy}
+            textAutoHide={true}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={false}
+            enableMagnetism={true}
+            clickEffect={true}
+            spotlightRadius={300}
+            particleCount={8}
+            glowColor="132, 0, 255"
+          />
         </div>
       </section>
 
