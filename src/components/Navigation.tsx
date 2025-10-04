@@ -127,6 +127,7 @@ const Navigation = () => {
   const gapValue = 6 - (scrollProgress * 3); // 6 to 3 (in units)
   const bgOpacity = 0.5 + scrollProgress * 0.2; // 0.5 to 0.7
   const borderOpacity = 0.05 + scrollProgress * 0.05; // 0.05 to 0.1
+  const fontSize = 0.75 + (scrollProgress * 0.125); // 0.75rem to 0.875rem (12px to 14px)
   
   return <nav className="fixed top-0 left-0 right-0 z-50" style={{ paddingTop: `${16 - scrollProgress * 8}px`, paddingLeft: '1rem', paddingRight: '1rem' }}>
       <div 
@@ -134,12 +135,13 @@ const Navigation = () => {
         style={{ 
           transform: `scale(${navScale})`,
           transformOrigin: 'top center',
-          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s, box-shadow 0.3s',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s, box-shadow 0.3s, font-size 0.3s',
           backgroundColor: `hsl(var(--background) / ${bgOpacity})`,
           borderColor: `hsl(var(--border) / ${borderOpacity})`,
           boxShadow: scrollProgress > 0.5 ? '0 25px 50px -12px hsl(var(--primary) / 0.1)' : 'none',
           paddingTop: `${10 + (1 - scrollProgress) * 4}px`,
           paddingBottom: `${6 + (1 - scrollProgress) * 4}px`,
+          fontSize: `${fontSize}rem`,
           willChange: 'transform'
         }}
       >
