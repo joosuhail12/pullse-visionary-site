@@ -122,10 +122,6 @@ const BlackArrowPath = ({
     });
   }, []);
 
-  // Calculate arrow head position and rotation
-  const arrowTip = points[points.length - 1];
-  const arrowBase = points[points.length - 5];
-  const arrowAngle = Math.atan2(arrowTip.y - arrowBase.y, arrowTip.x - arrowBase.x);
   return <group>
       {/* Base line with subtle glow */}
       <Line points={points} color="#5b21b6" lineWidth={6} transparent opacity={0.3} />
@@ -154,20 +150,8 @@ const BlackArrowPath = ({
           </div>
         </Html>}
       
-      {/* Arrow head */}
-      <Html position={[arrowTip.x, arrowTip.y, arrowTip.z]} center distanceFactor={10}>
-        <div style={{
-        transform: `rotate(${arrowAngle}rad)`,
-        fontSize: '24px',
-        color: '#000000',
-        fontWeight: 'bold'
-      }}>
-          ➤
-        </div>
-      </Html>
-      
       {/* End emoji */}
-      {endEmoji && <Html position={[arrowTip.x, arrowTip.y, arrowTip.z]} center distanceFactor={10}>
+      {endEmoji && <Html position={[points[points.length - 1].x, points[points.length - 1].y, points[points.length - 1].z]} center distanceFactor={10}>
           <div style={{
         fontSize: '28px',
         filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
