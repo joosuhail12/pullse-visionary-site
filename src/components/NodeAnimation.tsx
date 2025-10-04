@@ -236,45 +236,28 @@ const ParticleBurst = ({ position, color, delay }: { position: [number, number, 
   );
 };
 
-// Channel icon with hover tooltips
+// Channel icon with hover tooltips - minimal professional design
 const ChannelIcon = ({ position, icon, color, label, count }: { position: [number, number, number]; icon: any; color: string; label: string; count: number }) => {
   const Icon = icon;
   const [hovered, setHovered] = useState(false);
   
   return (
-    <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
       <group position={position}>
-        <mesh
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <sphereGeometry args={[0.4, 32, 32]} />
-          <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={hovered ? 1 : 0.5}
-            transparent
-            opacity={hovered ? 0.5 : 0.3}
-          />
-        </mesh>
         <Html center distanceFactor={8}>
           <div className="flex flex-col items-center gap-2">
             <div 
-              className="glass-strong p-4 rounded-2xl transition-all duration-300"
+              className="bg-background/95 backdrop-blur-sm p-3 rounded-lg border transition-all duration-200"
               style={{ 
-                backgroundColor: `${color}20`,
-                borderColor: color,
-                borderWidth: 2,
-                boxShadow: hovered ? `0 0 40px ${color}80` : `0 0 30px ${color}50`,
-                transform: hovered ? 'scale(1.1)' : 'scale(1)'
+                borderColor: hovered ? color : 'hsl(var(--border))',
+                transform: hovered ? 'scale(1.05)' : 'scale(1)'
               }}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
             >
-              <Icon className="h-8 w-8" style={{ color }} />
+              <Icon className="h-6 w-6" style={{ color: hovered ? color : 'hsl(var(--muted-foreground))' }} />
             </div>
-            <span className="text-xs font-bold text-muted-foreground">{label}</span>
-            <div className="text-xs font-semibold text-primary mt-1">
-              {count} active
-            </div>
+            <span className="text-xs font-medium text-muted-foreground">{label}</span>
           </div>
         </Html>
       </group>
@@ -531,7 +514,7 @@ const FlowingHappiness = ({
   );
 };
 
-// Outcome indicator with celebration effects
+// Outcome indicator with minimal professional design
 const OutcomeIcon = ({ position, emoji, color, label, count }: { 
   position: [number, number, number]; 
   emoji: string; 
@@ -542,40 +525,22 @@ const OutcomeIcon = ({ position, emoji, color, label, count }: {
   const [hovered, setHovered] = useState(false);
   
   return (
-    <Float speed={2.5} rotationIntensity={0.4} floatIntensity={0.6}>
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
       <group position={position}>
-        <mesh
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <sphereGeometry args={[0.4, 32, 32]} />
-          <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={hovered ? 1.2 : 0.6}
-            transparent
-            opacity={hovered ? 0.5 : 0.3}
-          />
-        </mesh>
-        <ParticleBurst position={position} color={color} delay={Math.random() * 2} />
         <Html center distanceFactor={8}>
           <div className="flex flex-col items-center gap-2">
             <div 
-              className="glass-strong p-4 rounded-2xl text-3xl transition-all duration-300"
+              className="bg-background/95 backdrop-blur-sm p-3 rounded-lg border transition-all duration-200 text-2xl"
               style={{ 
-                backgroundColor: `${color}20`,
-                borderColor: color,
-                borderWidth: 2,
-                boxShadow: hovered ? `0 0 50px ${color}90` : `0 0 30px ${color}60`,
-                transform: hovered ? 'scale(1.15)' : 'scale(1)'
+                borderColor: hovered ? color : 'hsl(var(--border))',
+                transform: hovered ? 'scale(1.05)' : 'scale(1)'
               }}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
             >
               {emoji}
             </div>
-            <span className="text-xs font-bold text-muted-foreground">{label}</span>
-            <div className="text-xs font-semibold text-primary mt-1">
-              +{count} today
-            </div>
+            <span className="text-xs font-medium text-muted-foreground">{label}</span>
           </div>
         </Html>
       </group>
@@ -825,15 +790,14 @@ const Scene = () => {
   const [processingTicket, setProcessingTicket] = useState<string | undefined>();
   
   const channels = useMemo(() => [
-    { position: [-8, 2.5, 0] as [number, number, number], icon: Mail, color: "#60a5fa", label: "Email", count: 12 },
-    { position: [-8, 0.5, 0] as [number, number, number], icon: MessageSquare, color: "#34d399", label: "Chat", count: 8 },
-    { position: [-8, -1.5, 0] as [number, number, number], icon: Phone, color: "#a78bfa", label: "Voice", count: 5 },
+    { position: [-8, 1.5, 0] as [number, number, number], icon: Mail, color: "#60a5fa", label: "Email", count: 12 },
+    { position: [-8, -1.5, 0] as [number, number, number], icon: MessageSquare, color: "#34d399", label: "Chat", count: 8 },
   ], []);
 
   const tickets = useMemo(() => [
     { 
       delay: 0, 
-      startY: 2.5, 
+      startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
         text: "Refund request", 
@@ -844,7 +808,7 @@ const Scene = () => {
     },
     { 
       delay: 1.2, 
-      startY: 0.5, 
+      startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
         text: "Login issue", 
@@ -855,18 +819,7 @@ const Scene = () => {
     },
     { 
       delay: 2.4, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "📞", 
-        text: "Upgrade plan", 
-        subtitle: "Enterprise tier",
-        color: "#8b5cf6",
-        priority: "low" as const
-      } 
-    },
-    { 
-      delay: 3.6, 
-      startY: 2, 
+      startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
         text: "Billing error", 
@@ -876,8 +829,8 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 4.8, 
-      startY: -0.5, 
+      delay: 3.6, 
+      startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
         text: "Feature request", 
@@ -886,18 +839,28 @@ const Scene = () => {
         priority: "low" as const
       } 
     },
+    { 
+      delay: 4.8, 
+      startY: 1.5, 
+      ticketInfo: { 
+        emoji: "📧", 
+        text: "Account help", 
+        subtitle: "Setup assistance",
+        color: "#3b82f6",
+        priority: "medium" as const
+      } 
+    },
   ], []);
 
   const outcomes = useMemo(() => [
-    { position: [9, 2.5, 0] as [number, number, number], emoji: "😊", color: "#10b981", label: "Satisfied", count: 847 },
-    { position: [9, 0.5, 0] as [number, number, number], emoji: "⭐", color: "#fbbf24", label: "5-Star", count: 412 },
-    { position: [9, -1.5, 0] as [number, number, number], emoji: "❤️", color: "#ec4899", label: "Delighted", count: 289 },
+    { position: [9, 1.5, 0] as [number, number, number], emoji: "😊", color: "#10b981", label: "Satisfied", count: 847 },
+    { position: [9, -1.5, 0] as [number, number, number], emoji: "⭐", color: "#fbbf24", label: "5-Star", count: 412 },
   ], []);
 
   const happiness = useMemo(() => [
     { 
       delay: 0.8, 
-      endY: 2.5, 
+      endY: 1.5, 
       happiness: { 
         emoji: "😊", 
         text: "Refund processed", 
@@ -907,7 +870,7 @@ const Scene = () => {
     },
     { 
       delay: 2, 
-      endY: 0.5, 
+      endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
         text: "5-star review", 
@@ -917,17 +880,7 @@ const Scene = () => {
     },
     { 
       delay: 3.2, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "❤️", 
-        text: "Plan upgraded", 
-        metric: "Customer retained",
-        color: "#ec4899" 
-      } 
-    },
-    { 
-      delay: 4.4, 
-      endY: 2, 
+      endY: 1.5, 
       happiness: { 
         emoji: "😊", 
         text: "Issue resolved", 
@@ -936,13 +889,23 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 5.6, 
-      endY: -0.5, 
+      delay: 4.4, 
+      endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
         text: "Feature delivered", 
         metric: "Under 24 hours",
         color: "#fbbf24" 
+      } 
+    },
+    { 
+      delay: 5.6, 
+      endY: 1.5, 
+      happiness: { 
+        emoji: "😊", 
+        text: "Account setup", 
+        metric: "Onboarded successfully",
+        color: "#10b981" 
       } 
     },
   ], []);
