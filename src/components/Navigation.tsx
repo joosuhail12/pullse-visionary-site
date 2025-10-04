@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 import logoIcon from "@/assets/logo-icon-purple.png";
 import logoText from "@/assets/logo-text-navy.png";
 const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
   
   useEffect(() => {
     let ticking = false;
-    let lastScrollY = window.scrollY;
     
     const handleScroll = () => {
-      lastScrollY = window.scrollY;
-      
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(lastScrollY > 50);
+          const scrollY = window.scrollY;
+          // Smooth interpolation from 0 to 1 between 0px and 100px scroll
+          const progress = Math.min(scrollY / 100, 1);
+          setScrollProgress(progress);
           ticking = false;
         });
         ticking = true;
@@ -27,8 +27,11 @@ const Navigation = () => {
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initialize on mount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  const isScrolled = scrollProgress > 0.5;
   const productLinks = [{
     name: "Overview",
     path: "/product"
@@ -117,52 +120,67 @@ const Navigation = () => {
           </div>}
       </div>;
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-[800ms] ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`} style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}>
+  // Calculate smooth scale values based on scroll progress
+  const navScale = 1 - (scrollProgress * 0.25); // 1 to 0.75
+  const logoScale = 1 - (scrollProgress * 0.22); // Slightly less aggressive
+  const textOpacity = 1 - scrollProgress;
+  const gapValue = 6 - (scrollProgress * 3); // 6 to 3 (in units)
+  
+  return <nav className="fixed top-0 left-0 right-0 z-50" style={{ paddingTop: `${16 - scrollProgress * 8}px`, paddingLeft: '1rem', paddingRight: '1rem' }}>
       <div 
-        className={`mx-auto rounded-[1.25rem] px-4 ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"}`}
+        className="max-w-7xl mx-auto rounded-[1.25rem] px-4 backdrop-blur-xl border"
         style={{ 
-          transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-          willChange: isScrolled ? 'auto' : 'transform, width, padding'
+          transform: `scale(${navScale})`,
+          transformOrigin: 'top center',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s, box-shadow 0.3s',
+          backgroundColor: `rgba(var(--background-rgb, 0 0 0) / ${0.5 + scrollProgress * 0.2})`,
+          borderColor: `rgba(255 255 255 / ${0.05 + scrollProgress * 0.05})`,
+          boxShadow: scrollProgress > 0.5 ? '0 25px 50px -12px rgba(var(--primary-rgb, 168 5 255) / 0.1)' : 'none',
+          paddingTop: `${10 + (1 - scrollProgress) * 4}px`,
+          paddingBottom: `${6 + (1 - scrollProgress) * 4}px`,
+          willChange: 'transform'
         }}
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
+          <Link to="/" className="flex items-center group" style={{ gap: `${10 * (1 - scrollProgress * 0.2)}px` }}>
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all duration-300"></div>
               <img 
                 src={logoIcon} 
                 alt="Pullse" 
-                className={`relative transform group-hover:scale-110 ${
-                  isScrolled ? 'h-7 w-7' : 'h-9 w-9'
-                }`}
+                className="relative transform group-hover:scale-110"
                 style={{ 
-                  transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-                  willChange: isScrolled ? 'auto' : 'width, height'
+                  width: `${36 - scrollProgress * 8}px`,
+                  height: `${36 - scrollProgress * 8}px`,
+                  transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'width, height'
                 }}
               />
             </div>
             <img 
               src={logoText} 
               alt="Pullse" 
-              className={`transform group-hover:scale-105 ${
-                isScrolled ? 'h-0 w-0 opacity-0' : 'h-5 opacity-100'
-              }`}
+              className="transform group-hover:scale-105"
               style={{ 
-                transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-                willChange: isScrolled ? 'auto' : 'opacity, width, height'
+                height: '20px',
+                opacity: textOpacity,
+                transform: `scaleX(${textOpacity})`,
+                transformOrigin: 'left center',
+                transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                pointerEvents: textOpacity < 0.1 ? 'none' : 'auto',
+                willChange: 'opacity, transform'
               }}
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div 
-            className={`hidden lg:flex items-center relative ${
-              isScrolled ? 'gap-3' : 'gap-6'
-            }`}
+            className="hidden lg:flex items-center relative"
             style={{ 
-              transition: 'gap 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: isScrolled ? 'auto' : 'gap'
+              gap: `${gapValue * 4}px`,
+              transition: 'gap 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'gap'
             }}
           >
             <NavDropdown title="Product" links={productLinks} />
@@ -183,12 +201,13 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center gap-2.5">
             <Button 
               asChild 
-              className={`text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 ${
-                isScrolled ? 'h-7 px-3' : 'h-8 px-4'
-              }`}
+              className="text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
               style={{ 
-                transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-                willChange: isScrolled ? 'auto' : 'height, padding'
+                height: `${32 - scrollProgress * 4}px`,
+                paddingLeft: `${16 - scrollProgress * 4}px`,
+                paddingRight: `${16 - scrollProgress * 4}px`,
+                transition: 'height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                willChange: 'height, padding'
               }}
             >
               <Link to="/contact-sales">
