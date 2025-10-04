@@ -285,12 +285,12 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const rawT = (state.clock.elapsedTime * 0.4 + delay) % 6;
+    const rawT = (state.clock.elapsedTime * 0.5 + delay) % 5;
     let t = rawT;
     
-    // Pause at engine for processing (around t=2.5-3.5)
-    if (rawT > 2.5 && rawT < 3.5) {
-      t = 2.5 + (rawT - 2.5) * 0.3; // Slow down dramatically
+    // Pause at engine for processing (around t=2-3)
+    if (rawT > 2 && rawT < 3) {
+      t = 2 + (rawT - 2) * 0.3; // Slow down dramatically
       if (!isProcessing) {
         setIsProcessing(true);
         if (!hasTriggeredProcess && onProcess) {
@@ -300,10 +300,10 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
       }
     } else {
       if (isProcessing) setIsProcessing(false);
-      if (rawT < 2.5) setHasTriggeredProcess(false);
+      if (rawT < 2) setHasTriggeredProcess(false);
     }
     
-    setProgress(t / 6);
+    setProgress(t / 5);
     
     // Enhanced Bezier curve with dramatic z-depth
     const curve = new THREE.CubicBezierCurve3(
@@ -421,8 +421,8 @@ const FlowingHappiness = ({
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const t = (state.clock.elapsedTime * 0.5 + delay) % 5;
-    setProgress(t / 5);
+    const t = (state.clock.elapsedTime * 0.6 + delay) % 4.5;
+    setProgress(t / 4.5);
     
     // Trigger celebration near the end
     if (progress > 0.82 && progress < 0.87 && !shouldCelebrate) {
@@ -807,7 +807,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 1.2, 
+      delay: 0.8, 
       startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
@@ -818,7 +818,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 2.4, 
+      delay: 1.6, 
       startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
@@ -829,7 +829,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 3.6, 
+      delay: 2.4, 
       startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
@@ -840,7 +840,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 4.8, 
+      delay: 3.2, 
       startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
@@ -848,6 +848,39 @@ const Scene = () => {
         subtitle: "Setup assistance",
         color: "#3b82f6",
         priority: "medium" as const
+      } 
+    },
+    { 
+      delay: 4.0, 
+      startY: -1.5, 
+      ticketInfo: { 
+        emoji: "💬", 
+        text: "Product question", 
+        subtitle: "Feature inquiry",
+        color: "#10b981",
+        priority: "low" as const
+      } 
+    },
+    { 
+      delay: 4.8, 
+      startY: 1.5, 
+      ticketInfo: { 
+        emoji: "📧", 
+        text: "Order update", 
+        subtitle: "Shipping status",
+        color: "#3b82f6",
+        priority: "medium" as const
+      } 
+    },
+    { 
+      delay: 5.6, 
+      startY: -1.5, 
+      ticketInfo: { 
+        emoji: "💬", 
+        text: "Technical support", 
+        subtitle: "Setup help",
+        color: "#10b981",
+        priority: "high" as const
       } 
     },
   ], []);
@@ -859,53 +892,83 @@ const Scene = () => {
 
   const happiness = useMemo(() => [
     { 
-      delay: 0.8, 
+      delay: 0.6, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
         text: "Refund processed", 
-        metric: "Resolved in 45 seconds",
+        metric: "Resolved in 45s",
         color: "#10b981" 
       } 
     },
     { 
-      delay: 2, 
+      delay: 1.4, 
       endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
         text: "5-star review", 
-        metric: "98% satisfaction score",
+        metric: "98% satisfaction",
         color: "#fbbf24" 
       } 
     },
     { 
-      delay: 3.2, 
+      delay: 2.2, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
         text: "Issue resolved", 
-        metric: "First contact resolution",
+        metric: "First contact",
         color: "#10b981" 
       } 
     },
     { 
-      delay: 4.4, 
+      delay: 3.0, 
       endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
         text: "Feature delivered", 
-        metric: "Under 24 hours",
+        metric: "Under 24h",
         color: "#fbbf24" 
       } 
     },
     { 
-      delay: 5.6, 
+      delay: 3.8, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
         text: "Account setup", 
-        metric: "Onboarded successfully",
+        metric: "Quick onboard",
         color: "#10b981" 
+      } 
+    },
+    { 
+      delay: 4.6, 
+      endY: -1.5, 
+      happiness: { 
+        emoji: "⭐", 
+        text: "Question answered", 
+        metric: "Instant help",
+        color: "#fbbf24" 
+      } 
+    },
+    { 
+      delay: 5.4, 
+      endY: 1.5, 
+      happiness: { 
+        emoji: "😊", 
+        text: "Order shipped", 
+        metric: "Same day",
+        color: "#10b981" 
+      } 
+    },
+    { 
+      delay: 6.2, 
+      endY: -1.5, 
+      happiness: { 
+        emoji: "⭐", 
+        text: "Support excellent", 
+        metric: "Highly rated",
+        color: "#fbbf24" 
       } 
     },
   ], []);
