@@ -488,44 +488,75 @@ const HomeNew = () => {
         </div>
       </section>
 
-      {/* Feature Bento - Cascading Stack */}
-      <section className="min-h-screen relative flex items-start py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 sticky top-20 z-10">
-            <h2 className="text-5xl font-bold mb-4">Built for Results</h2>
-            <p className="text-xl text-muted-foreground">Scroll to see the impact</p>
+      {/* Benefits Showcase */}
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
+        {/* Background gradient orbs */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6">
+              <span className="text-sm font-semibold text-primary">Real Impact</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              Built for Results
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              See the measurable impact across your support operations
+            </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          {/* Benefits Grid */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
               const Icon = feature.icon;
+              const isEven = index % 2 === 0;
+              
               return (
                 <div 
-                  key={index} 
-                  className="sticky glass-strong rounded-3xl border border-primary/10 transition-all duration-500 overflow-hidden"
+                  key={index}
+                  className="glass-strong rounded-3xl border border-primary/10 group hover:border-primary/30 transition-all duration-500 hover:glow relative overflow-hidden"
                   style={{
-                    top: `${80 + index * 60}px`,
-                    zIndex: featureBento.length - index
+                    animationDelay: `${index * 100}ms`
                   }}
                 >
-                  <div className="p-8 hover:bg-primary/5 transition-colors cursor-pointer group">
-                    <div className="flex items-start gap-6">
-                      <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform">
+                  {/* Animated gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${isEven ? 'from-primary/5 via-transparent to-accent/5' : 'from-accent/5 via-transparent to-primary/5'} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  
+                  <div className="relative z-10 p-8">
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${isEven ? 'from-primary to-primary/50' : 'from-accent to-accent/50'} flex items-center justify-center shadow-lg ${isEven ? 'shadow-primary/25' : 'shadow-accent/25'} group-hover:scale-110 transition-transform flex-shrink-0`}>
                         <Icon className="h-8 w-8 text-primary-foreground" />
                       </div>
+                      
                       <div className="flex-1">
-                        <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        <h3 className={`text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r ${isEven ? 'from-primary to-accent' : 'from-accent to-primary'} bg-clip-text text-transparent`}>
                           {feature.title}
                         </h3>
-                        <p className="text-lg text-muted-foreground leading-relaxed">
-                          {feature.desc}
-                        </p>
                       </div>
                     </div>
                     
-                    {/* Decorative gradient */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl -z-10 group-hover:scale-150 transition-transform duration-700" />
+                    <p className="text-muted-foreground leading-relaxed text-lg">
+                      {feature.desc}
+                    </p>
+                    
+                    {/* Metric preview */}
+                    <div className="mt-6 pt-6 border-t border-primary/10">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Average improvement</span>
+                        <div className="flex items-center gap-2">
+                          <span className={`text-2xl font-bold ${isEven ? 'text-primary' : 'text-accent'}`}>
+                            {index === 0 ? '45%' : index === 1 ? '3.2x' : index === 2 ? '92%' : '68%'}
+                          </span>
+                          <ArrowRight className={`h-4 w-4 ${isEven ? 'text-primary' : 'text-accent'} group-hover:translate-x-1 transition-transform`} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  
+                  {/* Corner accent */}
+                  <div className={`absolute top-0 right-0 w-32 h-32 ${isEven ? 'bg-primary/5' : 'bg-accent/5'} rounded-full blur-2xl -z-10 group-hover:scale-150 transition-transform duration-700`} />
                 </div>
               );
             })}
