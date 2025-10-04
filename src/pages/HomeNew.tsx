@@ -565,7 +565,7 @@ const HomeNew = () => {
         </div>
       </section>
 
-      {/* Solutions - Interactive Cards */}
+      {/* Solutions - Split Box Design */}
       <section className="py-32 fade-in-scroll relative overflow-hidden">
         {/* Animated background orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -580,89 +580,92 @@ const HomeNew = () => {
               Solutions that scale with you
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Click any card to explore how Pullse adapts to your specific needs
+              Select your team to see relevant capabilities
             </p>
           </div>
 
-          {/* Interactive solution cards grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {Object.entries(solutions).map(([key, solution], index) => {
-              const isActive = activeSolution === key;
-              const icons = [Users, Shield, Zap, BarChart3, Bot];
-              const Icon = icons[index] || Users;
-              
-              return (
-                <div
-                  key={key}
-                  onClick={() => setActiveSolution(key)}
-                  className={`group relative cursor-pointer transition-all duration-500 ${
-                    isActive ? 'md:col-span-2 lg:col-span-3' : ''
-                  }`}
-                >
-                  {/* Card wrapper with gradient border */}
-                  <div className={`relative h-full rounded-2xl p-[1px] transition-all duration-500 ${
-                    isActive 
-                      ? 'bg-gradient-to-br from-primary via-accent to-primary' 
-                      : 'bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/40 hover:to-accent/40'
-                  }`}>
-                    <div className={`relative h-full rounded-2xl bg-background/95 backdrop-blur-xl overflow-hidden transition-all duration-500 ${
-                      isActive ? 'p-8' : 'p-6'
-                    }`}>
+          {/* Single Box with Split Layout */}
+          <div className="max-w-6xl mx-auto">
+            <div className="relative rounded-3xl p-[1px] bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30">
+              <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden">
+                <div className="grid md:grid-cols-[300px,1fr] min-h-[500px]">
+                  
+                  {/* Left Side - Options */}
+                  <div className="border-r border-primary/10 bg-gradient-to-b from-primary/5 to-accent/5 p-6">
+                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-6">Select Team</h3>
+                    
+                    <div className="space-y-2">
+                      {Object.entries(solutions).map(([key, solution], index) => {
+                        const isActive = activeSolution === key;
+                        const icons = [Users, Shield, Zap, BarChart3, Bot];
+                        const Icon = icons[index] || Users;
+                        
+                        return (
+                          <button
+                            key={key}
+                            onClick={() => setActiveSolution(key)}
+                            className={`w-full text-left p-4 rounded-xl transition-all duration-300 group ${
+                              isActive 
+                                ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-[1.02]' 
+                                : 'hover:bg-primary/5 hover:scale-[1.01]'
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={`h-10 w-10 rounded-lg flex items-center justify-center transition-all ${
+                                isActive 
+                                  ? 'bg-white/20' 
+                                  : 'bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20'
+                              }`}>
+                                <Icon className={`h-5 w-5 ${isActive ? 'text-white' : 'text-primary'}`} />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-semibold ${isActive ? 'text-white' : 'text-foreground'}`}>
+                                  {solution.title}
+                                </div>
+                              </div>
+                              <ArrowRight className={`h-4 w-4 transition-all ${
+                                isActive ? 'text-white opacity-100' : 'text-primary opacity-0 group-hover:opacity-100'
+                              }`} />
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right Side - Use Cases */}
+                  <div className="p-8">
+                    {Object.entries(solutions).map(([key, solution], index) => {
+                      const isActive = activeSolution === key;
+                      const icons = [Users, Shield, Zap, BarChart3, Bot];
+                      const Icon = icons[index] || Users;
                       
-                      {/* Collapsed state */}
-                      {!isActive && (
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between">
-                            <div className={`h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                      if (!isActive) return null;
+                      
+                      return (
+                        <div key={key} className="h-full flex flex-col animate-fade-in">
+                          {/* Header */}
+                          <div className="flex items-center gap-4 mb-8 pb-6 border-b border-primary/10">
+                            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/25">
                               <Icon className="h-7 w-7 text-white" />
                             </div>
-                            <ArrowRight className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                              {solution.title}
-                            </h3>
-                            <p className="text-sm text-muted-foreground">
-                              Click to explore capabilities
-                            </p>
-                          </div>
-
-                          {/* Preview dots */}
-                          <div className="flex gap-1.5 pt-2">
-                            {solution.items.slice(0, 4).map((_, i) => (
-                              <div key={i} className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Expanded state */}
-                      {isActive && (
-                        <div className="space-y-6 animate-fade-in">
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-center gap-4">
-                              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/25">
-                                <Icon className="h-8 w-8 text-white" />
-                              </div>
-                              <div>
-                                <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                                  {solution.title}
-                                </h3>
-                                <p className="text-sm text-muted-foreground mt-1">Complete capabilities</p>
-                              </div>
+                            <div>
+                              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                                {solution.title}
+                              </h3>
+                              <p className="text-sm text-muted-foreground mt-1">Key capabilities</p>
                             </div>
                           </div>
 
-                          {/* Expanded content grid */}
-                          <div className="grid md:grid-cols-2 gap-4">
+                          {/* Use Cases Grid */}
+                          <div className="flex-1 grid md:grid-cols-2 gap-4 content-start">
                             {solution.items.map((item, i) => (
                               <div 
-                                key={i} 
-                                className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10 hover:border-primary/30 transition-all group/item"
+                                key={i}
+                                className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10 hover:border-primary/30 hover:shadow-md transition-all group"
                                 style={{ animationDelay: `${i * 50}ms` }}
                               >
-                                <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                                   <CheckCircle2 className="h-4 w-4 text-white" />
                                 </div>
                                 <span className="text-sm font-medium leading-relaxed">{item}</span>
@@ -670,8 +673,8 @@ const HomeNew = () => {
                             ))}
                           </div>
 
-                          {/* CTA button */}
-                          <div className="pt-4 flex justify-center">
+                          {/* CTA */}
+                          <div className="mt-8 pt-6 border-t border-primary/10 flex justify-center">
                             <Button size="lg" className="group/btn" asChild>
                               <Link to="/contact-sales">
                                 Get started with {solution.title}
@@ -680,20 +683,17 @@ const HomeNew = () => {
                             </Button>
                           </div>
                         </div>
-                      )}
-
-                      {/* Decorative glow */}
-                      <div className={`absolute -z-10 transition-opacity duration-500 ${
-                        isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
-                      }`}>
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl" />
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full blur-3xl" />
-                      </div>
-                    </div>
+                      );
+                    })}
                   </div>
+
                 </div>
-              );
-            })}
+
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl -z-10" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-accent/10 to-transparent rounded-full blur-3xl -z-10" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
