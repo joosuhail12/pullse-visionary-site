@@ -488,21 +488,47 @@ const HomeNew = () => {
         </div>
       </section>
 
-      {/* Feature Bento */}
-      <section className="py-20 fade-in-scroll">
+      {/* Feature Bento - Cascading Stack */}
+      <section className="min-h-screen relative flex items-start py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold">Built for Results</h2>
+          <div className="text-center mb-16 sticky top-20 z-10">
+            <h2 className="text-5xl font-bold mb-4">Built for Results</h2>
+            <p className="text-xl text-muted-foreground">Scroll to see the impact</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {featureBento.map((feature, index) => <div key={index} className="glass-strong p-8 rounded-2xl group hover:glow transition-all">
-                <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <feature.icon className="h-6 w-6 text-primary" />
+          <div className="max-w-4xl mx-auto space-y-4">
+            {featureBento.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div 
+                  key={index} 
+                  className="sticky glass-strong rounded-3xl border border-primary/10 transition-all duration-500 overflow-hidden"
+                  style={{
+                    top: `${80 + index * 60}px`,
+                    zIndex: featureBento.length - index
+                  }}
+                >
+                  <div className="p-8 hover:bg-primary/5 transition-colors cursor-pointer group">
+                    <div className="flex items-start gap-6">
+                      <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform">
+                        <Icon className="h-8 w-8 text-primary-foreground" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                          {feature.title}
+                        </h3>
+                        <p className="text-lg text-muted-foreground leading-relaxed">
+                          {feature.desc}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Decorative gradient */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl -z-10 group-hover:scale-150 transition-transform duration-700" />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.desc}</p>
-              </div>)}
+              );
+            })}
           </div>
         </div>
       </section>
