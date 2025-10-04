@@ -118,21 +118,7 @@ const PlatformOverview = () => {
                     left: hotspot.position.left,
                     transform: 'translate(-50%, -50%)'
                   }}>
-                        <button onClick={() => window.open(hotspot.link, '_blank')} onMouseEnter={() => setActiveHotspot(hotspot.id)} onMouseLeave={() => setActiveHotspot(null)} onFocus={() => setActiveHotspot(hotspot.id)} onBlur={() => setActiveHotspot(null)} onKeyDown={e => handleKeyDown(e, hotspot)} aria-describedby={`hotspot-tooltip-${hotspot.id}`} className="relative z-10 h-8 w-8 rounded-full bg-gradient-to-br from-accent-teal to-primary flex items-center justify-center text-white text-sm font-bold shadow-lg hover:scale-125 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-teal focus:ring-offset-2 animate-pulse">
-                          {hotspot.id}
-                          
-                          {/* Tooltip */}
-                          {activeHotspot === hotspot.id && <div id={`hotspot-tooltip-${hotspot.id}`} role="tooltip" className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 glass-strong rounded-xl shadow-xl animate-fade-in">
-                              <div className="text-sm font-bold text-foreground mb-1">
-                                {hotspot.label}
-                              </div>
-                              <div className="text-xs text-muted-foreground">
-                                {hotspot.description}
-                              </div>
-                              {/* Arrow */}
-                              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-2 border-8 border-transparent border-t-background/95" />
-                            </div>}
-                        </button>
+                        
                       </div>)}
                   </div>
 
