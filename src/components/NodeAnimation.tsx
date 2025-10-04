@@ -232,107 +232,6 @@ const ChannelIcon = ({
     </Float>;
 };
 
-// ECG Pulse Line Component
-const ECGPulse = () => {
-  const [progress, setProgress] = useState(0);
-  
-  useEffect(() => {
-    const animate = () => {
-      setProgress((prev) => (prev >= 1 ? 0 : prev + 0.005));
-    };
-    const interval = setInterval(animate, 16);
-    return () => clearInterval(interval);
-  }, []);
-
-  // ECG wave path - creates heartbeat pattern
-  const generateECGPath = (baseY: number, progress: number) => {
-    const points = [];
-    const width = 100; // percentage
-    
-    for (let x = 0; x <= width; x += 0.5) {
-      let y = baseY;
-      const xProgress = x / width;
-      const pulsePosition = progress;
-      
-      // Create ECG heartbeat pattern when pulse reaches this point
-      const distanceFromPulse = Math.abs(xProgress - pulsePosition);
-      
-      if (distanceFromPulse < 0.015) {
-        // Sharp spike up (R wave)
-        y = baseY - 25;
-      } else if (distanceFromPulse >= 0.015 && distanceFromPulse < 0.025) {
-        // Sharp drop (S wave)
-        y = baseY + 8;
-      } else if (distanceFromPulse >= 0.025 && distanceFromPulse < 0.035) {
-        // Recovery to baseline
-        y = baseY;
-      } else if (distanceFromPulse >= 0.008 && distanceFromPulse < 0.015) {
-        // Small Q wave before spike
-        y = baseY + 3;
-      }
-      
-      points.push(`${x},${y}`);
-    }
-    
-    return points.join(' ');
-  };
-
-  const isAtGlobe = progress > 0.48 && progress < 0.52;
-
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <svg 
-        className="w-full h-full" 
-        viewBox="0 0 100 100" 
-        preserveAspectRatio="none"
-      >
-        {/* Main ECG line */}
-        <polyline
-          points={generateECGPath(50, progress)}
-          fill="none"
-          stroke="url(#ecgGradient)"
-          strokeWidth="0.3"
-          opacity="0.8"
-          className="transition-all duration-100"
-          style={{
-            filter: isAtGlobe ? 'drop-shadow(0 0 8px hsl(var(--primary)))' : 'none'
-          }}
-        />
-        
-        {/* Pulse indicator dot */}
-        <circle
-          cx={progress * 100}
-          cy="50"
-          r={isAtGlobe ? "1.5" : "0.8"}
-          fill="hsl(var(--primary))"
-          className="transition-all duration-200"
-          style={{
-            filter: isAtGlobe ? 'drop-shadow(0 0 6px hsl(var(--primary)))' : 'none'
-          }}
-        >
-          <animate
-            attributeName="opacity"
-            values={isAtGlobe ? "1;0.4;1" : "1"}
-            dur="0.3s"
-            repeatCount="indefinite"
-          />
-        </circle>
-
-        {/* Gradient definition */}
-        <defs>
-          <linearGradient id="ecgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
-            <stop offset={`${progress * 100 - 10}%`} stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-            <stop offset={`${progress * 100}%`} stopColor="hsl(var(--primary))" stopOpacity="1" />
-            <stop offset={`${progress * 100 + 5}%`} stopColor="hsl(var(--primary))" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-  );
-};
-
 // Request pill component showing questions flowing through
 const RequestPill = ({
   delay,
@@ -1501,9 +1400,6 @@ const NodeAnimation = () => {
       <div className="relative w-full h-[700px] rounded-[2rem] overflow-hidden border border-primary/10 shadow-2xl">
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5 animate-gradient"></div>
-        
-        {/* ECG Pulse Line */}
-        <ECGPulse />
         
         {/* Subtle grid overlay */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
