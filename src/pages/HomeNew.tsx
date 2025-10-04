@@ -10,6 +10,7 @@ import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
 import HeroFloating3D from "@/components/HeroFloating3D";
 import MagicBento, { CardData } from "@/components/MagicBento";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import antlerLogo from "@/assets/antler-logo.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -368,13 +369,17 @@ const HomeNew = () => {
           </div>
 
           {/* Benefits Grid - Symmetrical & Sleek */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <ScrollStack 
+            className="max-w-4xl mx-auto h-screen"
+            itemDistance={150}
+            itemStackDistance={40}
+            baseScale={0.9}
+            useWindowScroll={false}
+          >
             {featureBento.map((feature, index) => {
             const Icon = feature.icon;
             const metrics = ['45%', '3.2x', '92%', '68%'];
-            return <div key={index} className="group relative h-[280px]" style={{
-              animationDelay: `${index * 100}ms`
-            }}>
+            return <ScrollStackItem key={index} itemClassName="!h-[320px]">
                   {/* Main card with border gradient effect */}
                   <div className="relative h-full rounded-xl p-[1px] bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/30 hover:to-accent/30 transition-all duration-300">
                     <div className="relative h-full rounded-xl bg-background/95 backdrop-blur-xl overflow-hidden flex flex-col">
@@ -429,9 +434,9 @@ const HomeNew = () => {
                       <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                   </div>
-                </div>;
+                </ScrollStackItem>;
           })}
-          </div>
+          </ScrollStack>
         </div>
       </section>
 
