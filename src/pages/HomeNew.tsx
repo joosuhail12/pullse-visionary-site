@@ -338,11 +338,11 @@ const HomeNew = () => {
             enableStars={true}
             enableSpotlight={true}
             enableBorderGlow={true}
-            enableTilt={false}
+            enableTilt={true}
             enableMagnetism={true}
             clickEffect={true}
-            spotlightRadius={300}
-            particleCount={8}
+            spotlightRadius={400}
+            particleCount={12}
             glowColor="132, 0, 255"
           />
         </div>
