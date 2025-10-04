@@ -1361,19 +1361,41 @@ const Scene = () => {
       {/* Fog for depth perception */}
       <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
-      {/* Black curved arrow paths from channels to center */}
-      <BlackArrowPath start={[-8, 1.5, 0]} end={[-3, 0.5, 0]} controlOffset={[-1, 0.8, -1]} />
-      <BlackArrowPath start={[-8, 1.5, 0]} end={[-3, -0.5, 0]} controlOffset={[-1, -0.3, -1.2]} />
-      <BlackArrowPath start={[-8, -1.5, 0]} end={[-3, 0.5, 0]} controlOffset={[-1, 0.3, -1.2]} />
-      <BlackArrowPath start={[-8, -1.5, 0]} end={[-3, -0.5, 0]} controlOffset={[-1, -0.8, -1]} />
+      {/* Multiple curved black arrow paths flowing into center - inspired by reference */}
+      {/* Top group */}
+      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} />
+      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} />
+      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} />
+      
+      {/* Middle-top group */}
+      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} />
+      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} />
+      
+      {/* Center group */}
+      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} />
+      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} />
+      
+      {/* Middle-bottom group */}
+      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} />
+      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} />
+      
+      {/* Bottom group */}
+      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} />
+      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} />
+      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} />
+      
+      {/* Additional varied curves for richness */}
+      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} />
+      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} />
       
       {/* Thick black arrow from center to outcomes */}
-      <Html position={[0, 0, 2]} center distanceFactor={8}>
+      <Html position={[3, 0, 2]} center distanceFactor={8}>
         <div style={{ 
-          fontSize: '64px',
+          fontSize: '80px',
           color: '#000000',
           fontWeight: 'bold',
-          filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+          filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
+          transform: 'scaleY(1.2)'
         }}>
           ➤
         </div>
