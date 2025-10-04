@@ -10,7 +10,10 @@ import {
   Environment
 } from "@react-three/drei";
 import * as THREE from "three";
-import { Mail, MessageSquare, AtSign, Zap, CheckCircle, DollarSign, Package, RefreshCw, Users, Bot } from "lucide-react";
+import { 
+  Mail, MessageSquare, AtSign, Zap, CheckCircle, DollarSign, Package, RefreshCw, Users, Bot,
+  FileText, AlertCircle, HelpCircle, Smile, Star, ThumbsUp, Heart, TrendingUp
+} from "lucide-react";
 import logoIcon from "@/assets/logo-icon-purple.png";
 
 // Particle field background
@@ -72,34 +75,27 @@ const ParticleField = () => {
   );
 };
 
-// Flowing message stream from left
-const MessageStream = ({ position, delay, type }: { position: [number, number, number]; delay: number; type: string }) => {
+// Incoming tickets/issues from left
+const IncomingTicket = ({ position, delay, ticket }: { position: [number, number, number]; delay: number; ticket: any }) => {
   const groupRef = useRef<THREE.Group>(null);
   const [progress, setProgress] = useState(0);
-  
-  const icons = { email: Mail, chat: MessageSquare, social: AtSign };
-  const colors = { email: "#3b82f6", chat: "#10b981", social: "#8b5cf6" };
-  
-  const Icon = icons[type as keyof typeof icons];
-  const color = colors[type as keyof typeof colors];
 
   useFrame((state) => {
     if (!groupRef.current) return;
     const t = (state.clock.elapsedTime * 0.4 + delay) % 6;
     setProgress(t / 6);
     
-    // Smooth bezier curve path
+    // Bezier curve from left to center
     const curve = new THREE.CubicBezierCurve3(
-      new THREE.Vector3(-10, position[1], 2),
-      new THREE.Vector3(-5, position[1] + 2, 0),
-      new THREE.Vector3(-2, position[1] - 1, -1),
+      new THREE.Vector3(-12, position[1], 2),
+      new THREE.Vector3(-7, position[1] + 2.5, 0),
+      new THREE.Vector3(-3, position[1] - 1.5, -1),
       new THREE.Vector3(0, 0, 0)
     );
     
     const point = curve.getPoint(progress);
     groupRef.current.position.copy(point);
     
-    // Rotation based on velocity
     const tangent = curve.getTangent(progress);
     groupRef.current.lookAt(
       point.x + tangent.x,
@@ -107,9 +103,8 @@ const MessageStream = ({ position, delay, type }: { position: [number, number, n
       point.z + tangent.z
     );
     
-    // Scale animation
     const opacity = Math.sin(progress * Math.PI);
-    groupRef.current.scale.setScalar(0.5 + opacity * 0.8);
+    groupRef.current.scale.setScalar(0.5 + opacity * 0.9);
   });
 
   if (progress < 0.05 || progress > 0.95) return null;
@@ -117,39 +112,42 @@ const MessageStream = ({ position, delay, type }: { position: [number, number, n
   return (
     <group ref={groupRef}>
       <Trail
-        width={3}
-        length={15}
-        color={color}
+        width={3.5}
+        length={18}
+        color={ticket.color}
         attenuation={(t) => t * t * t}
       >
         <mesh>
-          <sphereGeometry args={[0.2, 16, 16]} />
+          <sphereGeometry args={[0.22, 16, 16]} />
           <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={2}
+            color={ticket.color}
+            emissive={ticket.color}
+            emissiveIntensity={2.2}
           />
         </mesh>
       </Trail>
       <Html center distanceFactor={15}>
         <div 
-          className="flex items-center justify-center w-16 h-16 rounded-2xl glass-strong"
+          className="glass-strong px-5 py-3 rounded-xl flex items-center gap-3 whitespace-nowrap shadow-2xl border-l-4"
           style={{ 
-            backgroundColor: `${color}25`,
-            borderColor: color,
-            borderWidth: 2,
-            boxShadow: `0 0 30px ${color}60`
+            backgroundColor: `${ticket.color}20`,
+            borderColor: ticket.color,
+            boxShadow: `0 8px 32px ${ticket.color}50`
           }}
         >
-          <Icon className="h-8 w-8" style={{ color }} />
+          <ticket.icon className="h-6 w-6" style={{ color: ticket.color }} />
+          <div>
+            <div className="text-sm font-bold">{ticket.text}</div>
+            <div className="text-xs text-muted-foreground">{ticket.subtitle}</div>
+          </div>
         </div>
       </Html>
     </group>
   );
 };
 
-// Success outcomes flowing right
-const SuccessStream = ({ position, delay, action }: { position: [number, number, number]; delay: number; action: any }) => {
+// Happy customer experiences going out to the right
+const HappyExperience = ({ position, delay, experience }: { position: [number, number, number]; delay: number; experience: any }) => {
   const groupRef = useRef<THREE.Group>(null);
   const [progress, setProgress] = useState(0);
 
@@ -161,9 +159,9 @@ const SuccessStream = ({ position, delay, action }: { position: [number, number,
     // Smooth bezier curve to the right
     const curve = new THREE.CubicBezierCurve3(
       new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(3, position[1], -1),
-      new THREE.Vector3(6, position[1] + 1.5, 0),
-      new THREE.Vector3(10, position[1], 2)
+      new THREE.Vector3(3.5, position[1] + 1, -1),
+      new THREE.Vector3(7, position[1] + 2, 0),
+      new THREE.Vector3(12, position[1], 2)
     );
     
     const point = curve.getPoint(progress);
@@ -177,7 +175,7 @@ const SuccessStream = ({ position, delay, action }: { position: [number, number,
     );
     
     const opacity = Math.sin(progress * Math.PI);
-    groupRef.current.scale.setScalar(0.4 + opacity * 0.9);
+    groupRef.current.scale.setScalar(0.4 + opacity * 1);
   });
 
   if (progress < 0.05 || progress > 0.95) return null;
@@ -185,32 +183,38 @@ const SuccessStream = ({ position, delay, action }: { position: [number, number,
   return (
     <group ref={groupRef}>
       <Trail
-        width={2.5}
-        length={12}
-        color={action.color}
+        width={3}
+        length={15}
+        color={experience.color}
         attenuation={(t) => t * t}
       >
         <mesh>
-          <sphereGeometry args={[0.18, 16, 16]} />
+          <sphereGeometry args={[0.2, 16, 16]} />
           <meshStandardMaterial
-            color={action.color}
-            emissive={action.color}
-            emissiveIntensity={2.5}
+            color={experience.color}
+            emissive={experience.color}
+            emissiveIntensity={2.8}
           />
         </mesh>
       </Trail>
       <Html center distanceFactor={12}>
         <div 
-          className="glass-strong px-5 py-3 rounded-xl flex items-center gap-3 whitespace-nowrap"
+          className="glass-strong px-6 py-3 rounded-xl flex items-center gap-3 whitespace-nowrap shadow-2xl border-l-4"
           style={{
-            borderLeft: `4px solid ${action.color}`,
-            boxShadow: `0 8px 32px ${action.color}40`
+            backgroundColor: `${experience.color}15`,
+            borderColor: experience.color,
+            boxShadow: `0 8px 40px ${experience.color}60`
           }}
         >
-          <action.icon className="h-5 w-5" style={{ color: action.color }} />
+          <div 
+            className="p-2 rounded-lg"
+            style={{ backgroundColor: `${experience.color}30` }}
+          >
+            <experience.icon className="h-5 w-5" style={{ color: experience.color }} />
+          </div>
           <div>
-            <div className="text-sm font-bold">{action.text}</div>
-            <div className="text-xs text-muted-foreground">{action.subtitle}</div>
+            <div className="text-sm font-bold">{experience.text}</div>
+            <div className="text-xs text-muted-foreground">{experience.subtitle}</div>
           </div>
         </div>
       </Html>
@@ -479,20 +483,22 @@ const CameraController = () => {
 
 // Main scene
 const Scene = () => {
-  const messages = useMemo(() => [
-    { type: "email", delay: 0, position: [0, 2, 0] as [number, number, number] },
-    { type: "chat", delay: 1.2, position: [0, 0.5, 0] as [number, number, number] },
-    { type: "social", delay: 2.4, position: [0, -1.5, 0] as [number, number, number] },
-    { type: "email", delay: 3.6, position: [0, 1.2, 0] as [number, number, number] },
-    { type: "chat", delay: 4.8, position: [0, -0.8, 0] as [number, number, number] },
+  const incomingTickets = useMemo(() => [
+    { ticket: { icon: FileText, text: "Ticket #4821", subtitle: "Refund request", color: "#f59e0b" }, delay: 0, position: [0, 2.5, 0] as [number, number, number] },
+    { ticket: { icon: AlertCircle, text: "Issue reported", subtitle: "Login problem", color: "#ef4444" }, delay: 1, position: [0, 0.8, 0] as [number, number, number] },
+    { ticket: { icon: HelpCircle, text: "Question #3904", subtitle: "How to upgrade?", color: "#3b82f6" }, delay: 2, position: [0, -1.2, 0] as [number, number, number] },
+    { ticket: { icon: FileText, text: "Ticket #4822", subtitle: "Shipping delay", color: "#f59e0b" }, delay: 3, position: [0, 1.8, 0] as [number, number, number] },
+    { ticket: { icon: AlertCircle, text: "Bug report", subtitle: "Payment failed", color: "#ef4444" }, delay: 4, position: [0, -0.5, 0] as [number, number, number] },
+    { ticket: { icon: HelpCircle, text: "Support #9102", subtitle: "Need help", color: "#3b82f6" }, delay: 5, position: [0, 2, 0] as [number, number, number] },
   ], []);
 
-  const outcomes = useMemo(() => [
-    { action: { icon: CheckCircle, text: "Resolved", subtitle: "Auto-response", color: "#10b981" }, delay: 0.5, position: [0, 1.8, 0] as [number, number, number] },
-    { action: { icon: Zap, text: "Instant reply", subtitle: "AI drafted", color: "#f59e0b" }, delay: 1.7, position: [0, 0.3, 0] as [number, number, number] },
-    { action: { icon: DollarSign, text: "Refund sent", subtitle: "$149.99", color: "#10b981" }, delay: 2.9, position: [0, -1.2, 0] as [number, number, number] },
-    { action: { icon: Package, text: "Status updated", subtitle: "Customer notified", color: "#3b82f6" }, delay: 4.1, position: [0, 1.5, 0] as [number, number, number] },
-    { action: { icon: CheckCircle, text: "Ticket closed", subtitle: "CSAT sent", color: "#10b981" }, delay: 5.3, position: [0, -0.5, 0] as [number, number, number] },
+  const happyExperiences = useMemo(() => [
+    { experience: { icon: Smile, text: "Happy Customer", subtitle: "Issue resolved ✓", color: "#10b981" }, delay: 0.6, position: [0, 2.2, 0] as [number, number, number] },
+    { experience: { icon: Star, text: "5-Star Review", subtitle: "Excellent service!", color: "#fbbf24" }, delay: 1.6, position: [0, 0.5, 0] as [number, number, number] },
+    { experience: { icon: ThumbsUp, text: "Problem Solved", subtitle: "Quick response", color: "#10b981" }, delay: 2.6, position: [0, -1.5, 0] as [number, number, number] },
+    { experience: { icon: Heart, text: "Customer Love", subtitle: "CSAT: 98%", color: "#ec4899" }, delay: 3.6, position: [0, 1.5, 0] as [number, number, number] },
+    { experience: { icon: TrendingUp, text: "Upgraded Plan", subtitle: "Satisfied customer", color: "#8b5cf6" }, delay: 4.6, position: [0, -0.8, 0] as [number, number, number] },
+    { experience: { icon: Smile, text: "Delighted User", subtitle: "Fast resolution", color: "#10b981" }, delay: 5.6, position: [0, 2, 0] as [number, number, number] },
   ], []);
 
   return (
@@ -518,9 +524,9 @@ const Scene = () => {
       {/* Background particles */}
       <ParticleField />
 
-      {/* Message streams */}
-      {messages.map((msg, i) => (
-        <MessageStream key={`msg-${i}`} {...msg} />
+      {/* Incoming tickets from left */}
+      {incomingTickets.map((item, i) => (
+        <IncomingTicket key={`ticket-${i}`} {...item} />
       ))}
 
       {/* Central hub */}
@@ -530,9 +536,9 @@ const Scene = () => {
       <OrbitalRing radius={4.5} speed={0.3} icon={Bot} label="AI Engine" color="#7c3aed" />
       <OrbitalRing radius={5.5} speed={-0.2} icon={Users} label="Human" color="#f59e0b" />
 
-      {/* Success streams */}
-      {outcomes.map((outcome, i) => (
-        <SuccessStream key={`outcome-${i}`} {...outcome} />
+      {/* Happy experiences going out to the right */}
+      {happyExperiences.map((item, i) => (
+        <HappyExperience key={`experience-${i}`} {...item} />
       ))}
 
       {/* Action notifications */}
