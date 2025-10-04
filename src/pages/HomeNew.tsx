@@ -287,81 +287,141 @@ const HomeNew = () => {
             </p>
           </div>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto auto-rows-[280px]">
-            {/* Large card - spans 2 cols & 2 rows */}
-            <div className="glass-strong p-8 rounded-2xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors" />
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div>
-                  <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <MessageSquare className="h-7 w-7 text-primary" />
+          {/* Bento Grid - Creative Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-4 max-w-7xl mx-auto auto-rows-[200px]">
+            {/* Hero Feature - Large showcase (3 cols x 3 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-3 relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+              <div className="relative z-10 h-full flex flex-col p-8">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-lg shadow-primary/25">
+                    <MessageSquare className="h-8 w-8 text-primary-foreground" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-4 text-primary">{taxonomy[0].title}</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">{taxonomy[0].desc}</p>
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      {taxonomy[0].title}
+                    </h3>
+                    <p className="text-muted-foreground">{taxonomy[0].desc}</p>
+                  </div>
+                </div>
+                
+                {/* Screenshot placeholder */}
+                <div className="flex-1 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center backdrop-blur-sm group-hover:scale-[1.02] transition-transform">
+                  <div className="text-center space-y-2 opacity-60">
+                    <div className="w-16 h-16 mx-auto rounded-xl bg-primary/20 flex items-center justify-center">
+                      <MessageSquare className="h-8 w-8 text-primary" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">Unified Inbox Screenshot</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Tall card - spans 2 rows */}
-            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:row-span-2 relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-colors" />
-              <div className="relative z-10 h-full flex flex-col">
-                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Bot className="h-6 w-6 text-accent" />
+            {/* Vertical Feature (3 cols x 2 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-3 md:row-span-2 relative overflow-hidden border border-accent/10">
+              <div className="absolute inset-0 bg-gradient-to-tl from-accent/5 to-transparent" />
+              <div className="relative z-10 h-full flex flex-col md:flex-row gap-6 p-8">
+                <div className="md:w-1/2 flex flex-col justify-between">
+                  <div>
+                    <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center mb-4 shadow-lg shadow-accent/25">
+                      <Bot className="h-7 w-7 text-accent-foreground" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                      {taxonomy[2].title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[2].desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-accent">{taxonomy[2].title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[2].desc}</p>
-              </div>
-            </div>
-
-            {/* Regular card */}
-            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:col-span-1 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full blur-xl" />
-              <div className="relative z-10">
-                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Zap className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[1].title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[1].desc}</p>
-              </div>
-            </div>
-
-            {/* Wide card - spans 2 cols */}
-            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden">
-              <div className="absolute bottom-0 right-0 w-28 h-28 bg-primary/5 rounded-full blur-2xl" />
-              <div className="relative z-10 flex flex-col md:flex-row items-start gap-4">
-                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <Sparkles className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[3].title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[3].desc}</p>
+                
+                {/* Screenshot placeholder */}
+                <div className="flex-1 rounded-2xl bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
+                  <div className="text-center space-y-2 opacity-60">
+                    <div className="w-12 h-12 mx-auto rounded-lg bg-accent/20 flex items-center justify-center">
+                      <Bot className="h-6 w-6 text-accent" />
+                    </div>
+                    <p className="text-xs text-muted-foreground">AI Suite Screenshot</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Regular card */}
-            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-20 h-20 bg-accent/5 rounded-full blur-xl" />
-              <div className="relative z-10">
-                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Shield className="h-6 w-6 text-accent" />
+            {/* Compact card (2 cols x 1 row) */}
+            <div className="glass-strong rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10 h-full p-6 flex items-center gap-4">
+                <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Zap className="h-7 w-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-accent">{taxonomy[4].title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[4].desc}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-bold mb-1 text-primary truncate">{taxonomy[1].title}</h3>
+                  <p className="text-xs text-muted-foreground line-clamp-2">{taxonomy[1].desc}</p>
+                </div>
               </div>
             </div>
 
-            {/* Regular card */}
-            <div className="glass-strong p-6 rounded-2xl group hover:glow transition-all relative overflow-hidden">
-              <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
-              <div className="relative z-10">
-                <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <BarChart3 className="h-6 w-6 text-primary" />
+            {/* Square feature with preview (2 cols x 2 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-2 md:row-span-2 relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+              <div className="relative z-10 h-full flex flex-col p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center shadow-md shadow-primary/20">
+                    <Sparkles className="h-6 w-6 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-2 text-primary">{taxonomy[3].title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{taxonomy[3].desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-primary">{taxonomy[5].title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{taxonomy[5].desc}</p>
+                
+                {/* Screenshot placeholder */}
+                <div className="flex-1 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform">
+                  <div className="text-center space-y-2 opacity-60">
+                    <div className="w-10 h-10 mx-auto rounded-lg bg-primary/20 flex items-center justify-center">
+                      <Sparkles className="h-5 w-5 text-primary" />
+                    </div>
+                    <p className="text-xs text-muted-foreground">AI Agents Screenshot</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Compact card (2 cols x 1 row) */}
+            <div className="glass-strong rounded-2xl group hover:glow transition-all md:col-span-2 relative overflow-hidden border border-accent/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+              <div className="relative z-10 h-full p-6 flex items-center gap-4">
+                <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Shield className="h-7 w-7 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-bold mb-1 text-accent truncate">{taxonomy[4].title}</h3>
+                  <p className="text-xs text-muted-foreground line-clamp-2">{taxonomy[4].desc}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Wide showcase (4 cols x 2 rows) */}
+            <div className="glass-strong rounded-3xl group hover:glow transition-all md:col-span-4 md:row-span-2 relative overflow-hidden border border-primary/10">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
+              <div className="relative z-10 h-full flex flex-col md:flex-row gap-6 p-8">
+                <div className="md:w-2/5 flex flex-col justify-center">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 shadow-lg shadow-primary/25">
+                    <BarChart3 className="h-8 w-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    {taxonomy[5].title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{taxonomy[5].desc}</p>
+                </div>
+                
+                {/* Screenshot placeholder - wide */}
+                <div className="flex-1 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 border border-primary/20 flex items-center justify-center group-hover:scale-[1.01] transition-transform">
+                  <div className="text-center space-y-3 opacity-60">
+                    <div className="w-16 h-16 mx-auto rounded-xl bg-primary/20 flex items-center justify-center">
+                      <BarChart3 className="h-8 w-8 text-primary" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">Analytics Dashboard Screenshot</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
