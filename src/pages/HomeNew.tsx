@@ -178,7 +178,7 @@ const HomeNew = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-10" />
         
@@ -259,28 +259,30 @@ const HomeNew = () => {
               </div>
             </div>
 
-            {/* Right - 3D Scene */}
-            <div className="relative h-[600px] lg:h-[700px]">
-              {/* 3D Canvas */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                <HeroScene3D />
+            {/* Right - Video with floating elements */}
+            <div className="relative">
+              <div className="relative z-10">
+                <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
               </div>
 
               {/* Floating stats cards */}
-              <div className="absolute top-10 right-10 glass-strong p-4 rounded-2xl animate-float shadow-2xl">
+              <div className="absolute -top-6 -right-6 glass-strong p-4 rounded-2xl animate-float shadow-2xl z-20">
                 <div className="text-3xl font-bold text-primary">87%</div>
                 <div className="text-xs text-muted-foreground">Automation</div>
               </div>
 
-              <div className="absolute bottom-10 left-10 glass-strong p-4 rounded-2xl animate-float shadow-2xl" style={{ animationDelay: '1s' }}>
+              <div className="absolute -bottom-6 -left-6 glass-strong p-4 rounded-2xl animate-float shadow-2xl z-20" style={{ animationDelay: '1s' }}>
                 <div className="text-3xl font-bold text-primary">-35%</div>
                 <div className="text-xs text-muted-foreground">Handle Time</div>
               </div>
 
-              <div className="absolute top-1/2 left-0 glass-strong p-4 rounded-2xl animate-float shadow-2xl" style={{ animationDelay: '2s' }}>
+              <div className="absolute top-1/2 -right-8 glass-strong p-4 rounded-2xl animate-float shadow-2xl z-20" style={{ animationDelay: '2s' }}>
                 <div className="text-3xl font-bold text-primary">+42%</div>
                 <div className="text-xs text-muted-foreground">FCR</div>
               </div>
+
+              {/* Decorative glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl blur-3xl -z-10" />
             </div>
           </div>
         </div>
@@ -289,19 +291,6 @@ const HomeNew = () => {
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2">
             <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
-          </div>
-        </div>
-      </section>
-
-      {/* Video Section */}
-      <section className="py-20 relative fade-in-scroll">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">See Pullse in Action</h2>
-            <p className="text-xl text-muted-foreground">Watch how AI transforms customer support</p>
-          </div>
-          <div className="max-w-5xl mx-auto">
-            <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
           </div>
         </div>
       </section>
