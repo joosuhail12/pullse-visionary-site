@@ -305,19 +305,24 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
     
     setProgress(t / 10);
     
-    // Enhanced Bezier curve flowing from left (channels) to right (outcomes)
-    const curve = new THREE.CubicBezierCurve3(
-      new THREE.Vector3(-8, startY, 3),           // Start at channels (left)
-      new THREE.Vector3(-3, startY + 1, 0),       // Curve towards center
-      new THREE.Vector3(3, startY - 1, 0),        // Continue through center
-      new THREE.Vector3(9, startY, 3)             // End at outcomes (right)
-    );
+    // Sine wave pattern from channels (left) to outcomes (right)
+    const startX = -8;
+    const endX = 9;
+    const xPos = startX + (endX - startX) * progress;
     
-    const point = curve.getPoint(progress);
-    groupRef.current.position.copy(point);
+    // Sine wave for Y position with amplitude variation
+    const frequency = 3; // Number of waves
+    const amplitude = 2; // Height of waves
+    const yWave = Math.sin(progress * Math.PI * frequency) * amplitude;
+    const yPos = startY + yWave;
     
-    // Dramatic scale based on depth and state
-    const baseScale = 0.8 + progress * 1.2; // Grow as it approaches
+    // Z depth variation - go through the globe (negative Z at center)
+    const zDepth = Math.sin(progress * Math.PI) * -2; // Dips to -2 at center
+    
+    groupRef.current.position.set(xPos, yPos, zDepth);
+    
+    // Scale based on progress and state
+    const baseScale = 0.8 + Math.abs(Math.sin(progress * Math.PI)) * 0.8;
     const scale = isProcessing ? baseScale * 1.3 : baseScale;
     groupRef.current.scale.setScalar(scale);
   });
@@ -338,10 +343,10 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
         <meshBasicMaterial color="#000000" transparent opacity={0.2} />
       </mesh>
       <Trail
-        width={3}
-        length={8}
+        width={4}
+        length={20}
         color={ticketInfo.color}
-        attenuation={(t) => t * t}
+        attenuation={(t) => t * t * t}
       >
         <mesh>
           <sphereGeometry args={[0.35, 16, 16]} />
