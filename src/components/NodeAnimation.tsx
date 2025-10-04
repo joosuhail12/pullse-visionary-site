@@ -232,6 +232,79 @@ const ChannelIcon = ({
     </Float>;
 };
 
+// Request pill component showing questions flowing through
+const RequestPill = ({
+  delay,
+  question,
+  color
+}: {
+  delay: number;
+  question: string;
+  color: string;
+}) => {
+  const groupRef = useRef<THREE.Group>(null);
+  const [progress, setProgress] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  useFrame(state => {
+    if (!groupRef.current) return;
+    const rawT = (state.clock.elapsedTime * 0.15 + delay) % 12;
+    let t = rawT;
+
+    // Pause at engine for processing
+    if (rawT > 5 && rawT < 6.5) {
+      t = 5 + (rawT - 5) * 0.2;
+      setIsProcessing(true);
+    } else {
+      setIsProcessing(false);
+    }
+    setProgress(t / 12);
+
+    // Path from left to right
+    const startX = -9;
+    const endX = 10;
+    const xPos = startX + (endX - startX) * progress;
+    
+    // Gentle wave
+    const yWave = Math.sin(progress * Math.PI * 2) * 1.5;
+    const yPos = yWave;
+    
+    const zDepth = Math.sin(progress * Math.PI) * -1.5;
+    
+    groupRef.current.position.set(xPos, yPos, zDepth);
+    
+    const scale = isProcessing ? 1.2 : 1;
+    groupRef.current.scale.setScalar(scale);
+  });
+
+  if (progress < 0.02 || progress > 0.98) return null;
+
+  return (
+    <group ref={groupRef}>
+      <Html center distanceFactor={10}>
+        <div 
+          className={`px-4 py-2 rounded-full backdrop-blur-sm border transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
+            isProcessing ? 'animate-pulse' : ''
+          }`}
+          style={{
+            backgroundColor: `${color}15`,
+            borderColor: color,
+            boxShadow: isProcessing ? `0 0 20px ${color}80` : `0 0 10px ${color}40`,
+          }}
+        >
+          <div 
+            className="w-2 h-2 rounded-full animate-pulse" 
+            style={{ backgroundColor: color }}
+          />
+          <span className="text-xs font-medium" style={{ color }}>
+            {question}
+          </span>
+        </div>
+      </Html>
+    </group>
+  );
+};
+
 // Enhanced ticket component with cooler colors, depth, and processing states
 const FlowingTicket = ({
   delay,
@@ -646,6 +719,17 @@ const SectionLabel = ({
 // Enhanced main scene with all visual improvements
 const Scene = () => {
   const [processingTicket, setProcessingTicket] = useState<string | undefined>();
+  
+  // Sample request questions flowing through
+  const requestQuestions = useMemo(() => [
+    { question: "How do I reset my password?", color: "#3b82f6", delay: 0 },
+    { question: "When will my order ship?", color: "#10b981", delay: 1.5 },
+    { question: "Can I upgrade my plan?", color: "#8b5cf6", delay: 3 },
+    { question: "Why was I charged twice?", color: "#f59e0b", delay: 4.5 },
+    { question: "How to export my data?", color: "#ec4899", delay: 6 },
+    { question: "Is there a mobile app?", color: "#06b6d4", delay: 7.5 },
+  ], []);
+  
   const channels = useMemo(() => [{
     position: [-8, 1.5, 0] as [number, number, number],
     icon: Mail,
@@ -1222,6 +1306,16 @@ const Scene = () => {
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
       {channels.map((channel, i) => <ChannelIcon key={`channel-${i}`} {...channel} />)}
+
+      {/* Request pills with questions */}
+      {requestQuestions.map((req, index) => (
+        <RequestPill 
+          key={`request-${index}`} 
+          delay={req.delay} 
+          question={req.question}
+          color={req.color}
+        />
+      ))}
 
       {/* Tickets flowing from channels to engine */}
       {tickets.map((ticket, i) => <FlowingTicket key={`ticket-${i}`} {...ticket} onProcess={() => setProcessingTicket(ticket.ticketInfo.text)} />)}
