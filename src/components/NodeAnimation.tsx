@@ -1001,28 +1001,98 @@ const NodeAnimation = () => {
   }
 
   return (
-    <div className="w-full py-8">
-      <div className="relative w-full h-[650px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10">
+    <div className="w-full py-12">
+      {/* Enhanced container with better visual hierarchy */}
+      <div className="relative w-full h-[700px] rounded-[2rem] overflow-hidden border border-primary/10 shadow-2xl">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5 animate-gradient"></div>
+        
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+        
+        {/* Top status bar */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background/80 to-transparent backdrop-blur-sm border-b border-primary/10 z-10">
+          <div className="flex items-center justify-between h-full px-8">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span className="text-xs font-medium text-muted-foreground">Live Processing</span>
+              </div>
+              <div className="h-4 w-px bg-border"></div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1.5">
+                  <Activity className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-xs font-mono text-foreground">847</span>
+                  <span className="text-xs text-muted-foreground">resolved</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5 text-blue-500" />
+                  <span className="text-xs font-mono text-foreground">0.8s</span>
+                  <span className="text-xs text-muted-foreground">avg</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <TrendingUp className="h-3.5 w-3.5 text-green-500" />
+                  <span className="text-xs font-mono text-foreground">98.5%</span>
+                  <span className="text-xs text-muted-foreground">CSAT</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <Zap className="h-3 w-3 text-primary" />
+              <span className="text-xs font-semibold text-primary">Real-time Flow</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Main canvas */}
         <Canvas dpr={[1, 2]} performance={{ min: 0.5 }} gl={{ antialias: true, alpha: true }}>
           <Scene />
         </Canvas>
         
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 via-transparent to-background/10"></div>
-        
-        {/* Minimalistic Apple-style text at bottom aligned with phases */}
-        <div className="absolute bottom-6 left-0 right-0 px-8">
-          <div className="grid grid-cols-3 gap-4 text-xs text-muted-foreground/60">
-            <div className="text-left">
-              One inbox. Every channel.
+        {/* Bottom section with phases */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 via-background/50 to-transparent backdrop-blur-md border-t border-primary/10">
+          <div className="grid grid-cols-3 gap-8 h-full items-center px-12">
+            {/* Phase 1: Channels */}
+            <div className="flex items-center gap-3 group cursor-default">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                <Mail className="h-4 w-4 text-blue-500" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">Unified Inbox</div>
+                <div className="text-xs text-muted-foreground">All channels, one place</div>
+              </div>
             </div>
-            <div className="text-center">
-              AI + Human. Seamless collaboration.
+            
+            {/* Phase 2: Engine */}
+            <div className="flex items-center gap-3 justify-center group cursor-default">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
+                <Bot className="h-4 w-4 text-purple-500" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">Smart Collaboration</div>
+                <div className="text-xs text-muted-foreground">AI + Human synergy</div>
+              </div>
             </div>
-            <div className="text-right">
-              Better outcomes. Less busywork.
+            
+            {/* Phase 3: Outcomes */}
+            <div className="flex items-center gap-3 justify-end group cursor-default">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-foreground">Excellence</div>
+                <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Corner accent */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
       </div>
     </div>
   );
