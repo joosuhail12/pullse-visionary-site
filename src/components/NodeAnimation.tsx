@@ -317,8 +317,8 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
     groupRef.current.position.copy(point);
     
     // Dramatic scale based on depth and state
-    const baseScale = 0.4 + progress * 0.8; // Grow as it approaches
-    const scale = isProcessing ? baseScale * 1.2 : baseScale;
+    const baseScale = 0.8 + progress * 1.2; // Grow as it approaches
+    const scale = isProcessing ? baseScale * 1.3 : baseScale;
     groupRef.current.scale.setScalar(scale);
   });
 
@@ -344,7 +344,7 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
         attenuation={(t) => t * t}
       >
         <mesh>
-          <sphereGeometry args={[0.15, 16, 16]} />
+          <sphereGeometry args={[0.35, 16, 16]} />
           <meshStandardMaterial
             color={ticketInfo.color}
             emissive={ticketInfo.color}
@@ -361,7 +361,7 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
           color="#fbbf24"
         />
       )}
-      <Html center distanceFactor={12}>
+      <Html center distanceFactor={8}>
         <div 
           className={`glass-strong px-4 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap border-l-4 transition-all duration-300 ${isProcessing ? 'scale-110' : ''}`}
           style={{ 
