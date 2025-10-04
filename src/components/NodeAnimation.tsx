@@ -12,7 +12,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { 
-  Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target
+  Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2
 } from "lucide-react";
 import logoIcon from "@/assets/logo-icon-purple.png";
 
@@ -73,30 +73,131 @@ const ParticleField = () => {
   );
 };
 
-// Glowing connection lines
-const ConnectionLine = ({ start, end, color }: { start: [number, number, number]; end: [number, number, number]; color: string }) => {
+// Animated Gradient Flow Lines with Arrows
+const AnimatedFlowLine = ({ 
+  start, 
+  end, 
+  color, 
+  direction = "forward" 
+}: { 
+  start: [number, number, number]; 
+  end: [number, number, number]; 
+  color: string;
+  direction?: "forward" | "backward";
+}) => {
   const groupRef = useRef<THREE.Group>(null);
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
   
+  const points = useMemo(() => {
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(...start),
+      new THREE.Vector3((start[0] + end[0]) / 2, (start[1] + end[1]) / 2, (start[2] + end[2]) / 2 - 1),
+      new THREE.Vector3(...end)
+    ]);
+    return curve.getPoints(50);
+  }, [start, end]);
+
   useFrame((state) => {
-    if (!groupRef.current) return;
-    const line = groupRef.current.children[0] as THREE.Line;
-    if (line && line.material) {
-      const material = line.material as THREE.LineBasicMaterial;
-      material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 2) * 0.2;
+    if (materialRef.current) {
+      materialRef.current.uniforms.time.value = direction === "forward" 
+        ? state.clock.elapsedTime 
+        : -state.clock.elapsedTime;
     }
   });
+
+  const shaderMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+        color: { value: new THREE.Color(color) }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        uniform vec3 color;
+        varying vec2 vUv;
+        void main() {
+          float flow = fract(vUv.x - time * 0.3);
+          float alpha = smoothstep(0.0, 0.2, flow) * smoothstep(1.0, 0.8, flow);
+          gl_FragColor = vec4(color, alpha * 0.6);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    });
+  }, [color]);
 
   return (
     <group ref={groupRef}>
       <Line
-        points={[start, end]}
+        points={points}
         color={color}
-        lineWidth={2}
+        lineWidth={3}
         transparent
-        opacity={0.3}
-        dashed={false}
+        opacity={0.4}
       />
+      <mesh>
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.05, 8, false]} />
+        <shaderMaterial ref={materialRef} attach="material" {...shaderMaterial} />
+      </mesh>
+      {/* Arrow indicators along the path */}
+      {[0.3, 0.6, 0.9].map((t, i) => {
+        const pos = points[Math.floor(t * points.length)];
+        return (
+          <Html key={i} position={[pos.x, pos.y, pos.z]} center distanceFactor={15}>
+            <div className="animate-pulse" style={{ color }}>
+              <ArrowRight className="h-4 w-4" />
+            </div>
+          </Html>
+        );
+      })}
     </group>
+  );
+};
+
+// Progress Ring around the logo
+const ProgressRing = ({ radius, progress, color }: { radius: number; progress: number; color: string }) => {
+  const ringRef = useRef<THREE.Mesh>(null);
+  
+  useFrame(() => {
+    if (ringRef.current) {
+      ringRef.current.rotation.z += 0.01;
+    }
+  });
+
+  return (
+    <mesh ref={ringRef} rotation={[0, 0, 0]}>
+      <ringGeometry args={[radius, radius + 0.1, 64, 1, 0, Math.PI * 2 * progress]} />
+      <meshBasicMaterial color={color} transparent opacity={0.6} side={THREE.DoubleSide} />
+    </mesh>
+  );
+};
+
+// Processing Status Indicators
+const ProcessingIndicator = ({ text, delay }: { text: string; delay: number }) => {
+  const [visible, setVisible] = useState(false);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(true);
+      setTimeout(() => setVisible(false), 1500);
+    }, 4000 + delay * 1000);
+    return () => clearInterval(interval);
+  }, [delay]);
+
+  if (!visible) return null;
+
+  return (
+    <div className="animate-fade-in glass-strong px-3 py-1.5 rounded-lg border border-primary/40 text-xs font-semibold flex items-center gap-2">
+      <Activity className="h-3 w-3 animate-pulse text-primary" />
+      {text}
+    </div>
   );
 };
 
@@ -181,38 +282,81 @@ const ChannelIcon = ({ position, icon, color, label, count }: { position: [numbe
   );
 };
 
-// Ticket flowing from channels to engine
-const FlowingTicket = ({ delay, startY, ticketInfo }: { delay: number; startY: number; ticketInfo: { emoji: string; text: string; color: string } }) => {
+// Enhanced ticket with cooler colors, depth, and processing
+const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: { 
+  delay: number; 
+  startY: number; 
+  ticketInfo: { 
+    emoji: string; 
+    text: string; 
+    subtitle: string;
+    color: string;
+    priority: 'low' | 'medium' | 'high';
+  };
+  onProcess?: () => void;
+}) => {
   const groupRef = useRef<THREE.Group>(null);
   const [progress, setProgress] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [hasTriggeredProcess, setHasTriggeredProcess] = useState(false);
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const t = (state.clock.elapsedTime * 0.5 + delay) % 5;
-    setProgress(t / 5);
+    const rawT = (state.clock.elapsedTime * 0.4 + delay) % 6;
+    let t = rawT;
     
-    // Bezier curve from left channels to center engine
+    // Pause at engine for processing (around t=2.5-3.5)
+    if (rawT > 2.5 && rawT < 3.5) {
+      t = 2.5 + (rawT - 2.5) * 0.3; // Slow down dramatically
+      if (!isProcessing) {
+        setIsProcessing(true);
+        if (!hasTriggeredProcess && onProcess) {
+          setHasTriggeredProcess(true);
+          onProcess();
+        }
+      }
+    } else {
+      if (isProcessing) setIsProcessing(false);
+      if (rawT < 2.5) setHasTriggeredProcess(false);
+    }
+    
+    setProgress(t / 6);
+    
+    // Enhanced Bezier curve with dramatic z-depth
     const curve = new THREE.CubicBezierCurve3(
-      new THREE.Vector3(-8, startY, 1),
-      new THREE.Vector3(-4, startY + 1, 0),
-      new THREE.Vector3(-1, startY - 0.5, -0.5),
-      new THREE.Vector3(0, 0, 0)
+      new THREE.Vector3(-8, startY, 3),
+      new THREE.Vector3(-4, startY + 2, 0),
+      new THREE.Vector3(-2, startY - 1, -3),
+      new THREE.Vector3(0, 0, -1)
     );
     
     const point = curve.getPoint(progress);
     groupRef.current.position.copy(point);
     
-    const opacity = Math.sin(progress * Math.PI);
-    groupRef.current.scale.setScalar(0.6 + opacity * 0.6);
+    // Dramatic scale based on depth and state
+    const baseScale = 0.4 + progress * 0.8; // Grow as it approaches
+    const scale = isProcessing ? baseScale * 1.2 : baseScale;
+    groupRef.current.scale.setScalar(scale);
   });
 
   if (progress < 0.05 || progress > 0.95) return null;
 
+  const priorityColors = {
+    low: '#10b981',
+    medium: '#fbbf24',
+    high: '#ef4444'
+  };
+
   return (
     <group ref={groupRef}>
+      {/* Add subtle shadow/glow for depth */}
+      <mesh position={[0, -0.2, -0.1]}>
+        <sphereGeometry args={[0.2, 16, 16]} />
+        <meshBasicMaterial color="#000000" transparent opacity={0.2} />
+      </mesh>
       <Trail
-        width={2.5}
-        length={15}
+        width={isProcessing ? 2 : 2.5}
+        length={isProcessing ? 10 : 15}
         color={ticketInfo.color}
         attenuation={(t) => t * t * t}
       >
@@ -221,27 +365,59 @@ const FlowingTicket = ({ delay, startY, ticketInfo }: { delay: number; startY: n
           <meshStandardMaterial
             color={ticketInfo.color}
             emissive={ticketInfo.color}
-            emissiveIntensity={2}
+            emissiveIntensity={isProcessing ? 4 : 2}
           />
         </mesh>
       </Trail>
+      {isProcessing && (
+        <Sparkles
+          count={15}
+          scale={1.5}
+          size={2}
+          speed={1.5}
+          color="#fbbf24"
+        />
+      )}
       <Html center distanceFactor={12}>
         <div 
-          className="glass-strong px-4 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap border-l-4"
+          className={`glass-strong px-4 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap border-l-4 transition-all duration-300 ${isProcessing ? 'scale-110' : ''}`}
           style={{ 
             borderColor: ticketInfo.color,
-            boxShadow: `0 4px 24px ${ticketInfo.color}40`
+            boxShadow: isProcessing 
+              ? `0 12px 48px ${ticketInfo.color}90, 0 0 60px rgba(251, 191, 36, 0.5)` 
+              : `0 4px 24px ${ticketInfo.color}40`,
+            filter: isProcessing ? 'brightness(1.3)' : 'none'
           }}
         >
-          <span className="text-xl">{ticketInfo.emoji}</span>
-          <span className="text-xs font-semibold">{ticketInfo.text}</span>
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">{ticketInfo.emoji}</span>
+              <span className="text-xs font-semibold">{ticketInfo.text}</span>
+              <span 
+                className="text-[8px] px-1.5 py-0.5 rounded-full font-bold"
+                style={{ 
+                  backgroundColor: priorityColors[ticketInfo.priority],
+                  color: 'white'
+                }}
+              >
+                {ticketInfo.priority.toUpperCase()}
+              </span>
+            </div>
+            <span className="text-[10px] text-muted-foreground">{ticketInfo.subtitle}</span>
+          </div>
+          {isProcessing && (
+            <div className="ml-2 text-xs font-bold text-yellow-400 animate-pulse flex items-center gap-1">
+              <Activity className="h-3 w-3" />
+              Processing...
+            </div>
+          )}
         </div>
       </Html>
     </group>
   );
 };
 
-// Enhanced happiness with celebration and metrics
+// Enhanced happiness with warm colors, depth, and celebration
 const FlowingHappiness = ({ 
   delay, 
   endY, 
@@ -266,70 +442,84 @@ const FlowingHappiness = ({
     setProgress(t / 5);
     
     // Trigger celebration near the end
-    if (progress > 0.85 && progress < 0.9 && !shouldCelebrate) {
+    if (progress > 0.82 && progress < 0.87 && !shouldCelebrate) {
       setShouldCelebrate(true);
-      setTimeout(() => setShouldCelebrate(false), 500);
+      setTimeout(() => setShouldCelebrate(false), 800);
     }
     
-    // Enhanced Bezier curve from engine to outcomes
+    // Enhanced Bezier curve with z-depth
     const curve = new THREE.CubicBezierCurve3(
-      new THREE.Vector3(0, 0, 0),
-      new THREE.Vector3(3, endY - 1, -1),
-      new THREE.Vector3(6, endY + 2, 1),
-      new THREE.Vector3(9, endY, 2)
+      new THREE.Vector3(0, 0, -1),
+      new THREE.Vector3(3, endY - 1, -2),
+      new THREE.Vector3(6, endY + 2, 0),
+      new THREE.Vector3(9, endY, 3)
     );
     
     const point = curve.getPoint(progress);
     groupRef.current.position.copy(point);
     groupRef.current.rotation.z = progress * Math.PI * 2;
     
-    const opacity = Math.sin(progress * Math.PI);
-    const scale = shouldCelebrate ? 1.5 : (0.5 + opacity * 0.8);
+    // Grow dramatically as it travels
+    const baseScale = 0.3 + progress * 1;
+    const scale = shouldCelebrate ? baseScale * 1.8 : baseScale;
     groupRef.current.scale.setScalar(scale);
   });
 
   if (progress < 0.05 || progress > 0.95) return null;
 
+  // Brighter, warmer colors for success
+  const warmColor = happiness.color;
+
   return (
     <group ref={groupRef}>
+      {/* Shadow for depth */}
+      <mesh position={[0, -0.3, -0.2]}>
+        <sphereGeometry args={[0.25, 16, 16]} />
+        <meshBasicMaterial color="#000000" transparent opacity={0.15} />
+      </mesh>
       <Trail
-        width={shouldCelebrate ? 4 : 3}
-        length={shouldCelebrate ? 25 : 18}
-        color={happiness.color}
+        width={shouldCelebrate ? 5 : 3.5}
+        length={shouldCelebrate ? 30 : 20}
+        color={warmColor}
         attenuation={(t) => t * t}
       >
         <mesh>
           <sphereGeometry args={[0.18, 16, 16]} />
           <meshStandardMaterial
-            color={happiness.color}
-            emissive={happiness.color}
-            emissiveIntensity={shouldCelebrate ? 4 : 2.5}
+            color={warmColor}
+            emissive={warmColor}
+            emissiveIntensity={shouldCelebrate ? 6 : 3.5}
           />
         </mesh>
       </Trail>
       {shouldCelebrate && (
-        <Sparkles
-          count={30}
-          scale={2}
-          size={3}
-          speed={2}
-          color={happiness.color}
-        />
+        <>
+          <Sparkles
+            count={50}
+            scale={3}
+            size={4}
+            speed={2.5}
+            color={warmColor}
+          />
+          <pointLight position={[0, 0, 0]} intensity={3} color={warmColor} distance={3} />
+        </>
       )}
       <Html center distanceFactor={12}>
         <div 
-          className={`glass-strong px-5 py-3 rounded-xl flex items-center gap-3 whitespace-nowrap border-l-4 transition-all duration-300 ${shouldCelebrate ? 'scale-125' : ''}`}
+          className={`glass-strong px-5 py-3 rounded-xl flex items-center gap-3 whitespace-nowrap border-l-4 transition-all duration-300 ${shouldCelebrate ? 'scale-150 animate-pulse' : ''}`}
           style={{ 
-            borderColor: happiness.color,
+            borderColor: warmColor,
             boxShadow: shouldCelebrate 
-              ? `0 12px 48px ${happiness.color}90` 
-              : `0 8px 32px ${happiness.color}60`
+              ? `0 16px 64px ${warmColor}100, 0 0 80px ${warmColor}80` 
+              : `0 8px 32px ${warmColor}60`,
+            background: shouldCelebrate ? `radial-gradient(circle, ${warmColor}30, transparent)` : undefined
           }}
         >
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <span className="text-2xl">{happiness.emoji}</span>
               <span className="text-sm font-bold">{happiness.text}</span>
+              {shouldCelebrate && <CheckCircle2 className="h-4 w-4 text-green-400 animate-bounce" />}
             </div>
             <span className="text-[10px] text-muted-foreground font-semibold">
               {happiness.metric}
@@ -393,18 +583,26 @@ const OutcomeIcon = ({ position, emoji, color, label, count }: {
   );
 };
 
-// Enhanced Central Engine with statistics and AI actions
-const HumanAugmentationEngine = () => {
+// Enhanced Central Engine with dynamic processing indicators
+const HumanAugmentationEngine = ({ activeTicketType }: { activeTicketType?: string }) => {
   const outerRef = useRef<THREE.Mesh>(null);
   const innerRef = useRef<THREE.Mesh>(null);
   const [ticketsProcessed, setTicketsProcessed] = useState(0);
   const [avgResponseTime, setAvgResponseTime] = useState("0.8s");
+  const [progress, setProgress] = useState(0);
+  const [aiActive, setAiActive] = useState(false);
+  const [humanActive, setHumanActive] = useState(false);
   
   useEffect(() => {
     const interval = setInterval(() => {
       setTicketsProcessed(prev => prev + 1);
       const times = ["0.3s", "0.5s", "0.8s", "1.2s"];
       setAvgResponseTime(times[Math.floor(Math.random() * times.length)]);
+      setProgress(Math.random());
+      
+      // Randomly activate AI or Human
+      setAiActive(Math.random() > 0.5);
+      setHumanActive(Math.random() > 0.3);
     }, 2000);
     return () => clearInterval(interval);
   }, []);
@@ -475,25 +673,68 @@ const HumanAugmentationEngine = () => {
         </mesh>
       </Float>
 
-      {/* AI + Human indicators */}
+      {/* Progress Rings */}
+      <ProgressRing radius={3.5} progress={progress} color="#7c3aed" />
+      <ProgressRing radius={3.7} progress={1 - progress} color="#a78bfa" />
+
+      {/* Dynamic AI + Human indicators */}
       <Float speed={2} floatIntensity={0.5}>
-        <group position={[0, 2.5, 2]}>
+        <group position={[0, 2.8, 2]}>
           <Html center distanceFactor={8}>
-            <div className="glass-strong px-4 py-2 rounded-xl flex items-center gap-2 border-2 border-primary/40 hover:border-primary/80 transition-all">
-              <Bot className="h-5 w-5 text-primary" />
+            <div 
+              className={`glass-strong px-4 py-2 rounded-xl flex items-center gap-2 border-2 transition-all duration-300 ${
+                aiActive 
+                  ? 'border-primary bg-primary/20 scale-110 shadow-lg shadow-primary/50' 
+                  : 'border-primary/40'
+              }`}
+            >
+              <Bot className={`h-5 w-5 ${aiActive ? 'text-primary animate-pulse' : 'text-primary/60'}`} />
               <span className="text-xs font-bold">AI Agent</span>
+              {aiActive && <Zap className="h-3 w-3 text-yellow-400 animate-pulse" />}
             </div>
           </Html>
         </group>
       </Float>
 
       <Float speed={1.8} floatIntensity={0.6}>
-        <group position={[0, -2.5, 2]}>
+        <group position={[0, -2.8, 2]}>
           <Html center distanceFactor={8}>
-            <div className="glass-strong px-4 py-2 rounded-xl flex items-center gap-2 border-2 border-orange-500/40 hover:border-orange-500/80 transition-all">
-              <Users className="h-5 w-5 text-orange-500" />
+            <div 
+              className={`glass-strong px-4 py-2 rounded-xl flex items-center gap-2 border-2 transition-all duration-300 ${
+                humanActive 
+                  ? 'border-orange-500 bg-orange-500/20 scale-110 shadow-lg shadow-orange-500/50' 
+                  : 'border-orange-500/40'
+              }`}
+            >
+              <Users className={`h-5 w-5 ${humanActive ? 'text-orange-500 animate-pulse' : 'text-orange-500/60'}`} />
               <span className="text-xs font-bold">Human Expert</span>
+              {humanActive && <Activity className="h-3 w-3 text-orange-400 animate-pulse" />}
             </div>
+          </Html>
+        </group>
+      </Float>
+      
+      {/* Processing Status around the logo */}
+      <Float speed={1.4} floatIntensity={0.3}>
+        <group position={[-4.2, 1.5, 1.5]}>
+          <Html center distanceFactor={12}>
+            <ProcessingIndicator text="Analyzing..." delay={0} />
+          </Html>
+        </group>
+      </Float>
+
+      <Float speed={1.3} floatIntensity={0.3}>
+        <group position={[4.2, -1.5, 1.5]}>
+          <Html center distanceFactor={12}>
+            <ProcessingIndicator text="Routing..." delay={1} />
+          </Html>
+        </group>
+      </Float>
+
+      <Float speed={1.5} floatIntensity={0.3}>
+        <group position={[0, -4, 1.5]}>
+          <Html center distanceFactor={12}>
+            <ProcessingIndicator text="Resolving..." delay={2} />
           </Html>
         </group>
       </Float>
@@ -579,12 +820,14 @@ const SectionLabel = ({ position, title, subtitle, align = "center" }: { positio
   );
 };
 
-// Enhanced main scene with all improvements
+// Enhanced main scene with all visual improvements
 const Scene = () => {
+  const [processingTicket, setProcessingTicket] = useState<string | undefined>();
+  
   const channels = useMemo(() => [
-    { position: [-8, 2.5, 0] as [number, number, number], icon: Mail, color: "#3b82f6", label: "Email", count: 12 },
-    { position: [-8, 0.5, 0] as [number, number, number], icon: MessageSquare, color: "#10b981", label: "Chat", count: 8 },
-    { position: [-8, -1.5, 0] as [number, number, number], icon: Phone, color: "#8b5cf6", label: "Voice", count: 5 },
+    { position: [-8, 2.5, 0] as [number, number, number], icon: Mail, color: "#60a5fa", label: "Email", count: 12 },
+    { position: [-8, 0.5, 0] as [number, number, number], icon: MessageSquare, color: "#34d399", label: "Chat", count: 8 },
+    { position: [-8, -1.5, 0] as [number, number, number], icon: Phone, color: "#a78bfa", label: "Voice", count: 5 },
   ], []);
 
   const tickets = useMemo(() => [
@@ -718,10 +961,35 @@ const Scene = () => {
       <spotLight position={[0, 10, 10]} angle={0.5} penumbra={1} intensity={4} color="#a78bfa" />
 
       <ParticleField />
+      
+      {/* Fog for depth perception */}
+      <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
-      {/* Connection lines between sections */}
-      <ConnectionLine start={[-6, 0, 0]} end={[-2, 0, 0]} color="#6366f1" />
-      <ConnectionLine start={[2, 0, 0]} end={[7, 0, 0]} color="#10b981" />
+      {/* Animated gradient flow lines between sections */}
+      <AnimatedFlowLine 
+        start={[-6, 2, 0]} 
+        end={[-1, 0, 0]} 
+        color="#6366f1" 
+        direction="forward" 
+      />
+      <AnimatedFlowLine 
+        start={[-6, -1, 0]} 
+        end={[-1, 0, 0]} 
+        color="#34d399" 
+        direction="forward" 
+      />
+      <AnimatedFlowLine 
+        start={[1, 0, 0]} 
+        end={[7, 2, 0]} 
+        color="#fbbf24" 
+        direction="forward" 
+      />
+      <AnimatedFlowLine 
+        start={[1, 0, 0]} 
+        end={[7, -1, 0]} 
+        color="#ec4899" 
+        direction="forward" 
+      />
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
@@ -731,12 +999,16 @@ const Scene = () => {
 
       {/* Tickets flowing from channels to engine */}
       {tickets.map((ticket, i) => (
-        <FlowingTicket key={`ticket-${i}`} {...ticket} />
+        <FlowingTicket 
+          key={`ticket-${i}`} 
+          {...ticket} 
+          onProcess={() => setProcessingTicket(ticket.ticketInfo.text)}
+        />
       ))}
 
       {/* Section 2: Human Augmentation Engine (Center) */}
       <SectionLabel position={[0, 5.8, 0]} title="2. HUMAN AUGMENTATION ENGINE" subtitle="AI + Human collaboration" align="center" />
-      <HumanAugmentationEngine />
+      <HumanAugmentationEngine activeTicketType={processingTicket} />
 
       {/* Happiness flowing from engine to outcomes */}
       {happiness.map((happy, i) => (
