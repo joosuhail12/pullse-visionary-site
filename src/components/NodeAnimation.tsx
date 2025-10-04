@@ -47,14 +47,18 @@ const BlackArrowPath = ({
   end,
   controlOffset = [0, 0, -1.5],
   startQuestion,
-  endEmoji
+  endEmoji,
+  delay = 0
 }: {
   start: [number, number, number];
   end: [number, number, number];
   controlOffset?: [number, number, number];
   startQuestion?: string;
   endEmoji?: string;
+  delay?: number;
 }) => {
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
+  
   const points = useMemo(() => {
     const startVec = new THREE.Vector3(...start);
     const endVec = new THREE.Vector3(...end);
@@ -66,6 +70,39 @@ const BlackArrowPath = ({
     const curve = new THREE.QuadraticBezierCurve3(startVec, midVec, endVec);
     return curve.getPoints(50);
   }, [start, end, controlOffset]);
+
+  // Animate the flow
+  useFrame((state) => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.time.value = state.clock.elapsedTime + delay;
+    }
+  });
+
+  const shaderMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        void main() {
+          float flow = fract(vUv.x - time * 0.2);
+          float dash = step(0.5, fract(vUv.x * 8.0 - time * 2.0));
+          float alpha = dash * 0.8;
+          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
+        }
+      `,
+      transparent: true
+    });
+  }, []);
 
   // Calculate arrow head position and rotation
   const arrowTip = points[points.length - 1];
@@ -83,8 +120,14 @@ const BlackArrowPath = ({
         color="#000000" 
         lineWidth={4} 
         transparent 
-        opacity={0.8}
+        opacity={0.6}
       />
+      
+      {/* Animated flow tube */}
+      <mesh>
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.08, 8, false]} />
+        <shaderMaterial ref={materialRef} attach="material" {...shaderMaterial} />
+      </mesh>
       
       {/* Start question pill */}
       {startQuestion && (
@@ -1402,57 +1445,57 @@ const Scene = () => {
 
       {/* Multiple curved black arrow paths flowing into center - inspired by reference */}
       {/* Top group - with question pills */}
-      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startQuestion="Need refund help" />
-      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startQuestion="Billing issue?" />
-      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startQuestion="Order status?" />
+      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startQuestion="Need refund help" delay={0} />
+      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startQuestion="Billing issue?" delay={0.5} />
+      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startQuestion="Order status?" delay={1} />
       
       {/* Middle-top group */}
-      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startQuestion="Payment failed" />
-      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startQuestion="Account locked" />
+      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startQuestion="Payment failed" delay={1.5} />
+      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startQuestion="Account locked" delay={2} />
       
       {/* Center group */}
-      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startQuestion="Can't login" />
-      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startQuestion="Bug report" />
+      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startQuestion="Can't login" delay={2.5} />
+      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startQuestion="Bug report" delay={3} />
       
       {/* Middle-bottom group */}
-      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startQuestion="Upgrade plan?" />
-      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startQuestion="Cancel subscription" />
+      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startQuestion="Upgrade plan?" delay={3.5} />
+      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startQuestion="Cancel subscription" delay={4} />
       
       {/* Bottom group */}
-      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startQuestion="Wrong charge" />
-      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startQuestion="Delivery delayed" />
-      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startQuestion="Product broken" />
+      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startQuestion="Wrong charge" delay={4.5} />
+      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startQuestion="Delivery delayed" delay={5} />
+      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startQuestion="Product broken" delay={5.5} />
       
       {/* Additional varied curves for richness */}
-      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startQuestion="Technical issue" />
-      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startQuestion="Reset password" />
+      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startQuestion="Technical issue" delay={6} />
+      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startQuestion="Reset password" delay={6.5} />
       
       {/* Curved black arrows from center to outcome emojis on the right - with happy emojis */}
       {/* Upper outcomes */}
-      <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} endEmoji="😊" />
-      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} endEmoji="😄" />
-      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} endEmoji="🥰" />
+      <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} endEmoji="😊" delay={7} />
+      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} endEmoji="😄" delay={7.5} />
+      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} endEmoji="🥰" delay={8} />
       
       {/* Middle-upper outcomes */}
-      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} endEmoji="😍" />
-      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} endEmoji="🤗" />
+      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} endEmoji="😍" delay={8.5} />
+      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} endEmoji="🤗" delay={9} />
       
       {/* Center outcomes */}
-      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} endEmoji="😁" />
-      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} endEmoji="🙂" />
+      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} endEmoji="😁" delay={9.5} />
+      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} endEmoji="🙂" delay={10} />
       
       {/* Middle-lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} endEmoji="😌" />
-      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} endEmoji="☺️" />
+      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} endEmoji="😌" delay={10.5} />
+      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} endEmoji="☺️" delay={11} />
       
       {/* Lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} endEmoji="🤩" />
-      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} endEmoji="😃" />
-      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} endEmoji="😇" />
+      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} endEmoji="🤩" delay={11.5} />
+      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} endEmoji="😃" delay={12} />
+      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} endEmoji="😇" delay={12.5} />
       
       {/* Additional varied curves */}
-      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} endEmoji="🥳" />
-      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} endEmoji="😊" />
+      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} endEmoji="🥳" delay={13} />
+      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} endEmoji="😊" delay={13.5} />
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
