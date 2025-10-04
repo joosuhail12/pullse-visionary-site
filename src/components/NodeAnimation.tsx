@@ -285,12 +285,12 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const rawT = (state.clock.elapsedTime * 0.5 + delay) % 5;
+    const rawT = (state.clock.elapsedTime * 0.2 + delay) % 10;
     let t = rawT;
     
-    // Pause at engine for processing (around t=2-3)
-    if (rawT > 2 && rawT < 3) {
-      t = 2 + (rawT - 2) * 0.3; // Slow down dramatically
+    // Pause at engine for processing (around t=4.5-5.5)
+    if (rawT > 4.5 && rawT < 5.5) {
+      t = 4.5 + (rawT - 4.5) * 0.3; // Slow down dramatically
       if (!isProcessing) {
         setIsProcessing(true);
         if (!hasTriggeredProcess && onProcess) {
@@ -300,10 +300,10 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
       }
     } else {
       if (isProcessing) setIsProcessing(false);
-      if (rawT < 2) setHasTriggeredProcess(false);
+      if (rawT < 4.5) setHasTriggeredProcess(false);
     }
     
-    setProgress(t / 5);
+    setProgress(t / 10);
     
     // Enhanced Bezier curve with dramatic z-depth
     const curve = new THREE.CubicBezierCurve3(
@@ -338,10 +338,10 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
         <meshBasicMaterial color="#000000" transparent opacity={0.2} />
       </mesh>
       <Trail
-        width={isProcessing ? 2 : 2.5}
-        length={isProcessing ? 10 : 15}
+        width={3}
+        length={8}
         color={ticketInfo.color}
-        attenuation={(t) => t * t * t}
+        attenuation={(t) => t * t}
       >
         <mesh>
           <sphereGeometry args={[0.15, 16, 16]} />
@@ -421,8 +421,8 @@ const FlowingHappiness = ({
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const t = (state.clock.elapsedTime * 0.6 + delay) % 4.5;
-    setProgress(t / 4.5);
+    const t = (state.clock.elapsedTime * 0.25 + delay) % 8;
+    setProgress(t / 8);
     
     // Trigger celebration near the end
     if (progress > 0.82 && progress < 0.87 && !shouldCelebrate) {
@@ -461,8 +461,8 @@ const FlowingHappiness = ({
         <meshBasicMaterial color="#000000" transparent opacity={0.15} />
       </mesh>
       <Trail
-        width={shouldCelebrate ? 5 : 3.5}
-        length={shouldCelebrate ? 30 : 20}
+        width={3}
+        length={8}
         color={warmColor}
         attenuation={(t) => t * t}
       >
@@ -795,6 +795,7 @@ const Scene = () => {
   ], []);
 
   const tickets = useMemo(() => [
+    // Wave 1 - Email burst
     { 
       delay: 0, 
       startY: 1.5, 
@@ -807,18 +808,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 0.8, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Login issue", 
-        subtitle: "Password reset",
-        color: "#10b981",
-        priority: "medium" as const
-      } 
-    },
-    { 
-      delay: 1.6, 
+      delay: 0.3, 
       startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
@@ -829,29 +819,30 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 2.4, 
-      startY: -1.5, 
-      ticketInfo: { 
-        emoji: "💬", 
-        text: "Feature request", 
-        subtitle: "API integration",
-        color: "#10b981",
-        priority: "low" as const
-      } 
-    },
-    { 
-      delay: 3.2, 
+      delay: 0.6, 
       startY: 1.5, 
       ticketInfo: { 
         emoji: "📧", 
-        text: "Account help", 
-        subtitle: "Setup assistance",
+        text: "Order update", 
+        subtitle: "Shipping status",
         color: "#3b82f6",
         priority: "medium" as const
       } 
     },
+    // Wave 2 - Chat burst
     { 
-      delay: 4.0, 
+      delay: 2.5, 
+      startY: -1.5, 
+      ticketInfo: { 
+        emoji: "💬", 
+        text: "Login issue", 
+        subtitle: "Password reset",
+        color: "#10b981",
+        priority: "medium" as const
+      } 
+    },
+    { 
+      delay: 2.8, 
       startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
@@ -862,18 +853,7 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 4.8, 
-      startY: 1.5, 
-      ticketInfo: { 
-        emoji: "📧", 
-        text: "Order update", 
-        subtitle: "Shipping status",
-        color: "#3b82f6",
-        priority: "medium" as const
-      } 
-    },
-    { 
-      delay: 5.6, 
+      delay: 3.1, 
       startY: -1.5, 
       ticketInfo: { 
         emoji: "💬", 
@@ -881,6 +861,51 @@ const Scene = () => {
         subtitle: "Setup help",
         color: "#10b981",
         priority: "high" as const
+      } 
+    },
+    // Wave 3 - Mixed burst
+    { 
+      delay: 5.0, 
+      startY: 1.5, 
+      ticketInfo: { 
+        emoji: "📧", 
+        text: "Account help", 
+        subtitle: "Setup assistance",
+        color: "#3b82f6",
+        priority: "medium" as const
+      } 
+    },
+    { 
+      delay: 5.2, 
+      startY: -1.5, 
+      ticketInfo: { 
+        emoji: "💬", 
+        text: "Feature request", 
+        subtitle: "API integration",
+        color: "#10b981",
+        priority: "low" as const
+      } 
+    },
+    { 
+      delay: 5.5, 
+      startY: 1.5, 
+      ticketInfo: { 
+        emoji: "📧", 
+        text: "Payment inquiry", 
+        subtitle: "Invoice request",
+        color: "#3b82f6",
+        priority: "medium" as const
+      } 
+    },
+    { 
+      delay: 5.8, 
+      startY: -1.5, 
+      ticketInfo: { 
+        emoji: "💬", 
+        text: "Quick question", 
+        subtitle: "General inquiry",
+        color: "#10b981",
+        priority: "low" as const
       } 
     },
   ], []);
@@ -891,8 +916,9 @@ const Scene = () => {
   ], []);
 
   const happiness = useMemo(() => [
+    // Outcomes from Wave 1
     { 
-      delay: 0.6, 
+      delay: 1.2, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
@@ -902,27 +928,69 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 1.4, 
-      endY: -1.5, 
+      delay: 1.5, 
+      endY: 1.5, 
       happiness: { 
         emoji: "⭐", 
-        text: "5-star review", 
+        text: "Billing fixed", 
         metric: "98% satisfaction",
         color: "#fbbf24" 
       } 
     },
     { 
-      delay: 2.2, 
+      delay: 1.8, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
-        text: "Issue resolved", 
+        text: "Order updated", 
         metric: "First contact",
         color: "#10b981" 
       } 
     },
+    // Outcomes from Wave 2
     { 
-      delay: 3.0, 
+      delay: 3.7, 
+      endY: -1.5, 
+      happiness: { 
+        emoji: "⭐", 
+        text: "Login restored", 
+        metric: "Quick resolution",
+        color: "#fbbf24" 
+      } 
+    },
+    { 
+      delay: 4.0, 
+      endY: -1.5, 
+      happiness: { 
+        emoji: "😊", 
+        text: "Question answered", 
+        metric: "Instant help",
+        color: "#10b981" 
+      } 
+    },
+    { 
+      delay: 4.3, 
+      endY: -1.5, 
+      happiness: { 
+        emoji: "⭐", 
+        text: "Support excellent", 
+        metric: "Highly rated",
+        color: "#fbbf24" 
+      } 
+    },
+    // Outcomes from Wave 3
+    { 
+      delay: 6.2, 
+      endY: 1.5, 
+      happiness: { 
+        emoji: "😊", 
+        text: "Account ready", 
+        metric: "Quick onboard",
+        color: "#10b981" 
+      } 
+    },
+    { 
+      delay: 6.4, 
       endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
@@ -932,42 +1000,22 @@ const Scene = () => {
       } 
     },
     { 
-      delay: 3.8, 
+      delay: 6.7, 
       endY: 1.5, 
       happiness: { 
         emoji: "😊", 
-        text: "Account setup", 
-        metric: "Quick onboard",
+        text: "Payment complete", 
+        metric: "Invoice sent",
         color: "#10b981" 
       } 
     },
     { 
-      delay: 4.6, 
+      delay: 7.0, 
       endY: -1.5, 
       happiness: { 
         emoji: "⭐", 
-        text: "Question answered", 
-        metric: "Instant help",
-        color: "#fbbf24" 
-      } 
-    },
-    { 
-      delay: 5.4, 
-      endY: 1.5, 
-      happiness: { 
-        emoji: "😊", 
-        text: "Order shipped", 
+        text: "Issue resolved", 
         metric: "Same day",
-        color: "#10b981" 
-      } 
-    },
-    { 
-      delay: 6.2, 
-      endY: -1.5, 
-      happiness: { 
-        emoji: "⭐", 
-        text: "Support excellent", 
-        metric: "Highly rated",
         color: "#fbbf24" 
       } 
     },
