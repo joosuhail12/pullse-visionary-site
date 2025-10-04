@@ -58,30 +58,26 @@ const BlackArrowPath = ({
   delay?: number;
 }) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-  
   const points = useMemo(() => {
     const startVec = new THREE.Vector3(...start);
     const endVec = new THREE.Vector3(...end);
-    const midVec = new THREE.Vector3(
-      (start[0] + end[0]) / 2 + controlOffset[0],
-      (start[1] + end[1]) / 2 + controlOffset[1],
-      (start[2] + end[2]) / 2 + controlOffset[2]
-    );
+    const midVec = new THREE.Vector3((start[0] + end[0]) / 2 + controlOffset[0], (start[1] + end[1]) / 2 + controlOffset[1], (start[2] + end[2]) / 2 + controlOffset[2]);
     const curve = new THREE.QuadraticBezierCurve3(startVec, midVec, endVec);
     return curve.getPoints(50);
   }, [start, end, controlOffset]);
 
   // Animate the flow
-  useFrame((state) => {
+  useFrame(state => {
     if (materialRef.current) {
       materialRef.current.uniforms.time.value = state.clock.elapsedTime + delay;
     }
   });
-
   const shaderMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
-        time: { value: 0 }
+        time: {
+          value: 0
+        }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -107,21 +103,10 @@ const BlackArrowPath = ({
   // Calculate arrow head position and rotation
   const arrowTip = points[points.length - 1];
   const arrowBase = points[points.length - 5];
-  const arrowAngle = Math.atan2(
-    arrowTip.y - arrowBase.y,
-    arrowTip.x - arrowBase.x
-  );
-
-  return (
-    <group>
+  const arrowAngle = Math.atan2(arrowTip.y - arrowBase.y, arrowTip.x - arrowBase.x);
+  return <group>
       {/* Main curved line */}
-      <Line 
-        points={points} 
-        color="#000000" 
-        lineWidth={4} 
-        transparent 
-        opacity={0.6}
-      />
+      <Line points={points} color="#000000" lineWidth={4} transparent opacity={0.6} />
       
       {/* Animated flow tube */}
       <mesh>
@@ -130,57 +115,37 @@ const BlackArrowPath = ({
       </mesh>
       
       {/* Start question pill */}
-      {startQuestion && (
-        <Html 
-          position={[points[0].x, points[0].y, points[0].z]} 
-          center 
-          distanceFactor={10}
-        >
-          <div 
-            className="px-3 py-1.5 rounded-full backdrop-blur-sm border border-gray-800 bg-gray-100/90 whitespace-nowrap text-xs font-medium text-gray-800"
-            style={{
-              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-            }}
-          >
+      {startQuestion && <Html position={[points[0].x, points[0].y, points[0].z]} center distanceFactor={10}>
+          <div className="px-3 py-1.5 rounded-full backdrop-blur-sm border border-gray-800 bg-gray-100/90 whitespace-nowrap text-xs font-medium text-gray-800" style={{
+        boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+      }}>
             {startQuestion}
           </div>
-        </Html>
-      )}
+        </Html>}
       
       {/* Arrow head */}
-      <Html 
-        position={[arrowTip.x, arrowTip.y, arrowTip.z]} 
-        center 
-        distanceFactor={10}
-      >
-        <div style={{ 
-          transform: `rotate(${arrowAngle}rad)`,
-          fontSize: '24px',
-          color: '#000000',
-          fontWeight: 'bold'
-        }}>
+      <Html position={[arrowTip.x, arrowTip.y, arrowTip.z]} center distanceFactor={10}>
+        <div style={{
+        transform: `rotate(${arrowAngle}rad)`,
+        fontSize: '24px',
+        color: '#000000',
+        fontWeight: 'bold'
+      }}>
           ➤
         </div>
       </Html>
       
       {/* End emoji */}
-      {endEmoji && (
-        <Html 
-          position={[arrowTip.x, arrowTip.y, arrowTip.z]} 
-          center 
-          distanceFactor={10}
-        >
-          <div style={{ 
-            fontSize: '28px',
-            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
-            marginLeft: '30px'
-          }}>
+      {endEmoji && <Html position={[arrowTip.x, arrowTip.y, arrowTip.z]} center distanceFactor={10}>
+          <div style={{
+        fontSize: '28px',
+        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+        marginLeft: '30px'
+      }}>
             {endEmoji}
           </div>
-        </Html>
-      )}
-    </group>
-  );
+        </Html>}
+    </group>;
 };
 
 // Animated Gradient Flow Lines with Arrows
@@ -358,17 +323,7 @@ const ChannelIcon = ({
   return <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
       <group position={position}>
         <Html center distanceFactor={8}>
-          <div className="flex flex-col items-center gap-2">
-            <div className="bg-background/95 backdrop-blur-sm p-3 rounded-lg border transition-all duration-200" style={{
-            borderColor: hovered ? color : 'hsl(var(--border))',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)'
-          }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-              <Icon className="h-6 w-6" style={{
-              color: hovered ? color : 'hsl(var(--muted-foreground))'
-            }} />
-            </div>
-            <span className="text-xs font-medium text-muted-foreground">{label}</span>
-          </div>
+          
         </Html>
       </group>
     </Float>;
@@ -629,15 +584,7 @@ const OutcomeIcon = ({
   return <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
       <group position={position}>
         <Html center distanceFactor={8}>
-          <div className="flex flex-col items-center gap-2">
-            <div className="bg-background/95 backdrop-blur-sm p-3 rounded-lg border transition-all duration-200 text-2xl" style={{
-            borderColor: hovered ? color : 'hsl(var(--border))',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)'
-          }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-              {emoji}
-            </div>
-            <span className="text-xs font-medium text-muted-foreground">{label}</span>
-          </div>
+          
         </Html>
       </group>
     </Float>;
