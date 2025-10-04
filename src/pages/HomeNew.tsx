@@ -185,6 +185,27 @@ const HomeNew = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
 
+        {/* Floating elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-float-slow -z-10" />
+        <div className="absolute top-40 right-20 w-24 h-24 bg-accent/10 rounded-full blur-xl animate-float-slower -z-10" />
+        <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-primary/5 rounded-full blur-3xl animate-float -z-10" />
+        <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-primary/15 rounded-full blur-xl animate-float-slow -z-10" />
+        <div className="absolute bottom-20 right-10 w-36 h-36 bg-accent/8 rounded-full blur-2xl animate-float-slower -z-10" />
+        
+        {/* Floating icons */}
+        <div className="absolute top-32 right-1/3 animate-float opacity-20 -z-10">
+          <Bot className="h-8 w-8 text-primary" />
+        </div>
+        <div className="absolute bottom-32 left-1/3 animate-float-slower opacity-20 -z-10">
+          <Zap className="h-10 w-10 text-accent" />
+        </div>
+        <div className="absolute top-1/2 left-10 animate-float-slow opacity-15 -z-10">
+          <MessageSquare className="h-6 w-6 text-primary" />
+        </div>
+        <div className="absolute bottom-1/3 right-20 animate-float opacity-15 -z-10">
+          <Shield className="h-7 w-7 text-primary" />
+        </div>
+
         <div className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Copy */}
