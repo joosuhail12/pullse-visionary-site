@@ -88,7 +88,7 @@ const Navigation = () => {
   }) => {
     const isOpen = openDropdown === title;
     return <div className="relative group" onMouseEnter={() => setOpenDropdown(title)} onMouseLeave={() => setOpenDropdown(null)}>
-        <button className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+        <button className="flex items-center gap-1 text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
           {title}
           <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
           {isOpen && <span className="absolute -bottom-0.5 left-2 right-2 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0"></span>}
@@ -96,7 +96,7 @@ const Navigation = () => {
         
         {isOpen && <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-2 animate-fade-in z-50 shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
-            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-sm text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
+            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-xs text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
           animationDelay: `${index * 30}ms`
         }}>
                 {link.name}
@@ -105,7 +105,7 @@ const Navigation = () => {
       </div>;
   };
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-3 px-4" : "pt-4 px-4"}`}>
-      <div className={`container mx-auto transition-all duration-500 ${isScrolled ? "backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10" : "backdrop-blur-xl bg-background/50 border border-white/5"} rounded-[1.25rem] px-5 py-3`}>
+      <div className={`max-w-7xl mx-auto transition-all duration-500 ${isScrolled ? "backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10" : "backdrop-blur-xl bg-background/50 border border-white/5"} rounded-[1.25rem] px-4 py-2.5`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -113,31 +113,31 @@ const Navigation = () => {
               <div className="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all duration-300"></div>
               <img src={logoIcon} alt="Pullse" className="h-9 w-9 relative transform group-hover:scale-110 transition-transform duration-300" />
             </div>
-            <img src={logoText} alt="Pullse" className="h-7 transform group-hover:scale-105 transition-transform duration-300" />
+            <img src={logoText} alt="Pullse" className="h-5 transform group-hover:scale-105 transition-transform duration-300" />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6 relative">
             <NavDropdown title="Product" links={productLinks} />
-            <Link to="/integrations" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link to="/integrations" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Integrations
             </Link>
             <NavDropdown title="Solutions" links={solutionsLinks} />
-            <Link to="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link to="/pricing" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Pricing
             </Link>
             <NavDropdown title="Resources" links={resourcesLinks} />
-            <Link to="/compare" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link to="/compare" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Compare
             </Link>
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-2.5">
-            <Button variant="ghost" asChild className="h-9 text-sm hover:scale-[1.02] transition-transform duration-300">
+            <Button variant="ghost" asChild className="h-8 text-xs hover:scale-[1.02] transition-transform duration-300">
               <Link to="/contact-sales">Sign In</Link>
             </Button>
-            <Button asChild className="h-9 text-sm bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40">
+            <Button asChild className="h-8 text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40">
               <Link to="/contact-sales">
                 <span className="relative z-10">Book a Demo</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/20 to-primary/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></span>
@@ -155,23 +155,23 @@ const Navigation = () => {
         {isMobileMenuOpen && <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
             <div className="relative flex flex-col gap-1">
-              <Link to="/product" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link to="/product" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Product
               </Link>
-              <Link to="/integrations" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link to="/integrations" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Integrations
               </Link>
-              <Link to="/solutions" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link to="/solutions" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Solutions
               </Link>
-              <Link to="/pricing" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link to="/pricing" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Pricing
               </Link>
-              <Link to="/resources" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link to="/resources" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Resources
               </Link>
               <div className="border-t border-white/10 my-2"></div>
-              <Button asChild className="w-full h-9 text-sm shadow-lg shadow-primary/25">
+              <Button asChild className="w-full h-8 text-xs shadow-lg shadow-primary/25">
                 <Link to="/contact-sales">Book a Demo</Link>
               </Button>
             </div>
