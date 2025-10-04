@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
 import NodeAnimation from "@/components/NodeAnimation";
+import PlatformOverview from "@/components/PlatformOverview";
 import HeroFloating3D from "@/components/HeroFloating3D";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -591,6 +592,9 @@ const HomeNew = () => {
           </div>
         </div>
       </section>
+
+      {/* Platform Overview - The whole desk in one view */}
+      <PlatformOverview />
 
       {/* Solutions - Split Box Design */}
       <section className="py-32 fade-in-scroll relative overflow-hidden">
