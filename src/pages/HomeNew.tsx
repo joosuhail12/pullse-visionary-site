@@ -10,16 +10,13 @@ import NodeAnimation from "@/components/NodeAnimation";
 import HeroFloating3D from "@/components/HeroFloating3D";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
-
 const HomeNew = () => {
   const [activeSolution, setActiveSolution] = useState("b2b-saas");
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     // Hero text animations with GSAP
     if (titleRef.current) {
@@ -31,7 +28,6 @@ const HomeNew = () => {
         ease: "power3.out"
       });
     }
-
     if (descRef.current) {
       gsap.from(descRef.current, {
         y: 30,
@@ -41,7 +37,6 @@ const HomeNew = () => {
         ease: "power3.out"
       });
     }
-
     if (buttonsRef.current) {
       gsap.from(buttonsRef.current.children, {
         scale: 0.8,
@@ -54,127 +49,113 @@ const HomeNew = () => {
     }
 
     // Animate elements on scroll
-    gsap.utils.toArray<HTMLElement>(".fade-in-scroll").forEach((elem) => {
+    gsap.utils.toArray<HTMLElement>(".fade-in-scroll").forEach(elem => {
       gsap.from(elem, {
         scrollTrigger: {
           trigger: elem,
-          start: "top 80%",
+          start: "top 80%"
         },
         y: 50,
         opacity: 0,
         duration: 0.8,
-        ease: "power3.out",
+        ease: "power3.out"
       });
     });
   }, []);
-
-  const taxonomy = [
-    {
-      title: "Helpdesk (Unified Inbox)",
-      desc: "One place for email & chat with SLAs, assignments, and full context.",
-    },
-    {
-      title: "Automations (Workflows)",
-      desc: "Visual routing, tagging, SLAs, escalations.",
-    },
-    {
-      title: "AI Suite — Chatbots & Copilot",
-      desc: "Deflect known intents; draft, summarize, translate.",
-    },
-    {
-      title: "AI Agents (actions)",
-      desc: "Refunds, plan changes, order status—with guardrails & audit trails.",
-    },
-    {
-      title: "Auto-QA",
-      desc: "Score 100% of conversations for accuracy, empathy, policy.",
-    },
-    {
-      title: "Analytics",
-      desc: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
-    },
-  ];
-
-  const featureBento = [
-    {
-      title: "Fewer back-and-forths",
-      desc: "First-contact resolutions rise; exceptions get clean handoffs.",
-      icon: MessageSquare,
-    },
-    {
-      title: "Faster agents",
-      desc: "Suggested replies, instant summaries, one-click follow-ups.",
-      icon: Zap,
-    },
-    {
-      title: "Consistency by default",
-      desc: "Workflows keep ops predictable; Auto-QA raises the floor.",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Outcomes you can prove",
-      desc: "Automation coverage, intent trends, and actioned vs. deflected in one view.",
-      icon: BarChart3,
-    },
-  ];
-
+  const taxonomy = [{
+    title: "Helpdesk (Unified Inbox)",
+    desc: "One place for email & chat with SLAs, assignments, and full context."
+  }, {
+    title: "Automations (Workflows)",
+    desc: "Visual routing, tagging, SLAs, escalations."
+  }, {
+    title: "AI Suite — Chatbots & Copilot",
+    desc: "Deflect known intents; draft, summarize, translate."
+  }, {
+    title: "AI Agents (actions)",
+    desc: "Refunds, plan changes, order status—with guardrails & audit trails."
+  }, {
+    title: "Auto-QA",
+    desc: "Score 100% of conversations for accuracy, empathy, policy."
+  }, {
+    title: "Analytics",
+    desc: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view."
+  }];
+  const featureBento = [{
+    title: "Fewer back-and-forths",
+    desc: "First-contact resolutions rise; exceptions get clean handoffs.",
+    icon: MessageSquare
+  }, {
+    title: "Faster agents",
+    desc: "Suggested replies, instant summaries, one-click follow-ups.",
+    icon: Zap
+  }, {
+    title: "Consistency by default",
+    desc: "Workflows keep ops predictable; Auto-QA raises the floor.",
+    icon: CheckCircle2
+  }, {
+    title: "Outcomes you can prove",
+    desc: "Automation coverage, intent trends, and actioned vs. deflected in one view.",
+    icon: BarChart3
+  }];
   const solutions = {
     "b2b-saas": {
       title: "B2B SaaS",
-      items: ["Plan changes & billing", "Provisioning/SSO", "Usage/quota tracking", "Incident comms"],
+      items: ["Plan changes & billing", "Provisioning/SSO", "Usage/quota tracking", "Incident comms"]
     },
     ecommerce: {
       title: "Ecommerce",
-      items: ["WISMO/status updates", "Returns & exchanges", "Refunds & loyalty", "Order tracking"],
+      items: ["WISMO/status updates", "Returns & exchanges", "Refunds & loyalty", "Order tracking"]
     },
     "head-of-support": {
       title: "Head of Support",
-      items: ["CSAT tracking", "First-contact resolution", "Average handle time", "Team performance"],
+      items: ["CSAT tracking", "First-contact resolution", "Average handle time", "Team performance"]
     },
     "ops-lead": {
       title: "Ops Lead",
-      items: ["Coverage by intent", "SLA compliance", "Automation metrics", "Workflow optimization"],
+      items: ["Coverage by intent", "SLA compliance", "Automation metrics", "Workflow optimization"]
     },
     "cto-ciso": {
       title: "CTO/CISO",
-      items: ["Security policies", "Audit trails", "Data handling", "Trust Center access"],
-    },
+      items: ["Security policies", "Audit trails", "Data handling", "Trust Center access"]
+    }
   };
-
-  const integrations = [
-    { name: "Stripe", capabilities: ["Read", "Write", "Actions"] },
-    { name: "Salesforce", capabilities: ["Read", "Write"] },
-    { name: "Shopify", capabilities: ["Read", "Write", "Actions"] },
-    { name: "HubSpot", capabilities: ["Read", "Write"] },
-    { name: "Zendesk", capabilities: ["Read"] },
-    { name: "Slack", capabilities: ["Read", "Write"] },
-  ];
-
-  const faqs = [
-    {
-      q: "Do we have to change our process?",
-      a: "No—Pullse connects to your stack and removes manual steps.",
-    },
-    {
-      q: "Who decides what gets automated?",
-      a: "You do. Agents act only within approved guardrails.",
-    },
-    {
-      q: "Are workflows writing to systems?",
-      a: "Workflows run ticket ops; AI Agents perform the account actions you authorize.",
-    },
-    {
-      q: "How fast to value?",
-      a: "Start with top intents, wire 2–3 systems, measure from week one.",
-    },
-    {
-      q: "Pricing?",
-      a: "One plan, all capabilities. Request pricing.",
-    },
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const integrations = [{
+    name: "Stripe",
+    capabilities: ["Read", "Write", "Actions"]
+  }, {
+    name: "Salesforce",
+    capabilities: ["Read", "Write"]
+  }, {
+    name: "Shopify",
+    capabilities: ["Read", "Write", "Actions"]
+  }, {
+    name: "HubSpot",
+    capabilities: ["Read", "Write"]
+  }, {
+    name: "Zendesk",
+    capabilities: ["Read"]
+  }, {
+    name: "Slack",
+    capabilities: ["Read", "Write"]
+  }];
+  const faqs = [{
+    q: "Do we have to change our process?",
+    a: "No—Pullse connects to your stack and removes manual steps."
+  }, {
+    q: "Who decides what gets automated?",
+    a: "You do. Agents act only within approved guardrails."
+  }, {
+    q: "Are workflows writing to systems?",
+    a: "Workflows run ticket ops; AI Agents perform the account actions you authorize."
+  }, {
+    q: "How fast to value?",
+    a: "Start with top intents, wire 2–3 systems, measure from week one."
+  }, {
+    q: "Pricing?",
+    a: "One plan, all capabilities. Request pricing."
+  }];
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section */}
@@ -194,10 +175,7 @@ const HomeNew = () => {
                 <span>Powered by AI Agents</span>
               </div>
 
-              <h1 
-                ref={titleRef}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
-              >
+              <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
                 <span className="word inline-block">AI</span>{" "}
                 <span className="word inline-block">support</span>{" "}
                 <span className="word inline-block">that</span>{" "}
@@ -214,22 +192,13 @@ const HomeNew = () => {
               </p>
 
               <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  size="lg" 
-                  className="text-lg px-8 py-6 glow group" 
-                  asChild
-                >
+                <Button size="lg" className="text-lg px-8 py-6 glow group" asChild>
                   <Link to="/contact-sales">
                     Book a demo
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="text-lg px-8 py-6 border-primary/20" 
-                  asChild
-                >
+                <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary/20" asChild>
                   <Link to="/pricing">
                     Request pricing
                   </Link>
@@ -237,19 +206,19 @@ const HomeNew = () => {
               </div>
 
               <div className="flex flex-wrap gap-6 pt-4">
-                {[
-                  { icon: CheckCircle2, text: "Founder-led onboarding" },
-                  { icon: CheckCircle2, text: "Design-partner seats open" },
-                  { icon: CheckCircle2, text: "Enterprise-grade controls" }
-                ].map((item, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
-                  >
+                {[{
+                icon: CheckCircle2,
+                text: "Founder-led onboarding"
+              }, {
+                icon: CheckCircle2,
+                text: "Design-partner seats open"
+              }, {
+                icon: CheckCircle2,
+                text: "Enterprise-grade controls"
+              }].map((item, index) => <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <item.icon className="h-4 w-4 text-primary" />
                     {item.text}
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -282,24 +251,11 @@ const HomeNew = () => {
       {/* Node Animation */}
       <section className="py-32 relative fade-in-scroll overflow-hidden">
         {/* Decorative background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent -z-10" />
+        
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl -z-10" />
         
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm mb-6">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-muted-foreground font-medium">Live Demo</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-              Watch Pullse in Action
-            </h2>
-            
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              See how conversations flow through our AI-powered platform in real-time
-            </p>
-          </div>
+          
           
           <div className="relative">
             {/* Glow effect behind animation */}
@@ -321,12 +277,10 @@ const HomeNew = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {taxonomy.map((item, index) => (
-              <div key={index} className="glass-strong p-6 rounded-xl hover:scale-105 transition-all">
+            {taxonomy.map((item, index) => <div key={index} className="glass-strong p-6 rounded-xl hover:scale-105 transition-all">
                 <h3 className="font-bold mb-2 text-primary">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -339,15 +293,13 @@ const HomeNew = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {featureBento.map((feature, index) => (
-              <div key={index} className="glass-strong p-8 rounded-2xl group hover:glow transition-all">
+            {featureBento.map((feature, index) => <div key={index} className="glass-strong p-8 rounded-2xl group hover:glow transition-all">
                 <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.desc}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -368,21 +320,17 @@ const HomeNew = () => {
               <TabsTrigger value="cto-ciso">CTO/CISO</TabsTrigger>
             </TabsList>
 
-            {Object.entries(solutions).map(([key, solution]) => (
-              <TabsContent key={key} value={key}>
+            {Object.entries(solutions).map(([key, solution]) => <TabsContent key={key} value={key}>
                 <div className="glass-strong p-8 rounded-2xl">
                   <h3 className="text-2xl font-bold mb-6">{solution.title}</h3>
                   <ul className="grid md:grid-cols-2 gap-4">
-                    {solution.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
+                    {solution.items.map((item, i) => <li key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
-              </TabsContent>
-            ))}
+              </TabsContent>)}
           </Tabs>
         </div>
       </section>
@@ -425,25 +373,14 @@ const HomeNew = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
-            {integrations.map((integration, index) => (
-              <div key={index} className="glass-strong p-6 rounded-xl text-center hover:scale-105 transition-all">
+            {integrations.map((integration, index) => <div key={index} className="glass-strong p-6 rounded-xl text-center hover:scale-105 transition-all">
                 <div className="font-bold mb-3">{integration.name}</div>
                 <div className="flex flex-wrap gap-1 justify-center">
-                  {integration.capabilities.map((cap) => (
-                    <span
-                      key={cap}
-                      className={`text-xs px-2 py-1 rounded ${
-                        cap === "Actions"
-                          ? "bg-primary/20 text-primary"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
+                  {integration.capabilities.map(cap => <span key={cap} className={`text-xs px-2 py-1 rounded ${cap === "Actions" ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}>
                       {cap}
-                    </span>
-                  ))}
+                    </span>)}
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -477,12 +414,10 @@ const HomeNew = () => {
           <div className="max-w-3xl mx-auto">
             <h3 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h3>
             <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <div key={index} className="glass-strong p-6 rounded-xl">
+              {faqs.map((faq, index) => <div key={index} className="glass-strong p-6 rounded-xl">
                   <h4 className="font-bold mb-2">{faq.q}</h4>
                   <p className="text-muted-foreground">{faq.a}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -514,8 +449,6 @@ const HomeNew = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default HomeNew;
