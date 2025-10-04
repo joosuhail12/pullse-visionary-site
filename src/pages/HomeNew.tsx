@@ -9,7 +9,6 @@ import VideoEmbed from "@/components/VideoEmbed";
 import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
 import HeroFloating3D from "@/components/HeroFloating3D";
-import antlerLogo from "@/assets/antler-logo.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -199,8 +198,8 @@ const HomeNew = () => {
             {/* Left - Copy */}
             <div className="z-10 space-y-8">
               <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
-                <span>Backed by</span>
-                <img src={antlerLogo} alt="Antler" className="h-4" />
+                <Sparkles className="h-4 w-4 text-accent-teal animate-pulse" />
+                <span>Powered by AI Agents</span>
               </div>
 
               <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
