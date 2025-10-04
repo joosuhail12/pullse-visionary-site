@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Shield, Users, Zap, BarChart3, Bot, MessageSquare, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,15 +6,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
-import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
-import HeroFloating3D from "@/components/HeroFloating3D";
 import MagicBento, { CardData } from "@/components/MagicBento";
-import LiquidEther from "@/components/LiquidEther";
 import antlerLogo from "@/assets/antler-logo.png";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+
+// Lazy load heavy animation components
+const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
+
+// Lazy load GSAP only when needed
+let gsap: any = null;
+let ScrollTrigger: any = null;
+
+const loadGSAP = async () => {
+  if (!gsap) {
+    const gsapModule = await import("gsap");
+    const scrollTriggerModule = await import("gsap/ScrollTrigger");
+    gsap = gsapModule.default;
+    ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+  }
+  return { gsap, ScrollTrigger };
+};
 const HomeNew = () => {
   const [activeSolution, setActiveSolution] = useState<"b2b-saas" | "ecommerce" | "edtech" | "fintech">("b2b-saas");
   const heroRef = useRef<HTMLDivElement>(null);
@@ -22,47 +35,51 @@ const HomeNew = () => {
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    // Hero text animations with GSAP
-    if (titleRef.current) {
-      gsap.from(titleRef.current.querySelectorAll('.word'), {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.out"
-      });
-    }
-    if (descRef.current) {
-      gsap.from(descRef.current, {
-        y: 30,
-        opacity: 0,
-        delay: 0.4,
-        duration: 1.2,
-        ease: "power3.out"
-      });
-    }
-    if (buttonsRef.current) {
-      gsap.from(buttonsRef.current.children, {
-        scale: 0.8,
-        opacity: 0,
-        delay: 0.6,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "back.out(1.7)"
-      });
-    }
+    // Load and initialize GSAP animations asynchronously
+    loadGSAP().then(({ gsap, ScrollTrigger }) => {
+      // Hero text animations with GSAP
+      if (titleRef.current) {
+        gsap.from(titleRef.current.querySelectorAll('.word'), {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power3.out"
+        });
+      }
+      if (descRef.current) {
+        gsap.from(descRef.current, {
+          y: 30,
+          opacity: 0,
+          delay: 0.4,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+      }
+      if (buttonsRef.current) {
+        gsap.from(buttonsRef.current.children, {
+          scale: 0.8,
+          opacity: 0,
+          delay: 0.6,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "back.out(1.7)"
+        });
+      }
 
-    // Animate elements on scroll
-    gsap.utils.toArray<HTMLElement>(".fade-in-scroll").forEach(elem => {
-      gsap.from(elem, {
-        scrollTrigger: {
-          trigger: elem,
-          start: "top 80%"
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out"
+      // Animate elements on scroll
+      const elements = gsap.utils.toArray(".fade-in-scroll") as HTMLElement[];
+      elements.forEach(elem => {
+        gsap.from(elem, {
+          scrollTrigger: {
+            trigger: elem,
+            start: "top 80%"
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out"
+        });
       });
     });
   }, []);
@@ -210,21 +227,23 @@ const HomeNew = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
         
-        {/* LiquidEther overlay */}
+        {/* LiquidEther overlay - lazy loaded */}
         <div className="absolute inset-0 -z-10 opacity-50">
-          <LiquidEther
-            colors={['#FF00C8', '#A805FF', '#D3A9EA']}
-            mouseForce={25}
-            cursorSize={120}
-            isViscous={false}
-            resolution={0.5}
-            autoDemo={true}
-            autoSpeed={0.3}
-            autoIntensity={1.8}
-            takeoverDuration={0.3}
-            autoResumeDelay={4000}
-            autoRampDuration={0.8}
-          />
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={['#FF00C8', '#A805FF', '#D3A9EA']}
+              mouseForce={25}
+              cursorSize={120}
+              isViscous={false}
+              resolution={0.5}
+              autoDemo={true}
+              autoSpeed={0.3}
+              autoIntensity={1.8}
+              takeoverDuration={0.3}
+              autoResumeDelay={4000}
+              autoRampDuration={0.8}
+            />
+          </Suspense>
         </div>
 
         <div className="container mx-auto px-4 py-20">
@@ -233,7 +252,7 @@ const HomeNew = () => {
             <div className="z-10 space-y-8">
               <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
                 <span>Backed by</span>
-                <img src={antlerLogo} alt="Antler" className="h-4" />
+                <img src={antlerLogo} alt="Antler" className="h-4" loading="eager" fetchPriority="high" />
               </div>
 
               <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
@@ -324,7 +343,9 @@ const HomeNew = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-accent-teal/20 via-primary/20 to-accent-orange/20 rounded-3xl blur-2xl -z-10" />
             
             <div className="glass-strong p-8 rounded-3xl">
-              <NodeAnimation />
+              <Suspense fallback={<div className="w-full h-[400px] animate-pulse bg-muted/20" />}>
+                <NodeAnimation />
+              </Suspense>
             </div>
           </div>
         </div>

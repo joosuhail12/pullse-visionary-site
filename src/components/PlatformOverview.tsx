@@ -36,12 +36,13 @@ const PlatformOverview = () => {
           {/* Screenshot */}
           <div className="relative group">
             <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
-              <img 
-                src={inboxScreenshot} 
-                alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
-                className="w-full h-auto" 
-                loading="lazy" 
-              />
+                  <img 
+                    src={inboxScreenshot} 
+                    alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
+                    className="w-full h-auto" 
+                    loading="lazy"
+                    decoding="async"
+                  />
 
               {/* Full-screen button overlay */}
               <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300">
