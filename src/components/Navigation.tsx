@@ -125,6 +125,8 @@ const Navigation = () => {
   const logoScale = 1 - (scrollProgress * 0.22); // Slightly less aggressive
   const textOpacity = 1 - scrollProgress;
   const gapValue = 6 - (scrollProgress * 3); // 6 to 3 (in units)
+  const bgOpacity = 0.5 + scrollProgress * 0.2; // 0.5 to 0.7
+  const borderOpacity = 0.05 + scrollProgress * 0.05; // 0.05 to 0.1
   
   return <nav className="fixed top-0 left-0 right-0 z-50" style={{ paddingTop: `${16 - scrollProgress * 8}px`, paddingLeft: '1rem', paddingRight: '1rem' }}>
       <div 
@@ -133,9 +135,9 @@ const Navigation = () => {
           transform: `scale(${navScale})`,
           transformOrigin: 'top center',
           transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s, box-shadow 0.3s',
-          backgroundColor: `rgba(var(--background-rgb, 0 0 0) / ${0.5 + scrollProgress * 0.2})`,
-          borderColor: `rgba(255 255 255 / ${0.05 + scrollProgress * 0.05})`,
-          boxShadow: scrollProgress > 0.5 ? '0 25px 50px -12px rgba(var(--primary-rgb, 168 5 255) / 0.1)' : 'none',
+          backgroundColor: `hsl(var(--background) / ${bgOpacity})`,
+          borderColor: `hsl(var(--border) / ${borderOpacity})`,
+          boxShadow: scrollProgress > 0.5 ? '0 25px 50px -12px hsl(var(--primary) / 0.1)' : 'none',
           paddingTop: `${10 + (1 - scrollProgress) * 4}px`,
           paddingBottom: `${6 + (1 - scrollProgress) * 4}px`,
           willChange: 'transform'
