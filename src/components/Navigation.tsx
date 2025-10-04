@@ -129,7 +129,9 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6 relative">
+          <div className={`hidden lg:flex items-center relative transition-all duration-700 ease-in-out ${
+            isScrolled ? 'gap-3' : 'gap-6'
+          }`}>
             <NavDropdown title="Product" links={productLinks} />
             <Link to="/integrations" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Integrations
