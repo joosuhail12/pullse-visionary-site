@@ -38,6 +38,14 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          teal: "hsl(var(--accent-teal))",
+          "teal-light": "hsl(var(--accent-teal-light))",
+          orange: "hsl(var(--accent-orange))",
+          "orange-light": "hsl(var(--accent-orange-light))",
+          green: "hsl(var(--accent-green))",
+          "green-light": "hsl(var(--accent-green-light))",
+          pink: "hsl(var(--accent-pink))",
+          "pink-light": "hsl(var(--accent-pink-light))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

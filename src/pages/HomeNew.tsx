@@ -197,7 +197,7 @@ const HomeNew = () => {
             {/* Left - Copy */}
             <div className="z-10 space-y-8">
               <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
-                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                <Sparkles className="h-4 w-4 text-accent-teal animate-pulse" />
                 <span>Powered by AI Agents</span>
               </div>
 
@@ -253,13 +253,13 @@ const HomeNew = () => {
               <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
               
               {/* Simple floating stats */}
-              <div className="absolute -top-4 -right-4 glass-strong p-4 rounded-xl shadow-xl">
-                <div className="text-2xl font-bold text-primary">87%</div>
+              <div className="absolute -top-4 -right-4 glass-strong p-4 rounded-xl shadow-xl border-l-2 border-accent-teal">
+                <div className="text-2xl font-bold text-accent-teal">87%</div>
                 <div className="text-xs text-muted-foreground">Automation</div>
               </div>
 
-              <div className="absolute -bottom-4 -left-4 glass-strong p-4 rounded-xl shadow-xl">
-                <div className="text-2xl font-bold text-primary">+42%</div>
+              <div className="absolute -bottom-4 -left-4 glass-strong p-4 rounded-xl shadow-xl border-l-2 border-accent-green">
+                <div className="text-2xl font-bold text-accent-green">+42%</div>
                 <div className="text-xs text-muted-foreground">FCR Rate</div>
               </div>
             </div>
@@ -276,16 +276,17 @@ const HomeNew = () => {
 
       {/* Node Animation */}
       <section className="py-32 relative fade-in-scroll overflow-hidden">
-        {/* Decorative background */}
+        {/* Decorative background with color variety */}
         
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
         
         <div className="container mx-auto px-4">
           
           
           <div className="relative">
             {/* Glow effect behind animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl blur-2xl -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-teal/20 via-primary/20 to-accent-orange/20 rounded-3xl blur-2xl -z-10" />
             
             <div className="glass-strong p-8 rounded-3xl">
               <NodeAnimation />
@@ -296,14 +297,14 @@ const HomeNew = () => {
 
       {/* Taxonomy */}
       <section className="min-h-screen flex items-center py-20 fade-in-scroll relative overflow-hidden">
-        {/* Background accents */}
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        {/* Background accents with variety */}
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-accent-green/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent-pink/5 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-              <span className="text-sm font-semibold text-primary">Complete Platform</span>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-teal-light to-primary/10 border border-accent-teal/20 backdrop-blur-sm mb-4">
+              <span className="text-sm font-semibold bg-gradient-to-r from-accent-teal to-primary bg-clip-text text-transparent">Complete Platform</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               What Pullse is
@@ -506,14 +507,14 @@ const HomeNew = () => {
 
       {/* Benefits Showcase */}
       <section className="py-32 fade-in-scroll relative overflow-hidden">
-        {/* Background gradient orbs */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+        {/* Background gradient orbs with variety */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-teal/10 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6">
-              <span className="text-sm font-semibold text-primary">Real Impact</span>
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-orange-light to-primary/10 border border-accent-orange/20 backdrop-blur-sm mb-6">
+              <span className="text-sm font-semibold bg-gradient-to-r from-accent-orange to-primary bg-clip-text text-transparent">Real Impact</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               Built for Results
@@ -540,12 +541,22 @@ const HomeNew = () => {
                       <div className="p-6 flex-1 flex flex-col">
                         {/* Icon & Metric Row */}
                         <div className="flex items-center justify-between mb-4">
-                          <div className="relative h-12 w-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                          <div className={`relative h-12 w-12 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
+                            index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
+                            index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
+                            index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
+                            'bg-gradient-to-br from-accent-pink to-primary'
+                          }`}>
                             <Icon className="h-6 w-6 text-white" />
                           </div>
                           
                           <div className="text-right">
-                            <div className="text-2xl font-black text-primary">
+                            <div className={`text-2xl font-black ${
+                              index === 0 ? 'text-accent-teal' :
+                              index === 1 ? 'text-accent-orange' :
+                              index === 2 ? 'text-accent-green' :
+                              'text-accent-pink'
+                            }`}>
                               {metrics[index]}
                             </div>
                             <div className="text-[10px] text-muted-foreground uppercase tracking-wide">
@@ -583,14 +594,14 @@ const HomeNew = () => {
 
       {/* Solutions - Split Box Design */}
       <section className="py-32 fade-in-scroll relative overflow-hidden">
-        {/* Animated background orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        {/* Animated background orbs with variety */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-orange/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm mb-4">
-              <span className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Built for Your Team</span>
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-green-light to-primary/10 border border-accent-green/20 backdrop-blur-sm mb-4">
+              <span className="text-sm font-semibold bg-gradient-to-r from-accent-green to-primary bg-clip-text text-transparent">Built for Your Team</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               Solutions that scale with you
@@ -740,8 +751,8 @@ const HomeNew = () => {
       <section className="py-20 fade-in-scroll relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-6">
-              <span className="text-sm font-semibold text-primary">Trusted Partners</span>
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-pink-light to-primary/10 border border-accent-pink/20 backdrop-blur-sm mb-6">
+              <span className="text-sm font-semibold bg-gradient-to-r from-accent-pink to-primary bg-clip-text text-transparent">Trusted Partners</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Integrates with your stack
@@ -817,13 +828,13 @@ const HomeNew = () => {
 
       {/* Final CTA - Hero Style */}
       <section className="py-32 fade-in-scroll relative overflow-hidden">
-        {/* Dramatic background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20" />
+        {/* Dramatic background with color variety */}
+        <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/20 via-primary/20 to-accent-orange/20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_100%)]" />
         
-        {/* Animated orbs */}
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        {/* Animated orbs with variety */}
+        <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent-teal/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent-orange/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -837,9 +848,9 @@ const HomeNew = () => {
               
               <div className="relative glass-strong rounded-3xl p-12 md:p-16 text-center">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 backdrop-blur-sm mb-8">
-                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                  <span className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-accent-orange-light to-accent-teal-light border border-accent-orange/30 backdrop-blur-sm mb-8">
+                  <Sparkles className="h-4 w-4 text-accent-orange animate-pulse" />
+                  <span className="text-sm font-semibold bg-gradient-to-r from-accent-orange to-accent-teal bg-clip-text text-transparent">
                     Limited Design Partner Spots Available
                   </span>
                 </div>
@@ -883,7 +894,7 @@ const HomeNew = () => {
                 {/* Social Proof */}
                 <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-primary/10">
                   <div className="space-y-2">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-accent-teal to-primary bg-clip-text text-transparent">
                       87%
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -891,7 +902,7 @@ const HomeNew = () => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-accent-orange to-primary bg-clip-text text-transparent">
                       &lt;2 weeks
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -899,7 +910,7 @@ const HomeNew = () => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-accent-green to-primary bg-clip-text text-transparent">
                       24/7
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -913,16 +924,19 @@ const HomeNew = () => {
             {/* Floating trust indicators */}
             <div className="grid md:grid-cols-3 gap-4 mt-8">
               {[
-                { icon: Shield, text: "Enterprise-grade security" },
-                { icon: Zap, text: "Deploy in days, not quarters" },
-                { icon: CheckCircle2, text: "Cancel anytime" }
+                { icon: Shield, text: "Enterprise-grade security", color: "accent-teal" },
+                { icon: Zap, text: "Deploy in days, not quarters", color: "accent-orange" },
+                { icon: CheckCircle2, text: "Cancel anytime", color: "accent-green" }
               ].map((item, i) => (
                 <div 
                   key={i}
-                  className="glass-strong p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform"
-                  style={{ animationDelay: `${i * 100}ms` }}
+                  className="glass-strong p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform border-l-2"
+                  style={{ 
+                    animationDelay: `${i * 100}ms`,
+                    borderLeftColor: `hsl(var(--${item.color}))`
+                  }}
                 >
-                  <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
+                  <div className={`h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-${item.color} to-primary`}>
                     <item.icon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-sm font-medium">{item.text}</span>
