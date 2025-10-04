@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Shield, Users, Zap, BarChart3, Bot, MessageSquare } from "lucide-react";
+import { ArrowRight, CheckCircle2, Shield, Users, Zap, BarChart3, Bot, MessageSquare, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
 import NodeAnimation from "@/components/NodeAnimation";
+import HeroScene3D from "@/components/HeroScene3D";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,8 +15,44 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HomeNew = () => {
   const [activeSolution, setActiveSolution] = useState("b2b-saas");
+  const heroRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Hero text animations with GSAP
+    if (titleRef.current) {
+      gsap.from(titleRef.current.querySelectorAll('.word'), {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out"
+      });
+    }
+
+    if (descRef.current) {
+      gsap.from(descRef.current, {
+        y: 30,
+        opacity: 0,
+        delay: 0.4,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+    }
+
+    if (buttonsRef.current) {
+      gsap.from(buttonsRef.current.children, {
+        scale: 0.8,
+        opacity: 0,
+        delay: 0.6,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
+      });
+    }
+
     // Animate elements on scroll
     gsap.utils.toArray<HTMLElement>(".fade-in-scroll").forEach((elem) => {
       gsap.from(elem, {
@@ -141,50 +178,130 @@ const HomeNew = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-10" />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10" />
+
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Copy */}
-            <div className="fade-in-scroll">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                AI support that doesn't just reply — <span className="text-primary">it acts.</span>
+            <div className="z-10 space-y-8">
+              <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
+                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                <span>Powered by AI Agents</span>
+              </div>
+
+              <h1 
+                ref={titleRef}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+              >
+                <span className="word inline-block">AI</span>{" "}
+                <span className="word inline-block">support</span>{" "}
+                <span className="word inline-block">that</span>{" "}
+                <span className="word inline-block">doesn't</span>{" "}
+                <span className="word inline-block">just</span>{" "}
+                <span className="word inline-block">reply</span>{" "}
+                <span className="word inline-block">—</span>{" "}
+                <span className="word inline-block text-primary glow-text">it</span>{" "}
+                <span className="word inline-block text-primary glow-text">acts.</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+
+              <p ref={descRef} className="text-xl text-muted-foreground leading-relaxed">
                 Endless tickets, manual work, disconnected tools? Pullse unifies every message, automates the busywork, and lets AI answer and take real actions—while your team stays in control.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button size="lg" className="text-lg px-8 py-6 glow" asChild>
+              <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8 py-6 glow group relative overflow-hidden" 
+                  asChild
+                >
                   <Link to="/contact-sales">
-                    Book a demo
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <span className="relative z-10 flex items-center">
+                      Book a demo
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
-                  <Link to="/pricing">Request pricing</Link>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-lg px-8 py-6 group border-primary/20 hover:border-primary/50" 
+                  asChild
+                >
+                  <Link to="/pricing">
+                    <span className="flex items-center">
+                      Request pricing
+                      <Sparkles className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </span>
+                  </Link>
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  Founder-led onboarding
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  Design-partner seats open
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  Enterprise-grade controls
-                </div>
+              <div className="flex flex-wrap gap-6 pt-4">
+                {[
+                  { icon: CheckCircle2, text: "Founder-led onboarding" },
+                  { icon: CheckCircle2, text: "Design-partner seats open" },
+                  { icon: CheckCircle2, text: "Enterprise-grade controls" }
+                ].map((item, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group cursor-default"
+                  >
+                    <item.icon className="h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
+                    {item.text}
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right - Video */}
-            <div className="fade-in-scroll">
-              <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
+            {/* Right - 3D Scene */}
+            <div className="relative h-[600px] lg:h-[700px]">
+              {/* 3D Canvas */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                <HeroScene3D />
+              </div>
+
+              {/* Floating stats cards */}
+              <div className="absolute top-10 right-10 glass-strong p-4 rounded-2xl animate-float shadow-2xl">
+                <div className="text-3xl font-bold text-primary">87%</div>
+                <div className="text-xs text-muted-foreground">Automation</div>
+              </div>
+
+              <div className="absolute bottom-10 left-10 glass-strong p-4 rounded-2xl animate-float shadow-2xl" style={{ animationDelay: '1s' }}>
+                <div className="text-3xl font-bold text-primary">-35%</div>
+                <div className="text-xs text-muted-foreground">Handle Time</div>
+              </div>
+
+              <div className="absolute top-1/2 left-0 glass-strong p-4 rounded-2xl animate-float shadow-2xl" style={{ animationDelay: '2s' }}>
+                <div className="text-3xl font-bold text-primary">+42%</div>
+                <div className="text-xs text-muted-foreground">FCR</div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-primary rounded-full animate-pulse" />
+          </div>
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="py-20 relative fade-in-scroll">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">See Pullse in Action</h2>
+            <p className="text-xl text-muted-foreground">Watch how AI transforms customer support</p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <VideoEmbed videoId="NItSkrvcS04" title="Pullse Product Demo" />
           </div>
         </div>
       </section>
