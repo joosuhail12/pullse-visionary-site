@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import GlassSurface from "@/components/GlassSurface";
 import logoIcon from "@/assets/logo-icon-purple.png";
 import logoText from "@/assets/logo-text-navy.png";
 const Navigation = () => {
@@ -105,7 +106,17 @@ const Navigation = () => {
       </div>;
   };
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-3 px-4" : "pt-4 px-4"}`}>
-      <div className={`max-w-7xl mx-auto transition-all duration-500 ${isScrolled ? "backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10" : "backdrop-blur-xl bg-background/50 border border-white/5"} rounded-[1.25rem] px-4 py-2.5`}>
+      <GlassSurface 
+        width="100%" 
+        height="auto"
+        borderRadius={20}
+        className="max-w-7xl mx-auto"
+        backgroundOpacity={0.1}
+        saturation={1.2}
+        brightness={isScrolled ? 55 : 50}
+        opacity={isScrolled ? 0.95 : 0.9}
+      >
+        <div className="w-full px-4 py-2.5">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -176,7 +187,8 @@ const Navigation = () => {
               </Button>
             </div>
           </div>}
-      </div>
+        </div>
+      </GlassSurface>
     </nav>;
 };
 export default Navigation;
