@@ -95,9 +95,9 @@ const Navigation = () => {
           {isOpen && <span className="absolute -bottom-0.5 left-2 right-2 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0"></span>}
         </button>
         
-        {isOpen && <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-2 animate-fade-in z-50 shadow-2xl shadow-black/20">
-            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
-            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-xs text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
+        {isOpen && <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/98 border border-white/20 rounded-xl p-2 animate-fade-in z-[100] shadow-2xl shadow-black/40">
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-xl pointer-events-none"></div>
+            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-xs text-foreground/90 hover:text-foreground hover:bg-primary/15 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
           animationDelay: `${index * 30}ms`
         }}>
                 {link.name}
@@ -111,10 +111,10 @@ const Navigation = () => {
         height="auto"
         borderRadius={20}
         className="max-w-7xl mx-auto"
-        backgroundOpacity={0.1}
-        saturation={1.2}
-        brightness={isScrolled ? 55 : 50}
-        opacity={isScrolled ? 0.95 : 0.9}
+        backgroundOpacity={0.3}
+        saturation={1.3}
+        brightness={isScrolled ? 60 : 55}
+        opacity={0.98}
       >
         <div className="w-full px-4 py-2.5">
         <div className="flex items-center justify-between">
@@ -163,8 +163,8 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/20">
-            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
+        {isMobileMenuOpen && <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/98 border border-white/20 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/40 z-[100]">
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-xl pointer-events-none"></div>
             <div className="relative flex flex-col gap-1">
               <Link to="/product" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Product
