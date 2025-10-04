@@ -280,13 +280,35 @@ const HomeNew = () => {
       </section>
 
       {/* Node Animation */}
-      <section className="py-20 relative fade-in-scroll">
+      <section className="py-32 relative fade-in-scroll overflow-hidden">
+        {/* Decorative background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl -z-10" />
+        
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold mb-4">Watch Pullse in Action</h2>
-            <p className="text-xl text-muted-foreground">See how conversations flow through our AI-powered platform</p>
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm mb-6">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-muted-foreground font-medium">Live Demo</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+              Watch Pullse in Action
+            </h2>
+            
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              See how conversations flow through our AI-powered platform in real-time
+            </p>
           </div>
-          <NodeAnimation />
+          
+          <div className="relative">
+            {/* Glow effect behind animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl blur-2xl -z-10" />
+            
+            <div className="glass-strong p-8 rounded-3xl">
+              <NodeAnimation />
+            </div>
+          </div>
         </div>
       </section>
 
