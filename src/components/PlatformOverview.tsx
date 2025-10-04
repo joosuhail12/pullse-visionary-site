@@ -169,14 +169,10 @@ const PlatformOverview = () => {
           {/* Footer CTA */}
           <div className="mt-8 text-center">
             <p className="text-sm text-muted-foreground">
-              Prefer a guided tour?{" "}
-              <button onClick={() => {
-              // This would open your video modal - for now just a placeholder
-              window.open('https://youtube.com', '_blank');
-            }} className="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
-                <Play className="h-4 w-4" />
-                Watch the 1:11 demo
-              </button>
+              Want to see it in action?{" "}
+              <a href="/contact-sales" className="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
+                Book a demo
+              </a>
             </p>
           </div>
         </div>
