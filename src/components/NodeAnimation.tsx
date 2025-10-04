@@ -45,11 +45,15 @@ const ParticleField = () => {
 const BlackArrowPath = ({
   start,
   end,
-  controlOffset = [0, 0, -1.5]
+  controlOffset = [0, 0, -1.5],
+  startEmoji,
+  endEmoji
 }: {
   start: [number, number, number];
   end: [number, number, number];
   controlOffset?: [number, number, number];
+  startEmoji?: string;
+  endEmoji?: string;
 }) => {
   const points = useMemo(() => {
     const startVec = new THREE.Vector3(...start);
@@ -82,6 +86,22 @@ const BlackArrowPath = ({
         opacity={0.8}
       />
       
+      {/* Start emoji/icon */}
+      {startEmoji && (
+        <Html 
+          position={[points[0].x, points[0].y, points[0].z]} 
+          center 
+          distanceFactor={10}
+        >
+          <div style={{ 
+            fontSize: '28px',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+          }}>
+            {startEmoji}
+          </div>
+        </Html>
+      )}
+      
       {/* Arrow head */}
       <Html 
         position={[arrowTip.x, arrowTip.y, arrowTip.z]} 
@@ -97,6 +117,23 @@ const BlackArrowPath = ({
           ➤
         </div>
       </Html>
+      
+      {/* End emoji */}
+      {endEmoji && (
+        <Html 
+          position={[arrowTip.x, arrowTip.y, arrowTip.z]} 
+          center 
+          distanceFactor={10}
+        >
+          <div style={{ 
+            fontSize: '28px',
+            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+            marginLeft: '30px'
+          }}>
+            {endEmoji}
+          </div>
+        </Html>
+      )}
     </group>
   );
 };
@@ -1362,58 +1399,58 @@ const Scene = () => {
       <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
       {/* Multiple curved black arrow paths flowing into center - inspired by reference */}
-      {/* Top group */}
-      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} />
-      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} />
-      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} />
+      {/* Top group - with problem emojis */}
+      <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startEmoji="😤" />
+      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startEmoji="😰" />
+      <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startEmoji="😩" />
       
       {/* Middle-top group */}
-      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} />
-      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} />
+      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startEmoji="😣" />
+      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startEmoji="😖" />
       
       {/* Center group */}
-      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} />
-      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} />
+      <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startEmoji="😫" />
+      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startEmoji="😟" />
       
       {/* Middle-bottom group */}
-      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} />
-      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} />
+      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startEmoji="😕" />
+      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startEmoji="😔" />
       
       {/* Bottom group */}
-      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} />
-      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} />
-      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} />
+      <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startEmoji="😞" />
+      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startEmoji="😢" />
+      <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startEmoji="😠" />
       
       {/* Additional varied curves for richness */}
-      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} />
-      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} />
+      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startEmoji="😵" />
+      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startEmoji="😖" />
       
-      {/* Curved black arrows from center to outcome emojis on the right */}
+      {/* Curved black arrows from center to outcome emojis on the right - with happy emojis */}
       {/* Upper outcomes */}
-      <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} />
-      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} />
-      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} />
+      <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} endEmoji="😊" />
+      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} endEmoji="😄" />
+      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} endEmoji="🥰" />
       
       {/* Middle-upper outcomes */}
-      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} />
-      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} />
+      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} endEmoji="😍" />
+      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} endEmoji="🤗" />
       
       {/* Center outcomes */}
-      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} />
-      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} />
+      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} endEmoji="😁" />
+      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} endEmoji="🙂" />
       
       {/* Middle-lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} />
-      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} />
+      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} endEmoji="😌" />
+      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} endEmoji="☺️" />
       
       {/* Lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} />
-      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} />
-      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} />
+      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} endEmoji="🤩" />
+      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} endEmoji="😃" />
+      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} endEmoji="😇" />
       
       {/* Additional varied curves */}
-      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} />
-      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} />
+      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} endEmoji="🥳" />
+      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} endEmoji="😊" />
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
