@@ -4,13 +4,11 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoIcon from "@/assets/logo-icon-purple.png";
 import logoText from "@/assets/logo-text-navy.png";
-
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -18,88 +16,96 @@ const Navigation = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const productLinks = [
-    { name: "Overview", path: "/product" },
-    { name: "Inbox & Channels", path: "/product/inbox-channels" },
-    { name: "Workflows & Routing", path: "/product/workflows-routing" },
-    { name: "AI Suite", path: "/product/ai-suite" },
-    { name: "AI Engine", path: "/product/ai-engine" },
-    { name: "Analytics", path: "/product/analytics" },
-    { name: "Auto-QA", path: "/product/auto-qa" },
-    { name: "Knowledge Bases", path: "/product/knowledge-bases" },
-  ];
-
-  const solutionsLinks = [
-    { name: "Solutions Hub", path: "/solutions" },
-    { name: "For B2B SaaS", path: "/solutions/b2b-saas" },
-    { name: "For Ecommerce", path: "/solutions/ecommerce" },
-  ];
-
-  const resourcesLinks = [
-    { name: "Resources Hub", path: "/resources" },
-    { name: "Documentation", path: "/docs" },
-    { name: "Product Tour", path: "/product-tour" },
-    { name: "Changelog", path: "/changelog" },
-    { name: "Roadmap", path: "/roadmap" },
-    { name: "Blog", path: "/blog" },
-    { name: "Webinars", path: "/webinars" },
-    { name: "Status", path: "/status" },
-  ];
-
-  const NavDropdown = ({ 
-    title, 
-    links 
-  }: { 
-    title: string; 
-    links: { name: string; path: string }[] 
+  const productLinks = [{
+    name: "Overview",
+    path: "/product"
+  }, {
+    name: "Inbox & Channels",
+    path: "/product/inbox-channels"
+  }, {
+    name: "Workflows & Routing",
+    path: "/product/workflows-routing"
+  }, {
+    name: "AI Suite",
+    path: "/product/ai-suite"
+  }, {
+    name: "AI Engine",
+    path: "/product/ai-engine"
+  }, {
+    name: "Analytics",
+    path: "/product/analytics"
+  }, {
+    name: "Auto-QA",
+    path: "/product/auto-qa"
+  }, {
+    name: "Knowledge Bases",
+    path: "/product/knowledge-bases"
+  }];
+  const solutionsLinks = [{
+    name: "Solutions Hub",
+    path: "/solutions"
+  }, {
+    name: "For B2B SaaS",
+    path: "/solutions/b2b-saas"
+  }, {
+    name: "For Ecommerce",
+    path: "/solutions/ecommerce"
+  }];
+  const resourcesLinks = [{
+    name: "Resources Hub",
+    path: "/resources"
+  }, {
+    name: "Documentation",
+    path: "/docs"
+  }, {
+    name: "Product Tour",
+    path: "/product-tour"
+  }, {
+    name: "Changelog",
+    path: "/changelog"
+  }, {
+    name: "Roadmap",
+    path: "/roadmap"
+  }, {
+    name: "Blog",
+    path: "/blog"
+  }, {
+    name: "Webinars",
+    path: "/webinars"
+  }, {
+    name: "Status",
+    path: "/status"
+  }];
+  const NavDropdown = ({
+    title,
+    links
+  }: {
+    title: string;
+    links: {
+      name: string;
+      path: string;
+    }[];
   }) => {
     const isOpen = openDropdown === title;
-    
-    return (
-      <div
-        className="relative group"
-        onMouseEnter={() => setOpenDropdown(title)}
-        onMouseLeave={() => setOpenDropdown(null)}
-      >
+    return <div className="relative group" onMouseEnter={() => setOpenDropdown(title)} onMouseLeave={() => setOpenDropdown(null)}>
         <button className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
           {title}
           <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-          {isOpen && (
-            <span className="absolute -bottom-0.5 left-2 right-2 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0"></span>
-          )}
+          {isOpen && <span className="absolute -bottom-0.5 left-2 right-2 h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0"></span>}
         </button>
         
-        {isOpen && (
-          <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-2 animate-fade-in z-50 shadow-2xl shadow-black/20">
+        {isOpen && <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-2 animate-fade-in z-50 shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
-            {links.map((link, index) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="relative block px-3.5 py-2.5 text-sm text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5"
-                style={{ animationDelay: `${index * 30}ms` }}
-              >
+            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-sm text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
+          animationDelay: `${index * 30}ms`
+        }}>
                 {link.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    );
+              </Link>)}
+          </div>}
+      </div>;
   };
-
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isScrolled ? "pt-3 px-4" : "pt-4 px-4"
-      }`}
-    >
-      <div className={`container mx-auto transition-all duration-500 ${
-        isScrolled 
-          ? "backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10" 
-          : "backdrop-blur-xl bg-background/50 border border-white/5"
-      } rounded-[1.25rem] px-5 py-3`}>
+  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-3 px-4" : "pt-4 px-4"}`}>
+      <div className={`container mx-auto transition-all duration-500 ${isScrolled ? "backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10" : "backdrop-blur-xl bg-background/50 border border-white/5"} rounded-[1.25rem] px-5 py-3`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -113,24 +119,15 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6 relative">
             <NavDropdown title="Product" links={productLinks} />
-            <Link
-              to="/integrations"
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5"
-            >
+            <Link to="/integrations" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Integrations
             </Link>
             <NavDropdown title="Solutions" links={solutionsLinks} />
-            <Link
-              to="/pricing"
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5"
-            >
+            <Link to="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Pricing
             </Link>
             <NavDropdown title="Resources" links={resourcesLinks} />
-            <Link
-              to="/compare"
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5"
-            >
+            <Link to="/compare" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Compare
             </Link>
           </div>
@@ -138,7 +135,7 @@ const Navigation = () => {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-2.5">
             <Button variant="ghost" asChild className="h-9 text-sm hover:scale-[1.02] transition-transform duration-300">
-              <Link to="/contact-sales">Contact Sales</Link>
+              <Link to="/contact-sales">Sign In</Link>
             </Button>
             <Button asChild className="h-9 text-sm bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40">
               <Link to="/contact-sales">
@@ -149,51 +146,28 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden relative group/menu p-1.5 hover:bg-primary/10 rounded-lg transition-all duration-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5 transition-transform duration-300 rotate-90" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+          <button className="lg:hidden relative group/menu p-1.5 hover:bg-primary/10 rounded-lg transition-all duration-300" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="h-5 w-5 transition-transform duration-300 rotate-90" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/20">
+        {isMobileMenuOpen && <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
             <div className="relative flex flex-col gap-1">
-              <Link
-                to="/product"
-                className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200"
-              >
+              <Link to="/product" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Product
               </Link>
-              <Link
-                to="/integrations"
-                className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200"
-              >
+              <Link to="/integrations" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Integrations
               </Link>
-              <Link
-                to="/solutions"
-                className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200"
-              >
+              <Link to="/solutions" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Solutions
               </Link>
-              <Link
-                to="/pricing"
-                className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200"
-              >
+              <Link to="/pricing" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Pricing
               </Link>
-              <Link
-                to="/resources"
-                className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200"
-              >
+              <Link to="/resources" className="px-3.5 py-2.5 text-sm hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Resources
               </Link>
               <div className="border-t border-white/10 my-2"></div>
@@ -201,11 +175,8 @@ const Navigation = () => {
                 <Link to="/contact-sales">Book a Demo</Link>
               </Button>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </nav>
-  );
+    </nav>;
 };
-
 export default Navigation;
