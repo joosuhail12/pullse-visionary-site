@@ -104,8 +104,8 @@ const Navigation = () => {
           </div>}
       </div>;
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`}>
-      <div className={`mx-auto transition-all duration-500 ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"} rounded-[1.25rem] px-4`}>
+  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled ? "pt-2 px-4" : "pt-4 px-4"}`}>
+      <div className={`mx-auto transition-all duration-700 ease-in-out ${isScrolled ? "w-[75%] max-w-[960px] backdrop-blur-2xl bg-background/70 border border-white/10 shadow-2xl shadow-primary/10 py-1.5" : "max-w-7xl backdrop-blur-xl bg-background/50 border border-white/5 py-2.5"} rounded-[1.25rem] px-4`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -114,7 +114,7 @@ const Navigation = () => {
               <img 
                 src={logoIcon} 
                 alt="Pullse" 
-                className={`relative transform group-hover:scale-110 transition-all duration-500 ${
+                className={`relative transform group-hover:scale-110 transition-all duration-700 ease-in-out ${
                   isScrolled ? 'h-7 w-7' : 'h-9 w-9'
                 }`} 
               />
@@ -122,7 +122,7 @@ const Navigation = () => {
             <img 
               src={logoText} 
               alt="Pullse" 
-              className={`transform group-hover:scale-105 transition-all duration-500 ${
+              className={`transform group-hover:scale-105 transition-all duration-700 ease-in-out ${
                 isScrolled ? 'h-0 w-0 opacity-0' : 'h-5 opacity-100'
               }`} 
             />
@@ -146,7 +146,7 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-2.5">
-            <Button asChild className={`text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-500 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 ${
+            <Button asChild className={`text-xs bg-primary hover:bg-primary/90 relative overflow-hidden group/btn hover:scale-[1.02] transition-all duration-700 ease-in-out shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 ${
               isScrolled ? 'h-7 px-3' : 'h-8 px-4'
             }`}>
               <Link to="/contact-sales">
