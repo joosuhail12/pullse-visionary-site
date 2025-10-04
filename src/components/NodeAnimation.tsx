@@ -90,13 +90,32 @@ const BlackArrowPath = ({
         uniform float time;
         varying vec2 vUv;
         void main() {
-          float flow = fract(vUv.x - time * 0.2);
-          float dash = step(0.5, fract(vUv.x * 8.0 - time * 2.0));
-          float alpha = dash * 0.8;
-          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
+          // Smooth flowing animation
+          float flow = fract(vUv.x - time * 0.3);
+          
+          // Create gradient-based dashes with smooth transitions
+          float dash = fract(vUv.x * 12.0 - time * 3.0);
+          float dashPattern = smoothstep(0.3, 0.5, dash) * smoothstep(0.7, 0.5, dash);
+          
+          // Add glow effect
+          float glow = smoothstep(0.0, 0.3, flow) * smoothstep(1.0, 0.7, flow);
+          
+          // Purple/Navy gradient colors (hsl(262 83% 58%) and hsl(220 70% 60%))
+          vec3 colorPurple = vec3(0.62, 0.35, 0.85);
+          vec3 colorNavy = vec3(0.35, 0.55, 0.85);
+          vec3 color = mix(colorPurple, colorNavy, flow);
+          
+          // Combine effects with enhanced alpha
+          float alpha = dashPattern * (0.8 + glow * 0.6);
+          
+          // Add extra brightness to flowing particles
+          vec3 finalColor = color * (1.0 + glow * 1.5);
+          
+          gl_FragColor = vec4(finalColor, alpha);
         }
       `,
-      transparent: true
+      transparent: true,
+      blending: THREE.AdditiveBlending
     });
   }, []);
 
@@ -105,13 +124,19 @@ const BlackArrowPath = ({
   const arrowBase = points[points.length - 5];
   const arrowAngle = Math.atan2(arrowTip.y - arrowBase.y, arrowTip.x - arrowBase.x);
   return <group>
-      {/* Main curved line */}
-      <Line points={points} color="#000000" lineWidth={4} transparent opacity={0.6} />
+      {/* Main curved line with gradient */}
+      <Line points={points} color="#7c3aed" lineWidth={5} transparent opacity={0.4} />
       
-      {/* Animated flow tube */}
+      {/* Animated flow tube with enhanced size */}
       <mesh>
-        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.08, 8, false]} />
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.12, 8, false]} />
         <shaderMaterial ref={materialRef} attach="material" {...shaderMaterial} />
+      </mesh>
+      
+      {/* Outer glow tube */}
+      <mesh>
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.18, 8, false]} />
+        <meshBasicMaterial color="#7c3aed" transparent opacity={0.15} />
       </mesh>
       
       {/* Start question pill */}
