@@ -549,6 +549,15 @@ const MagicBento = ({
                 <div className="card__content">
                   <h2 className="card__title">{card.title}</h2>
                   <p className="card__description">{card.description}</p>
+                  
+                  <div className="card__screenshot">
+                    <div className="card__screenshot-placeholder">
+                      <div className="card__screenshot-icon">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="card__screenshot-text">{card.title} Preview</div>
+                    </div>
+                  </div>
                 </div>
               </ParticleCard>
             );
@@ -565,6 +574,15 @@ const MagicBento = ({
               <div className="card__content">
                 <h2 className="card__title">{card.title}</h2>
                 <p className="card__description">{card.description}</p>
+                
+                <div className="card__screenshot">
+                  <div className="card__screenshot-placeholder">
+                    <div className="card__screenshot-icon">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <div className="card__screenshot-text">{card.title} Preview</div>
+                  </div>
+                </div>
               </div>
             </div>
           );
