@@ -507,56 +507,71 @@ const HomeNew = () => {
             </p>
           </div>
 
-          {/* Benefits Grid */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {/* Benefits Grid - Modern Design */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {featureBento.map((feature, index) => {
               const Icon = feature.icon;
-              const isEven = index % 2 === 0;
+              const colors = [
+                { bg: 'from-violet-500/10 to-purple-500/10', icon: 'bg-violet-500', text: 'text-violet-500' },
+                { bg: 'from-blue-500/10 to-cyan-500/10', icon: 'bg-blue-500', text: 'text-blue-500' },
+                { bg: 'from-emerald-500/10 to-green-500/10', icon: 'bg-emerald-500', text: 'text-emerald-500' },
+                { bg: 'from-orange-500/10 to-amber-500/10', icon: 'bg-orange-500', text: 'text-orange-500' }
+              ];
+              const color = colors[index % colors.length];
+              const metrics = ['45%', '3.2x', '92%', '68%'];
               
               return (
                 <div 
                   key={index}
-                  className="glass-strong rounded-3xl border border-primary/10 group hover:border-primary/30 transition-all duration-500 hover:glow relative overflow-hidden"
-                  style={{
-                    animationDelay: `${index * 100}ms`
-                  }}
+                  className="group relative"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Animated gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${isEven ? 'from-primary/5 via-transparent to-accent/5' : 'from-accent/5 via-transparent to-primary/5'} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                  
-                  <div className="relative z-10 p-8">
-                    <div className="flex items-start gap-6 mb-6">
-                      <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${isEven ? 'from-primary to-primary/50' : 'from-accent to-accent/50'} flex items-center justify-center shadow-lg ${isEven ? 'shadow-primary/25' : 'shadow-accent/25'} group-hover:scale-110 transition-transform flex-shrink-0`}>
-                        <Icon className="h-8 w-8 text-primary-foreground" />
-                      </div>
+                  {/* Main card with border gradient effect */}
+                  <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-primary/20 via-transparent to-accent/20 hover:from-primary/40 hover:to-accent/40 transition-all duration-500">
+                    <div className="relative rounded-2xl bg-background/95 backdrop-blur-xl overflow-hidden">
+                      {/* Top accent bar */}
+                      <div className={`h-1 w-full bg-gradient-to-r ${color.bg}`} />
                       
-                      <div className="flex-1">
-                        <h3 className={`text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r ${isEven ? 'from-primary to-accent' : 'from-accent to-primary'} bg-clip-text text-transparent`}>
+                      <div className="p-8">
+                        {/* Icon & Metric Row */}
+                        <div className="flex items-center justify-between mb-6">
+                          <div className={`relative h-14 w-14 rounded-xl ${color.icon} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                            <Icon className="h-7 w-7 text-white" />
+                            <div className={`absolute inset-0 rounded-xl ${color.icon} blur-xl opacity-50 group-hover:opacity-75 transition-opacity`} />
+                          </div>
+                          
+                          <div className="text-right">
+                            <div className={`text-3xl font-black ${color.text} mb-1`}>
+                              {metrics[index]}
+                            </div>
+                            <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                              Improvement
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Title */}
+                        <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
                           {feature.title}
                         </h3>
-                      </div>
-                    </div>
-                    
-                    <p className="text-muted-foreground leading-relaxed text-lg">
-                      {feature.desc}
-                    </p>
-                    
-                    {/* Metric preview */}
-                    <div className="mt-6 pt-6 border-t border-primary/10">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-muted-foreground">Average improvement</span>
-                        <div className="flex items-center gap-2">
-                          <span className={`text-2xl font-bold ${isEven ? 'text-primary' : 'text-accent'}`}>
-                            {index === 0 ? '45%' : index === 1 ? '3.2x' : index === 2 ? '92%' : '68%'}
-                          </span>
-                          <ArrowRight className={`h-4 w-4 ${isEven ? 'text-primary' : 'text-accent'} group-hover:translate-x-1 transition-transform`} />
+                        
+                        {/* Description */}
+                        <p className="text-muted-foreground leading-relaxed mb-6">
+                          {feature.desc}
+                        </p>
+                        
+                        {/* Bottom CTA */}
+                        <div className="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
+                          <span>Learn more</span>
+                          <ArrowRight className="h-4 w-4" />
                         </div>
                       </div>
+                      
+                      {/* Decorative circles */}
+                      <div className={`absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-br ${color.bg} rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                      <div className={`absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br ${color.bg} rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
                     </div>
                   </div>
-                  
-                  {/* Corner accent */}
-                  <div className={`absolute top-0 right-0 w-32 h-32 ${isEven ? 'bg-primary/5' : 'bg-accent/5'} rounded-full blur-2xl -z-10 group-hover:scale-150 transition-transform duration-700`} />
                 </div>
               );
             })}
