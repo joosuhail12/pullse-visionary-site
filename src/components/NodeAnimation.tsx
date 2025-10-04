@@ -41,6 +41,58 @@ const ParticleField = () => {
     </points>;
 };
 
+// Flowing particle that travels along a path
+const FlowingPathParticle = ({
+  points,
+  delay = 0,
+  color = "#7c3aed",
+  speed = 1
+}: {
+  points: THREE.Vector3[];
+  delay?: number;
+  color?: string;
+  speed?: number;
+}) => {
+  const particleRef = useRef<THREE.Mesh>(null);
+  const [progress, setProgress] = useState(0);
+
+  useFrame(state => {
+    const t = ((state.clock.elapsedTime * speed + delay) % 4) / 4;
+    setProgress(t);
+
+    if (particleRef.current && points.length > 0) {
+      const index = Math.floor(t * (points.length - 1));
+      const nextIndex = Math.min(index + 1, points.length - 1);
+      const localT = (t * (points.length - 1)) - index;
+      
+      const currentPoint = points[index];
+      const nextPoint = points[nextIndex];
+      
+      particleRef.current.position.lerpVectors(currentPoint, nextPoint, localT);
+      
+      // Scale based on position for depth effect
+      const scale = 0.8 + Math.sin(t * Math.PI) * 0.4;
+      particleRef.current.scale.setScalar(scale);
+    }
+  });
+
+  if (progress < 0.02 || progress > 0.98) return null;
+
+  return (
+    <mesh ref={particleRef}>
+      <sphereGeometry args={[0.12, 16, 16]} />
+      <meshStandardMaterial 
+        color={color} 
+        emissive={color} 
+        emissiveIntensity={2}
+        transparent
+        opacity={0.9}
+      />
+      <pointLight color={color} intensity={1} distance={1} />
+    </mesh>
+  );
+};
+
 // Black curved arrow paths like in reference image with enhanced flowy movement
 const BlackArrowPath = ({
   start,
@@ -151,6 +203,11 @@ const BlackArrowPath = ({
       
       {/* Inner bright core */}
       <Line points={points} color="#a78bfa" lineWidth={2} transparent opacity={0.8} />
+      
+      {/* Flowing particles showing tickets moving through */}
+      <FlowingPathParticle points={points} delay={delay} color="#a78bfa" speed={0.8} />
+      <FlowingPathParticle points={points} delay={delay + 1.5} color="#7c3aed" speed={0.8} />
+      <FlowingPathParticle points={points} delay={delay + 3} color="#c4b5fd" speed={0.8} />
       
       {/* Start question pill */}
       {startQuestion && <Html position={[points[0].x, points[0].y, points[0].z]} center distanceFactor={10}>
