@@ -363,38 +363,17 @@ const FlowingTicket = ({ delay, startY, ticketInfo, onProcess }: {
       )}
       <Html center distanceFactor={8}>
         <div 
-          className={`glass-strong px-4 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap border-l-4 transition-all duration-300 ${isProcessing ? 'scale-110' : ''}`}
+          className={`rounded transition-all duration-300 ${isProcessing ? 'scale-110' : ''}`}
           style={{ 
-            borderColor: ticketInfo.color,
+            width: '10px',
+            height: '14px',
+            backgroundColor: ticketInfo.color,
             boxShadow: isProcessing 
-              ? `0 12px 48px ${ticketInfo.color}90, 0 0 60px rgba(251, 191, 36, 0.5)` 
-              : `0 4px 24px ${ticketInfo.color}40`,
+              ? `0 0 20px ${ticketInfo.color}` 
+              : `0 0 8px ${ticketInfo.color}80`,
             filter: isProcessing ? 'brightness(1.3)' : 'none'
           }}
-        >
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
-              <span className="text-xl">{ticketInfo.emoji}</span>
-              <span className="text-xs font-semibold">{ticketInfo.text}</span>
-              <span 
-                className="text-[8px] px-1.5 py-0.5 rounded-full font-bold"
-                style={{ 
-                  backgroundColor: priorityColors[ticketInfo.priority],
-                  color: 'white'
-                }}
-              >
-                {ticketInfo.priority.toUpperCase()}
-              </span>
-            </div>
-            <span className="text-[10px] text-muted-foreground">{ticketInfo.subtitle}</span>
-          </div>
-          {isProcessing && (
-            <div className="ml-2 text-xs font-bold text-yellow-400 animate-pulse flex items-center gap-1">
-              <Activity className="h-3 w-3" />
-              Processing...
-            </div>
-          )}
-        </div>
+        ></div>
       </Html>
     </group>
   );
