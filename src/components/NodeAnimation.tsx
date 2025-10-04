@@ -66,10 +66,10 @@ const BlackArrowPath = ({
     return curve.getPoints(50);
   }, [start, end, controlOffset]);
 
-  // Animate the flow
+  // Animate the flow with faster speed
   useFrame(state => {
     if (materialRef.current) {
-      materialRef.current.uniforms.time.value = state.clock.elapsedTime + delay;
+      materialRef.current.uniforms.time.value = (state.clock.elapsedTime + delay) * 1.5;
     }
   });
   const shaderMaterial = useMemo(() => {
@@ -90,26 +90,29 @@ const BlackArrowPath = ({
         uniform float time;
         varying vec2 vUv;
         void main() {
-          // Smooth flowing animation
-          float flow = fract(vUv.x - time * 0.3);
+          // Fast flowing animation for ticket movement
+          float flow = fract(vUv.x - time * 0.5);
           
-          // Create gradient-based dashes with smooth transitions
-          float dash = fract(vUv.x * 12.0 - time * 3.0);
-          float dashPattern = smoothstep(0.3, 0.5, dash) * smoothstep(0.7, 0.5, dash);
+          // Create distinct flowing particles/tickets
+          float particlePos = fract(vUv.x * 8.0 - time * 4.0);
+          float particle = smoothstep(0.2, 0.3, particlePos) * smoothstep(0.8, 0.7, particlePos);
           
-          // Add glow effect
-          float glow = smoothstep(0.0, 0.3, flow) * smoothstep(1.0, 0.7, flow);
+          // Add trailing glow effect behind particles
+          float trail = smoothstep(0.0, 0.4, flow) * smoothstep(1.0, 0.6, flow);
           
-          // Purple/Navy gradient colors (hsl(262 83% 58%) and hsl(220 70% 60%))
+          // Pulsing effect for liveliness
+          float pulse = sin(time * 3.0 + vUv.x * 10.0) * 0.3 + 0.7;
+          
+          // Purple/Navy gradient colors
           vec3 colorPurple = vec3(0.62, 0.35, 0.85);
           vec3 colorNavy = vec3(0.35, 0.55, 0.85);
-          vec3 color = mix(colorPurple, colorNavy, flow);
+          vec3 color = mix(colorPurple, colorNavy, particlePos);
           
-          // Combine effects with enhanced alpha
-          float alpha = dashPattern * (0.8 + glow * 0.6);
+          // Combine particle and trail with enhanced brightness
+          float alpha = (particle * 1.0 + trail * 0.4) * pulse;
           
-          // Add extra brightness to flowing particles
-          vec3 finalColor = color * (1.0 + glow * 1.5);
+          // Boost brightness on particles
+          vec3 finalColor = color * (1.0 + particle * 2.0 + trail * 0.8);
           
           gl_FragColor = vec4(finalColor, alpha);
         }
@@ -124,20 +127,23 @@ const BlackArrowPath = ({
   const arrowBase = points[points.length - 5];
   const arrowAngle = Math.atan2(arrowTip.y - arrowBase.y, arrowTip.x - arrowBase.x);
   return <group>
-      {/* Main curved line with gradient */}
-      <Line points={points} color="#7c3aed" lineWidth={5} transparent opacity={0.4} />
+      {/* Base line with subtle glow */}
+      <Line points={points} color="#5b21b6" lineWidth={6} transparent opacity={0.3} />
       
-      {/* Animated flow tube with enhanced size */}
+      {/* Main animated flow tube - thicker for visibility */}
       <mesh>
-        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.12, 8, false]} />
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.15, 8, false]} />
         <shaderMaterial ref={materialRef} attach="material" {...shaderMaterial} />
       </mesh>
       
-      {/* Outer glow tube */}
+      {/* Outer glow tube with pulsing effect */}
       <mesh>
-        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.18, 8, false]} />
-        <meshBasicMaterial color="#7c3aed" transparent opacity={0.15} />
+        <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 50, 0.22, 8, false]} />
+        <meshBasicMaterial color="#7c3aed" transparent opacity={0.2} />
       </mesh>
+      
+      {/* Inner bright core */}
+      <Line points={points} color="#a78bfa" lineWidth={2} transparent opacity={0.8} />
       
       {/* Start question pill */}
       {startQuestion && <Html position={[points[0].x, points[0].y, points[0].z]} center distanceFactor={10}>
