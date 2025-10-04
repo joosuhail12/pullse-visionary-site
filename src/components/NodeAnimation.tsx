@@ -1388,18 +1388,32 @@ const Scene = () => {
       <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} />
       <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} />
       
-      {/* Thick black arrow from center to outcomes */}
-      <Html position={[3, 0, 2]} center distanceFactor={8}>
-        <div style={{ 
-          fontSize: '80px',
-          color: '#000000',
-          fontWeight: 'bold',
-          filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
-          transform: 'scaleY(1.2)'
-        }}>
-          ➤
-        </div>
-      </Html>
+      {/* Curved black arrows from center to outcome emojis on the right */}
+      {/* Upper outcomes */}
+      <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} />
+      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} />
+      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} />
+      
+      {/* Middle-upper outcomes */}
+      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} />
+      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} />
+      
+      {/* Center outcomes */}
+      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} />
+      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} />
+      
+      {/* Middle-lower outcomes */}
+      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} />
+      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} />
+      
+      {/* Lower outcomes */}
+      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} />
+      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} />
+      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} />
+      
+      {/* Additional varied curves */}
+      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} />
+      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} />
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
