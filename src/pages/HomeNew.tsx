@@ -565,34 +565,136 @@ const HomeNew = () => {
         </div>
       </section>
 
-      {/* Solutions Tabs */}
-      <section className="py-20 fade-in-scroll">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold">Solutions for Every Team</h2>
+      {/* Solutions - Interactive Cards */}
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
+        {/* Animated background orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm mb-4">
+              <span className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Built for Your Team</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              Solutions that scale with you
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Click any card to explore how Pullse adapts to your specific needs
+            </p>
           </div>
 
-          <Tabs value={activeSolution} onValueChange={setActiveSolution} className="max-w-4xl mx-auto">
-            <TabsList className="grid grid-cols-5 glass-strong p-1 mb-8">
-              <TabsTrigger value="b2b-saas">B2B SaaS</TabsTrigger>
-              <TabsTrigger value="ecommerce">Ecommerce</TabsTrigger>
-              <TabsTrigger value="head-of-support">Head of Support</TabsTrigger>
-              <TabsTrigger value="ops-lead">Ops Lead</TabsTrigger>
-              <TabsTrigger value="cto-ciso">CTO/CISO</TabsTrigger>
-            </TabsList>
+          {/* Interactive solution cards grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {Object.entries(solutions).map(([key, solution], index) => {
+              const isActive = activeSolution === key;
+              const icons = [Users, Shield, Zap, BarChart3, Bot];
+              const Icon = icons[index] || Users;
+              
+              return (
+                <div
+                  key={key}
+                  onClick={() => setActiveSolution(key)}
+                  className={`group relative cursor-pointer transition-all duration-500 ${
+                    isActive ? 'md:col-span-2 lg:col-span-3' : ''
+                  }`}
+                >
+                  {/* Card wrapper with gradient border */}
+                  <div className={`relative h-full rounded-2xl p-[1px] transition-all duration-500 ${
+                    isActive 
+                      ? 'bg-gradient-to-br from-primary via-accent to-primary' 
+                      : 'bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/40 hover:to-accent/40'
+                  }`}>
+                    <div className={`relative h-full rounded-2xl bg-background/95 backdrop-blur-xl overflow-hidden transition-all duration-500 ${
+                      isActive ? 'p-8' : 'p-6'
+                    }`}>
+                      
+                      {/* Collapsed state */}
+                      {!isActive && (
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <div className={`h-14 w-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                              <Icon className="h-7 w-7 text-white" />
+                            </div>
+                            <ArrowRight className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                          
+                          <div>
+                            <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                              {solution.title}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                              Click to explore capabilities
+                            </p>
+                          </div>
 
-            {Object.entries(solutions).map(([key, solution]) => <TabsContent key={key} value={key}>
-                <div className="glass-strong p-8 rounded-2xl">
-                  <h3 className="text-2xl font-bold mb-6">{solution.title}</h3>
-                  <ul className="grid md:grid-cols-2 gap-4">
-                    {solution.items.map((item, i) => <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>)}
-                  </ul>
+                          {/* Preview dots */}
+                          <div className="flex gap-1.5 pt-2">
+                            {solution.items.slice(0, 4).map((_, i) => (
+                              <div key={i} className="h-1.5 w-1.5 rounded-full bg-primary/40" />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Expanded state */}
+                      {isActive && (
+                        <div className="space-y-6 animate-fade-in">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-4">
+                              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/25">
+                                <Icon className="h-8 w-8 text-white" />
+                              </div>
+                              <div>
+                                <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                                  {solution.title}
+                                </h3>
+                                <p className="text-sm text-muted-foreground mt-1">Complete capabilities</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Expanded content grid */}
+                          <div className="grid md:grid-cols-2 gap-4">
+                            {solution.items.map((item, i) => (
+                              <div 
+                                key={i} 
+                                className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10 hover:border-primary/30 transition-all group/item"
+                                style={{ animationDelay: `${i * 50}ms` }}
+                              >
+                                <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                  <CheckCircle2 className="h-4 w-4 text-white" />
+                                </div>
+                                <span className="text-sm font-medium leading-relaxed">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* CTA button */}
+                          <div className="pt-4 flex justify-center">
+                            <Button size="lg" className="group/btn" asChild>
+                              <Link to="/contact-sales">
+                                Get started with {solution.title}
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                              </Link>
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Decorative glow */}
+                      <div className={`absolute -z-10 transition-opacity duration-500 ${
+                        isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
+                      }`}>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl" />
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-accent/20 to-primary/20 rounded-full blur-3xl" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </TabsContent>)}
-          </Tabs>
+              );
+            })}
+          </div>
         </div>
       </section>
 
