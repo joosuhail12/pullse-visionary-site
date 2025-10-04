@@ -41,6 +41,66 @@ const ParticleField = () => {
     </points>;
 };
 
+// Black curved arrow paths like in reference image
+const BlackArrowPath = ({
+  start,
+  end,
+  controlOffset = [0, 0, -1.5]
+}: {
+  start: [number, number, number];
+  end: [number, number, number];
+  controlOffset?: [number, number, number];
+}) => {
+  const points = useMemo(() => {
+    const startVec = new THREE.Vector3(...start);
+    const endVec = new THREE.Vector3(...end);
+    const midVec = new THREE.Vector3(
+      (start[0] + end[0]) / 2 + controlOffset[0],
+      (start[1] + end[1]) / 2 + controlOffset[1],
+      (start[2] + end[2]) / 2 + controlOffset[2]
+    );
+    const curve = new THREE.QuadraticBezierCurve3(startVec, midVec, endVec);
+    return curve.getPoints(50);
+  }, [start, end, controlOffset]);
+
+  // Calculate arrow head position and rotation
+  const arrowTip = points[points.length - 1];
+  const arrowBase = points[points.length - 5];
+  const arrowAngle = Math.atan2(
+    arrowTip.y - arrowBase.y,
+    arrowTip.x - arrowBase.x
+  );
+
+  return (
+    <group>
+      {/* Main curved line */}
+      <Line 
+        points={points} 
+        color="#000000" 
+        lineWidth={4} 
+        transparent 
+        opacity={0.8}
+      />
+      
+      {/* Arrow head */}
+      <Html 
+        position={[arrowTip.x, arrowTip.y, arrowTip.z]} 
+        center 
+        distanceFactor={10}
+      >
+        <div style={{ 
+          transform: `rotate(${arrowAngle}rad)`,
+          fontSize: '24px',
+          color: '#000000',
+          fontWeight: 'bold'
+        }}>
+          ➤
+        </div>
+      </Html>
+    </group>
+  );
+};
+
 // Animated Gradient Flow Lines with Arrows
 const AnimatedFlowLine = ({
   start,
@@ -1301,11 +1361,23 @@ const Scene = () => {
       {/* Fog for depth perception */}
       <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
-      {/* Animated gradient flow lines between sections */}
-      <AnimatedFlowLine start={[-6, 2, 0]} end={[-1, 0, 0]} color="#6366f1" direction="forward" />
-      <AnimatedFlowLine start={[-6, -1, 0]} end={[-1, 0, 0]} color="#34d399" direction="forward" />
-      <AnimatedFlowLine start={[1, 0, 0]} end={[7, 2, 0]} color="#fbbf24" direction="forward" />
-      <AnimatedFlowLine start={[1, 0, 0]} end={[7, -1, 0]} color="#ec4899" direction="forward" />
+      {/* Black curved arrow paths from channels to center */}
+      <BlackArrowPath start={[-8, 1.5, 0]} end={[-3, 0.5, 0]} controlOffset={[-1, 0.8, -1]} />
+      <BlackArrowPath start={[-8, 1.5, 0]} end={[-3, -0.5, 0]} controlOffset={[-1, -0.3, -1.2]} />
+      <BlackArrowPath start={[-8, -1.5, 0]} end={[-3, 0.5, 0]} controlOffset={[-1, 0.3, -1.2]} />
+      <BlackArrowPath start={[-8, -1.5, 0]} end={[-3, -0.5, 0]} controlOffset={[-1, -0.8, -1]} />
+      
+      {/* Thick black arrow from center to outcomes */}
+      <Html position={[0, 0, 2]} center distanceFactor={8}>
+        <div style={{ 
+          fontSize: '64px',
+          color: '#000000',
+          fontWeight: 'bold',
+          filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+        }}>
+          ➤
+        </div>
+      </Html>
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
