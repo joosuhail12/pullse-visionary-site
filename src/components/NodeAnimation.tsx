@@ -811,31 +811,15 @@ const SectionLabel = ({
 const Scene = () => {
   const [processingTicket, setProcessingTicket] = useState<string | undefined>();
 
-  // Sample request questions flowing through
+  // Sample request questions flowing through - reduced for clarity
   const requestQuestions = useMemo(() => [{
     question: "How do I reset my password?",
     color: "#3b82f6",
     delay: 0
   }, {
-    question: "When will my order ship?",
-    color: "#10b981",
-    delay: 1.5
-  }, {
     question: "Can I upgrade my plan?",
     color: "#8b5cf6",
     delay: 3
-  }, {
-    question: "Why was I charged twice?",
-    color: "#f59e0b",
-    delay: 4.5
-  }, {
-    question: "How to export my data?",
-    color: "#ec4899",
-    delay: 6
-  }, {
-    question: "Is there a mobile app?",
-    color: "#06b6d4",
-    delay: 7.5
   }], []);
   const channels = useMemo(() => [{
     position: [-8, 1.5, 0] as [number, number, number],
@@ -851,7 +835,7 @@ const Scene = () => {
     count: 8
   }], []);
   const tickets = useMemo(() => [
-  // Wave 1 - Email burst (0-1.5s)
+  // Wave 1 - Email burst
   {
     delay: 0,
     startY: 1.5,
@@ -859,16 +843,6 @@ const Scene = () => {
       emoji: "📧",
       text: "Refund request",
       subtitle: "Order #45821",
-      color: "#3b82f6",
-      priority: "high" as const
-    }
-  }, {
-    delay: 0.2,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Billing error",
-      subtitle: "Duplicate charge",
       color: "#3b82f6",
       priority: "high" as const
     }
@@ -883,26 +857,6 @@ const Scene = () => {
       priority: "medium" as const
     }
   }, {
-    delay: 0.6,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Payment inquiry",
-      subtitle: "Invoice request",
-      color: "#3b82f6",
-      priority: "medium" as const
-    }
-  }, {
-    delay: 0.8,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Account help",
-      subtitle: "Setup assistance",
-      color: "#3b82f6",
-      priority: "medium" as const
-    }
-  }, {
     delay: 1.0,
     startY: 1.5,
     ticketInfo: {
@@ -912,28 +866,8 @@ const Scene = () => {
       color: "#3b82f6",
       priority: "high" as const
     }
-  }, {
-    delay: 1.2,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Return request",
-      subtitle: "RMA needed",
-      color: "#3b82f6",
-      priority: "medium" as const
-    }
-  }, {
-    delay: 1.4,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Price match",
-      subtitle: "Competitor pricing",
-      color: "#3b82f6",
-      priority: "low" as const
-    }
   },
-  // Wave 2 - Chat burst (1.5-3s)
+  // Wave 2 - Chat burst
   {
     delay: 1.6,
     startY: -1.5,
@@ -943,16 +877,6 @@ const Scene = () => {
       subtitle: "Password reset",
       color: "#10b981",
       priority: "high" as const
-    }
-  }, {
-    delay: 1.8,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Product question",
-      subtitle: "Feature inquiry",
-      color: "#10b981",
-      priority: "low" as const
     }
   }, {
     delay: 2.0,
@@ -965,26 +889,6 @@ const Scene = () => {
       priority: "high" as const
     }
   }, {
-    delay: 2.2,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Feature request",
-      subtitle: "API integration",
-      color: "#10b981",
-      priority: "low" as const
-    }
-  }, {
-    delay: 2.4,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Quick question",
-      subtitle: "General inquiry",
-      color: "#10b981",
-      priority: "low" as const
-    }
-  }, {
     delay: 2.6,
     startY: -1.5,
     ticketInfo: {
@@ -994,18 +898,8 @@ const Scene = () => {
       color: "#10b981",
       priority: "medium" as const
     }
-  }, {
-    delay: 2.8,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Mobile app",
-      subtitle: "Download help",
-      color: "#10b981",
-      priority: "low" as const
-    }
   },
-  // Wave 3 - Mixed burst (3-4.5s)
+  // Wave 3 - Mixed burst
   {
     delay: 3.0,
     startY: 1.5,
@@ -1017,27 +911,7 @@ const Scene = () => {
       priority: "high" as const
     }
   }, {
-    delay: 3.2,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Live chat",
-      subtitle: "Sales inquiry",
-      color: "#10b981",
-      priority: "medium" as const
-    }
-  }, {
     delay: 3.4,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Invoice copy",
-      subtitle: "Tax records",
-      color: "#3b82f6",
-      priority: "low" as const
-    }
-  }, {
-    delay: 3.6,
     startY: -1.5,
     ticketInfo: {
       emoji: "💬",
@@ -1056,28 +930,8 @@ const Scene = () => {
       color: "#3b82f6",
       priority: "high" as const
     }
-  }, {
-    delay: 4.0,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Integration",
-      subtitle: "API setup",
-      color: "#10b981",
-      priority: "medium" as const
-    }
-  }, {
-    delay: 4.2,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Upgrade plan",
-      subtitle: "Pro features",
-      color: "#3b82f6",
-      priority: "medium" as const
-    }
   },
-  // Wave 4 - Heavy traffic (4.5-6s)
+  // Wave 4 - Final burst
   {
     delay: 4.5,
     startY: -1.5,
@@ -1089,26 +943,6 @@ const Scene = () => {
       priority: "high" as const
     }
   }, {
-    delay: 4.7,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Warranty claim",
-      subtitle: "Product defect",
-      color: "#3b82f6",
-      priority: "high" as const
-    }
-  }, {
-    delay: 4.9,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Pricing info",
-      subtitle: "Quote request",
-      color: "#10b981",
-      priority: "medium" as const
-    }
-  }, {
     delay: 5.1,
     startY: 1.5,
     ticketInfo: {
@@ -1117,36 +951,6 @@ const Scene = () => {
       subtitle: "Shipping update",
       color: "#3b82f6",
       priority: "medium" as const
-    }
-  }, {
-    delay: 5.3,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Documentation",
-      subtitle: "Guide needed",
-      color: "#10b981",
-      priority: "low" as const
-    }
-  }, {
-    delay: 5.5,
-    startY: 1.5,
-    ticketInfo: {
-      emoji: "📧",
-      text: "Credit note",
-      subtitle: "Store credit",
-      color: "#3b82f6",
-      priority: "medium" as const
-    }
-  }, {
-    delay: 5.7,
-    startY: -1.5,
-    ticketInfo: {
-      emoji: "💬",
-      text: "Feedback",
-      subtitle: "Suggestion",
-      color: "#10b981",
-      priority: "low" as const
     }
   }], []);
   const outcomes = useMemo(() => [{
@@ -1174,49 +978,22 @@ const Scene = () => {
       color: "#10b981"
     }
   }, {
-    delay: 1.4,
-    endY: 1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Billing fixed",
-      metric: "98% satisfaction",
-      color: "#fbbf24"
-    }
-  }, {
     delay: 1.6,
     endY: 1.5,
     happiness: {
-      emoji: "😊",
+      emoji: "⭐",
       text: "Order updated",
       metric: "First contact",
-      color: "#10b981"
-    }
-  }, {
-    delay: 1.8,
-    endY: 1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Payment sorted",
-      metric: "Quick fix",
       color: "#fbbf24"
-    }
-  }, {
-    delay: 2.0,
-    endY: 1.5,
-    happiness: {
-      emoji: "😊",
-      text: "Account setup",
-      metric: "Easy process",
-      color: "#10b981"
     }
   }, {
     delay: 2.2,
     endY: 1.5,
     happiness: {
-      emoji: "⭐",
+      emoji: "😊",
       text: "Package tracked",
       metric: "Real-time",
-      color: "#fbbf24"
+      color: "#10b981"
     }
   },
   // Outcomes from Wave 2
@@ -1224,18 +1001,9 @@ const Scene = () => {
     delay: 2.8,
     endY: -1.5,
     happiness: {
-      emoji: "😊",
+      emoji: "⭐",
       text: "Login restored",
       metric: "Quick resolution",
-      color: "#10b981"
-    }
-  }, {
-    delay: 3.0,
-    endY: -1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Question answered",
-      metric: "Instant help",
       color: "#fbbf24"
     }
   }, {
@@ -1245,24 +1013,6 @@ const Scene = () => {
       emoji: "😊",
       text: "Support excellent",
       metric: "Highly rated",
-      color: "#10b981"
-    }
-  }, {
-    delay: 3.4,
-    endY: -1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Feature noted",
-      metric: "Feedback logged",
-      color: "#fbbf24"
-    }
-  }, {
-    delay: 3.6,
-    endY: -1.5,
-    happiness: {
-      emoji: "😊",
-      text: "Issue resolved",
-      metric: "Fast response",
       color: "#10b981"
     }
   }, {
@@ -1286,24 +1036,6 @@ const Scene = () => {
       color: "#10b981"
     }
   }, {
-    delay: 4.4,
-    endY: -1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Sales helped",
-      metric: "Perfect match",
-      color: "#fbbf24"
-    }
-  }, {
-    delay: 4.6,
-    endY: 1.5,
-    happiness: {
-      emoji: "😊",
-      text: "Invoice sent",
-      metric: "Instant email",
-      color: "#10b981"
-    }
-  }, {
     delay: 4.8,
     endY: -1.5,
     happiness: {
@@ -1321,70 +1053,25 @@ const Scene = () => {
       metric: "Complete",
       color: "#10b981"
     }
-  }, {
-    delay: 5.2,
-    endY: -1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "API working",
-      metric: "Connected",
-      color: "#fbbf24"
-    }
   },
   // Outcomes from Wave 4
   {
     delay: 5.7,
     endY: -1.5,
     happiness: {
-      emoji: "😊",
+      emoji: "⭐",
       text: "Service up",
       metric: "5min downtime",
-      color: "#10b981"
-    }
-  }, {
-    delay: 5.9,
-    endY: 1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Warranty approved",
-      metric: "Free replace",
       color: "#fbbf24"
-    }
-  }, {
-    delay: 6.1,
-    endY: -1.5,
-    happiness: {
-      emoji: "😊",
-      text: "Quote ready",
-      metric: "Best price",
-      color: "#10b981"
     }
   }, {
     delay: 6.3,
     endY: 1.5,
     happiness: {
-      emoji: "⭐",
+      emoji: "😊",
       text: "Address changed",
       metric: "Updated",
-      color: "#fbbf24"
-    }
-  }, {
-    delay: 6.5,
-    endY: -1.5,
-    happiness: {
-      emoji: "😊",
-      text: "Guide sent",
-      metric: "Step by step",
       color: "#10b981"
-    }
-  }, {
-    delay: 6.7,
-    endY: 1.5,
-    happiness: {
-      emoji: "⭐",
-      text: "Credit issued",
-      metric: "$50 added",
-      color: "#fbbf24"
     }
   }], []);
   return <>
@@ -1404,59 +1091,29 @@ const Scene = () => {
       {/* Fog for depth perception */}
       <fog attach="fog" args={['#1a1a2e', 10, 35]} />
 
-      {/* Multiple curved black arrow paths flowing into center - inspired by reference */}
+      {/* Multiple curved black arrow paths flowing into center - reduced for clarity */}
       {/* Top group - with question pills */}
       <BlackArrowPath start={[-10, 3.5, 0]} end={[-2, 0.8, 0]} controlOffset={[-2, 1.5, -1.5]} startQuestion="Need refund help" delay={0} />
-      <BlackArrowPath start={[-9, 2.8, 0]} end={[-2, 0.5, 0]} controlOffset={[-1.5, 1, -1.2]} startQuestion="Billing issue?" delay={0.5} />
       <BlackArrowPath start={[-10, 2, 0]} end={[-2.5, 0.3, 0]} controlOffset={[-2.5, 0.8, -1]} startQuestion="Order status?" delay={1} />
-      
-      {/* Middle-top group */}
-      <BlackArrowPath start={[-10.5, 1.2, 0]} end={[-2.5, 0.2, 0]} controlOffset={[-3, 0.5, -1.8]} startQuestion="Payment failed" delay={1.5} />
-      <BlackArrowPath start={[-9.5, 0.8, 0]} end={[-2, 0, 0]} controlOffset={[-1.8, 0.3, -1.3]} startQuestion="Account locked" delay={2} />
       
       {/* Center group */}
       <BlackArrowPath start={[-10, 0, 0]} end={[-2.5, 0, 0]} controlOffset={[-2, -0.2, -2]} startQuestion="Can't login" delay={2.5} />
-      <BlackArrowPath start={[-9, -0.3, 0]} end={[-2, -0.1, 0]} controlOffset={[-1.5, -0.1, -1.5]} startQuestion="Bug report" delay={3} />
-      
-      {/* Middle-bottom group */}
-      <BlackArrowPath start={[-10.5, -1.2, 0]} end={[-2.5, -0.2, 0]} controlOffset={[-3, -0.5, -1.8]} startQuestion="Upgrade plan?" delay={3.5} />
-      <BlackArrowPath start={[-9.5, -0.8, 0]} end={[-2, -0.3, 0]} controlOffset={[-1.8, -0.4, -1.3]} startQuestion="Cancel subscription" delay={4} />
       
       {/* Bottom group */}
       <BlackArrowPath start={[-10, -2, 0]} end={[-2.5, -0.5, 0]} controlOffset={[-2.5, -0.8, -1]} startQuestion="Wrong charge" delay={4.5} />
-      <BlackArrowPath start={[-9, -2.8, 0]} end={[-2, -0.6, 0]} controlOffset={[-1.5, -1, -1.2]} startQuestion="Delivery delayed" delay={5} />
       <BlackArrowPath start={[-10, -3.5, 0]} end={[-2, -0.9, 0]} controlOffset={[-2, -1.5, -1.5]} startQuestion="Product broken" delay={5.5} />
       
-      {/* Additional varied curves for richness */}
-      <BlackArrowPath start={[-11, 1.8, 0]} end={[-2.8, 0.4, 0]} controlOffset={[-4, 1.2, -2.2]} startQuestion="Technical issue" delay={6} />
-      <BlackArrowPath start={[-11, -1.8, 0]} end={[-2.8, -0.4, 0]} controlOffset={[-4, -1.2, -2.2]} startQuestion="Reset password" delay={6.5} />
-      
-      {/* Curved black arrows from center to outcome emojis on the right - with happy emojis */}
+      {/* Curved black arrows from center to outcome emojis on the right - reduced quantity */}
       {/* Upper outcomes */}
       <BlackArrowPath start={[2.5, 0.8, 0]} end={[8.5, 3.5, 0]} controlOffset={[2, 2, -1.5]} endEmoji="😊" delay={7} />
-      <BlackArrowPath start={[2.5, 0.5, 0]} end={[8.5, 2.8, 0]} controlOffset={[1.5, 1.5, -1.2]} endEmoji="😄" delay={7.5} />
-      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} endEmoji="🥰" delay={8} />
-      
-      {/* Middle-upper outcomes */}
-      <BlackArrowPath start={[2.5, 0.2, 0]} end={[9, 1.2, 0]} controlOffset={[3, 0.8, -1.8]} endEmoji="😍" delay={8.5} />
-      <BlackArrowPath start={[2.5, 0.1, 0]} end={[8.8, 0.8, 0]} controlOffset={[1.8, 0.5, -1.3]} endEmoji="🤗" delay={9} />
+      <BlackArrowPath start={[2.5, 0.3, 0]} end={[8.5, 2, 0]} controlOffset={[2, 1, -1]} endEmoji="⭐" delay={8} />
       
       {/* Center outcomes */}
-      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} endEmoji="😁" delay={9.5} />
-      <BlackArrowPath start={[2.5, -0.1, 0]} end={[8.8, -0.3, 0]} controlOffset={[1.5, 0, -1.5]} endEmoji="🙂" delay={10} />
-      
-      {/* Middle-lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.2, 0]} end={[9, -1.2, 0]} controlOffset={[3, -0.8, -1.8]} endEmoji="😌" delay={10.5} />
-      <BlackArrowPath start={[2.5, -0.3, 0]} end={[8.8, -0.8, 0]} controlOffset={[1.8, -0.5, -1.3]} endEmoji="☺️" delay={11} />
+      <BlackArrowPath start={[2.5, 0, 0]} end={[9, 0, 0]} controlOffset={[2, 0.2, -2]} endEmoji="😊" delay={9.5} />
       
       {/* Lower outcomes */}
-      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} endEmoji="🤩" delay={11.5} />
-      <BlackArrowPath start={[2.5, -0.6, 0]} end={[8.5, -2.8, 0]} controlOffset={[1.5, -1.5, -1.2]} endEmoji="😃" delay={12} />
-      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} endEmoji="😇" delay={12.5} />
-      
-      {/* Additional varied curves */}
-      <BlackArrowPath start={[2.8, 0.4, 0]} end={[9.5, 1.8, 0]} controlOffset={[4, 1.2, -2.2]} endEmoji="🥳" delay={13} />
-      <BlackArrowPath start={[2.8, -0.4, 0]} end={[9.5, -1.8, 0]} controlOffset={[4, -1.2, -2.2]} endEmoji="😊" delay={13.5} />
+      <BlackArrowPath start={[2.5, -0.5, 0]} end={[8.5, -2, 0]} controlOffset={[2, -1, -1]} endEmoji="⭐" delay={11.5} />
+      <BlackArrowPath start={[2.5, -0.8, 0]} end={[8.5, -3.5, 0]} controlOffset={[2, -2, -1.5]} endEmoji="😊" delay={12.5} />
 
       {/* Section 1: Channels (Left) */}
       <SectionLabel position={[-8, 4.5, 0]} title="1. CHANNELS" subtitle="Multi-channel support" align="center" />
