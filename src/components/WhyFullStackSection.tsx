@@ -19,246 +19,199 @@ const WhyFullStackSection = () => {
           </p>
         </div>
 
-        {/* Before/After Comparison with Center Arrow */}
-        <div className="relative max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-0 items-center mb-16">
-            {/* BEFORE - Siloed Tools */}
-            <div className="relative group perspective-1000">
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-red-500/20 via-orange-500/20 to-red-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-60 transition-all duration-700" />
-              
-              <div className="relative bg-gradient-to-br from-background/95 to-background/80 backdrop-blur-xl border border-border/50 rounded-3xl p-8 space-y-6 shadow-2xl hover:shadow-red-500/10 transition-all duration-500 hover:-translate-y-1">
-                {/* Header with badge */}
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-destructive/10 border border-destructive/20">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-destructive"></span>
-                    </span>
-                    <span className="text-xs font-semibold text-destructive tracking-wide uppercase">Fragmented</span>
+        {/* Before/After Comparison - Modern Design */}
+        <div className="relative max-w-6xl mx-auto mb-20">
+          {/* Comparison Container */}
+          <div className="relative bg-gradient-to-br from-muted/30 to-muted/10 backdrop-blur-sm rounded-3xl border border-border/50 p-8 md:p-12 overflow-hidden">
+            {/* Ambient Background Effects */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-destructive/10 rounded-full blur-3xl opacity-20" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-20" />
+            
+            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12">
+              {/* BEFORE - Siloed Chaos */}
+              <div className="space-y-6">
+                {/* Header */}
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-destructive/10 border border-destructive/20">
+                    <div className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
+                    <span className="text-xs font-semibold text-destructive uppercase tracking-wider">Fragmented</span>
                   </div>
-                  
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                      Before Pullse
-                    </h3>
-                    <p className="text-sm text-muted-foreground">Multiple disconnected tools creating chaos</p>
-                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">Before Pullse</h3>
+                  <p className="text-muted-foreground text-sm">The hidden cost of disconnected tools</p>
                 </div>
 
-                {/* Scattered tools visualization - Interactive */}
-                <div className="relative h-56 bg-gradient-to-br from-muted/30 to-muted/10 rounded-2xl p-6 overflow-hidden border border-border/50">
-                  {/* Animated tangled lines background */}
-                  <div className="absolute inset-0 opacity-20">
-                    <svg className="w-full h-full" viewBox="0 0 400 200">
-                      <path d="M 30,100 Q 80,40 130,100 T 230,100 T 330,100" 
-                            stroke="url(#gradient1)" 
-                            strokeWidth="2" 
-                            fill="none" 
-                            strokeDasharray="8,4"
-                            className="animate-pulse" />
-                      <path d="M 50,60 Q 100,120 150,60 T 250,60 T 350,60" 
-                            stroke="url(#gradient2)" 
-                            strokeWidth="2" 
-                            fill="none" 
-                            strokeDasharray="6,3"
-                            style={{ animationDelay: '0.3s' }}
-                            className="animate-pulse" />
-                      <path d="M 70,140 Q 120,80 170,140 T 270,140 T 370,140" 
-                            stroke="url(#gradient3)" 
-                            strokeWidth="2" 
-                            fill="none" 
-                            strokeDasharray="10,5"
-                            style={{ animationDelay: '0.6s' }}
-                            className="animate-pulse" />
-                      <defs>
-                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.2"/>
-                          <stop offset="50%" stopColor="currentColor" stopOpacity="0.5"/>
-                          <stop offset="100%" stopColor="currentColor" stopOpacity="0.2"/>
-                        </linearGradient>
-                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.3"/>
-                          <stop offset="50%" stopColor="currentColor" stopOpacity="0.6"/>
-                          <stop offset="100%" stopColor="currentColor" stopOpacity="0.3"/>
-                        </linearGradient>
-                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="currentColor" stopOpacity="0.25"/>
-                          <stop offset="50%" stopColor="currentColor" stopOpacity="0.55"/>
-                          <stop offset="100%" stopColor="currentColor" stopOpacity="0.25"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
+                {/* Visual Chaos Representation */}
+                <div className="relative aspect-square max-w-sm mx-auto">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-destructive/20" />
                   
-                  <div className="relative grid grid-cols-3 gap-3 h-full content-center">
+                  {/* Scattered Tool Nodes */}
+                  <div className="absolute inset-0 p-6">
                     {[
-                      { icon: MessageSquare, label: "Chat", delay: "0ms" },
-                      { icon: Database, label: "CRM", delay: "100ms" },
-                      { icon: BarChart3, label: "Analytics", delay: "200ms" },
-                      { icon: Users, label: "Ticketing", delay: "300ms" },
-                      { icon: Lock, label: "Knowledge", delay: "400ms" },
-                      { icon: Zap, label: "Automation", delay: "500ms" }
+                      { icon: MessageSquare, pos: "top-4 left-4", delay: "0s" },
+                      { icon: Database, pos: "top-4 right-4", delay: "0.1s" },
+                      { icon: BarChart3, pos: "bottom-4 left-4", delay: "0.2s" },
+                      { icon: Users, pos: "bottom-4 right-4", delay: "0.3s" },
+                      { icon: Lock, pos: "top-1/2 left-8 -translate-y-1/2", delay: "0.4s" },
+                      { icon: Zap, pos: "top-1/2 right-8 -translate-y-1/2", delay: "0.5s" }
                     ].map((tool, idx) => (
                       <div 
-                        key={idx} 
-                        className="group/tool relative flex flex-col items-center gap-2 p-3 bg-background/80 backdrop-blur-sm rounded-xl border border-destructive/30 hover:border-destructive/60 hover:bg-destructive/5 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-destructive/20 cursor-pointer"
-                        style={{ 
-                          animationDelay: tool.delay,
-                          animation: 'float 3s ease-in-out infinite'
-                        }}
+                        key={idx}
+                        className={`absolute ${tool.pos} w-14 h-14 rounded-xl bg-background/90 border border-destructive/30 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 cursor-pointer group/tool`}
+                        style={{ animation: `float 3s ease-in-out infinite ${tool.delay}` }}
                       >
-                        <tool.icon className="w-5 h-5 text-destructive group-hover/tool:scale-110 transition-transform" />
-                        <span className="text-xs font-medium text-muted-foreground group-hover/tool:text-destructive transition-colors">{tool.label}</span>
+                        <tool.icon className="w-6 h-6 text-destructive/70 group-hover/tool:text-destructive transition-colors" />
                       </div>
                     ))}
+                    
+                    {/* Tangled Connection Lines */}
+                    <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+                      <line x1="20%" y1="20%" x2="80%" y2="20%" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" className="text-destructive animate-pulse" />
+                      <line x1="80%" y1="20%" x2="80%" y2="80%" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" className="text-destructive animate-pulse" style={{ animationDelay: '0.5s' }} />
+                      <line x1="80%" y1="80%" x2="20%" y2="80%" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" className="text-destructive animate-pulse" style={{ animationDelay: '1s' }} />
+                      <line x1="20%" y1="80%" x2="20%" y2="20%" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4" className="text-destructive animate-pulse" style={{ animationDelay: '1.5s' }} />
+                    </svg>
                   </div>
                 </div>
 
-                {/* Pain points with icons */}
-                <div className="space-y-3 pt-2">
+                {/* Pain Points */}
+                <div className="space-y-3">
                   {[
-                    { text: "Multiple logins & subscriptions", icon: Lock },
-                    { text: "Manual integrations & data sync", icon: Database },
-                    { text: "Lost context between tools", icon: MessageSquare },
-                    { text: "Inconsistent customer data", icon: BarChart3 }
+                    "5+ disconnected platforms",
+                    "Manual data entry & syncing",
+                    "Lost context between tools",
+                    "Duplicated customer records"
                   ].map((pain, idx) => (
                     <div 
-                      key={idx} 
-                      className="flex items-start gap-3 text-sm text-muted-foreground group/item hover:text-foreground transition-colors p-2 rounded-lg hover:bg-muted/30"
-                      style={{ animationDelay: `${idx * 100}ms` }}
+                      key={idx}
+                      className="flex items-center gap-3 text-sm text-muted-foreground p-3 rounded-lg bg-background/40 border border-border/30 hover:border-destructive/30 transition-colors group/pain"
                     >
-                      <div className="w-5 h-5 rounded-md bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover/item:bg-destructive/20 transition-colors">
-                        <pain.icon className="w-3 h-3 text-destructive" />
-                      </div>
-                      <span className="leading-relaxed">{pain.text}</span>
+                      <div className="w-1 h-1 rounded-full bg-destructive" />
+                      <span className="group-hover/pain:text-foreground transition-colors">{pain}</span>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
 
-            {/* CENTER ARROW - Desktop only */}
-            <div className="hidden lg:flex flex-col items-center justify-center px-8 relative z-20">
-              <div className="relative">
-                {/* Animated pulse rings */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-24 h-24 rounded-full bg-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center" style={{ animationDelay: '0.5s' }}>
-                  <div className="w-20 h-20 rounded-full bg-accent/20 animate-ping" style={{ animationDuration: '2s' }} />
-                </div>
-                
-                {/* Arrow container */}
-                <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary via-accent to-primary bg-[length:200%_200%] animate-gradient flex items-center justify-center shadow-2xl shadow-primary/50">
-                  <ArrowRight className="w-8 h-8 text-white animate-pulse" />
-                </div>
-              </div>
-              
-              <div className="mt-4 text-center">
-                <p className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Transform
-                </p>
-              </div>
-            </div>
-
-            {/* Mobile arrow */}
-            <div className="lg:hidden flex justify-center py-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" style={{ animationDuration: '2s' }} />
-                <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl">
-                  <ArrowRight className="w-7 h-7 text-white rotate-90 animate-pulse" />
-                </div>
-              </div>
-            </div>
-
-            {/* AFTER - Unified Platform */}
-            <div className="relative group perspective-1000">
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-accent/30 to-primary/30 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
-              
-              <div className="relative bg-gradient-to-br from-background/95 to-background/80 backdrop-blur-xl border border-primary/30 rounded-3xl p-8 space-y-6 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-1 hover:border-primary/50">
-                {/* Header with badge */}
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30">
-                    <Zap className="w-3.5 h-3.5 text-primary animate-pulse" />
-                    <span className="text-xs font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent tracking-wide uppercase">Unified</span>
+              {/* Vertical Divider with Arrow */}
+              <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <div className="relative">
+                  {/* Pulse Rings */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
                   </div>
                   
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                      After Pullse
-                    </h3>
-                    <p className="text-sm text-muted-foreground">Everything you need in one powerful platform</p>
+                  {/* Arrow Circle */}
+                  <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-primary bg-[length:200%_200%] animate-gradient flex items-center justify-center shadow-2xl shadow-primary/30">
+                    <ArrowRight className="w-7 h-7 text-white" />
                   </div>
                 </div>
+              </div>
 
-                {/* Unified platform visualization - Interactive */}
-                <div className="relative h-56 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 rounded-2xl p-6 border border-primary/20 overflow-hidden group/viz">
-                  {/* Animated background */}
-                  <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-2 border-primary/30 animate-ping" style={{ animationDuration: '3s' }} />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-2 border-accent/30 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
+              {/* Mobile Divider */}
+              <div className="lg:hidden flex justify-center py-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl">
+                  <ArrowRight className="w-6 h-6 text-white rotate-90" />
+                </div>
+              </div>
+
+              {/* AFTER - Unified Excellence */}
+              <div className="space-y-6">
+                {/* Header */}
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30">
+                    <Zap className="w-3 h-3 text-primary" />
+                    <span className="text-xs font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent uppercase tracking-wider">Unified</span>
                   </div>
+                  <h3 className="text-3xl font-bold text-foreground">After Pullse</h3>
+                  <p className="text-muted-foreground text-sm">One platform, infinite possibilities</p>
+                </div>
+
+                {/* Unified Platform Visualization */}
+                <div className="relative aspect-square max-w-sm mx-auto">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 backdrop-blur-sm border border-primary/30" />
                   
-                  <div className="relative h-full flex flex-col items-center justify-center gap-4">
-                    {/* Central hub */}
+                  {/* Central Hub */}
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative group/hub">
-                      <div className="absolute inset-0 bg-primary/30 rounded-2xl blur-xl group-hover/viz:blur-2xl transition-all" />
-                      <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary bg-[length:200%_200%] animate-gradient flex items-center justify-center border-2 border-primary/40 shadow-2xl shadow-primary/50 group-hover/viz:scale-110 transition-transform duration-500">
-                        <Zap className="w-12 h-12 text-white drop-shadow-lg" />
+                      {/* Glow Effect */}
+                      <div className="absolute inset-0 bg-primary/40 rounded-3xl blur-2xl group-hover/hub:blur-3xl transition-all" />
+                      
+                      {/* Central Platform */}
+                      <div className="relative w-32 h-32 rounded-3xl bg-gradient-to-br from-primary via-accent to-primary bg-[length:200%_200%] animate-gradient flex flex-col items-center justify-center border-2 border-primary/40 shadow-2xl shadow-primary/50 group-hover/hub:scale-110 transition-transform duration-500">
+                        <Zap className="w-14 h-14 text-white drop-shadow-lg mb-1" />
+                        <span className="text-xs font-bold text-white/90">Pullse OS</span>
                       </div>
                     </div>
-                    
-                    <div className="text-center space-y-1">
-                      <p className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                        Pullse Support OS
-                      </p>
-                      <p className="text-xs text-muted-foreground font-medium">Unified workspace</p>
-                    </div>
-                    
-                    {/* Integrated modules */}
-                    <div className="flex items-center justify-center gap-2 mt-2">
-                      {[
-                        { Icon: MessageSquare, delay: "0ms" },
-                        { Icon: Database, delay: "100ms" },
-                        { Icon: BarChart3, delay: "200ms" },
-                        { Icon: Users, delay: "300ms" },
-                        { Icon: Lock, delay: "400ms" },
-                        { Icon: Zap, delay: "500ms" }
-                      ].map(({ Icon, delay }, idx) => (
-                        <div 
-                          key={idx} 
-                          className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/30 hover:border-primary/60 hover:scale-125 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-primary/30"
-                          style={{ 
-                            animationDelay: delay,
-                            animation: 'float-slow 4s ease-in-out infinite'
+                  </div>
+
+                  {/* Orbiting Integrated Modules */}
+                  <div className="absolute inset-0">
+                    {[
+                      { Icon: MessageSquare, angle: 0, label: "Chat" },
+                      { Icon: Database, angle: 60, label: "CRM" },
+                      { Icon: BarChart3, angle: 120, label: "Analytics" },
+                      { Icon: Users, angle: 180, label: "Tickets" },
+                      { Icon: Lock, angle: 240, label: "KB" },
+                      { Icon: Zap, angle: 300, label: "Auto" }
+                    ].map(({ Icon, angle, label }, idx) => {
+                      const radius = 45; // percentage
+                      const x = 50 + radius * Math.cos((angle - 90) * Math.PI / 180);
+                      const y = 50 + radius * Math.sin((angle - 90) * Math.PI / 180);
+                      
+                      return (
+                        <div
+                          key={idx}
+                          className="absolute w-12 h-12 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 backdrop-blur-sm border border-primary/40 flex items-center justify-center shadow-lg hover:scale-125 hover:shadow-primary/50 transition-all duration-300 cursor-pointer group/module"
+                          style={{
+                            left: `${x}%`,
+                            top: `${y}%`,
+                            transform: 'translate(-50%, -50%)',
+                            animation: `float-slow 4s ease-in-out infinite ${idx * 0.2}s`
                           }}
                         >
-                          <Icon className="w-4 h-4 text-primary" />
+                          <Icon className="w-5 h-5 text-primary group-hover/module:text-accent transition-colors" />
                         </div>
-                      ))}
-                    </div>
+                      );
+                    })}
                   </div>
+
+                  {/* Connection Lines */}
+                  <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+                    {[0, 60, 120, 180, 240, 300].map((angle, idx) => {
+                      const radius = 45;
+                      const x = 50 + radius * Math.cos((angle - 90) * Math.PI / 180);
+                      const y = 50 + radius * Math.sin((angle - 90) * Math.PI / 180);
+                      return (
+                        <line
+                          key={idx}
+                          x1="50%"
+                          y1="50%"
+                          x2={`${x}%`}
+                          y2={`${y}%`}
+                          stroke="currentColor"
+                          strokeWidth="1"
+                          className="text-primary animate-pulse"
+                          style={{ animationDelay: `${idx * 0.2}s` }}
+                        />
+                      );
+                    })}
+                  </svg>
                 </div>
 
-                {/* Benefits with checkmarks */}
-                <div className="space-y-3 pt-2">
+                {/* Benefits */}
+                <div className="space-y-3">
                   {[
-                    { text: "Single login, unified workspace", icon: CheckCircle },
-                    { text: "Native integrations out-of-the-box", icon: Zap },
-                    { text: "Complete customer context always", icon: Users },
-                    { text: "Real-time data synchronization", icon: TrendingUp }
+                    "Single unified workspace",
+                    "Automatic data sync",
+                    "Complete customer context",
+                    "AI-powered automation"
                   ].map((benefit, idx) => (
                     <div 
-                      key={idx} 
-                      className="flex items-start gap-3 text-sm group/item hover:bg-primary/5 p-2 rounded-lg transition-all duration-300"
-                      style={{ animationDelay: `${idx * 100}ms` }}
+                      key={idx}
+                      className="flex items-center gap-3 text-sm text-foreground p-3 rounded-lg bg-primary/5 border border-primary/20 hover:border-primary/40 hover:bg-primary/10 transition-all group/benefit"
                     >
-                      <div className="w-5 h-5 rounded-md bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover/item:bg-primary/30 group-hover/item:scale-110 transition-all">
-                        <benefit.icon className="w-3 h-3 text-primary" />
-                      </div>
-                      <span className="text-foreground font-medium leading-relaxed group-hover/item:text-primary transition-colors">{benefit.text}</span>
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 group-hover/benefit:scale-110 transition-transform" />
+                      <span className="font-medium">{benefit}</span>
                     </div>
                   ))}
                 </div>
