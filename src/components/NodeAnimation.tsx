@@ -1281,29 +1281,16 @@ const NodeAnimation = () => {
         </div>
       </div>;
   }
-  return <div className="w-full py-12">
+  return <>
       {/* Pill at the top */}
-      <div className="flex justify-center mb-8">
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
           <span className="text-sm font-semibold text-primary">The Pullse Difference</span>
         </div>
       </div>
       
-      {/* Enhanced container with better visual hierarchy */}
-      <div className="relative w-full h-[700px] rounded-[2rem] overflow-hidden border border-primary/10 shadow-2xl">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5 animate-gradient"></div>
-        
-        {/* Subtle grid overlay */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
-        backgroundSize: '50px 50px'
-      }}></div>
-        
-        {/* Top status bar */}
-        
-        
-        {/* Main canvas */}
+      {/* Main canvas - full size */}
+      <div className="absolute inset-0">
         <Canvas dpr={[1, 2]} performance={{
         min: 0.5
       }} gl={{
@@ -1312,49 +1299,45 @@ const NodeAnimation = () => {
       }}>
           <Scene />
         </Canvas>
+      </div>
         
-        {/* Bottom section with phases */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 via-background/50 to-transparent backdrop-blur-md border-t border-primary/10">
-          <div className="grid grid-cols-3 gap-8 h-full items-center px-12">
-            {/* Phase 1: Channels */}
-            <div className="flex items-center gap-3 group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                <Mail className="h-4 w-4 text-blue-500" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Unified Communication</div>
-                <div className="text-xs text-muted-foreground">All channels, one place</div>
-              </div>
+      {/* Bottom section with phases */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 via-background/50 to-transparent backdrop-blur-md border-t border-primary/10">
+        <div className="grid grid-cols-3 gap-8 h-full items-center px-12">
+          {/* Phase 1: Channels */}
+          <div className="flex items-center gap-3 group cursor-default">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+              <Mail className="h-4 w-4 text-blue-500" />
             </div>
-            
-            {/* Phase 2: Engine */}
-            <div className="flex items-center gap-3 justify-center group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
-                <Bot className="h-4 w-4 text-purple-500" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Smart Synergy</div>
-                <div className="text-xs text-muted-foreground">AI Augmented Human Support</div>
-              </div>
+            <div>
+              <div className="text-sm font-semibold text-foreground">Unified Communication</div>
+              <div className="text-xs text-muted-foreground">All channels, one place</div>
             </div>
-            
-            {/* Phase 3: Outcomes */}
-            <div className="flex items-center gap-3 justify-end group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
-                <CheckCircle2 className="h-4 w-4 text-green-500" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Excellent Outcomes</div>
-                <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
-              </div>
+          </div>
+          
+          {/* Phase 2: Engine */}
+          <div className="flex items-center gap-3 justify-center group cursor-default">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
+              <Bot className="h-4 w-4 text-purple-500" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-foreground">Smart Synergy</div>
+              <div className="text-xs text-muted-foreground">AI Augmented Human Support</div>
+            </div>
+          </div>
+          
+          {/* Phase 3: Outcomes */}
+          <div className="flex items-center gap-3 justify-end group cursor-default">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
+              <CheckCircle2 className="h-4 w-4 text-green-500" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-foreground">Excellent Outcomes</div>
+              <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
             </div>
           </div>
         </div>
-        
-        {/* Corner accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
       </div>
-    </div>;
+    </>;
 };
 export default NodeAnimation;
