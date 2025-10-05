@@ -13,6 +13,7 @@ import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import AIChatbotPreview from "@/components/AIChatbotPreview";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -106,7 +107,8 @@ const HomeNew = () => {
     description: "Deflect known intents with intelligent automated responses.",
     label: "AI Agent",
     color: "hsl(var(--background))",
-    icon: Bot
+    icon: Bot,
+    customComponent: <AIChatbotPreview />
   }, {
     title: "AI Copilots",
     description: "Draft, summarize, translate—AI assistance for your team.",

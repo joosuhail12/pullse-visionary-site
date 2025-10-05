@@ -469,6 +469,7 @@ export interface CardData {
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   image?: string;
+  customComponent?: React.ReactNode;
 }
 
 interface MagicBentoProps {
@@ -552,7 +553,9 @@ const MagicBento = ({
                   <p className="card__description">{card.description}</p>
                   
                   <div className="card__screenshot">
-                    {card.image ? (
+                    {card.customComponent ? (
+                      <div className="w-full h-full">{card.customComponent}</div>
+                    ) : card.image ? (
                       <img 
                         src={card.image} 
                         alt={`${card.title} preview`}
@@ -585,7 +588,9 @@ const MagicBento = ({
                 <p className="card__description">{card.description}</p>
                 
                 <div className="card__screenshot">
-                  {card.image ? (
+                  {card.customComponent ? (
+                    <div className="w-full h-full">{card.customComponent}</div>
+                  ) : card.image ? (
                     <img 
                       src={card.image} 
                       alt={`${card.title} preview`}
