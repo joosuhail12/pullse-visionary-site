@@ -82,17 +82,39 @@ export const AIAgentsSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-20 space-y-5 animate-fade-in">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-semibold text-primary tracking-wide">Beyond Traditional Chatbots</span>
+        <div className="text-center mb-20 space-y-6 animate-fade-in max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm shadow-sm">
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <span className="text-xs font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent tracking-wide">
+              Next-Gen AI Automation
+            </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-            AI Agents & Copilots
-          </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Self-service bots that execute actions and intelligent copilots that augment your team
-          </p>
+          
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+              AI Agents That <span className="text-primary">Actually Work</span>
+            </h2>
+            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Deploy autonomous bots that handle customer requests end-to-end, and intelligent copilots that make your team 10x more productive
+            </p>
+          </div>
+
+          {/* Stats or social proof */}
+          <div className="flex items-center justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">94%</span> automation rate
+              </span>
+            </div>
+            <div className="h-4 w-px bg-border" />
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              <span className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">2.3s</span> avg response
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Tab Navigation - Modern Segmented Control */}
