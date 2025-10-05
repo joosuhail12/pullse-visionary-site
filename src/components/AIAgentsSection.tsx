@@ -95,36 +95,38 @@ export const AIAgentsSection = () => {
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-16">
-          <div className="inline-flex rounded-xl bg-card border border-border p-1.5 gap-2 shadow-lg backdrop-blur-sm">
+        {/* Tab Navigation - Modern Segmented Control */}
+        <div className="flex justify-center mb-20">
+          <div className="relative inline-flex items-center rounded-full bg-muted/50 backdrop-blur-sm p-1 border border-border/50">
+            {/* Sliding indicator */}
+            <div
+              className={`absolute top-1 bottom-1 rounded-full bg-primary shadow-md transition-all duration-300 ease-out ${
+                activeTab === 'bots' ? 'left-1 right-[50%]' : 'left-[50%] right-1'
+              }`}
+            />
+            
             <button
               onClick={() => setActiveTab('bots')}
-              className={`px-8 py-4 rounded-lg font-semibold transition-all duration-300 relative overflow-hidden group ${
+              className={`relative z-10 flex items-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm transition-colors duration-300 ${
                 activeTab === 'bots'
-                  ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg scale-105'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  ? 'text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {activeTab === 'bots' && (
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 animate-shimmer" />
-              )}
-              <Bot className="w-5 h-5 inline-block mr-2" />
-              Self-Service Bots
+              <Bot className="w-4 h-4" />
+              <span className="whitespace-nowrap">Self-Service Bots</span>
             </button>
+            
             <button
               onClick={() => setActiveTab('copilots')}
-              className={`px-8 py-4 rounded-lg font-semibold transition-all duration-300 relative overflow-hidden group ${
+              className={`relative z-10 flex items-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm transition-colors duration-300 ${
                 activeTab === 'copilots'
-                  ? 'bg-gradient-to-r from-accent to-accent/80 text-accent-foreground shadow-lg scale-105'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  ? 'text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {activeTab === 'copilots' && (
-                <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-white/20 to-accent/0 animate-shimmer" />
-              )}
-              <User className="w-5 h-5 inline-block mr-2" />
-              Agent Copilots
+              <User className="w-4 h-4" />
+              <span className="whitespace-nowrap">Agent Copilots</span>
             </button>
           </div>
         </div>
