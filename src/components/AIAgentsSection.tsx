@@ -210,28 +210,44 @@ export const AIAgentsSection = () => {
                   {/* Content */}
                   <div className="relative z-10">
                     {/* Bot conversation */}
-                    <div className="space-y-4 mb-8">
-                      <div className="flex gap-3 animate-fade-in">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <User className="w-5 h-5 text-white" />
+                    <div className="space-y-3 mb-6">
+                      {/* User message */}
+                      <div className="flex gap-2.5 animate-fade-in">
+                        <div className="relative flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md ring-2 ring-background">
+                            <User className="w-4 h-4 text-white" />
+                          </div>
                         </div>
-                        <div className="bg-muted/80 backdrop-blur-sm rounded-2xl rounded-tl-sm px-5 py-3 max-w-[85%] shadow-md">
-                          <p className="text-sm leading-relaxed">{typingMessage}</p>
-                          {typingMessage.length < fullMessage.length && (
-                            <span className="inline-block w-1 h-4 bg-foreground ml-1 animate-pulse" />
-                          )}
+                        <div className="flex-1 max-w-[80%]">
+                          <div className="bg-card/90 backdrop-blur-sm rounded-2xl rounded-tl-md px-4 py-2.5 shadow-sm border border-border/50">
+                            <p className="text-sm leading-relaxed text-foreground">{typingMessage}</p>
+                            {typingMessage.length < fullMessage.length && (
+                              <span className="inline-block w-0.5 h-3.5 bg-primary ml-1 animate-pulse" />
+                            )}
+                          </div>
+                          <p className="text-[10px] text-muted-foreground mt-1 ml-3">Just now</p>
                         </div>
                       </div>
                       
+                      {/* Bot response */}
                       {typingMessage.length === fullMessage.length && (
-                        <div className="flex gap-3 justify-end animate-fade-in">
-                          <div className="bg-gradient-to-r from-primary to-primary/80 rounded-2xl rounded-tr-sm px-5 py-3 max-w-[85%] shadow-lg">
-                            <p className="text-sm text-primary-foreground leading-relaxed">
-                              I'll execute those changes right away. Let me access your account systems.
-                            </p>
+                        <div className="flex gap-2.5 justify-end animate-fade-in">
+                          <div className="flex-1 max-w-[80%] flex flex-col items-end">
+                            <div className="bg-gradient-to-br from-primary via-primary to-primary/90 rounded-2xl rounded-tr-md px-4 py-2.5 shadow-lg">
+                              <p className="text-sm text-primary-foreground leading-relaxed">
+                                I'll execute those changes right away. Let me access your account systems.
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-1.5 mt-1 mr-3">
+                              <p className="text-[10px] text-muted-foreground">Just now</p>
+                              <CheckCircle className="w-3 h-3 text-primary" />
+                            </div>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-lg">
-                            <Bot className="w-5 h-5 text-primary-foreground" />
+                          <div className="relative flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/90 flex items-center justify-center shadow-md ring-2 ring-primary/20">
+                              <Bot className="w-4 h-4 text-primary-foreground" />
+                            </div>
+                            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-card" />
                           </div>
                         </div>
                       )}
@@ -239,59 +255,60 @@ export const AIAgentsSection = () => {
 
                     {/* API Actions */}
                     {showApiCalls && (
-                      <div className="border-t border-border/50 pt-6 animate-fade-in">
-                        <div className="flex items-center justify-between mb-5">
-                          <p className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-                            <RefreshCw className="w-3 h-3 animate-spin" />
-                            EXECUTING API CALLS
-                          </p>
-                          <div className="flex items-center gap-1">
-                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-xs text-green-500 font-semibold">LIVE</span>
+                      <div className="border-t border-border/30 pt-5 animate-fade-in">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                            <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+                              Executing Actions
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-[10px] text-green-600 font-semibold">LIVE</span>
                           </div>
                         </div>
                         
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                           {apiActions.map((action, idx) => {
                             const Icon = action.icon;
                             return (
                               <div
                                 key={idx}
-                                className="group relative overflow-hidden rounded-xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/50 transition-all duration-500"
+                                className="group relative overflow-hidden rounded-xl bg-card/60 backdrop-blur-sm border border-border/40 hover:border-primary/40 hover:bg-card/80 transition-all duration-300"
                                 style={{ 
-                                  animationDelay: `${idx * 200}ms`,
-                                  animation: animateApi ? 'pulse 2s ease-in-out' : 'none'
+                                  animationDelay: `${idx * 150}ms`,
                                 }}
                               >
-                                {/* Animated background on execution */}
+                                {/* Success wave animation */}
                                 {animateApi && (
                                   <div 
-                                    className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 animate-shimmer"
-                                    style={{ animationDelay: `${idx * 200}ms` }}
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent animate-shimmer"
+                                    style={{ animationDelay: `${idx * 150}ms` }}
                                   />
                                 )}
                                 
-                                <div className="relative p-4 flex items-center gap-4">
-                                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${
+                                <div className="relative p-3 flex items-center gap-3">
+                                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${
                                     idx === 0 ? 'from-blue-500 to-cyan-500' :
                                     idx === 1 ? 'from-purple-500 to-pink-500' :
                                     'from-green-500 to-emerald-500'
-                                  } flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                                    <Icon className="w-5 h-5 text-white" />
+                                  } flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform`}>
+                                    <Icon className="w-4 h-4 text-white" />
                                   </div>
                                   
                                   <div className="flex-1 min-w-0">
-                                    <div className="font-semibold text-sm mb-1">{action.label}</div>
-                                    <div className="font-mono text-xs text-muted-foreground">{action.api}</div>
+                                    <div className="font-semibold text-xs mb-0.5">{action.label}</div>
+                                    <div className="font-mono text-[10px] text-muted-foreground truncate">{action.api}</div>
                                   </div>
                                   
-                                  <div className="flex items-center gap-3">
-                                    <span className="text-xs text-muted-foreground font-mono">{action.time}</span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[10px] text-muted-foreground font-mono tabular-nums">{action.time}</span>
                                     <CheckCircle
-                                      className={`w-5 h-5 text-green-500 transition-all duration-500 ${
-                                        animateApi ? 'opacity-100 scale-110' : 'opacity-0 scale-50'
+                                      className={`w-4 h-4 text-green-500 transition-all duration-500 ${
+                                        animateApi ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                                       }`}
-                                      style={{ transitionDelay: `${idx * 200 + 500}ms` }}
+                                      style={{ transitionDelay: `${idx * 150 + 400}ms` }}
                                     />
                                   </div>
                                 </div>
