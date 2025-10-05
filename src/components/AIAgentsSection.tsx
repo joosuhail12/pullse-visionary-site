@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Bot, User, Zap, Database, Code, CheckCircle, MessageSquare, Sparkles, ArrowRight, TrendingUp, Clock, Activity, RefreshCw, Shield, Boxes } from 'lucide-react';
 import gsap from 'gsap';
 import aiCopilotScreenshot from '@/assets/ai-copilot-screenshot.png';
+import copilotInterfaceScreenshot from '@/assets/copilot-interface-screenshot.png';
 
 export const AIAgentsSection = () => {
   const [activeTab, setActiveTab] = useState<'bots' | 'copilots'>('bots');
@@ -318,123 +319,13 @@ export const AIAgentsSection = () => {
                 <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 to-purple-500/20 rounded-3xl blur-3xl opacity-50 animate-pulse" />
                 
                 <div className="relative">
-                  {/* Main copilot interface - inspired by screenshot */}
-                  <div className="bg-card/80 backdrop-blur-xl border border-border rounded-2xl p-8 shadow-2xl overflow-hidden">
-                    {/* Animated background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-purple-500/5" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,hsl(var(--accent)/0.1),transparent_60%)]" />
-                    
-                    <div className="relative z-10">
-                      {/* Agent header */}
-                      <div className="flex items-center justify-between mb-8 pb-6 border-b border-border/50">
-                        <div className="flex items-center gap-4">
-                          <div className="relative">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center shadow-lg">
-                              <User className="w-6 h-6 text-white" />
-                            </div>
-                            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-card animate-pulse" />
-                          </div>
-                          <div>
-                            <h4 className="font-bold text-lg">Sarah Martinez</h4>
-                            <p className="text-sm text-muted-foreground">Support Agent • Active</p>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-                          <Activity className="w-4 h-4 text-green-500" />
-                          <span className="text-sm font-semibold text-green-500">AI Active</span>
-                        </div>
-                      </div>
-
-                      {/* Copilot actions - using actual screenshot as inspiration */}
-                      <div className="space-y-4 mb-8">
-                        {[
-                          { 
-                            icon: MessageSquare, 
-                            title: 'Summary Generated', 
-                            desc: 'Customer requesting refund for order #1234 due to delayed shipping. Previous positive history.',
-                            gradient: 'from-blue-500 to-cyan-500',
-                            action: 'View Full Context'
-                          },
-                          { 
-                            icon: Sparkles, 
-                            title: 'Response Draft Ready', 
-                            desc: 'Apology drafted with refund offer + 15% discount code for future purchase.',
-                            gradient: 'from-purple-500 to-pink-500',
-                            action: 'Edit & Send'
-                          },
-                          { 
-                            icon: Zap, 
-                            title: 'Quick Actions Available', 
-                            desc: 'Process refund • Apply discount • Update shipping status',
-                            gradient: 'from-orange-500 to-red-500',
-                            action: 'Execute'
-                          }
-                        ].map((item, idx) => {
-                          const Icon = item.icon;
-                          return (
-                            <div
-                              key={idx}
-                              className="group relative overflow-hidden rounded-xl bg-card/50 backdrop-blur-sm border border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                            >
-                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                              
-                              <div className="relative p-5">
-                                <div className="flex items-start gap-4 mb-3">
-                                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                                    <Icon className="w-5 h-5 text-white" />
-                                  </div>
-                                  <div className="flex-1">
-                                    <h5 className="font-semibold mb-2 text-base group-hover:text-accent transition-colors">{item.title}</h5>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                                  </div>
-                                </div>
-                                
-                                <button className="w-full mt-3 px-4 py-2 rounded-lg bg-muted/50 hover:bg-accent/20 border border-border hover:border-accent/50 text-sm font-medium transition-all flex items-center justify-center gap-2 group-hover:translate-x-1">
-                                  {item.action}
-                                  <ArrowRight className="w-4 h-4" />
-                                </button>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* AI Insight */}
-                      <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-accent/10 to-purple-500/10 border border-accent/20 p-5">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,hsl(var(--accent)/0.2),transparent_50%)]" />
-                        <div className="relative flex items-start gap-3">
-                          <Sparkles className="w-5 h-5 text-accent mt-0.5 flex-shrink-0 animate-pulse" />
-                          <div>
-                            <p className="text-xs font-bold tracking-wider text-accent mb-2">AI INSIGHT</p>
-                            <p className="text-sm leading-relaxed mb-3">Customer shows frustration keywords. Recommend offering expedited shipping replacement + loyalty points to prevent churn.</p>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <Clock className="w-3 h-3" />
-                              <span>Confidence: 94% • Based on 1,247 similar cases</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Performance metrics overlay */}
-                  <div className="absolute -bottom-8 -right-8 grid grid-cols-3 gap-3">
-                    {copilotMetrics.map((metric, idx) => {
-                      const Icon = metric.icon;
-                      return (
-                        <div key={idx} className="bg-card/90 backdrop-blur-xl border border-border rounded-xl p-4 shadow-xl min-w-[120px]">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Icon className="w-4 h-4 text-accent" />
-                            <span className="text-xs text-muted-foreground">{metric.label}</span>
-                          </div>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold">{metric.value}</span>
-                            <span className="text-xs font-semibold text-green-500">{metric.change}</span>
-                          </div>
-                        </div>
-                      );
-                    })}
+                  {/* Copilot Screenshot */}
+                  <div className="relative bg-card/80 backdrop-blur-xl border border-border rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={copilotInterfaceScreenshot} 
+                      alt="Pullse AI Copilot Interface showing agent assistance features" 
+                      className="w-full h-auto"
+                    />
                   </div>
                 </div>
 
