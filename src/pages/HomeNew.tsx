@@ -224,10 +224,29 @@ const HomeNew = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-[60]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background -z-20" />
         
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-[60]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
+        
+        {/* LiquidEther overlay - lazy loaded */}
+        <div className="absolute inset-0 -z-10 opacity-50">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={['#FF00C8', '#A805FF', '#D3A9EA']}
+              mouseForce={25}
+              cursorSize={120}
+              isViscous={false}
+              resolution={0.5}
+              autoDemo={true}
+              autoSpeed={0.3}
+              autoIntensity={1.8}
+              takeoverDuration={0.3}
+              autoResumeDelay={4000}
+              autoRampDuration={0.8}
+            />
+          </Suspense>
+        </div>
 
         <div className="container mx-auto px-4 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -348,17 +367,14 @@ const HomeNew = () => {
       </section>
 
       {/* Node Animation */}
-      <section className="relative fade-in-scroll overflow-hidden min-h-screen flex items-center py-20">
+      <section className="py-32 relative fade-in-scroll overflow-hidden">
         {/* Decorative background with color variety */}
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
         <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
         
-        {/* Content container */}
-        <div className="relative w-full h-[700px]">
-          <Suspense fallback={<div className="w-full h-full animate-pulse bg-muted/20" />}>
-            <NodeAnimation />
-          </Suspense>
-        </div>
+        <Suspense fallback={<div className="w-full h-[400px] animate-pulse bg-muted/20" />}>
+          <NodeAnimation />
+        </Suspense>
       </section>
 
       {/* Benefits Showcase */}
