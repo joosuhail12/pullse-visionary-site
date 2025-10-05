@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Bot, User, Zap, Database, Code, CheckCircle, MessageSquare, Sparkles, ArrowRight, TrendingUp, Clock, Activity, RefreshCw, Shield, Boxes } from 'lucide-react';
 import gsap from 'gsap';
 import aiCopilotScreenshot from '@/assets/ai-copilot-screenshot.png';
+import copilotInterfaceScreenshot from '@/assets/copilot-interface-screenshot.png';
 
 export const AIAgentsSection = () => {
   const [activeTab, setActiveTab] = useState<'bots' | 'copilots'>('bots');
@@ -272,96 +273,17 @@ export const AIAgentsSection = () => {
               {/* Left: Interactive Demo */}
               <div className="relative order-2 lg:order-1 lg:pr-8">
                 <div className="relative">
-                  {/* Main copilot interface - inspired by screenshot */}
-                  <div className="bg-card border border-border rounded-3xl p-8 shadow-xl overflow-hidden">
+                  {/* Main copilot interface - actual screenshot */}
+                  <div className="bg-card border border-border rounded-3xl overflow-hidden shadow-xl">
                     {/* Minimal accent */}
                     <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
                     
                     <div className="relative z-10">
-                      {/* Agent header */}
-                      <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                              <User className="w-5 h-5" />
-                            </div>
-                            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-card" />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-base">Sarah Martinez</h4>
-                            <p className="text-xs text-muted-foreground">Support Agent</p>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10">
-                          <Activity className="w-3 h-3 text-green-500" />
-                          <span className="text-xs font-medium text-green-500">AI Active</span>
-                        </div>
-                      </div>
-
-                      {/* Copilot actions - using actual screenshot as inspiration */}
-                      <div className="space-y-3 mb-6">
-                        {[
-                          { 
-                            icon: MessageSquare, 
-                            title: 'Summary Generated', 
-                            desc: 'Customer requesting refund for order #1234 due to delayed shipping. Previous positive history.',
-                            action: 'View Full Context'
-                          },
-                          { 
-                            icon: Sparkles, 
-                            title: 'Response Draft Ready', 
-                            desc: 'Apology drafted with refund offer + 15% discount code for future purchase.',
-                            action: 'Edit & Send'
-                          },
-                          { 
-                            icon: Zap, 
-                            title: 'Quick Actions Available', 
-                            desc: 'Process refund • Apply discount • Update shipping status',
-                            action: 'Execute'
-                          }
-                        ].map((item, idx) => {
-                          const Icon = item.icon;
-                          return (
-                            <div
-                              key={idx}
-                              className="group rounded-xl bg-muted/30 hover:bg-muted/50 border border-transparent hover:border-border transition-all duration-300 cursor-pointer"
-                            >
-                              <div className="p-5">
-                                <div className="flex items-start gap-3 mb-3">
-                                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                                    <Icon className="w-4 h-4 text-primary" />
-                                  </div>
-                                  <div className="flex-1 pt-0.5">
-                                    <h5 className="font-semibold mb-1.5 text-sm">{item.title}</h5>
-                                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                                  </div>
-                                </div>
-                                
-                                <button className="w-full px-3 py-2 rounded-lg bg-background hover:bg-muted text-xs font-medium transition-all flex items-center justify-center gap-2">
-                                  {item.action}
-                                  <ArrowRight className="w-3 h-3" />
-                                </button>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* AI Insight */}
-                      <div className="rounded-xl bg-primary/5 border border-primary/10 p-5">
-                        <div className="flex items-start gap-3">
-                          <Sparkles className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="text-xs font-medium tracking-wide text-primary mb-2">AI Insight</p>
-                            <p className="text-sm leading-relaxed mb-3">Customer shows frustration keywords. Recommend offering expedited shipping replacement + loyalty points to prevent churn.</p>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <Clock className="w-3 h-3" />
-                              <span>94% confidence • 1,247 similar cases</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <img 
+                        src={copilotInterfaceScreenshot} 
+                        alt="Pullse Copilot Interface showing Creation Assistant creating a Linear issue"
+                        className="w-full h-auto"
+                      />
                     </div>
                   </div>
 
