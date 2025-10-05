@@ -72,8 +72,19 @@ export const AIAgentsSection = () => {
 
   return (
     <section ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden bg-background">
-      {/* Minimal background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/[0.02] to-background" />
+      {/* Modern layered background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/[0.03] to-background" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,hsl(var(--accent)/0.06),transparent_50%)]" />
+      
+      {/* Animated dot pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.3)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
+      </div>
+      
+      {/* Floating gradient orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-7xl">
         {/* Header */}
