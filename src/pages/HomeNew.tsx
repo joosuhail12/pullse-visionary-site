@@ -13,10 +13,10 @@ import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import analyticsScreenshot from "@/assets/analytics-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
-import AnalyticsPreview from "@/components/AnalyticsPreview";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -139,7 +139,7 @@ const HomeNew = () => {
     label: "Insights",
     color: "hsl(var(--background))",
     icon: BarChart3,
-    customComponent: <AnalyticsPreview />
+    image: analyticsScreenshot
   }];
   const featureBento = [{
     title: "Fewer back-and-forths",
