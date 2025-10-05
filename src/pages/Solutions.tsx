@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SectionWithLiquid from "@/components/SectionWithLiquid";
 import { Link } from "react-router-dom";
 import { ShoppingCart, Briefcase, ArrowRight } from "lucide-react";
 
@@ -25,7 +26,7 @@ const Solutions = () => {
     <div className="min-h-screen">
       <Navigation />
 
-      <div className="pt-32 pb-20">
+      <SectionWithLiquid className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <h1 className="text-5xl font-bold mb-6">Solutions</h1>
@@ -62,7 +63,7 @@ const Solutions = () => {
             ))}
           </div>
         </div>
-      </div>
+      </SectionWithLiquid>
 
       <Footer />
     </div>

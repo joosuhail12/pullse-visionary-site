@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SectionWithLiquid from "@/components/SectionWithLiquid";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -14,7 +15,7 @@ const GenericPage = ({ title, description }: GenericPageProps) => {
     <div className="min-h-screen">
       <Navigation />
 
-      <div className="pt-32 pb-20">
+      <SectionWithLiquid className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="glass-strong p-12 rounded-3xl text-center">
@@ -37,7 +38,7 @@ const GenericPage = ({ title, description }: GenericPageProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </SectionWithLiquid>
 
       <Footer />
     </div>
