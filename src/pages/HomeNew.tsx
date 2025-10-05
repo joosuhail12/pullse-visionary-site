@@ -13,6 +13,7 @@ import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 
 // Lazy load heavy animation components
@@ -121,7 +122,8 @@ const HomeNew = () => {
     description: "Refunds, plan changes, order status—with guardrails & audit trails.",
     label: "Actions",
     color: "hsl(var(--background))",
-    icon: Users
+    icon: Users,
+    image: aiToolsScreenshot
   }, {
     title: "Auto-QA",
     description: "Score 100% of conversations for accuracy, empathy, policy.",
