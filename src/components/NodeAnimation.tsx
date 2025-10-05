@@ -5,20 +5,20 @@ import * as THREE from "three";
 import { Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2 } from "lucide-react";
 import logoIcon from "@/assets/logo-white.svg";
 
-// Optimized particle field background
+// Optimized particle field background with smoother animation
 const ParticleField = () => {
   const pointsRef = useRef<THREE.Points>(null);
-  const particleCount = 500; // Reduced for performance
+  const particleCount = 300; // Further reduced for better performance
 
   const particles = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 50;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 30;
+      positions[i * 3] = (Math.random() - 0.5) * 45;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 35;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 25;
       const color = new THREE.Color();
-      color.setHSL(0.7 + Math.random() * 0.1, 0.7, 0.4 + Math.random() * 0.3);
+      color.setHSL(0.72 + Math.random() * 0.08, 0.65, 0.45 + Math.random() * 0.25);
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
       colors[i * 3 + 2] = color.b;
@@ -28,16 +28,28 @@ const ParticleField = () => {
       colors
     };
   }, []);
-  useFrame(state => {
+  
+  useFrame((state) => {
     if (!pointsRef.current) return;
-    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.03;
+    const t = state.clock.elapsedTime;
+    pointsRef.current.rotation.y = t * 0.02;
+    pointsRef.current.rotation.x = Math.sin(t * 0.1) * 0.05;
   });
+  
   return <points ref={pointsRef}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={particleCount} array={particles.positions} itemSize={3} />
         <bufferAttribute attach="attributes-color" count={particleCount} array={particles.colors} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.05} vertexColors transparent opacity={0.5} sizeAttenuation blending={THREE.AdditiveBlending} />
+      <pointsMaterial 
+        size={0.06} 
+        vertexColors 
+        transparent 
+        opacity={0.4} 
+        sizeAttenuation 
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
     </points>;
 };
 
@@ -56,7 +68,7 @@ const FlowingPathParticle = ({
   const particleRef = useRef<THREE.Mesh>(null);
   const [progress, setProgress] = useState(0);
 
-  useFrame(state => {
+  useFrame((state) => {
     const t = ((state.clock.elapsedTime * speed + delay) % 4) / 4;
     setProgress(t);
 
@@ -68,10 +80,12 @@ const FlowingPathParticle = ({
       const currentPoint = points[index];
       const nextPoint = points[nextIndex];
       
-      particleRef.current.position.lerpVectors(currentPoint, nextPoint, localT);
+      // Smooth interpolation with easing
+      const easedT = localT * localT * (3 - 2 * localT);
+      particleRef.current.position.lerpVectors(currentPoint, nextPoint, easedT);
       
-      // Scale based on position for depth effect
-      const scale = 0.8 + Math.sin(t * Math.PI) * 0.4;
+      // Smoother scale transition
+      const scale = 0.85 + Math.sin(t * Math.PI) * 0.35;
       particleRef.current.scale.setScalar(scale);
     }
   });
@@ -1156,21 +1170,31 @@ const Scene = () => {
     }
   }], []);
   return <>
-      <PerspectiveCamera makeDefault position={[0, 0, 18]} fov={45} />
+      <PerspectiveCamera makeDefault position={[0, 0, 18]} fov={42} near={0.1} far={100} />
       
-      <Environment preset="city" />
+      {/* Optimized environment with lower quality for performance */}
+      <Environment preset="city" background={false} />
       
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 15]} intensity={3} color="#7c3aed" />
-      <pointLight position={[-10, 10, 10]} intensity={2} color="#3b82f6" />
-      <pointLight position={[0, -5, 10]} intensity={2} color="#10b981" />
+      {/* Simplified lighting setup for better performance */}
+      <ambientLight intensity={0.6} />
+      <pointLight position={[10, 10, 15]} intensity={2.5} color="hsl(262, 83%, 58%)" castShadow={false} />
+      <pointLight position={[-10, 10, 10]} intensity={1.8} color="hsl(190, 95%, 42%)" castShadow={false} />
+      <pointLight position={[0, -5, 10]} intensity={1.8} color="hsl(152, 69%, 45%)" castShadow={false} />
       
-      <spotLight position={[0, 10, 10]} angle={0.5} penumbra={1} intensity={4} color="#a78bfa" />
+      <spotLight 
+        position={[0, 10, 10]} 
+        angle={0.5} 
+        penumbra={1} 
+        intensity={3.5} 
+        color="hsl(262, 83%, 70%)" 
+        castShadow={false}
+        decay={2}
+      />
 
       <ParticleField />
       
-      {/* Fog for depth perception */}
-      <fog attach="fog" args={['#1a1a2e', 10, 35]} />
+      {/* Optimized fog for depth perception */}
+      <fog attach="fog" args={['hsl(220, 47%, 11%)', 12, 40]} />
 
       {/* Multiple curved black arrow paths flowing into center - reduced for clarity */}
       {/* Top group - with question pills */}
@@ -1229,52 +1253,50 @@ const NodeAnimation = () => {
   }, []);
   if (prefersReducedMotion) {
     return <div className="w-full py-12">
-        <div className="glass-strong rounded-3xl p-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="glass-strong rounded-3xl p-12 border border-primary/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center space-y-4">
-              <div className="text-6xl mb-4 animate-fade-in">📧💬📞</div>
-              <h3 className="text-xl font-bold mb-2">1. Channels</h3>
+              <div className="text-6xl mb-4">📧💬📞</div>
+              <h3 className="text-xl font-bold mb-2 text-foreground">1. Channels</h3>
               <p className="text-sm text-muted-foreground">Multi-channel support</p>
               <div className="flex flex-wrap gap-2 justify-center mt-4">
-                <span className="text-xs px-3 py-1 rounded-full glass">12 Email</span>
-                <span className="text-xs px-3 py-1 rounded-full glass">8 Chat</span>
-                <span className="text-xs px-3 py-1 rounded-full glass">5 Voice</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-teal/20 text-foreground">12 Email</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-teal/20 text-foreground">8 Chat</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-teal/20 text-foreground">5 Voice</span>
               </div>
             </div>
             <div className="text-center space-y-4">
               <div className="relative inline-block">
-                <div className="absolute inset-0 blur-2xl bg-primary/30 rounded-full animate-pulse"></div>
-                <img src={logoIcon} alt="Pullse" className="w-32 h-32 mx-auto mb-4 relative z-10" />
+                <div className="absolute inset-0 blur-3xl bg-primary/20 rounded-full"></div>
+                <img src={logoIcon} alt="Pullse" className="w-32 h-32 mx-auto mb-4 relative z-10 drop-shadow-lg" />
               </div>
-              <h3 className="text-xl font-bold mb-2">2. Human Augmentation Engine</h3>
+              <h3 className="text-xl font-bold mb-2 text-foreground">2. Human Augmentation Engine</h3>
               <p className="text-sm text-muted-foreground">AI + Human collaboration</p>
               <div className="space-y-2 mt-4">
-                <div className="text-xs px-3 py-2 rounded-lg glass flex items-center justify-center gap-2">
-                  <Clock className="h-3 w-3" />
-                  <span>0.8s avg response</span>
+                <div className="text-xs px-4 py-2 rounded-lg glass border border-primary/20 flex items-center justify-center gap-2">
+                  <Clock className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-foreground">0.8s avg response</span>
                 </div>
-                <div className="text-xs px-3 py-2 rounded-lg glass flex items-center justify-center gap-2">
-                  <TrendingUp className="h-3 w-3" />
-                  <span>98.5% satisfaction</span>
+                <div className="text-xs px-4 py-2 rounded-lg glass border border-primary/20 flex items-center justify-center gap-2">
+                  <TrendingUp className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-foreground">98.5% satisfaction</span>
                 </div>
               </div>
             </div>
             <div className="text-center space-y-4">
-              <div className="text-6xl mb-4 animate-fade-in" style={{
-              animationDelay: '0.2s'
-            }}>😊⭐❤️</div>
-              <h3 className="text-xl font-bold mb-2">3. Outcomes</h3>
+              <div className="text-6xl mb-4">😊⭐❤️</div>
+              <h3 className="text-xl font-bold mb-2 text-foreground">3. Outcomes</h3>
               <p className="text-sm text-muted-foreground">Delighted customers</p>
               <div className="flex flex-wrap gap-2 justify-center mt-4">
-                <span className="text-xs px-3 py-1 rounded-full glass">+847 Satisfied</span>
-                <span className="text-xs px-3 py-1 rounded-full glass">+412 5-Star</span>
-                <span className="text-xs px-3 py-1 rounded-full glass">+289 Delighted</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-green/20 text-foreground">+847 Satisfied</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-green/20 text-foreground">+412 5-Star</span>
+                <span className="text-xs px-3 py-1.5 rounded-full glass border border-accent-green/20 text-foreground">+289 Delighted</span>
               </div>
             </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-primary/20">
-            <p className="text-center text-sm text-muted-foreground">
+          <div className="mt-10 pt-8 border-t border-primary/10">
+            <p className="text-center text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               Customer requests flow through our AI-powered engine, where human expertise and artificial intelligence collaborate to deliver exceptional experiences.
             </p>
           </div>
@@ -1282,78 +1304,86 @@ const NodeAnimation = () => {
       </div>;
   }
   return <div className="w-full py-12">
-      {/* Pill at the top */}
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-          <span className="text-sm font-semibold text-primary">The Pullse Difference</span>
+      {/* Pill at the top with subtle animation */}
+      <div className="flex justify-center mb-8 animate-fade-in">
+        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-primary/20 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+          <Activity className="h-4 w-4 text-primary animate-pulse" />
+          <span className="text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+            The Pullse Difference
+          </span>
         </div>
       </div>
       
-      {/* Enhanced container with better visual hierarchy */}
-      <div className="relative w-full h-[700px] rounded-[2rem] overflow-hidden border border-primary/10 shadow-2xl">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5 animate-gradient"></div>
+      {/* Enhanced container with improved glassmorphism */}
+      <div className="relative w-full h-[700px] rounded-[2rem] overflow-hidden glass-strong shadow-2xl hover:shadow-primary/10 transition-shadow duration-500">
+        {/* Multi-layered animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent-teal/5 animate-gradient"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-accent-orange/3 to-transparent opacity-50"></div>
         
-        {/* Subtle grid overlay */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
-        backgroundSize: '50px 50px'
-      }}></div>
+        {/* Refined grid overlay */}
+        <div className="absolute inset-0 opacity-[0.015]" style={{
+          backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+          backgroundPosition: 'center center'
+        }}></div>
         
-        {/* Top status bar */}
-        
-        
-        {/* Main canvas */}
-        <Canvas dpr={[1, 2]} performance={{
-        min: 0.5
-      }} gl={{
-        antialias: true,
-        alpha: true
-      }}>
+        {/* Optimized canvas with performance settings */}
+        <Canvas 
+          dpr={[1, 1.5]} 
+          performance={{ min: 0.5, max: 1 }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: true
+          }}
+          frameloop="always"
+        >
           <Scene />
         </Canvas>
         
-        {/* Bottom section with phases */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 via-background/50 to-transparent backdrop-blur-md border-t border-primary/10">
-          <div className="grid grid-cols-3 gap-8 h-full items-center px-12">
+        {/* Enhanced bottom section with better visual hierarchy */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background/95 via-background/60 to-transparent backdrop-blur-xl border-t border-primary/10">
+          <div className="grid grid-cols-3 gap-6 h-full items-center px-8 md:px-12">
             {/* Phase 1: Channels */}
-            <div className="flex items-center gap-3 group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                <Mail className="h-4 w-4 text-blue-500" />
+            <div className="flex items-center gap-3 group cursor-default hover-scale">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-accent-teal/10 to-accent-teal/5 border border-accent-teal/20 group-hover:from-accent-teal/20 group-hover:to-accent-teal/10 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent-teal/20">
+                <Mail className="h-4 w-4 text-accent-teal" />
               </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Unified Communication</div>
-                <div className="text-xs text-muted-foreground">All channels, one place</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-foreground truncate">Unified Communication</div>
+                <div className="text-xs text-muted-foreground truncate">All channels, one place</div>
               </div>
             </div>
             
             {/* Phase 2: Engine */}
-            <div className="flex items-center gap-3 justify-center group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
-                <Bot className="h-4 w-4 text-purple-500" />
+            <div className="flex items-center gap-3 justify-center group cursor-default hover-scale">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/20">
+                <Bot className="h-4 w-4 text-primary" />
               </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Smart Synergy</div>
-                <div className="text-xs text-muted-foreground">AI Augmented Human Support</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-foreground truncate">Smart Synergy</div>
+                <div className="text-xs text-muted-foreground truncate">AI + Human excellence</div>
               </div>
             </div>
             
             {/* Phase 3: Outcomes */}
-            <div className="flex items-center gap-3 justify-end group cursor-default">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
-                <CheckCircle2 className="h-4 w-4 text-green-500" />
+            <div className="flex items-center gap-3 justify-end group cursor-default hover-scale">
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-accent-green/10 to-accent-green/5 border border-accent-green/20 group-hover:from-accent-green/20 group-hover:to-accent-green/10 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent-green/20">
+                <CheckCircle2 className="h-4 w-4 text-accent-green" />
               </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">Excellent Outcomes</div>
-                <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-foreground truncate">Excellent Outcomes</div>
+                <div className="text-xs text-muted-foreground truncate">Faster resolutions</div>
               </div>
             </div>
           </div>
         </div>
         
-        {/* Corner accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
+        {/* Refined corner accents with smoother blur */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[120px] animate-float-slow pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-teal/5 rounded-full blur-[120px] animate-float-slower pointer-events-none"></div>
       </div>
     </div>;
 };
