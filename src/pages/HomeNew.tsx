@@ -16,6 +16,7 @@ import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
+import AnalyticsPreview from "@/components/AnalyticsPreview";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -137,7 +138,8 @@ const HomeNew = () => {
     description: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
     label: "Insights",
     color: "hsl(var(--background))",
-    icon: BarChart3
+    icon: BarChart3,
+    customComponent: <AnalyticsPreview />
   }];
   const featureBento = [{
     title: "Fewer back-and-forths",
