@@ -11,6 +11,7 @@ import MagicBento, { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
+import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -97,7 +98,8 @@ const HomeNew = () => {
     description: "Visual routing, tagging, SLAs, escalations.",
     label: "Automation",
     color: "hsl(var(--background))",
-    icon: Zap
+    icon: Zap,
+    image: workflowScreenshot
   }, {
     title: "AI Chatbots",
     description: "Deflect known intents with intelligent automated responses.",
