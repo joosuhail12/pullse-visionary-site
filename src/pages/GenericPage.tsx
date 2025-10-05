@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import SectionWithLiquid from "@/components/SectionWithLiquid";
+import PageLiquidBackground from "@/components/PageLiquidBackground";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -13,9 +13,10 @@ interface GenericPageProps {
 const GenericPage = ({ title, description }: GenericPageProps) => {
   return (
     <div className="min-h-screen">
+      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      <SectionWithLiquid className="pt-32 pb-20">
+      <div className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="glass-strong p-12 rounded-3xl text-center">
@@ -38,7 +39,7 @@ const GenericPage = ({ title, description }: GenericPageProps) => {
             </div>
           </div>
         </div>
-      </SectionWithLiquid>
+      </div>
 
       <Footer />
     </div>

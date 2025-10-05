@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
 import PlatformOverview from "@/components/PlatformOverview";
 import MagicBento, { CardData } from "@/components/MagicBento";
-import SectionWithLiquid from "@/components/SectionWithLiquid";
+import PageLiquidBackground from "@/components/PageLiquidBackground";
 import antlerLogo from "@/assets/antler-logo.png";
 
 // Lazy load heavy animation components
@@ -218,6 +218,7 @@ const HomeNew = () => {
     a: "One plan, all capabilities. Request pricing."
   }];
   return <div className="min-h-screen">
+      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
       {/* Hero Section */}
@@ -330,7 +331,7 @@ const HomeNew = () => {
       </section>
 
       {/* Node Animation */}
-      <SectionWithLiquid className="py-32 fade-in-scroll" opacity={0.2}>
+      <section className="py-32 relative fade-in-scroll overflow-hidden">
         {/* Decorative background with color variety */}
         
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
@@ -350,10 +351,10 @@ const HomeNew = () => {
             </div>
           </div>
         </div>
-      </SectionWithLiquid>
+      </section>
 
       {/* Taxonomy */}
-      <SectionWithLiquid className="min-h-screen flex items-center py-20 fade-in-scroll" opacity={0.25}>
+      <section className="min-h-screen flex items-center py-20 fade-in-scroll relative overflow-hidden">
         {/* Background accents with variety */}
         <div className="absolute top-1/4 left-10 w-96 h-96 bg-accent-green/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent-pink/5 rounded-full blur-3xl" />
@@ -386,10 +387,10 @@ const HomeNew = () => {
             glowColor="132, 0, 255"
           />
         </div>
-      </SectionWithLiquid>
+      </section>
 
       {/* Benefits Showcase */}
-      <SectionWithLiquid className="py-32 fade-in-scroll" opacity={0.25}>
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
         {/* Background gradient orbs with variety */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent-teal/10 rounded-full blur-3xl" />
@@ -473,13 +474,13 @@ const HomeNew = () => {
            })}
           </div>
         </div>
-      </SectionWithLiquid>
+      </section>
 
       {/* Platform Overview - The whole desk in one view */}
       <PlatformOverview />
 
       {/* Solutions - Split Box Design */}
-      <SectionWithLiquid className="py-32 fade-in-scroll" opacity={0.25}>
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
         {/* Animated background orbs with variety */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-orange/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
@@ -631,10 +632,10 @@ const HomeNew = () => {
             </div>
           </div>
         </div>
-      </SectionWithLiquid>
+      </section>
 
       {/* Integration Ticker */}
-      <SectionWithLiquid className="py-20 fade-in-scroll" opacity={0.2}>
+      <section className="py-20 fade-in-scroll relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-pink-light to-primary/10 border border-accent-pink/20 backdrop-blur-sm mb-6">
@@ -683,7 +684,7 @@ const HomeNew = () => {
             </p>
           </div>
         </div>
-      </SectionWithLiquid>
+      </section>
 
       <style>{`
         @keyframes scroll {
@@ -713,7 +714,7 @@ const HomeNew = () => {
       </section>
 
       {/* Final CTA - Hero Style */}
-      <SectionWithLiquid className="py-32 fade-in-scroll" opacity={0.3}>
+      <section className="py-32 fade-in-scroll relative overflow-hidden">
         {/* Dramatic background with color variety */}
         <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/20 via-primary/20 to-accent-orange/20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_100%)]" />
@@ -831,7 +832,7 @@ const HomeNew = () => {
             </div>
           </div>
         </div>
-      </SectionWithLiquid>
+      </section>
 
       <Footer />
     </div>;

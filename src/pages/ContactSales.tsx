@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import SectionWithLiquid from "@/components/SectionWithLiquid";
+import PageLiquidBackground from "@/components/PageLiquidBackground";
 import { Calendar, Mail, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,9 +32,10 @@ const ContactSales = () => {
 
   return (
     <div className="min-h-screen">
+      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      <SectionWithLiquid className="pt-32 pb-20">
+      <div className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -143,7 +144,7 @@ const ContactSales = () => {
             </div>
           </div>
         </div>
-      </SectionWithLiquid>
+      </div>
 
       <Footer />
     </div>
