@@ -1282,37 +1282,8 @@ const NodeAnimation = () => {
       </div>;
   }
   return <>
-      {/* Top content overlay with improved spacing and hierarchy */}
-      <div className="absolute top-0 left-0 right-0 z-10 pt-12 md:pt-20 pb-8">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center space-y-5 max-w-5xl mx-auto">
-            {/* Pill badge with enhanced glow */}
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/15 via-accent-purple/15 to-primary/15 border border-primary/40 backdrop-blur-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow duration-300">
-              <SparklesIcon className="h-4 w-4 text-primary mr-2.5 animate-pulse" />
-              <span className="text-sm font-bold bg-gradient-to-r from-primary via-accent-purple to-primary bg-clip-text text-transparent">
-                The Pullse Difference
-              </span>
-            </div>
-            
-            {/* Main heading with improved hierarchy */}
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight">
-                <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                  From Inbox to Impact
-                </span>
-              </h2>
-              
-              {/* Subheading with enhanced contrast */}
-              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Watch how conversations flow through our intelligent platform—unified, automated, and optimized for results
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Main canvas - full size */}
-      <div className="absolute inset-0">
+      {/* Main canvas - behind everything */}
+      <div className="absolute inset-0 z-0">
         <Canvas 
           dpr={[1, 2]} 
           performance={{ min: 0.5 }} 
@@ -1321,9 +1292,38 @@ const NodeAnimation = () => {
           <Scene />
         </Canvas>
       </div>
+
+      {/* Top content overlay with improved spacing and hierarchy */}
+      <div className="absolute top-0 left-0 right-0 z-20 pt-8 md:pt-12 lg:pt-16 pb-4 md:pb-6 pointer-events-none">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center space-y-4 md:space-y-5 max-w-5xl mx-auto">
+            {/* Pill badge with enhanced glow */}
+            <div className="inline-flex items-center px-4 md:px-6 py-2 md:py-3 rounded-full bg-gradient-to-r from-primary/15 via-accent-purple/15 to-primary/15 border border-primary/40 backdrop-blur-xl shadow-lg shadow-primary/20">
+              <SparklesIcon className="h-3 md:h-4 w-3 md:w-4 text-primary mr-2 md:mr-2.5 animate-pulse" />
+              <span className="text-xs md:text-sm font-bold bg-gradient-to-r from-primary via-accent-purple to-primary bg-clip-text text-transparent">
+                The Pullse Difference
+              </span>
+            </div>
+            
+            {/* Main heading with improved hierarchy */}
+            <div className="space-y-3 md:space-y-4">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight">
+                <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                  From Inbox to Impact
+                </span>
+              </h2>
+              
+              {/* Subheading with enhanced contrast */}
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Watch how conversations flow through our intelligent platform—unified, automated, and optimized for results
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
         
       {/* Bottom section with enhanced layout */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 pb-4 md:pb-8">
+      <div className="absolute bottom-0 left-0 right-0 z-20 pb-4 md:pb-6 lg:pb-8">
         <div className="relative">
           {/* Enhanced multi-layer gradient backdrop */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background to-transparent" />
@@ -1336,21 +1336,21 @@ const NodeAnimation = () => {
           </div>
           
           {/* Content container with optimized spacing */}
-          <div className="relative container mx-auto px-4 md:px-6 py-8 md:py-12">
+          <div className="relative container mx-auto px-4 md:px-6 py-4 md:py-6 lg:py-8">
             {/* Animated flow line connecting phases */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl pointer-events-none">
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl pointer-events-none z-0">
               <div className="relative h-1.5 rounded-full overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-green-500/30" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/50 via-purple-500/50 to-green-500/50 animate-pulse" />
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto relative z-10">
               {/* Phase 1: Input */}
               <div className="group relative animate-fade-in" style={{ animationDelay: '0.1s' }}>
                 <div className="relative h-full">
                   {/* Enhanced card with depth */}
-                  <div className="relative glass-strong p-7 md:p-8 rounded-3xl border border-blue-500/30 hover:border-blue-500/50 transition-all duration-500 hover:scale-[1.04] hover:shadow-2xl hover:shadow-blue-500/25 h-full overflow-hidden">
+                  <div className="relative glass-strong p-5 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl border border-blue-500/30 hover:border-blue-500/50 transition-all duration-500 hover:scale-[1.02] md:hover:scale-[1.04] hover:shadow-xl md:hover:shadow-2xl hover:shadow-blue-500/25 h-full overflow-hidden">
                     {/* Accent bar with gradient */}
                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600" />
                     
@@ -1359,25 +1359,25 @@ const NodeAnimation = () => {
                     
                     <div className="relative flex flex-col h-full">
                       {/* Icon with enhanced glow */}
-                      <div className="mb-5">
+                      <div className="mb-4 md:mb-5">
                         <div className="relative inline-flex">
-                          <div className="absolute inset-0 bg-blue-500/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
-                          <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 shadow-xl shadow-blue-500/40 group-hover:shadow-blue-500/60 transition-all duration-500">
-                            <Mail className="h-8 w-8 text-white" />
+                          <div className="absolute inset-0 bg-blue-500/30 rounded-xl md:rounded-2xl blur-xl md:blur-2xl group-hover:blur-2xl md:group-hover:blur-3xl transition-all duration-500" />
+                          <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 shadow-lg md:shadow-xl shadow-blue-500/40 group-hover:shadow-blue-500/60 transition-all duration-500">
+                            <Mail className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white" />
                           </div>
                         </div>
                       </div>
                       
                       {/* Content with improved spacing */}
-                      <div className="flex-1 space-y-3">
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-xs font-extrabold text-blue-500 uppercase tracking-widest">Step 1</span>
+                      <div className="flex-1 space-y-2 md:space-y-3">
+                        <div className="flex items-center gap-2 md:gap-2.5">
+                          <span className="text-[10px] md:text-xs font-extrabold text-blue-500 uppercase tracking-widest">Step 1</span>
                           <div className="h-0.5 flex-1 bg-gradient-to-r from-blue-500/40 via-blue-500/20 to-transparent rounded-full" />
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-blue-500 transition-colors duration-300">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-blue-500 transition-colors duration-300">
                           Unified Communication
                         </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                        <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed">
                           All channels flow into one intelligent inbox
                         </p>
                       </div>
@@ -1398,7 +1398,7 @@ const NodeAnimation = () => {
               <div className="group relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 <div className="relative h-full">
                   {/* Enhanced card with depth */}
-                  <div className="relative glass-strong p-7 md:p-8 rounded-3xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-500 hover:scale-[1.04] hover:shadow-2xl hover:shadow-purple-500/25 h-full overflow-hidden">
+                  <div className="relative glass-strong p-5 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl border border-purple-500/30 hover:border-purple-500/50 transition-all duration-500 hover:scale-[1.02] md:hover:scale-[1.04] hover:shadow-xl md:hover:shadow-2xl hover:shadow-purple-500/25 h-full overflow-hidden">
                     {/* Accent bar with gradient */}
                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600" />
                     
@@ -1407,25 +1407,25 @@ const NodeAnimation = () => {
                     
                     <div className="relative flex flex-col h-full">
                       {/* Icon with enhanced glow */}
-                      <div className="mb-5">
+                      <div className="mb-4 md:mb-5">
                         <div className="relative inline-flex">
-                          <div className="absolute inset-0 bg-purple-500/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
-                          <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 shadow-xl shadow-purple-500/40 group-hover:shadow-purple-500/60 transition-all duration-500">
-                            <Bot className="h-8 w-8 text-white" />
+                          <div className="absolute inset-0 bg-purple-500/30 rounded-xl md:rounded-2xl blur-xl md:blur-2xl group-hover:blur-2xl md:group-hover:blur-3xl transition-all duration-500" />
+                          <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 shadow-lg md:shadow-xl shadow-purple-500/40 group-hover:shadow-purple-500/60 transition-all duration-500">
+                            <Bot className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white" />
                           </div>
                         </div>
                       </div>
                       
                       {/* Content with improved spacing */}
-                      <div className="flex-1 space-y-3">
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-xs font-extrabold text-purple-500 uppercase tracking-widest">Step 2</span>
+                      <div className="flex-1 space-y-2 md:space-y-3">
+                        <div className="flex items-center gap-2 md:gap-2.5">
+                          <span className="text-[10px] md:text-xs font-extrabold text-purple-500 uppercase tracking-widest">Step 2</span>
                           <div className="h-0.5 flex-1 bg-gradient-to-r from-purple-500/40 via-purple-500/20 to-transparent rounded-full" />
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-purple-500 transition-colors duration-300">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-purple-500 transition-colors duration-300">
                           Smart Synergy
                         </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                        <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed">
                           AI augments human expertise at every step
                         </p>
                       </div>
@@ -1446,7 +1446,7 @@ const NodeAnimation = () => {
               <div className="group relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
                 <div className="relative h-full">
                   {/* Enhanced card with depth */}
-                  <div className="relative glass-strong p-7 md:p-8 rounded-3xl border border-green-500/30 hover:border-green-500/50 transition-all duration-500 hover:scale-[1.04] hover:shadow-2xl hover:shadow-green-500/25 h-full overflow-hidden">
+                  <div className="relative glass-strong p-5 md:p-6 lg:p-7 rounded-2xl md:rounded-3xl border border-green-500/30 hover:border-green-500/50 transition-all duration-500 hover:scale-[1.02] md:hover:scale-[1.04] hover:shadow-xl md:hover:shadow-2xl hover:shadow-green-500/25 h-full overflow-hidden">
                     {/* Accent bar with gradient */}
                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-green-400 via-green-500 to-green-600" />
                     
@@ -1455,25 +1455,25 @@ const NodeAnimation = () => {
                     
                     <div className="relative flex flex-col h-full">
                       {/* Icon with enhanced glow */}
-                      <div className="mb-5">
+                      <div className="mb-4 md:mb-5">
                         <div className="relative inline-flex">
-                          <div className="absolute inset-0 bg-green-500/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
-                          <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 via-green-500 to-green-600 shadow-xl shadow-green-500/40 group-hover:shadow-green-500/60 transition-all duration-500">
-                            <CheckCircle2 className="h-8 w-8 text-white" />
+                          <div className="absolute inset-0 bg-green-500/30 rounded-xl md:rounded-2xl blur-xl md:blur-2xl group-hover:blur-2xl md:group-hover:blur-3xl transition-all duration-500" />
+                          <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-green-400 via-green-500 to-green-600 shadow-lg md:shadow-xl shadow-green-500/40 group-hover:shadow-green-500/60 transition-all duration-500">
+                            <CheckCircle2 className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white" />
                           </div>
                         </div>
                       </div>
                       
                       {/* Content with improved spacing */}
-                      <div className="flex-1 space-y-3">
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-xs font-extrabold text-green-500 uppercase tracking-widest">Step 3</span>
+                      <div className="flex-1 space-y-2 md:space-y-3">
+                        <div className="flex items-center gap-2 md:gap-2.5">
+                          <span className="text-[10px] md:text-xs font-extrabold text-green-500 uppercase tracking-widest">Step 3</span>
                           <div className="h-0.5 flex-1 bg-gradient-to-r from-green-500/40 via-green-500/20 to-transparent rounded-full" />
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300">
                           Excellent Outcomes
                         </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                        <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed">
                           Faster resolutions, happier customers
                         </p>
                       </div>
