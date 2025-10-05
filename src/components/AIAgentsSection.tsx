@@ -132,59 +132,52 @@ export const AIAgentsSection = () => {
         {/* Content Area */}
         <div className="max-w-7xl mx-auto">
           {activeTab === 'bots' ? (
-            <div ref={botsVisualRef} className="grid lg:grid-cols-2 gap-12 items-center">
+            <div ref={botsVisualRef} className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Description */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                    <Boxes className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-semibold text-primary">Universal Integration</span>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                    <Boxes className="w-3.5 h-3.5 text-primary" />
+                    <span className="text-xs font-medium text-primary">Universal Integration</span>
                   </div>
-                  <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                  <h3 className="text-3xl md:text-4xl font-bold">
                     Connect to Any API
                   </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     Unlike competitors that rely on third-party integrations, Pullse bots directly connect to your entire stack—no middleware, no delays.
                   </p>
                 </div>
 
-                <div className="grid gap-6">
+                <div className="grid gap-4">
                   {[
                     { 
                       icon: Database, 
                       title: 'Knowledge Base Integration', 
-                      desc: 'Pull from your docs, FAQs, and resources in real-time',
-                      gradient: 'from-blue-500 to-cyan-500'
+                      desc: 'Pull from docs and resources in real-time'
                     },
                     { 
                       icon: Code, 
                       title: 'Universal API Access', 
-                      desc: 'Execute actions across your systems without middleware',
-                      gradient: 'from-purple-500 to-pink-500'
+                      desc: 'Execute actions without middleware'
                     },
                     { 
                       icon: Zap, 
                       title: 'Instant Task Completion', 
-                      desc: 'Handle complex workflows end-to-end autonomously',
-                      gradient: 'from-orange-500 to-red-500'
+                      desc: 'Handle complex workflows autonomously'
                     }
                   ].map((item, idx) => {
                     const Icon = item.icon;
                     return (
                       <div 
                         key={idx}
-                        className="group p-6 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 cursor-pointer"
+                        className="group flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50 hover:border-primary/30 hover:bg-card/80 transition-all duration-200"
                       >
-                        <div className="flex items-start gap-4">
-                          <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.gradient} p-0.5 group-hover:scale-110 transition-transform`}>
-                            <div className="w-full h-full bg-card rounded-lg flex items-center justify-center">
-                              <Icon className="w-6 h-6 text-primary" />
-                            </div>
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{item.title}</h4>
-                            <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                          </div>
+                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                          <Icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                         </div>
                       </div>
                     );
@@ -193,19 +186,14 @@ export const AIAgentsSection = () => {
               </div>
 
               {/* Right: Interactive Demo */}
-              <div className="relative">
-                {/* Glow effects */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-3xl opacity-50 animate-pulse" />
+              <div className="relative group">
+                {/* Subtle hover glow */}
+                <div className="absolute -inset-3 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                <div className="relative bg-card/80 backdrop-blur-xl border border-border rounded-2xl p-8 shadow-2xl overflow-hidden">
-                  {/* Modern animated mesh gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5" />
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.15),transparent_50%),radial-gradient(ellipse_at_bottom_right,hsl(var(--accent)/0.15),transparent_50%)]" />
-                  <div className="absolute inset-0 opacity-30">
-                    <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
-                    <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
-                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
-                  </div>
+                <div className="relative bg-card/60 backdrop-blur-sm border border-border/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+                  {/* Subtle mesh gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-accent/3" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.08),transparent_50%),radial-gradient(ellipse_at_bottom_right,hsl(var(--accent)/0.08),transparent_50%)]" />
                   
                   {/* Content */}
                   <div className="relative z-10">
@@ -321,14 +309,14 @@ export const AIAgentsSection = () => {
                   </div>
                 </div>
 
-                {/* Floating badges */}
-                <div className="absolute -top-6 -right-6 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-6 py-3 rounded-full font-bold shadow-2xl animate-float flex items-center gap-2">
-                  <Zap className="w-4 h-4" />
+                {/* Minimal floating badges */}
+                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-primary to-primary/80 text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5">
+                  <Zap className="w-3 h-3" />
                   Any API
                 </div>
                 
-                <div className="absolute -bottom-6 -left-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full font-bold shadow-2xl animate-float flex items-center gap-2" style={{ animationDelay: '1s' }}>
-                  <Shield className="w-4 h-4" />
+                <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5">
+                  <Shield className="w-3 h-3" />
                   Secure
                 </div>
               </div>
