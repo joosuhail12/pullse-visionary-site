@@ -287,4 +287,13 @@ All colors MUST be HSL.
     background-size: 400% 400%;
     animation: gradient 20s ease infinite;
   }
+
+  /* Animation delay utilities */
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
 }
