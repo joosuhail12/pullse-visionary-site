@@ -82,15 +82,15 @@ export const AIAgentsSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Beyond Traditional Chatbots</span>
+        <div className="text-center mb-20 space-y-5 animate-fade-in">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="text-xs font-semibold text-primary tracking-wide">Beyond Traditional Chatbots</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
             AI Agents & Copilots
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Self-service bots that execute actions and intelligent copilots that augment your team
           </p>
         </div>
