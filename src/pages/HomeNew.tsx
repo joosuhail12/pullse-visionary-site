@@ -13,8 +13,8 @@ import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
-import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
+import AIToolsPreview from "@/components/AIToolsPreview";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -123,7 +123,7 @@ const HomeNew = () => {
     label: "Actions",
     color: "hsl(var(--background))",
     icon: Users,
-    image: aiToolsScreenshot
+    customComponent: <AIToolsPreview />
   }, {
     title: "Auto-QA",
     description: "Score 100% of conversations for accuracy, empathy, policy.",
