@@ -12,6 +12,7 @@ import PageLiquidBackground from "@/components/PageLiquidBackground";
 import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
+import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -111,7 +112,8 @@ const HomeNew = () => {
     description: "Draft, summarize, translate—AI assistance for your team.",
     label: "AI Assistant",
     color: "hsl(var(--background))",
-    icon: Sparkles
+    icon: Sparkles,
+    image: aiCopilotScreenshot
   }, {
     title: "AI Tools",
     description: "Refunds, plan changes, order status—with guardrails & audit trails.",
