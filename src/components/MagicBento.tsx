@@ -468,6 +468,7 @@ export interface CardData {
   description: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
+  image?: string;
 }
 
 interface MagicBentoProps {
@@ -551,12 +552,20 @@ const MagicBento = ({
                   <p className="card__description">{card.description}</p>
                   
                   <div className="card__screenshot">
-                    <div className="card__screenshot-placeholder">
-                      <div className="card__screenshot-icon">
-                        <Icon className="h-6 w-6" />
+                    {card.image ? (
+                      <img 
+                        src={card.image} 
+                        alt={`${card.title} preview`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <div className="card__screenshot-placeholder">
+                        <div className="card__screenshot-icon">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <div className="card__screenshot-text">{card.title} Preview</div>
                       </div>
-                      <div className="card__screenshot-text">{card.title} Preview</div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </ParticleCard>
@@ -576,12 +585,20 @@ const MagicBento = ({
                 <p className="card__description">{card.description}</p>
                 
                 <div className="card__screenshot">
-                  <div className="card__screenshot-placeholder">
-                    <div className="card__screenshot-icon">
-                      <Icon className="h-6 w-6" />
+                  {card.image ? (
+                    <img 
+                      src={card.image} 
+                      alt={`${card.title} preview`}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="card__screenshot-placeholder">
+                      <div className="card__screenshot-icon">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="card__screenshot-text">{card.title} Preview</div>
                     </div>
-                    <div className="card__screenshot-text">{card.title} Preview</div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

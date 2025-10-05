@@ -10,6 +10,7 @@ import PlatformOverview from "@/components/PlatformOverview";
 import MagicBento, { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import antlerLogo from "@/assets/antler-logo.png";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -89,7 +90,8 @@ const HomeNew = () => {
     description: "One place for email & chat with SLAs, assignments, and full context.",
     label: "Communication",
     color: "hsl(var(--background))",
-    icon: MessageSquare
+    icon: MessageSquare,
+    image: inboxScreenshot
   }, {
     title: "Workflow Automation",
     description: "Visual routing, tagging, SLAs, escalations.",
