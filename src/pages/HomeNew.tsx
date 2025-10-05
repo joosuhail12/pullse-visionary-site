@@ -15,6 +15,7 @@ import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
+import AutoQAPreview from "@/components/AutoQAPreview";
 
 // Lazy load heavy animation components
 const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
@@ -129,7 +130,8 @@ const HomeNew = () => {
     description: "Score 100% of conversations for accuracy, empathy, policy.",
     label: "Quality",
     color: "hsl(var(--background))",
-    icon: Shield
+    icon: Shield,
+    customComponent: <AutoQAPreview />
   }, {
     title: "Analytics",
     description: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
