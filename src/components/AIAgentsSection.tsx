@@ -312,82 +312,75 @@ export const AIAgentsSection = () => {
               </div>
             </div>
           ) : (
-            <div ref={copilotsVisualRef} className="grid lg:grid-cols-2 gap-12 items-center">
+            <div ref={copilotsVisualRef} className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left: Interactive Demo */}
               <div className="relative order-2 lg:order-1">
-                {/* Glow effects */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 to-purple-500/20 rounded-3xl blur-3xl opacity-50 animate-pulse" />
-                
-                <div className="relative">
-                  {/* Copilot Screenshot */}
-                  <div className="relative bg-card/80 backdrop-blur-xl border border-border rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative group">
+                  {/* Subtle glow on hover */}
+                  <div className="absolute -inset-2 bg-gradient-to-r from-accent/10 to-purple-500/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Screenshot Container */}
+                  <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <img 
                       src={copilotInterfaceScreenshot} 
                       alt="Pullse AI Copilot Interface showing agent assistance features" 
                       className="w-full h-auto"
                     />
                   </div>
-                </div>
 
-                {/* Floating badge */}
-                <div className="absolute -top-6 -left-6 bg-gradient-to-r from-accent to-purple-500 text-white px-6 py-3 rounded-full font-bold shadow-2xl animate-float flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  AI-Powered
+                  {/* Minimal floating badge */}
+                  <div className="absolute -top-3 -left-3 bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1.5">
+                    <Sparkles className="w-3 h-3" />
+                    AI-Powered
+                  </div>
                 </div>
               </div>
 
               {/* Right: Description */}
-              <div className="space-y-8 order-1 lg:order-2">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
-                    <User className="w-4 h-4 text-accent" />
-                    <span className="text-sm font-semibold text-accent">Agent Augmentation</span>
+              <div className="space-y-6 order-1 lg:order-2">
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
+                    <User className="w-3.5 h-3.5 text-accent" />
+                    <span className="text-xs font-medium text-accent">Agent Augmentation</span>
                   </div>
-                  <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                  <h3 className="text-3xl md:text-4xl font-bold">
                     Supercharge Your Team
                   </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    AI copilots work alongside agents, handling complexity so your team can focus on building relationships and solving unique problems.
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    AI copilots work alongside agents, handling complexity so your team can focus on building relationships.
                   </p>
                 </div>
 
-                <div className="grid gap-6">
+                <div className="grid gap-4">
                   {[
                     { 
                       icon: MessageSquare, 
                       title: 'Instant Context', 
-                      desc: 'Summarize long conversations in seconds, giving agents full context at a glance with sentiment analysis',
-                      gradient: 'from-blue-500 to-cyan-500'
+                      desc: 'Summarize conversations with sentiment analysis'
                     },
                     { 
                       icon: Sparkles, 
                       title: 'Smart Response Drafts', 
-                      desc: 'AI-powered reply suggestions that agents can customize and send, maintaining your brand voice',
-                      gradient: 'from-purple-500 to-pink-500'
+                      desc: 'AI-powered suggestions maintaining your brand voice'
                     },
                     { 
                       icon: Zap, 
                       title: 'On-Demand Actions', 
-                      desc: 'Execute API calls across your entire stack without leaving the conversation interface',
-                      gradient: 'from-orange-500 to-red-500'
+                      desc: 'Execute API calls without leaving the interface'
                     }
                   ].map((item, idx) => {
                     const Icon = item.icon;
                     return (
                       <div 
                         key={idx}
-                        className="group p-6 rounded-xl bg-card border border-border hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 cursor-pointer"
+                        className="group flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50 hover:border-accent/30 hover:bg-card/80 transition-all duration-200"
                       >
-                        <div className="flex items-start gap-4">
-                          <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.gradient} p-0.5 group-hover:scale-110 transition-transform`}>
-                            <div className="w-full h-full bg-card rounded-lg flex items-center justify-center">
-                              <Icon className="w-6 h-6 text-accent" />
-                            </div>
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">{item.title}</h4>
-                            <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                          </div>
+                        <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                          <Icon className="w-4 h-4 text-accent" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                         </div>
                       </div>
                     );
