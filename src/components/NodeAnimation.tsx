@@ -2,7 +2,7 @@ import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, MeshTransmissionMaterial, Trail, Sparkles, Float, PerspectiveCamera, Environment, Line } from "@react-three/drei";
 import * as THREE from "three";
-import { Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2 } from "lucide-react";
+import { Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2, Sparkles as SparklesIcon } from "lucide-react";
 import logoIcon from "@/assets/logo-white.svg";
 
 // Optimized particle field background
@@ -1282,24 +1282,31 @@ const NodeAnimation = () => {
       </div>;
   }
   return <>
-      {/* Top content overlay */}
-      <div className="absolute top-0 left-0 right-0 z-10 pt-12 pb-8">
+      {/* Top content overlay with better spacing */}
+      <div className="absolute top-0 left-0 right-0 z-10 pt-16 pb-12">
         <div className="container mx-auto px-4">
-          <div className="text-center space-y-4">
-            {/* Pill badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-purple-light to-primary/10 border border-accent-purple/20 backdrop-blur-md">
-              <span className="text-sm font-semibold bg-gradient-to-r from-accent-purple to-primary bg-clip-text text-transparent">The Pullse Difference</span>
+          <div className="text-center space-y-6 max-w-4xl mx-auto">
+            {/* Pill badge with glow */}
+            <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 via-accent-purple/20 to-primary/20 border border-primary/30 backdrop-blur-xl shadow-lg shadow-primary/10">
+              <SparklesIcon className="h-4 w-4 text-primary mr-2" />
+              <span className="text-sm font-bold bg-gradient-to-r from-primary via-accent-purple to-primary bg-clip-text text-transparent">
+                The Pullse Difference
+              </span>
             </div>
             
-            {/* Main heading */}
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-              From Inbox to Impact
-            </h2>
-            
-            {/* Subheading */}
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Watch how conversations flow through our intelligent platform—unified, automated, and optimized for results
-            </p>
+            {/* Main heading with better hierarchy */}
+            <div className="space-y-3">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+                  From Inbox to Impact
+                </span>
+              </h2>
+              
+              {/* Subheading with better contrast */}
+              <p className="text-lg md:text-xl text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">
+                Watch how conversations flow through our intelligent platform—unified, automated, and optimized for results
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1316,59 +1323,143 @@ const NodeAnimation = () => {
         </Canvas>
       </div>
         
-      {/* Bottom section with phases - Enhanced design */}
+      {/* Bottom section with enhanced flow design */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="relative">
-          {/* Gradient overlay for better readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-transparent backdrop-blur-xl" />
+          {/* Multi-layer gradient for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/98 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent backdrop-blur-2xl" />
           
-          {/* Content */}
-          <div className="relative container mx-auto px-4 py-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Phase 1: Channels */}
-              <div className="group relative">
-                <div className="glass-strong p-6 rounded-2xl border-l-4 border-blue-500/50 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02]">
-                  <div className="flex items-start gap-4">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25">
-                      <Mail className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-lg font-bold text-foreground mb-1">Unified Communication</div>
-                      <div className="text-sm text-muted-foreground">All channels flow into one intelligent inbox</div>
+          {/* Subtle top border glow */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          
+          {/* Content with better spacing */}
+          <div className="relative container mx-auto px-4 py-10">
+            {/* Flow visualization line */}
+            <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl">
+              <div className="relative h-1">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-green-500/20 rounded-full" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-green-500/40 rounded-full animate-pulse" />
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 relative">
+              {/* Phase 1: Input */}
+              <div className="group relative animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                <div className="relative h-full">
+                  {/* Card with enhanced styling */}
+                  <div className="relative glass-strong p-6 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-blue-500/20 h-full">
+                    {/* Accent bar */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-t-2xl" />
+                    
+                    <div className="flex flex-col h-full">
+                      {/* Icon with enhanced design */}
+                      <div className="mb-4">
+                        <div className="relative inline-flex">
+                          <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-xl" />
+                          <div className="relative flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-shadow duration-500">
+                            <Mail className="h-7 w-7 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-blue-500 uppercase tracking-wider">Step 1</span>
+                          <div className="h-px flex-1 bg-gradient-to-r from-blue-500/30 to-transparent" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-blue-500 transition-colors duration-300">
+                          Unified Communication
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          All channels flow into one intelligent inbox
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* Connecting line */}
-                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-blue-500/50 to-purple-500/50 -translate-y-1/2" />
-              </div>
-              
-              {/* Phase 2: Engine */}
-              <div className="group relative">
-                <div className="glass-strong p-6 rounded-2xl border-l-4 border-purple-500/50 hover:border-purple-500 transition-all duration-300 hover:scale-[1.02]">
-                  <div className="flex items-start gap-4">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg shadow-purple-500/25">
-                      <Bot className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-lg font-bold text-foreground mb-1">Smart Synergy</div>
-                      <div className="text-sm text-muted-foreground">AI augments human expertise at every step</div>
-                    </div>
+                  
+                  {/* Arrow connector */}
+                  <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 z-20">
+                    <ArrowRight className="h-8 w-8 text-blue-500/50 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </div>
-                {/* Connecting line */}
-                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-purple-500/50 to-green-500/50 -translate-y-1/2" />
               </div>
               
-              {/* Phase 3: Outcomes */}
-              <div className="group relative">
-                <div className="glass-strong p-6 rounded-2xl border-l-4 border-green-500/50 hover:border-green-500 transition-all duration-300 hover:scale-[1.02]">
-                  <div className="flex items-start gap-4">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/25">
-                      <CheckCircle2 className="h-6 w-6 text-white" />
+              {/* Phase 2: Process */}
+              <div className="group relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div className="relative h-full">
+                  {/* Card with enhanced styling */}
+                  <div className="relative glass-strong p-6 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-purple-500/20 h-full">
+                    {/* Accent bar */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 rounded-t-2xl" />
+                    
+                    <div className="flex flex-col h-full">
+                      {/* Icon with enhanced design */}
+                      <div className="mb-4">
+                        <div className="relative inline-flex">
+                          <div className="absolute inset-0 bg-purple-500/20 rounded-xl blur-xl" />
+                          <div className="relative flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg shadow-purple-500/30 group-hover:shadow-purple-500/50 transition-shadow duration-500">
+                            <Bot className="h-7 w-7 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-purple-500 uppercase tracking-wider">Step 2</span>
+                          <div className="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-purple-500 transition-colors duration-300">
+                          Smart Synergy
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          AI augments human expertise at every step
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="text-lg font-bold text-foreground mb-1">Excellent Outcomes</div>
-                      <div className="text-sm text-muted-foreground">Faster resolutions, happier customers</div>
+                  </div>
+                  
+                  {/* Arrow connector */}
+                  <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 z-20">
+                    <ArrowRight className="h-8 w-8 text-purple-500/50 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Phase 3: Output */}
+              <div className="group relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                <div className="relative h-full">
+                  {/* Card with enhanced styling */}
+                  <div className="relative glass-strong p-6 rounded-2xl border border-green-500/20 hover:border-green-500/40 transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-green-500/20 h-full">
+                    {/* Accent bar */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-t-2xl" />
+                    
+                    <div className="flex flex-col h-full">
+                      {/* Icon with enhanced design */}
+                      <div className="mb-4">
+                        <div className="relative inline-flex">
+                          <div className="absolute inset-0 bg-green-500/20 rounded-xl blur-xl" />
+                          <div className="relative flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/30 group-hover:shadow-green-500/50 transition-shadow duration-500">
+                            <CheckCircle2 className="h-7 w-7 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-green-500 uppercase tracking-wider">Step 3</span>
+                          <div className="h-px flex-1 bg-gradient-to-r from-green-500/30 to-transparent" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-green-500 transition-colors duration-300">
+                          Excellent Outcomes
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Faster resolutions, happier customers
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
