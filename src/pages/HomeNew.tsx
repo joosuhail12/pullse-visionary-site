@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Shield, Users, Zap, BarChart3, Bot, MessageSquare, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,36 +6,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
+import NodeAnimation from "@/components/NodeAnimation";
 import PlatformOverview from "@/components/PlatformOverview";
+import HeroFloating3D from "@/components/HeroFloating3D";
 import MagicBento, { CardData } from "@/components/MagicBento";
-import PageLiquidBackground from "@/components/PageLiquidBackground";
+import LiquidEther from "@/components/LiquidEther";
 import antlerLogo from "@/assets/antler-logo.png";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
-import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
-import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
-import analyticsScreenshot from "@/assets/analytics-screenshot.png";
-import AIChatbotPreview from "@/components/AIChatbotPreview";
-import AIToolsPreview from "@/components/AIToolsPreview";
-import AutoQAPreview from "@/components/AutoQAPreview";
-
-// Lazy load heavy animation components
-const NodeAnimation = lazy(() => import("@/components/NodeAnimation"));
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
-
-// Lazy load GSAP only when needed
-let gsap: any = null;
-let ScrollTrigger: any = null;
-
-const loadGSAP = async () => {
-  if (!gsap) {
-    const gsapModule = await import("gsap");
-    const scrollTriggerModule = await import("gsap/ScrollTrigger");
-    gsap = gsapModule.default;
-    ScrollTrigger = scrollTriggerModule.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
-  }
-  return { gsap, ScrollTrigger };
-};
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const HomeNew = () => {
   const [activeSolution, setActiveSolution] = useState<"b2b-saas" | "ecommerce" | "edtech" | "fintech">("b2b-saas");
   const heroRef = useRef<HTMLDivElement>(null);
@@ -43,51 +22,47 @@ const HomeNew = () => {
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    // Load and initialize GSAP animations asynchronously
-    loadGSAP().then(({ gsap, ScrollTrigger }) => {
-      // Hero text animations with GSAP
-      if (titleRef.current) {
-        gsap.from(titleRef.current.querySelectorAll('.word'), {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out"
-        });
-      }
-      if (descRef.current) {
-        gsap.from(descRef.current, {
-          y: 30,
-          opacity: 0,
-          delay: 0.4,
-          duration: 1.2,
-          ease: "power3.out"
-        });
-      }
-      if (buttonsRef.current) {
-        gsap.from(buttonsRef.current.children, {
-          scale: 0.8,
-          opacity: 0,
-          delay: 0.6,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "back.out(1.7)"
-        });
-      }
+    // Hero text animations with GSAP
+    if (titleRef.current) {
+      gsap.from(titleRef.current.querySelectorAll('.word'), {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out"
+      });
+    }
+    if (descRef.current) {
+      gsap.from(descRef.current, {
+        y: 30,
+        opacity: 0,
+        delay: 0.4,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+    }
+    if (buttonsRef.current) {
+      gsap.from(buttonsRef.current.children, {
+        scale: 0.8,
+        opacity: 0,
+        delay: 0.6,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
+      });
+    }
 
-      // Animate elements on scroll
-      const elements = gsap.utils.toArray(".fade-in-scroll") as HTMLElement[];
-      elements.forEach(elem => {
-        gsap.from(elem, {
-          scrollTrigger: {
-            trigger: elem,
-            start: "top 80%"
-          },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out"
-        });
+    // Animate elements on scroll
+    gsap.utils.toArray<HTMLElement>(".fade-in-scroll").forEach(elem => {
+      gsap.from(elem, {
+        scrollTrigger: {
+          trigger: elem,
+          start: "top 80%"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out"
       });
     });
   }, []);
@@ -96,50 +71,43 @@ const HomeNew = () => {
     description: "One place for email & chat with SLAs, assignments, and full context.",
     label: "Communication",
     color: "hsl(var(--background))",
-    icon: MessageSquare,
-    image: inboxScreenshot
+    icon: MessageSquare
   }, {
     title: "Workflow Automation",
     description: "Visual routing, tagging, SLAs, escalations.",
     label: "Automation",
     color: "hsl(var(--background))",
-    icon: Zap,
-    image: workflowScreenshot
+    icon: Zap
   }, {
     title: "AI Chatbots",
     description: "Deflect known intents with intelligent automated responses.",
     label: "AI Agent",
     color: "hsl(var(--background))",
-    icon: Bot,
-    customComponent: <AIChatbotPreview />
+    icon: Bot
   }, {
     title: "AI Copilots",
     description: "Draft, summarize, translate—AI assistance for your team.",
     label: "AI Assistant",
     color: "hsl(var(--background))",
-    icon: Sparkles,
-    image: aiCopilotScreenshot
+    icon: Sparkles
   }, {
     title: "AI Tools",
     description: "Refunds, plan changes, order status—with guardrails & audit trails.",
     label: "Actions",
     color: "hsl(var(--background))",
-    icon: Users,
-    customComponent: <AIToolsPreview />
+    icon: Users
   }, {
     title: "Auto-QA",
     description: "Score 100% of conversations for accuracy, empathy, policy.",
     label: "Quality",
     color: "hsl(var(--background))",
-    icon: Shield,
-    customComponent: <AutoQAPreview />
+    icon: Shield
   }, {
     title: "Analytics",
     description: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
     label: "Insights",
     color: "hsl(var(--background))",
-    icon: BarChart3,
-    image: analyticsScreenshot
+    icon: BarChart3
   }];
   const featureBento = [{
     title: "Fewer back-and-forths",
@@ -161,39 +129,67 @@ const HomeNew = () => {
   const solutions = {
     "b2b-saas": {
       title: "B2B SaaS",
-      items: [
-        { benefit: "Reduce churn instantly", detail: "Handle plan changes & billing disputes before customers leave" },
-        { benefit: "Onboard faster", detail: "Automated provisioning and SSO setup cuts wait times" },
-        { benefit: "Prevent overages", detail: "Proactive usage & quota alerts keep customers happy" },
-        { benefit: "Turn incidents into trust", detail: "Real-time status updates and transparent communication" }
-      ]
+      items: [{
+        benefit: "Reduce churn instantly",
+        detail: "Handle plan changes & billing disputes before customers leave"
+      }, {
+        benefit: "Onboard faster",
+        detail: "Automated provisioning and SSO setup cuts wait times"
+      }, {
+        benefit: "Prevent overages",
+        detail: "Proactive usage & quota alerts keep customers happy"
+      }, {
+        benefit: "Turn incidents into trust",
+        detail: "Real-time status updates and transparent communication"
+      }]
     },
     ecommerce: {
       title: "Ecommerce",
-      items: [
-        { benefit: "Stop WISMO flooding", detail: "Automated order tracking updates reduce repeat inquiries" },
-        { benefit: "Streamline returns", detail: "Self-service exchanges & refunds with instant confirmations" },
-        { benefit: "Boost loyalty retention", detail: "Smart refund routing to store credit increases LTV" },
-        { benefit: "Recover abandoned carts", detail: "Proactive shipping issue resolution saves revenue" }
-      ]
+      items: [{
+        benefit: "Stop WISMO flooding",
+        detail: "Automated order tracking updates reduce repeat inquiries"
+      }, {
+        benefit: "Streamline returns",
+        detail: "Self-service exchanges & refunds with instant confirmations"
+      }, {
+        benefit: "Boost loyalty retention",
+        detail: "Smart refund routing to store credit increases LTV"
+      }, {
+        benefit: "Recover abandoned carts",
+        detail: "Proactive shipping issue resolution saves revenue"
+      }]
     },
     edtech: {
       title: "Edtech",
-      items: [
-        { benefit: "Enroll more students", detail: "Instant onboarding support removes friction at signup" },
-        { benefit: "Reduce drop-off", detail: "24/7 course access help keeps learners engaged" },
-        { benefit: "Process payments faster", detail: "Automated billing support prevents enrollment delays" },
-        { benefit: "Increase completion rates", detail: "Real-time assignment help reduces frustration" }
-      ]
+      items: [{
+        benefit: "Enroll more students",
+        detail: "Instant onboarding support removes friction at signup"
+      }, {
+        benefit: "Reduce drop-off",
+        detail: "24/7 course access help keeps learners engaged"
+      }, {
+        benefit: "Process payments faster",
+        detail: "Automated billing support prevents enrollment delays"
+      }, {
+        benefit: "Increase completion rates",
+        detail: "Real-time assignment help reduces frustration"
+      }]
     },
     fintech: {
       title: "Fintech",
-      items: [
-        { benefit: "Resolve disputes in minutes", detail: "Automated transaction lookups and instant resolutions" },
-        { benefit: "Speed up verification", detail: "Smart document validation cuts approval times by 80%" },
-        { benefit: "Prevent payment failures", detail: "Proactive issue detection before transactions fail" },
-        { benefit: "Build trust instantly", detail: "Real-time fraud alerts with transparent explanations" }
-      ]
+      items: [{
+        benefit: "Resolve disputes in minutes",
+        detail: "Automated transaction lookups and instant resolutions"
+      }, {
+        benefit: "Speed up verification",
+        detail: "Smart document validation cuts approval times by 80%"
+      }, {
+        benefit: "Prevent payment failures",
+        detail: "Proactive issue detection before transactions fail"
+      }, {
+        benefit: "Build trust instantly",
+        detail: "Real-time fraud alerts with transparent explanations"
+      }]
     }
   };
   const integrations = [{
@@ -232,7 +228,6 @@ const HomeNew = () => {
     a: "One plan, all capabilities. Request pricing."
   }];
   return <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
       {/* Hero Section */}
@@ -243,23 +238,9 @@ const HomeNew = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
         
-        {/* LiquidEther overlay - lazy loaded */}
+        {/* LiquidEther overlay */}
         <div className="absolute inset-0 -z-10 opacity-50">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={['#FF00C8', '#A805FF', '#D3A9EA']}
-              mouseForce={25}
-              cursorSize={120}
-              isViscous={false}
-              resolution={0.5}
-              autoDemo={true}
-              autoSpeed={0.3}
-              autoIntensity={1.8}
-              takeoverDuration={0.3}
-              autoResumeDelay={4000}
-              autoRampDuration={0.8}
-            />
-          </Suspense>
+          <LiquidEther colors={['#FF00C8', '#A805FF', '#D3A9EA']} mouseForce={25} cursorSize={120} isViscous={false} resolution={0.5} autoDemo={true} autoSpeed={0.3} autoIntensity={1.8} takeoverDuration={0.3} autoResumeDelay={4000} autoRampDuration={0.8} />
         </div>
 
         <div className="container mx-auto px-4 py-20">
@@ -268,7 +249,7 @@ const HomeNew = () => {
             <div className="z-10 space-y-8">
               <div className="inline-flex items-center gap-2 glass-strong px-4 py-2 rounded-full text-sm">
                 <span>Backed by</span>
-                <img src={antlerLogo} alt="Antler" className="h-4" loading="eager" fetchPriority="high" />
+                <img src={antlerLogo} alt="Antler" className="h-4" />
               </div>
 
               <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
@@ -344,6 +325,27 @@ const HomeNew = () => {
         </div>
       </section>
 
+      {/* Node Animation */}
+      <section className="py-32 relative fade-in-scroll overflow-hidden">
+        {/* Decorative background with color variety */}
+        
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
+        
+        <div className="container mx-auto px-4">
+          
+          
+          <div className="relative">
+            {/* Glow effect behind animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-teal/20 via-primary/20 to-accent-orange/20 rounded-3xl blur-2xl -z-10" />
+            
+            <div className="glass-strong p-8 rounded-3xl">
+              <NodeAnimation />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Taxonomy */}
       <section className="min-h-screen flex items-center py-20 fade-in-scroll relative overflow-hidden">
         {/* Background accents with variety */}
@@ -364,31 +366,8 @@ const HomeNew = () => {
           </div>
 
           {/* Magic Bento Grid */}
-          <MagicBento
-            cardData={taxonomy}
-            textAutoHide={true}
-            enableStars={true}
-            enableSpotlight={true}
-            enableBorderGlow={true}
-            enableTilt={true}
-            enableMagnetism={true}
-            clickEffect={true}
-            spotlightRadius={400}
-            particleCount={12}
-            glowColor="132, 0, 255"
-          />
+          <MagicBento cardData={taxonomy} textAutoHide={true} enableStars={true} enableSpotlight={true} enableBorderGlow={true} enableTilt={true} enableMagnetism={true} clickEffect={true} spotlightRadius={400} particleCount={12} glowColor="132, 0, 255" />
         </div>
-      </section>
-
-      {/* Node Animation */}
-      <section className="py-32 relative fade-in-scroll overflow-hidden">
-        {/* Decorative background with color variety */}
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
-        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
-        
-        <Suspense fallback={<div className="w-full h-[400px] animate-pulse bg-muted/20" />}>
-          <NodeAnimation />
-        </Suspense>
       </section>
 
       {/* Benefits Showcase */}
@@ -427,22 +406,12 @@ const HomeNew = () => {
                       <div className="p-6 flex-1 flex flex-col">
                         {/* Icon & Metric Row */}
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`relative h-12 w-12 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${
-                            index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' :
-                            index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' :
-                            index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' :
-                            'bg-gradient-to-br from-accent-pink to-primary'
-                          }`}>
+                          <div className={`relative h-12 w-12 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300 ${index === 0 ? 'bg-gradient-to-br from-accent-teal to-primary' : index === 1 ? 'bg-gradient-to-br from-accent-orange to-primary' : index === 2 ? 'bg-gradient-to-br from-accent-green to-primary' : 'bg-gradient-to-br from-accent-pink to-primary'}`}>
                             <Icon className="h-6 w-6 text-white" />
                           </div>
                           
                           <div className="text-right">
-                            <div className={`text-2xl font-black ${
-                              index === 0 ? 'text-accent-teal' :
-                              index === 1 ? 'text-accent-orange' :
-                              index === 2 ? 'text-accent-green' :
-                              'text-accent-pink'
-                            }`}>
+                            <div className={`text-2xl font-black ${index === 0 ? 'text-accent-teal' : index === 1 ? 'text-accent-orange' : index === 2 ? 'text-accent-green' : 'text-accent-pink'}`}>
                               {metrics[index]}
                             </div>
                             <div className="text-[10px] text-muted-foreground uppercase tracking-wide">
@@ -473,7 +442,7 @@ const HomeNew = () => {
                     </div>
                   </div>
                 </div>;
-           })}
+          })}
           </div>
         </div>
       </section>
@@ -485,7 +454,9 @@ const HomeNew = () => {
       <section className="py-32 fade-in-scroll relative overflow-hidden">
         {/* Animated background orbs with variety */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-orange/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-green/10 rounded-full blur-3xl animate-pulse" style={{
+        animationDelay: '1s'
+      }} />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 space-y-4">
@@ -512,26 +483,12 @@ const HomeNew = () => {
                     
                     <div className="space-y-2">
                       {Object.entries(solutions).map(([key, solution], index) => {
-                        const isActive = activeSolution === key;
-                        const icons = [Zap, Shield, Users, BarChart3];
-                        const Icon = icons[index] || Users;
-                        
-                        return (
-                          <button
-                            key={key}
-                            onClick={() => setActiveSolution(key as "b2b-saas" | "ecommerce" | "edtech" | "fintech")}
-                            className={`w-full text-left p-4 rounded-xl transition-all duration-300 group ${
-                              isActive 
-                                ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-[1.02]' 
-                                : 'hover:bg-primary/5 hover:scale-[1.01]'
-                            }`}
-                          >
+                      const isActive = activeSolution === key;
+                      const icons = [Zap, Shield, Users, BarChart3];
+                      const Icon = icons[index] || Users;
+                      return <button key={key} onClick={() => setActiveSolution(key as "b2b-saas" | "ecommerce" | "edtech" | "fintech")} className={`w-full text-left p-4 rounded-xl transition-all duration-300 group ${isActive ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg scale-[1.02]' : 'hover:bg-primary/5 hover:scale-[1.01]'}`}>
                             <div className="flex items-center gap-3">
-                              <div className={`h-10 w-10 rounded-lg flex items-center justify-center transition-all ${
-                                isActive 
-                                  ? 'bg-white/20' 
-                                  : 'bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20'
-                              }`}>
+                              <div className={`h-10 w-10 rounded-lg flex items-center justify-center transition-all ${isActive ? 'bg-white/20' : 'bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20'}`}>
                                 <Icon className={`h-5 w-5 ${isActive ? 'text-white' : 'text-primary'}`} />
                               </div>
                               <div className="flex-1">
@@ -539,27 +496,21 @@ const HomeNew = () => {
                                   {solution.title}
                                 </div>
                               </div>
-                              <ArrowRight className={`h-4 w-4 transition-all ${
-                                isActive ? 'text-white opacity-100' : 'text-primary opacity-0 group-hover:opacity-100'
-                              }`} />
+                              <ArrowRight className={`h-4 w-4 transition-all ${isActive ? 'text-white opacity-100' : 'text-primary opacity-0 group-hover:opacity-100'}`} />
                             </div>
-                          </button>
-                        );
-                      })}
+                          </button>;
+                    })}
                     </div>
                   </div>
 
                   {/* Right Side - Benefits & Use Cases */}
                   <div className="p-8 lg:p-12">
                     {Object.entries(solutions).map(([key, solution], index) => {
-                      const isActive = activeSolution === key;
-                      const icons = [Zap, Shield, Users, BarChart3];
-                      const Icon = icons[index] || Users;
-                      
-                      if (!isActive) return null;
-                      
-                      return (
-                        <div key={key} className="h-full flex flex-col animate-fade-in">
+                    const isActive = activeSolution === key;
+                    const icons = [Zap, Shield, Users, BarChart3];
+                    const Icon = icons[index] || Users;
+                    if (!isActive) return null;
+                    return <div key={key} className="h-full flex flex-col animate-fade-in">
                           {/* Header */}
                           <div className="flex items-center gap-4 mb-8 pb-6 border-b border-primary/10">
                             <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/25">
@@ -575,12 +526,9 @@ const HomeNew = () => {
 
                           {/* Benefits Grid */}
                           <div className="flex-1 space-y-4 content-start">
-                            {solution.items.map((item, i) => (
-                              <div 
-                                key={i}
-                                className="group p-5 rounded-xl bg-gradient-to-br from-background to-primary/5 border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all"
-                                style={{ animationDelay: `${i * 50}ms` }}
-                              >
+                            {solution.items.map((item, i) => <div key={i} className="group p-5 rounded-xl bg-gradient-to-br from-background to-primary/5 border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all" style={{
+                          animationDelay: `${i * 50}ms`
+                        }}>
                                 <div className="flex items-start gap-4">
                                   {/* Number badge */}
                                   <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
@@ -601,8 +549,7 @@ const HomeNew = () => {
                                   {/* Arrow indicator */}
                                   <ArrowRight className="flex-shrink-0 h-5 w-5 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                                 </div>
-                              </div>
-                            ))}
+                              </div>)}
                           </div>
 
                           {/* CTA */}
@@ -620,9 +567,8 @@ const HomeNew = () => {
                               </Button>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        </div>;
+                  })}
                   </div>
 
                 </div>
@@ -723,7 +669,9 @@ const HomeNew = () => {
         
         {/* Animated orbs with variety */}
         <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent-teal/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent-orange/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent-orange/30 rounded-full blur-3xl animate-pulse" style={{
+        animationDelay: '1s'
+      }} />
         
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -812,31 +760,33 @@ const HomeNew = () => {
 
             {/* Floating trust indicators */}
             <div className="grid md:grid-cols-3 gap-4 mt-8">
-              {[
-                { icon: Shield, text: "Enterprise-grade security", color: "accent-teal" },
-                { icon: Zap, text: "Deploy in days, not quarters", color: "accent-orange" },
-                { icon: CheckCircle2, text: "Cancel anytime", color: "accent-green" }
-              ].map((item, i) => (
-                <div 
-                  key={i}
-                  className="glass-strong p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform border-l-2"
-                  style={{ 
-                    animationDelay: `${i * 100}ms`,
-                    borderLeftColor: `hsl(var(--${item.color}))`
-                  }}
-                >
+              {[{
+              icon: Shield,
+              text: "Enterprise-grade security",
+              color: "accent-teal"
+            }, {
+              icon: Zap,
+              text: "Deploy in days, not quarters",
+              color: "accent-orange"
+            }, {
+              icon: CheckCircle2,
+              text: "Cancel anytime",
+              color: "accent-green"
+            }].map((item, i) => <div key={i} className="glass-strong p-4 rounded-xl flex items-center gap-3 hover:scale-105 transition-transform border-l-2" style={{
+              animationDelay: `${i * 100}ms`,
+              borderLeftColor: `hsl(var(--${item.color}))`
+            }}>
                   <div className={`h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gradient-to-br from-${item.color} to-primary`}>
                     <item.icon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-sm font-medium">{item.text}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </section>
 
-      <Footer />
+      
     </div>;
 };
 export default HomeNew;
