@@ -348,14 +348,17 @@ const HomeNew = () => {
       </section>
 
       {/* Node Animation */}
-      <section className="relative fade-in-scroll overflow-hidden h-[700px]">
+      <section className="relative fade-in-scroll overflow-hidden min-h-screen flex items-center py-20">
         {/* Decorative background with color variety */}
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
         <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
         
-        <Suspense fallback={<div className="w-full h-full animate-pulse bg-muted/20" />}>
-          <NodeAnimation />
-        </Suspense>
+        {/* Content container */}
+        <div className="relative w-full h-[700px]">
+          <Suspense fallback={<div className="w-full h-full animate-pulse bg-muted/20" />}>
+            <NodeAnimation />
+          </Suspense>
+        </div>
       </section>
 
       {/* Benefits Showcase */}

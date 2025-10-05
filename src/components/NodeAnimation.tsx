@@ -1282,10 +1282,25 @@ const NodeAnimation = () => {
       </div>;
   }
   return <>
-      {/* Pill at the top */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
-          <span className="text-sm font-semibold text-primary">The Pullse Difference</span>
+      {/* Top content overlay */}
+      <div className="absolute top-0 left-0 right-0 z-10 pt-12 pb-8">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4">
+            {/* Pill badge */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-accent-purple-light to-primary/10 border border-accent-purple/20 backdrop-blur-md">
+              <span className="text-sm font-semibold bg-gradient-to-r from-accent-purple to-primary bg-clip-text text-transparent">The Pullse Difference</span>
+            </div>
+            
+            {/* Main heading */}
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              From Inbox to Impact
+            </h2>
+            
+            {/* Subheading */}
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Watch how conversations flow through our intelligent platform—unified, automated, and optimized for results
+            </p>
+          </div>
         </div>
       </div>
       
@@ -1301,39 +1316,63 @@ const NodeAnimation = () => {
         </Canvas>
       </div>
         
-      {/* Bottom section with phases */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background/90 via-background/50 to-transparent backdrop-blur-md border-t border-primary/10">
-        <div className="grid grid-cols-3 gap-8 h-full items-center px-12">
-          {/* Phase 1: Channels */}
-          <div className="flex items-center gap-3 group cursor-default">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-              <Mail className="h-4 w-4 text-blue-500" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-foreground">Unified Communication</div>
-              <div className="text-xs text-muted-foreground">All channels, one place</div>
-            </div>
-          </div>
+      {/* Bottom section with phases - Enhanced design */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="relative">
+          {/* Gradient overlay for better readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-transparent backdrop-blur-xl" />
           
-          {/* Phase 2: Engine */}
-          <div className="flex items-center gap-3 justify-center group cursor-default">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
-              <Bot className="h-4 w-4 text-purple-500" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-foreground">Smart Synergy</div>
-              <div className="text-xs text-muted-foreground">AI Augmented Human Support</div>
-            </div>
-          </div>
-          
-          {/* Phase 3: Outcomes */}
-          <div className="flex items-center gap-3 justify-end group cursor-default">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:bg-green-500/20 transition-colors">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-foreground">Excellent Outcomes</div>
-              <div className="text-xs text-muted-foreground">Faster, smarter resolutions</div>
+          {/* Content */}
+          <div className="relative container mx-auto px-4 py-8">
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Phase 1: Channels */}
+              <div className="group relative">
+                <div className="glass-strong p-6 rounded-2xl border-l-4 border-blue-500/50 hover:border-blue-500 transition-all duration-300 hover:scale-[1.02]">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25">
+                      <Mail className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-lg font-bold text-foreground mb-1">Unified Communication</div>
+                      <div className="text-sm text-muted-foreground">All channels flow into one intelligent inbox</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Connecting line */}
+                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-blue-500/50 to-purple-500/50 -translate-y-1/2" />
+              </div>
+              
+              {/* Phase 2: Engine */}
+              <div className="group relative">
+                <div className="glass-strong p-6 rounded-2xl border-l-4 border-purple-500/50 hover:border-purple-500 transition-all duration-300 hover:scale-[1.02]">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg shadow-purple-500/25">
+                      <Bot className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-lg font-bold text-foreground mb-1">Smart Synergy</div>
+                      <div className="text-sm text-muted-foreground">AI augments human expertise at every step</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Connecting line */}
+                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-purple-500/50 to-green-500/50 -translate-y-1/2" />
+              </div>
+              
+              {/* Phase 3: Outcomes */}
+              <div className="group relative">
+                <div className="glass-strong p-6 rounded-2xl border-l-4 border-green-500/50 hover:border-green-500 transition-all duration-300 hover:scale-[1.02]">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/25">
+                      <CheckCircle2 className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-lg font-bold text-foreground mb-1">Excellent Outcomes</div>
+                      <div className="text-sm text-muted-foreground">Faster resolutions, happier customers</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
