@@ -9,6 +9,7 @@ import VideoEmbed from "@/components/VideoEmbed";
 import PlatformOverview from "@/components/PlatformOverview";
 import MagicBento, { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+import { AIAgentsSection } from "@/components/AIAgentsSection";
 import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
@@ -379,6 +380,9 @@ const HomeNew = () => {
           />
         </div>
       </section>
+
+      {/* AI Agents & Copilots Section */}
+      <AIAgentsSection />
 
       {/* Node Animation */}
       <section className="py-32 relative fade-in-scroll overflow-hidden">
