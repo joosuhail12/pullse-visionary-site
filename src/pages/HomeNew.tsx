@@ -369,24 +369,12 @@ const HomeNew = () => {
       {/* Node Animation */}
       <section className="py-32 relative fade-in-scroll overflow-hidden">
         {/* Decorative background with color variety */}
-        
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-teal/10 rounded-full blur-3xl -z-10" />
         <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl -z-10" />
         
-        <div className="container mx-auto px-4">
-          
-          
-          <div className="relative">
-            {/* Glow effect behind animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-teal/20 via-primary/20 to-accent-orange/20 rounded-3xl blur-2xl -z-10" />
-            
-            <div className="glass-strong p-8 rounded-3xl">
-              <Suspense fallback={<div className="w-full h-[400px] animate-pulse bg-muted/20" />}>
-                <NodeAnimation />
-              </Suspense>
-            </div>
-          </div>
-        </div>
+        <Suspense fallback={<div className="w-full h-[400px] animate-pulse bg-muted/20" />}>
+          <NodeAnimation />
+        </Suspense>
       </section>
 
       {/* Benefits Showcase */}
