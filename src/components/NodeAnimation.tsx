@@ -1313,12 +1313,11 @@ const NodeAnimation = () => {
       
       {/* Main canvas - full size */}
       <div className="absolute inset-0">
-        <Canvas dpr={[1, 2]} performance={{
-        min: 0.5
-      }} gl={{
-        antialias: true,
-        alpha: true
-      }}>
+        <Canvas 
+          dpr={[1, 2]} 
+          performance={{ min: 0.5 }} 
+          gl={{ antialias: true, alpha: true }}
+        >
           <Scene />
         </Canvas>
       </div>
