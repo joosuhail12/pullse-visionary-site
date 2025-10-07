@@ -15,6 +15,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import RouteButton from "@/components/RouteButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -507,15 +508,11 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 Connectors shipping with early access: {connectorHighlights.join(', ')}. Follow the roadmap to request the next systems we should wire in.
               </div>
               <div className="flex flex-wrap gap-3">
-                <Button size="lg" asChild>
-                  <Link href="/contact-sales">
-                    Schedule a planning session
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/integrations">View integration roadmap</Link>
-                </Button>
+                <RouteButton size="lg" href="/contact-sales">
+                  Schedule a planning session
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </RouteButton>
+                <RouteButton variant="outline" href="/integrations">View integration roadmap</RouteButton>
               </div>
             </div>
           </div>
@@ -601,15 +598,13 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
               If you’re exploring how AI and automation can shoulder real work, let’s map it together. We’ll share the latest product milestones, integrations, and onboarding plan.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" className="px-8" asChild>
-                <Link href="/contact-sales">
-                  Talk to the founders
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="px-8" asChild>
-                <Link href="/product-tour">Watch the product tour</Link>
-              </Button>
+              <RouteButton size="lg" className="px-8" href="/contact-sales">
+                Talk to the founders
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </RouteButton>
+              <RouteButton size="lg" variant="outline" className="px-8" href="/product-tour">
+                Watch the product tour
+              </RouteButton>
             </div>
           </div>
         </div>
