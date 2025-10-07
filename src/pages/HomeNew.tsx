@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import type { Context as GSAPContext } from "gsap";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Shield, Users, Zap, BarChart3, Bot, MessageSquare, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,58 +41,76 @@ const loadGSAP = async () => {
 };
 const HomeNew = () => {
   const [activeSolution, setActiveSolution] = useState<"b2b-saas" | "ecommerce" | "edtech" | "fintech">("b2b-saas");
+  const pageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Load and initialize GSAP animations asynchronously
-    loadGSAP().then(({ gsap, ScrollTrigger }) => {
-      // Hero text animations with GSAP
-      if (titleRef.current) {
-        gsap.from(titleRef.current.querySelectorAll('.word'), {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out"
-        });
-      }
-      if (descRef.current) {
-        gsap.from(descRef.current, {
-          y: 30,
-          opacity: 0,
-          delay: 0.4,
-          duration: 1.2,
-          ease: "power3.out"
-        });
-      }
-      if (buttonsRef.current) {
-        gsap.from(buttonsRef.current.children, {
-          scale: 0.8,
-          opacity: 0,
-          delay: 0.6,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "back.out(1.7)"
-        });
+    let ctx: GSAPContext | null = null;
+    let isMounted = true;
+
+    loadGSAP().then(({ gsap }) => {
+      if (!isMounted) {
+        return;
       }
 
-      // Animate elements on scroll
-      const elements = gsap.utils.toArray(".fade-in-scroll") as HTMLElement[];
-      elements.forEach(elem => {
-        gsap.from(elem, {
-          scrollTrigger: {
-            trigger: elem,
-            start: "top 80%"
-          },
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out"
+      ctx = gsap.context(() => {
+        // Hero text animations with GSAP
+        if (titleRef.current) {
+          gsap.from(titleRef.current.querySelectorAll(".word"), {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out"
+          });
+        }
+        if (descRef.current) {
+          gsap.from(descRef.current, {
+            y: 30,
+            opacity: 0,
+            delay: 0.4,
+            duration: 1.2,
+            ease: "power3.out"
+          });
+        }
+        if (buttonsRef.current) {
+          gsap.from(buttonsRef.current.children, {
+            scale: 0.8,
+            opacity: 0,
+            delay: 0.6,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+          });
+        }
+
+        // Animate elements on scroll
+        const elements = gsap.utils.toArray(".fade-in-scroll") as HTMLElement[];
+        elements.forEach(elem => {
+          gsap.from(elem, {
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 80%"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          });
         });
-      });
+      }, pageRef);
     });
+
+    return () => {
+      isMounted = false;
+      ctx?.revert();
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
   }, []);
   const taxonomy: CardData[] = [{
     title: "Unified Inbox",
@@ -233,7 +252,7 @@ const HomeNew = () => {
     q: "Pricing?",
     a: "One plan, all capabilities. Request pricing."
   }];
-  return <div className="min-h-screen">
+  return <div ref={pageRef} className="min-h-screen">
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
