@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoIcon from "@/assets/logo-icon-purple.png";
+import logoText from "@/assets/logo-text-navy.png";
 const Navigation = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -156,23 +159,31 @@ const Navigation = () => {
           <Link href="/" className="flex items-center group" style={{ gap: `${10 * (1 - scrollProgress * 0.2)}px` }}>
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all duration-300"></div>
-              <div
-                className="relative transform group-hover:scale-110 font-bold text-primary flex items-center justify-center"
+              <Image
+                src={logoIcon}
+                alt="Pullse"
+                priority
+                width={48}
+                height={48}
+                className="relative transform group-hover:scale-110"
                 style={{
                   width: `${36 - scrollProgress * 8}px`,
                   height: `${36 - scrollProgress * 8}px`,
-                  fontSize: `${20 - scrollProgress * 4}px`,
-                  transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  willChange: 'width, height, font-size'
+                  transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'width, height'
                 }}
-              >
-                P
-              </div>
+              />
             </div>
-            <div
-              className="transform group-hover:scale-105 font-bold text-primary"
+            <Image
+              src={logoText}
+              alt="Pullse"
+              priority
+              width={160}
+              height={32}
+              className="transform group-hover:scale-105"
               style={{
-                fontSize: '18px',
+                height: '20px',
+                width: 'auto',
                 opacity: textOpacity,
                 transform: `scaleX(${textOpacity})`,
                 transformOrigin: 'left center',
@@ -180,9 +191,7 @@ const Navigation = () => {
                 pointerEvents: textOpacity < 0.1 ? 'none' : 'auto',
                 willChange: 'opacity, transform'
               }}
-            >
-              Pullse
-            </div>
+            />
           </Link>
 
           {/* Desktop Navigation */}

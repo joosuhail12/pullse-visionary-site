@@ -24,6 +24,11 @@ import MagicBento, { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import WhyFullStackSection from "@/components/WhyFullStackSection";
 import RoiCalculator from "@/components/RoiCalculator";
+import antlerLogo from "@/assets/antler-logo.png";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
+import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
+import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import analyticsScreenshot from "@/assets/analytics-screenshot.png";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
@@ -162,6 +167,7 @@ const taxonomy: CardData[] = [
     label: "Communication",
     color: "hsl(var(--background))",
     icon: MessageSquare,
+    image: inboxScreenshot.src,
   },
   {
     title: "Workflow Automation",
@@ -169,6 +175,7 @@ const taxonomy: CardData[] = [
     label: "Automation",
     color: "hsl(var(--background))",
     icon: Zap,
+    image: workflowScreenshot.src,
   },
   {
     title: "AI Chatbots",
@@ -184,6 +191,7 @@ const taxonomy: CardData[] = [
     label: "AI Assistant",
     color: "hsl(var(--background))",
     icon: Sparkles,
+    image: aiCopilotScreenshot.src,
   },
   {
     title: "AI Tools",
@@ -207,6 +215,7 @@ const taxonomy: CardData[] = [
     label: "Insights",
     color: "hsl(var(--background))",
     icon: BarChart3,
+    image: analyticsScreenshot.src,
   },
 ];
 
@@ -292,8 +301,9 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
         <div className="container mx-auto px-4 py-20">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 text-sm text-foreground backdrop-blur">
-                <span>Backed by Antler</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur">
+                <span>Backed by</span>
+                <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto" />
               </div>
 
               <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-foreground">
