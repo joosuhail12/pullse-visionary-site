@@ -1,7 +1,9 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Bot, User, Zap, Database, Code, CheckCircle, MessageSquare, Sparkles, ArrowRight, TrendingUp, Clock, Activity, RefreshCw, Shield, Boxes } from 'lucide-react';
 import gsap from 'gsap';
-import aiCopilotScreenshot from '@/assets/ai-copilot-screenshot.png';
 import copilotInterfaceScreenshot from '@/assets/copilot-interface-screenshot.png';
 
 export const AIAgentsSection = () => {
@@ -355,10 +357,11 @@ export const AIAgentsSection = () => {
                   
                   {/* Screenshot Container */}
                   <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <img 
-                      src={copilotInterfaceScreenshot} 
-                      alt="Pullse AI Copilot Interface showing agent assistance features" 
+                    <Image
+                      src={copilotInterfaceScreenshot}
+                      alt="Pullse AI Copilot Interface showing agent assistance features"
                       className="w-full h-auto"
+                      placeholder="blur"
                     />
                   </div>
 
@@ -440,3 +443,5 @@ export const AIAgentsSection = () => {
     </section>
   );
 };
+
+export default AIAgentsSection;

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 import { Github, Twitter, Linkedin } from "lucide-react";
 import logoIcon from "@/assets/logo-icon-purple.png";
 import logoText from "@/assets/logo-text-navy.png";
@@ -47,9 +48,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {/* Logo & Social */}
           <div className="col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <img src={logoIcon} alt="Pullse" className="h-10 w-10" />
-              <img src={logoText} alt="Pullse" className="h-8" />
+            <Link href="/" className="flex items-center gap-3 mb-4">
+              <Image src={logoIcon} alt="Pullse" width={40} height={40} priority />
+              <Image src={logoText} alt="Pullse" width={120} height={32} priority />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               AI-powered customer support platform for modern teams.
@@ -90,7 +91,7 @@ const Footer = () => {
                 {section.links.map((link) => (
                   <li key={link.path}>
                     <Link
-                      to={link.path}
+                      href={link.path}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.name}
@@ -109,19 +110,19 @@ const Footer = () => {
           </p>
           <div className="flex gap-6">
             <Link
-              to="/legal"
+              href="/legal"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms
             </Link>
             <Link
-              to="/legal"
+              href="/legal"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy
             </Link>
             <Link
-              to="/legal"
+              href="/legal"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Cookies

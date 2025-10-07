@@ -1,6 +1,9 @@
-import { lazy, Suspense } from "react";
+import dynamic from "next/dynamic";
 
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
+const LiquidEther = dynamic(() => import("@/components/LiquidEther"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full" />,
+});
 
 interface PageLiquidBackgroundProps {
   opacity?: number;
@@ -13,21 +16,19 @@ const PageLiquidBackground = ({
 }: PageLiquidBackgroundProps) => {
   return (
     <div className="fixed inset-0 -z-50 pointer-events-none" style={{ opacity }}>
-      <Suspense fallback={<div className="w-full h-full" />}>
-        <LiquidEther
-          colors={colors}
-          mouseForce={25}
-          cursorSize={120}
-          isViscous={false}
-          resolution={0.5}
-          autoDemo={true}
-          autoSpeed={0.3}
-          autoIntensity={1.8}
-          takeoverDuration={0.3}
-          autoResumeDelay={4000}
-          autoRampDuration={0.8}
-        />
-      </Suspense>
+      <LiquidEther
+        colors={colors}
+        mouseForce={25}
+        cursorSize={120}
+        isViscous={false}
+        resolution={0.5}
+        autoDemo={true}
+        autoSpeed={0.3}
+        autoIntensity={1.8}
+        takeoverDuration={0.3}
+        autoResumeDelay={4000}
+        autoRampDuration={0.8}
+      />
     </div>
   );
 };

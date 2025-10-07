@@ -1,6 +1,8 @@
+'use client';
+
 import { useRef, useEffect, useCallback, useState } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
 import { gsap } from 'gsap';
-import './MagicBento.css';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -48,10 +50,10 @@ const updateCardGlowProperties = (
 };
 
 interface ParticleCardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   disableAnimations?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   particleCount?: number;
   glowColor?: string;
   enableTilt?: boolean;
@@ -437,7 +439,7 @@ const GlobalSpotlight = ({
 };
 
 interface BentoCardGridProps {
-  children: React.ReactNode;
+  children: ReactNode;
   gridRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -469,7 +471,7 @@ export interface CardData {
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   image?: string;
-  customComponent?: React.ReactNode;
+  customComponent?: ReactNode;
 }
 
 interface MagicBentoProps {
@@ -525,7 +527,7 @@ const MagicBento = ({
             style: {
               backgroundColor: card.color,
               '--glow-color': glowColor
-            } as React.CSSProperties
+            } as CSSProperties
           };
 
           const Icon = card.icon;

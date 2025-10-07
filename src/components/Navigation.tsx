@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+'use client';
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoIcon from "@/assets/logo-icon-purple.png";
@@ -8,7 +12,7 @@ const Navigation = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const location = useLocation();
+  const pathname = usePathname();
   
   useEffect(() => {
     let ticking = false;
@@ -30,6 +34,10 @@ const Navigation = () => {
     handleScroll(); // Initialize on mount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setOpenDropdown(null);
+  }, [pathname]);
   
   const isScrolled = scrollProgress > 0.5;
   const productLinks = [{
@@ -112,7 +120,7 @@ const Navigation = () => {
         
         {isOpen && <div className="absolute top-full left-0 mt-2 w-56 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-2 animate-fade-in z-50 shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
-            {links.map((link, index) => <Link key={link.path} to={link.path} className="relative block px-3.5 py-2.5 text-xs text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
+            {links.map((link, index) => <Link key={link.path} href={link.path} className="relative block px-3.5 py-2.5 text-xs text-foreground/80 hover:text-foreground hover:bg-primary/10 rounded-lg transition-all duration-200 hover:translate-x-0.5" style={{
           animationDelay: `${index * 30}ms`
         }}>
                 {link.name}
@@ -148,14 +156,17 @@ const Navigation = () => {
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group" style={{ gap: `${10 * (1 - scrollProgress * 0.2)}px` }}>
+          <Link href="/" className="flex items-center group" style={{ gap: `${10 * (1 - scrollProgress * 0.2)}px` }}>
             <div className="relative">
               <div className="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all duration-300"></div>
-              <img 
-                src={logoIcon} 
-                alt="Pullse" 
+              <Image
+                src={logoIcon}
+                alt="Pullse"
+                priority
+                width={48}
+                height={48}
                 className="relative transform group-hover:scale-110"
-                style={{ 
+                style={{
                   width: `${36 - scrollProgress * 8}px`,
                   height: `${36 - scrollProgress * 8}px`,
                   transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -163,12 +174,16 @@ const Navigation = () => {
                 }}
               />
             </div>
-            <img 
-              src={logoText} 
-              alt="Pullse" 
+            <Image
+              src={logoText}
+              alt="Pullse"
+              priority
+              width={160}
+              height={32}
               className="transform group-hover:scale-105"
-              style={{ 
+              style={{
                 height: '20px',
+                width: 'auto',
                 opacity: textOpacity,
                 transform: `scaleX(${textOpacity})`,
                 transformOrigin: 'left center',
@@ -190,15 +205,15 @@ const Navigation = () => {
             }}
           >
             <NavDropdown title="Product" links={productLinks} />
-            <Link to="/integrations" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link href="/integrations" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Integrations
             </Link>
             <NavDropdown title="Solutions" links={solutionsLinks} />
-            <Link to="/pricing" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link href="/pricing" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Pricing
             </Link>
             <NavDropdown title="Resources" links={resourcesLinks} />
-            <Link to="/compare" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
+            <Link href="/compare" className="text-xs font-medium text-foreground/80 hover:text-foreground transition-all duration-300 relative py-1.5 px-2 rounded-lg hover:bg-primary/5">
               Compare
             </Link>
           </div>
@@ -216,7 +231,7 @@ const Navigation = () => {
                 willChange: 'height, padding'
               }}
             >
-              <Link to="/contact-sales">
+              <Link href="/contact-sales">
                 <span className="relative z-10">Book a Demo</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/20 to-primary/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></span>
               </Link>
@@ -233,24 +248,24 @@ const Navigation = () => {
         {isMobileMenuOpen && <div className="lg:hidden mt-3 backdrop-blur-2xl bg-background/95 border border-white/10 rounded-xl p-3 animate-fade-in shadow-2xl shadow-black/20">
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-xl pointer-events-none"></div>
             <div className="relative flex flex-col gap-1">
-              <Link to="/product" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link href="/product" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Product
               </Link>
-              <Link to="/integrations" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link href="/integrations" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Integrations
               </Link>
-              <Link to="/solutions" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link href="/solutions" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Solutions
               </Link>
-              <Link to="/pricing" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link href="/pricing" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Pricing
               </Link>
-              <Link to="/resources" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
+              <Link href="/resources" className="px-3.5 py-2.5 text-xs hover:bg-primary/10 rounded-lg transition-all duration-200">
                 Resources
               </Link>
               <div className="border-t border-white/10 my-2"></div>
               <Button asChild className="w-full h-8 text-xs shadow-lg shadow-primary/25">
-                <Link to="/contact-sales">Book a Demo</Link>
+                <Link href="/contact-sales">Book a Demo</Link>
               </Button>
             </div>
           </div>}

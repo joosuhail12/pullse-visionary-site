@@ -1,4 +1,7 @@
+'use client';
+
 import { useState } from "react";
+import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -6,7 +9,7 @@ import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
 const PlatformOverview = () => {
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
-  return <section id="platform-overview" aria-labelledby="platform-overview-h2" className="py-32 fade-in-scroll relative overflow-hidden">
+  return <section id="platform-overview" aria-labelledby="platform-overview-h2" className="py-20 fade-in-scroll relative overflow-hidden">
       {/* Background accents - enhanced */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-accent-teal/10 rounded-full blur-3xl animate-pulse" />
@@ -16,17 +19,17 @@ const PlatformOverview = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header - enhanced */}
-        <div className="text-center mb-20 space-y-6">
+        <div className="text-center mb-14 space-y-4">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-teal/20 via-primary/20 to-accent-orange/20 border border-accent-teal/30 backdrop-blur-md shadow-lg mb-6">
             <div className="h-2 w-2 rounded-full bg-accent-teal animate-pulse" />
             <span className="text-sm font-bold bg-gradient-to-r from-accent-teal via-primary to-accent-orange bg-clip-text text-transparent">
               Platform Preview
             </span>
           </div>
-          <h2 id="platform-overview-h2" className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent leading-tight">
-            The whole desk, in one view
+          <h2 id="platform-overview-h2" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent leading-tight">
+          The whole desk, in one view
           </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Everything an agent needs—Inbox, AI, customer context, QA, and actions—on a single surface.
           </p>
         </div>
@@ -36,12 +39,13 @@ const PlatformOverview = () => {
           {/* Screenshot */}
           <div className="relative group">
             <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={inboxScreenshot} 
-                    alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar" 
-                    className="w-full h-auto" 
+                  <Image
+                    src={inboxScreenshot}
+                    alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar"
+                    className="w-full h-auto"
                     loading="lazy"
-                    decoding="async"
+                    placeholder="blur"
+                    sizes="(min-width: 1280px) 70vw, (min-width: 768px) 80vw, 100vw"
                   />
 
               {/* Full-screen button overlay */}
@@ -55,10 +59,12 @@ const PlatformOverview = () => {
                   </DialogTrigger>
                   <DialogContent className="max-w-[95vw] max-h-[95vh] p-0" aria-modal="true">
                     <div className="relative w-full h-full">
-                      <img 
-                        src={inboxScreenshot} 
-                        alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar - Full screen view" 
-                        className="w-full h-full object-contain" 
+                      <Image
+                        src={inboxScreenshot}
+                        alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar - Full screen view"
+                        className="w-full h-full object-contain"
+                        fill
+                        sizes="(min-width: 1280px) 80vw, 95vw"
                       />
                     </div>
                   </DialogContent>
