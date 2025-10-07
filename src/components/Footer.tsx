@@ -1,8 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Github, Twitter, Linkedin } from "lucide-react";
-import logoIcon from "@/assets/logo-icon-purple.png";
-import logoText from "@/assets/logo-text-navy.png";
 
 const Footer = () => {
   const footerSections = [
@@ -49,8 +46,7 @@ const Footer = () => {
           {/* Logo & Social */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <Image src={logoIcon} alt="Pullse" width={40} height={40} priority />
-              <Image src={logoText} alt="Pullse" width={120} height={32} priority />
+              <div className="text-2xl font-bold text-primary">Pullse</div>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               AI-powered customer support platform for modern teams.
