@@ -1,11 +1,9 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
 const PlatformOverview = () => {
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
@@ -38,37 +36,9 @@ const PlatformOverview = () => {
         <div className="max-w-6xl mx-auto">
           {/* Screenshot */}
           <div className="relative group">
-            <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={inboxScreenshot}
-                    alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar"
-                    className="w-full h-auto"
-                    loading="lazy"
-                    placeholder="blur"
-                    sizes="(min-width: 1280px) 70vw, (min-width: 768px) 80vw, 100vw"
-                  />
-
-              {/* Full-screen button overlay */}
-              <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <Dialog open={isFullscreenOpen} onOpenChange={setIsFullscreenOpen}>
-                  <DialogTrigger asChild>
-                    <Button size="sm" variant="secondary" className="glass-strong shadow-xl hover:scale-105 transition-transform">
-                      <Maximize2 className="h-4 w-4 mr-2" />
-                      Full screen
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-[95vw] max-h-[95vh] p-0" aria-modal="true">
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={inboxScreenshot}
-                        alt="Pullse Inbox showing ticket list, AI summary inside the conversation, and customer/company context in the right sidebar - Full screen view"
-                        className="w-full h-full object-contain"
-                        fill
-                        sizes="(min-width: 1280px) 80vw, 95vw"
-                      />
-                    </div>
-                  </DialogContent>
-                </Dialog>
+            <div className="relative rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden shadow-2xl p-20">
+              <div className="w-full aspect-video bg-gradient-to-br from-primary/20 via-accent/10 to-primary/10 rounded-xl flex items-center justify-center border border-border/50">
+                <p className="text-muted-foreground text-sm">Platform Preview</p>
               </div>
             </div>
           </div>
