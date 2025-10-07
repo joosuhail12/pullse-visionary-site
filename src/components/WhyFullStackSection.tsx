@@ -1,7 +1,5 @@
-'use client';
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bot, LayoutDashboard, Link as LinkIcon, Shield, CheckCircle2, ArrowRight } from "lucide-react";
+import { Bot, LayoutDashboard, Link as LinkIcon, Shield } from "lucide-react";
 
 const orchestrationSteps = [
   {
@@ -47,49 +45,36 @@ const orchestrationSteps = [
 ];
 
 const WhyFullStackSection = () => (
-  <section className="relative overflow-hidden py-20">
-    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.12),transparent_50%)] opacity-70" />
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+  <section className="relative overflow-hidden bg-muted/10 py-20">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.1),transparent_60%)] opacity-70" />
 
     <div className="container relative z-10 mx-auto px-4">
-      <div className="mx-auto mb-16 max-w-3xl text-center space-y-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg shadow-primary/10 backdrop-blur">
-          <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+      <div className="mx-auto mb-12 max-w-3xl text-center space-y-4">
+        <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
           Operate end-to-end
         </div>
-        <h2 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-          One platform to capture, automate, assist, and measure
-        </h2>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <h2 className="text-4xl md:text-5xl font-bold text-foreground">One platform to capture, automate, assist, and measure</h2>
+        <p className="text-lg text-muted-foreground">
           Every step of the support loop lives inside Pullse—no extra tools or stitched workflows required.
         </p>
       </div>
 
       <Tabs defaultValue="capture" className="mx-auto w-full max-w-6xl">
-        <div className="grid gap-8 items-start lg:grid-cols-[320px,1fr]">
-          <TabsList className="flex flex-col gap-2 rounded-3xl border border-border/70 bg-background/90 p-5 shadow-2xl backdrop-blur-xl">
-            {orchestrationSteps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <TabsTrigger
-                  key={step.value}
-                  value={step.value}
-                  className="group relative flex items-center justify-between rounded-2xl border border-transparent px-5 py-4 text-left text-sm font-semibold transition-all duration-300 hover:bg-primary/5 data-[state=active]:border-primary/50 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/15 data-[state=active]:to-primary/5 data-[state=active]:text-primary data-[state=active]:shadow-lg data-[state=active]:shadow-primary/10"
-                >
-                  <span className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-primary transition-all duration-300 group-data-[state=active]:bg-primary group-data-[state=active]:text-primary-foreground group-data-[state=active]:shadow-md">
-                      {step.step}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <Icon className="h-4 w-4 opacity-60 group-data-[state=active]:opacity-100" />
-                      {step.label}
-                    </span>
-                  </span>
-                  <ArrowRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-60 group-data-[state=active]:opacity-100" />
-                </TabsTrigger>
-              );
-            })}
+        <div className="grid gap-8 items-start lg:grid-cols-[280px,1fr]">
+          <TabsList className="flex flex-col gap-3 rounded-3xl border border-border/60 bg-background/80 p-4 shadow-lg backdrop-blur">
+            {orchestrationSteps.map((step) => (
+              <TabsTrigger
+                key={step.value}
+                value={step.value}
+                className="flex items-center justify-between rounded-2xl border border-transparent px-4 py-3 text-left text-sm font-medium data-[state=active]:border-primary/40 data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="text-xs font-semibold text-muted-foreground">{step.step}</span>
+                  {step.label}
+                </span>
+                <span className="text-xs text-muted-foreground">→</span>
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           {orchestrationSteps.map((step) => {
@@ -98,44 +83,24 @@ const WhyFullStackSection = () => (
               <TabsContent
                 key={step.value}
                 value={step.value}
-                className="rounded-3xl border border-border/70 bg-gradient-to-br from-background/95 to-background/80 p-10 shadow-2xl backdrop-blur-xl transition-all duration-500 animate-in fade-in-50 slide-in-from-bottom-4"
+                className="rounded-3xl border border-border/70 bg-background/80 p-8 shadow-xl backdrop-blur transition"
               >
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-lg shadow-primary/20">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-                      {step.label}
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h3 className="text-3xl font-bold text-foreground leading-tight">{step.headline}</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">{step.copy}</p>
-                  </div>
-
-                  <ul className="grid gap-3 text-sm sm:grid-cols-2">
-                    {step.bullets.map((item, index) => (
-                      <li
-                        key={item}
-                        className="group flex items-start gap-3 rounded-2xl border border-border/60 bg-background/80 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                      >
-                        <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                        <span className="text-foreground/90 leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex items-center gap-2 pt-2">
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/5 px-5 py-2 text-sm font-bold text-primary shadow-lg shadow-primary/10">
-                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                      {step.stat.label}: {step.stat.value}
-                    </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-                  </div>
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary/80">
+                  <Icon className="h-4 w-4" />
+                  {step.label}
+                </div>
+                <h3 className="mt-4 text-2xl font-semibold text-foreground">{step.headline}</h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{step.copy}</p>
+                <ul className="mt-6 grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
+                  {step.bullets.map((item) => (
+                    <li key={item} className="flex items-start gap-2 rounded-2xl border border-border/60 bg-background/75 p-3">
+                      <Shield className="mt-1 h-4 w-4 text-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  {step.stat.label}: {step.stat.value}
                 </div>
               </TabsContent>
             );
@@ -143,30 +108,15 @@ const WhyFullStackSection = () => (
         </div>
       </Tabs>
 
-      <div className="mt-16 grid gap-6 rounded-3xl border border-border/70 bg-gradient-to-br from-background/95 to-background/80 p-8 shadow-2xl backdrop-blur-xl md:grid-cols-3">
-        <div className="group flex flex-col gap-4 rounded-2xl border border-transparent p-5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <LinkIcon className="h-6 w-6" />
-          </div>
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            Channel, CRM, billing, and custom systems sync in real time.
-          </p>
+      <div className="mt-12 grid gap-4 rounded-3xl border border-border/70 bg-background/80 p-6 text-sm text-muted-foreground shadow-lg backdrop-blur md:grid-cols-3">
+        <div className="flex items-start gap-3">
+          <LinkIcon className="mt-1 h-5 w-5 text-primary" /> Channel, CRM, billing, and custom systems sync in real time.
         </div>
-        <div className="group flex flex-col gap-4 rounded-2xl border border-transparent p-5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <Bot className="h-6 w-6" />
-          </div>
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            AI copilots stay on-policy with approvals and manual takeover.
-          </p>
+        <div className="flex items-start gap-3">
+          <Bot className="mt-1 h-5 w-5 text-primary" /> AI copilots stay on-policy with approvals and manual takeover.
         </div>
-        <div className="group flex flex-col gap-4 rounded-2xl border border-transparent p-5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20">
-            <LayoutDashboard className="h-6 w-6" />
-          </div>
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            Shared dashboards highlight coverage, savings, and sentiment.
-          </p>
+        <div className="flex items-start gap-3">
+          <LayoutDashboard className="mt-1 h-5 w-5 text-primary" /> Shared dashboards highlight coverage, savings, and sentiment.
         </div>
       </div>
     </div>
