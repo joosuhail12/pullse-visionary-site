@@ -373,6 +373,18 @@ const ProductHelpCenters = () => {
         .appo-theme nav a:hover {
           background-color: rgba(242, 141, 27, 0.1) !important;
         }
+        .appo-theme nav a[class*="bg-primary"] {
+          background-color: #F28D1B !important;
+        }
+        .appo-theme nav a[class*="bg-primary"]:hover {
+          background-color: #FFB633 !important;
+        }
+        .appo-theme nav a[class*="shadow-primary"] {
+          box-shadow: 0 10px 15px -3px rgba(242, 141, 27, 0.25) !important;
+        }
+        .appo-theme nav a[class*="shadow-primary"]:hover {
+          box-shadow: 0 20px 25px -5px rgba(242, 141, 27, 0.4) !important;
+        }
       `}</style>
       <PageLiquidBackground opacity={0.3} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
