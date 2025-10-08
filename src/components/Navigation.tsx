@@ -47,7 +47,7 @@ const Navigation = () => {
     name: "Inbox & Channels",
     path: "/product/inbox-channels"
   }, {
-    name: "Workflows & Routing",
+    name: "Visual Workflows",
     path: "/product/workflows-routing"
   }, {
     name: "AI Suite",
@@ -62,7 +62,7 @@ const Navigation = () => {
     name: "Auto-QA",
     path: "/product/auto-qa"
   }, {
-    name: "Knowledge Bases",
+    name: "Help Centers",
     path: "/product/knowledge-bases"
   }];
   const solutionsLinks = [{

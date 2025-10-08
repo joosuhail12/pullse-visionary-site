@@ -13,6 +13,9 @@ import {
   Bot,
   MessageSquare,
   Sparkles,
+  Headphones,
+  ShoppingCart,
+  Building2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RouteButton from "@/components/RouteButton";
@@ -52,14 +55,6 @@ const heroStats = [
   { label: "Time to launch", value: "<14 days", caption: "First automations" },
 ];
 
-const trustSignals = [
-  "Backed by Antler",
-  "Microsoft for Startups",
-  "Google for Startups",
-  "SOC 2 controls in progress",
-  "AI guardrails & audit trails",
-  "Founder-led onboarding",
-];
 
 const problemPoints = [
   {
@@ -84,33 +79,58 @@ const useCaseTabs = [
   {
     value: 'ops',
     label: 'Support Operations',
-    headline: 'Automate triage and back-office updates',
-    summary: 'Route intents, update CRM fields, and surface context so agents stay focused on high-touch work.',
-    bullets: ['Intent-based routing & SLAs', 'Auto-tagging and CRM updates', 'Agent copilots with policy guardrails'],
+    icon: Headphones,
+    headline: 'Eliminate repetitive triage work',
+    summary: 'Free your team from manual routing, tagging, and CRM updates. AI handles the busy work while agents focus on complex customer needs that require empathy and expertise.',
+    bullets: [
+      'Smart routing based on intent, not keywords',
+      'Automatic CRM syncing and ticket tagging',
+      'AI copilots that draft replies on-policy',
+      'Escalation paths with approval workflows'
+    ],
+    gradient: 'from-blue-500/20 to-cyan-500/20',
+    stat: { label: 'Automation Rate', value: '68%', description: 'of routine tickets handled by AI' },
   },
   {
     value: 'commerce',
-    label: 'Commerce Experience',
-    headline: 'Resolve WISMO, returns, and loyalty questions instantly',
-    summary: 'Pull order status, policy logic, and loyalty balances directly into the reply.',
-    bullets: ['Refunds & exchanges with approval paths', 'Real-time order + inventory lookups', 'Customer updates in brand voice'],
+    label: 'E-commerce & Retail',
+    icon: ShoppingCart,
+    headline: 'Answer order questions instantly',
+    summary: 'Resolve "Where is my order?" and return requests in seconds. Pull real-time data from Shopify, inventory systems, and shipping providers—no agent lookup required.',
+    bullets: [
+      'Automated WISMO with live tracking updates',
+      'Self-service returns and exchanges',
+      'Loyalty balance and points inquiries',
+      'Product recommendations in brand voice'
+    ],
+    gradient: 'from-purple-500/20 to-pink-500/20',
+    stat: { label: 'Resolution Time', value: '<30 sec', description: 'average order status lookup' },
   },
   {
     value: 'fintech',
-    label: 'Financial & Ops Workflows',
-    headline: 'Blend automation with compliance-ready approvals',
-    summary: 'Automate account actions and investigations while keeping audit trails airtight.',
-    bullets: ['Role-based guardrails on every workflow', 'Automated disputes & account changes', 'Exportable audit logs and reports'],
+    label: 'Fintech & SaaS',
+    icon: Building2,
+    headline: 'Automate with compliance built-in',
+    summary: 'Handle account changes, billing disputes, and investigations with automated workflows that include approval gates, audit trails, and role-based permissions by default.',
+    bullets: [
+      'Account updates with multi-level approvals',
+      'Dispute resolution with full audit logs',
+      'Secure credential management vault',
+      'Compliance-ready documentation export'
+    ],
+    gradient: 'from-green-500/20 to-emerald-500/20',
+    stat: { label: 'Audit Coverage', value: '100%', description: 'every action logged & traceable' },
   },
 ];
 
-const roiHighlights = [
-  'Co-design automation targets with the founding team',
-  'Share dashboards that track coverage, CSAT, and savings',
-  'Request connectors via our public roadmap and ship them fast',
+const connectorHighlights = [
+  { name: 'Shopify', status: 'live', description: 'Orders, inventory, customer data' },
+  { name: 'Stripe', status: 'live', description: 'Payments, refunds, subscriptions' },
+  { name: 'Slack', status: 'live', description: 'Team notifications & approvals' },
+  { name: 'Salesforce', status: 'beta', description: 'CRM sync & case management' },
+  { name: 'Zendesk', status: 'beta', description: 'Ticket import & sync' },
+  { name: 'REST API', status: 'live', description: 'Connect any custom system' },
 ];
-
-const connectorHighlights = ['Shopify', 'Stripe', 'Slack', 'Salesforce (beta)', 'Zendesk (beta)', 'REST API'];
 
 
 
@@ -358,61 +378,173 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       </section>
 
       {/* Trust & problem framing */}
-      <section className="border-y border-border/60 bg-background py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-12 lg:grid-cols-[1.4fr,1fr] items-start">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-                Built with trust from day one
+      <section className="relative border-y border-border/60 bg-background py-24 md:py-28 overflow-hidden">
+        {/* Subtle background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/5" />
+
+        <div className="container relative mx-auto px-4">
+          <div className="grid gap-16 lg:grid-cols-[1.3fr,1fr] items-start">
+            {/* Left: Trust & Backing */}
+            <div className="space-y-8">
+              {/* Enhanced badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
+                <Shield className="h-3.5 w-3.5" />
+                Enterprise-Grade Trust
               </div>
-              <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-                Backed by Antler, Microsoft for Startups, and Google for Startups to deliver a secure, measurable AI support desk
+
+              {/* Punchier headline */}
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                One platform. Zero silos. Total control.
               </h2>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Pullse replaces channel silos and brittle experiments with one workspace: capture every signal, automate repetitive work, empower humans, and ship ROI dashboards that leadership can trust.
+
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                Stop stitching together disconnected tools. Pullse unifies channels, workflows, AI agents, and analytics—with security and compliance built in from day one.
               </p>
-              <div className="flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
-                {trustSignals.map((signal) => (
-                  <span key={signal} className="rounded-full border border-border bg-background px-3 py-1">
-                    {signal}
-                  </span>
-                ))}
-                <Button variant="link" className="h-auto px-0 text-primary" asChild>
-                  <Link href="/security">View security & roadmap</Link>
+
+              {/* Enhanced trust signals with icons */}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background to-muted/20 p-4 transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Shield className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-foreground">SOC 2 Type II</div>
+                    <div className="text-xs text-muted-foreground">In progress</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background to-muted/20 p-4 transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Users className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-foreground">Founder-Led Support</div>
+                    <div className="text-xs text-muted-foreground">Direct access</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background to-muted/20 p-4 transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-foreground">AI Guardrails</div>
+                    <div className="text-xs text-muted-foreground">Audit trails included</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background to-muted/20 p-4 transition-all hover:border-primary/30 hover:shadow-md">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-foreground">Backed by Antler</div>
+                    <div className="text-xs text-muted-foreground">+ Microsoft & Google</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Link to security */}
+              <div className="pt-2">
+                <Button variant="link" className="h-auto p-0 text-sm font-semibold text-primary" asChild>
+                  <Link href="/security" className="inline-flex items-center gap-2 group">
+                    View security roadmap & compliance status
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </Button>
               </div>
             </div>
-            <div className="grid gap-5">
-              {problemPoints.map((point) => (
-                <div key={point.title} className="rounded-3xl border border-border/60 bg-background/80 p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary/40">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <point.icon className="h-5 w-5" />
+
+            {/* Right: Problem points with gradient accents */}
+            <div className="space-y-4">
+              <div className="mb-6">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                  Why Teams Switch to Pullse
+                </h3>
+              </div>
+              {problemPoints.map((point, index) => {
+                const gradients = [
+                  'from-blue-500/10 to-cyan-500/10',
+                  'from-purple-500/10 to-pink-500/10',
+                  'from-orange-500/10 to-amber-500/10'
+                ];
+                return (
+                  <div
+                    key={point.title}
+                    className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                  >
+                    {/* Gradient background on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index]} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
+
+                    <div className="relative">
+                      <div className="flex items-start gap-4 mb-3">
+                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradients[index]} border border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                          <point.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-base font-bold text-foreground mb-2 leading-tight group-hover:text-primary transition-colors">
+                            {point.title}
+                          </h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {point.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-base font-semibold text-foreground">{point.title}</h3>
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   </div>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{point.description}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Platform taxonomy */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto mb-16 max-w-3xl text-center space-y-4">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              The Pullse platform
+      <section className="relative py-24 md:py-28 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-background to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08),transparent_50%)]" />
+
+        <div className="container relative mx-auto px-4">
+          <div className="mx-auto mb-20 max-w-4xl text-center space-y-6">
+            {/* Enhanced badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
+              <Zap className="h-3.5 w-3.5" />
+              Complete Platform
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              Everything your agents and automations need in one place
+
+            {/* Stronger headline */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              Seven products. One platform. Zero integration headaches.
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Visual workflows, AI copilots, and analytics that prove the impact—all inside a unified inbox.
+
+            {/* Better value prop */}
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              From unified inbox to AI agents to real-time analytics—everything your team needs to deliver world-class support is built in, battle-tested, and ready to deploy.
             </p>
+
+            {/* Social proof stat */}
+            <div className="inline-flex items-center gap-6 rounded-2xl border border-border/50 bg-card px-8 py-4 shadow-lg">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">7</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Products</div>
+              </div>
+              <div className="h-8 w-px bg-border/60" />
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">1</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Login</div>
+              </div>
+              <div className="h-8 w-px bg-border/60" />
+              <div className="text-center">
+                <div className="text-3xl font-bold text-primary">0</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Integrations</div>
+              </div>
+            </div>
           </div>
+
           <MagicBento cardData={taxonomy} />
         </div>
       </section>
@@ -420,191 +552,511 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       <PlatformOverview />
       <WhyFullStackSection />
 
-      {/* Use cases */}
-      <section className="relative py-18">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent-green/10 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,hsl(var(--accent-green)/0.18),transparent_50%)] opacity-70" />
+      {/* Redesigned Use cases section - Card Grid Layout */}
+      <section className="relative py-24 md:py-32 bg-muted/5">
+        {/* Enhanced background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-accent-green/8 via-background to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent-green)/0.1),transparent_50%)]" />
+
         <div className="container relative mx-auto px-4">
-          <div className="mx-auto mb-12 max-w-3xl text-center space-y-4">
-            <div className="inline-flex items-center rounded-full border border-accent-green/30 bg-accent-green/10 px-4 py-1 text-sm font-medium text-accent-green">
-              Where teams start with Pullse
+          {/* Enhanced header */}
+          <div className="mx-auto mb-16 max-w-3xl text-center space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent-green/40 bg-gradient-to-r from-accent-green/20 to-accent-green/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-accent-green shadow-lg">
+              <BarChart3 className="h-3.5 w-3.5" />
+              Industry Solutions
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Launch automations and copilots where they matter most</h2>
-            <p className="text-lg text-muted-foreground">Toggle through the tabs to see how we co-design early workflows across support ops, commerce, and regulated teams.</p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              Purpose-built for your vertical
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              Proven automation patterns and compliance frameworks ready to deploy—no guesswork required
+            </p>
           </div>
 
+          {/* Horizontal Tab Pills */}
           <Tabs defaultValue="ops" className="mx-auto w-full max-w-6xl">
-            <div className="grid gap-8 lg:grid-cols-[280px,1fr]">
-              <TabsList className="flex flex-col gap-3 rounded-3xl border border-border/70 bg-background/70 p-4 shadow-xl backdrop-blur">
-                {useCaseTabs.map((tab) => (
+            <TabsList className="!h-auto !inline-flex w-full justify-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-2 shadow-lg mb-12 backdrop-blur-sm">
+              {useCaseTabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
                   <TabsTrigger
                     key={tab.value}
                     value={tab.value}
-                    className="justify-between rounded-2xl border border-transparent px-4 py-3 text-left text-sm font-medium data-[state=active]:border-primary/40 data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
+                    className="flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all data-[state=active]:bg-accent-green data-[state=active]:text-background data-[state=active]:shadow-lg"
                   >
+                    <Icon className="h-4 w-4" />
                     {tab.label}
-                    <ArrowRight className="h-4 w-4 opacity-60" />
                   </TabsTrigger>
-                ))}
-              </TabsList>
+                );
+              })}
+            </TabsList>
 
-              {useCaseTabs.map((tab) => (
-                <TabsContent key={tab.value} value={tab.value} className="rounded-3xl border border-border/70 bg-background/80 p-8 shadow-2xl backdrop-blur">
-                  <div className="space-y-4">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                      Co-design focus
+            {/* Card-based content */}
+            {useCaseTabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <TabsContent
+                  key={tab.value}
+                  value={tab.value}
+                  className="space-y-8 data-[state=active]:animate-in data-[state=active]:fade-in-50"
+                >
+                  {/* Featured card with stat */}
+                  <div className="relative overflow-hidden rounded-[24px] border-l-4 border-accent-green bg-card p-10 shadow-xl transition-all hover:shadow-2xl">
+                    <div className="grid gap-10 lg:grid-cols-[1fr,1.3fr] items-start">
+                      <div className="space-y-6">
+                        <div className="flex items-center gap-4">
+                          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${tab.gradient} border border-accent-green/30 shadow-lg`}>
+                            <Icon className="h-8 w-8 text-accent-green" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold uppercase tracking-wider text-accent-green mb-1">
+                              {tab.label}
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                              {tab.headline}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <p className="text-base text-muted-foreground leading-relaxed">
+                          {tab.summary}
+                        </p>
+
+                        {/* Industry stat callout */}
+                        <div className="rounded-2xl border border-accent-green/30 bg-gradient-to-br from-accent-green/10 to-accent-green/5 p-5">
+                          <div className="flex items-end gap-3 mb-2">
+                            <div className="text-4xl font-bold text-accent-green">{tab.stat.value}</div>
+                            <div className="pb-1 text-sm font-semibold text-foreground">{tab.stat.label}</div>
+                          </div>
+                          <div className="text-xs text-muted-foreground">{tab.stat.description}</div>
+                        </div>
+
+                        <Button size="lg" className="w-full sm:w-auto bg-accent-green hover:bg-accent-green/90 text-background shadow-lg" asChild>
+                          <Link href="/contact-sales">
+                            See it in action
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+
+                      {/* Feature bullets in right column */}
+                      <ul className="space-y-3">
+                        {tab.bullets.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background/80 to-background/60 p-5 backdrop-blur-sm transition-all hover:border-accent-green/40 hover:bg-accent-green/5 hover:shadow-md"
+                          >
+                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-green/20 border border-accent-green/30 mt-0.5">
+                              <CheckCircle2 className="h-3.5 w-3.5 text-accent-green" />
+                            </div>
+                            <span className="text-sm font-semibold text-foreground leading-relaxed">
+                              {item}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <h3 className="text-2xl font-semibold text-foreground">{tab.headline}</h3>
-                    <p className="text-sm text-muted-foreground">{tab.summary}</p>
-                    <ul className="mt-4 grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-                      {tab.bullets.map((point) => (
-                        <li key={point} className="flex items-start gap-2 rounded-2xl border border-border/60 bg-background/70 p-3">
-                          <CheckCircle2 className="mt-1 h-4 w-4 text-primary" />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-wide text-primary">
-                      <ArrowRight className="h-4 w-4" />
-                      <span>Book a working session to map this track</span>
+                  </div>
+
+                  {/* Three supporting feature cards */}
+                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
+                          <Shield className="h-5 w-5 text-accent-green" />
+                        </div>
+                        <h4 className="text-sm font-bold text-foreground">Security First</h4>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        SOC 2 controls, encrypted data, role-based access, and full audit trails for every action
+                      </p>
+                    </div>
+
+                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
+                          <Zap className="h-5 w-5 text-accent-green" />
+                        </div>
+                        <h4 className="text-sm font-bold text-foreground">Rapid Deployment</h4>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        2-4 week implementation with dedicated founder support and industry-specific playbooks
+                      </p>
+                    </div>
+
+                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
+                          <BarChart3 className="h-5 w-5 text-accent-green" />
+                        </div>
+                        <h4 className="text-sm font-bold text-foreground">Measurable Impact</h4>
+                      </div>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        Real-time dashboards showing automation rates, cost savings, and ROI metrics leadership trusts
+                      </p>
                     </div>
                   </div>
                 </TabsContent>
-              ))}
-            </div>
+              );
+            })}
           </Tabs>
         </div>
       </section>
 
-      {/* ROI & next steps */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,hsl(var(--primary)/0.15),transparent_55%)] opacity-70" />
+      {/* Enhanced ROI Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_60%)]" />
+
         <div className="container relative mx-auto px-4">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr),minmax(0,1fr)] items-start">
-            <div className="rounded-3xl border border-white/10 bg-background/80 p-6 shadow-xl backdrop-blur">
-              <RoiCalculator />
-            </div>
-            <div className="space-y-6 rounded-3xl border border-border/60 bg-background/80 p-8 shadow-lg backdrop-blur">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-                  Plan your rollout with us
-                </div>
-                <h2 className="text-3xl font-semibold text-foreground">Model the before-and-after, then plug in your real data together</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  The calculator gives you a directional view. During onboarding we replace the defaults with your handle times, cost structure, and automation targets so finance and leadership are aligned.
-                </p>
+          <div className="mx-auto max-w-5xl">
+            {/* Header with social proof */}
+            <div className="text-center mb-12 space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
+                <BarChart3 className="h-3.5 w-3.5" />
+                ROI Calculator
               </div>
-              <ul className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-                {roiHighlights.map((item) => (
-                  <li key={item} className="flex items-start gap-2 rounded-2xl border border-border/60 bg-background/75 p-3">
-                    <Zap className="mt-1 h-4 w-4 text-primary" />
-                    <span>{item}</span>
-                  </li>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                See your potential savings
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Real customer data shows 60-75% cost reduction with Pullse. Calculate your team's potential impact.
+              </p>
+            </div>
+
+            {/* Calculator Card with enhanced styling */}
+            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-10 md:p-12 shadow-2xl backdrop-blur-sm">
+              {/* Decorative gradient */}
+              <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
+
+              <div className="relative">
+                <RoiCalculator />
+              </div>
+            </div>
+
+            {/* Enhanced CTA with trust indicators */}
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              <div className="rounded-2xl border border-border/50 bg-card p-6 shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                    <Users className="h-6 w-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold text-foreground mb-2">
+                      Get Your Custom Analysis
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                      Schedule a session with our team to model your exact costs and automation opportunities
+                    </p>
+                    <RouteButton href="/contact-sales" className="w-full sm:w-auto">
+                      Book analysis call
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </RouteButton>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-border/50 bg-gradient-to-br from-primary/10 to-primary/5 p-6 shadow-md">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                    <span className="text-sm font-semibold text-foreground">Average 68% automation rate across customers</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                    <span className="text-sm font-semibold text-foreground">Typical payback period under 6 months</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                    <span className="text-sm font-semibold text-foreground">Real-time dashboards to prove ROI to leadership</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Integrations Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-accent-pink/5 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--accent-pink)/0.1),transparent_50%)]" />
+
+        <div className="container relative mx-auto px-4">
+          <div className="mx-auto max-w-5xl">
+            {/* Enhanced Header */}
+            <div className="text-center mb-16 space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-accent-pink/40 bg-gradient-to-r from-accent-pink/20 to-accent-pink/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-accent-pink shadow-lg">
+                <Zap className="h-3.5 w-3.5" />
+                Integrations
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                Native connectors for your entire stack
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Pull live data from CRMs, billing systems, and inventory platforms. No middleware. No sync delays.
+              </p>
+            </div>
+
+            {/* Enhanced Grid with detailed cards */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+              {connectorHighlights.map((connector) => {
+                const isBeta = connector.status === 'beta';
+                const isLive = connector.status === 'live';
+                return (
+                  <div
+                    key={connector.name}
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:border-accent-pink/40 hover:shadow-xl hover:shadow-accent-pink/10 hover:-translate-y-1"
+                  >
+                    {/* Status badge */}
+                    <div className="absolute top-3 right-3">
+                      {isBeta && (
+                        <div className="px-2.5 py-1 rounded-full bg-accent-pink/20 border border-accent-pink/30 text-accent-pink text-[10px] font-bold uppercase tracking-wider">
+                          Beta
+                        </div>
+                      )}
+                      {isLive && (
+                        <div className="px-2.5 py-1 rounded-full bg-accent-green/20 border border-accent-green/30 text-accent-green text-[10px] font-bold uppercase tracking-wider">
+                          Live
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Connector content */}
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-pink/20 to-accent-pink/10 border border-accent-pink/30 shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-accent-pink/20">
+                          <Zap className="h-6 w-6 text-accent-pink" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-base font-bold text-foreground">{connector.name}</div>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {connector.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent-pink/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Coming Soon Section */}
+            <div className="mb-10 rounded-2xl border border-border/50 bg-card p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-lg font-bold text-foreground mb-2">Coming Soon</h3>
+                <p className="text-sm text-muted-foreground">In active development for Q2 2025</p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                {['HubSpot', 'Intercom', 'Freshdesk', 'Gorgias', 'Help Scout'].map((name) => (
+                  <div key={name} className="rounded-lg border border-border/50 bg-muted/30 px-4 py-2 text-sm font-semibold text-muted-foreground">
+                    {name}
+                  </div>
                 ))}
-              </ul>
-              <div className="rounded-2xl border border-border/60 bg-background/75 p-4 text-xs text-muted-foreground">
-                <Shield className="mr-2 inline h-4 w-4 text-primary" />
-                Connectors shipping with early access: {connectorHighlights.join(', ')}. Follow the roadmap to request the next systems we should wire in.
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <RouteButton size="lg" href="/contact-sales">
-                  Schedule a planning session
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </RouteButton>
-                <RouteButton variant="outline" href="/integrations">View integration roadmap</RouteButton>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Full-stack connectivity */}
-      <section className="py-18 bg-muted/10">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto mb-12 max-w-3xl text-center space-y-4">
-            <div className="inline-flex items-center rounded-full border border-accent-pink/30 bg-accent-pink/10 px-4 py-1 text-sm font-medium text-accent-pink">
-              Full-stack connectivity
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Connect Pullse to every system that matters</h2>
-            <p className="text-lg text-muted-foreground">Native connectors, secure APIs, and webhooks let automations update the tools you already rely on.</p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {connectorHighlights.map((logo) => (
-              <div key={logo} className="flex h-24 items-center justify-center rounded-2xl border border-border/60 bg-background/80 text-sm font-semibold text-muted-foreground">
-                {logo}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Button variant="link" className="text-primary" asChild>
-              <Link href="/integrations">
-                Browse the integration roadmap and request connectors
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Plan your rollout */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/12 via-background to-background" />
-        <div className="container relative mx-auto px-4">
-          <div className="mx-auto mb-12 max-w-3xl text-center space-y-4">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-              Plan your rollout
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Resources for buyers and operators</h2>
-            <p className="text-lg text-muted-foreground">Guides, catalogues, and stories to help you make the case and launch with confidence.</p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {resources.map((resource) => (
-              <div key={resource.title} className="flex h-full flex-col gap-4 rounded-3xl border border-border/60 bg-background/80 p-8 shadow-lg backdrop-blur">
-                <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-                  {resource.badge}
+            {/* Enhanced CTA Card */}
+            <div className="rounded-2xl border border-accent-pink/30 bg-gradient-to-br from-accent-pink/10 via-accent-pink/5 to-background p-8 shadow-lg">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-center md:text-left flex-1">
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    Don't see your integration?
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Vote on our roadmap or request custom connectors. We prioritize integrations based on partner needs.
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{resource.title}</h3>
-                <p className="text-sm text-muted-foreground flex-1">{resource.description}</p>
-                <Button variant="ghost" className="justify-start px-0 text-primary" asChild>
-                  <Link href={resource.href}>
-                    Open resource
+                <div className="flex gap-3 shrink-0">
+                  <RouteButton variant="outline" href="/integrations" className="shadow-md">
+                    View roadmap
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                  </RouteButton>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative overflow-hidden py-18">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-accent/20 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,hsl(var(--background))_20%,transparent_60%)]" />
+      {/* Optimized Final CTA - Split Layout */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        {/* Enhanced background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_65%)]" />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="mx-auto max-w-4xl rounded-3xl border border-border/60 bg-background/70 p-12 text-center shadow-2xl backdrop-blur">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-              Ready to build the future of support
-            </div>
-            <h2 className="mt-6 text-4xl md:text-5xl font-bold text-foreground">
-              Spend more time on customers, not coordination
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              If you’re exploring how AI and automation can shoulder real work, let’s map it together. We’ll share the latest product milestones, integrations, and onboarding plan.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <RouteButton size="lg" className="px-8" href="/contact-sales">
-                Talk to the founders
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </RouteButton>
-              <RouteButton size="lg" variant="outline" className="px-8" href="/product-tour">
-                Watch the product tour
-              </RouteButton>
+        <div className="container relative mx-auto px-4">
+          <div className="mx-auto max-w-7xl">
+            {/* Main CTA Container - Enhanced Split Design */}
+            <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-gradient-to-br from-card via-card to-card/95 shadow-2xl backdrop-blur-sm">
+              <div className="grid lg:grid-cols-[1fr,1.3fr] gap-0">
+                {/* Left: Stats & Social Proof */}
+                <div className="relative overflow-hidden lg:border-r border-b lg:border-b-0 border-border/60 bg-gradient-to-br from-primary/12 via-primary/6 to-transparent p-10 lg:p-14">
+                  {/* Decorative elements */}
+                  <div className="absolute -top-24 -left-24 h-56 w-56 rounded-full bg-primary/20 blur-3xl" />
+                  <div className="absolute -bottom-20 -right-20 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
+
+                  <div className="relative space-y-10">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/20 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-primary shadow-lg backdrop-blur-sm">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+                      </span>
+                      Limited Spots · 2025
+                    </div>
+
+                    {/* Impact Stats with attribution */}
+                    <div className="space-y-8">
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-5">
+                          Typical Customer Results
+                        </div>
+                        <div className="grid gap-6">
+                          <div className="group">
+                            <div className="flex items-end gap-3 mb-3">
+                              <div className="text-5xl md:text-6xl font-bold text-primary">68%</div>
+                              <div className="pb-2 text-sm font-bold text-foreground">Tickets Automated</div>
+                            </div>
+                            <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden mb-2">
+                              <div className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 rounded-full w-[68%] transition-all duration-1000" />
+                            </div>
+                            <div className="text-xs text-muted-foreground">Average across early customers</div>
+                          </div>
+
+                          <div className="group">
+                            <div className="flex items-end gap-3 mb-2">
+                              <div className="text-5xl md:text-6xl font-bold text-primary">60-75%</div>
+                              <div className="pb-2 text-sm font-bold text-foreground">Cost Reduction</div>
+                            </div>
+                            <div className="text-xs text-muted-foreground">Total operational savings range</div>
+                          </div>
+
+                          <div className="group">
+                            <div className="flex items-end gap-3 mb-2">
+                              <div className="text-5xl md:text-6xl font-bold text-primary">&lt;6mo</div>
+                              <div className="pb-2 text-sm font-bold text-foreground">Payback Period</div>
+                            </div>
+                            <div className="text-xs text-muted-foreground">Typical ROI timeframe</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Trust Badges */}
+                    <div className="pt-8 border-t border-border/50">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-xs font-semibold text-foreground">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                          </div>
+                          <span>SOC 2 Type II controls in progress</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs font-semibold text-foreground">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                          </div>
+                          <span>GDPR & CCPA compliance ready</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs font-semibold text-foreground">
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
+                          </div>
+                          <span>Direct founder access & support</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: CTA Content */}
+                <div className="p-10 lg:p-16 flex flex-col justify-center">
+                  <div className="space-y-8">
+                    {/* Headline */}
+                    <div className="space-y-5">
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1]">
+                        Ready to join the early access program?
+                      </h2>
+                      <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                        Partner with our founding team to design workflows that match your exact needs. Limited spots available for 2025.
+                      </p>
+                    </div>
+
+                    {/* CTA Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <RouteButton size="lg" className="text-base px-8 py-7 shadow-xl shadow-primary/25" href="/contact-sales">
+                        Talk to founders
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </RouteButton>
+                      <RouteButton size="lg" variant="outline" className="text-base px-8 py-7" href="/product-tour">
+                        Watch demo
+                      </RouteButton>
+                    </div>
+
+                    {/* Visual Implementation Timeline */}
+                    <div className="pt-8 border-t border-border/50">
+                      <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-6">
+                        Your Implementation Journey
+                      </div>
+                      <div className="grid sm:grid-cols-3 gap-6">
+                        <div className="relative">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">1</div>
+                            <div className="text-xl font-bold text-primary">Week 1</div>
+                          </div>
+                          <div className="text-sm text-muted-foreground leading-relaxed">
+                            Connect channels & systems
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">2</div>
+                            <div className="text-xl font-bold text-primary">Week 2-3</div>
+                          </div>
+                          <div className="text-sm text-muted-foreground leading-relaxed">
+                            Design & test automations
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">3</div>
+                            <div className="text-xl font-bold text-primary">Week 4</div>
+                          </div>
+                          <div className="text-sm text-muted-foreground leading-relaxed">
+                            Go live & measure impact
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Enhanced Resource Links */}
+                    <div className="pt-6">
+                      <div className="grid sm:grid-cols-3 gap-3">
+                        {resources.map((resource) => (
+                          <Link
+                            key={resource.title}
+                            href={resource.href}
+                            className="group rounded-xl border border-border/50 bg-muted/30 p-4 transition-all hover:border-primary/40 hover:bg-primary/5 hover:shadow-md"
+                          >
+                            <div className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">
+                              {resource.badge}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-semibold text-foreground leading-tight">{resource.title}</span>
+                              <ArrowRight className="h-3 w-3 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

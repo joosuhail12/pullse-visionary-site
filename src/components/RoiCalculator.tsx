@@ -3,13 +3,20 @@
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { ArrowRight, TrendingDown } from "lucide-react";
 
-const HANDLE_TIME_MINUTES = 12;
-const HOURLY_COST = 40;
-const AUTOMATION_COVERAGE_TARGET = 0.6;
-const AUTOMATED_HANDLE_MINUTES = 2;
-const COPILOT_SPEED_BOOST = 0.4;
-const HOURS_PER_FTE = 160;
+// Constants based on your example
+const MEDIAN_SALARY_YEARLY = 45000; // $45k/year
+const TRADITIONAL_PLATFORM_LICENSE = 140; // $140/month per user
+const TRADITIONAL_AUTOMATION_RATE = 0.20; // 20% automation
+const TRADITIONAL_AUTOMATION_COST = 0.60; // $0.60 per ticket
+
+const PULLSE_LICENSE = 80; // $80/month per user
+const PULLSE_AUTOMATION_RATE = 0.70; // 70% automation
+const PULLSE_AUTOMATION_COST = 0.15; // $0.15 per ticket
+
+const HOURS_PER_MONTH = 160; // Working hours per month
+const TICKETS_PER_REP_MONTH = 1200; // 12000 tickets / 10 reps = 1200 per rep
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
@@ -17,103 +24,228 @@ const formatCurrency = (value: number) =>
 const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(Math.round(value));
 
 const RoiCalculator = () => {
-  const [reps, setReps] = useState(12);
-  const [tickets, setTickets] = useState(4500);
+  const [reps, setReps] = useState(10);
+  const [tickets, setTickets] = useState(12000);
 
-  const baselineHours = useMemo(() => (tickets * HANDLE_TIME_MINUTES) / 60, [tickets]);
-  const baselineCost = baselineHours * HOURLY_COST;
+  // Calculate traditional setup costs
+  const traditional = useMemo(() => {
+    const monthlySalaryCost = (MEDIAN_SALARY_YEARLY / 12) * reps;
+    const platformLicenseCost = TRADITIONAL_PLATFORM_LICENSE * reps;
+    const automatedTickets = tickets * TRADITIONAL_AUTOMATION_RATE;
+    const automationCost = automatedTickets * TRADITIONAL_AUTOMATION_COST;
+    const totalCost = monthlySalaryCost + platformLicenseCost + automationCost;
 
-  const pullse = useMemo(() => {
-    const automatedTickets = tickets * AUTOMATION_COVERAGE_TARGET;
-    const assistedTickets = tickets - automatedTickets;
-    const automatedHours = (automatedTickets * AUTOMATED_HANDLE_MINUTES) / 60;
-    const assistedHours = (assistedTickets * HANDLE_TIME_MINUTES * (1 - COPILOT_SPEED_BOOST)) / 60;
-    const totalHours = automatedHours + assistedHours;
     return {
-      hours: totalHours,
-      cost: totalHours * HOURLY_COST,
+      reps,
+      salaryCost: monthlySalaryCost,
+      licenseCost: platformLicenseCost,
+      automationCost,
       automatedTickets,
-      assistedTickets,
+      totalCost,
+    };
+  }, [reps, tickets]);
+
+  // Calculate Pullse setup costs
+  const pullse = useMemo(() => {
+    const automatedTickets = tickets * PULLSE_AUTOMATION_RATE;
+    const manualTickets = tickets - automatedTickets;
+
+    // With 70% automation, we need fewer reps to handle remaining tickets
+    const requiredReps = Math.ceil(manualTickets / TICKETS_PER_REP_MONTH);
+
+    const monthlySalaryCost = (MEDIAN_SALARY_YEARLY / 12) * requiredReps;
+    const platformLicenseCost = PULLSE_LICENSE * requiredReps;
+    const automationCost = automatedTickets * PULLSE_AUTOMATION_COST;
+    const totalCost = monthlySalaryCost + platformLicenseCost + automationCost;
+
+    return {
+      reps: requiredReps,
+      salaryCost: monthlySalaryCost,
+      licenseCost: platformLicenseCost,
+      automationCost,
+      automatedTickets,
+      totalCost,
     };
   }, [tickets]);
 
-  const hoursSaved = Math.max(baselineHours - pullse.hours, 0);
-  const costSaved = Math.max(baselineCost - pullse.cost, 0);
-  const capacityLift = pullse.hours > 0 ? (baselineHours / pullse.hours - 1) * 100 : 0;
+  const savings = traditional.totalCost - pullse.totalCost;
+  const savingsPercentage = ((savings / traditional.totalCost) * 100);
+  const repsSaved = traditional.reps - pullse.reps;
 
   return (
     <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-semibold text-foreground">Estimate your monthly impact</h3>
+      {/* Compact Header */}
+      <div className="text-center space-y-2">
+        <h3 className="text-2xl font-bold text-foreground">Calculate your savings</h3>
         <p className="text-sm text-muted-foreground">
-          Adjust the inputs to see a directional view of time and cost savings. We’ll tune the model with your real numbers during onboarding.
+          Compare costs: traditional setup vs Pullse
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-foreground" htmlFor="reps">
-            Support reps today
-          </label>
-          <Input
-            id="reps"
-            type="number"
-            min={1}
-            value={reps}
-            onChange={(event) => setReps(Math.max(1, Number(event.target.value)))}
-          />
-          <Slider value={[reps]} min={1} max={100} onValueChange={([value]) => setReps(value)} />
-        </div>
-
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-foreground" htmlFor="tickets">
-            Monthly tickets across channels
-          </label>
-          <Input
-            id="tickets"
-            type="number"
-            min={100}
-            step={100}
-            value={tickets}
-            onChange={(event) => setTickets(Math.max(100, Number(event.target.value)))}
-          />
-          <Slider value={[tickets]} min={500} max={20000} step={100} onValueChange={([value]) => setTickets(value)} />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Manual effort today</p>
-          <p className="mt-2 text-2xl font-bold text-foreground">{formatNumber(baselineHours)} hrs</p>
-          <p className="text-xs text-muted-foreground">Approximate team hours each month</p>
-        </div>
-        <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Projected effort with Pullse</p>
-          <p className="mt-2 text-2xl font-bold text-foreground">{formatNumber(pullse.hours)} hrs</p>
-          <p className="text-xs text-muted-foreground">Assumes 60% automation coverage & copilots</p>
-        </div>
-        <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Hours saved monthly</p>
-          <p className="mt-2 text-2xl font-bold text-primary">{formatNumber(hoursSaved)} hrs</p>
-          <p className="text-xs text-muted-foreground">Equivalent to {Math.max(0, Math.round(hoursSaved / HOURS_PER_FTE))} FTEs</p>
-        </div>
-      </div>
-
+      {/* Compact Input Controls */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Monthly cost today</p>
-          <p className="mt-2 text-2xl font-bold text-foreground">{formatCurrency(baselineCost)}</p>
-          <p className="text-xs text-muted-foreground">Assumes ${HOURLY_COST}/hour fully-loaded cost</p>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Support Reps
+            </label>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+              <span className="text-sm font-bold text-primary">{reps}</span>
+            </div>
+          </div>
+          <Slider
+            value={[reps]}
+            min={5}
+            max={100}
+            step={5}
+            onValueChange={([value]) => setReps(value)}
+          />
         </div>
-        <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Projected savings</p>
-          <p className="mt-2 text-2xl font-bold text-primary">{formatCurrency(costSaved)}</p>
-          <p className="text-xs text-muted-foreground">~{Math.round(capacityLift)}% more capacity for the same team</p>
+
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Monthly Tickets
+            </label>
+            <div className="flex h-8 min-w-[60px] items-center justify-center rounded-lg bg-primary/10 border border-primary/20 px-2">
+              <span className="text-sm font-bold text-primary">{formatNumber(tickets)}</span>
+            </div>
+          </div>
+          <Slider
+            value={[tickets]}
+            min={5000}
+            max={50000}
+            step={1000}
+            onValueChange={([value]) => setTickets(value)}
+          />
         </div>
       </div>
 
-      <div className="rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4 text-xs text-muted-foreground">
-        These figures are directional. During onboarding we will plug in your real handle times, blended costs, and automation targets. Ready to dive deeper?
+      {/* Compact Comparison */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Traditional Setup */}
+        <div className="rounded-2xl border border-border/50 bg-background p-5 space-y-4">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+              Traditional
+            </div>
+            <div className="text-3xl font-bold text-foreground">100%</div>
+          </div>
+
+          <div className="space-y-3">
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Team Size</span>
+                <span className="font-bold text-foreground">{reps}</span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-foreground/60 rounded-full" style={{ width: '100%' }} />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Automation</span>
+                <span className="font-bold text-foreground">20%</span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-foreground/60 rounded-full" style={{ width: '20%' }} />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Cost/Ticket</span>
+                <span className="font-bold text-foreground">4×</span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-foreground/60 rounded-full" style={{ width: '100%' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Pullse Setup */}
+        <div className="relative rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 to-primary/5 p-5 space-y-4">
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-primary text-background text-[10px] font-bold uppercase tracking-wider">
+            Pullse
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
+              With Pullse
+            </div>
+            <div className="text-3xl font-bold text-primary">{(100 - savingsPercentage).toFixed(0)}%</div>
+          </div>
+
+          <div className="space-y-3">
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Team Size</span>
+                <span className="font-bold text-primary">{pullse.reps} <span className="text-[10px]">(-{repsSaved})</span></span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary to-primary/60 rounded-full" style={{ width: `${(pullse.reps / reps) * 100}%` }} />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Automation</span>
+                <span className="font-bold text-primary">70% <span className="text-[10px]">(+50%)</span></span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary to-primary/60 rounded-full" style={{ width: '70%' }} />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between text-xs mb-1">
+                <span className="text-muted-foreground">Cost/Ticket</span>
+                <span className="font-bold text-primary">1× <span className="text-[10px]">(-75%)</span></span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary to-primary/60 rounded-full" style={{ width: '25%' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Compact Savings Summary */}
+      <div className="rounded-2xl border border-primary/40 bg-gradient-to-r from-primary/10 to-primary/5 p-6">
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="text-center md:text-left">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-1">
+              <TrendingDown className="h-3 w-3" />
+              Total Savings
+            </div>
+            <div className="text-5xl font-bold text-primary mb-1">{savingsPercentage.toFixed(0)}%</div>
+            <p className="text-xs text-muted-foreground">lower operating cost</p>
+          </div>
+
+          <div className="h-px md:h-12 md:w-px bg-border/40 w-full md:w-auto" />
+
+          <div className="grid grid-cols-3 gap-4 flex-1">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">{repsSaved}</div>
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Fewer Reps</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-foreground">{formatNumber(pullse.automatedTickets)}</div>
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Automated</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">+250%</div>
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Auto Increase</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Compact Note */}
+      <div className="text-xs text-muted-foreground text-center">
+        <span className="font-semibold text-foreground">Note:</span> Projections based on $45k median salary and typical platform costs. We'll use your actual data during onboarding.
       </div>
     </div>
   );

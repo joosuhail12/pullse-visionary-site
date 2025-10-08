@@ -1,5 +1,5 @@
-import ProductInboxChannels from "@/views/ProductInboxChannels";
+import ProductInbox from "@/views/ProductInbox";
 
-const ProductInboxChannelsPage = () => <ProductInboxChannels />;
+const ProductInboxPage = () => <ProductInbox />;
 
-export default ProductInboxChannelsPage;
+export default ProductInboxPage;
