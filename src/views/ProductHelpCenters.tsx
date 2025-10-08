@@ -60,6 +60,93 @@ const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }:
   return <>{count}{suffix}</>;
 };
 
+// AI Accordion Component
+const AIAccordion = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = [
+    {
+      icon: Wand2,
+      title: 'AI Writing & Optimization',
+      content: 'AI co-authors articles with you. Suggests better phrasing, improves clarity, optimizes for SEO. Makes every writer sound like your best writer.',
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      icon: Search,
+      title: 'Content Gap Analysis',
+      content: 'AI identifies missing content by analyzing unanswered searches and customer questions. Shows you exactly what articles to write next.',
+      color: 'from-teal-500 to-cyan-500'
+    },
+    {
+      icon: MessageCircle,
+      title: 'Pullse Chatbot Integration',
+      content: 'Appo plugs directly into Pullse AI chatbots. Customers ask questions, chatbot pulls instant answers from your help centers—no setup required.',
+      color: 'from-green-400 to-teal-500'
+    }
+  ];
+
+  return (
+    <div className="space-y-3">
+      <div className="space-y-2">
+        {tabs.map((tab, index) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === index;
+
+          return (
+            <div key={index} className="group">
+              <button
+                onClick={() => setActiveTab(index)}
+                className={`w-full text-left rounded-xl border transition-all ${
+                  isActive
+                    ? 'border-green-500/50 bg-gradient-to-r from-green-500/15 to-green-500/5 shadow-lg'
+                    : 'border-border/40 bg-card/80 hover:border-green-500/30 hover:bg-card'
+                }`}
+              >
+                <div className="flex items-center gap-3 p-4">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.color} shadow-lg transition-all ${isActive ? 'scale-110' : 'group-hover:scale-105'}`}>
+                    <Icon className="h-5 w-5 text-background" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-green-500' : 'text-foreground group-hover:text-green-500'}`}>
+                      {tab.title}
+                    </h3>
+                  </div>
+                  <div className={`text-green-500 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+
+              {isActive && (
+                <div className="mt-2 rounded-xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {tab.content}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Single Link at Bottom */}
+      <div className="pt-2 border-t border-border/30">
+        <RouteButton
+          variant="ghost"
+          size="sm"
+          href="https://appo.com"
+          className="w-full justify-center text-xs text-green-500 hover:text-green-400 hover:bg-green-500/10"
+        >
+          Learn more about Appo
+          <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+        </RouteButton>
+      </div>
+    </div>
+  );
+};
+
 const ProductHelpCenters = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [statsAnimated, setStatsAnimated] = useState(false);
@@ -680,7 +767,7 @@ const ProductHelpCenters = () => {
                   {[
                     'Track unanswered searches',
                     'Identify missing content',
-                    'See which questions customers ask but you don't answer',
+                    "See which questions customers ask but you don't answer",
                     'AI suggests article topics to write'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
