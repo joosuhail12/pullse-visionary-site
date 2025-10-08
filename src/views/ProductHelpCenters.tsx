@@ -69,19 +69,19 @@ const AIAccordion = () => {
       icon: Wand2,
       title: 'AI Writing & Optimization',
       content: 'AI co-authors articles with you. Suggests better phrasing, improves clarity, optimizes for SEO. Makes every writer sound like your best writer.',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-[#F28D1B] to-[#FFB633]'
     },
     {
       icon: Search,
       title: 'Content Gap Analysis',
       content: 'AI identifies missing content by analyzing unanswered searches and customer questions. Shows you exactly what articles to write next.',
-      color: 'from-teal-500 to-cyan-500'
+      color: 'from-[#FFB633] to-[#FEE3AC]'
     },
     {
       icon: MessageCircle,
       title: 'Pullse Chatbot Integration',
       content: 'Appo plugs directly into Pullse AI chatbots. Customers ask questions, chatbot pulls instant answers from your help centers—no setup required.',
-      color: 'from-green-400 to-teal-500'
+      color: 'from-[#F28D1B] to-[#503225]'
     }
   ];
 
@@ -98,20 +98,20 @@ const AIAccordion = () => {
                 onClick={() => setActiveTab(index)}
                 className={`w-full text-left rounded-xl border transition-all ${
                   isActive
-                    ? 'border-green-500/50 bg-gradient-to-r from-green-500/15 to-green-500/5 shadow-lg'
-                    : 'border-border/40 bg-card/80 hover:border-green-500/30 hover:bg-card'
+                    ? 'border-[#F28D1B]/50 bg-gradient-to-r from-[#F28D1B]/15 to-[#FFB633]/5 shadow-lg'
+                    : 'border-border/40 bg-card/80 hover:border-[#F28D1B]/30 hover:bg-card'
                 }`}
               >
                 <div className="flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.color} shadow-lg transition-all ${isActive ? 'scale-110' : 'group-hover:scale-105'}`}>
-                    <Icon className="h-5 w-5 text-background" />
+                    <Icon className="h-5 w-5 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-green-500' : 'text-foreground group-hover:text-green-500'}`}>
+                    <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-[#F28D1B]' : 'text-foreground group-hover:text-[#F28D1B]'}`}>
                       {tab.title}
                     </h3>
                   </div>
-                  <div className={`text-green-500 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
+                  <div className={`text-[#F28D1B] transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
@@ -120,7 +120,7 @@ const AIAccordion = () => {
               </button>
 
               {isActive && (
-                <div className="mt-2 rounded-xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="mt-2 rounded-xl border border-[#F28D1B]/20 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {tab.content}
                   </p>
@@ -137,7 +137,7 @@ const AIAccordion = () => {
           variant="ghost"
           size="sm"
           href="https://appo.com"
-          className="w-full justify-center text-xs text-green-500 hover:text-green-400 hover:bg-green-500/10"
+          className="w-full justify-center text-xs text-[#F28D1B] hover:text-[#FFB633] hover:bg-[#F28D1B]/10"
         >
           Learn more about Appo
           <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
@@ -255,19 +255,19 @@ const ProductHelpCenters = () => {
         icon: Wand2,
         title: 'AI Writing & Optimization',
         content: 'AI co-authors articles with you. Suggests better phrasing, improves clarity, optimizes for SEO. Makes every writer sound like your best writer.',
-        color: 'from-green-500 to-emerald-500'
+        color: 'from-[#F28D1B] to-[#FFB633]'
       },
       {
         icon: Search,
         title: 'Content Gap Analysis',
         content: 'AI identifies missing content by analyzing unanswered searches and customer questions. Shows you exactly what articles to write next.',
-        color: 'from-teal-500 to-cyan-500'
+        color: 'from-[#FFB633] to-[#FEE3AC]'
       },
       {
         icon: MessageCircle,
         title: 'Pullse Chatbot Integration',
         content: 'Appo plugs directly into Pullse AI chatbots. Customers ask questions, chatbot pulls instant answers from your help centers—no setup required.',
-        color: 'from-green-400 to-teal-500'
+        color: 'from-[#FFB633] to-[#503225]'
       }
     ];
 
@@ -284,8 +284,8 @@ const ProductHelpCenters = () => {
                   onClick={() => setActiveTab(index)}
                   className={`w-full text-left rounded-xl border transition-all ${
                     isActive
-                      ? 'border-green-500/50 bg-gradient-to-r from-green-500/15 to-green-500/5 shadow-lg'
-                      : 'border-border/40 bg-card/80 hover:border-green-500/30 hover:bg-card'
+                      ? 'border-[#F28D1B]/50 bg-gradient-to-r from-[#F28D1B]/15 to-[#FFB633]/5 shadow-lg'
+                      : 'border-border/40 bg-card/80 hover:border-[#F28D1B]/30 hover:bg-card'
                   }`}
                 >
                   <div className="flex items-center gap-3 p-4">
@@ -293,11 +293,11 @@ const ProductHelpCenters = () => {
                       <Icon className="h-5 w-5 text-background" />
                     </div>
                     <div className="flex-1">
-                      <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-green-500' : 'text-foreground group-hover:text-green-500'}`}>
+                      <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-[#F28D1B]' : 'text-foreground group-hover:text-[#F28D1B]'}`}>
                         {tab.title}
                       </h3>
                     </div>
-                    <div className={`text-green-500 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
+                    <div className={`text-[#F28D1B] transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
@@ -306,7 +306,7 @@ const ProductHelpCenters = () => {
                 </button>
 
                 {isActive && (
-                  <div className="mt-2 rounded-xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="mt-2 rounded-xl border border-[#F28D1B]/20 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {tab.content}
                     </p>
@@ -323,7 +323,7 @@ const ProductHelpCenters = () => {
             variant="ghost"
             size="sm"
             href="https://appo.com"
-            className="w-full justify-center text-xs text-green-500 hover:text-green-400 hover:bg-green-500/10"
+            className="w-full justify-center text-xs text-[#F28D1B] hover:text-[#FFB633] hover:bg-[#F28D1B]/10"
           >
             Learn more about Appo
             <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
@@ -341,7 +341,7 @@ const ProductHelpCenters = () => {
       label: 'Monthly article views',
       description: 'Across all help centers',
       icon: BarChart3,
-      color: 'from-green-500 to-emerald-500',
+      color: 'from-[#F28D1B] to-[#FFB633]',
     },
     {
       value: 87,
@@ -349,7 +349,7 @@ const ProductHelpCenters = () => {
       label: 'Self-service resolution',
       description: 'Customers find answers',
       icon: TrendingUp,
-      color: 'from-teal-500 to-cyan-500',
+      color: 'from-[#FFB633] to-[#FEE3AC]',
     },
     {
       value: 200,
@@ -357,7 +357,7 @@ const ProductHelpCenters = () => {
       label: 'Search speed',
       description: 'Lightning-fast results',
       icon: Zap,
-      color: 'from-green-400 to-teal-500',
+      color: 'from-[#FFB633] to-[#503225]',
     },
   ];
 
@@ -369,7 +369,7 @@ const ProductHelpCenters = () => {
       {/* Scroll Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
         <div
-          className="h-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 transition-all duration-300 ease-out"
+          className="h-full bg-gradient-to-r from-[#F28D1B] via-[#FFB633] to-[#FEE3AC] transition-all duration-300 ease-out"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -377,7 +377,7 @@ const ProductHelpCenters = () => {
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(142_76%_36%/0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(28_88%_53%/0.15),transparent_50%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
@@ -392,14 +392,14 @@ const ProductHelpCenters = () => {
                 />
               </div>
 
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2.5 shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/30 bg-[#F28D1B]/10 px-5 py-2.5 shadow-sm">
                 <Image src={appoLogo} alt="Appo" className="h-4 w-4" />
-                <span className="text-sm font-semibold tracking-wide text-green-600 dark:text-green-400">Powered by Appo</span>
+                <span className="text-sm font-semibold tracking-wide text-[#F28D1B] dark:text-[#FFB633]">Powered by Appo</span>
               </div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Help centers that
-                <span className="block bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent animate-gradient mt-2">
+                <span className="block bg-gradient-to-r from-[#F28D1B] via-[#FFB633] to-[#FEE3AC] bg-clip-text text-transparent animate-gradient mt-2">
                   scale with you
                 </span>
               </h1>
@@ -410,7 +410,7 @@ const ProductHelpCenters = () => {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-green-500/30 group">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-[#F28D1B]/30 group">
                   See Appo in action
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
@@ -423,15 +423,15 @@ const ProductHelpCenters = () => {
               {/* Trust Signals */}
               <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  <CheckCircle2 className="h-4 w-4 text-[#F28D1B]" />
                   <span>Multiple help centers</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  <CheckCircle2 className="h-4 w-4 text-[#F28D1B]" />
                   <span>Custom domains</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  <CheckCircle2 className="h-4 w-4 text-[#F28D1B]" />
                   <span>AI-powered</span>
                 </div>
               </div>
@@ -439,11 +439,11 @@ const ProductHelpCenters = () => {
 
             {/* Hero Screenshot Placeholder */}
             <div className="relative max-w-6xl mx-auto">
-              <div className="absolute -inset-12 bg-gradient-to-br from-green-500/20 via-emerald-500/10 to-transparent blur-3xl opacity-60" />
+              <div className="absolute -inset-12 bg-gradient-to-br from-[#F28D1B]/20 via-[#FFB633]/10 to-transparent blur-3xl opacity-60" />
               <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl aspect-video flex items-center justify-center">
                   <div className="text-center space-y-2 p-8">
-                    <BookOpen className="h-16 w-16 text-green-500/40 mx-auto" />
+                    <BookOpen className="h-16 w-16 text-[#F28D1B]/40 mx-auto" />
                     <p className="text-sm text-muted-foreground">Appo Help Center Interface</p>
                   </div>
                 </div>
@@ -468,13 +468,13 @@ const ProductHelpCenters = () => {
                 return (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-green-500/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-[#F28D1B]/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 border border-green-500/20 transition-all group-hover:scale-110">
-                        <Icon className="h-6 w-6 text-green-500" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F28D1B]/10 border border-[#F28D1B]/20 transition-all group-hover:scale-110">
+                        <Icon className="h-6 w-6 text-[#F28D1B]" />
                       </div>
                       <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
                       <p className="text-sm text-muted-foreground">{item.description}</p>
@@ -489,15 +489,15 @@ const ProductHelpCenters = () => {
 
       {/* Content Creation - MagicBento Section */}
       <section className="relative py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(142_76%_36%/0.08),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-green-500" />
-                <span className="text-xs font-semibold tracking-wide text-green-500">Content Creation</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
+                <Sparkles className="h-4 w-4 text-[#F28D1B]" />
+                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Content Creation</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Build content that helps
@@ -525,15 +525,15 @@ const ProductHelpCenters = () => {
 
       {/* AI-Powered Intelligence Section */}
       <section className="relative h-screen max-h-screen bg-gradient-to-b from-muted/10 via-background to-background flex items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(142_76%_36%/0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.12),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4 py-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-8 space-y-3 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/40 bg-gradient-to-r from-green-500/15 to-green-500/10 px-4 py-1.5 shadow-lg backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/40 bg-gradient-to-r from-[#F28D1B]/15 to-[#FFB633]/10 px-4 py-1.5 shadow-lg backdrop-blur-sm">
                 <Image src={appoLogo} alt="Appo" className="h-3.5 w-3.5" />
-                <span className="text-xs font-bold uppercase tracking-wider text-green-500">AI-Powered Intelligence</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F28D1B]">AI-Powered Intelligence</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI that makes content better
@@ -548,11 +548,11 @@ const ProductHelpCenters = () => {
               {/* Left: Screenshot Placeholder */}
               <div className="fade-in-up">
                 <div className="relative max-w-lg mx-auto">
-                  <div className="absolute -inset-3 bg-gradient-to-br from-green-500/20 via-emerald-500/10 to-transparent blur-xl opacity-50" />
-                  <div className="relative rounded-xl border border-green-500/30 bg-gradient-to-br from-green-500/5 via-card to-card p-2 shadow-lg backdrop-blur-xl">
+                  <div className="absolute -inset-3 bg-gradient-to-br from-[#F28D1B]/20 via-[#FFB633]/10 to-transparent blur-xl opacity-50" />
+                  <div className="relative rounded-xl border border-[#F28D1B]/30 bg-gradient-to-br from-[#FEE3AC]/10 via-card to-card p-2 shadow-lg backdrop-blur-xl">
                     <div className="rounded-lg overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-md aspect-[4/3] flex items-center justify-center">
                       <div className="text-center space-y-2 p-6">
-                        <Wand2 className="h-12 w-12 text-green-500/40 mx-auto" />
+                        <Wand2 className="h-12 w-12 text-[#F28D1B]/40 mx-auto" />
                         <p className="text-xs text-muted-foreground">AI Writing Assistant Interface</p>
                       </div>
                     </div>
@@ -575,9 +575,9 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-2">
-                <Globe className="h-4 w-4 text-green-500" />
-                <span className="text-xs font-semibold tracking-wide text-green-500">Multi-Brand</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
+                <Globe className="h-4 w-4 text-[#F28D1B]" />
+                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Multi-Brand</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 One workspace. Unlimited help centers.
@@ -594,7 +594,7 @@ const ProductHelpCenters = () => {
                 <div className="relative rounded-3xl border border-border/50 bg-card p-6 shadow-xl">
                   <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 aspect-video flex items-center justify-center">
                     <div className="text-center space-y-2 p-6">
-                      <BookOpen className="h-14 w-14 text-green-500/40 mx-auto" />
+                      <BookOpen className="h-14 w-14 text-[#F28D1B]/40 mx-auto" />
                       <p className="text-sm text-muted-foreground">Multiple Help Centers Dashboard</p>
                     </div>
                   </div>
@@ -608,26 +608,26 @@ const ProductHelpCenters = () => {
                     icon: BookOpen,
                     title: 'Multiple Help Centers',
                     description: 'Create unlimited public help centers per workspace—one for each brand, product, or region',
-                    color: 'from-green-500 to-emerald-500'
+                    color: 'from-[#F28D1B] to-[#FFB633]'
                   },
                   {
                     icon: Palette,
                     title: 'White-Labeled',
                     description: 'Your branding, your domain, your design—Appo is completely invisible to customers',
-                    color: 'from-teal-500 to-cyan-500'
+                    color: 'from-[#FFB633] to-[#FEE3AC]'
                   },
                   {
                     icon: Zap,
                     title: 'Instant Deployment',
                     description: 'Launch new help centers in minutes with templates, copy content between centers',
-                    color: 'from-green-400 to-teal-500'
+                    color: 'from-[#FFB633] to-[#503225]'
                   },
                 ].map((feature, index) => {
                   const Icon = feature.icon;
                   return (
                     <div
                       key={index}
-                      className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-6 transition-all hover:border-green-500/40 hover:shadow-lg hover:-translate-y-1"
+                      className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-6 transition-all hover:border-[#F28D1B]/40 hover:shadow-lg hover:-translate-y-1"
                     >
                       <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 transition-opacity group-hover:opacity-5`} />
                       <div className="relative flex items-start gap-4">
@@ -635,7 +635,7 @@ const ProductHelpCenters = () => {
                           <Icon className="h-6 w-6 text-background" />
                         </div>
                         <div className="space-y-1 flex-1">
-                          <h3 className="text-lg font-bold text-foreground group-hover:text-green-500 transition-colors">{feature.title}</h3>
+                          <h3 className="text-lg font-bold text-foreground group-hover:text-[#F28D1B] transition-colors">{feature.title}</h3>
                           <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
                         </div>
                       </div>
@@ -650,15 +650,15 @@ const ProductHelpCenters = () => {
 
       {/* Multilingual Section */}
       <section className="relative py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(142_76%_36%/0.08),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-2">
-                <Languages className="h-4 w-4 text-green-500" />
-                <span className="text-xs font-semibold tracking-wide text-green-500">Global Reach</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
+                <Languages className="h-4 w-4 text-[#F28D1B]" />
+                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Global Reach</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Publish globally. Speak locally.
@@ -680,13 +680,13 @@ const ProductHelpCenters = () => {
                 return (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-green-500/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-[#F28D1B]/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 border border-green-500/20 transition-all group-hover:scale-110">
-                        <Icon className="h-6 w-6 text-green-500" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F28D1B]/10 border border-[#F28D1B]/20 transition-all group-hover:scale-110">
+                        <Icon className="h-6 w-6 text-[#F28D1B]" />
                       </div>
                       <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
                       <p className="text-sm text-muted-foreground">{item.description}</p>
@@ -705,9 +705,9 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/5 px-4 py-2">
-                <BarChart3 className="h-4 w-4 text-green-500" />
-                <span className="text-xs font-semibold tracking-wide text-green-500">Analytics</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
+                <BarChart3 className="h-4 w-4 text-[#F28D1B]" />
+                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Analytics</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Measure what matters
@@ -724,7 +724,7 @@ const ProductHelpCenters = () => {
                 return (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 transition-all hover:border-green-500/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up"
+                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 transition-all hover:border-[#F28D1B]/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 transition-opacity group-hover:opacity-10`} />
@@ -751,7 +751,7 @@ const ProductHelpCenters = () => {
               <div className="relative rounded-3xl border border-border/50 bg-card p-6 shadow-xl">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 aspect-video flex items-center justify-center">
                   <div className="text-center space-y-2 p-6">
-                    <Search className="h-14 w-14 text-green-500/40 mx-auto" />
+                    <Search className="h-14 w-14 text-[#F28D1B]/40 mx-auto" />
                     <p className="text-sm text-muted-foreground">Content Gap Analysis Dashboard</p>
                   </div>
                 </div>
@@ -771,7 +771,7 @@ const ProductHelpCenters = () => {
                     'AI suggests article topics to write'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#F28D1B] mt-0.5 shrink-0" />
                       <span className="text-foreground">{item}</span>
                     </li>
                   ))}
@@ -784,18 +784,18 @@ const ProductHelpCenters = () => {
 
       {/* Pullse Integration + Final CTA */}
       <section className="relative py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(142_76%_36%/0.15),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-16">
             {/* Integration Callout */}
-            <div className="relative overflow-hidden rounded-3xl border border-green-500/30 bg-gradient-to-br from-green-500/5 via-card to-card p-8 shadow-2xl fade-in-up">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(142_76%_36%/0.1),transparent_50%)]" />
+            <div className="relative overflow-hidden rounded-3xl border border-[#F28D1B]/30 bg-gradient-to-br from-[#FEE3AC]/10 via-card to-card p-8 shadow-2xl fade-in-up">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(28_88%_53%/0.1),transparent_50%)]" />
 
               <div className="relative">
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <Image src={appoLogo} alt="Appo" className="h-12 w-12" />
-                  <Link2 className="h-6 w-6 text-green-500" />
+                  <Link2 className="h-6 w-6 text-[#F28D1B]" />
                   <div className="h-12 w-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
                     <MessageCircle className="h-6 w-6 text-primary" />
                   </div>
@@ -812,7 +812,7 @@ const ProductHelpCenters = () => {
                     { text: 'Track deflection rate—see ROI of self-service' }
                   ].map((item, index) => (
                     <div key={index} className="flex items-start gap-2 p-3 rounded-lg bg-background/50">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#F28D1B] mt-0.5 shrink-0" />
                       <span className="text-sm text-muted-foreground">{item.text}</span>
                     </div>
                   ))}
@@ -822,8 +822,8 @@ const ProductHelpCenters = () => {
 
             {/* Final CTA */}
             <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card via-card to-card/90 shadow-2xl fade-in-up">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(142_76%_36%/0.1),transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(142_76%_36%/0.1),transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(28_88%_53%/0.1),transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(28_88%_53%/0.1),transparent_50%)]" />
 
               <div className="relative p-12 lg:p-16">
                 <div className="text-center space-y-10">
@@ -842,7 +842,7 @@ const ProductHelpCenters = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-green-500/20" href="/contact-sales">
+                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-[#F28D1B]/20" href="/contact-sales">
                       Book Appo demo
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </RouteButton>
