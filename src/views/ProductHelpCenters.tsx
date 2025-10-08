@@ -517,6 +517,7 @@ const ProductHelpCenters = () => {
                 enableTilt={false}
                 enableMagnetism={true}
                 clickEffect={true}
+                glowColor="242, 141, 27"
               />
             </div>
           </div>
