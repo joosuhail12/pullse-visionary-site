@@ -362,7 +362,18 @@ const ProductHelpCenters = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen appo-theme">
+      <style jsx global>{`
+        .appo-theme nav button:hover {
+          background-color: rgba(242, 141, 27, 0.05) !important;
+        }
+        .appo-theme nav button span[class*="bg-gradient"] {
+          background: linear-gradient(to right, transparent, rgb(242, 141, 27), transparent) !important;
+        }
+        .appo-theme nav a:hover {
+          background-color: rgba(242, 141, 27, 0.1) !important;
+        }
+      `}</style>
       <PageLiquidBackground opacity={0.3} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
 
