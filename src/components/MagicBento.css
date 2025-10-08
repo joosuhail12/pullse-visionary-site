@@ -56,7 +56,7 @@
 }
 
 .card__icon {
-  color: hsl(var(--primary));
+  color: rgba(var(--glow-color), 1);
   flex-shrink: 0;
 }
 
@@ -73,8 +73,8 @@
   flex: 1;
   min-height: 120px;
   border-radius: 12px;
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--accent) / 0.1) 100%);
-  border: 1px solid hsl(var(--primary) / 0.2);
+  background: linear-gradient(135deg, rgba(var(--glow-color), 0.1) 0%, rgba(var(--glow-color), 0.05) 100%);
+  border: 1px solid rgba(var(--glow-color), 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,11 +94,11 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: hsl(var(--primary) / 0.2);
+  background: rgba(var(--glow-color), 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: hsl(var(--primary));
+  color: rgba(var(--glow-color), 1);
 }
 
 .card__screenshot-text {
