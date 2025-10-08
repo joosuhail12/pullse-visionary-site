@@ -796,8 +796,8 @@ const ProductHelpCenters = () => {
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <Image src={appoLogo} alt="Appo" className="h-12 w-12" />
                   <Link2 className="h-6 w-6 text-[#F28D1B]" />
-                  <div className="h-12 w-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <MessageCircle className="h-6 w-6 text-primary" />
+                  <div className="h-12 w-12 rounded-lg bg-[#F28D1B]/10 border border-[#F28D1B]/20 flex items-center justify-center">
+                    <MessageCircle className="h-6 w-6 text-[#F28D1B]" />
                   </div>
                 </div>
 
