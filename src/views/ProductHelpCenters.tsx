@@ -363,7 +363,7 @@ const ProductHelpCenters = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.3} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -410,11 +410,11 @@ const ProductHelpCenters = () => {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-[#F28D1B]/30 group">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-[#F28D1B]/30 bg-[#F28D1B] hover:bg-[#FFB633] group">
                   See Appo in action
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
-                <RouteButton size="lg" variant="outline" href="https://appo.com" className="text-base px-10 py-7">
+                <RouteButton size="lg" variant="outline" href="https://appo.com" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white">
                   Visit Appo.com
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </RouteButton>
@@ -843,11 +843,11 @@ const ProductHelpCenters = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-[#F28D1B]/20" href="/contact-sales">
+                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-[#F28D1B]/20 bg-[#F28D1B] hover:bg-[#FFB633]" href="/contact-sales">
                       Book Appo demo
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </RouteButton>
-                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7" href="https://appo.com">
+                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white" href="https://appo.com">
                       Visit Appo.com
                       <ExternalLink className="ml-2 h-5 w-5" />
                     </RouteButton>
