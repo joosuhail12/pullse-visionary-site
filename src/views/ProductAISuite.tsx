@@ -685,87 +685,145 @@ const ProductAISuite = () => {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-              {[
-                {
-                  value: 2,
-                  suffix: 'M+',
-                  label: 'Conversations',
-                  detail: 'Powered by AI Suite',
-                  expanded: 'Across 50+ enterprise customers, our AI Suite has powered over 2 million customer conversations with 99.9% uptime.',
-                  color: 'primary',
-                  icon: MessageSquare
-                },
-                {
-                  value: 87,
-                  suffix: '%',
-                  label: 'Deflection Rate',
-                  detail: 'Industry-leading average',
-                  expanded: 'Our chatbots successfully resolve 87% of inquiries without human intervention, freeing up your team for complex issues.',
-                  color: 'purple-500',
-                  icon: BarChart3
-                },
-                {
-                  value: 50,
-                  suffix: '%',
-                  label: 'Faster Ramp',
-                  detail: 'New agent onboarding',
-                  expanded: 'AI Copilots cut new hire training time in half, getting agents productive in days instead of weeks.',
-                  color: 'indigo-500',
-                  icon: TrendingUp
-                },
-                {
-                  value: 100,
-                  suffix: '%',
-                  label: 'QA Coverage',
-                  detail: 'Every conversation analyzed',
-                  expanded: 'Unlike manual QA that samples 5-10%, Auto-QA evaluates 100% of conversations the moment they close.',
-                  color: 'primary',
-                  icon: Shield
-                }
-              ].map((stat, index) => {
-                const Icon = stat.icon;
-                const isSelected = selectedStat === index;
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedStat(selectedStat === index ? null : index)}
-                    className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 ${
-                      isSelected
-                        ? `border-${stat.color} bg-gradient-to-br from-${stat.color}/20 via-${stat.color}/10 to-transparent shadow-2xl shadow-${stat.color}/30 scale-105`
-                        : `border-${stat.color}/20 bg-gradient-to-br from-${stat.color}/10 via-${stat.color}/5 to-transparent hover:border-${stat.color}/40 hover:shadow-xl hover:shadow-${stat.color}/20`
-                    } p-8`}
-                  >
-                    <div className="relative">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className={`text-6xl font-black text-${stat.color}`}>
-                          {index === 3 ? (
-                            <>{stat.value}<span className="text-4xl">{stat.suffix}</span></>
-                          ) : (
-                            <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} />
-                          )}
-                        </div>
-                        <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-${stat.color}/20 group-hover:scale-110 transition-transform`}>
-                          <Icon className={`h-5 w-5 text-${stat.color}`} />
-                        </div>
-                      </div>
-                      <p className="text-lg font-bold text-foreground mb-2">{stat.label}</p>
-                      <p className="text-sm text-muted-foreground mb-4">{stat.detail}</p>
-
-                      {isSelected && (
-                        <div className={`mt-4 pt-4 border-t border-${stat.color}/20 animate-in fade-in slide-in-from-top-2 duration-300`}>
-                          <p className="text-sm text-foreground leading-relaxed">{stat.expanded}</p>
-                        </div>
-                      )}
-
-                      <div className={`mt-4 flex items-center gap-2 text-xs font-semibold text-${stat.color}`}>
-                        <span>{isSelected ? 'Click to collapse' : 'Click to learn more'}</span>
-                        <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${isSelected ? 'rotate-90' : ''}`} />
-                      </div>
+              {/* Stat 1: Conversations */}
+              <button
+                onClick={() => setSelectedStat(selectedStat === 0 ? null : 0)}
+                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
+                  selectedStat === 0
+                    ? 'border-primary bg-gradient-to-br from-primary/20 via-primary/10 to-transparent shadow-2xl shadow-primary/30 scale-105'
+                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent hover:border-primary/40 hover:shadow-xl hover:shadow-primary/20'
+                }`}
+              >
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="text-6xl font-black text-primary">
+                      <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
                     </div>
-                    <div className={`absolute -bottom-4 -right-4 w-24 h-24 bg-${stat.color}/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500`} />
-                  </button>
-                );
-              })}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 group-hover:scale-110 transition-transform">
+                      <MessageSquare className="h-5 w-5 text-primary" />
+                    </div>
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Conversations</p>
+                  <p className="text-sm text-muted-foreground mb-4">Powered by AI Suite</p>
+
+                  {selectedStat === 0 && (
+                    <div className="mt-4 pt-4 border-t border-primary/20 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <p className="text-sm text-foreground leading-relaxed">Across 50+ enterprise customers, our AI Suite has powered over 2 million customer conversations with 99.9% uptime.</p>
+                    </div>
+                  )}
+
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-primary">
+                    <span>{selectedStat === 0 ? 'Click to collapse' : 'Click to learn more'}</span>
+                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 0 ? 'rotate-90' : ''}`} />
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              </button>
+
+              {/* Stat 2: Deflection Rate */}
+              <button
+                onClick={() => setSelectedStat(selectedStat === 1 ? null : 1)}
+                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
+                  selectedStat === 1
+                    ? 'border-purple-500 bg-gradient-to-br from-purple-500/20 via-purple-500/10 to-transparent shadow-2xl shadow-purple-500/30 scale-105'
+                    : 'border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/20'
+                }`}
+              >
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="text-6xl font-black text-purple-500">
+                      <AnimatedCounter end={87} suffix="%" trigger={statsAnimated} />
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/20 group-hover:scale-110 transition-transform">
+                      <BarChart3 className="h-5 w-5 text-purple-500" />
+                    </div>
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Deflection Rate</p>
+                  <p className="text-sm text-muted-foreground mb-4">Industry-leading average</p>
+
+                  {selectedStat === 1 && (
+                    <div className="mt-4 pt-4 border-t border-purple-500/20 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <p className="text-sm text-foreground leading-relaxed">Our chatbots successfully resolve 87% of inquiries without human intervention, freeing up your team for complex issues.</p>
+                    </div>
+                  )}
+
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-purple-500">
+                    <span>{selectedStat === 1 ? 'Click to collapse' : 'Click to learn more'}</span>
+                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 1 ? 'rotate-90' : ''}`} />
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              </button>
+
+              {/* Stat 3: Faster Ramp */}
+              <button
+                onClick={() => setSelectedStat(selectedStat === 2 ? null : 2)}
+                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
+                  selectedStat === 2
+                    ? 'border-indigo-500 bg-gradient-to-br from-indigo-500/20 via-indigo-500/10 to-transparent shadow-2xl shadow-indigo-500/30 scale-105'
+                    : 'border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 via-indigo-500/5 to-transparent hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/20'
+                }`}
+              >
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="text-6xl font-black text-indigo-500">
+                      <AnimatedCounter end={50} suffix="%" trigger={statsAnimated} />
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/20 group-hover:scale-110 transition-transform">
+                      <TrendingUp className="h-5 w-5 text-indigo-500" />
+                    </div>
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Faster Ramp</p>
+                  <p className="text-sm text-muted-foreground mb-4">New agent onboarding</p>
+
+                  {selectedStat === 2 && (
+                    <div className="mt-4 pt-4 border-t border-indigo-500/20 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <p className="text-sm text-foreground leading-relaxed">AI Copilots cut new hire training time in half, getting agents productive in days instead of weeks.</p>
+                    </div>
+                  )}
+
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-indigo-500">
+                    <span>{selectedStat === 2 ? 'Click to collapse' : 'Click to learn more'}</span>
+                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 2 ? 'rotate-90' : ''}`} />
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              </button>
+
+              {/* Stat 4: QA Coverage */}
+              <button
+                onClick={() => setSelectedStat(selectedStat === 3 ? null : 3)}
+                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
+                  selectedStat === 3
+                    ? 'border-primary bg-gradient-to-br from-primary/20 via-primary/10 to-transparent shadow-2xl shadow-primary/30 scale-105'
+                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent hover:border-primary/40 hover:shadow-xl hover:shadow-primary/20'
+                }`}
+              >
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="text-6xl font-black text-primary">
+                      100<span className="text-4xl">%</span>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 group-hover:scale-110 transition-transform">
+                      <Shield className="h-5 w-5 text-primary" />
+                    </div>
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">QA Coverage</p>
+                  <p className="text-sm text-muted-foreground mb-4">Every conversation analyzed</p>
+
+                  {selectedStat === 3 && (
+                    <div className="mt-4 pt-4 border-t border-primary/20 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <p className="text-sm text-foreground leading-relaxed">Unlike manual QA that samples 5-10%, Auto-QA evaluates 100% of conversations the moment they close.</p>
+                    </div>
+                  )}
+
+                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-primary">
+                    <span>{selectedStat === 3 ? 'Click to collapse' : 'Click to learn more'}</span>
+                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 3 ? 'rotate-90' : ''}`} />
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+              </button>
             </div>
           </div>
         </section>
