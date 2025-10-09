@@ -181,10 +181,10 @@
 @media (min-width: 1024px) {
   .card-grid {
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 220px;
+    grid-template-rows: repeat(3, 220px);
     gap: 1em;
   }
-  
+
   .card {
     aspect-ratio: auto;
   }
