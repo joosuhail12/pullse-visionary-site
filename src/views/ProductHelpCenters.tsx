@@ -364,14 +364,20 @@ const ProductHelpCenters = () => {
   return (
     <div className="min-h-screen appo-theme">
       <style jsx global>{`
+        .appo-theme nav button {
+          background-color: transparent !important;
+        }
         .appo-theme nav button:hover {
-          background-color: rgba(242, 141, 27, 0.05) !important;
+          background-color: transparent !important;
         }
         .appo-theme nav button span[class*="bg-gradient"] {
           background: linear-gradient(to right, transparent, rgb(242, 141, 27), transparent) !important;
         }
-        .appo-theme nav a:hover {
-          background-color: rgba(242, 141, 27, 0.1) !important;
+        .appo-theme nav a:not([href*="demo"]) {
+          background-color: transparent !important;
+        }
+        .appo-theme nav a:hover:not([href*="demo"]) {
+          background-color: transparent !important;
         }
         .appo-theme nav a[class*="bg-primary"] {
           background-color: #F28D1B !important;
@@ -386,7 +392,7 @@ const ProductHelpCenters = () => {
           box-shadow: 0 20px 25px -5px rgba(242, 141, 27, 0.4) !important;
         }
       `}</style>
-      <PageLiquidBackground opacity={0.3} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
+      <PageLiquidBackground opacity={0.5} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}

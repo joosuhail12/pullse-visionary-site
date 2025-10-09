@@ -62,8 +62,8 @@ const Navigation = () => {
     name: "Auto-QA",
     path: "/product/auto-qa"
   }, {
-    name: "Help Centers",
-    path: "/product/knowledge-bases"
+    name: "Appo",
+    path: "/product/appo"
   }];
   const solutionsLinks = [{
     name: "Solutions Hub",
