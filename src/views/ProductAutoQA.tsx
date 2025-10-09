@@ -170,57 +170,57 @@ const ProductAutoQA = () => {
   const bentoCards: CardData[] = [
     {
       color: 'hsl(var(--card))',
-      title: '100% Conversation Coverage',
-      description: 'AI automatically QAs every conversation—bot and human—once tickets close. No manual sampling, no blind spots, complete visibility.',
-      label: 'Automated',
+      title: 'Every Ticket, Every Time',
+      description: 'Traditional QA samples 5-10% of conversations. Auto-QA analyzes 100% of tickets—bot and human—the moment they close. No sampling bias, no blind spots.',
+      label: 'Zero Sampling',
       icon: Shield,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Conversational Quality Parameters',
-      description: 'Define custom QA rubrics: tone, empathy, response time, resolution quality, policy compliance, clarity. Fully customizable to your standards.',
+      title: 'Your Standards, Automated',
+      description: 'Build custom scoring rubrics: tone, empathy, speed, resolution quality, policy adherence. Define what quality means for your team, then let AI enforce it consistently.',
       label: 'Custom Rubrics',
       icon: CheckCircle2,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Moment-Level Feedback',
-      description: "AI pinpoints exact conversation moments where something could've been better—and suggests the language reps should have used.",
-      label: 'Precision',
+      title: 'Surgical Feedback',
+      description: "Instead of vague critiques, AI highlights the exact message where a rep could improve—and suggests the specific phrasing they should have used. Actionable, not abstract.",
+      label: 'Moment-Level',
       icon: Target,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Positive Reinforcement',
-      description: "AI doesn't just critique—it highlights what reps did well. Celebrates wins, reinforces good habits, builds confidence.",
+      title: 'Celebrate Wins Too',
+      description: "QA isn't just about mistakes. AI calls out what reps did well—great empathy, fast response, clear explanation. Reinforces good behaviors.",
       label: 'Recognition',
       icon: Award,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Trend Analysis',
-      description: 'Every scorecard includes performance trends from past QA results. See improvement over time across all quality dimensions.',
-      label: 'Growth Tracking',
+      title: 'See the Trajectory',
+      description: 'Every scorecard shows trend lines from past QA results. Is this rep improving on empathy? Is response time getting faster? Track growth over weeks and months.',
+      label: 'Trend Tracking',
       icon: TrendingUp,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Accept/Dispute Scores',
-      description: 'Reps can accept or dispute any score. Supervisors review disputes, provide context, and adjust scores—fair and transparent.',
-      label: 'Fairness',
+      title: 'Built-In Fairness',
+      description: 'Reps can dispute any score. Supervisors review the full context, adjust if needed, and explain decisions. Fair, transparent, and auditable.',
+      label: 'Dispute Flow',
       icon: AlertCircle,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Supervisor Controls',
-      description: 'Adjust parameter weights, override scores, provide feedback, manage coaching sessions. Full control over your QA process.',
+      title: 'Full Supervisor Control',
+      description: 'Change parameter weights anytime. Override AI scores. Add manual feedback. Adjust coaching priorities. You stay in control—AI just handles the heavy lifting.',
       label: 'Management',
       icon: Settings,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Coaching & Feedback Management',
-      description: 'Structured feedback loops. Track coaching sessions, set improvement goals, measure impact. Turn QA into continuous learning.',
+      title: 'From QA to Coaching',
+      description: 'Track coaching sessions. Set improvement goals. Measure impact. Auto-QA turns quality assurance into a continuous learning engine.',
       label: 'Development',
       icon: Users,
     },
@@ -241,28 +241,28 @@ const ProductAutoQA = () => {
     {
       number: '01',
       title: 'Ticket Closes',
-      description: 'When a conversation is permanently closed, Auto-QA triggers automatically.',
+      description: 'Rep marks the ticket as resolved. Auto-QA triggers instantly—no manual selection, no waiting.',
       icon: CheckCircle2,
       color: 'from-primary to-purple-600',
     },
     {
       number: '02',
-      title: 'AI Analyzes Conversation',
-      description: 'AI evaluates the entire conversation across all quality parameters, pinpointing exact moments.',
+      title: 'AI Reads Everything',
+      description: 'AI reads every message, evaluates against your rubric, and identifies the exact moments where quality could improve.',
       icon: Brain,
       color: 'from-purple-600 to-indigo-600',
     },
     {
       number: '03',
-      title: 'Scorecard Generated',
-      description: 'Rep receives detailed scorecard with moment-level feedback, suggested language, and trend analysis.',
+      title: 'Scorecard Delivered',
+      description: 'Rep gets a detailed scorecard: scores per parameter, exact messages flagged, suggested improvements, plus trend lines showing progress.',
       icon: BarChart3,
       color: 'from-indigo-600 to-blue-600',
     },
     {
       number: '04',
-      title: 'Review & Coach',
-      description: 'Rep accepts/disputes scores. Supervisors coach, provide feedback, track improvement over time.',
+      title: 'Coaching Happens',
+      description: 'Rep can accept scores or dispute with context. Supervisors review, adjust if needed, and schedule coaching sessions. Growth tracked over time.',
       icon: Users,
       color: 'from-blue-600 to-primary',
     },
@@ -323,14 +323,14 @@ const ProductAutoQA = () => {
               </div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
-                QA every conversation.
+                Every conversation.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
-                  Coach every rep.
+                  Every rep. Every time.
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                AI analyzes 100% of conversations—bot and human—pinpoints exact moments for improvement, suggests better language, and tracks performance trends. Turn QA into continuous coaching.
+                Stop sampling 5% of conversations. AI automatically evaluates every ticket the moment it closes—identifying exact moments for improvement, suggesting better language, and tracking trends over time. Turn quality assurance into continuous coaching.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -347,15 +347,15 @@ const ProductAutoQA = () => {
               <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>100% coverage</span>
+                  <span>100% of tickets analyzed</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Instant feedback</span>
+                  <span>Real-time feedback</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Fair & transparent</span>
+                  <span>Dispute & appeal workflow</span>
                 </div>
               </div>
             </div>
@@ -385,10 +385,10 @@ const ProductAutoQA = () => {
                   <Shield className="h-6 w-6 text-background" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                  100% Coverage
+                  No More Sampling
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every conversation automatically analyzed
+                  QA every single conversation, not just 5%. Zero blind spots.
                 </p>
               </div>
               <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
@@ -396,10 +396,10 @@ const ProductAutoQA = () => {
                   <Target className="h-6 w-6 text-background" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                  Moment-Level Feedback
+                  Surgical Precision
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Pinpoints exact improvement areas
+                  AI identifies exact message where rep could improve—with suggested phrasing.
                 </p>
               </div>
               <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
@@ -407,10 +407,10 @@ const ProductAutoQA = () => {
                   <TrendingUp className="h-6 w-6 text-background" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                  Trend Analysis
+                  See the Trajectory
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Track performance over time
+                  Every scorecard shows trend lines. Is empathy improving? Response time getting faster?
                 </p>
               </div>
               <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
@@ -418,10 +418,10 @@ const ProductAutoQA = () => {
                   <Users className="h-6 w-6 text-background" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                  Fair & Transparent
+                  Built-In Fairness
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Accept or dispute any score
+                  Reps can dispute any score. Supervisors review, adjust, and provide context.
                 </p>
               </div>
             </div>
@@ -435,10 +435,10 @@ const ProductAutoQA = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                Complete Quality Coverage
+                Beyond Traditional QA
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                From automated QA to moment-level coaching, everything you need to improve conversation quality at scale.
+                Manual QA teams sample 5-10% of conversations. Auto-QA analyzes 100%—evaluating every ticket against your quality standards the moment it closes, with zero extra headcount.
               </p>
             </div>
 
@@ -560,12 +560,12 @@ const ProductAutoQA = () => {
                     <span className="text-sm font-semibold tracking-wide text-primary">Coaching & Feedback</span>
                   </div>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-                    Fair, Transparent,
+                    QA that feels like
                     <br />
-                    Growth-Focused
+                    coaching, not critique
                   </h2>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    QA isn't about punishment—it's about coaching. Reps can dispute scores, supervisors adjust parameters, and everyone sees performance trends. Build a culture of continuous improvement.
+                    Traditional QA feels punitive—random spot checks, subjective scores, no recourse. Auto-QA is different. Every score is explainable. Every rep can dispute. Every trend line shows progress. It's QA designed for growth, not gotchas.
                   </p>
                 </div>
 
@@ -574,9 +574,9 @@ const ProductAutoQA = () => {
                     <ThumbsUp className="h-5 w-5 text-background" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-1">Rep Empowerment</p>
+                    <p className="text-sm font-medium mb-1">Reps Have a Voice</p>
                     <p className="text-sm text-muted-foreground">
-                      Every rep can challenge scores and provide context. Supervisors review and adjust—ensuring fair, accurate QA.
+                      Disagree with a score? Click dispute, add context, and request supervisor review. Fair, transparent, and built into every scorecard.
                     </p>
                   </div>
                 </div>
@@ -636,11 +636,11 @@ const ProductAutoQA = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Ready to QA Every Conversation?
+              Stop sampling. Start seeing everything.
             </h2>
 
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              See how Auto-QA turns quality assurance into continuous coaching—for every rep, every conversation, every time.
+              Traditional QA teams sample 5-10% of tickets. Auto-QA evaluates 100%—with surgical feedback, trend tracking, and built-in fairness. See how it works.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
