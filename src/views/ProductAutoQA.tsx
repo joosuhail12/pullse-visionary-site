@@ -217,13 +217,6 @@ const ProductAutoQA = () => {
       label: 'Management',
       icon: Settings,
     },
-    {
-      color: 'hsl(var(--card))',
-      title: 'From QA to Coaching',
-      description: 'Track coaching sessions. Set improvement goals. Measure impact. Turn quality assurance into continuous learning.',
-      label: 'Development',
-      icon: Users,
-    },
   ];
 
   // Quality Parameters Data
