@@ -23,12 +23,7 @@ import {
   Target,
   TrendingUp,
   BarChart3,
-  Globe,
   Lock,
-  Palette,
-  Code,
-  GitBranch,
-  Settings,
   Database,
   Layers,
   RefreshCw,
@@ -129,66 +124,6 @@ const ProductAISuite = () => {
       description: 'Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.',
       label: 'Measure What Matters',
       icon: Heart,
-    },
-  ];
-
-  // Platform Capabilities Bento Cards
-  const platformCards: CardData[] = [
-    {
-      color: 'hsl(var(--card))',
-      title: 'Continuous Learning',
-      description: 'AI improves from every conversation, correction, and feedback. The more you use it, the smarter it gets.',
-      label: 'Auto-Improvement',
-      icon: RefreshCw,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Brand Voice Control',
-      description: 'Configure tone, language, and personality across all AI tools. Sound like your brand, always.',
-      label: 'Customization',
-      icon: Palette,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Multi-Language Support',
-      description: 'Deploy in 50+ languages with automatic translation. Global support, local experience.',
-      label: 'Global Ready',
-      icon: Globe,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Enterprise Security',
-      description: 'SOC 2, GDPR compliant. Data encrypted at rest and in transit. Your data stays yours.',
-      label: 'Secure',
-      icon: Lock,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Analytics & Insights',
-      description: 'Track performance, deflection rates, sentiment trends, and quality metrics in real-time.',
-      label: 'Data-Driven',
-      icon: BarChart3,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Custom Workflows',
-      description: 'Build conditional logic and routing rules. Automate complex processes with visual builders.',
-      label: 'Automation',
-      icon: GitBranch,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'White-Label Ready',
-      description: 'Remove Pullse branding, use your custom domain. Make it fully yours.',
-      label: 'Your Brand',
-      icon: Settings,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'API Access',
-      description: 'Programmatic access to all AI capabilities. Build custom integrations and extensions.',
-      label: 'Developer-Friendly',
-      icon: Code,
     },
   ];
 
@@ -583,28 +518,6 @@ const ProductAISuite = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Platform Capabilities */}
-        <section className="relative py-20 bg-gradient-to-b from-muted/10 via-background to-background">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Settings className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Enterprise-Grade</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Everything you need for production
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Security, compliance, customization, and control built in from day one.
-              </p>
-            </div>
-
-            <div className="max-w-6xl mx-auto">
-              <MagicBento cardData={platformCards} />
             </div>
           </div>
         </section>
