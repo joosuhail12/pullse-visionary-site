@@ -29,6 +29,7 @@ import {
   FileText,
   Brain,
   LineChart,
+  Play,
 } from "lucide-react";
 
 // Animated Counter Component
@@ -309,53 +310,114 @@ const ProductAutoQA = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
+
         <div className="container relative mx-auto px-4">
-          <div className="max-w-5xl mx-auto text-center space-y-8 fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-              <Shield className="h-4 w-4" />
-              <span>AI-Powered Quality Assurance</span>
+          <div className="max-w-7xl mx-auto">
+            {/* Header Content */}
+            <div className="text-center mb-16 space-y-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
+                <Shield className="h-4 w-4 text-primary animate-pulse" />
+                <span className="text-sm font-semibold tracking-wide text-primary">AI-Powered Quality Assurance</span>
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
+                QA every conversation.
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
+                  Coach every rep.
+                </span>
+              </h1>
+
+              <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                AI analyzes 100% of conversations—bot and human—pinpoints exact moments for improvement, suggests better language, and tracks performance trends. Turn QA into continuous coaching.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group">
+                  See Auto-QA in action
+                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                </RouteButton>
+                <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-10 py-7">
+                  View pricing
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </RouteButton>
+              </div>
+
+              {/* Trust Signals */}
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <span>100% coverage</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <span>Instant feedback</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <span>Fair & transparent</span>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              QA Every Conversation.
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-indigo-500">
-                Coach Every Rep.
-              </span>
-            </h1>
+            {/* Hero Screenshot Placeholder */}
+            <div className="relative max-w-6xl mx-auto">
+              <div className="absolute -inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl aspect-video flex items-center justify-center">
+                  <div className="text-center space-y-2 p-8">
+                    <Shield className="h-16 w-16 text-primary/40 mx-auto" />
+                    <p className="text-sm text-muted-foreground">Auto-QA Scorecard Interface</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              AI analyzes 100% of conversations—bot and human—pinpoints exact moments for improvement, suggests better language, and tracks performance trends. Turn QA into continuous coaching.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <RouteButton
-                size="lg"
-                href="/contact-sales"
-                className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group"
-              >
-                See Auto-QA in action
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </RouteButton>
-              <RouteButton
-                variant="outline"
-                size="lg"
-                href="/book-demo"
-                className="text-base px-10 py-7 border-2"
-              >
-                Book a demo
-              </RouteButton>
+      {/* Quick Value Props Section */}
+      <section className="relative py-20 bg-gradient-to-b from-muted/10 to-transparent">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { icon: Shield, title: '100% Coverage', description: 'Every conversation automatically QA'd' },
+                { icon: Target, title: 'Moment-Level Feedback', description: 'Pinpoints exact improvement areas' },
+                { icon: TrendingUp, title: 'Trend Analysis', description: 'Track performance over time' },
+                { icon: Users, title: 'Fair & Transparent', description: 'Accept or dispute any score' },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                      <Icon className="h-6 w-6 text-background" />
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Bento Grid - Core Features */}
-      <section className="relative py-20 bg-gradient-to-b from-background via-muted/20 to-background">
+      <section className="relative py-20">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-4 fade-in-up">
+            <div className="text-center mb-16 space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 Complete Quality Coverage
               </h2>
@@ -378,13 +440,13 @@ const ProductAutoQA = () => {
       </section>
 
       {/* How It Works - Process Flow */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-background via-muted/10 to-background">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-4 fade-in-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-                <GitBranch className="h-4 w-4" />
-                <span>How It Works</span>
+            <div className="text-center mb-16 space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
+                <GitBranch className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold tracking-wide text-primary">How It Works</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 From Ticket to Coaching
@@ -432,10 +494,10 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Quality Parameters Showcase */}
-      <section className="relative py-20 bg-gradient-to-b from-muted/20 via-background to-background">
+      <section className="relative py-20">
         <div className="container relative mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 space-y-4 fade-in-up">
+            <div className="text-center mb-16 space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 Customizable Quality Parameters
               </h2>
@@ -471,15 +533,15 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Coaching & Feedback Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-background to-background">
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8 fade-in-up">
+              <div className="space-y-8">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-                    <Users className="h-4 w-4" />
-                    <span>Coaching & Feedback</span>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm mb-6">
+                    <Users className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold tracking-wide text-primary">Coaching & Feedback</span>
                   </div>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
                     Fair, Transparent,
@@ -504,7 +566,7 @@ const ProductAutoQA = () => {
                 </div>
               </div>
 
-              <div className="fade-in-up delay-200">
+              <div>
                 <CoachingAccordion />
               </div>
             </div>
@@ -513,10 +575,10 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Analytics & Stats Section */}
-      <section ref={statsRef} className="relative py-20 bg-gradient-to-b from-muted/20 to-background">
+      <section ref={statsRef} className="relative py-20">
         <div className="container relative mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 space-y-4 fade-in-up">
+            <div className="text-center mb-16 space-y-4">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 Real-Time Quality Intelligence
               </h2>
@@ -554,9 +616,9 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 to-background">
         <div className="container relative mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8 fade-in-up">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
               Ready to QA Every Conversation?
             </h2>
@@ -565,7 +627,7 @@ const ProductAutoQA = () => {
               See how Auto-QA turns quality assurance into continuous coaching—for every rep, every conversation, every time.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <RouteButton
                 size="lg"
                 href="/contact-sales"
@@ -577,10 +639,10 @@ const ProductAutoQA = () => {
               <RouteButton
                 variant="outline"
                 size="lg"
-                href="/book-demo"
-                className="text-base px-10 py-7 border-2"
+                href="/pricing"
+                className="text-base px-10 py-7"
               >
-                Book a demo
+                View pricing
               </RouteButton>
             </div>
           </div>
