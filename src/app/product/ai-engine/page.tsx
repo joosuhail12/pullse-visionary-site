@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import GenericPage from "@/views/GenericPage";
+import ProductAIEngine from "@/views/ProductAIEngine";
 
 export const metadata: Metadata = {
-  title: "The Pullse AI Engine | Pullse",
-  description: "Advanced model orchestration, RAG, and API-connected actions.",
+  title: "AI Engine | Pullse - Governed AI with Guardrails",
+  description: "From intent to safe action in seconds. Classification, retrieval, planning, execution, and QA—all governed and logged. Built on NIST AI RMF and OWASP best practices.",
 };
 
-const AIEnginePage = () => (
-  <GenericPage
-    title="The Pullse AI Engine"
-    description="Advanced model orchestration, RAG, and API-connected actions."
-  />
-);
+const AIEnginePage = () => <ProductAIEngine />;
 
 export default AIEnginePage;
