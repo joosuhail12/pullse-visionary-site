@@ -8,6 +8,7 @@ import RouteButton from "@/components/RouteButton";
 import MagicBento from "@/components/MagicBento";
 import type { CardData } from "@/components/MagicBento";
 import Image from "next/image";
+import Link from "next/link";
 import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
 import {
   Bot,
@@ -36,6 +37,7 @@ import {
   Brain,
   LifeBuoy,
   Star,
+  ExternalLink,
 } from "lucide-react";
 
 // Animated Counter Component
@@ -69,7 +71,10 @@ const ProductAISuite = () => {
   const [statsAnimated, setStatsAnimated] = useState(false);
   const [activeDeploymentTab, setActiveDeploymentTab] = useState<'chatbot' | 'copilot'>('chatbot');
   const [hoveredUseCase, setHoveredUseCase] = useState<number | null>(null);
-  const [selectedStat, setSelectedStat] = useState<number | null>(null);
+  const [selectedStat, setSelectedStat] = useState<number | null>(0);
+  const [activeUseCaseTab, setActiveUseCaseTab] = useState<'chatbot' | 'copilot'>('chatbot');
+  const [expandedUseCase, setExpandedUseCase] = useState<number | null>(null);
+  const [selectedInfrastructure, setSelectedInfrastructure] = useState<'content' | 'action' | 'engine'>('content');
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -476,270 +481,544 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Chatbots Use Cases - Interactive Grid with Before/After */}
+        {/* Combined Use Cases - Single Card with Sidebar */}
         <section className="relative py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-purple-500/5" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.1),transparent_50%)]" />
 
           <div className="container mx-auto px-6 relative">
             <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-indigo-500/10 border border-primary/20 mb-6">
                 <Bot className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">Chatbot Use Cases</span>
+                <span className="text-sm font-semibold text-foreground">AI-Powered Solutions</span>
+                <Sparkles className="h-4 w-4 text-purple-500" />
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-6">
-                Turn support costs into
+                Real problems.
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                  competitive advantages
+                  Real solutions.
                 </span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Automate high-volume, repetitive inquiries while maintaining quality and customer satisfaction
+                See how AI Chatbots and Copilots transform your support operations
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-              {[
-                {
-                  icon: ShoppingCart,
-                  title: 'Order Tracking',
-                  problem: 'Agents spending 40% of time on "Where\'s my order?"',
-                  solution: 'Bot checks status, sends tracking links, updates customers—instantly',
-                  impact: '60% reduction in WISMO tickets',
-                  tag: 'E-commerce',
-                  color: 'from-primary to-purple-600'
-                },
-                {
-                  icon: Clock,
-                  title: 'After-Hours Support',
-                  problem: 'Customers frustrated waiting until business hours',
-                  solution: '24/7 AI coverage for FAQs, basic troubleshooting, order changes',
-                  impact: '3x more issues resolved outside 9-5',
-                  tag: 'All Industries',
-                  color: 'from-purple-600 to-indigo-600'
-                },
-                {
-                  icon: CreditCard,
-                  title: 'Account Management',
-                  problem: 'Long wait times for simple account updates',
-                  solution: 'Instant balance checks, billing updates, transaction verification',
-                  impact: '70% of account queries automated',
-                  tag: 'Financial, SaaS',
-                  color: 'from-indigo-600 to-primary'
-                },
-                {
-                  icon: LifeBuoy,
-                  title: 'FAQ Deflection',
-                  problem: 'Same questions asked hundreds of times daily',
-                  solution: 'AI instantly answers password resets, how-tos, account setup',
-                  impact: '85% FAQ deflection rate',
-                  tag: 'Tech Support',
-                  color: 'from-primary to-purple-600'
-                },
-                {
-                  icon: Users,
-                  title: 'Lead Qualification',
-                  problem: 'Sales team wasting time on unqualified leads',
-                  solution: 'Bot asks qualifying questions, scores leads, routes hot prospects',
-                  impact: '2x more qualified leads to sales',
-                  tag: 'Sales',
-                  color: 'from-purple-600 to-pink-600'
-                },
-                {
-                  icon: Settings,
-                  title: 'Self-Service Actions',
-                  problem: 'Agents manually processing simple transactional requests',
-                  solution: 'Customers process refunds, cancel subs, reschedule on their own',
-                  impact: '50% reduction in admin work',
-                  tag: 'Services',
-                  color: 'from-indigo-600 to-purple-600'
-                }
-              ].map((useCase, index) => {
-                const Icon = useCase.icon;
-                return (
-                  <div
-                    key={index}
-                    onMouseEnter={() => setHoveredUseCase(index)}
-                    onMouseLeave={() => setHoveredUseCase(null)}
-                    className="group relative overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
-                  >
-                    {/* Header */}
-                    <div className="p-6 pb-4">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${useCase.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          <Icon className="h-7 w-7 text-background" />
-                        </div>
-                        <div className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-semibold text-primary">
-                          {useCase.tag}
-                        </div>
-                      </div>
-                      <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">{useCase.title}</h4>
+            {/* Single Card with Sidebar - Light Mode */}
+            <div className="max-w-[1300px] mx-auto">
+              <div className="relative overflow-hidden rounded-[28px] border border-border/60 bg-card/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.05)_inset]">
+                {/* Light mode mesh gradients */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(var(--primary-rgb),0.08)_0%,transparent_50%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(139,92,246,0.06)_0%,transparent_50%)]" />
+
+                <div className="grid lg:grid-cols-[360px,1fr] relative">
+                  {/* Left Sidebar - Use Case Selector */}
+                  <div className="border-r border-border/50 bg-gradient-to-b from-background/40 via-card/20 to-background/40 p-8 relative backdrop-blur-sm">
+                    {/* Tabs with sliding indicator - Light Mode */}
+                    <div className="relative flex gap-1 mb-6 p-1 bg-background/80 rounded-[18px] backdrop-blur-xl border border-border/60 shadow-sm">
+                      {/* Sliding indicator - Light mode */}
+                      <div
+                        className={`absolute top-1 h-[calc(100%-8px)] rounded-[14px] transition-all duration-700 ease-out ${
+                          activeUseCaseTab === 'chatbot'
+                            ? 'left-1 w-[calc(50%-6px)] bg-gradient-to-br from-primary to-purple-600 shadow-md'
+                            : 'left-[calc(50%+3px)] w-[calc(50%-6px)] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-md'
+                        }`}
+                      />
+                      <button
+                        onClick={() => {
+                          setActiveUseCaseTab('chatbot');
+                          setSelectedStat(0);
+                        }}
+                        className={`flex-1 px-5 py-3 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-500 relative z-10 ${
+                          activeUseCaseTab === 'chatbot'
+                            ? 'text-white'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <Bot className="h-4 w-4 inline mr-2 -mt-0.5" />
+                        Chatbots
+                      </button>
+                      <button
+                        onClick={() => {
+                          setActiveUseCaseTab('copilot');
+                          setSelectedStat(3);
+                        }}
+                        className={`flex-1 px-5 py-3 rounded-[14px] text-[13px] font-bold tracking-wide transition-all duration-500 relative z-10 ${
+                          activeUseCaseTab === 'copilot'
+                            ? 'text-white'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <Sparkles className="h-4 w-4 inline mr-2 -mt-0.5" />
+                        Copilots
+                      </button>
                     </div>
 
-                    {/* Content - Changes on Hover */}
-                    <div className="px-6 pb-6">
-                      {hoveredUseCase === index ? (
-                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                          <div>
-                            <div className="text-xs font-semibold text-primary mb-1">THE SOLUTION</div>
-                            <p className="text-sm text-foreground leading-relaxed">{useCase.solution}</p>
-                          </div>
-                          <div className="pt-3 border-t border-border/50">
-                            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20">
-                              <BarChart3 className="h-4 w-4 text-primary" />
-                              <span className="text-sm font-bold text-primary">{useCase.impact}</span>
+                    {/* Use Case List */}
+                    <div className="space-y-3">
+                      {activeUseCaseTab === 'chatbot' ? (
+                        <>
+                          <button
+                            onClick={() => setSelectedStat(0)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 0
+                                ? 'bg-gradient-to-br from-primary/10 to-purple-600/5 border border-primary/30 shadow-lg shadow-primary/10'
+                                : 'bg-card/50 border border-border/40 hover:border-primary/30 hover:bg-primary/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-500 ${selectedStat === 0 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-primary to-purple-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 0 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <ShoppingCart className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 0 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>Order Tracking</div>
+                              </div>
+                              {selectedStat === 0 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(var(--primary-rgb),0.6)] animate-pulse" />
+                              )}
                             </div>
-                          </div>
-                        </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 0 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>Automate WISMO inquiries</div>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedStat(1)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 1
+                                ? 'bg-gradient-to-br from-primary/10 to-purple-600/5 border border-primary/30 shadow-lg shadow-primary/10'
+                                : 'bg-card/50 border border-border/40 hover:border-primary/30 hover:bg-primary/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-500 ${selectedStat === 1 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-primary to-purple-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 1 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <Clock className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 1 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>After-Hours Support</div>
+                              </div>
+                              {selectedStat === 1 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(var(--primary-rgb),0.6)] animate-pulse" />
+                              )}
+                            </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 1 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>24/7 coverage</div>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedStat(2)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 2
+                                ? 'bg-gradient-to-br from-primary/10 to-purple-600/5 border border-primary/30 shadow-lg shadow-primary/10'
+                                : 'bg-card/50 border border-border/40 hover:border-primary/30 hover:bg-primary/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-500 ${selectedStat === 2 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-primary to-purple-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 2 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <LifeBuoy className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 2 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>FAQ Deflection</div>
+                              </div>
+                              {selectedStat === 2 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_rgba(var(--primary-rgb),0.6)] animate-pulse" />
+                              )}
+                            </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 2 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>Instant answers</div>
+                          </button>
+                        </>
                       ) : (
-                        <div className="space-y-2">
-                          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">The Problem</div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">{useCase.problem}</p>
-                          <div className="pt-3 text-xs text-primary font-semibold flex items-center gap-1">
-                            Hover to see solution
-                            <ArrowRight className="h-3 w-3" />
-                          </div>
-                        </div>
+                        <>
+                          <button
+                            onClick={() => setSelectedStat(3)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 3
+                                ? 'bg-gradient-to-br from-purple-600/10 to-indigo-600/5 border border-purple-500/30 shadow-lg shadow-purple-500/10'
+                                : 'bg-card/50 border border-border/40 hover:border-purple-500/30 hover:bg-purple-500/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-purple-600/5 to-transparent transition-opacity duration-500 ${selectedStat === 3 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 3 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <Zap className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 3 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>Go Live Faster</div>
+                              </div>
+                              {selectedStat === 3 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(139,92,246,0.6)] animate-pulse" />
+                              )}
+                            </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 3 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>AI-guided setup</div>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedStat(4)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 4
+                                ? 'bg-gradient-to-br from-purple-600/10 to-indigo-600/5 border border-purple-500/30 shadow-lg shadow-purple-500/10'
+                                : 'bg-card/50 border border-border/40 hover:border-purple-500/30 hover:bg-purple-500/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-purple-600/5 to-transparent transition-opacity duration-500 ${selectedStat === 4 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 4 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <Database className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 4 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>On-Demand Execution</div>
+                              </div>
+                              {selectedStat === 4 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(139,92,246,0.6)] animate-pulse" />
+                              )}
+                            </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 4 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>Cross-system actions</div>
+                          </button>
+
+                          <button
+                            onClick={() => setSelectedStat(5)}
+                            className={`group relative w-full text-left p-4 rounded-[16px] transition-all duration-500 ease-out overflow-hidden ${
+                              selectedStat === 5
+                                ? 'bg-gradient-to-br from-purple-600/10 to-indigo-600/5 border border-purple-500/30 shadow-lg shadow-purple-500/10'
+                                : 'bg-card/50 border border-border/40 hover:border-purple-500/30 hover:bg-purple-500/5'
+                            }`}
+                          >
+                            <div className={`absolute inset-0 rounded-[16px] bg-gradient-to-br from-purple-600/5 to-transparent transition-opacity duration-500 ${selectedStat === 5 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+
+                            <div className="relative flex items-center gap-3 mb-2">
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-[12px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-md transition-all duration-500 ${
+                                selectedStat === 5 ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                              }`}>
+                                <Users className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <div className={`font-bold text-[14px] tracking-tight transition-colors duration-500 ${selectedStat === 5 ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>Faster Ramp Time</div>
+                              </div>
+                              {selectedStat === 5 && (
+                                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(139,92,246,0.6)] animate-pulse" />
+                              )}
+                            </div>
+                            <div className={`text-[11px] leading-relaxed ml-[52px] transition-colors duration-500 ${selectedStat === 5 ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>Agent onboarding</div>
+                          </button>
+                        </>
                       )}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
 
-        {/* Copilots Use Cases - Split View Cards */}
-        <section className="relative py-32">
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-background to-background" />
+                  {/* Right Content Area */}
+                  <div className="p-8 lg:p-12 relative">
+                    {selectedStat === 0 && (
+                      <div className="space-y-10 animate-in fade-in slide-in-from-right-8 duration-700 relative">
+                        {/* Floating gradient orbs */}
+                        <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-full blur-3xl opacity-40 animate-pulse" />
 
-          <div className="container mx-auto px-6 relative">
-            <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
-                <Sparkles className="h-4 w-4 text-purple-500" />
-                <span className="text-sm font-semibold text-purple-500">Copilot Use Cases</span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-6">
-                Scale expertise without
-                <span className="block bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                  scaling headcount
-                </span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Give every agent instant access to your best knowledge—without them ever leaving the conversation
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-              {[
-                {
-                  icon: Users,
-                  title: 'New Hire Onboarding',
-                  challenge: 'New agents take 6-8 weeks to become productive',
-                  solution: 'Copilot suggests answers in real-time, surfaces relevant docs, acts as always-available senior mentor',
-                  result: '50% faster ramp-up time',
-                  metric: '3-4 weeks',
-                  tag: 'Onboarding'
-                },
-                {
-                  icon: Code,
-                  title: 'Technical Support',
-                  challenge: 'Complex API questions require senior engineers',
-                  solution: 'AI retrieves technical docs, suggests code samples, drafts accurate troubleshooting steps',
-                  result: 'Junior agents handle senior-level issues',
-                  metric: '3x throughput',
-                  tag: 'Dev Tools'
-                },
-                {
-                  icon: Brain,
-                  title: 'Product Complexity',
-                  challenge: '300+ page documentation impossible to memorize',
-                  solution: 'Copilot instantly surfaces exact section needed for any customer question',
-                  result: 'Zero time searching internal docs',
-                  metric: '10 min saved per ticket',
-                  tag: 'Enterprise'
-                },
-                {
-                  icon: Shield,
-                  title: 'Compliance & Regulations',
-                  challenge: 'One wrong word creates legal liability',
-                  solution: 'AI ensures every response meets regulatory requirements and compliance standards',
-                  result: '100% compliant language',
-                  metric: '0 violations',
-                  tag: 'Healthcare, Finance'
-                },
-                {
-                  icon: TrendingUp,
-                  title: 'Peak Volume Periods',
-                  challenge: 'Black Friday surges overwhelm team capacity',
-                  solution: 'Copilot helps agents handle 3x normal volume without quality degradation',
-                  result: 'No seasonal hiring needed',
-                  metric: '3x capacity',
-                  tag: 'Seasonal'
-                },
-                {
-                  icon: CheckCircle2,
-                  title: 'Response Consistency',
-                  challenge: 'Every agent writes in their own style',
-                  solution: 'AI ensures consistent tone, accuracy, and brand voice across all agents',
-                  result: 'Every agent sounds like your best rep',
-                  metric: '95% consistency',
-                  tag: 'Quality'
-                }
-              ].map((useCase, index) => {
-                const Icon = useCase.icon;
-                return (
-                  <div
-                    key={index}
-                    className="group relative rounded-3xl border border-border/50 bg-card overflow-hidden hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10"
-                  >
-                    {/* Top Section - Always Visible */}
-                    <div className="p-6 pb-4 bg-gradient-to-br from-purple-500/5 to-transparent">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                          <Icon className="h-7 w-7 text-background" />
+                        <div className="relative">
+                          <div className="flex items-start gap-5 mb-6">
+                            <div className="relative group">
+                              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary via-purple-600 to-purple-700 shadow-2xl shadow-primary/40 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                                <ShoppingCart className="h-10 w-10 text-white relative z-10" />
+                              </div>
+                              <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-4xl lg:text-5xl font-black text-foreground mb-2 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">Order Tracking</h3>
+                              <p className="text-base text-muted-foreground font-medium">Automate "Where's my order?" inquiries with instant answers</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-500">
-                          {useCase.tag}
+
+                        <div className="grid md:grid-cols-2 gap-6 relative">
+                          <div className="group relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-red-500/5 to-red-600/5 border-2 border-red-500/20 hover:border-red-500/40 transition-all duration-500 hover:shadow-xl hover:shadow-red-500/10">
+                            <div className="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br from-red-500/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="h-1.5 w-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg shadow-red-500/50" />
+                              <span className="text-xs font-black text-red-500 uppercase tracking-widest">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed relative z-10">
+                              Agents spending <span className="text-foreground font-bold">40% of time</span> on repetitive "Where's my order?" questions
+                            </p>
+                          </div>
+
+                          <div className="group relative overflow-hidden p-6 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-600/5 to-purple-700/5 border-2 border-primary/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20">
+                            <div className="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br from-primary/30 to-purple-600/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="h-1.5 w-16 bg-gradient-to-r from-primary to-purple-600 rounded-full shadow-lg shadow-primary/50" />
+                              <span className="text-xs font-black text-primary uppercase tracking-widest">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-semibold relative z-10">
+                              Bot checks status, sends tracking links, updates customers—<span className="text-primary">instantly</span>
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="pt-8 relative">
+                          <div className="group inline-flex items-center gap-6 px-8 py-6 rounded-3xl bg-gradient-to-br from-primary/20 via-purple-600/15 to-purple-700/10 border-2 border-primary/40 shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-500 hover:scale-105">
+                            <div className="relative">
+                              <TrendingUp className="h-12 w-12 text-primary relative z-10 group-hover:rotate-12 transition-transform duration-500" />
+                              <div className="absolute inset-0 bg-primary/30 rounded-full blur-xl" />
+                            </div>
+                            <div>
+                              <div className="text-5xl font-black bg-gradient-to-r from-primary via-purple-600 to-purple-700 bg-clip-text text-transparent">60% reduction</div>
+                              <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1">in WISMO tickets</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <h4 className="text-2xl font-bold text-foreground mb-3 group-hover:text-purple-500 transition-colors">
-                        {useCase.title}
-                      </h4>
-                    </div>
+                    )}
 
-                    {/* Bottom Section - Two Columns */}
-                    <div className="grid grid-cols-2 gap-px bg-border/30">
-                      {/* Problem */}
-                      <div className="p-5 bg-card">
-                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Challenge</div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{useCase.challenge}</p>
-                      </div>
-
-                      {/* Solution */}
-                      <div className="p-5 bg-card">
-                        <div className="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2">How Copilot Helps</div>
-                        <p className="text-sm text-foreground leading-relaxed">{useCase.solution}</p>
-                      </div>
-                    </div>
-
-                    {/* Result Badge */}
-                    <div className="p-4 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border-t border-purple-500/20">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-semibold text-foreground">{useCase.result}</div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                          <TrendingUp className="h-4 w-4 text-purple-500" />
-                          <span className="text-sm font-bold text-purple-500">{useCase.metric}</span>
+                    {selectedStat === 1 && (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl">
+                              <Clock className="h-8 w-8 text-background relative z-10" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 blur-xl opacity-50" />
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-black text-foreground">After-Hours Support</h3>
+                              <p className="text-sm text-muted-foreground">24/7 customer service coverage</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-red-500/50 rounded-full" />
+                              <span className="text-xs font-bold text-red-500/70 uppercase tracking-wider">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                              Customers frustrated waiting until business hours
+                            </p>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-primary rounded-full" />
+                              <span className="text-xs font-bold text-primary uppercase tracking-wider">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-medium">
+                              24/7 AI coverage for FAQs, basic troubleshooting, order changes
+                            </p>
+                          </div>
+                        </div>
+                        <div className="pt-6 border-t border-border/50">
+                          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/10 border border-primary/30">
+                            <TrendingUp className="h-8 w-8 text-primary" />
+                            <div>
+                              <div className="text-3xl font-black text-primary">3x more</div>
+                              <div className="text-sm text-muted-foreground">issues resolved outside 9-5</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
+
+                    {selectedStat === 2 && (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl">
+                              <LifeBuoy className="h-8 w-8 text-background relative z-10" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 blur-xl opacity-50" />
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-black text-foreground">FAQ Deflection</h3>
+                              <p className="text-sm text-muted-foreground">Instantly resolve common questions</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-red-500/50 rounded-full" />
+                              <span className="text-xs font-bold text-red-500/70 uppercase tracking-wider">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                              Same questions asked hundreds of times daily
+                            </p>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-primary rounded-full" />
+                              <span className="text-xs font-bold text-primary uppercase tracking-wider">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-medium">
+                              AI instantly answers password resets, how-tos, account setup
+                            </p>
+                          </div>
+                        </div>
+                        <div className="pt-6 border-t border-border/50">
+                          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/10 border border-primary/30">
+                            <TrendingUp className="h-8 w-8 text-primary" />
+                            <div>
+                              <div className="text-3xl font-black text-primary">85%</div>
+                              <div className="text-sm text-muted-foreground">FAQ deflection rate</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedStat === 3 && (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
+                              <Zap className="h-8 w-8 text-background relative z-10" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 blur-xl opacity-50" />
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-black text-foreground">Go Live Faster</h3>
+                              <p className="text-sm text-muted-foreground">AI-guided platform configuration</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-red-500/50 rounded-full" />
+                              <span className="text-xs font-bold text-red-500/70 uppercase tracking-wider">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                              Months of manual configuration delays deployment
+                            </p>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-purple-500 rounded-full" />
+                              <span className="text-xs font-bold text-purple-500 uppercase tracking-wider">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-medium">
+                              Use copilots to configure Pullse—AI guides setup, suggests best practices, automates workflows
+                            </p>
+                          </div>
+                        </div>
+                        <div className="pt-6 border-t border-border/50">
+                          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-purple-600/20 to-indigo-600/10 border border-purple-500/30">
+                            <TrendingUp className="h-8 w-8 text-purple-500" />
+                            <div>
+                              <div className="text-3xl font-black text-purple-500">10x faster</div>
+                              <div className="text-sm text-muted-foreground">time-to-value</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedStat === 4 && (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
+                              <Database className="h-8 w-8 text-background relative z-10" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 blur-xl opacity-50" />
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-black text-foreground">On-Demand Execution</h3>
+                              <p className="text-sm text-muted-foreground">Cross-system action automation</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-red-500/50 rounded-full" />
+                              <span className="text-xs font-bold text-red-500/70 uppercase tracking-wider">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                              Critical actions require jumping between multiple systems
+                            </p>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-purple-500 rounded-full" />
+                              <span className="text-xs font-bold text-purple-500 uppercase tracking-wider">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-medium">
+                              Execute actions across your entire org stack—CRM, billing, ticketing—all from one place
+                            </p>
+                          </div>
+                        </div>
+                        <div className="pt-6 border-t border-border/50">
+                          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-purple-600/20 to-indigo-600/10 border border-purple-500/30">
+                            <TrendingUp className="h-8 w-8 text-purple-500" />
+                            <div>
+                              <div className="text-3xl font-black text-purple-500">5min → 30sec</div>
+                              <div className="text-sm text-muted-foreground">task completion time</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedStat === 5 && (
+                      <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                        <div>
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
+                              <Users className="h-8 w-8 text-background relative z-10" />
+                              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600 blur-xl opacity-50" />
+                            </div>
+                            <div>
+                              <h3 className="text-3xl font-black text-foreground">Faster Ramp Time</h3>
+                              <p className="text-sm text-muted-foreground">AI-powered agent onboarding</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-red-500/50 rounded-full" />
+                              <span className="text-xs font-bold text-red-500/70 uppercase tracking-wider">The Challenge</span>
+                            </div>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                              New agents take 6-8 weeks to become productive
+                            </p>
+                          </div>
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-12 bg-purple-500 rounded-full" />
+                              <span className="text-xs font-bold text-purple-500 uppercase tracking-wider">AI Solution</span>
+                            </div>
+                            <p className="text-lg text-foreground leading-relaxed font-medium">
+                              Copilot acts as always-available senior mentor—suggests answers, surfaces docs in real-time
+                            </p>
+                          </div>
+                        </div>
+                        <div className="pt-6 border-t border-border/50">
+                          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-purple-600/20 to-indigo-600/10 border border-purple-500/30">
+                            <TrendingUp className="h-8 w-8 text-purple-500" />
+                            <div>
+                              <div className="text-3xl font-black text-purple-500">50% faster</div>
+                              <div className="text-sm text-muted-foreground">agent onboarding</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                );
-              })}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Shared Infrastructure - Stacked Cards Design */}
+
+        {/* Shared Infrastructure - Interactive Split Screen */}
         <section className="relative py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
@@ -747,81 +1026,256 @@ const ProductAISuite = () => {
           <div className="container mx-auto px-6 relative">
             <div className="text-center mb-20">
               <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-6">
-                Three pillars.
+                Unified infrastructure.
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                  Infinite possibilities.
+                  Infinite scale.
                 </span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Every AI tool shares the same core infrastructure. Train once, deploy everywhere, learn continuously.
+                One knowledge base, one AI brain, unlimited tools. Build faster, scale easier, manage smarter.
               </p>
             </div>
 
-            <div className="max-w-5xl mx-auto space-y-8">
-              {/* Content Center */}
-              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-primary/5 p-10 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl">
-                <div className="flex flex-col md:flex-row items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-purple-600 shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                      <Database className="h-10 w-10 text-background" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-black mb-3 group-hover:text-primary transition-colors">Content Center</h3>
-                    <p className="text-lg text-muted-foreground mb-6">Single source of truth for all AI tools</p>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      {['Import from Notion, Confluence, Google Docs', 'Version control and content scheduling', 'Train once, power all tools', 'Automatic freshness checks'].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-                          <span className="text-sm text-foreground">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="max-w-[1300px] mx-auto">
+              <div className="relative overflow-hidden rounded-[28px] border border-border/60 bg-card/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.05)_inset]">
+                {/* Light mode mesh gradients */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(var(--primary-rgb),0.08)_0%,transparent_50%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(139,92,246,0.06)_0%,transparent_50%)]" />
 
-              {/* Action Center */}
-              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-purple-500/5 p-10 hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl md:ml-12">
-                <div className="flex flex-col md:flex-row items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                      <Zap className="h-10 w-10 text-background" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-black mb-3 group-hover:text-purple-500 transition-colors">Action Center</h3>
-                    <p className="text-lg text-muted-foreground mb-6">Connect AI to your tools and workflows</p>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      {['Pre-built: Stripe, Salesforce, Zendesk, HubSpot', 'Custom REST API integrations', 'Execute refunds, lookups, updates', 'Permission controls and approvals'].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-                          <span className="text-sm text-foreground">{item}</span>
+                <div className="grid lg:grid-cols-[360px,1fr] relative">
+                  {/* Left Sidebar - Navigation Pills */}
+                  <div className="border-r border-border/50 bg-gradient-to-b from-background/40 via-card/20 to-background/40 p-8 relative backdrop-blur-sm">
+                    <div className="space-y-3">
+                      {/* Content Center Pill */}
+                      <button
+                        onClick={() => setSelectedInfrastructure('content')}
+                        className={`group relative w-full text-left p-5 rounded-[18px] transition-all duration-500 ease-out overflow-hidden ${
+                          selectedInfrastructure === 'content'
+                            ? 'bg-gradient-to-br from-primary/10 to-purple-600/5 border border-primary/30 shadow-lg shadow-primary/10'
+                            : 'bg-card/50 border border-border/40 hover:border-primary/30 hover:bg-primary/5'
+                        }`}
+                      >
+                        <div className={`absolute inset-0 rounded-[18px] bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-500 ${selectedInfrastructure === 'content' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                        <div className="relative flex items-center gap-4">
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-[14px] bg-gradient-to-br from-primary to-purple-600 shadow-md transition-all duration-500 ${
+                            selectedInfrastructure === 'content' ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                          }`}>
+                            <Database className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className={`font-bold text-base tracking-tight transition-colors duration-500 ${selectedInfrastructure === 'content' ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>Content Center</div>
+                            <div className="text-[11px] text-muted-foreground/70 mt-0.5">Knowledge hub</div>
+                          </div>
+                          {selectedInfrastructure === 'content' && (
+                            <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.6)] animate-pulse" />
+                          )}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      </button>
 
-              {/* Chat Engine */}
-              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-indigo-500/5 p-10 hover:border-indigo-500/50 transition-all duration-500 hover:shadow-2xl md:ml-24">
-                <div className="flex flex-col md:flex-row items-start gap-8">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-indigo-600 to-primary shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                      <MessageSquare className="h-10 w-10 text-background" />
+                      {/* Action Center Pill */}
+                      <button
+                        onClick={() => setSelectedInfrastructure('action')}
+                        className={`group relative w-full text-left p-5 rounded-[18px] transition-all duration-500 ease-out overflow-hidden ${
+                          selectedInfrastructure === 'action'
+                            ? 'bg-gradient-to-br from-purple-600/10 to-indigo-600/5 border border-purple-500/30 shadow-lg shadow-purple-500/10'
+                            : 'bg-card/50 border border-border/40 hover:border-purple-500/30 hover:bg-purple-500/5'
+                        }`}
+                      >
+                        <div className={`absolute inset-0 rounded-[18px] bg-gradient-to-br from-purple-500/5 to-transparent transition-opacity duration-500 ${selectedInfrastructure === 'action' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                        <div className="relative flex items-center gap-4">
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-[14px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-md transition-all duration-500 ${
+                            selectedInfrastructure === 'action' ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                          }`}>
+                            <Zap className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className={`font-bold text-base tracking-tight transition-colors duration-500 ${selectedInfrastructure === 'action' ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>Action Center</div>
+                            <div className="text-[11px] text-muted-foreground/70 mt-0.5">Integrations</div>
+                          </div>
+                          {selectedInfrastructure === 'action' && (
+                            <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)] animate-pulse" />
+                          )}
+                        </div>
+                      </button>
+
+                      {/* AI Engine Pill */}
+                      <button
+                        onClick={() => setSelectedInfrastructure('engine')}
+                        className={`group relative w-full text-left p-5 rounded-[18px] transition-all duration-500 ease-out overflow-hidden ${
+                          selectedInfrastructure === 'engine'
+                            ? 'bg-gradient-to-br from-indigo-600/10 to-primary/5 border border-indigo-500/30 shadow-lg shadow-indigo-500/10'
+                            : 'bg-card/50 border border-border/40 hover:border-indigo-500/30 hover:bg-indigo-500/5'
+                        }`}
+                      >
+                        <div className={`absolute inset-0 rounded-[18px] bg-gradient-to-br from-indigo-500/5 to-transparent transition-opacity duration-500 ${selectedInfrastructure === 'engine' ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                        <div className="relative flex items-center gap-4">
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-[14px] bg-gradient-to-br from-indigo-600 to-primary shadow-md transition-all duration-500 ${
+                            selectedInfrastructure === 'engine' ? 'scale-100' : 'scale-95 opacity-70 group-hover:scale-100 group-hover:opacity-90'
+                          }`}>
+                            <Brain className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className={`font-bold text-base tracking-tight transition-colors duration-500 ${selectedInfrastructure === 'engine' ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}`}>AI Engine</div>
+                            <div className="text-[11px] text-muted-foreground/70 mt-0.5">Core intelligence</div>
+                          </div>
+                          {selectedInfrastructure === 'engine' && (
+                            <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-pulse" />
+                          )}
+                        </div>
+                      </button>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-black mb-3 group-hover:text-indigo-500 transition-colors">Chat Engine</h3>
-                    <p className="text-lg text-muted-foreground mb-6">Core AI brain powering conversations</p>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      {['Contextual understanding and memory', 'Multi-turn reasoning and clarification', 'Learns from corrections and feedback', 'Enterprise-grade security'].map((item, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-                          <span className="text-sm text-foreground">{item}</span>
+
+                  {/* Right Content Panel */}
+                  <div className="p-8 lg:p-12 relative">
+                    <div className="relative min-h-[500px]">
+                      {/* Content Center Content */}
+                      {selectedInfrastructure === 'content' && (
+                        <div className="animate-in fade-in slide-in-from-right-8 duration-700">
+                          <div className="flex items-start gap-5 mb-10">
+                            <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-[20px] bg-gradient-to-br from-primary to-purple-600 shadow-2xl">
+                              <Database className="h-10 w-10 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-4xl font-black text-foreground mb-3 tracking-tight">Content Center</h3>
+                              <p className="text-lg text-muted-foreground leading-relaxed">Your unified knowledge base that powers every AI tool. Upload once, use everywhere.</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-5 mb-8">
+                            {[
+                              { icon: FileText, title: 'Universal Import', desc: 'Sync from Notion, Confluence, Google Docs, SharePoint, or upload directly. All formats supported.' },
+                              { icon: RefreshCw, title: 'Smart Versioning', desc: 'Track changes, schedule updates, and roll back content with full version history and change logs.' },
+                              { icon: Layers, title: 'Train Once, Deploy Everywhere', desc: 'Single knowledge base powers chatbots, copilots, help centers, and search—no duplication needed.' },
+                              { icon: CheckCircle2, title: 'Auto-Freshness Detection', desc: 'AI monitors your content health, flags outdated info, and suggests updates automatically.' }
+                            ].map((feature, i) => (
+                              <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500">
+                                <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="relative flex items-start gap-4">
+                                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br from-primary/20 to-purple-600/10 group-hover:scale-110 transition-transform duration-500">
+                                    <feature.icon className="h-5 w-5 text-primary" />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-base text-foreground mb-2 tracking-tight">{feature.title}</div>
+                                    <div className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-primary/5 via-transparent to-purple-600/5 border border-primary/20">
+                            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                              <Sparkles className="h-5 w-5 text-primary" />
+                              <span className="font-medium">Works with: PDF, DOCX, Markdown, HTML, TXT, CSV, and more</span>
+                            </div>
+                          </div>
                         </div>
-                      ))}
+                      )}
+
+                      {/* Action Center Content */}
+                      {selectedInfrastructure === 'action' && (
+                        <div className="animate-in fade-in slide-in-from-right-8 duration-700">
+                          <div className="flex items-start gap-5 mb-10">
+                            <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-[20px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-2xl">
+                              <Zap className="h-10 w-10 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-4xl font-black text-foreground mb-3 tracking-tight">Action Center</h3>
+                              <p className="text-lg text-muted-foreground leading-relaxed">Connect your AI to any tool or API. Let it take actions, not just answer questions.</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-5 mb-8">
+                            {[
+                              { icon: Code, title: 'Pre-Built Connectors', desc: 'Instant integrations with Stripe, Salesforce, Zendesk, HubSpot, Shopify, and 50+ popular platforms.' },
+                              { icon: Settings, title: 'Custom REST APIs', desc: 'Connect any internal tool or external service with custom API endpoints. Full OpenAPI support.' },
+                              { icon: Play, title: 'Real-Time Actions', desc: 'Process refunds, update orders, create tickets, schedule meetings—all in natural conversation.' },
+                              { icon: Lock, title: 'Permission & Approval Flows', desc: 'Define who can do what. Set up approval workflows for sensitive actions with audit trails.' }
+                            ].map((feature, i) => (
+                              <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-500">
+                                <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="relative flex items-start gap-4">
+                                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br from-purple-600/20 to-indigo-600/10 group-hover:scale-110 transition-transform duration-500">
+                                    <feature.icon className="h-5 w-5 text-purple-600" />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-base text-foreground mb-2 tracking-tight">{feature.title}</div>
+                                    <div className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-purple-600/5 via-transparent to-indigo-600/5 border border-purple-500/20">
+                            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                              <Sparkles className="h-5 w-5 text-purple-600" />
+                              <span className="font-medium">Enterprise-grade security with OAuth 2.0, API key encryption, and SOC 2 compliance</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* AI Engine Content */}
+                      {selectedInfrastructure === 'engine' && (
+                        <div className="animate-in fade-in slide-in-from-right-8 duration-700">
+                          <div className="flex items-start gap-5 mb-10">
+                            <div className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-[20px] bg-gradient-to-br from-indigo-600 to-primary shadow-2xl">
+                              <Brain className="h-10 w-10 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-4xl font-black text-foreground mb-3 tracking-tight">AI Engine</h3>
+                              <p className="text-lg text-muted-foreground leading-relaxed">The intelligent core that understands context, learns from interactions, and gets smarter over time.</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-5 mb-8">
+                            {[
+                              { icon: MessageSquare, title: 'Contextual Memory', desc: 'Remembers conversation history, user preferences, and past interactions for personalized responses.' },
+                              { icon: Brain, title: 'Advanced Reasoning', desc: 'Multi-step problem solving, clarifying questions, and complex query understanding with chain-of-thought.' },
+                              { icon: TrendingUp, title: 'Continuous Learning', desc: 'Learns from corrections, feedback, and human oversight to improve accuracy without retraining.' },
+                              { icon: Shield, title: 'Enterprise-Grade AI', desc: 'SOC 2 compliant, GDPR ready, with data isolation, audit logs, and role-based access control.' }
+                            ].map((feature, i) => (
+                              <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-500">
+                                <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="relative flex items-start gap-4">
+                                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br from-indigo-600/20 to-primary/10 group-hover:scale-110 transition-transform duration-500">
+                                    <feature.icon className="h-5 w-5 text-indigo-600" />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-bold text-base text-foreground mb-2 tracking-tight">{feature.title}</div>
+                                    <div className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-indigo-600/5 via-transparent to-primary/5 border border-indigo-500/20 mb-8">
+                            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                              <Sparkles className="h-5 w-5 text-indigo-600" />
+                              <span className="font-medium">Powered by GPT-4, Claude, and custom models—choose what works best for you</span>
+                            </div>
+                          </div>
+
+                          <div className="pt-6 border-t border-border/50">
+                            <Link href="/product/ai-engine">
+                              <RouteButton
+                                href="/product/ai-engine"
+                                variant="default"
+                                size="lg"
+                                className="group relative overflow-hidden bg-gradient-to-r from-indigo-600 to-primary hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-500"
+                              >
+                                <span className="relative z-10 flex items-center gap-2">
+                                  Explore AI Engine in Detail
+                                  <ExternalLink className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                                </span>
+                              </RouteButton>
+                            </Link>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -830,157 +1284,98 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Stats Section - Interactive Cards */}
-        <section ref={statsRef} className="relative py-28">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-4">
-                Results that speak
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">for themselves</span>
+        {/* Platform Metrics Section */}
+        <section ref={statsRef} className="relative py-28 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
+
+          <div className="container mx-auto px-6 relative">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
+                Platform capabilities
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">at a glance</span>
               </h2>
-              <p className="text-lg text-muted-foreground">Click on any metric to learn more</p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Built to handle enterprise scale with industry-leading performance</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-              {/* Stat 1: Conversations */}
-              <button
-                onClick={() => setSelectedStat(selectedStat === 0 ? null : 0)}
-                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
-                  selectedStat === 0
-                    ? 'border-primary bg-gradient-to-br from-primary/20 via-primary/10 to-transparent shadow-2xl shadow-primary/30 scale-105'
-                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent hover:border-primary/40 hover:shadow-xl hover:shadow-primary/20'
-                }`}
-              >
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              {/* Metric 1: Response Time */}
+              <div className="group relative overflow-hidden rounded-[28px] border border-border/50 bg-gradient-to-br from-card via-background/50 to-card p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-6xl font-black text-primary">
-                      <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
-                    </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 group-hover:scale-110 transition-transform">
-                      <MessageSquare className="h-5 w-5 text-primary" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-gradient-to-br from-primary to-purple-600 shadow-xl">
+                      <Zap className="h-8 w-8 text-white" />
                     </div>
                   </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Conversations</p>
-                  <p className="text-sm text-muted-foreground mb-4">Powered by AI Suite</p>
-
-                  {selectedStat === 0 && (
-                    <div className="mt-4 pt-4 border-t border-primary/20 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <p className="text-sm text-foreground leading-relaxed">Across 50+ enterprise customers, our AI Suite has powered over 2 million customer conversations with 99.9% uptime.</p>
+                  <div className="mb-4">
+                    <div className="text-5xl font-black text-foreground mb-2">
+                      <AnimatedCounter end={200} suffix="ms" trigger={statsAnimated} />
                     </div>
-                  )}
-
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-primary">
-                    <span>{selectedStat === 0 ? 'Click to collapse' : 'Click to learn more'}</span>
-                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 0 ? 'rotate-90' : ''}`} />
+                    <h3 className="text-lg font-bold text-foreground mb-2">Avg Response Time</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Lightning-fast AI responses powered by optimized inference</p>
                   </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-              </button>
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+              </div>
 
-              {/* Stat 2: Deflection Rate */}
-              <button
-                onClick={() => setSelectedStat(selectedStat === 1 ? null : 1)}
-                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
-                  selectedStat === 1
-                    ? 'border-purple-500 bg-gradient-to-br from-purple-500/20 via-purple-500/10 to-transparent shadow-2xl shadow-purple-500/30 scale-105'
-                    : 'border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/20'
-                }`}
-              >
+              {/* Metric 2: Uptime */}
+              <div className="group relative overflow-hidden rounded-[28px] border border-border/50 bg-gradient-to-br from-card via-background/50 to-card p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-6xl font-black text-purple-500">
-                      <AnimatedCounter end={87} suffix="%" trigger={statsAnimated} />
-                    </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/20 group-hover:scale-110 transition-transform">
-                      <BarChart3 className="h-5 w-5 text-purple-500" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
+                      <CheckCircle2 className="h-8 w-8 text-white" />
                     </div>
                   </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Deflection Rate</p>
-                  <p className="text-sm text-muted-foreground mb-4">Industry-leading average</p>
-
-                  {selectedStat === 1 && (
-                    <div className="mt-4 pt-4 border-t border-purple-500/20 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <p className="text-sm text-foreground leading-relaxed">Our chatbots successfully resolve 87% of inquiries without human intervention, freeing up your team for complex issues.</p>
-                    </div>
-                  )}
-
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-purple-500">
-                    <span>{selectedStat === 1 ? 'Click to collapse' : 'Click to learn more'}</span>
-                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 1 ? 'rotate-90' : ''}`} />
+                  <div className="mb-4">
+                    <div className="text-5xl font-black text-foreground mb-2">99.9%</div>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Platform Uptime</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Enterprise-grade reliability with redundant infrastructure</p>
                   </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-              </button>
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl" />
+              </div>
 
-              {/* Stat 3: Faster Ramp */}
-              <button
-                onClick={() => setSelectedStat(selectedStat === 2 ? null : 2)}
-                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
-                  selectedStat === 2
-                    ? 'border-indigo-500 bg-gradient-to-br from-indigo-500/20 via-indigo-500/10 to-transparent shadow-2xl shadow-indigo-500/30 scale-105'
-                    : 'border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 via-indigo-500/5 to-transparent hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/20'
-                }`}
-              >
+              {/* Metric 3: Languages */}
+              <div className="group relative overflow-hidden rounded-[28px] border border-border/50 bg-gradient-to-br from-card via-background/50 to-card p-8 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-6xl font-black text-indigo-500">
-                      <AnimatedCounter end={50} suffix="%" trigger={statsAnimated} />
-                    </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/20 group-hover:scale-110 transition-transform">
-                      <TrendingUp className="h-5 w-5 text-indigo-500" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-gradient-to-br from-indigo-600 to-primary shadow-xl">
+                      <MessageSquare className="h-8 w-8 text-white" />
                     </div>
                   </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Faster Ramp</p>
-                  <p className="text-sm text-muted-foreground mb-4">New agent onboarding</p>
-
-                  {selectedStat === 2 && (
-                    <div className="mt-4 pt-4 border-t border-indigo-500/20 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <p className="text-sm text-foreground leading-relaxed">AI Copilots cut new hire training time in half, getting agents productive in days instead of weeks.</p>
+                  <div className="mb-4">
+                    <div className="text-5xl font-black text-foreground mb-2">
+                      <AnimatedCounter end={100} suffix="+" trigger={statsAnimated} />
                     </div>
-                  )}
-
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-indigo-500">
-                    <span>{selectedStat === 2 ? 'Click to collapse' : 'Click to learn more'}</span>
-                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 2 ? 'rotate-90' : ''}`} />
+                    <h3 className="text-lg font-bold text-foreground mb-2">Languages Supported</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Multilingual AI with automatic language detection</p>
                   </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-              </button>
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl" />
+              </div>
 
-              {/* Stat 4: QA Coverage */}
-              <button
-                onClick={() => setSelectedStat(selectedStat === 3 ? null : 3)}
-                className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 p-8 ${
-                  selectedStat === 3
-                    ? 'border-primary bg-gradient-to-br from-primary/20 via-primary/10 to-transparent shadow-2xl shadow-primary/30 scale-105'
-                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent hover:border-primary/40 hover:shadow-xl hover:shadow-primary/20'
-                }`}
-              >
+              {/* Metric 4: Integration Points */}
+              <div className="group relative overflow-hidden rounded-[28px] border border-border/50 bg-gradient-to-br from-card via-background/50 to-card p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-6xl font-black text-primary">
-                      100<span className="text-4xl">%</span>
-                    </div>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 group-hover:scale-110 transition-transform">
-                      <Shield className="h-5 w-5 text-primary" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-gradient-to-br from-primary to-purple-600 shadow-xl">
+                      <Layers className="h-8 w-8 text-white" />
                     </div>
                   </div>
-                  <p className="text-lg font-bold text-foreground mb-2">QA Coverage</p>
-                  <p className="text-sm text-muted-foreground mb-4">Every conversation analyzed</p>
-
-                  {selectedStat === 3 && (
-                    <div className="mt-4 pt-4 border-t border-primary/20 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <p className="text-sm text-foreground leading-relaxed">Unlike manual QA that samples 5-10%, Auto-QA evaluates 100% of conversations the moment they close.</p>
+                  <div className="mb-4">
+                    <div className="text-5xl font-black text-foreground mb-2">
+                      <AnimatedCounter end={50} suffix="+" trigger={statsAnimated} />
                     </div>
-                  )}
-
-                  <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-primary">
-                    <span>{selectedStat === 3 ? 'Click to collapse' : 'Click to learn more'}</span>
-                    <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${selectedStat === 3 ? 'rotate-90' : ''}`} />
+                    <h3 className="text-lg font-bold text-foreground mb-2">Pre-Built Integrations</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Connect to your favorite tools out of the box</p>
                   </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-              </button>
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+              </div>
             </div>
           </div>
         </section>
