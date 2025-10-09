@@ -67,6 +67,9 @@ const AnimatedCounter = ({ end, suffix = '', prefix = '', duration = 2000, trigg
 const ProductAISuite = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [statsAnimated, setStatsAnimated] = useState(false);
+  const [activeDeploymentTab, setActiveDeploymentTab] = useState<'chatbot' | 'copilot'>('chatbot');
+  const [hoveredUseCase, setHoveredUseCase] = useState<number | null>(null);
+  const [selectedStat, setSelectedStat] = useState<number | null>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -303,107 +306,172 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Two Deployment Modes - Split Screen Design */}
+        {/* Two Deployment Modes - Interactive Tabbed Comparison */}
         <section className="relative py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/5 to-background" />
 
           <div className="container mx-auto px-6 relative">
-            <div className="text-center mb-20">
+            <div className="text-center mb-16">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground mb-6">
                 Same engine,{" "}
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                   different reach
                 </span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
                 Deploy AI that talks to customers or assists agents—or both.
               </p>
+
+              {/* Tab Switcher */}
+              <div className="inline-flex items-center gap-2 p-2 rounded-2xl bg-card border border-border/50 shadow-xl">
+                <button
+                  onClick={() => setActiveDeploymentTab('chatbot')}
+                  className={`relative px-8 py-4 rounded-xl font-bold transition-all duration-300 ${
+                    activeDeploymentTab === 'chatbot'
+                      ? 'bg-gradient-to-r from-primary to-purple-600 text-background shadow-lg scale-105'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <Bot className="h-5 w-5 inline-block mr-2" />
+                  AI Chatbots
+                </button>
+                <button
+                  onClick={() => setActiveDeploymentTab('copilot')}
+                  className={`relative px-8 py-4 rounded-xl font-bold transition-all duration-300 ${
+                    activeDeploymentTab === 'copilot'
+                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-background shadow-lg scale-105'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <Sparkles className="h-5 w-5 inline-block mr-2" />
+                  AI Copilots
+                </button>
+              </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-0 max-w-7xl mx-auto rounded-3xl overflow-hidden border border-border/50 shadow-2xl">
-              {/* Chatbots - Left Side */}
-              <div className="group relative p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-background hover:from-primary/15 transition-all duration-500">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-
-                <div className="relative">
-                  <div className="inline-flex items-center gap-3 mb-8">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl">
-                      <Bot className="h-7 w-7 text-background" />
+            {/* Content Panel */}
+            <div className="max-w-5xl mx-auto">
+              {activeDeploymentTab === 'chatbot' ? (
+                <div className="relative p-12 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-card to-card shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="absolute -top-6 left-12">
+                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-background font-bold shadow-xl">
+                      <Bot className="h-5 w-5" />
+                      Customer-Facing AI
                     </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-8 mt-6">
                     <div>
-                      <h3 className="text-3xl font-black">AI Chatbots</h3>
-                      <p className="text-sm text-primary font-semibold">Customer-Facing</p>
-                    </div>
-                  </div>
+                      <h3 className="text-4xl font-black mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                        Autonomous Deflection
+                      </h3>
+                      <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                        Handle routine customer inquiries automatically, 24/7 across every channel. Smart escalation to humans when needed.
+                      </p>
 
-                  <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                    Autonomous deflection at scale. Handle routine inquiries 24/7 across every channel.
-                  </p>
-
-                  <div className="space-y-4 mb-8">
-                    {[
-                      '24/7 autonomous support',
-                      'Multi-channel deployment',
-                      'Smart human handoff',
-                      'Execute actions & workflows'
-                    ].map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3 group/item">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 group-hover/item:bg-primary/30 transition-colors">
-                          <CheckCircle2 className="h-4 w-4 text-primary" />
-                        </div>
-                        <span className="text-foreground">{feature}</span>
+                      <div className="space-y-4">
+                        {[
+                          { label: '24/7 Availability', detail: 'Never closes, never sleeps' },
+                          { label: 'Multi-Channel', detail: 'Web, Slack, WhatsApp, Email, Teams' },
+                          { label: 'Smart Handoff', detail: 'Seamless escalation with full context' },
+                          { label: 'Action Execution', detail: 'Refunds, updates, data lookups' }
+                        ].map((feature, i) => (
+                          <div key={i} className="group/feature flex items-start gap-4 p-4 rounded-xl bg-background/50 border border-primary/10 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/20">
+                              <CheckCircle2 className="h-5 w-5 text-primary" />
+                            </div>
+                            <div>
+                              <div className="font-bold text-foreground">{feature.label}</div>
+                              <div className="text-sm text-muted-foreground">{feature.detail}</div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background border border-primary/30 shadow-lg">
-                    <BarChart3 className="h-5 w-5 text-primary" />
-                    <span className="font-bold text-foreground">87% deflection rate</span>
+                    <div className="space-y-6">
+                      <div className="p-6 rounded-2xl bg-primary/5 border border-primary/20">
+                        <div className="text-6xl font-black text-primary mb-2">87%</div>
+                        <div className="text-lg font-bold text-foreground mb-1">Average Deflection Rate</div>
+                        <div className="text-sm text-muted-foreground">Across all industries and use cases</div>
+                      </div>
+
+                      <div className="p-6 rounded-2xl bg-card border border-border/50">
+                        <div className="font-bold text-foreground mb-4 flex items-center gap-2">
+                          <Target className="h-5 w-5 text-primary" />
+                          Best For
+                        </div>
+                        <div className="space-y-2 text-sm text-muted-foreground">
+                          <div>• High-volume repetitive questions</div>
+                          <div>• After-hours support coverage</div>
+                          <div>• Order tracking & account inquiries</div>
+                          <div>• Self-service automation</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Copilots - Right Side */}
-              <div className="group relative p-12 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-background hover:from-purple-500/15 transition-all duration-500 border-l border-border/30">
-                <div className="absolute top-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl" />
-
-                <div className="relative">
-                  <div className="inline-flex items-center gap-3 mb-8">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
-                      <Sparkles className="h-7 w-7 text-background" />
+              ) : (
+                <div className="relative p-12 rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 via-card to-card shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="absolute -top-6 left-12">
+                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-purple-600 text-background font-bold shadow-xl">
+                      <Sparkles className="h-5 w-5" />
+                      Agent-Facing AI
                     </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-8 mt-6">
                     <div>
-                      <h3 className="text-3xl font-black">AI Copilots</h3>
-                      <p className="text-sm text-purple-500 font-semibold">Agent-Facing</p>
-                    </div>
-                  </div>
+                      <h3 className="text-4xl font-black mb-6 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                        Agent Augmentation
+                      </h3>
+                      <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                        Give agents instant AI assistance for complex inquiries. Never touches customers—pure productivity boost.
+                      </p>
 
-                  <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                    Agent augmentation for complex issues. AI assistance that never touches customers.
-                  </p>
-
-                  <div className="space-y-4 mb-8">
-                    {[
-                      'On-demand agent assistance',
-                      'Never talks to customers',
-                      'Real-time knowledge retrieval',
-                      'Draft responses instantly'
-                    ].map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3 group/item">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/20 group-hover/item:bg-purple-500/30 transition-colors">
-                          <CheckCircle2 className="h-4 w-4 text-purple-500" />
-                        </div>
-                        <span className="text-foreground">{feature}</span>
+                      <div className="space-y-4">
+                        {[
+                          { label: 'On-Demand Help', detail: 'Triggered by agents, not automated' },
+                          { label: 'Knowledge Retrieval', detail: 'Instant access to all documentation' },
+                          { label: 'Response Drafting', detail: 'AI-written answers in your voice' },
+                          { label: 'Zero Customer Contact', detail: 'Never interacts with end users' }
+                        ].map((feature, i) => (
+                          <div key={i} className="group/feature flex items-start gap-4 p-4 rounded-xl bg-background/50 border border-purple-500/10 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
+                              <CheckCircle2 className="h-5 w-5 text-purple-500" />
+                            </div>
+                            <div>
+                              <div className="font-bold text-foreground">{feature.label}</div>
+                              <div className="text-sm text-muted-foreground">{feature.detail}</div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background border border-purple-500/30 shadow-lg">
-                    <TrendingUp className="h-5 w-5 text-purple-500" />
-                    <span className="font-bold text-foreground">50% faster ramp time</span>
+                    <div className="space-y-6">
+                      <div className="p-6 rounded-2xl bg-purple-500/5 border border-purple-500/20">
+                        <div className="text-6xl font-black text-purple-500 mb-2">50%</div>
+                        <div className="text-lg font-bold text-foreground mb-1">Faster Ramp Time</div>
+                        <div className="text-sm text-muted-foreground">New agents productive in days, not weeks</div>
+                      </div>
+
+                      <div className="p-6 rounded-2xl bg-card border border-border/50">
+                        <div className="font-bold text-foreground mb-4 flex items-center gap-2">
+                          <Target className="h-5 w-5 text-purple-500" />
+                          Best For
+                        </div>
+                        <div className="space-y-2 text-sm text-muted-foreground">
+                          <div>• Complex technical support</div>
+                          <div>• New hire onboarding</div>
+                          <div>• Compliance & regulations</div>
+                          <div>• High-volume peak periods</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
@@ -605,53 +673,99 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Stats Section - Bold Numbers */}
+        {/* Stats Section - Interactive Cards */}
         <section ref={statsRef} className="relative py-28">
           <div className="container mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-4">
+                Results that speak
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">for themselves</span>
+              </h2>
+              <p className="text-lg text-muted-foreground">Click on any metric to learn more</p>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-              <div className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
-                <div className="relative">
-                  <div className="text-6xl sm:text-7xl font-black text-primary mb-4">
-                    <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
-                  </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Conversations</p>
-                  <p className="text-sm text-muted-foreground">Powered by AI Suite</p>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-              </div>
+              {[
+                {
+                  value: 2,
+                  suffix: 'M+',
+                  label: 'Conversations',
+                  detail: 'Powered by AI Suite',
+                  expanded: 'Across 50+ enterprise customers, our AI Suite has powered over 2 million customer conversations with 99.9% uptime.',
+                  color: 'primary',
+                  icon: MessageSquare
+                },
+                {
+                  value: 87,
+                  suffix: '%',
+                  label: 'Deflection Rate',
+                  detail: 'Industry-leading average',
+                  expanded: 'Our chatbots successfully resolve 87% of inquiries without human intervention, freeing up your team for complex issues.',
+                  color: 'purple-500',
+                  icon: BarChart3
+                },
+                {
+                  value: 50,
+                  suffix: '%',
+                  label: 'Faster Ramp',
+                  detail: 'New agent onboarding',
+                  expanded: 'AI Copilots cut new hire training time in half, getting agents productive in days instead of weeks.',
+                  color: 'indigo-500',
+                  icon: TrendingUp
+                },
+                {
+                  value: 100,
+                  suffix: '%',
+                  label: 'QA Coverage',
+                  detail: 'Every conversation analyzed',
+                  expanded: 'Unlike manual QA that samples 5-10%, Auto-QA evaluates 100% of conversations the moment they close.',
+                  color: 'primary',
+                  icon: Shield
+                }
+              ].map((stat, index) => {
+                const Icon = stat.icon;
+                const isSelected = selectedStat === index;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedStat(selectedStat === index ? null : index)}
+                    className={`group relative overflow-hidden rounded-3xl border text-left transition-all duration-500 ${
+                      isSelected
+                        ? `border-${stat.color} bg-gradient-to-br from-${stat.color}/20 via-${stat.color}/10 to-transparent shadow-2xl shadow-${stat.color}/30 scale-105`
+                        : `border-${stat.color}/20 bg-gradient-to-br from-${stat.color}/10 via-${stat.color}/5 to-transparent hover:border-${stat.color}/40 hover:shadow-xl hover:shadow-${stat.color}/20`
+                    } p-8`}
+                  >
+                    <div className="relative">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`text-6xl font-black text-${stat.color}`}>
+                          {index === 3 ? (
+                            <>{stat.value}<span className="text-4xl">{stat.suffix}</span></>
+                          ) : (
+                            <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} />
+                          )}
+                        </div>
+                        <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-${stat.color}/20 group-hover:scale-110 transition-transform`}>
+                          <Icon className={`h-5 w-5 text-${stat.color}`} />
+                        </div>
+                      </div>
+                      <p className="text-lg font-bold text-foreground mb-2">{stat.label}</p>
+                      <p className="text-sm text-muted-foreground mb-4">{stat.detail}</p>
 
-              <div className="group relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent p-10 hover:border-purple-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
-                <div className="relative">
-                  <div className="text-6xl sm:text-7xl font-black text-purple-500 mb-4">
-                    <AnimatedCounter end={87} suffix="%" trigger={statsAnimated} />
-                  </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Deflection Rate</p>
-                  <p className="text-sm text-muted-foreground">Industry-leading average</p>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl" />
-              </div>
+                      {isSelected && (
+                        <div className={`mt-4 pt-4 border-t border-${stat.color}/20 animate-in fade-in slide-in-from-top-2 duration-300`}>
+                          <p className="text-sm text-foreground leading-relaxed">{stat.expanded}</p>
+                        </div>
+                      )}
 
-              <div className="group relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 via-indigo-500/5 to-transparent p-10 hover:border-indigo-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/20">
-                <div className="relative">
-                  <div className="text-6xl sm:text-7xl font-black text-indigo-500 mb-4">
-                    <AnimatedCounter end={50} suffix="%" trigger={statsAnimated} />
-                  </div>
-                  <p className="text-lg font-bold text-foreground mb-2">Faster Ramp</p>
-                  <p className="text-sm text-muted-foreground">New agent onboarding</p>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl" />
-              </div>
-
-              <div className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
-                <div className="relative">
-                  <div className="text-6xl sm:text-7xl font-black text-primary mb-4">
-                    100<span className="text-4xl">%</span>
-                  </div>
-                  <p className="text-lg font-bold text-foreground mb-2">QA Coverage</p>
-                  <p className="text-sm text-muted-foreground">Every conversation analyzed</p>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-              </div>
+                      <div className={`mt-4 flex items-center gap-2 text-xs font-semibold text-${stat.color}`}>
+                        <span>{isSelected ? 'Click to collapse' : 'Click to learn more'}</span>
+                        <ArrowRight className={`h-3 w-3 transition-transform duration-300 ${isSelected ? 'rotate-90' : ''}`} />
+                      </div>
+                    </div>
+                    <div className={`absolute -bottom-4 -right-4 w-24 h-24 bg-${stat.color}/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500`} />
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
