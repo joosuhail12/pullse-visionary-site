@@ -5,8 +5,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
-import MagicBento from "@/components/MagicBento";
-import type { CardData } from "@/components/MagicBento";
 import Link from "next/link";
 import {
   Bot,
@@ -28,6 +26,12 @@ import {
   Layers,
   RefreshCw,
   Play,
+  ShoppingCart,
+  Code,
+  CreditCard,
+  Settings,
+  Brain,
+  LifeBuoy,
 } from "lucide-react";
 
 // Animated Counter Component
@@ -80,52 +84,6 @@ const ProductAISuite = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [statsAnimated]);
-
-  // AI Tools Bento Cards
-  const aiToolsCards: CardData[] = [
-    {
-      color: 'hsl(var(--card))',
-      title: 'AI Chatbots',
-      description: 'Deploy autonomous bots across web, Slack, WhatsApp, and email. Handle routine questions 24/7 with smart handoff to humans when needed.',
-      label: 'Customer-Facing',
-      icon: Bot,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'AI Copilots',
-      description: 'Give agents instant AI assistance. Suggest answers, retrieve knowledge, draft responses—without ever touching customer conversations.',
-      label: 'Agent-Facing',
-      icon: Sparkles,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Auto QA',
-      description: 'AI evaluates 100% of conversations on quality parameters. No sampling, complete visibility into support quality.',
-      label: '100% Coverage',
-      icon: Shield,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'AI Rewriting',
-      description: 'Transform tone instantly—formal to casual, technical to simple. Perfect brand voice compliance, every time.',
-      label: 'Tone Perfection',
-      icon: FileText,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Conversation Summaries',
-      description: 'Auto-generated summaries with key points, action items, and sentiment after every conversation.',
-      label: 'Context in Seconds',
-      icon: MessageSquare,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Sentiment Analysis',
-      description: 'Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.',
-      label: 'Measure What Matters',
-      icon: Heart,
-    },
-  ];
 
   return (
     <div className="min-h-screen relative bg-background text-foreground">
@@ -193,8 +151,128 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Two Deployment Modes */}
+        {/* All 6 AI Tools - 2x3 Grid */}
         <section className="relative py-20 bg-gradient-to-b from-muted/10 to-transparent">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
+                <Zap className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">Complete AI Suite</span>
+              </span>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
+                Six tools, one platform
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Everything you need to deploy intelligent AI across your support operations.
+              </p>
+            </div>
+
+            {/* 2x3 Grid for 6 cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {/* AI Chatbots */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <Bot className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-primary mb-2">Customer-Facing</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">AI Chatbots</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Deploy autonomous bots across web, Slack, WhatsApp, and email. Handle routine questions 24/7 with smart handoff.
+                </p>
+              </div>
+
+              {/* AI Copilots */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <Sparkles className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-purple-500 mb-2">Agent-Facing</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">AI Copilots</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Give agents instant AI assistance. Suggest answers, retrieve knowledge, draft responses—pure augmentation.
+                </p>
+              </div>
+
+              {/* Auto QA */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-indigo-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <Shield className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-primary mb-2">100% Coverage</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Auto QA</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  AI evaluates 100% of conversations on quality parameters. No sampling, complete visibility into support quality.
+                </p>
+              </div>
+
+              {/* AI Rewriting */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <FileText className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-indigo-500 mb-2">Tone Perfection</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">AI Rewriting</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Transform tone instantly—formal to casual, technical to simple. Perfect brand voice compliance, every time.
+                </p>
+              </div>
+
+              {/* Conversation Summaries */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <MessageSquare className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-purple-500 mb-2">Context in Seconds</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Summaries</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Auto-generated summaries with key points, action items, and sentiment after every conversation.
+                </p>
+              </div>
+
+              {/* Sentiment Analysis */}
+              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-pink-600 to-primary shadow-lg mb-4 group-hover:scale-110 transition-transform">
+                  <Heart className="h-6 w-6 text-background" />
+                </div>
+                <div className="text-xs font-semibold text-pink-500 mb-2">Measure What Matters</div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Sentiment Analysis</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Feature Highlights */}
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16">
+              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
+                <Database className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h4 className="font-bold mb-2">One Content Center</h4>
+                <p className="text-sm text-muted-foreground">
+                  Train once, deploy everywhere. All tools share the same knowledge base.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
+                <RefreshCw className="h-10 w-10 text-purple-500 mx-auto mb-3" />
+                <h4 className="font-bold mb-2">Continuous Improvement</h4>
+                <p className="text-sm text-muted-foreground">
+                  Every conversation makes every tool smarter. No data silos.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
+                <Layers className="h-10 w-10 text-indigo-500 mx-auto mb-3" />
+                <h4 className="font-bold mb-2">Flexible Deployment</h4>
+                <p className="text-sm text-muted-foreground">
+                  Start with one tool, add more anytime. Deploy incrementally or all at once.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Two Deployment Modes */}
+        <section className="relative py-20">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
@@ -205,7 +283,7 @@ const ProductAISuite = () => {
                 Same engine, different reach
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Deploy AI that talks to customers or assists agents—or both. Powered by the same intelligence, learning from every conversation.
+                Deploy AI that talks to customers or assists agents—or both. Same intelligence, different applications.
               </p>
             </div>
 
@@ -242,7 +320,7 @@ const ProductAISuite = () => {
                   </li>
                 </ul>
 
-                <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <div className="flex items-center gap-2 text-sm font-semibold text-primary mb-4">
                   <BarChart3 className="h-4 w-4" />
                   <span>87% average deflection rate</span>
                 </div>
@@ -280,65 +358,206 @@ const ProductAISuite = () => {
                   </li>
                 </ul>
 
-                <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <div className="flex items-center gap-2 text-sm font-semibold text-primary mb-4">
                   <TrendingUp className="h-4 w-4" />
                   <span>50% faster new hire ramp time</span>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="text-center mt-12">
-              <p className="text-lg text-muted-foreground bg-gradient-to-r from-primary/10 via-purple-500/10 to-indigo-500/10 border border-primary/20 rounded-2xl px-8 py-6 inline-block backdrop-blur-sm">
-                <span className="font-semibold text-foreground">Deploy both and get the best of both worlds.</span> Same training, different applications.
+        {/* Chatbots Use Cases */}
+        <section className="relative py-20 bg-gradient-to-b from-muted/10 via-background to-background">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
+                <Bot className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">Chatbot Use Cases</span>
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-4">
+                Where chatbots excel
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Autonomous AI handling customer conversations across industries and use cases.
               </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <ShoppingCart className="h-5 w-5 text-primary" />
+                  </div>
+                  <h4 className="font-bold">Order Tracking</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  "Where's my order?" handled instantly. Check status, provide updates, send tracking links—no human needed.
+                </p>
+                <div className="text-xs font-semibold text-primary">E-commerce, Retail</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Clock className="h-5 w-5 text-purple-500" />
+                  </div>
+                  <h4 className="font-bold">After-Hours Support</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Customers don't wait for business hours. Bots provide 24/7 coverage for common questions and basic troubleshooting.
+                </p>
+                <div className="text-xs font-semibold text-purple-500">All Industries</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                    <CreditCard className="h-5 w-5 text-indigo-500" />
+                  </div>
+                  <h4 className="font-bold">Account Inquiries</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Check balances, update billing info, verify transactions. Secure, instant account management.
+                </p>
+                <div className="text-xs font-semibold text-indigo-500">Financial Services, SaaS</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <LifeBuoy className="h-5 w-5 text-primary" />
+                  </div>
+                  <h4 className="font-bold">FAQ Deflection</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  "How do I reset my password?" answered instantly. Deflect repetitive questions, free up agents for complex issues.
+                </p>
+                <div className="text-xs font-semibold text-primary">SaaS, Tech Support</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Users className="h-5 w-5 text-purple-500" />
+                  </div>
+                  <h4 className="font-bold">Lead Qualification</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Engage prospects, ask qualifying questions, route hot leads to sales. Convert while you sleep.
+                </p>
+                <div className="text-xs font-semibold text-purple-500">Sales, Marketing</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                    <Settings className="h-5 w-5 text-indigo-500" />
+                  </div>
+                  <h4 className="font-bold">Self-Service Actions</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Process refunds, cancel subscriptions, reschedule appointments. Empower customers to help themselves.
+                </p>
+                <div className="text-xs font-semibold text-indigo-500">Subscriptions, Services</div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* All 6 AI Tools */}
+        {/* Copilots Use Cases */}
         <section className="relative py-20">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Complete AI Suite</span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm mb-4">
+                <Sparkles className="h-4 w-4 text-purple-500" />
+                <span className="text-sm font-medium text-purple-500">Copilot Use Cases</span>
               </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Six tools, one platform
+              <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-4">
+                Where copilots shine
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Everything you need to deploy intelligent AI across your support operations—from deflection to acceleration, QA to insights.
+                AI-powered agent assistance for complex scenarios that need a human touch.
               </p>
             </div>
 
-            <div className="max-w-6xl mx-auto">
-              <MagicBento cardData={aiToolsCards} />
-            </div>
-
-            {/* Quick Feature Highlights */}
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16">
-              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
-                <Database className="h-10 w-10 text-primary mx-auto mb-3" />
-                <h4 className="font-bold mb-2">One Content Center</h4>
-                <p className="text-sm text-muted-foreground">
-                  Train once, deploy everywhere. All tools share the same knowledge base.
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Users className="h-5 w-5 text-purple-500" />
+                  </div>
+                  <h4 className="font-bold">New Hire Onboarding</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  New agents productive in days, not weeks. Copilot suggests answers, surfaces relevant docs, acts as a senior mentor.
                 </p>
+                <div className="text-xs font-semibold text-purple-500">50% faster ramp time</div>
               </div>
 
-              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
-                <RefreshCw className="h-10 w-10 text-purple-500 mx-auto mb-3" />
-                <h4 className="font-bold mb-2">Continuous Improvement</h4>
-                <p className="text-sm text-muted-foreground">
-                  Every conversation makes every tool smarter. No data silos.
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                    <Code className="h-5 w-5 text-indigo-500" />
+                  </div>
+                  <h4 className="font-bold">Technical Support</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Complex API questions, integration troubleshooting. Copilot retrieves docs, suggests solutions, drafts technical responses.
                 </p>
+                <div className="text-xs font-semibold text-indigo-500">Developer Tools, APIs</div>
               </div>
 
-              <div className="p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm text-center">
-                <Layers className="h-10 w-10 text-indigo-500 mx-auto mb-3" />
-                <h4 className="font-bold mb-2">Flexible Deployment</h4>
-                <p className="text-sm text-muted-foreground">
-                  Start with one tool, add more anytime. Deploy incrementally or all at once.
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <Brain className="h-5 w-5 text-primary" />
+                  </div>
+                  <h4 className="font-bold">Product Complexity</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  300-page documentation? No problem. Copilot instantly surfaces the exact section agents need for any question.
                 </p>
+                <div className="text-xs font-semibold text-primary">Enterprise Software</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Shield className="h-5 w-5 text-purple-500" />
+                  </div>
+                  <h4 className="font-bold">Compliance & Regulations</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Agents need precise, compliant language. Copilot ensures every response meets regulatory requirements.
+                </p>
+                <div className="text-xs font-semibold text-purple-500">Healthcare, Finance, Legal</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5 text-indigo-500" />
+                  </div>
+                  <h4 className="font-bold">Peak Volume Periods</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Black Friday, product launches, incidents. Copilot helps agents handle 3x volume without sacrificing quality.
+                </p>
+                <div className="text-xs font-semibold text-indigo-500">Seasonal Businesses</div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                  </div>
+                  <h4 className="font-bold">Response Consistency</h4>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Every agent sounds like your best rep. Copilot ensures consistent tone, accuracy, and brand voice across all responses.
+                </p>
+                <div className="text-xs font-semibold text-primary">All Industries</div>
               </div>
             </div>
           </div>
@@ -472,7 +691,7 @@ const ProductAISuite = () => {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               <div className="text-center p-6">
                 <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
                   <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
@@ -499,119 +718,6 @@ const ProductAISuite = () => {
                   <AnimatedCounter end={4.5} suffix="min" trigger={statsAnimated} />
                 </div>
                 <p className="text-muted-foreground font-medium">Average resolution time</p>
-              </div>
-            </div>
-
-            {/* Testimonial */}
-            <div className="max-w-4xl mx-auto">
-              <div className="relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-purple-500/5 backdrop-blur-sm">
-                <div className="text-center space-y-4">
-                  <p className="text-xl text-foreground italic leading-relaxed">
-                    "Pullse AI Suite transformed our support operations. We went from 5-10% QA coverage to 100%, deflected 87% of routine inquiries with chatbots, and cut new hire ramp time in half with copilots."
-                  </p>
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-purple-600" />
-                    <div className="text-left">
-                      <div className="font-bold text-foreground">Sarah Chen</div>
-                      <div className="text-sm text-muted-foreground">VP of Customer Success, TechCorp</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Use Cases */}
-        <section className="relative py-20">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Target className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Real-World Impact</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl font-black text-foreground mb-4">
-                See how teams use the suite
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-primary" />
-                  </div>
-                  <h4 className="font-bold">E-commerce</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Chatbots handle order tracking and returns. Copilots help agents with product questions. Auto QA ensures quality at scale.
-                </p>
-                <div className="text-xs font-semibold text-primary">87% deflection, 4.5min resolution</div>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                    <Zap className="h-5 w-5 text-purple-500" />
-                  </div>
-                  <h4 className="font-bold">SaaS</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Bots onboard new users. Copilots accelerate complex feature questions. Sentiment tracks satisfaction trends.
-                </p>
-                <div className="text-xs font-semibold text-purple-500">50% faster onboarding</div>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-                    <Users className="h-5 w-5 text-indigo-500" />
-                  </div>
-                  <h4 className="font-bold">Financial Services</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Secure chatbots for account inquiries. Copilots ensure compliance. Auto QA maintains quality standards.
-                </p>
-                <div className="text-xs font-semibold text-indigo-500">100% conversation coverage</div>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Clock className="h-5 w-5 text-primary" />
-                  </div>
-                  <h4 className="font-bold">Healthcare</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  HIPAA-compliant bots for appointment scheduling. Copilots assist with insurance verification. Summaries save time.
-                </p>
-                <div className="text-xs font-semibold text-primary">24/7 availability</div>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                    <TrendingUp className="h-5 w-5 text-purple-500" />
-                  </div>
-                  <h4 className="font-bold">High-Growth Startups</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Scale support without scaling headcount. Bots deflect, copilots accelerate, QA maintains standards.
-                </p>
-                <div className="text-xs font-semibold text-purple-500">3x volume, same team size</div>
-              </div>
-
-              <div className="p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-                    <Shield className="h-5 w-5 text-indigo-500" />
-                  </div>
-                  <h4 className="font-bold">Enterprise</h4>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Multi-brand deployment. White-labeled chatbots. Centralized analytics. Enterprise security and compliance.
-                </p>
-                <div className="text-xs font-semibold text-indigo-500">SOC 2, GDPR ready</div>
               </div>
             </div>
           </div>
