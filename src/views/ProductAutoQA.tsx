@@ -273,7 +273,7 @@ const ProductAutoQA = () => {
       value: 100,
       suffix: '%',
       label: 'Coverage',
-      description: 'Every conversation QA'd',
+      description: "Every conversation QA'd",
       icon: Shield,
       color: 'from-primary to-purple-600',
     },
