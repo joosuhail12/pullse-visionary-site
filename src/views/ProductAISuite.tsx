@@ -7,6 +7,8 @@ import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import MagicBento from "@/components/MagicBento";
 import type { CardData } from "@/components/MagicBento";
+import Image from "next/image";
+import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
 import {
   Bot,
   Sparkles,
@@ -33,6 +35,7 @@ import {
   Settings,
   Brain,
   LifeBuoy,
+  Star,
 } from "lucide-react";
 
 // Animated Counter Component
@@ -104,10 +107,10 @@ const ProductAISuite = () => {
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Auto QA',
-      description: 'AI evaluates 100% of conversations on quality parameters. No sampling, complete visibility into support quality.',
-      label: '100% Coverage',
-      icon: Shield,
+      title: 'Sentiment Analysis',
+      description: 'Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.',
+      label: 'Measure What Matters',
+      icon: Heart,
     },
     {
       color: 'hsl(var(--card))',
@@ -125,10 +128,10 @@ const ProductAISuite = () => {
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Sentiment Analysis',
-      description: 'Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.',
-      label: 'Measure What Matters',
-      icon: Heart,
+      title: 'Auto QA',
+      description: 'AI evaluates 100% of conversations on quality parameters. No sampling, complete visibility into support quality.',
+      label: '100% Coverage',
+      icon: Shield,
     },
   ];
 
@@ -183,15 +186,62 @@ const ProductAISuite = () => {
               <div className="flex flex-wrap gap-6 justify-center items-center pt-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>50+ Enterprise Customers</span>
+                  <span>6 AI tools</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>2M+ Conversations Powered</span>
+                  <span>One training process</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>SOC 2 Compliant</span>
+                  <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
+                  <span>4.8/5 on G2</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Hero Screenshot */}
+            <div className="relative max-w-6xl mx-auto mt-16">
+              {/* Glow effect */}
+              <div className="absolute -inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
+
+              {/* Main screenshot card */}
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
+                  <Image
+                    src={aiToolsScreenshot}
+                    alt="Pullse AI Suite Dashboard"
+                    className="w-full"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Floating stat badges */}
+              <div className="absolute -left-4 top-1/4 hidden lg:block">
+                <div className="rounded-2xl border border-border/60 bg-card/95 p-5 shadow-xl backdrop-blur-xl animate-float">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg">
+                      <Bot className="h-6 w-6 text-background" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">87%</div>
+                      <div className="text-xs text-muted-foreground">Deflection</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -right-4 top-1/3 hidden lg:block">
+                <div className="rounded-2xl border border-border/60 bg-card/95 p-5 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg">
+                      <Sparkles className="h-6 w-6 text-background" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">100%</div>
+                      <div className="text-xs text-muted-foreground">QA Coverage</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -253,143 +303,159 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Two Deployment Modes */}
-        <section className="relative py-20">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Layers className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Two Deployment Modes</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Same engine,
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient">
+        {/* Two Deployment Modes - Split Screen Design */}
+        <section className="relative py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/5 to-background" />
+
+          <div className="container mx-auto px-6 relative">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground mb-6">
+                Same engine,{" "}
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                   different reach
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Deploy AI that talks to customers or assists agents—or both. Same intelligence, different applications.
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Deploy AI that talks to customers or assists agents—or both.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {/* Chatbots */}
-              <div className="group relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                  <Bot className="h-8 w-8 text-background" />
-                </div>
+            <div className="grid lg:grid-cols-2 gap-0 max-w-7xl mx-auto rounded-3xl overflow-hidden border border-border/50 shadow-2xl">
+              {/* Chatbots - Left Side */}
+              <div className="group relative p-12 bg-gradient-to-br from-primary/10 via-primary/5 to-background hover:from-primary/15 transition-all duration-500">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
 
-                <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  AI Chatbots
-                </h3>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Customer-facing deflection at scale
-                </p>
+                <div className="relative">
+                  <div className="inline-flex items-center gap-3 mb-8">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl">
+                      <Bot className="h-7 w-7 text-background" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-black">AI Chatbots</h3>
+                      <p className="text-sm text-primary font-semibold">Customer-Facing</p>
+                    </div>
+                  </div>
 
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">24/7 autonomous support without human intervention</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Multi-channel: web, Slack, WhatsApp, email, MS Teams</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Smart handoff to humans with full context</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Execute actions: refunds, lookups, updates</span>
-                  </li>
-                </ul>
+                  <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                    Autonomous deflection at scale. Handle routine inquiries 24/7 across every channel.
+                  </p>
 
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-semibold text-primary w-fit">
-                  <BarChart3 className="h-4 w-4" />
-                  <span>87% average deflection rate</span>
+                  <div className="space-y-4 mb-8">
+                    {[
+                      '24/7 autonomous support',
+                      'Multi-channel deployment',
+                      'Smart human handoff',
+                      'Execute actions & workflows'
+                    ].map((feature, i) => (
+                      <div key={i} className="flex items-center gap-3 group/item">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 group-hover/item:bg-primary/30 transition-colors">
+                          <CheckCircle2 className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-foreground">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background border border-primary/30 shadow-lg">
+                    <BarChart3 className="h-5 w-5 text-primary" />
+                    <span className="font-bold text-foreground">87% deflection rate</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Copilots */}
-              <div className="group relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                  <Sparkles className="h-8 w-8 text-background" />
-                </div>
+              {/* Copilots - Right Side */}
+              <div className="group relative p-12 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-background hover:from-purple-500/15 transition-all duration-500 border-l border-border/30">
+                <div className="absolute top-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl" />
 
-                <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  AI Copilots
-                </h3>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Agent-facing acceleration for complex issues
-                </p>
+                <div className="relative">
+                  <div className="inline-flex items-center gap-3 mb-8">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-xl">
+                      <Sparkles className="h-7 w-7 text-background" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-black">AI Copilots</h3>
+                      <p className="text-sm text-purple-500 font-semibold">Agent-Facing</p>
+                    </div>
+                  </div>
 
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">On-demand assistance triggered by agents</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Never talks to customers—pure augmentation</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Real-time knowledge retrieval and suggestions</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">Draft responses in your brand voice</span>
-                  </li>
-                </ul>
+                  <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                    Agent augmentation for complex issues. AI assistance that never touches customers.
+                  </p>
 
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-sm font-semibold text-purple-500 w-fit">
-                  <TrendingUp className="h-4 w-4" />
-                  <span>50% faster new hire ramp time</span>
+                  <div className="space-y-4 mb-8">
+                    {[
+                      'On-demand agent assistance',
+                      'Never talks to customers',
+                      'Real-time knowledge retrieval',
+                      'Draft responses instantly'
+                    ].map((feature, i) => (
+                      <div key={i} className="flex items-center gap-3 group/item">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/20 group-hover/item:bg-purple-500/30 transition-colors">
+                          <CheckCircle2 className="h-4 w-4 text-purple-500" />
+                        </div>
+                        <span className="text-foreground">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background border border-purple-500/30 shadow-lg">
+                    <TrendingUp className="h-5 w-5 text-purple-500" />
+                    <span className="font-bold text-foreground">50% faster ramp time</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Chatbots Use Cases */}
-        <section className="relative py-20 bg-gradient-to-b from-muted/10 via-background to-background">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
+        {/* Chatbots Use Cases - Masonry Style */}
+        <section className="relative py-24 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
+
+          <div className="container mx-auto px-6 relative">
+            <div className="max-w-3xl mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <Bot className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Chatbot Use Cases</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Where chatbots excel
+                <span className="text-sm font-semibold text-primary">Chatbot Use Cases</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl font-black text-foreground mb-6">
+                Where chatbots
+                <span className="block text-primary">excel</span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Autonomous AI handling customer conversations across industries and use cases.
+              <p className="text-xl text-muted-foreground">
+                Autonomous AI handling customer conversations across industries.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {[
-                { icon: ShoppingCart, title: 'Order Tracking', desc: '"Where\'s my order?" handled instantly. Check status, provide updates, send tracking links—no human needed.', tag: 'E-commerce, Retail', color: 'from-primary to-purple-600' },
-                { icon: Clock, title: 'After-Hours Support', desc: 'Customers don\'t wait for business hours. Bots provide 24/7 coverage for common questions and basic troubleshooting.', tag: 'All Industries', color: 'from-purple-600 to-indigo-600' },
-                { icon: CreditCard, title: 'Account Inquiries', desc: 'Check balances, update billing info, verify transactions. Secure, instant account management.', tag: 'Financial Services, SaaS', color: 'from-indigo-600 to-primary' },
-                { icon: LifeBuoy, title: 'FAQ Deflection', desc: '"How do I reset my password?" answered instantly. Deflect repetitive questions, free up agents for complex issues.', tag: 'SaaS, Tech Support', color: 'from-primary to-purple-600' },
-                { icon: Users, title: 'Lead Qualification', desc: 'Engage prospects, ask qualifying questions, route hot leads to sales. Convert while you sleep.', tag: 'Sales, Marketing', color: 'from-purple-600 to-pink-600' },
-                { icon: Settings, title: 'Self-Service Actions', desc: 'Process refunds, cancel subscriptions, reschedule appointments. Empower customers to help themselves.', tag: 'Subscriptions, Services', color: 'from-indigo-600 to-purple-600' },
+                { icon: ShoppingCart, title: 'Order Tracking', desc: '"Where\'s my order?" handled instantly. Check status, provide updates, send tracking links—no human needed.', tag: 'E-commerce, Retail' },
+                { icon: Clock, title: 'After-Hours Support', desc: 'Customers don\'t wait for business hours. Bots provide 24/7 coverage for common questions and basic troubleshooting.', tag: 'All Industries' },
+                { icon: CreditCard, title: 'Account Inquiries', desc: 'Check balances, update billing info, verify transactions. Secure, instant account management.', tag: 'Financial Services, SaaS' },
+                { icon: LifeBuoy, title: 'FAQ Deflection', desc: '"How do I reset my password?" answered instantly. Deflect repetitive questions, free up agents for complex issues.', tag: 'SaaS, Tech Support' },
+                { icon: Users, title: 'Lead Qualification', desc: 'Engage prospects, ask qualifying questions, route hot leads to sales. Convert while you sleep.', tag: 'Sales, Marketing' },
+                { icon: Settings, title: 'Self-Service Actions', desc: 'Process refunds, cancel subscriptions, reschedule appointments. Empower customers to help themselves.', tag: 'Subscriptions, Services' },
               ].map((useCase, index) => {
                 const Icon = useCase.icon;
                 return (
-                  <div key={index} className="group p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${useCase.color} shadow-lg group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-5 w-5 text-background" />
+                  <div key={index} className="group relative overflow-hidden rounded-3xl border border-border/50 bg-card p-8 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+
+                    <div className="relative">
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
+                          <Icon className="h-8 w-8 text-primary" />
+                        </div>
+                        <div className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-semibold text-primary">
+                          {useCase.tag}
+                        </div>
                       </div>
-                      <h4 className="font-bold group-hover:text-primary transition-colors">{useCase.title}</h4>
+
+                      <h4 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{useCase.title}</h4>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {useCase.desc}
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                      {useCase.desc}
-                    </p>
-                    <div className="text-xs font-semibold text-primary">{useCase.tag}</div>
                   </div>
                 );
               })}
@@ -397,44 +463,50 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Copilots Use Cases */}
-        <section className="relative py-20">
+        {/* Copilots Use Cases - Timeline Style */}
+        <section className="relative py-28 bg-gradient-to-b from-purple-500/5 via-background to-background">
           <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm mb-4">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
                 <Sparkles className="h-4 w-4 text-purple-500" />
-                <span className="text-sm font-medium text-purple-500">Copilot Use Cases</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Where copilots shine
+                <span className="text-sm font-semibold text-purple-500">Copilot Use Cases</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl font-black text-foreground mb-6">
+                Where copilots
+                <span className="block bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">shine</span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 AI-powered agent assistance for complex scenarios that need a human touch.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="max-w-4xl mx-auto space-y-6">
               {[
-                { icon: Users, title: 'New Hire Onboarding', desc: 'New agents productive in days, not weeks. Copilot suggests answers, surfaces relevant docs, acts as a senior mentor.', tag: '50% faster ramp time', color: 'from-purple-600 to-indigo-600' },
-                { icon: Code, title: 'Technical Support', desc: 'Complex API questions, integration troubleshooting. Copilot retrieves docs, suggests solutions, drafts technical responses.', tag: 'Developer Tools, APIs', color: 'from-indigo-600 to-primary' },
-                { icon: Brain, title: 'Product Complexity', desc: '300-page documentation? No problem. Copilot instantly surfaces the exact section agents need for any question.', tag: 'Enterprise Software', color: 'from-primary to-purple-600' },
-                { icon: Shield, title: 'Compliance & Regulations', desc: 'Agents need precise, compliant language. Copilot ensures every response meets regulatory requirements.', tag: 'Healthcare, Finance, Legal', color: 'from-purple-600 to-pink-600' },
-                { icon: TrendingUp, title: 'Peak Volume Periods', desc: 'Black Friday, product launches, incidents. Copilot helps agents handle 3x volume without sacrificing quality.', tag: 'Seasonal Businesses', color: 'from-indigo-600 to-purple-600' },
-                { icon: CheckCircle2, title: 'Response Consistency', desc: 'Every agent sounds like your best rep. Copilot ensures consistent tone, accuracy, and brand voice across all responses.', tag: 'All Industries', color: 'from-primary to-indigo-600' },
+                { icon: Users, title: 'New Hire Onboarding', desc: 'New agents productive in days, not weeks. Copilot suggests answers, surfaces relevant docs, acts as a senior mentor.', tag: '50% faster ramp time' },
+                { icon: Code, title: 'Technical Support', desc: 'Complex API questions, integration troubleshooting. Copilot retrieves docs, suggests solutions, drafts technical responses.', tag: 'Developer Tools, APIs' },
+                { icon: Brain, title: 'Product Complexity', desc: '300-page documentation? No problem. Copilot instantly surfaces the exact section agents need for any question.', tag: 'Enterprise Software' },
+                { icon: Shield, title: 'Compliance & Regulations', desc: 'Agents need precise, compliant language. Copilot ensures every response meets regulatory requirements.', tag: 'Healthcare, Finance, Legal' },
+                { icon: TrendingUp, title: 'Peak Volume Periods', desc: 'Black Friday, product launches, incidents. Copilot helps agents handle 3x volume without sacrificing quality.', tag: 'Seasonal Businesses' },
+                { icon: CheckCircle2, title: 'Response Consistency', desc: 'Every agent sounds like your best rep. Copilot ensures consistent tone, accuracy, and brand voice across all responses.', tag: 'All Industries' },
               ].map((useCase, index) => {
                 const Icon = useCase.icon;
                 return (
-                  <div key={index} className="group p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${useCase.color} shadow-lg group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-5 w-5 text-background" />
-                      </div>
-                      <h4 className="font-bold group-hover:text-primary transition-colors">{useCase.title}</h4>
+                  <div key={index} className="group relative flex items-start gap-6 p-8 rounded-3xl border border-border/50 bg-card hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10">
+                    <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/20 group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300">
+                      <Icon className="h-7 w-7 text-purple-500" />
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                      {useCase.desc}
-                    </p>
-                    <div className="text-xs font-semibold text-purple-500">{useCase.tag}</div>
+
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <h4 className="text-2xl font-bold group-hover:text-purple-500 transition-colors">{useCase.title}</h4>
+                        <div className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-500 whitespace-nowrap">
+                          {useCase.tag}
+                        </div>
+                      </div>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {useCase.desc}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
@@ -442,167 +514,143 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Shared Infrastructure */}
-        <section className="relative py-20 bg-gradient-to-b from-muted/10 via-background to-background">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Database className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Built on Three Pillars</span>
-              </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                The foundation that
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient">
-                  powers it all
+        {/* Shared Infrastructure - Stacked Cards Design */}
+        <section className="relative py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
+
+          <div className="container mx-auto px-6 relative">
+            <div className="text-center mb-20">
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-6">
+                Three pillars.
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                  Infinite possibilities.
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Every AI tool shares the same three core systems. Train once, deploy everywhere, learn continuously.
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Every AI tool shares the same core infrastructure. Train once, deploy everywhere, learn continuously.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="max-w-5xl mx-auto space-y-8">
               {/* Content Center */}
-              <div className="group relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-primary/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                  <Database className="h-8 w-8 text-background" />
+              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-primary/5 p-10 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-purple-600 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                      <Database className="h-10 w-10 text-background" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-black mb-3 group-hover:text-primary transition-colors">Content Center</h3>
+                    <p className="text-lg text-muted-foreground mb-6">Single source of truth for all AI tools</p>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {['Import from Notion, Confluence, Google Docs', 'Version control and content scheduling', 'Train once, power all tools', 'Automatic freshness checks'].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                          <span className="text-sm text-foreground">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  Content Center
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Single source of truth for all AI
-                </p>
-
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Import from Notion, Confluence, Google Docs</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Version control and content scheduling</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Train once, power all tools</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Automatic freshness checks</span>
-                  </li>
-                </ul>
               </div>
 
               {/* Action Center */}
-              <div className="group relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-purple-500/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                  <Zap className="h-8 w-8 text-background" />
+              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-purple-500/5 p-10 hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl md:ml-12">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                      <Zap className="h-10 w-10 text-background" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-black mb-3 group-hover:text-purple-500 transition-colors">Action Center</h3>
+                    <p className="text-lg text-muted-foreground mb-6">Connect AI to your tools and workflows</p>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {['Pre-built: Stripe, Salesforce, Zendesk, HubSpot', 'Custom REST API integrations', 'Execute refunds, lookups, updates', 'Permission controls and approvals'].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+                          <span className="text-sm text-foreground">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  Action Center
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Connect AI to your tools
-                </p>
-
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Pre-built: Stripe, Salesforce, Zendesk, HubSpot</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Custom REST API integrations</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Execute refunds, lookups, updates</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Permission controls and approvals</span>
-                  </li>
-                </ul>
               </div>
 
               {/* Chat Engine */}
-              <div className="group relative p-8 rounded-3xl border border-border/50 bg-gradient-to-br from-indigo-500/5 via-card/50 to-transparent backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-primary shadow-lg mb-6 group-hover:scale-110 transition-transform">
-                  <MessageSquare className="h-8 w-8 text-background" />
+              <div className="group relative rounded-3xl border border-border/50 bg-gradient-to-r from-card via-card to-indigo-500/5 p-10 hover:border-indigo-500/50 transition-all duration-500 hover:shadow-2xl md:ml-24">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-indigo-600 to-primary shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                      <MessageSquare className="h-10 w-10 text-background" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-black mb-3 group-hover:text-indigo-500 transition-colors">Chat Engine</h3>
+                    <p className="text-lg text-muted-foreground mb-6">Core AI brain powering conversations</p>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {['Contextual understanding and memory', 'Multi-turn reasoning and clarification', 'Learns from corrections and feedback', 'Enterprise-grade security'].map((item, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                          <span className="text-sm text-foreground">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  Chat Engine
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Core AI brain
-                </p>
-
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Contextual understanding and memory</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Multi-turn reasoning and clarification</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Learns from corrections and feedback</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Enterprise-grade security</span>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section ref={statsRef} className="relative py-20">
+        {/* Stats Section - Bold Numbers */}
+        <section ref={statsRef} className="relative py-28">
           <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-4">
-                Built for scale,
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient">
-                  designed for results
-                </span>
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-              <div className="text-center p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
-                  <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+              <div className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+                <div className="relative">
+                  <div className="text-6xl sm:text-7xl font-black text-primary mb-4">
+                    <AnimatedCounter end={2} suffix="M+" trigger={statsAnimated} />
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Conversations</p>
+                  <p className="text-sm text-muted-foreground">Powered by AI Suite</p>
                 </div>
-                <p className="text-muted-foreground font-medium">Conversations powered</p>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
               </div>
 
-              <div className="text-center p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                  <AnimatedCounter end={87} suffix="%" trigger={statsAnimated} />
+              <div className="group relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent p-10 hover:border-purple-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
+                <div className="relative">
+                  <div className="text-6xl sm:text-7xl font-black text-purple-500 mb-4">
+                    <AnimatedCounter end={87} suffix="%" trigger={statsAnimated} />
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Deflection Rate</p>
+                  <p className="text-sm text-muted-foreground">Industry-leading average</p>
                 </div>
-                <p className="text-muted-foreground font-medium">Average deflection rate</p>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl" />
               </div>
 
-              <div className="text-center p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-indigo-600 to-primary bg-clip-text text-transparent mb-2">
-                  <AnimatedCounter end={50} suffix="%" trigger={statsAnimated} />
+              <div className="group relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 via-indigo-500/5 to-transparent p-10 hover:border-indigo-500/40 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/20">
+                <div className="relative">
+                  <div className="text-6xl sm:text-7xl font-black text-indigo-500 mb-4">
+                    <AnimatedCounter end={50} suffix="%" trigger={statsAnimated} />
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">Faster Ramp</p>
+                  <p className="text-sm text-muted-foreground">New agent onboarding</p>
                 </div>
-                <p className="text-muted-foreground font-medium">Faster agent ramp time</p>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl" />
               </div>
 
-              <div className="text-center p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
-                  <AnimatedCounter end={4.5} suffix="min" trigger={statsAnimated} />
+              <div className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-10 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+                <div className="relative">
+                  <div className="text-6xl sm:text-7xl font-black text-primary mb-4">
+                    100<span className="text-4xl">%</span>
+                  </div>
+                  <p className="text-lg font-bold text-foreground mb-2">QA Coverage</p>
+                  <p className="text-sm text-muted-foreground">Every conversation analyzed</p>
                 </div>
-                <p className="text-muted-foreground font-medium">Average resolution time</p>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
               </div>
             </div>
           </div>
