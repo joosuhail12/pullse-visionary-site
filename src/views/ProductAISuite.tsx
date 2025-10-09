@@ -476,53 +476,130 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Chatbots Use Cases - Masonry Style */}
-        <section className="relative py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
+        {/* Chatbots Use Cases - Interactive Grid with Before/After */}
+        <section className="relative py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
 
           <div className="container mx-auto px-6 relative">
-            <div className="max-w-3xl mb-16">
+            <div className="text-center mb-20">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <Bot className="h-4 w-4 text-primary" />
                 <span className="text-sm font-semibold text-primary">Chatbot Use Cases</span>
               </div>
-              <h2 className="text-5xl sm:text-6xl font-black text-foreground mb-6">
-                Where chatbots
-                <span className="block text-primary">excel</span>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-6">
+                Turn support costs into
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                  competitive advantages
+                </span>
               </h2>
-              <p className="text-xl text-muted-foreground">
-                Autonomous AI handling customer conversations across industries.
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Automate high-volume, repetitive inquiries while maintaining quality and customer satisfaction
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {[
-                { icon: ShoppingCart, title: 'Order Tracking', desc: '"Where\'s my order?" handled instantly. Check status, provide updates, send tracking links—no human needed.', tag: 'E-commerce, Retail' },
-                { icon: Clock, title: 'After-Hours Support', desc: 'Customers don\'t wait for business hours. Bots provide 24/7 coverage for common questions and basic troubleshooting.', tag: 'All Industries' },
-                { icon: CreditCard, title: 'Account Inquiries', desc: 'Check balances, update billing info, verify transactions. Secure, instant account management.', tag: 'Financial Services, SaaS' },
-                { icon: LifeBuoy, title: 'FAQ Deflection', desc: '"How do I reset my password?" answered instantly. Deflect repetitive questions, free up agents for complex issues.', tag: 'SaaS, Tech Support' },
-                { icon: Users, title: 'Lead Qualification', desc: 'Engage prospects, ask qualifying questions, route hot leads to sales. Convert while you sleep.', tag: 'Sales, Marketing' },
-                { icon: Settings, title: 'Self-Service Actions', desc: 'Process refunds, cancel subscriptions, reschedule appointments. Empower customers to help themselves.', tag: 'Subscriptions, Services' },
+                {
+                  icon: ShoppingCart,
+                  title: 'Order Tracking',
+                  problem: 'Agents spending 40% of time on "Where\'s my order?"',
+                  solution: 'Bot checks status, sends tracking links, updates customers—instantly',
+                  impact: '60% reduction in WISMO tickets',
+                  tag: 'E-commerce',
+                  color: 'from-primary to-purple-600'
+                },
+                {
+                  icon: Clock,
+                  title: 'After-Hours Support',
+                  problem: 'Customers frustrated waiting until business hours',
+                  solution: '24/7 AI coverage for FAQs, basic troubleshooting, order changes',
+                  impact: '3x more issues resolved outside 9-5',
+                  tag: 'All Industries',
+                  color: 'from-purple-600 to-indigo-600'
+                },
+                {
+                  icon: CreditCard,
+                  title: 'Account Management',
+                  problem: 'Long wait times for simple account updates',
+                  solution: 'Instant balance checks, billing updates, transaction verification',
+                  impact: '70% of account queries automated',
+                  tag: 'Financial, SaaS',
+                  color: 'from-indigo-600 to-primary'
+                },
+                {
+                  icon: LifeBuoy,
+                  title: 'FAQ Deflection',
+                  problem: 'Same questions asked hundreds of times daily',
+                  solution: 'AI instantly answers password resets, how-tos, account setup',
+                  impact: '85% FAQ deflection rate',
+                  tag: 'Tech Support',
+                  color: 'from-primary to-purple-600'
+                },
+                {
+                  icon: Users,
+                  title: 'Lead Qualification',
+                  problem: 'Sales team wasting time on unqualified leads',
+                  solution: 'Bot asks qualifying questions, scores leads, routes hot prospects',
+                  impact: '2x more qualified leads to sales',
+                  tag: 'Sales',
+                  color: 'from-purple-600 to-pink-600'
+                },
+                {
+                  icon: Settings,
+                  title: 'Self-Service Actions',
+                  problem: 'Agents manually processing simple transactional requests',
+                  solution: 'Customers process refunds, cancel subs, reschedule on their own',
+                  impact: '50% reduction in admin work',
+                  tag: 'Services',
+                  color: 'from-indigo-600 to-purple-600'
+                }
               ].map((useCase, index) => {
                 const Icon = useCase.icon;
                 return (
-                  <div key={index} className="group relative overflow-hidden rounded-3xl border border-border/50 bg-card p-8 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
-
-                    <div className="relative">
-                      <div className="flex items-start justify-between mb-6">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-300">
-                          <Icon className="h-8 w-8 text-primary" />
+                  <div
+                    key={index}
+                    onMouseEnter={() => setHoveredUseCase(index)}
+                    onMouseLeave={() => setHoveredUseCase(null)}
+                    className="group relative overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
+                  >
+                    {/* Header */}
+                    <div className="p-6 pb-4">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${useCase.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          <Icon className="h-7 w-7 text-background" />
                         </div>
                         <div className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-semibold text-primary">
                           {useCase.tag}
                         </div>
                       </div>
+                      <h4 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">{useCase.title}</h4>
+                    </div>
 
-                      <h4 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{useCase.title}</h4>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {useCase.desc}
-                      </p>
+                    {/* Content - Changes on Hover */}
+                    <div className="px-6 pb-6">
+                      {hoveredUseCase === index ? (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                          <div>
+                            <div className="text-xs font-semibold text-primary mb-1">THE SOLUTION</div>
+                            <p className="text-sm text-foreground leading-relaxed">{useCase.solution}</p>
+                          </div>
+                          <div className="pt-3 border-t border-border/50">
+                            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20">
+                              <BarChart3 className="h-4 w-4 text-primary" />
+                              <span className="text-sm font-bold text-primary">{useCase.impact}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">The Problem</div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{useCase.problem}</p>
+                          <div className="pt-3 text-xs text-primary font-semibold flex items-center gap-1">
+                            Hover to see solution
+                            <ArrowRight className="h-3 w-3" />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -531,49 +608,129 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Copilots Use Cases - Timeline Style */}
-        <section className="relative py-28 bg-gradient-to-b from-purple-500/5 via-background to-background">
-          <div className="container mx-auto px-6">
+        {/* Copilots Use Cases - Split View Cards */}
+        <section className="relative py-32">
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-background to-background" />
+
+          <div className="container mx-auto px-6 relative">
             <div className="text-center mb-20">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
                 <Sparkles className="h-4 w-4 text-purple-500" />
                 <span className="text-sm font-semibold text-purple-500">Copilot Use Cases</span>
               </div>
-              <h2 className="text-5xl sm:text-6xl font-black text-foreground mb-6">
-                Where copilots
-                <span className="block bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">shine</span>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-6">
+                Scale expertise without
+                <span className="block bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                  scaling headcount
+                </span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                AI-powered agent assistance for complex scenarios that need a human touch.
+                Give every agent instant access to your best knowledge—without them ever leaving the conversation
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {[
-                { icon: Users, title: 'New Hire Onboarding', desc: 'New agents productive in days, not weeks. Copilot suggests answers, surfaces relevant docs, acts as a senior mentor.', tag: '50% faster ramp time' },
-                { icon: Code, title: 'Technical Support', desc: 'Complex API questions, integration troubleshooting. Copilot retrieves docs, suggests solutions, drafts technical responses.', tag: 'Developer Tools, APIs' },
-                { icon: Brain, title: 'Product Complexity', desc: '300-page documentation? No problem. Copilot instantly surfaces the exact section agents need for any question.', tag: 'Enterprise Software' },
-                { icon: Shield, title: 'Compliance & Regulations', desc: 'Agents need precise, compliant language. Copilot ensures every response meets regulatory requirements.', tag: 'Healthcare, Finance, Legal' },
-                { icon: TrendingUp, title: 'Peak Volume Periods', desc: 'Black Friday, product launches, incidents. Copilot helps agents handle 3x volume without sacrificing quality.', tag: 'Seasonal Businesses' },
-                { icon: CheckCircle2, title: 'Response Consistency', desc: 'Every agent sounds like your best rep. Copilot ensures consistent tone, accuracy, and brand voice across all responses.', tag: 'All Industries' },
+                {
+                  icon: Users,
+                  title: 'New Hire Onboarding',
+                  challenge: 'New agents take 6-8 weeks to become productive',
+                  solution: 'Copilot suggests answers in real-time, surfaces relevant docs, acts as always-available senior mentor',
+                  result: '50% faster ramp-up time',
+                  metric: '3-4 weeks',
+                  tag: 'Onboarding'
+                },
+                {
+                  icon: Code,
+                  title: 'Technical Support',
+                  challenge: 'Complex API questions require senior engineers',
+                  solution: 'AI retrieves technical docs, suggests code samples, drafts accurate troubleshooting steps',
+                  result: 'Junior agents handle senior-level issues',
+                  metric: '3x throughput',
+                  tag: 'Dev Tools'
+                },
+                {
+                  icon: Brain,
+                  title: 'Product Complexity',
+                  challenge: '300+ page documentation impossible to memorize',
+                  solution: 'Copilot instantly surfaces exact section needed for any customer question',
+                  result: 'Zero time searching internal docs',
+                  metric: '10 min saved per ticket',
+                  tag: 'Enterprise'
+                },
+                {
+                  icon: Shield,
+                  title: 'Compliance & Regulations',
+                  challenge: 'One wrong word creates legal liability',
+                  solution: 'AI ensures every response meets regulatory requirements and compliance standards',
+                  result: '100% compliant language',
+                  metric: '0 violations',
+                  tag: 'Healthcare, Finance'
+                },
+                {
+                  icon: TrendingUp,
+                  title: 'Peak Volume Periods',
+                  challenge: 'Black Friday surges overwhelm team capacity',
+                  solution: 'Copilot helps agents handle 3x normal volume without quality degradation',
+                  result: 'No seasonal hiring needed',
+                  metric: '3x capacity',
+                  tag: 'Seasonal'
+                },
+                {
+                  icon: CheckCircle2,
+                  title: 'Response Consistency',
+                  challenge: 'Every agent writes in their own style',
+                  solution: 'AI ensures consistent tone, accuracy, and brand voice across all agents',
+                  result: 'Every agent sounds like your best rep',
+                  metric: '95% consistency',
+                  tag: 'Quality'
+                }
               ].map((useCase, index) => {
                 const Icon = useCase.icon;
                 return (
-                  <div key={index} className="group relative flex items-start gap-6 p-8 rounded-3xl border border-border/50 bg-card hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10">
-                    <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/20 group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300">
-                      <Icon className="h-7 w-7 text-purple-500" />
-                    </div>
-
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-start justify-between gap-4 mb-3">
-                        <h4 className="text-2xl font-bold group-hover:text-purple-500 transition-colors">{useCase.title}</h4>
-                        <div className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-500 whitespace-nowrap">
+                  <div
+                    key={index}
+                    className="group relative rounded-3xl border border-border/50 bg-card overflow-hidden hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10"
+                  >
+                    {/* Top Section - Always Visible */}
+                    <div className="p-6 pb-4 bg-gradient-to-br from-purple-500/5 to-transparent">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Icon className="h-7 w-7 text-background" />
+                        </div>
+                        <div className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-semibold text-purple-500">
                           {useCase.tag}
                         </div>
                       </div>
-                      <p className="text-muted-foreground text-lg leading-relaxed">
-                        {useCase.desc}
-                      </p>
+                      <h4 className="text-2xl font-bold text-foreground mb-3 group-hover:text-purple-500 transition-colors">
+                        {useCase.title}
+                      </h4>
+                    </div>
+
+                    {/* Bottom Section - Two Columns */}
+                    <div className="grid grid-cols-2 gap-px bg-border/30">
+                      {/* Problem */}
+                      <div className="p-5 bg-card">
+                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Challenge</div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{useCase.challenge}</p>
+                      </div>
+
+                      {/* Solution */}
+                      <div className="p-5 bg-card">
+                        <div className="text-xs font-bold text-purple-500 uppercase tracking-wider mb-2">How Copilot Helps</div>
+                        <p className="text-sm text-foreground leading-relaxed">{useCase.solution}</p>
+                      </div>
+                    </div>
+
+                    {/* Result Badge */}
+                    <div className="p-4 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border-t border-purple-500/20">
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-semibold text-foreground">{useCase.result}</div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-500/20 border border-purple-500/30">
+                          <TrendingUp className="h-4 w-4 text-purple-500" />
+                          <span className="text-sm font-bold text-purple-500">{useCase.metric}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
