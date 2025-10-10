@@ -15,7 +15,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 // Lazy load 3D components for performance
 const DataFlowParticles = lazy(() => import("@/components/three/DataFlowParticles"));
 const MorphingBackground = lazy(() => import("@/components/three/MorphingBackground"));
-const PipelineFlowModel = lazy(() => import("@/components/three/PipelineFlowModel"));
+const EngineAssembly = lazy(() => import("@/components/three/EngineAssembly"));
 import {
   Shield,
   Target,
@@ -370,7 +370,7 @@ const StickyStepperSection = () => {
                     <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full" />
                   </div>
                 }>
-                  <PipelineFlowModel currentStep={currentStep} progress={progress} />
+                  <EngineAssembly currentStep={currentStep} progress={progress} />
                 </Suspense>
 
                 {/* Gradient overlay for depth */}
