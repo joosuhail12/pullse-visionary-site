@@ -323,7 +323,7 @@ const StickyStepperSection = () => {
         {/* Sticky Split Layout */}
         <div className="grid lg:grid-cols-2 gap-12">
           {/* LEFT: Sticky Visual Display */}
-          <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] flex items-center" ref={stickyRef}>
+          <div className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center" ref={stickyRef}>
             <div className="relative">
               {/* Progress Ring */}
               <div className="absolute -top-6 -right-6 z-10">
