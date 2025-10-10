@@ -33,6 +33,7 @@ import {
   Clock,
   DollarSign,
   Award,
+  Zap,
 } from "lucide-react";
 
 // Step type definition
