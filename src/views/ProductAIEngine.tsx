@@ -55,269 +55,6 @@ interface Step {
   color: string;
 }
 
-// Interactive Flow Section Component with GSAP Scroll Animations
-const InteractiveFlowSection = () => {
-  const flowRef = useRef<HTMLDivElement>(null);
-  const [activeStage, setActiveStage] = useState<number>(0);
-
-  const flowStages = [
-    {
-      id: 0,
-      label: "Customer Request",
-      icon: MessageSquare,
-      title: "It starts with a simple message",
-      description: "A customer reaches out with any request—refund, upgrade, password reset, or complex inquiry. No matter how it arrives (chat, email, API), Pullse captures the intent.",
-      example: '"I need a refund for order #4931"',
-      metric: "100ms",
-      metricLabel: "Avg. Response Time",
-      gradient: "from-blue-600 to-cyan-600",
-      position: "left"
-    },
-    {
-      id: 1,
-      label: "Input Guardrails",
-      icon: Shield,
-      title: "Safety before processing",
-      description: "Before the AI sees it, we scan for jailbreaks, prompt injections, and policy violations. OWASP-aligned security ensures malicious prompts never reach your engine.",
-      example: "Blocked 127 injection attempts this month",
-      metric: "8 Layers",
-      metricLabel: "Security Checks",
-      gradient: "from-red-600 to-orange-600",
-      position: "right"
-    },
-    {
-      id: 2,
-      label: "AI Processing",
-      icon: Brain,
-      title: "Intelligent classification & orchestration",
-      description: "The AI Engine classifies intent, retrieves context from your systems, and builds an action plan—all while respecting your governance rules and approval requirements.",
-      example: "Intent: Refund • Confidence: 94% • Policy: REF-30",
-      metric: "8 Steps",
-      metricLabel: "Governed Flow",
-      gradient: "from-primary to-purple-600",
-      position: "left"
-    },
-    {
-      id: 3,
-      label: "Safe Execution",
-      icon: Zap,
-      title: "Actions with accountability",
-      description: "If approved, we execute through your APIs with scoped credentials. Every action is logged, traceable, and reversible—no black box decisions.",
-      example: "Refund processed: $49.99 to original payment method",
-      metric: "100%",
-      metricLabel: "Audit Coverage",
-      gradient: "from-green-600 to-emerald-600",
-      position: "right"
-    },
-    {
-      id: 4,
-      label: "Action Receipt",
-      icon: CheckCheck,
-      title: "Full transparency, every time",
-      description: "The customer gets an instant response, and you get a complete audit trail—what happened, why it happened, and who approved it. Perfect for compliance and continuous improvement.",
-      example: "Action ID: AC-4931 • Approved by: Auto-policy • Duration: 847ms",
-      metric: "SOC 2",
-      metricLabel: "Compliant Logging",
-      gradient: "from-indigo-600 to-violet-600",
-      position: "left"
-    }
-  ];
-
-  useEffect(() => {
-    if (!flowRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Animate each stage on scroll
-      flowStages.forEach((stage, index) => {
-        const stageEl = flowRef.current?.querySelector(`[data-stage="${index}"]`);
-        if (!stageEl) return;
-
-        gsap.fromTo(
-          stageEl,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.9
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: stageEl,
-              start: "top 80%",
-              end: "top 50%",
-              scrub: 1,
-              onEnter: () => setActiveStage(index),
-              onEnterBack: () => setActiveStage(index)
-            }
-          }
-        );
-
-        // Animate connecting line
-        const lineEl = flowRef.current?.querySelector(`[data-line="${index}"]`);
-        if (lineEl) {
-          gsap.fromTo(
-            lineEl,
-            { scaleY: 0 },
-            {
-              scaleY: 1,
-              duration: 0.8,
-              ease: "power2.inOut",
-              scrollTrigger: {
-                trigger: stageEl,
-                start: "top 70%",
-                end: "top 40%",
-                scrub: 1
-              }
-            }
-          );
-        }
-      });
-    }, flowRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <div ref={flowRef} className="relative max-w-7xl mx-auto">
-      {/* Section Header */}
-      <div className="text-center mb-20">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6">
-          <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-          <span className="text-sm font-bold text-primary">Watch How It Works</span>
-        </div>
-        <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-6 leading-tight">
-          From request to resolution,{" "}
-          <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-            fully governed
-          </span>
-        </h3>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Watch as a customer request flows through our 8-step pipeline. Every stage is <span className="font-bold text-foreground">secured</span>, <span className="font-bold text-foreground">monitored</span>, and <span className="font-bold text-foreground">auditable</span>.
-        </p>
-      </div>
-
-      {/* Flow Stages */}
-      <div className="relative">
-        {/* Center line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent hidden lg:block" />
-
-        <div className="space-y-32">
-          {flowStages.map((stage, index) => (
-            <div key={stage.id} data-stage={index} className="relative">
-              {/* Connecting line segment */}
-              {index < flowStages.length - 1 && (
-                <div
-                  data-line={index}
-                  className="absolute left-1/2 top-full h-32 w-1 -translate-x-1/2 bg-gradient-to-b from-primary/30 to-transparent origin-top hidden lg:block"
-                  style={{ transformOrigin: "top" }}
-                />
-              )}
-
-              <div className={`grid lg:grid-cols-2 gap-12 items-center ${stage.position === 'right' ? 'lg:flex-row-reverse' : ''}`}>
-                {/* Content Side */}
-                <div className={`${stage.position === 'right' ? 'lg:order-2 lg:pl-20' : 'lg:pr-20'}`}>
-                  <div className="relative">
-                    {/* Stage number */}
-                    <div className={`absolute -left-4 -top-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stage.gradient} shadow-xl`}>
-                      <span className="text-xl font-black text-white">{index + 1}</span>
-                    </div>
-
-                    <div className="pl-10">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border/50 mb-4">
-                        <stage.icon className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm font-bold text-muted-foreground">{stage.label}</span>
-                      </div>
-
-                      <h4 className="text-3xl sm:text-4xl font-black text-foreground mb-4 leading-tight">
-                        {stage.title}
-                      </h4>
-
-                      <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                        {stage.description}
-                      </p>
-
-                      {/* Metric badge */}
-                      <div className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-card to-card/50 border border-border/50 shadow-lg">
-                        <div className="flex flex-col">
-                          <span className={`text-2xl font-black bg-gradient-to-r ${stage.gradient} bg-clip-text text-transparent`}>
-                            {stage.metric}
-                          </span>
-                          <span className="text-xs text-muted-foreground font-semibold">
-                            {stage.metricLabel}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Visual Side */}
-                <div className={`${stage.position === 'right' ? 'lg:order-1 lg:pr-20' : 'lg:pl-20'}`}>
-                  <div className="relative group">
-                    {/* Glow effect */}
-                    <div className={`absolute -inset-4 bg-gradient-to-br ${stage.gradient} opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-500 rounded-3xl`} />
-
-                    <div className="relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/80 via-background/50 to-card/80 backdrop-blur-xl p-8 shadow-2xl">
-                      {/* Icon */}
-                      <div className="flex items-center justify-center mb-6">
-                        <div className={`relative flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br ${stage.gradient} shadow-2xl`}>
-                          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${stage.gradient} blur-xl opacity-60`} />
-                          <stage.icon className="relative h-12 w-12 text-white" />
-                        </div>
-                      </div>
-
-                      {/* Example */}
-                      <div className="relative p-4 rounded-xl bg-black/40 border border-border/30 backdrop-blur-sm">
-                        <div className="flex items-start gap-2 mb-2">
-                          <Terminal className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-xs text-primary font-mono font-bold">LIVE EXAMPLE</span>
-                        </div>
-                        <p className="text-sm text-green-400/90 font-mono leading-relaxed">
-                          {stage.example}
-                        </p>
-                      </div>
-
-                      {/* Animated pulse indicator */}
-                      {activeStage === index && (
-                        <div className="absolute -top-2 -right-2">
-                          <span className="relative flex h-4 w-4">
-                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${stage.gradient} opacity-75`}></span>
-                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-gradient-to-r ${stage.gradient}`}></span>
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Center dot on timeline */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block">
-                <div className={`flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${stage.gradient} shadow-xl ring-4 ring-background ${activeStage === index ? 'scale-125' : 'scale-100'} transition-transform duration-300`}>
-                  <div className={`h-2 w-2 rounded-full bg-white ${activeStage === index ? 'animate-pulse' : ''}`} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom CTA */}
-      <div className="mt-32 text-center">
-        <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-600/10 to-indigo-600/10 border border-primary/30 backdrop-blur-xl">
-          <p className="text-lg font-bold text-foreground">
-            See the full 8-step pipeline in action
-          </p>
-          <ArrowRight className="h-6 w-6 text-primary animate-bounce" style={{ animationDuration: '2s' }} />
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Sticky Viewport Stepper Section Component
 const StickyStepperSection = () => {
@@ -826,62 +563,59 @@ const ProductAIEngine = () => {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      {/* Hero Section - Ultra Modern */}
+      {/* Hero Section - Enhanced */}
       <section className="relative pt-40 pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(var(--primary-rgb),0.15),transparent_50%)]" />
 
-        {/* Floating stat badges */}
-        <div className="absolute top-40 left-10 animate-float">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-purple-600/20 border border-primary/30 backdrop-blur-xl shadow-lg">
-            <Shield className="h-4 w-4 text-primary" />
-            <span className="text-sm font-bold text-foreground">8 Safety Checks</span>
-          </div>
-        </div>
-
-        <div className="absolute top-60 right-16 animate-float" style={{animationDelay: '1s'}}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 backdrop-blur-xl shadow-lg">
-            <Zap className="h-4 w-4 text-green-500" />
-            <span className="text-sm font-bold text-foreground">200ms Response</span>
-          </div>
-        </div>
-
-        <div className="absolute bottom-40 left-20 animate-float" style={{animationDelay: '2s'}}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600/20 to-primary/20 border border-indigo-500/30 backdrop-blur-xl shadow-lg">
-            <CheckCircle2 className="h-4 w-4 text-indigo-500" />
-            <span className="text-sm font-bold text-foreground">99.9% Uptime</span>
-          </div>
-        </div>
-
         <div className="container mx-auto px-6 relative">
           <div className="max-w-6xl mx-auto text-center">
+            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-indigo-500/10 border border-primary/30 backdrop-blur-xl mb-8 shadow-lg">
               <Sparkles className="h-4 w-4 text-primary animate-pulse" />
               <span className="text-sm font-bold bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">Governed AI Engine</span>
             </div>
 
+            {/* Enhanced Headline */}
             <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground mb-8 tracking-tight leading-tight">
-              Turn conversations into
-              <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent mt-2">
-                safe, auditable actions
+              AI that acts like a{" "}
+              <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                senior agent
               </span>
+              <span className="block mt-2">—in milliseconds</span>
             </h1>
 
-            <p className="text-2xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
-              Every request flows through <span className="text-foreground font-bold">8 governed steps</span>—from guardrails to execution—in milliseconds. No guesswork. No risk. Just results.
+            {/* Enhanced Subheadline */}
+            <p className="text-2xl text-muted-foreground max-w-4xl mx-auto mb-6 leading-relaxed">
+              Turn every customer conversation into governed actions. No hallucinations. No risk.
+              Just <span className="text-foreground font-bold">results your leadership can trust</span>.
             </p>
 
+            {/* Social proof stat */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/50 mb-12">
+              <div className="flex -space-x-2">
+                <div className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-purple-600 border-2 border-background" />
+                <div className="h-6 w-6 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 border-2 border-background" />
+                <div className="h-6 w-6 rounded-full bg-gradient-to-br from-indigo-600 to-primary border-2 border-background" />
+              </div>
+              <span className="text-sm text-muted-foreground">
+                Processing <span className="font-bold text-foreground">2.4M actions/month</span> for teams like yours
+              </span>
+            </div>
+
+            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-5 justify-center mb-16">
               <RouteButton
                 href="/contact-sales"
                 variant="default"
                 size="lg"
-                className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-8 py-6 text-lg"
+                className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-10 py-7 text-lg font-black"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <span className="relative z-10 flex items-center gap-3">
                   <Play className="h-5 w-5" />
-                  Book Technical Demo
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  See It Process a Real Request
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </RouteButton>
 
@@ -889,37 +623,32 @@ const ProductAIEngine = () => {
                 href="#stepper"
                 variant="outline"
                 size="lg"
-                className="group px-8 py-6 text-lg border-2 hover:bg-primary/5"
+                className="group px-10 py-7 text-lg border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 font-black"
               >
                 <span className="flex items-center gap-3">
                   <ChevronDown className="h-5 w-5 group-hover:translate-y-1 transition-transform duration-300" />
-                  See How It Works
+                  Explore the 8-Step Pipeline
                 </span>
               </RouteButton>
             </div>
 
-            {/* Key stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-8 mb-16 text-sm text-muted-foreground">
+            {/* Trust indicators */}
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCheck className="h-4 w-4 text-green-500" />
-                <span>SOC 2 Type II</span>
+                <span className="font-semibold">SOC 2 Type II</span>
               </div>
               <div className="h-4 w-px bg-border" />
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-primary" />
-                <span>OWASP Compliant</span>
+                <span className="font-semibold">OWASP Compliant</span>
               </div>
               <div className="h-4 w-px bg-border" />
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-indigo-500" />
-                <span>NIST AI RMF</span>
+                <span className="font-semibold">NIST AI RMF</span>
               </div>
             </div>
-          </div>
-
-          {/* Interactive Scroll-Based Flow Animation */}
-          <div className="mt-24">
-            <InteractiveFlowSection />
           </div>
         </div>
       </section>
