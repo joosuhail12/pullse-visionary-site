@@ -321,9 +321,9 @@ const StickyStepperSection = () => {
         </div>
 
         {/* Sticky Split Layout */}
-        <div className="grid lg:grid-cols-2 gap-12 min-h-screen">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* LEFT: Sticky Visual Display */}
-          <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] flex flex-col justify-center" ref={stickyRef}>
+          <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] flex items-center" ref={stickyRef}>
             <div className="relative">
               {/* Progress Ring */}
               <div className="absolute -top-6 -right-6 z-10">
@@ -421,12 +421,12 @@ const StickyStepperSection = () => {
           </div>
 
           {/* RIGHT: Scrolling Content */}
-          <div className="space-y-[100vh] pb-[100vh]">
+          <div className="space-y-0 pb-[100vh]">
             {stepperSteps.map((step, index) => (
               <div
                 key={step.id}
                 data-step-content={index}
-                className="min-h-screen flex flex-col justify-center"
+                className="h-screen flex items-center"
               >
                 <div className="space-y-6">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border/50">
