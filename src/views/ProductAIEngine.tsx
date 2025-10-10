@@ -319,6 +319,416 @@ const InteractiveFlowSection = () => {
   );
 };
 
+// Sticky Viewport Stepper Section Component
+const StickyStepperSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
+
+  const stepperSteps = [
+    {
+      id: 0,
+      number: "01",
+      title: "Stop threats before they start",
+      subtitle: "Input Guardrails",
+      description: "Before AI sees anything, we scan for jailbreaks, prompt injections, and policy violations. OWASP-aligned security ensures malicious prompts never reach your engine.",
+      why: "Prompt injection is the #1 LLM vulnerability. Pre-generation defenses are non-negotiable.",
+      metric: "99.97%",
+      metricLabel: "Attack Detection Rate",
+      icon: Shield,
+      gradient: "from-red-600 to-orange-600",
+      console: `{
+  "step": "input_guardrail",
+  "status": "blocked",
+  "reason": "prompt_injection_detected",
+  "rule": "external_instructions",
+  "threat_level": "critical",
+  "action": "request_rejected"
+}`,
+      source: "OWASP Top 10"
+    },
+    {
+      id: 1,
+      number: "02",
+      title: "Know exactly what they want",
+      subtitle: "Intent Classification",
+      description: "We map every message to your support intents—refund, plan change, WISMO, login help—with confidence scores, fallbacks, and escalation paths built in.",
+      why: "The right workflow starts with knowing the real intent. No guessing, no mistakes.",
+      metric: "94%",
+      metricLabel: "Intent Accuracy",
+      icon: Target,
+      gradient: "from-primary to-purple-600",
+      console: `{
+  "step": "classify_intent",
+  "intent": "refund_request",
+  "confidence": 0.94,
+  "sub_intent": "order_quality_issue",
+  "fallback": "human_review_queue",
+  "priority": "high"
+}`,
+      source: "Proprietary ML"
+    },
+    {
+      id: 2,
+      number: "03",
+      title: "Pull the right data, nothing more",
+      subtitle: "Context Retrieval",
+      description: "We fetch only what's needed—order history, entitlements, policies, past conversations. The model gets facts, not fantasies. Zero hallucinations.",
+      why: "RAG (Retrieval-Augmented Generation) keeps answers grounded in reality. Industry standard for accuracy.",
+      metric: "8ms",
+      metricLabel: "Retrieval Latency",
+      icon: Database,
+      gradient: "from-blue-600 to-cyan-600",
+      console: `{
+  "step": "retrieve_context",
+  "order_id": "ORD-4931",
+  "customer_tier": "premium",
+  "policy": "REF-30",
+  "sources": ["orders_db", "policy_docs", "conversation_history"],
+  "facts_retrieved": 7
+}`,
+      source: "MDPI Research"
+    },
+    {
+      id: 3,
+      number: "04",
+      title: "Smart plans, zero guesswork",
+      subtitle: "Orchestration Engine",
+      description: "The AI builds a safe action plan—verify eligibility → calculate refund → execute → notify customer. Multi-step workflows with approval gates exactly where you want them.",
+      why: "Function calling is powerful. Ungoverned function calling is dangerous. We enforce guardrails at every step.",
+      metric: "12ms",
+      metricLabel: "Planning Time",
+      icon: GitBranch,
+      gradient: "from-purple-600 to-indigo-600",
+      console: `{
+  "step": "orchestrate",
+  "plan": [
+    {"action": "verify_eligibility", "approved": true},
+    {"action": "calculate_refund", "amount": 49.99},
+    {"action": "execute_refund", "approval": "required"},
+    {"action": "notify_customer", "channel": "email"}
+  ],
+  "approval_required": true
+}`,
+      source: "OpenAI Best Practices"
+    },
+    {
+      id: 4,
+      number: "05",
+      title: "Execute with confidence",
+      subtitle: "Safe Action Execution",
+      description: "Actions run through least-privilege connectors. Every execution writes an Action Receipt—who did what, when, and why. Complete traceability, zero ambiguity.",
+      why: "Tool execution without scoping and logging is a security nightmare. We make it bulletproof.",
+      metric: "100%",
+      metricLabel: "Actions Logged",
+      icon: Zap,
+      gradient: "from-green-600 to-emerald-600",
+      console: `{
+  "step": "execute_action",
+  "connector": "stripe_refunds",
+  "operation": "create_refund",
+  "amount": 49.99,
+  "receipt_id": "AR-2025-001",
+  "status": "success",
+  "duration_ms": 342,
+  "audit_trail": "complete"
+}`,
+      source: "OpenAI + NIST"
+    },
+    {
+      id: 5,
+      number: "06",
+      title: "Catch mistakes before they happen",
+      subtitle: "Quality Assurance",
+      description: "We verify the action did what we expected and the answer matches the facts. Low confidence? Automatic escalation. Policy violation? Blocked instantly.",
+      why: "Continuous evaluation across the AI lifecycle isn't optional—it's required for production AI.",
+      metric: "0.96",
+      metricLabel: "QA Score",
+      icon: CheckCircle2,
+      gradient: "from-indigo-600 to-primary",
+      console: `{
+  "step": "evaluate_quality",
+  "facts_verified": 5,
+  "confidence": 0.96,
+  "qa_metrics": {
+    "accuracy": 0.98,
+    "tone": 0.94,
+    "policy_compliance": 1.0,
+    "hallucination_check": "passed"
+  }
+}`,
+      source: "NIST AI RMF"
+    },
+    {
+      id: 6,
+      number: "07",
+      title: "Final safety net",
+      subtitle: "Output Guardrails",
+      description: "Before anything reaches the customer, we run output checks—PII redaction, policy compliance, data leakage patterns. Unsafe content gets blocked or rewritten with full logging.",
+      why: "Defense-in-depth. Input AND output filtering. Because one layer is never enough.",
+      metric: "Zero",
+      metricLabel: "PII Leaks (Ever)",
+      icon: Lock,
+      gradient: "from-orange-600 to-red-600",
+      console: `{
+  "step": "output_guardrail",
+  "status": "passed",
+  "pii_redacted": true,
+  "policy_violations": 0,
+  "data_leakage_check": "clean",
+  "safe_to_send": true,
+  "redactions": ["ssn", "credit_card"]
+}`,
+      source: "OWASP + SOC 2"
+    },
+    {
+      id: 7,
+      number: "08",
+      title: "Instant, accurate responses",
+      subtitle: "Response Generation",
+      description: "Customers get clear, human-sounding answers. Agents get context, the full action plan, and the Action Receipt. Everyone knows exactly what happened and why.",
+      why: "Transparency builds trust. Auditability ensures compliance. Both are built into every response.",
+      metric: "847ms",
+      metricLabel: "End-to-End Time",
+      icon: MessageSquare,
+      gradient: "from-primary to-purple-600",
+      console: `{
+  "step": "generate_response",
+  "message": "Your refund of $49.99 has been processed and will appear in 5-7 business days.",
+  "receipt_attached": true,
+  "total_duration_ms": 847,
+  "steps_completed": 8,
+  "approval_status": "auto_approved"
+}`,
+      source: "Full Pipeline"
+    }
+  ];
+
+  useEffect(() => {
+    if (!sectionRef.current || !stickyRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Pin the sticky content
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        pin: stickyRef.current,
+        pinSpacing: false,
+        onUpdate: (self) => {
+          // Calculate which step should be active based on scroll progress
+          const stepIndex = Math.min(
+            Math.floor(self.progress * stepperSteps.length),
+            stepperSteps.length - 1
+          );
+          setCurrentStep(stepIndex);
+          setProgress(self.progress);
+        }
+      });
+
+      // Animate each step content section
+      stepperSteps.forEach((step, index) => {
+        const contentEl = sectionRef.current?.querySelector(`[data-step-content="${index}"]`);
+        if (!contentEl) return;
+
+        gsap.fromTo(
+          contentEl,
+          {
+            opacity: 0,
+            y: 50
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scrollTrigger: {
+              trigger: contentEl,
+              start: "top 80%",
+              end: "top 50%",
+              scrub: 1
+            }
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const currentStepData = stepperSteps[currentStep];
+
+  return (
+    <section ref={sectionRef} id="stepper" className="relative">
+      <div className="container mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center pt-32 pb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span className="text-sm font-bold text-primary">8 Governed Steps</span>
+          </div>
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+            Every action,{" "}
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+              fully governed
+            </span>
+          </h2>
+          <p className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-4">
+            Watch how a customer request flows through our <span className="font-bold text-foreground">8-step pipeline</span> in under a second.
+          </p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Scroll to see each step in action →
+          </p>
+        </div>
+
+        {/* Sticky Split Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 min-h-screen">
+          {/* LEFT: Sticky Visual Display */}
+          <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] flex flex-col justify-center" ref={stickyRef}>
+            <div className="relative">
+              {/* Progress Ring */}
+              <div className="absolute -top-6 -right-6 z-10">
+                <svg className="w-20 h-20 transform -rotate-90">
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="36"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    fill="none"
+                    className="text-border"
+                  />
+                  <circle
+                    cx="40"
+                    cy="40"
+                    r="36"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    fill="none"
+                    strokeDasharray={`${2 * Math.PI * 36}`}
+                    strokeDashoffset={`${2 * Math.PI * 36 * (1 - progress)}`}
+                    className="text-primary transition-all duration-300"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-sm font-black text-foreground">{currentStep + 1}/8</span>
+                </div>
+              </div>
+
+              {/* Main Visual Card */}
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 via-background/50 to-card/80 backdrop-blur-2xl p-12 shadow-2xl overflow-hidden">
+                {/* Animated gradient glow */}
+                <div className={`absolute -inset-px rounded-3xl bg-gradient-to-br ${currentStepData.gradient} opacity-20 blur-2xl transition-all duration-700`} />
+
+                <div className="relative space-y-8">
+                  {/* Step Number Badge */}
+                  <div className="flex items-center gap-4">
+                    <div className={`flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${currentStepData.gradient} shadow-xl`}>
+                      <span className="text-2xl font-black text-white">{currentStepData.number}</span>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground font-mono">{currentStepData.subtitle}</div>
+                      <div className="text-xs text-muted-foreground/60 mt-1">{currentStepData.source}</div>
+                    </div>
+                  </div>
+
+                  {/* Large Icon */}
+                  <div className="flex items-center justify-center py-8">
+                    <div className="relative">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${currentStepData.gradient} rounded-full blur-3xl opacity-40 transition-all duration-700`} />
+                      <div className={`relative flex h-32 w-32 items-center justify-center rounded-2xl bg-gradient-to-br ${currentStepData.gradient} shadow-2xl transition-all duration-700`}>
+                        <currentStepData.icon className="h-16 w-16 text-white" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Metric Badge */}
+                  <div className="flex items-center justify-center">
+                    <div className="inline-flex flex-col items-center gap-1 px-6 py-4 rounded-xl bg-gradient-to-r from-card to-card/50 border border-border/50 shadow-lg">
+                      <span className={`text-4xl font-black bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent transition-all duration-700`}>
+                        {currentStepData.metric}
+                      </span>
+                      <span className="text-xs text-muted-foreground font-semibold">
+                        {currentStepData.metricLabel}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Live Console */}
+                  <div className="rounded-xl overflow-hidden border border-primary/30 shadow-xl">
+                    <div className="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-primary/20 via-purple-600/20 to-primary/20 border-b border-primary/30">
+                      <div className="flex items-center gap-2">
+                        <Terminal className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-mono font-bold text-foreground">LIVE CONSOLE</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </div>
+                        <span className="text-xs text-green-400 font-mono font-bold">ACTIVE</span>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-black/80 backdrop-blur-xl max-h-64 overflow-y-auto">
+                      <pre className="text-xs text-green-400/90 font-mono leading-relaxed whitespace-pre-wrap">
+                        {currentStepData.console}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Scrolling Content */}
+          <div className="space-y-[100vh] pb-[100vh]">
+            {stepperSteps.map((step, index) => (
+              <div
+                key={step.id}
+                data-step-content={index}
+                className="min-h-screen flex flex-col justify-center"
+              >
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border/50">
+                    <span className="text-xs font-mono text-muted-foreground">STEP {step.number}</span>
+                  </div>
+
+                  <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
+                    {step.description}
+                  </p>
+
+                  <div className="relative p-6 rounded-xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/20">
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm font-bold text-foreground mb-2">Why this matters</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{step.why}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-4">
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+                    <span className="text-xs text-muted-foreground font-mono">Source: {step.source}</span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ProductAIEngine = () => {
   const [expandedStep, setExpandedStep] = useState<number>(0);
   const [activeConsoleStep, setActiveConsoleStep] = useState<number>(0);
@@ -514,184 +924,8 @@ const ProductAIEngine = () => {
         </div>
       </section>
 
-      {/* 8-Step Interactive Stepper - Ultra Modern */}
-      <section id="stepper" ref={stepperRef} className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-
-        <div className="container mx-auto px-6 relative">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              <span className="text-sm font-bold text-primary">8 Governed Steps</span>
-            </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
-              Every action,{" "}
-              <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                fully governed
-              </span>
-            </h2>
-            <p className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Our 8-step pipeline transforms unstructured requests into <span className="font-bold text-foreground">safe, auditable actions</span>.
-              Click any step to see the security checks in action.
-            </p>
-          </div>
-
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-[1fr,520px] gap-12">
-              {/* Left: Vertical Stepper with Progress Line */}
-              <div className="relative">
-                {/* Vertical progress line */}
-                <div className="absolute left-7 top-10 bottom-10 w-0.5 bg-gradient-to-b from-primary/30 via-primary/10 to-transparent hidden lg:block" />
-
-                <div className="space-y-5">
-                  {steps.map((step, index) => {
-                    const isExpanded = expandedStep === step.id;
-                    return (
-                      <button
-                        key={step.id}
-                        type="button"
-                        onClick={() => setExpandedStep(step.id)}
-                        className="w-full text-left transition-all duration-500 group relative"
-                        aria-expanded={String(isExpanded)}
-                        aria-label={`${step.title} - Click to ${isExpanded ? 'collapse' : 'expand'}`}
-                      >
-                        {/* Step number circle on progress line */}
-                        <div className={`absolute left-7 top-7 -translate-x-1/2 z-10 hidden lg:flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-br ${step.color} shadow-xl ring-4 ring-background transition-all duration-500 ${
-                          isExpanded ? 'scale-125 ring-8' : 'scale-100 group-hover:scale-110'
-                        }`}>
-                          <span className="text-xs font-black text-white">{index + 1}</span>
-                        </div>
-
-                        <div className={`relative rounded-2xl border transition-all duration-500 lg:ml-16 ${
-                          isExpanded
-                            ? 'border-primary/50 bg-gradient-to-br from-card via-background to-card shadow-2xl shadow-primary/20 scale-[1.02]'
-                            : 'border-border/40 bg-card/30 backdrop-blur-sm hover:border-primary/30 hover:shadow-xl hover:scale-[1.01]'
-                        }`}>
-                          {/* Animated glow effect */}
-                          <div className={`absolute -inset-px rounded-2xl bg-gradient-to-br ${step.color} opacity-0 blur-xl transition-all duration-500 ${
-                            isExpanded ? 'opacity-20' : 'group-hover:opacity-10'
-                          }`} />
-
-                          {/* Content */}
-                          <div className="relative p-6">
-                            <div className="flex items-start gap-5">
-                              {/* Icon */}
-                              <div className={`relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-xl transition-all duration-500 ${
-                                isExpanded ? 'scale-110 rotate-3' : 'scale-100 rotate-0 group-hover:scale-105'
-                              }`}>
-                                <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${step.color} blur-lg opacity-0 transition-opacity duration-500 ${
-                                  isExpanded ? 'opacity-60' : 'group-hover:opacity-40'
-                                }`} />
-                                <step.icon className="relative h-7 w-7 text-white" />
-                              </div>
-
-                              {/* Text content */}
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-start justify-between gap-4 mb-2">
-                                  <div>
-                                    <div className="flex items-center gap-3 mb-1">
-                                      <h3 className="text-xl font-black text-foreground">{step.title}</h3>
-                                      {/* Mobile step number */}
-                                      <span className="lg:hidden inline-flex items-center justify-center h-6 w-6 rounded-full bg-gradient-to-br from-primary to-purple-600 text-[10px] font-black text-white">
-                                        {index + 1}
-                                      </span>
-                                    </div>
-                                    <p className={`text-sm leading-relaxed transition-colors duration-300 ${
-                                      isExpanded ? 'text-foreground' : 'text-muted-foreground'
-                                    }`}>{step.description}</p>
-                                  </div>
-                                  {isExpanded && (
-                                    <CheckCircle2 className="h-6 w-6 text-primary animate-in fade-in zoom-in duration-300 flex-shrink-0" />
-                                  )}
-                                </div>
-
-                                {/* Expanded content */}
-                                {isExpanded && (
-                                  <div className="animate-in slide-in-from-top-4 fade-in duration-500 space-y-4 mt-5 pt-5 border-t border-border/30">
-                                    {/* Why this matters */}
-                                    <div className="relative p-4 rounded-xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/20 overflow-hidden">
-                                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl" />
-                                      <p className="relative text-sm font-bold text-foreground mb-2 flex items-center gap-2">
-                                        <AlertCircle className="h-4 w-4 text-primary" />
-                                        Why this matters
-                                      </p>
-                                      <p className="relative text-sm text-muted-foreground leading-relaxed">{step.why}</p>
-                                    </div>
-
-                                    {/* Source badge */}
-                                    <div className="flex items-center gap-3">
-                                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-card to-card/50 border border-border/50 text-xs font-mono font-bold text-foreground shadow-sm">
-                                        <span className="text-primary">◆</span>
-                                        Source: {step.source}
-                                      </span>
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Right: Live Console - Enhanced */}
-              <div className="sticky top-24 h-fit">
-                <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-zinc-950 to-zinc-900 shadow-2xl overflow-hidden">
-                  {/* Glow effect */}
-                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 opacity-50 blur-xl" />
-
-                  <div className="relative">
-                    {/* Console header */}
-                    <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-primary/20 via-purple-600/20 to-primary/20 border-b border-primary/30 backdrop-blur-xl">
-                      <div className="flex items-center gap-3">
-                        <div className="flex gap-1.5">
-                          <div className="h-3 w-3 rounded-full bg-red-500/80 shadow-sm" />
-                          <div className="h-3 w-3 rounded-full bg-yellow-500/80 shadow-sm" />
-                          <div className="h-3 w-3 rounded-full bg-green-500/80 shadow-sm" />
-                        </div>
-                        <span className="text-sm font-mono font-black text-foreground tracking-wide">LIVE CONSOLE</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="relative flex h-2.5 w-2.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                        </div>
-                        <span className="text-xs text-green-400 font-mono font-bold">ACTIVE</span>
-                      </div>
-                    </div>
-
-                    {/* Console body */}
-                    <div className="relative p-6 font-mono text-sm min-h-[400px]">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
-                      <pre className="relative text-green-400/90 leading-relaxed overflow-x-auto whitespace-pre-wrap break-all">
-                        {steps[activeConsoleStep].console}
-                      </pre>
-                    </div>
-
-                    {/* Console footer */}
-                    <div className="px-6 py-4 border-t border-zinc-800 bg-black/40">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs text-zinc-400 font-mono">
-                          Step <span className="text-primary font-bold">{activeConsoleStep + 1}</span> of {steps.length}
-                        </div>
-                        <div className="text-xs text-zinc-500 font-mono">
-                          {steps[activeConsoleStep].title}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 8-Step Sticky Viewport Stepper */}
+      <StickyStepperSection />
 
       {/* Controls You'll Love - Ultra Modern */}
       <section className="relative py-32 overflow-hidden">
