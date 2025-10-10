@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import anime from 'animejs';
+import gsap from 'gsap';
 
 interface AnimatedCounterProps {
   value: number;
@@ -35,13 +35,11 @@ export default function AnimatedCounter({
 
             // Animate the counter
             const obj = { value: 0 };
-            anime({
-              targets: obj,
+            gsap.to(obj, {
               value: value,
-              duration: duration,
-              easing: 'easeOutExpo',
-              round: decimals === 0 ? 1 : Math.pow(10, decimals),
-              update: () => {
+              duration: duration / 1000,
+              ease: 'expo.out',
+              onUpdate: () => {
                 if (counterRef.current) {
                   counterRef.current.textContent = obj.value.toFixed(decimals);
                 }
@@ -61,15 +59,14 @@ export default function AnimatedCounter({
                 const angle = (i / particleCount) * Math.PI * 2;
                 const distance = 30 + Math.random() * 20;
 
-                anime({
-                  targets: particle,
-                  translateX: Math.cos(angle) * distance,
-                  translateY: Math.sin(angle) * distance,
-                  opacity: [0.6, 0],
-                  scale: [1, 0],
-                  duration: 800,
-                  easing: 'easeOutCubic',
-                  complete: () => {
+                gsap.to(particle, {
+                  x: Math.cos(angle) * distance,
+                  y: Math.sin(angle) * distance,
+                  opacity: 0,
+                  scale: 0,
+                  duration: 0.8,
+                  ease: 'power2.out',
+                  onComplete: () => {
                     particle.remove();
                   },
                 });
