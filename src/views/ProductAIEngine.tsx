@@ -1,13 +1,21 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
+import TypingEffect from "@/components/TypingEffect";
+import TiltCard from "@/components/TiltCard";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+// Lazy load 3D components for performance
+const DataFlowParticles = lazy(() => import("@/components/three/DataFlowParticles"));
+const MorphingBackground = lazy(() => import("@/components/three/MorphingBackground"));
+const PipelineFlowModel = lazy(() => import("@/components/three/PipelineFlowModel"));
 import {
   Shield,
   Target,
@@ -295,7 +303,7 @@ const StickyStepperSection = () => {
   const currentStepData = stepperSteps[currentStep];
 
   return (
-    <section ref={sectionRef} id="stepper" className="relative">
+    <section ref={sectionRef} id="stepper" className="relative bg-gradient-to-b from-background via-muted/5 to-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center pt-32 pb-20">
@@ -322,11 +330,11 @@ const StickyStepperSection = () => {
 
         {/* Sticky Split Layout */}
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* LEFT: Sticky Visual Display */}
+          {/* LEFT: 3D Pipeline Model (Sticky) */}
           <div className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center" ref={stickyRef}>
-            <div className="relative">
+            <div className="relative w-full h-full">
               {/* Progress Ring */}
-              <div className="absolute -top-6 -right-6 z-10">
+              <div className="absolute top-6 right-6 z-20">
                 <svg className="w-20 h-20 transform -rotate-90">
                   <circle
                     cx="40"
@@ -355,64 +363,36 @@ const StickyStepperSection = () => {
                 </div>
               </div>
 
-              {/* Main Visual Card */}
-              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 via-background/50 to-card/80 backdrop-blur-2xl p-12 shadow-2xl overflow-hidden">
-                {/* Animated gradient glow */}
-                <div className={`absolute -inset-px rounded-3xl bg-gradient-to-br ${currentStepData.gradient} opacity-20 blur-2xl transition-all duration-700`} />
+              {/* 3D Pipeline Model */}
+              <div className="relative w-full h-full rounded-3xl border border-border/50 bg-gradient-to-b from-zinc-950 to-zinc-900 shadow-2xl overflow-hidden">
+                <Suspense fallback={
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full" />
+                  </div>
+                }>
+                  <PipelineFlowModel currentStep={currentStep} progress={progress} />
+                </Suspense>
 
-                <div className="relative space-y-8">
-                  {/* Step Number Badge */}
-                  <div className="flex items-center gap-4">
-                    <div className={`flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${currentStepData.gradient} shadow-xl`}>
-                      <span className="text-2xl font-black text-white">{currentStepData.number}</span>
+                {/* Gradient overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/50 via-transparent to-zinc-900/50 pointer-events-none" />
+
+                {/* Step Info Overlay */}
+                <div className="absolute bottom-6 left-6 right-6 z-10 bg-zinc-900/90 backdrop-blur-xl rounded-2xl border border-border/50 p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${currentStepData.gradient} shadow-lg`}>
+                      <currentStepData.icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground font-mono">{currentStepData.subtitle}</div>
-                      <div className="text-xs text-muted-foreground/60 mt-1">{currentStepData.source}</div>
+                      <div className="text-xs text-muted-foreground/60">{currentStepData.source}</div>
                     </div>
                   </div>
-
-                  {/* Large Icon */}
-                  <div className="flex items-center justify-center py-8">
-                    <div className="relative">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${currentStepData.gradient} rounded-full blur-3xl opacity-40 transition-all duration-700`} />
-                      <div className={`relative flex h-32 w-32 items-center justify-center rounded-2xl bg-gradient-to-br ${currentStepData.gradient} shadow-2xl transition-all duration-700`}>
-                        <currentStepData.icon className="h-16 w-16 text-white" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Metric Badge */}
-                  <div className="flex items-center justify-center">
-                    <div className="inline-flex flex-col items-center gap-1 px-6 py-4 rounded-xl bg-gradient-to-r from-card to-card/50 border border-border/50 shadow-lg">
-                      <span className={`text-4xl font-black bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent transition-all duration-700`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className={`text-3xl font-black bg-gradient-to-r ${currentStepData.gradient} bg-clip-text text-transparent`}>
                         {currentStepData.metric}
                       </span>
-                      <span className="text-xs text-muted-foreground font-semibold">
-                        {currentStepData.metricLabel}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Live Console */}
-                  <div className="rounded-xl overflow-hidden border border-primary/30 shadow-xl">
-                    <div className="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-primary/20 via-purple-600/20 to-primary/20 border-b border-primary/30">
-                      <div className="flex items-center gap-2">
-                        <Terminal className="h-4 w-4 text-primary" />
-                        <span className="text-xs font-mono font-bold text-foreground">LIVE CONSOLE</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </div>
-                        <span className="text-xs text-green-400 font-mono font-bold">ACTIVE</span>
-                      </div>
-                    </div>
-                    <div className="p-4 bg-black/80 backdrop-blur-xl max-h-64 overflow-y-auto">
-                      <pre className="text-xs text-green-400/90 font-mono leading-relaxed whitespace-pre-wrap">
-                        {currentStepData.console}
-                      </pre>
+                      <span className="text-xs text-muted-foreground ml-2">{currentStepData.metricLabel}</span>
                     </div>
                   </div>
                 </div>
@@ -469,7 +449,18 @@ const StickyStepperSection = () => {
 const ProductAIEngine = () => {
   const [expandedStep, setExpandedStep] = useState<number>(0);
   const [activeConsoleStep, setActiveConsoleStep] = useState<number>(0);
+  const [scrollOffset, setScrollOffset] = useState<number>(0);
   const stepperRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll for morphing background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollOffset(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // 8-step flow data
   const steps: Step[] = [
@@ -560,6 +551,11 @@ const ProductAIEngine = () => {
 
   return (
     <div className="min-h-screen relative">
+      {/* Morphing WebGL Background */}
+      <Suspense fallback={null}>
+        <MorphingBackground scrollOffset={scrollOffset} />
+      </Suspense>
+
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
@@ -632,6 +628,28 @@ const ProductAIEngine = () => {
               </RouteButton>
             </div>
 
+            {/* Animated Stats Showcase */}
+            <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
+              <div className="text-center">
+                <div className="text-5xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
+                  <AnimatedCounter value={99.97} decimals={2} suffix="%" />
+                </div>
+                <div className="text-sm text-muted-foreground font-semibold">Attack Detection</div>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+                  <AnimatedCounter value={850} suffix="ms" />
+                </div>
+                <div className="text-sm text-muted-foreground font-semibold">Avg Response Time</div>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl font-black bg-gradient-to-r from-indigo-600 to-primary bg-clip-text text-transparent mb-2">
+                  <AnimatedCounter value={2.4} decimals={1} suffix="M" />
+                </div>
+                <div className="text-sm text-muted-foreground font-semibold">Actions/Month</div>
+              </div>
+            </div>
+
             {/* Trust indicators */}
             <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
@@ -679,8 +697,8 @@ const ProductAIEngine = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Approvals - Enhanced */}
-              <div className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:scale-[1.02]">
+              {/* Approvals - Enhanced with 3D Tilt */}
+              <TiltCard className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500" intensity={8}>
                 <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <div className="relative">
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-2xl mb-8 group-hover:scale-110 transition-transform duration-500">
@@ -696,10 +714,10 @@ const ProductAIEngine = () => {
                     OpenAI Best Practices
                   </div>
                 </div>
-              </div>
+              </TiltCard>
 
-              {/* Simulation Mode - Enhanced */}
-              <div className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500 hover:scale-[1.02]">
+              {/* Simulation Mode - Enhanced with 3D Tilt */}
+              <TiltCard className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500" intensity={8}>
                 <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <div className="relative">
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-2xl mb-8 group-hover:scale-110 transition-transform duration-500">
@@ -718,10 +736,10 @@ const ProductAIEngine = () => {
                     Test Mode Active
                   </div>
                 </div>
-              </div>
+              </TiltCard>
 
-              {/* Policy Packs - Enhanced */}
-              <div className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:scale-[1.02]">
+              {/* Policy Packs - Enhanced with 3D Tilt */}
+              <TiltCard className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500" intensity={8}>
                 <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-indigo-600/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <div className="relative">
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-primary shadow-2xl mb-8 group-hover:scale-110 transition-transform duration-500">
@@ -738,10 +756,10 @@ const ProductAIEngine = () => {
                     <span className="px-2 py-1 rounded-md bg-indigo-600/10 text-xs text-indigo-400 font-bold">Custom</span>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
 
-              {/* Observability - Enhanced */}
-              <div className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-green-500/50 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-500 hover:scale-[1.02]">
+              {/* Observability - Enhanced with 3D Tilt */}
+              <TiltCard className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-10 hover:border-green-500/50 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-500" intensity={8}>
                 <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-green-600/10 to-emerald-600/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <div className="relative">
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-green-600 to-emerald-600 shadow-2xl mb-8 group-hover:scale-110 transition-transform duration-500">
@@ -757,7 +775,7 @@ const ProductAIEngine = () => {
                     100% Coverage
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           </div>
         </div>
