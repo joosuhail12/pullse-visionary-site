@@ -213,8 +213,7 @@ export function Navigation() {
                       <span className="relative z-10">Product</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-[680px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                      <div className="rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 p-6">
+                    <NavigationMenu.Content className="w-[680px] p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured Overview Card */}
                         {navigationData.product[0].isOverview && (
                           <div className="mb-6">
@@ -350,7 +349,6 @@ export function Navigation() {
                             </div>
                           ))}
                         </div>
-                      </div>
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
 
@@ -361,8 +359,7 @@ export function Navigation() {
                       <span className="relative z-10">Solutions</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-[400px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                      <div className="rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 p-4">
+                    <NavigationMenu.Content className="w-[400px] p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         <div className="space-y-1">
                           {navigationData.solutions.map((link, index) => {
                             const Icon = link.icon;
@@ -406,7 +403,6 @@ export function Navigation() {
                             );
                           })}
                         </div>
-                      </div>
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
 
@@ -417,8 +413,7 @@ export function Navigation() {
                       <span className="relative z-10">Resources</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-[450px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                      <div className="rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 p-4">
+                    <NavigationMenu.Content className="w-[450px] p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         <div className="grid grid-cols-2 gap-1">
                           {navigationData.resources.map((link, index) => {
                             const Icon = link.icon;
@@ -452,7 +447,6 @@ export function Navigation() {
                             );
                           })}
                         </div>
-                      </div>
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
 
