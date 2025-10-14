@@ -207,13 +207,13 @@ export function Navigation() {
               <NavigationMenu.Root className="hidden lg:flex">
                 <NavigationMenu.List className="flex items-center space-x-1">
                   {/* Product Dropdown */}
-                  <NavigationMenu.Item>
+                  <NavigationMenu.Item className="relative">
                     <NavigationMenu.Trigger className="group flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50/60 transition-all duration-300 relative overflow-hidden">
                       <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/15 via-pink-500/10 to-purple-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
                       <span className="relative z-10">Product</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-lg p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-lg p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured Overview Card */}
                         {navigationData.product[0].isOverview && (
                           <div className="mb-4">
@@ -353,13 +353,13 @@ export function Navigation() {
                   </NavigationMenu.Item>
 
                   {/* Solutions Dropdown */}
-                  <NavigationMenu.Item>
+                  <NavigationMenu.Item className="relative">
                     <NavigationMenu.Trigger className="group flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50/60 transition-all duration-300 relative overflow-hidden">
                       <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/15 via-purple-500/10 to-blue-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
                       <span className="relative z-10">Solutions</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-xs p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-xs p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured "All Solutions" Item */}
                         {navigationData.solutions[0] && (
                           <>
@@ -453,13 +453,13 @@ export function Navigation() {
                   </NavigationMenu.Item>
 
                   {/* Resources Dropdown */}
-                  <NavigationMenu.Item>
+                  <NavigationMenu.Item className="relative">
                     <NavigationMenu.Trigger className="group flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50/60 transition-all duration-300 relative overflow-hidden">
                       <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-indigo-500/15 via-blue-500/10 to-purple-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
                       <span className="relative z-10">Resources</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-md p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-md p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured "All Resources" Item */}
                         {navigationData.resources[0] && (
                           <>
@@ -663,13 +663,6 @@ export function Navigation() {
                     </Link>
                   </NavigationMenu.Item>
                 </NavigationMenu.List>
-
-                {/* Viewport for dropdown content - Required by Radix NavigationMenu */}
-                <div className="perspective-[2000px] absolute top-full left-0 w-full">
-                  <NavigationMenu.Viewport
-                    className="relative mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 transition-all duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 h-[var(--radix-navigation-menu-viewport-height)] w-[var(--radix-navigation-menu-viewport-width)]"
-                  />
-                </div>
               </NavigationMenu.Root>
 
               {/* CTA Buttons */}
