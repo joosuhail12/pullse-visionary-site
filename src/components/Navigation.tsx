@@ -213,10 +213,10 @@ export function Navigation() {
                       <span className="relative z-10">Product</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-lg p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="w-max max-w-lg p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured Overview Card */}
                         {navigationData.product[0].isOverview && (
-                          <div className="mb-6">
+                          <div className="mb-4">
                             <NavigationMenu.Link asChild>
                               <motion.div
                                 initial={{ opacity: 0, y: -5 }}
@@ -225,7 +225,7 @@ export function Navigation() {
                               >
                                 <Link
                                   href={navigationData.product[0].links[0].href}
-                                  className="group/featured relative flex items-center gap-4 p-4 rounded-2xl border-2 border-purple-100 hover:border-purple-300 bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-blue-50/30 hover:from-purple-100/60 hover:via-pink-100/40 hover:to-blue-100/40 transition-all duration-300 overflow-hidden"
+                                  className="group/featured relative flex items-center gap-3 p-3 rounded-xl border border-purple-200/60 hover:border-purple-300 bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-blue-50/30 hover:from-purple-100/60 hover:via-pink-100/40 hover:to-blue-100/40 transition-all duration-300 overflow-hidden"
                                 >
                                   {/* Animated gradient background */}
                                   <motion.div
@@ -237,11 +237,11 @@ export function Navigation() {
 
                                   {/* Icon */}
                                   <motion.div
-                                    className="relative flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white flex-shrink-0 shadow-lg shadow-purple-500/30"
+                                    className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 text-white flex-shrink-0 shadow-lg shadow-purple-500/30"
                                     whileHover={{ scale: 1.05, rotate: 3 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                                   >
-                                    <LayoutGrid className="w-7 h-7 relative z-10" />
+                                    <LayoutGrid className="w-6 h-6 relative z-10" />
                                     <motion.div
                                       className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-400 to-pink-400 blur-lg opacity-50"
                                       animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -251,8 +251,8 @@ export function Navigation() {
 
                                   {/* Content */}
                                   <div className="flex-1 relative z-10">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <h3 className="text-base font-bold text-gray-900 group-hover/featured:text-purple-600 transition-colors">
+                                    <div className="flex items-center gap-2">
+                                      <h3 className="text-sm font-bold text-gray-900 group-hover/featured:text-purple-600 transition-colors">
                                         {navigationData.product[0].links[0].label}
                                       </h3>
                                       <motion.div
@@ -260,10 +260,10 @@ export function Navigation() {
                                         whileHover={{ x: 4, opacity: 1 }}
                                         className="text-purple-600"
                                       >
-                                        <ArrowRight className="w-5 h-5" />
+                                        <ArrowRight className="w-4 h-4" />
                                       </motion.div>
                                     </div>
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-xs text-gray-500 mt-0.5">
                                       {navigationData.product[0].links[0].description}
                                     </p>
                                   </div>
@@ -272,23 +272,23 @@ export function Navigation() {
                             </NavigationMenu.Link>
 
                             {/* Divider */}
-                            <div className="mt-6 mb-5 relative">
+                            <div className="mt-4 mb-3 relative">
                               <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gradient-to-r from-purple-200 via-pink-200 to-purple-200"></div>
+                                <div className="w-full border-t border-purple-100"></div>
                               </div>
                               <div className="relative flex justify-center">
-                                <span className="px-3 text-xs font-medium text-purple-600 bg-white rounded-full">Products</span>
+                                <span className="px-2.5 text-xs font-semibold text-purple-600 bg-white rounded-full">Products</span>
                               </div>
                             </div>
                           </div>
                         )}
 
                         {/* Product Categories Grid */}
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 gap-4">
                           {navigationData.product.slice(1).map((category, categoryIndex) => (
                             <div key={category.category}>
-                              <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-3 flex items-center gap-2">
-                                <span className="w-4 h-0.5 bg-gradient-to-r from-purple-600 to-transparent rounded-full" />
+                              <h3 className="text-xs font-bold text-purple-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
+                                <span className="w-3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent rounded-full" />
                                 {category.category}
                               </h3>
                               <div className="space-y-1">
@@ -303,18 +303,18 @@ export function Navigation() {
                                       >
                                         <Link
                                           href={link.href}
-                                          className="group/item flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:via-pink-50/30 hover:to-purple-50/50 transition-all duration-300 relative overflow-hidden"
+                                          className="group/item flex items-start gap-2.5 px-2.5 py-2 rounded-xl hover:bg-gradient-to-br hover:from-purple-50 hover:via-pink-50/30 hover:to-purple-50/50 transition-all duration-300 relative overflow-hidden"
                                         >
                                           {/* Enhanced hover glow effect */}
                                           <span className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-500/8 via-pink-500/6 to-blue-500/5 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
 
                                           {/* Icon container with vibrant gradient */}
                                           <motion.div
-                                            className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 via-pink-50 to-purple-50 text-purple-600 flex-shrink-0"
+                                            className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-purple-100 via-pink-50 to-purple-50 text-purple-600 flex-shrink-0"
                                             whileHover={{ scale: 1.1, rotate: 5 }}
                                             transition={{ type: "spring", stiffness: 400, damping: 17 }}
                                           >
-                                            <Icon className="w-5 h-5 relative z-10" />
+                                            <Icon className="w-4.5 h-4.5 relative z-10" />
                                             <motion.div
                                               className="absolute inset-0 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/15 blur-md"
                                               animate={{ opacity: [0, 0.7, 0] }}
@@ -359,38 +359,84 @@ export function Navigation() {
                       <span className="relative z-10">Solutions</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-xs p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                        <div className="space-y-1">
-                          {navigationData.solutions.map((link, index) => {
+                    <NavigationMenu.Content className="w-max max-w-xs p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                        {/* Featured "All Solutions" Item */}
+                        {navigationData.solutions[0] && (
+                          <>
+                            <NavigationMenu.Link asChild>
+                              <motion.div
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                <Link
+                                  href={navigationData.solutions[0].href}
+                                  className="group/featured relative flex items-center gap-2.5 p-3 mb-3 rounded-xl border border-blue-200/60 hover:border-blue-300 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-teal-50/30 hover:from-blue-100/60 hover:via-purple-100/40 hover:to-teal-100/40 transition-all duration-300 overflow-hidden"
+                                >
+                                  {/* Hover glow */}
+                                  <span className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-teal-500/5 opacity-0 group-hover/featured:opacity-100 transition-opacity duration-300" />
+
+                                  {/* Icon */}
+                                  <motion.div
+                                    className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-teal-500 text-white flex-shrink-0"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                  >
+                                    <LayoutGrid className="w-5 h-5 relative z-10" />
+                                  </motion.div>
+
+                                  {/* Content */}
+                                  <div className="flex-1 relative z-10">
+                                    <div className="text-sm font-bold text-gray-900 group-hover/featured:text-blue-600 transition-colors">
+                                      {navigationData.solutions[0].label}
+                                    </div>
+                                    <div className="text-xs text-gray-500 mt-0.5">
+                                      {navigationData.solutions[0].description}
+                                    </div>
+                                  </div>
+
+                                  <ArrowRight className="w-4 h-4 text-blue-600 opacity-0 group-hover/featured:opacity-100 transition-opacity relative z-10" />
+                                </Link>
+                              </motion.div>
+                            </NavigationMenu.Link>
+
+                            {/* Subtle divider */}
+                            <div className="border-t border-blue-100/50 mb-3" />
+                          </>
+                        )}
+
+                        {/* Regular Solutions Items */}
+                        <div className="space-y-2">
+                          {navigationData.solutions.slice(1).map((link, index) => {
                             const Icon = link.icon;
                             return (
                               <NavigationMenu.Link key={link.href} asChild>
                                 <motion.div
                                   initial={{ opacity: 0, y: -5 }}
                                   animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: index * 0.03 }}
+                                  transition={{ delay: (index + 1) * 0.03 }}
                                 >
                                   <Link
                                     href={link.href}
-                                    className="group/item flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:via-purple-50/40 hover:to-teal-50/50 transition-all duration-300 relative overflow-hidden"
+                                    className="group/item flex items-center gap-2.5 px-3 py-3 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:via-purple-50/40 hover:to-teal-50/50 transition-all duration-300 relative overflow-hidden"
                                   >
                                     {/* Enhanced hover glow for solutions */}
                                     <span className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/8 via-purple-500/6 to-teal-500/5 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
 
                                     <motion.div
-                                      className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 via-purple-50 to-teal-50 text-blue-600 flex-shrink-0"
+                                      className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-blue-100 via-purple-50 to-teal-50 text-blue-600 flex-shrink-0"
                                       whileHover={{ scale: 1.1, rotate: 5 }}
                                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                                     >
-                                      <Icon className="w-5 h-5 relative z-10" />
+                                      <Icon className="w-4.5 h-4.5 relative z-10" />
                                       <motion.div
-                                        className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/15 blur-md"
+                                        className="absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/15 blur-md"
                                         animate={{ opacity: [0, 0.7, 0] }}
                                         transition={{ duration: 2, repeat: Infinity }}
                                       />
                                     </motion.div>
-                                    <div className="flex-1">
-                                      <div className="text-sm font-semibold text-gray-900 group-hover/item:text-purple-600 transition-colors">
+                                    <div className="flex-1 relative z-10">
+                                      <div className="text-sm font-semibold text-gray-900 group-hover/item:text-blue-600 transition-colors">
                                         {link.label}
                                       </div>
                                       <div className="text-xs text-gray-500 mt-0.5">
@@ -413,39 +459,173 @@ export function Navigation() {
                       <span className="relative z-10">Resources</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max max-w-sm p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                        <div className="grid grid-cols-2 gap-1">
-                          {navigationData.resources.map((link, index) => {
-                            const Icon = link.icon;
-                            return (
-                              <NavigationMenu.Link key={link.href} asChild>
-                                <motion.div
-                                  initial={{ opacity: 0, scale: 0.95 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  transition={{ delay: index * 0.02 }}
+                    <NavigationMenu.Content className="w-max max-w-md p-5 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                        {/* Featured "All Resources" Item */}
+                        {navigationData.resources[0] && (
+                          <>
+                            <NavigationMenu.Link asChild>
+                              <motion.div
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                <Link
+                                  href={navigationData.resources[0].href}
+                                  className="group/featured relative flex items-center gap-2.5 p-3 mb-3 rounded-xl border border-indigo-200/60 hover:border-indigo-300 bg-gradient-to-br from-indigo-50/50 via-purple-50/30 to-blue-50/30 hover:from-indigo-100/60 hover:via-purple-100/40 hover:to-blue-100/40 transition-all duration-300 overflow-hidden"
                                 >
-                                  <Link
-                                    href={link.href}
-                                    className="group/item flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50/70 transition-all duration-300 relative overflow-hidden"
-                                  >
-                                    {/* Enhanced hover glow for resources */}
-                                    <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/8 to-indigo-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+                                  {/* Hover glow */}
+                                  <span className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-blue-500/5 opacity-0 group-hover/featured:opacity-100 transition-opacity duration-300" />
 
-                                    <motion.div
-                                      whileHover={{ scale: 1.15, rotate: 8 }}
-                                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                      className="relative z-10"
+                                  {/* Icon */}
+                                  <motion.div
+                                    className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 text-white flex-shrink-0"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                  >
+                                    <LayoutGrid className="w-5 h-5 relative z-10" />
+                                  </motion.div>
+
+                                  {/* Content */}
+                                  <div className="flex-1 relative z-10">
+                                    <div className="text-sm font-bold text-gray-900 group-hover/featured:text-indigo-600 transition-colors">
+                                      {navigationData.resources[0].label}
+                                    </div>
+                                    <div className="text-xs text-gray-500 mt-0.5">
+                                      {navigationData.resources[0].description}
+                                    </div>
+                                  </div>
+
+                                  <ArrowRight className="w-4 h-4 text-indigo-600 opacity-0 group-hover/featured:opacity-100 transition-opacity relative z-10" />
+                                </Link>
+                              </motion.div>
+                            </NavigationMenu.Link>
+
+                            {/* Subtle divider */}
+                            <div className="border-t border-indigo-100/50 mb-4" />
+                          </>
+                        )}
+
+                        {/* Learn Section */}
+                        <div className="mb-4">
+                          <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
+                            <span className="w-3 h-0.5 bg-gradient-to-r from-indigo-600 to-transparent rounded-full" />
+                            Learn
+                          </h3>
+                          <div className="space-y-1 p-2 rounded-lg bg-gradient-to-br from-indigo-50/30 to-purple-50/20">
+                            {[navigationData.resources[1], navigationData.resources[2], navigationData.resources[5]].map((link, index) => {
+                              if (!link) return null;
+                              const Icon = link.icon;
+                              return (
+                                <NavigationMenu.Link key={link.href} asChild>
+                                  <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: (index + 1) * 0.03 }}
+                                  >
+                                    <Link
+                                      href={link.href}
+                                      className="group/item flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/70 transition-all duration-300 relative overflow-hidden"
                                     >
-                                      <Icon className="w-4 h-4 text-purple-600 flex-shrink-0" />
-                                    </motion.div>
-                                    <span className="text-sm font-medium text-gray-900 group-hover/item:text-purple-600 transition-colors relative z-10">
-                                      {link.label}
-                                    </span>
-                                  </Link>
-                                </motion.div>
-                              </NavigationMenu.Link>
-                            );
-                          })}
+                                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/8 to-purple-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+
+                                      <motion.div
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        className="relative z-10"
+                                      >
+                                        <Icon className="w-4 h-4 text-indigo-600 flex-shrink-0" />
+                                      </motion.div>
+                                      <span className="text-sm font-medium text-gray-900 group-hover/item:text-indigo-600 transition-colors relative z-10">
+                                        {link.label}
+                                      </span>
+                                    </Link>
+                                  </motion.div>
+                                </NavigationMenu.Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Product Section */}
+                        <div className="mb-4">
+                          <h3 className="text-xs font-bold text-purple-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
+                            <span className="w-3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent rounded-full" />
+                            Product
+                          </h3>
+                          <div className="grid grid-cols-2 gap-2">
+                            {[navigationData.resources[3], navigationData.resources[4], navigationData.resources[6], navigationData.resources[7], navigationData.resources[9]].map((link, index) => {
+                              if (!link) return null;
+                              const Icon = link.icon;
+                              return (
+                                <NavigationMenu.Link key={link.href} asChild>
+                                  <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: (index + 4) * 0.02 }}
+                                  >
+                                    <Link
+                                      href={link.href}
+                                      className="group/item flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50/70 transition-all duration-300 relative overflow-hidden"
+                                    >
+                                      <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/8 to-indigo-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+
+                                      <motion.div
+                                        whileHover={{ scale: 1.15, rotate: 8 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        className="relative z-10"
+                                      >
+                                        <Icon className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                                      </motion.div>
+                                      <span className="text-xs font-medium text-gray-900 group-hover/item:text-purple-600 transition-colors relative z-10">
+                                        {link.label}
+                                      </span>
+                                    </Link>
+                                  </motion.div>
+                                </NavigationMenu.Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Company Section */}
+                        <div>
+                          <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
+                            <span className="w-3 h-0.5 bg-gradient-to-r from-blue-600 to-transparent rounded-full" />
+                            Company
+                          </h3>
+                          <div className="grid grid-cols-2 gap-2">
+                            {[navigationData.resources[8], navigationData.resources[10], navigationData.resources[11]].map((link, index) => {
+                              if (!link) return null;
+                              const Icon = link.icon;
+                              return (
+                                <NavigationMenu.Link key={link.href} asChild>
+                                  <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: (index + 9) * 0.02 }}
+                                  >
+                                    <Link
+                                      href={link.href}
+                                      className="group/item flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50/70 transition-all duration-300 relative overflow-hidden"
+                                    >
+                                      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/8 to-purple-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+
+                                      <motion.div
+                                        whileHover={{ scale: 1.15, rotate: 8 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        className="relative z-10"
+                                      >
+                                        <Icon className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                                      </motion.div>
+                                      <span className="text-xs font-medium text-gray-900 group-hover/item:text-blue-600 transition-colors relative z-10">
+                                        {link.label}
+                                      </span>
+                                    </Link>
+                                  </motion.div>
+                                </NavigationMenu.Link>
+                              );
+                            })}
+                          </div>
                         </div>
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
