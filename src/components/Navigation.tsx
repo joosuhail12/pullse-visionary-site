@@ -70,7 +70,7 @@ const navigationData = {
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
-  const logoRef = useRef<HTMLAnchorElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
 
@@ -88,7 +88,7 @@ export function Navigation() {
   const shadowOpacity = useTransform(smoothProgress, [0, 1], [0.1, 0.1]); // Match dropdown: shadow-purple-500/10
 
   // Magnetic logo effect
-  const handleLogoMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!logoRef.current) return;
 
     const rect = logoRef.current.getBoundingClientRect();
