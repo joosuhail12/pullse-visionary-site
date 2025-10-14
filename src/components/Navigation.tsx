@@ -213,7 +213,7 @@ export function Navigation() {
                       <span className="relative z-10">Product</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="min-w-max p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="w-max max-w-lg p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured Overview Card */}
                         {navigationData.product[0].isOverview && (
                           <div className="mb-6">
@@ -359,7 +359,7 @@ export function Navigation() {
                       <span className="relative z-10">Solutions</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="min-w-max p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="w-max max-w-xs p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         <div className="space-y-1">
                           {navigationData.solutions.map((link, index) => {
                             const Icon = link.icon;
@@ -413,7 +413,7 @@ export function Navigation() {
                       <span className="relative z-10">Resources</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="min-w-max p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <NavigationMenu.Content className="w-max max-w-sm p-4 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         <div className="grid grid-cols-2 gap-1">
                           {navigationData.resources.map((link, index) => {
                             const Icon = link.icon;
