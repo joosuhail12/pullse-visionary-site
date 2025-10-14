@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import GenericPage from "@/views/GenericPage";
+import ProductAnalytics from "@/views/ProductAnalytics";
 
 export const metadata: Metadata = {
   title: "Analytics & Reporting | Pullse",
-  description: "Comprehensive dashboards tracking volumes, resolution rates, and team performance.",
+  description: "Real-time dashboards, custom reports, and ROI tracking. Turn support data into strategic decisions with Pullse Analytics.",
 };
 
-const AnalyticsPage = () => (
-  <GenericPage
-    title="Analytics & Reporting"
-    description="Comprehensive dashboards tracking volumes, resolution rates, and team performance."
-  />
-);
+const AnalyticsPage = () => <ProductAnalytics />;
 
 export default AnalyticsPage;

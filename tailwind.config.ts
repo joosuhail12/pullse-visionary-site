@@ -114,6 +114,10 @@ export default {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(100%)" },
         },
+        "shimmer": {
+          "0%": { backgroundPosition: "-250% 0" },
+          "100%": { backgroundPosition: "250% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +130,7 @@ export default {
         "glow": "glow 2s ease-in-out infinite",
         "blob": "blob 7s infinite",
         "scan": "scan 2s ease-in-out infinite",
+        "shimmer": "shimmer 3s ease-in-out infinite",
       },
       animationDelay: {
         "2000": "2s",

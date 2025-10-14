@@ -26,7 +26,7 @@ import VideoEmbed from "@/components/VideoEmbed";
 import PlatformOverview from "@/components/PlatformOverview";
 import MagicBento, { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
-import WhyFullStackSection from "@/components/WhyFullStackSection";
+import InteractiveHowItWorks from "@/components/InteractiveHowItWorks";
 import RoiCalculator from "@/components/RoiCalculator";
 import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
@@ -550,7 +550,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       </section>
 
       <PlatformOverview />
-      <WhyFullStackSection />
+      <InteractiveHowItWorks />
 
       {/* Redesigned Use cases section - Card Grid Layout */}
       <section className="relative py-24 md:py-32 bg-muted/5">

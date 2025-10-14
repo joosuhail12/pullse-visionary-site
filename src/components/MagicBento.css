@@ -216,9 +216,9 @@
     grid-row: 3 / 5;
   }
 
-  /* Row 4: Card 6 (full width) */
+  /* Row 4: Card 6 and Card 7 (two equal cards) */
   .card:nth-child(6) {
-    grid-column: 1 / 7;
+    grid-column: 1 / 4;
     grid-row: 5 / 7;
   }
 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
-    <body className={inter.className}>
+    <body className={inter.className} suppressHydrationWarning>
       <Providers>{children}</Providers>
     </body>
   </html>

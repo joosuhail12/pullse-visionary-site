@@ -9,14 +9,12 @@ import { ArrowRight, TrendingDown } from "lucide-react";
 const MEDIAN_SALARY_YEARLY = 45000; // $45k/year
 const TRADITIONAL_PLATFORM_LICENSE = 140; // $140/month per user
 const TRADITIONAL_AUTOMATION_RATE = 0.20; // 20% automation
-const TRADITIONAL_AUTOMATION_COST = 0.60; // $0.60 per ticket
+const TRADITIONAL_AUTOMATION_COST = 1.00; // $1.00 per automated ticket
 
 const PULLSE_LICENSE = 80; // $80/month per user
 const PULLSE_AUTOMATION_RATE = 0.70; // 70% automation
-const PULLSE_AUTOMATION_COST = 0.15; // $0.15 per ticket
-
-const HOURS_PER_MONTH = 160; // Working hours per month
-const TICKETS_PER_REP_MONTH = 1200; // 12000 tickets / 10 reps = 1200 per rep
+const PULLSE_AUTOMATION_COST = 0.24; // $0.24 per automated ticket
+const PULLSE_PRODUCTIVITY_BOOST = 1.30; // 30% capacity increase with Pullse
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
@@ -32,6 +30,8 @@ const RoiCalculator = () => {
     const monthlySalaryCost = (MEDIAN_SALARY_YEARLY / 12) * reps;
     const platformLicenseCost = TRADITIONAL_PLATFORM_LICENSE * reps;
     const automatedTickets = tickets * TRADITIONAL_AUTOMATION_RATE;
+    const manualTickets = tickets - automatedTickets;
+    const perRepCapacity = manualTickets / reps; // Calculate legacy capacity per rep
     const automationCost = automatedTickets * TRADITIONAL_AUTOMATION_COST;
     const totalCost = monthlySalaryCost + platformLicenseCost + automationCost;
 
@@ -41,6 +41,8 @@ const RoiCalculator = () => {
       licenseCost: platformLicenseCost,
       automationCost,
       automatedTickets,
+      manualTickets,
+      perRepCapacity,
       totalCost,
     };
   }, [reps, tickets]);
@@ -50,8 +52,11 @@ const RoiCalculator = () => {
     const automatedTickets = tickets * PULLSE_AUTOMATION_RATE;
     const manualTickets = tickets - automatedTickets;
 
-    // With 70% automation, we need fewer reps to handle remaining tickets
-    const requiredReps = Math.ceil(manualTickets / TICKETS_PER_REP_MONTH);
+    // Calculate Pullse per-rep capacity: legacy capacity boosted by 30%
+    const pullsePerRepCapacity = traditional.perRepCapacity * PULLSE_PRODUCTIVITY_BOOST;
+
+    // Calculate required reps based on boosted capacity
+    const requiredReps = Math.ceil(manualTickets / pullsePerRepCapacity);
 
     const monthlySalaryCost = (MEDIAN_SALARY_YEARLY / 12) * requiredReps;
     const platformLicenseCost = PULLSE_LICENSE * requiredReps;
@@ -64,9 +69,10 @@ const RoiCalculator = () => {
       licenseCost: platformLicenseCost,
       automationCost,
       automatedTickets,
+      perRepCapacity: pullsePerRepCapacity,
       totalCost,
     };
-  }, [tickets]);
+  }, [tickets, traditional]);
 
   const savings = traditional.totalCost - pullse.totalCost;
   const savingsPercentage = ((savings / traditional.totalCost) * 100);
@@ -127,9 +133,10 @@ const RoiCalculator = () => {
         <div className="rounded-2xl border border-border/50 bg-background p-5 space-y-4">
           <div>
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
-              Traditional
+              Traditional Setup
             </div>
-            <div className="text-3xl font-bold text-foreground">100%</div>
+            <div className="text-3xl font-bold text-foreground">{formatCurrency(traditional.totalCost)}</div>
+            <div className="text-xs text-muted-foreground">per month</div>
           </div>
 
           <div className="space-y-3">
@@ -175,7 +182,8 @@ const RoiCalculator = () => {
             <div className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
               With Pullse
             </div>
-            <div className="text-3xl font-bold text-primary">{(100 - savingsPercentage).toFixed(0)}%</div>
+            <div className="text-3xl font-bold text-primary">{formatCurrency(pullse.totalCost)}</div>
+            <div className="text-xs text-primary/70">per month ({(100 - savingsPercentage).toFixed(0)}% of traditional)</div>
           </div>
 
           <div className="space-y-3">
@@ -216,12 +224,13 @@ const RoiCalculator = () => {
       <div className="rounded-2xl border border-primary/40 bg-gradient-to-r from-primary/10 to-primary/5 p-6">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="text-center md:text-left">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-1">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-2">
               <TrendingDown className="h-3 w-3" />
               Total Savings
             </div>
-            <div className="text-5xl font-bold text-primary mb-1">{savingsPercentage.toFixed(0)}%</div>
-            <p className="text-xs text-muted-foreground">lower operating cost</p>
+            <div className="text-5xl font-bold text-primary mb-1">{formatCurrency(savings)}</div>
+            <p className="text-xs text-muted-foreground">per month ({savingsPercentage.toFixed(0)}% savings)</p>
+            <p className="text-sm font-semibold text-primary mt-2">{formatCurrency(savings * 12)}/year</p>
           </div>
 
           <div className="h-px md:h-12 md:w-px bg-border/40 w-full md:w-auto" />
@@ -236,7 +245,7 @@ const RoiCalculator = () => {
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Automated</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">+250%</div>
+              <div className="text-2xl font-bold text-primary">+50%</div>
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Auto Increase</div>
             </div>
           </div>
