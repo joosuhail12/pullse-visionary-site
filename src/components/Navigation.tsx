@@ -666,7 +666,7 @@ export function Navigation() {
 
                 {/* Viewport for dropdown content - Required by Radix NavigationMenu */}
                 <div className="perspective-[2000px] absolute top-full left-0 flex justify-start w-full">
-                  <NavigationMenu.Viewport className="relative mt-3 origin-top-center overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 transition-all duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 h-[var(--radix-navigation-menu-viewport-height)] w-full" />
+                  <NavigationMenu.Viewport className="relative mt-3 origin-top-center overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 transition-all duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 h-[var(--radix-navigation-menu-viewport-height)] w-auto" />
                 </div>
               </NavigationMenu.Root>
 
