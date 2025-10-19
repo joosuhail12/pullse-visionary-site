@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import GenericPage from "@/views/GenericPage";
+import Blog from "@/views/Blog";
 
 export const metadata: Metadata = {
-  title: "Blog | Pullse",
-  description: "Insights, tips, and customer stories.",
+  title: "Blog | Pullse - AI Support Insights & Customer Stories",
+  description: "Explore AI-powered support insights, product updates, and customer success stories. Learn how leading teams are transforming customer experience with Pullse.",
 };
 
-const BlogPage = () => (
-  <GenericPage title="Blog" description="Insights, tips, and customer stories." />
-);
+const BlogPage = () => <Blog />;
 
 export default BlogPage;
