@@ -6,17 +6,13 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink, Linkedin } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Timeline from '@/components/company/Timeline';
-import ValueCard from '@/components/company/ValueCard';
-import TeamMember from '@/components/company/TeamMember';
-import FragmentationDiagram from '@/components/company/FragmentationDiagram';
-import SaaSSprawlStats from '@/components/company/SaaSSprawlStats';
-import PlatformVisionPreview from '@/components/company/PlatformVisionPreview';
-import StoryCard from '@/components/company/StoryCard';
 import MissionVisionSplit from '@/components/company/MissionVisionSplit';
-import ScrollProgress from '@/components/company/ScrollProgress';
+import StoryQuoteBlock from '@/components/company/StoryQuoteBlock';
+import PrincipleCard from '@/components/company/PrincipleCard';
 import {
   story,
   mission,
@@ -26,227 +22,174 @@ import {
   team,
   antler,
   cta,
-  whySupportFirst,
+  platformVision,
 } from '@/data/companyData';
+import antlerLogo from '@/assets/antler-logo.png';
 
 const Company = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
-  // Parallax effect for hero section
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // Subtle parallax for hero (less dramatic, more professional)
+  const heroY = useTransform(scrollY, [0, 400], [0, 80]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.25} />
       <Navigation />
 
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-4">
-          {/* HERO SECTION - "The Call to Adventure" */}
+          {/* ========================================
+              SECTION 1: HERO - "The Vision"
+          ======================================== */}
           <motion.div
             ref={heroRef}
             style={{ y: heroY, opacity: heroOpacity }}
             className="max-w-5xl mx-auto text-center mb-32 relative"
           >
-            {/* Animated background numbers */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <motion.div
-                className="absolute top-0 left-10 text-9xl font-bold text-gray-100"
-                animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                100+
-              </motion.div>
-              <motion.div
-                className="absolute top-20 right-10 text-7xl font-bold text-gray-100"
-                animate={{
-                  y: [0, 20, 0],
-                  opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-              >
-                $3.2M
-              </motion.div>
-            </div>
-
-            {/* Content */}
             <div className="relative z-10">
+              {/* Antler Badge - Subtle */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 mb-8 shadow-lg"
+                transition={{ delay: 0.1, duration: 0.4 }}
+                className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gray-200 bg-white/90 backdrop-blur-sm mb-8 shadow-sm"
               >
-                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  🚀 Backed by Antler | Building in Public
+                <Image
+                  src={antlerLogo}
+                  alt="Antler"
+                  width={60}
+                  height={24}
+                  className="h-5 w-auto"
+                />
+                <span className="text-sm font-medium text-muted-foreground">
+                  Backed by Antler
                 </span>
               </motion.div>
 
+              {/* Main Headline */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
               >
-                Every Business Uses{' '}
-                <span className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                  100+ Disconnected Tools
-                </span>
+                Building the Operating System
                 <br />
-                <span className="text-4xl md:text-5xl lg:text-6xl block mt-4">
-                  We're Building{' '}
-                  <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-                    One Unified AI Brain
-                  </span>
+                <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+                  for AI-Native Business
                 </span>
               </motion.h1>
 
+              {/* Subheadline */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto"
               >
-                Starting with customer support. Building the future of business
-                software.
+                Starting with customer support. Scaling to every business function.
               </motion.p>
 
+              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                transition={{ delay: 0.4, duration: 0.5 }}
               >
                 <Button
                   size="lg"
-                  className="animate-glow-pulse-strong text-lg px-8 py-6"
+                  className="text-lg px-8 py-6 shadow-xl shadow-primary/20"
                   asChild
                 >
                   <Link href={cta.primaryCTA.link}>
                     {cta.primaryCTA.text}
-                    <ArrowRight className="ml-2 h-6 w-6" />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-              </motion.div>
-
-              {/* Scroll indicator */}
-              <motion.div
-                className="mt-16 flex flex-col items-center gap-2 text-muted-foreground"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="text-sm">Scroll to begin the journey</span>
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* STORY SECTION - "The Journey Begins" with 3D Flip Cards */}
+          {/* ========================================
+              SECTION 2: THE STORY - "Why We Exist"
+          ======================================== */}
           <div className="max-w-7xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-200 mb-4">
-                <span className="text-sm font-bold text-purple-600 uppercase tracking-wide">
-                  Chapter 1: The Journey
-                </span>
-              </div>
-              <h2 className="text-5xl font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Why We're Building Pullse
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                From chaos to clarity - the path to unified AI
+                The journey from chaos to clarity
               </p>
             </motion.div>
 
-            {/* 3D Flip Story Cards */}
-            <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 mb-20">
-              <StoryCard
-                type="problem"
-                emoji="😰"
-                title="The Ordinary World"
+            <div className="space-y-16">
+              {/* Problem */}
+              <StoryQuoteBlock
+                title="The Problem We Saw"
+                quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
                 content={story.problem}
                 index={0}
+                accentColor="red"
               />
-              <StoryCard
-                type="insight"
-                emoji="💡"
-                title="The Revelation"
+
+              {/* Visual Connector */}
+              <div className="flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center gap-3"
+                >
+                  <div className="w-px h-12 bg-gradient-to-b from-red-600/50 to-blue-600/50" />
+                  <div className="w-3 h-3 rounded-full bg-blue-600" />
+                </motion.div>
+              </div>
+
+              {/* Insight */}
+              <StoryQuoteBlock
+                title="The Insight"
+                quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
                 content={story.insight}
-                highlightQuote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
                 index={1}
+                accentColor="blue"
               />
-              <StoryCard
-                type="solution"
-                emoji="✨"
-                title="The Quest"
+
+              {/* Visual Connector */}
+              <div className="flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center gap-3"
+                >
+                  <div className="w-px h-12 bg-gradient-to-b from-blue-600/50 to-purple-600/50" />
+                  <div className="w-3 h-3 rounded-full bg-purple-600" />
+                </motion.div>
+              </div>
+
+              {/* Solution */}
+              <StoryQuoteBlock
+                title="What We're Building"
+                quote="The future isn't more specialized tools—it's unified AI-native platforms."
                 content={story.solution}
                 index={2}
+                accentColor="purple"
               />
-            </div>
-
-            {/* SaaS Sprawl Stats - Data Evidence */}
-            <div className="mb-20">
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-center mb-12"
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-200 mb-4">
-                  <span className="text-sm font-bold text-red-600 uppercase tracking-wide">
-                    The Evidence
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold">
-                  The Cost of Fragmentation
-                </h3>
-              </motion.div>
-              <SaaSSprawlStats />
-            </div>
-
-            {/* Fragmentation Diagram - Visual Comparison */}
-            <div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-center mb-12"
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-200 mb-4">
-                  <span className="text-sm font-bold text-blue-600 uppercase tracking-wide">
-                    The Transformation
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold">
-                  From Chaos to Unity
-                </h3>
-              </motion.div>
-              <FragmentationDiagram />
             </div>
           </div>
 
-          {/* MISSION & VISION - "The Destination" with Interactive Split */}
+          {/* ========================================
+              SECTION 3: MISSION & VISION
+          ======================================== */}
           <div className="max-w-7xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -254,238 +197,287 @@ const Company = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-200 mb-4">
-                <span className="text-sm font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent uppercase tracking-wide">
-                  Chapter 2: The Destination
-                </span>
-              </div>
-              <h2 className="text-5xl font-bold mb-6">
-                Where We Are & Where We're Going
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Our Mission & Vision
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our mission today, our vision for tomorrow
+                Where we're going and how we'll get there
               </p>
             </motion.div>
 
             <MissionVisionSplit mission={mission} vision={vision} />
           </div>
 
-          {/* PLATFORM VISION - "The Ultimate Goal" */}
+          {/* ========================================
+              SECTION 4: WHAT WE STAND FOR
+          ======================================== */}
           <div className="max-w-7xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-200 mb-4">
-                <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent uppercase tracking-wide">
-                  Chapter 3: The Reward
-                </span>
-              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Principles That Guide Us
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                The core beliefs that shape everything we build
+              </p>
             </motion.div>
-            <PlatformVisionPreview />
+
+            {/* 4 Core Principles - 2x2 Grid */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {values.map((value, index) => (
+                <PrincipleCard
+                  key={value.title}
+                  icon={value.icon}
+                  title={value.title}
+                  description={value.description}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* WHY SUPPORT FIRST - "Crossing the Threshold" */}
-          <div className="max-w-6xl mx-auto mb-40">
+          {/* ========================================
+              SECTION 5: THE TEAM & JOURNEY
+          ======================================== */}
+          <div className="max-w-7xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-20"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-200 mb-4">
-                <span className="text-sm font-bold text-purple-600 uppercase tracking-wide">
-                  Chapter 4: The Strategy
-                </span>
-              </div>
-              <h2 className="text-4xl font-bold mb-6">
-                {whySupportFirst.headline}
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Who's Building This
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Every quest needs a starting point. Here's why customer support
-                is ours.
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                The team and journey behind Pullse
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {whySupportFirst.reasons.map((reason, index) => {
-                const Icon = reason.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="glass-elevated p-8 rounded-3xl hover-tilt group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform">
-                        <Icon className="w-7 h-7 text-white" />
+            {/* Team Section */}
+            <div className="max-w-4xl mx-auto mb-20">
+              {team.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass-strong rounded-3xl p-10 md:p-12 border-2 border-gray-200 shadow-xl"
+                >
+                  <div className="flex flex-col md:flex-row gap-8 items-start">
+                    {/* Avatar/Photo */}
+                    <div className="flex-shrink-0">
+                      {member.image ? (
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          width={160}
+                          height={160}
+                          className="rounded-2xl"
+                        />
+                      ) : (
+                        <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/20">
+                          <span className="text-5xl font-bold text-primary">
+                            {member.name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 space-y-6">
+                      {/* Header */}
+                      <div>
+                        <h3 className="text-3xl font-bold mb-2">{member.name}</h3>
+                        <p className="text-lg text-primary font-semibold">{member.title}</p>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-3">
-                          {reason.title}
-                        </h3>
-                        <p className="text-base text-muted-foreground leading-relaxed">
-                          {reason.description}
-                        </p>
+
+                      {/* Bio */}
+                      <p className="text-lg leading-relaxed text-muted-foreground">
+                        {member.bio}
+                      </p>
+
+                      {/* Background */}
+                      {member.background && (
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200">
+                          <p className="text-sm font-semibold text-foreground mb-2">Background</p>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {member.background}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Why This */}
+                      {member.whyThis && (
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
+                          <p className="text-sm font-semibold text-primary mb-2">Why This Mission</p>
+                          <p className="text-sm text-foreground leading-relaxed italic">
+                            "{member.whyThis}"
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Links */}
+                      <div className="flex gap-4">
+                        {member.linkedin && (
+                          <a
+                            href={member.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                          >
+                            <Linkedin className="h-4 w-4" />
+                            LinkedIn
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
                       </div>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* TIMELINE - "The Path" with Scroll Progress */}
-          <div className="max-w-7xl mx-auto mb-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-200 mb-4">
-                <span className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent uppercase tracking-wide">
-                  Chapter 5: The Journey
-                </span>
-              </div>
-              <h2 className="text-5xl font-bold mb-6">Our Path Forward</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Every step brings us closer to the future of unified AI
-              </p>
-            </motion.div>
-
-            <ScrollProgress>
-              <Timeline milestones={timeline} />
-            </ScrollProgress>
-          </div>
-
-          {/* VALUES - "The Principles" */}
-          <div className="max-w-6xl mx-auto mb-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-200 mb-4">
-                <span className="text-sm font-bold text-teal-600 uppercase tracking-wide">
-                  Chapter 6: The Principles
-                </span>
-              </div>
-              <h2 className="text-5xl font-bold mb-6">Our Values</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                The core beliefs that guide every decision we make
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {values.map((value, index) => (
-                <ValueCard key={index} value={value} index={index} />
+                  </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
 
-          {/* TEAM - "The Heroes" */}
-          <div className="max-w-6xl mx-auto mb-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-200 mb-4">
-                <span className="text-sm font-bold text-orange-600 uppercase tracking-wide">
-                  Chapter 7: The Heroes
-                </span>
-              </div>
-              <h2 className="text-5xl font-bold mb-6">Meet the Builders</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                The team on this quest to transform business software
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {team.map((member, index) => (
-                <TeamMember key={index} member={member} index={index} />
-              ))}
-            </div>
-          </div>
-
-          {/* ANTLER - "The Mentor" */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center mb-40"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-200 mb-8">
-              <span className="text-sm font-bold text-indigo-600 uppercase tracking-wide">
-                Our Mentor
-              </span>
-            </div>
-
-            <div className="glass-elevated p-12 rounded-3xl border-glow">
-              <div className="mb-6 flex justify-center">
-                <div className="text-4xl font-bold text-gray-400">ANTLER</div>
-              </div>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                {antler.description}
-              </p>
-              <a
-                href={antler.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold text-lg group"
+              {/* Antler Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="mt-8 p-8 rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 to-purple-50/30"
               >
-                Learn more about Antler
-                <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+                <div className="flex items-center gap-6">
+                  <Image
+                    src={antlerLogo}
+                    alt="Antler"
+                    width={80}
+                    height={32}
+                    className="h-8 w-auto"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {antler.description}
+                    </p>
+                  </div>
+                  <a
+                    href={antler.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0"
+                  >
+                    <Button variant="outline" size="sm">
+                      Learn more
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
 
-          {/* FINAL CTA - "Join the Quest" */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="relative glass-gradient p-16 rounded-3xl text-center overflow-hidden border-2 border-purple-500/30 shadow-2xl">
-              {/* Animated gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 animate-mesh"></div>
+            {/* Journey Timeline */}
+            <div className="mb-20">
+              <h3 className="text-3xl font-bold text-center mb-12">The Journey</h3>
+              <Timeline milestones={timeline} />
+            </div>
 
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-purple-200 mb-6">
-                  <span className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent uppercase tracking-wide">
-                    Final Chapter: Your Turn
+            {/* Platform Vision - Simplified */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto text-center space-y-12"
+            >
+              <div>
+                <h3 className="text-3xl font-bold mb-6">{platformVision.headline}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {platformVision.description}
+                </p>
+              </div>
+
+              {/* Current Focus */}
+              <div className="p-10 rounded-3xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 to-primary/5 shadow-xl">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <platformVision.currentFocus.icon className="h-8 w-8 text-primary" />
+                  <h4 className="text-2xl font-bold">{platformVision.currentFocus.name}</h4>
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-3">
+                  <span className="text-sm font-bold text-primary">
+                    {platformVision.currentFocus.status}
                   </span>
                 </div>
+                <p className="text-sm text-muted-foreground">
+                  {platformVision.currentFocus.tagline}
+                </p>
+              </div>
 
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              {/* Future Vision */}
+              <div className="p-10 rounded-3xl border-2 border-gray-200 bg-gradient-to-br from-gray-50 to-white">
+                <h4 className="text-2xl font-bold mb-6">{platformVision.futureVision.title}</h4>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  {platformVision.futureVision.description}
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {platformVision.futureVision.examples.map((example) => (
+                    <div
+                      key={example}
+                      className="px-5 py-2.5 rounded-full bg-gray-100 border border-gray-200 text-sm font-medium text-muted-foreground"
+                    >
+                      {example}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ========================================
+              SECTION 6: FINAL CTA
+          ======================================== */}
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-3xl border-2 border-gray-200 bg-gradient-to-br from-white via-white to-gray-50/50 shadow-2xl p-12 md:p-16 text-center"
+            >
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+
+              <div className="relative z-10 space-y-8">
+                <h2 className="text-4xl md:text-5xl font-bold">
                   {cta.headline}
                 </h2>
-                <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                   {cta.description}
                 </p>
 
                 <Button
                   size="lg"
-                  className="animate-glow-pulse-strong text-lg px-10 py-7 shadow-2xl"
+                  className="text-lg px-10 py-7 shadow-xl shadow-primary/20"
                   asChild
                 >
                   <Link href={cta.primaryCTA.link}>
                     {cta.primaryCTA.text}
-                    <ArrowRight className="ml-3 h-6 w-6" />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
+
+                {/* Trust Indicators */}
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-gray-200">
+                  <div className="flex items-center gap-2">
+                    <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto opacity-60" />
+                    <span className="text-sm text-muted-foreground">Antler-backed</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">Launching Q4 2025</span>
+                  <span className="text-sm text-muted-foreground">Limited early access</span>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
 

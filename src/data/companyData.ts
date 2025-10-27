@@ -37,10 +37,14 @@ export interface Value {
 export interface TeamMember {
   name: string;
   role: string;
-  bio: string;
+  title: string; // e.g., "Co-founder & CEO"
+  bio: string; // Extended bio
+  background?: string; // Previous experience highlight
+  whyThis?: string; // Why this mission matters
   image?: string;
   linkedin?: string;
   twitter?: string;
+  email?: string;
 }
 
 export const story = {
@@ -106,65 +110,42 @@ export const timeline: Milestone[] = [
 
 export const values: Value[] = [
   {
-    icon: Layers,
-    title: "First Principles Thinking",
+    icon: Brain,
+    title: "AI-Native by Design",
     description:
-      "We don't accept 'how things are done.' We question fundamental assumptions, understand core principles (like AI + aggregation), and build from the ground up. That's how we saw the future others missed.",
-  },
-  {
-    icon: Users,
-    title: "Customer First",
-    description:
-      "Even before our first customer, every decision starts with one question: Will this genuinely help teams succeed? We build for real people solving real problems.",
+      "We don't bolt AI onto legacy software. Every solution is built from the ground up for AI aggregation—because AI gets smarter by connecting data, not fragmenting it. We question assumptions, understand first principles, and build the future others don't see yet.",
   },
   {
     icon: Eye,
-    title: "Build in Public",
+    title: "Radically Transparent",
     description:
-      "Transparent about our journey, our pricing, and our roadmap. No hidden costs, no surprise fees, no marketing fluff. What you see is what you get.",
-  },
-  {
-    icon: Lightbulb,
-    title: "AI-Native Philosophy",
-    description:
-      "Not AI bolted onto legacy software - every solution built for AI from day one. We design for aggregation, not fragmentation, because that's how AI gets smarter.",
+      "We build in public. Our pricing, roadmap, and journey are completely open. No hidden costs, no surprise fees, no marketing fluff. Real pricing comparisons. Honest about what we're building and where we're headed. Trust through transparency.",
   },
   {
     icon: Heart,
-    title: "Keep It Simple",
+    title: "Customer Obsessed",
     description:
-      "One platform per function. Transparent pricing. No expensive add-ons. Complexity is the enemy of usability, and we're ruthlessly committed to simplicity.",
+      "Even before our first customer, every decision starts with one question: Will this genuinely help teams succeed? We're ruthlessly committed to simplicity—one platform per function, no expensive add-ons, no complexity. Real people. Real problems. Real solutions.",
   },
   {
-    icon: TrendingUp,
-    title: "Move Fast",
+    icon: Zap,
+    title: "Speed & Conviction",
     description:
-      "Ship quickly, learn from feedback, iterate constantly. The faster we ship, the faster we learn what actually helps teams succeed.",
-  },
-  {
-    icon: Shield,
-    title: "Honest & Transparent",
-    description:
-      "Real pricing comparisons. Acknowledging competitor strengths. Clear about what we're building and where we're headed. Trust through transparency.",
+      "Ship quickly. Learn from feedback. Iterate constantly. The faster we ship, the faster we learn what actually helps teams succeed. We move with conviction because the world needs better business software now, not years from now.",
   },
 ];
 
 export const team: TeamMember[] = [
   {
-    name: "Your Name",
-    role: "Co-founder & CEO",
-    bio: "Previously led customer support operations at [Company]. After years of struggling with complex, expensive platforms, decided to build the tool teams actually want to use. Joined Antler in October 2024 to make it happen.",
-    image: "/team/founder-1.jpg", // Placeholder
+    name: "Suhail Joo",
+    role: "Founder",
+    title: "Founder & CEO",
+    bio: "Building Pullse to solve the AI-native business software problem from first principles.",
+    background: "Previously worked in customer support operations, experiencing firsthand the pain of fragmented tools and disconnected systems. Saw the opportunity to rebuild business software for the AI era.",
+    whyThis: "After years of watching teams struggle with 100+ disconnected tools, I realized AI changes everything. The future isn't more specialized point solutions—it's unified platforms where AI gets smarter through aggregation, not fragmentation.",
+    image: undefined, // Will use initials fallback
     linkedin: "https://linkedin.com/in/yourprofile",
   },
-  // Add more team members as needed
-  // {
-  //   name: "Co-founder Name",
-  //   role: "Co-founder & CTO",
-  //   bio: "Engineering leader with experience building scalable AI systems. Passionate about making powerful technology accessible.",
-  //   image: "/team/founder-2.jpg",
-  //   linkedin: "https://linkedin.com/in/cofounder",
-  // },
 ];
 
 export const antler = {
@@ -219,38 +200,19 @@ export const whySupportFirst = {
 };
 
 export const platformVision = {
-  headline: "The Future: Unified AI Business Operations",
+  headline: "Beyond Customer Support",
   description:
-    "Customer support is just the beginning. We're building toward a future where every business function has its own specialized, end-to-end AI-native solution - all connected by a central company brain.",
-  functions: [
-    {
-      name: "Customer Support",
-      status: "building",
-      description: "End-to-end AI-native support platform (launching Q4 2025)",
-      icon: Users,
-    },
-    {
-      name: "Sales & CRM",
-      status: "future",
-      description: "AI-powered sales automation and relationship management",
-      icon: TrendingUp,
-    },
-    {
-      name: "Marketing",
-      status: "future",
-      description: "Autonomous campaign management and content creation",
-      icon: Sparkles,
-    },
-    {
-      name: "Operations",
-      status: "future",
-      description: "Workflow automation and process optimization",
-      icon: Workflow,
-    },
-  ],
-  companyBrain: {
-    title: "The Company Brain",
+    "We're starting with customer support, but the vision is bigger: AI-native solutions for every business function, all unified by a central intelligence that understands your entire company.",
+  currentFocus: {
+    name: "Customer Support",
+    status: "Building Now",
+    tagline: "Launching Q4 2025",
+    icon: Users,
+  },
+  futureVision: {
+    title: "The Unified Future",
     description:
-      "All functions connected by a central AI that understands your entire business - your customers, your team, your goals. The more functions you use, the smarter the whole system becomes.",
+      "Imagine AI-native solutions for sales, marketing, operations—all connected. The more functions you use, the smarter the entire system becomes. One company brain, infinite possibilities.",
+    examples: ["Sales & CRM", "Marketing", "Operations"],
   },
 };
