@@ -146,6 +146,16 @@ export const team: TeamMember[] = [
     image: undefined, // Will use initials fallback
     linkedin: "https://linkedin.com/in/yourprofile",
   },
+  {
+    name: "Manminder Tomar",
+    role: "Co-founder",
+    title: "Co-founder & CTO",
+    bio: "Leading the technical vision and architecture for Pullse's AI-native platform.",
+    background: "Engineering leader with deep experience in building scalable systems and AI infrastructure. Passionate about creating technology that's both powerful and accessible.",
+    whyThis: "The best products come from understanding both the problem deeply and the technology intimately. AI-native platforms require rethinking architecture from the ground up—that's the challenge that excites me.",
+    image: undefined, // Will use initials fallback
+    linkedin: "https://linkedin.com/in/manminder-tomar",
+  },
 ];
 
 export const antler = {
