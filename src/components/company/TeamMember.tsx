@@ -11,16 +11,52 @@ interface TeamMemberProps {
 }
 
 const TeamMember = ({ member, index }: TeamMemberProps) => {
+  // Define unique gradients for each team member
+  const gradients = [
+    {
+      bg: 'from-purple-600 to-pink-600',
+      light: 'from-purple-100 to-pink-100',
+      shadow: 'hover:shadow-purple-500/10',
+    },
+    {
+      bg: 'from-blue-600 to-indigo-600',
+      light: 'from-blue-100 to-indigo-100',
+      shadow: 'hover:shadow-blue-500/10',
+    },
+    {
+      bg: 'from-teal-600 to-cyan-600',
+      light: 'from-teal-100 to-cyan-100',
+      shadow: 'hover:shadow-teal-500/10',
+    },
+    {
+      bg: 'from-orange-600 to-amber-600',
+      light: 'from-orange-100 to-amber-100',
+      shadow: 'hover:shadow-orange-500/10',
+    },
+    {
+      bg: 'from-pink-600 to-rose-600',
+      light: 'from-pink-100 to-rose-100',
+      shadow: 'hover:shadow-pink-500/10',
+    },
+    {
+      bg: 'from-green-600 to-emerald-600',
+      light: 'from-green-100 to-emerald-100',
+      shadow: 'hover:shadow-green-500/10',
+    },
+  ];
+
+  const gradient = gradients[index % gradients.length];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass-strong rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
+      className={`glass-strong rounded-3xl overflow-hidden hover:shadow-xl ${gradient.shadow} transition-all duration-300`}
     >
       {/* Image Section */}
-      <div className="relative h-64 bg-gradient-to-br from-purple-100 to-pink-100">
+      <div className={`relative h-64 bg-gradient-to-br ${gradient.light}`}>
         {member.image ? (
           <Image
             src={member.image}
@@ -30,7 +66,7 @@ const TeamMember = ({ member, index }: TeamMemberProps) => {
           />
         ) : (
           // Placeholder avatar with initials
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-600 to-pink-600">
+          <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${gradient.bg}`}>
             <span className="text-6xl font-bold text-white">
               {member.name
                 .split(' ')
