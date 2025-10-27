@@ -5,6 +5,12 @@ import { client } from "@/lib/sanity/client";
 import { postBySlugQuery, postsQuery } from "@/lib/sanity/queries";
 import type { BlogPost, BlogPostCard } from "@/types/blog";
 
+// Revalidate every 60 seconds (ISR)
+export const revalidate = 60;
+
+// Generate only 10 most recent posts at build time, rest on-demand
+export const dynamicParams = true;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -12,7 +18,8 @@ interface PageProps {
 export async function generateStaticParams() {
   try {
     const posts = await client.fetch<BlogPostCard[]>(postsQuery);
-    return posts.map((post) => ({
+    // Generate only first 10 posts at build time, rest on-demand
+    return posts.slice(0, 10).map((post) => ({
       slug: post.slug,
     }));
   } catch (error) {
