@@ -654,8 +654,8 @@ const Product = () => {
 
             {/* CTA */}
             <div className="text-center">
-              <RouteButton variant="outline" size="lg" href="/integrations" className="group">
-                View all 50+ integrations
+              <RouteButton variant="outline" size="lg" href="/contact-sales" className="group">
+                Request integration
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </RouteButton>
             </div>

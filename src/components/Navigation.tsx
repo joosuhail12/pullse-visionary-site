@@ -7,9 +7,9 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "fra
 import {
   Menu, X, ChevronDown, ArrowRight,
   Brain, Workflow, Sparkles, Inbox, BookOpen, CheckCircle2, Wand2, Heart,
-  Plug, BarChart3, Building2, Banknote, ShoppingCart,
+  BarChart3, Building2, Banknote, ShoppingCart,
   FileText, Calendar, Video, Activity, Shield, Scale, Users, Phone,
-  Newspaper, Compass, Rocket, LayoutGrid
+  Newspaper, Rocket, LayoutGrid
 } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -624,28 +624,6 @@ export function Navigation() {
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
 
-                  {/* Product Tour Link */}
-                  <NavigationMenu.Item>
-                    <Link
-                      href="/product-tour"
-                      className="group flex items-center px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50/60 transition-all duration-300 relative overflow-hidden"
-                    >
-                      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/15 via-teal-500/10 to-blue-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                      <span className="relative z-10">Product Tour</span>
-                    </Link>
-                  </NavigationMenu.Item>
-
-                  {/* Integrations Link */}
-                  <NavigationMenu.Item>
-                    <Link
-                      href="/integrations"
-                      className="group flex items-center px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-teal-50 hover:to-purple-50/60 transition-all duration-300 relative overflow-hidden"
-                    >
-                      <span className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-teal-500/15 via-purple-500/10 to-teal-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                      <span className="relative z-10">Integrations</span>
-                    </Link>
-                  </NavigationMenu.Item>
-
                   {/* Pricing Link */}
                   <NavigationMenu.Item>
                     <Link
@@ -862,26 +840,6 @@ export function Navigation() {
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion.Root>
-
-                {/* Direct Link - Product Tour */}
-                <Link
-                  href="/product-tour"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 mt-2 px-4 py-3 rounded-lg border border-gray-100 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors"
-                >
-                  <Compass className="w-4 h-4 text-purple-600" />
-                  Product Tour
-                </Link>
-
-                {/* Direct Link - Integrations */}
-                <Link
-                  href="/integrations"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 mt-2 px-4 py-3 rounded-lg border border-gray-100 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors"
-                >
-                  <Plug className="w-4 h-4 text-purple-600" />
-                  Integrations
-                </Link>
 
                 {/* Direct Link - Pricing */}
                 <Link

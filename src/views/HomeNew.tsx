@@ -140,15 +140,9 @@ const connectorHighlights = [
 const resources = [
   {
     title: "Founder vision letter",
-    description: "Why we’re building Pullse and how the early access cohort works.",
+    description: "Why we're building Pullse and how the early access cohort works.",
     href: "/blog/founder-letter",
     badge: "Read",
-  },
-  {
-    title: "Integration roadmap",
-    description: "See upcoming connectors and how to request the systems you rely on.",
-    href: "/integrations",
-    badge: "Roadmap",
   },
   {
     title: "Early access FAQ",
@@ -348,9 +342,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                     Book a demo
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
-                </Button>
-                <Button size="lg" variant="outline" className="px-6 py-6 text-base" asChild>
-                  <Link href="/product-tour">Watch product tour</Link>
                 </Button>
               </div>
 
@@ -873,8 +864,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   </p>
                 </div>
                 <div className="flex gap-3 shrink-0">
-                  <RouteButton variant="outline" href="/integrations" className="shadow-md">
-                    View roadmap
+                  <RouteButton variant="outline" href="/contact-sales" className="shadow-md">
+                    Request integration
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </RouteButton>
                 </div>
@@ -992,9 +983,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                       <RouteButton size="lg" className="text-base px-8 py-7 shadow-xl shadow-primary/25" href="/contact-sales">
                         Talk to founders
                         <ArrowRight className="ml-2 h-5 w-5" />
-                      </RouteButton>
-                      <RouteButton size="lg" variant="outline" className="text-base px-8 py-7" href="/product-tour">
-                        Watch demo
                       </RouteButton>
                     </div>
 
