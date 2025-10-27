@@ -53,13 +53,7 @@ const navigationData = {
   ],
   resources: [
     { href: "/resources", label: "All Resources", description: "Browse all content", icon: LayoutGrid },
-    { href: "/docs", label: "Documentation", description: "Developer guides", icon: FileText },
     { href: "/blog", label: "Blog", description: "News & insights", icon: Newspaper },
-    { href: "/changelog", label: "Changelog", description: "Latest updates", icon: Calendar },
-    { href: "/roadmap", label: "Roadmap", description: "Future plans", icon: Calendar },
-    { href: "/webinars", label: "Webinars", description: "Live sessions", icon: Video },
-    { href: "/early-access", label: "Early Access", description: "Join beta program", icon: Rocket },
-    { href: "/status", label: "System Status", description: "Uptime & health", icon: Activity },
     { href: "/security", label: "Security", description: "Trust & compliance", icon: Shield },
     { href: "/compare", label: "Compare", description: "vs Competitors", icon: BarChart3 },
     { href: "/company", label: "Company", description: "About us", icon: Users },
@@ -512,7 +506,7 @@ export function Navigation() {
                             Learn
                           </h3>
                           <div className="space-y-1 p-2 rounded-lg bg-gradient-to-br from-indigo-50/30 to-purple-50/20">
-                            {[navigationData.resources[1], navigationData.resources[2], navigationData.resources[5]].map((link, index) => {
+                            {[navigationData.resources[1]].map((link, index) => {
                               if (!link) return null;
                               const Icon = link.icon;
                               return (
@@ -553,7 +547,7 @@ export function Navigation() {
                             Product
                           </h3>
                           <div className="grid grid-cols-2 gap-2">
-                            {[navigationData.resources[3], navigationData.resources[4], navigationData.resources[6], navigationData.resources[7], navigationData.resources[9]].map((link, index) => {
+                            {[navigationData.resources[3]].map((link, index) => {
                               if (!link) return null;
                               const Icon = link.icon;
                               return (
@@ -594,7 +588,7 @@ export function Navigation() {
                             Company
                           </h3>
                           <div className="grid grid-cols-2 gap-2">
-                            {[navigationData.resources[8], navigationData.resources[10], navigationData.resources[11]].map((link, index) => {
+                            {[navigationData.resources[2], navigationData.resources[4], navigationData.resources[5]].map((link, index) => {
                               if (!link) return null;
                               const Icon = link.icon;
                               return (

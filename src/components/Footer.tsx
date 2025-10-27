@@ -25,10 +25,7 @@ const Footer = () => {
     {
       title: "Resources",
       links: [
-        { name: "Documentation", path: "/docs" },
         { name: "Blog", path: "/blog" },
-        { name: "Changelog", path: "/changelog" },
-        { name: "Status", path: "/status" },
       ],
     },
     {

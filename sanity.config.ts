@@ -9,6 +9,7 @@ export default defineConfig({
 
   projectId: 'iw0d0k33',
   dataset: 'production',
+  basePath: '/studio',
 
   plugins: [
     structureTool(),
