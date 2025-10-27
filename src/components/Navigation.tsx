@@ -44,6 +44,12 @@ const navigationData = {
         { href: "/product/auto-qa", label: "Auto QA", description: "Quality assurance automation", icon: CheckCircle2 },
       ],
     },
+    {
+      category: "Compare",
+      links: [
+        { href: "/compare", label: "Compare", description: "Pullse vs Competitors", icon: BarChart3 },
+      ],
+    },
   ],
   solutions: [
     { href: "/solutions", label: "All Solutions", description: "View all use cases", icon: LayoutGrid },
@@ -55,7 +61,6 @@ const navigationData = {
     { href: "/resources", label: "All Resources", description: "Browse all content", icon: LayoutGrid },
     { href: "/blog", label: "Blog", description: "News & insights", icon: Newspaper },
     { href: "/security", label: "Security", description: "Trust & compliance", icon: Shield },
-    { href: "/compare", label: "Compare", description: "vs Competitors", icon: BarChart3 },
     { href: "/company", label: "Company", description: "About us", icon: Users },
     { href: "/legal", label: "Legal", description: "Terms & policies", icon: Scale },
   ],
@@ -540,47 +545,6 @@ export function Navigation() {
                           </div>
                         </div>
 
-                        {/* Product Section */}
-                        <div className="mb-4">
-                          <h3 className="text-xs font-bold text-purple-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
-                            <span className="w-3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent rounded-full" />
-                            Product
-                          </h3>
-                          <div className="grid grid-cols-2 gap-2">
-                            {[navigationData.resources[3]].map((link, index) => {
-                              if (!link) return null;
-                              const Icon = link.icon;
-                              return (
-                                <NavigationMenu.Link key={link.href} asChild>
-                                  <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: (index + 4) * 0.02 }}
-                                  >
-                                    <Link
-                                      href={link.href}
-                                      className="group/item flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50/70 transition-all duration-300 relative overflow-hidden"
-                                    >
-                                      <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/8 to-indigo-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
-
-                                      <motion.div
-                                        whileHover={{ scale: 1.15, rotate: 8 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                        className="relative z-10"
-                                      >
-                                        <Icon className="w-4 h-4 text-purple-600 flex-shrink-0" />
-                                      </motion.div>
-                                      <span className="text-xs font-medium text-gray-900 group-hover/item:text-purple-600 transition-colors relative z-10">
-                                        {link.label}
-                                      </span>
-                                    </Link>
-                                  </motion.div>
-                                </NavigationMenu.Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-
                         {/* Company Section */}
                         <div>
                           <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
@@ -588,7 +552,7 @@ export function Navigation() {
                             Company
                           </h3>
                           <div className="grid grid-cols-2 gap-2">
-                            {[navigationData.resources[2], navigationData.resources[4], navigationData.resources[5]].map((link, index) => {
+                            {[navigationData.resources[2], navigationData.resources[3], navigationData.resources[4]].map((link, index) => {
                               if (!link) return null;
                               const Icon = link.icon;
                               return (
