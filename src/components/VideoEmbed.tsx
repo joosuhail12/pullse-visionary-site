@@ -1,3 +1,4 @@
+// @ts-nocheck - lite-youtube custom element not typed in React 19
 'use client';
 
 import { useEffect, useRef } from "react";

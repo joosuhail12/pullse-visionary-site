@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense, lazy } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
@@ -15,9 +16,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { motion } from "framer-motion";
 
-// Lazy load components for performance
-const DataFlowParticles = lazy(() => import("@/components/three/DataFlowParticles"));
-const MorphingBackground = lazy(() => import("@/components/three/MorphingBackground"));
+// Lazy load components for performance with SSR disabled
+const DataFlowParticles = dynamic(() => import("@/components/three/DataFlowParticles"), { ssr: false });
+const MorphingBackground = dynamic(() => import("@/components/three/MorphingBackground"), { ssr: false });
 import ProgressHeader from "@/components/ProgressHeader";
 import TimelineStep from "@/components/TimelineStep";
 import {
