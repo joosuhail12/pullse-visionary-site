@@ -40,7 +40,8 @@ export const postsQuery = `
       name,
       "slug": slug.current,
       avatar,
-      jobTitle
+      jobTitle,
+      bio
     },
     publishedAt,
     readTime,
@@ -68,7 +69,8 @@ export const featuredPostsQuery = `
       name,
       "slug": slug.current,
       avatar,
-      jobTitle
+      jobTitle,
+      bio
     },
     publishedAt,
     readTime,
@@ -126,7 +128,8 @@ export const postsByCategoryQuery = `
       name,
       "slug": slug.current,
       avatar,
-      jobTitle
+      jobTitle,
+      bio
     },
     publishedAt,
     readTime,
@@ -154,7 +157,8 @@ export const postsByAuthorQuery = `
       name,
       "slug": slug.current,
       avatar,
-      jobTitle
+      jobTitle,
+      bio
     },
     publishedAt,
     readTime,

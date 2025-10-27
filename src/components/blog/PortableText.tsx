@@ -2,10 +2,13 @@
 
 import { PortableText as PortableTextReact } from '@portabletext/react';
 import type { PortableTextBlock, PortableTextComponents } from '@portabletext/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/lib/sanity/client';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import CodeBlock from './CodeBlock';
+import Callout from './Callout';
+import BlogImage from './BlogImage';
+import YouTubeEmbed from './YouTubeEmbed';
 
 interface PortableTextProps {
   value: PortableTextBlock[];
@@ -162,25 +165,20 @@ const components: PortableTextComponents = {
         .height(800)
         .url();
 
+      // Generate LQIP (Low Quality Image Placeholder) for blur effect
+      const blurDataURL = urlFor(value.asset as SanityImageSource)
+        .width(20)
+        .height(20)
+        .blur(50)
+        .url();
+
       return (
-        <figure className="my-10">
-          <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-card/40 shadow-2xl shadow-primary/10 backdrop-blur-sm transition-all hover:shadow-2xl hover:shadow-primary/20">
-            <div className="relative h-[400px] md:h-[600px]">
-              <Image
-                src={imageUrl}
-                alt={value.alt || 'Blog post image'}
-                fill
-                sizes="(min-width: 768px) 800px, 100vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-          </div>
-          {value.caption && (
-            <figcaption className="mt-4 text-center text-sm italic text-muted-foreground">
-              {value.caption}
-            </figcaption>
-          )}
-        </figure>
+        <BlogImage
+          src={imageUrl}
+          alt={value.alt || 'Blog post image'}
+          caption={value.caption}
+          blurDataURL={blurDataURL}
+        />
       );
     },
     code: ({ value }) => {
@@ -189,18 +187,35 @@ const components: PortableTextComponents = {
       }
 
       return (
-        <div className="my-8 overflow-hidden rounded-xl border border-white/5 bg-slate-900/95 shadow-2xl backdrop-blur-sm">
-          <div className="flex items-center justify-between border-b border-white/5 bg-slate-800/50 px-4 py-2">
-            <span className="text-xs font-semibold text-slate-400">
-              {value.language || 'code'}
-            </span>
-          </div>
-          <pre className="overflow-x-auto p-6">
-            <code className="font-mono text-sm text-slate-100">
-              {value.code}
-            </code>
-          </pre>
-        </div>
+        <CodeBlock
+          code={value.code}
+          language={value.language || 'typescript'}
+          filename={value.filename}
+        />
+      );
+    },
+    callout: ({ value }) => {
+      if (!value) {
+        return null;
+      }
+
+      return (
+        <Callout type={value.type} title={value.title}>
+          {value.content}
+        </Callout>
+      );
+    },
+    youtube: ({ value }) => {
+      if (!value?.videoId) {
+        return null;
+      }
+
+      return (
+        <YouTubeEmbed
+          videoId={value.videoId}
+          title={value.title}
+          params={value.params}
+        />
       );
     },
   },

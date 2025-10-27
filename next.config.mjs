@@ -11,6 +11,8 @@ const nextConfig = {
       },
     ],
   },
+  // External packages for Sanity Studio
+  serverExternalPackages: ['styled-components', '@sanity/client'],
 };
 
 export default nextConfig;

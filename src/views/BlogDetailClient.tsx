@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { Clock, User, Home, ChevronRight, Tag, ArrowRight, Sparkles } from 'lucide-react';
+import { Clock, User, Home, ChevronRight, Tag, ArrowRight, Sparkles, ArrowUp } from 'lucide-react';
 import { urlFor } from '@/lib/sanity/client';
 import type { BlogPost, BlogPostCard } from '@/types/blog';
 import PortableText from '@/components/blog/PortableText';
@@ -12,6 +12,7 @@ import TableOfContents from '@/components/blog/TableOfContents';
 import ShareButtons from '@/components/blog/ShareButtons';
 import AuthorBioCard from '@/components/blog/AuthorBioCard';
 import RelatedPosts from '@/components/blog/RelatedPosts';
+import ArticleStructuredData from '@/components/blog/ArticleStructuredData';
 
 interface BlogDetailClientProps {
   post: BlogPost;
@@ -36,38 +37,74 @@ const getCategoryStyle = (color: string) => {
 export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClientProps) {
   const [readingProgress, setReadingProgress] = useState(0);
   const [showProgress, setShowProgress] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const categoryStyle = getCategoryStyle(post.category.color);
 
-  // Reading progress calculation
+  // Reading progress calculation with debounced scroll
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const handleScroll = () => {
-      const article = document.querySelector('article');
-      if (!article) return;
+      // Clear the previous timeout
+      clearTimeout(timeoutId);
 
-      const windowHeight = window.innerHeight;
-      const documentHeight = article.clientHeight;
-      const scrollTop = window.scrollY;
-      const articleTop = article.offsetTop;
+      // Set a new timeout to debounce the scroll event
+      timeoutId = setTimeout(() => {
+        const article = document.querySelector('article');
+        if (!article) return;
 
-      // Show progress bar after scrolling past hero
-      setShowProgress(scrollTop > windowHeight * 0.5);
+        const windowHeight = window.innerHeight;
+        const documentHeight = article.clientHeight;
+        const scrollTop = window.scrollY;
+        const articleTop = article.offsetTop;
 
-      // Calculate reading progress
-      const scrollDistance = scrollTop - articleTop + windowHeight;
-      const totalDistance = documentHeight;
-      const progress = Math.min(Math.max((scrollDistance / totalDistance) * 100, 0), 100);
+        // Show progress bar after scrolling past hero
+        setShowProgress(scrollTop > windowHeight * 0.5);
 
-      setReadingProgress(progress);
+        // Show back to top button after scrolling down 400px
+        setShowBackToTop(scrollTop > 400);
+
+        // Calculate reading progress
+        const scrollDistance = scrollTop - articleTop + windowHeight;
+        const totalDistance = documentHeight;
+        const progress = Math.min(Math.max((scrollDistance / totalDistance) * 100, 0), 100);
+
+        setReadingProgress(progress);
+      }, 10); // 10ms debounce for smooth updates
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Initial calculation
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Structured Data for SEO */}
+      <ArticleStructuredData post={post} url={currentUrl} />
+
+      {/* Skip to Content Link for Accessibility */}
+      <a
+        href="#article-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to content
+      </a>
+
       {/* Reading Progress Bar */}
       <div
         className={`fixed left-0 right-0 top-0 z-50 h-1 bg-primary transition-all duration-300 ${
@@ -191,7 +228,7 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
           </div>
 
           {/* Center: Article Content */}
-          <article className="min-w-0">
+          <article id="article-content" className="min-w-0" role="article" aria-label="Blog post content">
             {post.content && post.content.length > 0 ? (
               <PortableText value={post.content} />
             ) : (
@@ -233,9 +270,14 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
             </div>
           </article>
 
-          {/* Right: Table of Contents (Desktop) */}
+          {/* Right: Table of Contents (Desktop & Mobile Drawer) */}
           <div className="hidden lg:block">
-            <TableOfContents />
+            <TableOfContents showMobileButton />
+          </div>
+
+          {/* Mobile TOC is shown via the TableOfContents component */}
+          <div className="lg:hidden">
+            <TableOfContents showMobileButton />
           </div>
         </div>
       </div>
@@ -255,6 +297,20 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
           className="flex-row"
         />
       </div>
+
+      {/* Back to Top Button */}
+      <button
+        type="button"
+        onClick={scrollToTop}
+        className={`fixed bottom-24 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-card/80 text-foreground shadow-2xl shadow-primary/10 backdrop-blur-xl transition-all hover:bg-card hover:shadow-primary/30 hover:scale-110 lg:bottom-8 ${
+          showBackToTop
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none translate-y-4 opacity-0'
+        }`}
+        aria-label="Back to top"
+      >
+        <ArrowUp className="h-5 w-5" />
+      </button>
     </div>
   );
 }

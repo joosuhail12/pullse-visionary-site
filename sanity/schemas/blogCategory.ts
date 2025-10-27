@@ -4,6 +4,11 @@ export const blogCategory = defineType({
   name: 'blogCategory',
   title: 'Blog Category',
   type: 'document',
+  options: {
+    canvasApp: {
+      exclude: true, // Categories are managed in Studio, not created in Canvas
+    },
+  },
   fields: [
     defineField({
       name: 'title',
