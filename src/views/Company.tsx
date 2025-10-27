@@ -258,89 +258,81 @@ const Company = () => {
               </p>
             </motion.div>
 
-            {/* Team Section */}
-            <div className="max-w-4xl mx-auto mb-20">
-              {team.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-strong rounded-3xl p-10 md:p-12 border-2 border-gray-200 shadow-xl"
-                >
-                  <div className="flex flex-col md:flex-row gap-8 items-start">
-                    {/* Avatar/Photo */}
-                    <div className="flex-shrink-0">
-                      {member.image ? (
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          width={160}
-                          height={160}
-                          className="rounded-2xl"
-                        />
-                      ) : (
-                        <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/20">
-                          <span className="text-5xl font-bold text-primary">
-                            {member.name.split(' ').map(n => n[0]).join('')}
-                          </span>
-                        </div>
-                      )}
-                    </div>
+            {/* Team Section - Side by Side Cards */}
+            <div className="max-w-6xl mx-auto mb-20">
+              <div className="grid md:grid-cols-2 gap-8">
+                {team.map((member, index) => (
+                  <motion.div
+                    key={member.name}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    className="group relative overflow-hidden rounded-3xl border-2 border-gray-200 bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-primary/30"
+                  >
+                    {/* Subtle gradient on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                    {/* Content */}
-                    <div className="flex-1 space-y-6">
-                      {/* Header */}
-                      <div>
-                        <h3 className="text-3xl font-bold mb-2">{member.name}</h3>
-                        <p className="text-lg text-primary font-semibold">{member.title}</p>
+                    <div className="relative z-10 flex flex-col items-center text-center space-y-6">
+                      {/* Avatar/Photo */}
+                      <div className="relative">
+                        {member.image ? (
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            width={120}
+                            height={120}
+                            className="rounded-2xl"
+                          />
+                        ) : (
+                          <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/20 shadow-lg">
+                            <span className="text-4xl font-bold text-primary">
+                              {member.name.split(' ').map(n => n[0]).join('')}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
-                      {/* Bio */}
-                      <p className="text-lg leading-relaxed text-muted-foreground">
+                      {/* Name & Title */}
+                      <div>
+                        <h3 className="text-2xl font-bold mb-1">{member.name}</h3>
+                        <p className="text-base text-primary font-semibold">{member.title}</p>
+                      </div>
+
+                      {/* Consolidated Bio */}
+                      <p className="text-sm leading-relaxed text-muted-foreground">
                         {member.bio}
+                        {member.background && ` ${member.background}`}
                       </p>
 
-                      {/* Background */}
-                      {member.background && (
-                        <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200">
-                          <p className="text-sm font-semibold text-foreground mb-2">Background</p>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {member.background}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Why This */}
+                      {/* Personal Quote/Why This (if exists) */}
                       {member.whyThis && (
-                        <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
-                          <p className="text-sm font-semibold text-primary mb-2">Why This Mission</p>
-                          <p className="text-sm text-foreground leading-relaxed italic">
+                        <div className="pt-4 border-t border-gray-200">
+                          <p className="text-xs italic text-foreground leading-relaxed">
                             "{member.whyThis}"
                           </p>
                         </div>
                       )}
 
-                      {/* Links */}
-                      <div className="flex gap-4">
+                      {/* Social Links */}
+                      <div className="flex gap-3 pt-2">
                         {member.linkedin && (
                           <a
                             href={member.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                            className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-gray-100 hover:bg-primary hover:text-white text-sm font-medium transition-all duration-300"
                           >
                             <Linkedin className="h-4 w-4" />
-                            LinkedIn
-                            <ExternalLink className="h-3 w-3" />
+                            <span>LinkedIn</span>
                           </a>
                         )}
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
               {/* Antler Card */}
               <motion.div
