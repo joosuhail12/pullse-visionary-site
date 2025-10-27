@@ -2,30 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogDetail from "@/views/BlogDetail";
 import { client } from "@/lib/sanity/client";
-import { postBySlugQuery, postsQuery } from "@/lib/sanity/queries";
-import type { BlogPost, BlogPostCard } from "@/types/blog";
+import { postBySlugQuery } from "@/lib/sanity/queries";
+import type { BlogPost } from "@/types/blog";
 
-// Revalidate every 60 seconds (ISR)
-export const revalidate = 60;
-
-// Generate only 10 most recent posts at build time, rest on-demand
-export const dynamicParams = true;
+// Force dynamic rendering to avoid build-time data fetching issues
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  try {
-    const posts = await client.fetch<BlogPostCard[]>(postsQuery);
-    // Generate only first 10 posts at build time, rest on-demand
-    return posts.slice(0, 10).map((post) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.error("Failed to generate static params:", error);
-    return [];
-  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
