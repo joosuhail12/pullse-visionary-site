@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import GenericPage from "@/views/GenericPage";
+import Company from "@/views/Company";
 
 export const metadata: Metadata = {
-  title: "Company | Pullse",
-  description: "About Pullse, our team, and careers.",
+  title: "About Pullse | AI-First Customer Support Platform | Antler-Backed",
+  description: "We're building the customer support platform we wish existed. Antler-backed, AI-native, transparent pricing. Meet our team and join our journey.",
 };
 
-const CompanyPage = () => (
-  <GenericPage title="Company" description="About Pullse, our team, and careers." />
-);
+const CompanyPage = () => <Company />;
 
 export default CompanyPage;
