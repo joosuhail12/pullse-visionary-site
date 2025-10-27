@@ -1,4 +1,3 @@
-// @ts-nocheck - @react-three/fiber doesn't support React 19 yet
 'use client';
 
 import { useRef, useMemo, useEffect, useState } from 'react';

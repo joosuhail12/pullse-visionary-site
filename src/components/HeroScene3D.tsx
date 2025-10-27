@@ -1,4 +1,3 @@
-// @ts-nocheck - @react-three/fiber doesn't support React 19 yet
 'use client';
 
 import { useRef, useEffect } from "react";
@@ -55,20 +54,15 @@ const ParticleField = () => {
   });
 
   return (
-    // @ts-expect-error - @react-three/fiber doesn't support React 19 yet
     <points ref={pointsRef}>
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <bufferGeometry>
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <bufferAttribute
           attach="attributes-position"
           count={particleCount}
           array={particles}
           itemSize={3}
         />
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       </bufferGeometry>
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <pointsMaterial
         size={0.02}
         color="hsl(var(--primary))"
@@ -76,7 +70,6 @@ const ParticleField = () => {
         opacity={0.6}
         sizeAttenuation
       />
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
     </points>
   );
 };
@@ -88,11 +81,8 @@ const HeroScene3D = () => {
         camera={{ position: [0, 0, 5], fov: 75 }}
         style={{ background: "transparent" }}
       >
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <ambientLight intensity={0.5} />
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <pointLight position={[-10, -10, -5]} intensity={0.5} color="hsl(var(--primary))" />
         
         <AnimatedSphere />

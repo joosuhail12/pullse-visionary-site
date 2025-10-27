@@ -1,4 +1,3 @@
-// @ts-nocheck - @react-three/fiber doesn't support React 19 yet
 'use client';
 
 import { useRef, useMemo, useState, useEffect, useCallback } from "react";
@@ -40,17 +39,11 @@ const ParticleField = () => {
   });
   
   return (
-    // @ts-expect-error - @react-three/fiber doesn't support React 19 yet
     <points ref={pointsRef}>
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <bufferGeometry>
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <bufferAttribute attach="attributes-position" count={particleCount} array={particles.positions} itemSize={3} />
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
         <bufferAttribute attach="attributes-color" count={particleCount} array={particles.colors} itemSize={3} />
-        {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       </bufferGeometry>
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <pointsMaterial
         size={0.06}
         vertexColors
@@ -60,7 +53,6 @@ const ParticleField = () => {
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
     </points>
   );
 };
@@ -105,11 +97,8 @@ const FlowingPathParticle = ({
   if (progress < 0.02 || progress > 0.98) return null;
 
   return (
-    // @ts-expect-error - @react-three/fiber doesn't support React 19 yet
     <mesh ref={particleRef}>
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <sphereGeometry args={[0.12, 16, 16]} />
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <meshStandardMaterial
         color={color}
         emissive={color}
@@ -117,9 +106,7 @@ const FlowingPathParticle = ({
         transparent
         opacity={0.9}
       />
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
       <pointLight color={color} intensity={1} distance={1} />
-      {/* @ts-expect-error - @react-three/fiber doesn't support React 19 yet */}
     </mesh>
   );
 };
