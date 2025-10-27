@@ -14,14 +14,11 @@ export interface Competitor {
   name: string;
   logo: string;
   tagline: string;
+  bestFor: string;
   whySwitch: string[];
   pricingNote: string;
-  testimonial?: {
-    quote: string;
-    author: string;
-    role: string;
-    company: string;
-  };
+  whenToChoose?: string;
+  strengths?: string[];
 }
 
 export const competitors: Competitor[] = [
@@ -30,65 +27,80 @@ export const competitors: Competitor[] = [
     name: 'Zendesk',
     logo: '/competitors/zendesk.svg',
     tagline: 'Enterprise support platform',
+    bestFor: 'Large enterprises with complex workflows needing 1000+ integrations',
     whySwitch: [
-      "Pullse AI handles 70% more tickets autonomously compared to Zendesk's basic automation",
-      'All features included - no expensive add-ons for AI, analytics, or advanced workflows',
-      "Setup in days, not months - Zendesk's complex configuration slows teams down",
-      'Modern, intuitive UI that teams actually enjoy using'
+      "All AI features included in base plan - Zendesk charges $50/agent/month extra for AI add-ons",
+      "Faster setup (2-5 days vs 2-8 weeks) - Get your team productive immediately",
+      "Transparent pricing - No hidden costs or surprise add-on fees",
+      "Modern, intuitive interface built for today's teams"
     ],
-    pricingNote: 'Zendesk can cost 3-4x more when you factor in required add-ons for AI, advanced analytics, and workflows.',
+    pricingNote: "Zendesk Suite Professional starts at $115/agent/month, plus $50/agent/month for AI add-ons, plus pay-per-resolution fees. Total cost for AI-powered support: $165+/agent/month.",
+    whenToChoose: "Choose Zendesk if you need 1000+ integrations, have enterprise-level compliance requirements, or already use their ecosystem extensively.",
+    strengths: ['1700+ integrations', 'Mature enterprise features', 'Established brand', 'Advanced reporting']
   },
   {
     id: 'intercom',
     name: 'Intercom',
     logo: '/competitors/intercom.svg',
     tagline: 'Customer messaging platform',
+    bestFor: 'SaaS companies focused on proactive messaging and growth',
     whySwitch: [
-      'True omnichannel support - not just messaging-focused',
-      'Advanced AI that goes beyond chatbots with autonomous resolution',
-      'Built-in ticketing and workflow management included',
-      'Better analytics and reporting capabilities out of the box'
+      "Predictable costs - Intercom's $0.99/resolution can spiral with high volume",
+      "Comprehensive omnichannel support beyond just messaging",
+      "All features included - No variable pricing surprises",
+      "Better for support-first teams (Intercom is sales/marketing-focused)"
     ],
-    pricingNote: 'Intercom charges per seat AND per conversation, costs can spiral quickly with volume.',
+    pricingNote: "Intercom starts at $39/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
+    whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging and product tours over traditional support.",
+    strengths: ['Strong proactive messaging', 'Product tours', 'SaaS-focused features', 'Conversational AI']
   },
   {
     id: 'freshdesk',
     name: 'Freshdesk',
     logo: '/competitors/freshdesk.svg',
     tagline: 'Cloud-based helpdesk',
+    bestFor: 'Small to medium businesses wanting affordable entry-level support',
     whySwitch: [
-      "Superior AI capabilities - Freshdesk's AI is limited to basic automation",
-      'More powerful workflow designer with visual builder',
-      'Better integration ecosystem and API capabilities',
-      'Advanced analytics included, not locked behind enterprise tier'
+      "AI included in base plan - Freshdesk requires Pro plan ($47+) plus expensive AI add-ons",
+      "More powerful automation out of the box",
+      "Better knowledge base AI and search capabilities",
+      "No tier limitations - All features available to all customers"
     ],
-    pricingNote: "Freshdesk's AI features require expensive Pro or Enterprise plans.",
+    pricingNote: "Freshdesk AI features require Pro plan at $47/agent/month, plus Freddy AI Copilot ($29/agent/month) or Freddy AI Agent ($100/1000 sessions). Real AI cost: $76+/agent/month.",
+    whenToChoose: "Choose Freshdesk if you're a very small team (2-5 agents) wanting a free plan, or need basic ticketing without AI.",
+    strengths: ['Free plan available', '300+ integrations', 'Lower entry price', 'Good for basic ticketing']
   },
   {
     id: 'dixa',
     name: 'Dixa',
     logo: '/competitors/dixa.svg',
-    tagline: 'Customer service platform',
+    tagline: 'Conversation platform',
+    bestFor: 'Companies with 7+ agents needing voice-first support',
     whySwitch: [
-      'More comprehensive AI suite with autonomous agents and copilot',
-      'Automatic QA with customizable rubrics - no manual setup needed',
-      'Better knowledge base integration with AI-powered search',
-      'More flexible workflow automation capabilities'
+      "No minimum seat requirement - Dixa requires 7 seats minimum ($343-1,183/month)",
+      "More comprehensive AI suite (agent, copilot, and Auto-QA)",
+      "Faster setup and easier configuration",
+      "Better pricing flexibility for growing teams"
     ],
-    pricingNote: 'Dixa charges premium prices for AI features that are standard in Pullse.',
+    pricingNote: "Dixa starts at $49/seat/month with a 7-seat minimum ($343/month minimum), ranging up to $169/seat/month ($1,183/month minimum for 7 agents).",
+    whenToChoose: "Choose Dixa if you have 7+ agents and voice support is your primary channel with high call volume.",
+    strengths: ['Strong voice support', 'Unified agent desktop', 'Conversation routing', '55% automation with Mim AI']
   },
   {
     id: 'gladly',
     name: 'Gladly',
     logo: '/competitors/gladly.svg',
-    tagline: 'Radically personal customer service',
+    tagline: 'Radically personal service',
+    bestFor: 'High-touch brands with premium customer service models',
     whySwitch: [
-      'AI-first approach - automation that actually works at scale',
-      'Faster setup and onboarding process',
-      'More competitive pricing with all features included',
-      'Better suited for both B2B and B2C use cases'
+      "Much more affordable - Gladly requires $150-180/user with 10-user minimum ($1,500-1,800/month)",
+      "Better AI automation capabilities for scaling support",
+      "Lower entry point for smaller teams",
+      "Modern tech stack with faster innovation"
     ],
-    pricingNote: 'Gladly focuses on high-touch support; Pullse balances automation with personalization.',
+    pricingNote: "Gladly pricing starts at $150-180/user/month with a 10-user minimum, making the entry point $1,500-1,800/month minimum.",
+    whenToChoose: "Choose Gladly if you're a premium brand (luxury retail, high-end services) where every customer interaction must be deeply personalized.",
+    strengths: ['Person-centric model', 'Premium brand focus', 'Customer lifetime view', 'High-touch support']
   },
 ];
 
@@ -96,29 +108,29 @@ export const comparisonFeatures: ComparisonFeature[] = [
   // AI & Automation
   {
     category: 'AI & Automation',
-    feature: 'AI Autonomous Agent',
+    feature: 'Autonomous AI Agent',
     pullse: true,
-    zendesk: 'Basic bots',
-    intercom: 'Limited',
-    freshdesk: 'Add-on',
-    dixa: 'Limited',
+    zendesk: 'Add-on $50/mo',
+    intercom: '$0.99/resolution',
+    freshdesk: 'Add-on required',
+    dixa: 'Mim AI included',
     gladly: false,
   },
   {
     category: 'AI & Automation',
     feature: 'AI Copilot for Agents',
     pullse: true,
-    zendesk: false,
-    intercom: 'Limited',
-    freshdesk: false,
-    dixa: 'Limited',
-    gladly: false,
+    zendesk: 'Add-on $50/mo',
+    intercom: 'Limited free',
+    freshdesk: 'Add-on $29/mo',
+    dixa: 'Included',
+    gladly: 'Limited',
   },
   {
     category: 'AI & Automation',
-    feature: 'Automatic QA with Custom Rubrics',
+    feature: 'Automatic QA Monitoring',
     pullse: true,
-    zendesk: false,
+    zendesk: 'Manual/Limited',
     intercom: false,
     freshdesk: false,
     dixa: 'Manual setup',
@@ -128,27 +140,27 @@ export const comparisonFeatures: ComparisonFeature[] = [
     category: 'AI & Automation',
     feature: 'AI-Powered Knowledge Base',
     pullse: true,
-    zendesk: 'Add-on',
+    zendesk: 'Add-on required',
     intercom: true,
-    freshdesk: 'Limited',
+    freshdesk: 'Pro plan+',
     dixa: true,
     gladly: 'Limited',
   },
   {
     category: 'AI & Automation',
-    feature: 'Intent Detection & Routing',
+    feature: 'Smart Intent Detection',
     pullse: true,
-    zendesk: 'Basic',
+    zendesk: 'Add-on required',
     intercom: true,
     freshdesk: 'Basic',
     dixa: true,
     gladly: true,
   },
 
-  // Platform Features
+  // Platform & Core Features
   {
     category: 'Platform',
-    feature: 'Unified Omnichannel Inbox',
+    feature: 'Omnichannel Inbox',
     pullse: true,
     zendesk: true,
     intercom: 'Messaging-focused',
@@ -160,7 +172,7 @@ export const comparisonFeatures: ComparisonFeature[] = [
     category: 'Platform',
     feature: 'Visual Workflow Builder',
     pullse: true,
-    zendesk: 'Complex',
+    zendesk: 'Complex setup',
     intercom: 'Limited',
     freshdesk: 'Basic',
     dixa: true,
@@ -168,9 +180,9 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'Platform',
-    feature: 'Advanced Analytics & Reporting',
+    feature: 'Advanced Analytics',
     pullse: true,
-    zendesk: 'Add-on',
+    zendesk: 'Add-on for advanced',
     intercom: 'Limited',
     freshdesk: 'Enterprise only',
     dixa: true,
@@ -178,17 +190,17 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'Platform',
-    feature: 'Custom Integrations & API',
-    pullse: true,
-    zendesk: true,
-    intercom: true,
-    freshdesk: true,
-    dixa: true,
-    gladly: true,
+    feature: 'API & Integrations',
+    pullse: '100+',
+    zendesk: '1700+',
+    intercom: '300+',
+    freshdesk: '300+',
+    dixa: '100+',
+    gladly: '50+',
   },
   {
     category: 'Platform',
-    feature: 'Mobile App for Agents',
+    feature: 'Mobile App',
     pullse: true,
     zendesk: true,
     intercom: true,
@@ -199,17 +211,59 @@ export const comparisonFeatures: ComparisonFeature[] = [
 
   // Pricing & Setup
   {
-    category: 'Ease of Use',
-    feature: 'Setup Time',
-    pullse: 'Days',
-    zendesk: 'Weeks-Months',
-    intercom: 'Weeks',
-    freshdesk: '1-2 Weeks',
-    dixa: '1-2 Weeks',
-    gladly: 'Weeks',
+    category: 'Pricing',
+    feature: 'AI Features Included',
+    pullse: true,
+    zendesk: false,
+    intercom: 'Pay per use',
+    freshdesk: false,
+    dixa: true,
+    gladly: 'Limited',
   },
   {
-    category: 'Ease of Use',
+    category: 'Pricing',
+    feature: 'Single Pricing Tier',
+    pullse: true,
+    zendesk: false,
+    intercom: false,
+    freshdesk: false,
+    dixa: false,
+    gladly: 'Yes',
+  },
+  {
+    category: 'Pricing',
+    feature: 'No Seat Minimum',
+    pullse: true,
+    zendesk: true,
+    intercom: true,
+    freshdesk: true,
+    dixa: '7 seat min',
+    gladly: '10 seat min',
+  },
+  {
+    category: 'Pricing',
+    feature: 'Transparent Pricing',
+    pullse: true,
+    zendesk: 'Complex',
+    intercom: 'Variable',
+    freshdesk: 'Clear tiers',
+    dixa: 'Clear',
+    gladly: 'Contact sales',
+  },
+
+  // Implementation & Support
+  {
+    category: 'Setup & Support',
+    feature: 'Setup Time',
+    pullse: '2-5 days',
+    zendesk: '2-8 weeks',
+    intercom: '1-2 weeks',
+    freshdesk: '1-2 weeks',
+    dixa: '1-2 weeks',
+    gladly: '2+ weeks',
+  },
+  {
+    category: 'Setup & Support',
     feature: 'User-Friendly Interface',
     pullse: true,
     zendesk: 'Complex',
@@ -219,130 +273,141 @@ export const comparisonFeatures: ComparisonFeature[] = [
     gladly: true,
   },
   {
-    category: 'Ease of Use',
-    feature: 'No-Code Customization',
-    pullse: true,
-    zendesk: 'Limited',
-    intercom: 'Limited',
-    freshdesk: 'Limited',
-    dixa: true,
-    gladly: 'Limited',
-  },
-
-  // Pricing
-  {
-    category: 'Pricing',
-    feature: 'AI Features Included',
-    pullse: true,
-    zendesk: false,
-    intercom: 'Partial',
-    freshdesk: false,
-    dixa: 'Partial',
-    gladly: false,
-  },
-  {
-    category: 'Pricing',
-    feature: 'All Features in Base Plan',
-    pullse: true,
-    zendesk: false,
-    intercom: false,
-    freshdesk: false,
-    dixa: false,
-    gladly: false,
-  },
-  {
-    category: 'Pricing',
-    feature: 'Transparent Pricing',
-    pullse: true,
-    zendesk: 'Complex',
-    intercom: 'Variable',
-    freshdesk: true,
-    dixa: true,
-    gladly: 'Contact sales',
-  },
-
-  // Support
-  {
-    category: 'Support',
-    feature: 'Priority Support',
-    pullse: true,
-    zendesk: 'Enterprise only',
-    intercom: 'Enterprise only',
-    freshdesk: 'Pro+',
-    dixa: true,
-    gladly: true,
-  },
-  {
-    category: 'Support',
-    feature: 'Dedicated Account Manager',
-    pullse: true,
-    zendesk: 'Enterprise only',
-    intercom: 'Enterprise only',
-    freshdesk: 'Enterprise only',
-    dixa: 'Enterprise only',
-    gladly: true,
-  },
-  {
-    category: 'Support',
+    category: 'Setup & Support',
     feature: 'Migration Assistance',
-    pullse: true,
+    pullse: 'Included',
     zendesk: 'Paid service',
     intercom: 'Limited',
     freshdesk: 'Limited',
     dixa: 'Limited',
     gladly: 'Limited',
   },
+  {
+    category: 'Setup & Support',
+    feature: 'Dedicated Support',
+    pullse: true,
+    zendesk: 'Enterprise only',
+    intercom: 'Enterprise only',
+    freshdesk: 'Pro+',
+    dixa: 'All plans',
+    gladly: 'All plans',
+  },
 ];
 
 export const faqs = [
   {
-    question: 'How long does it take to switch from [Competitor] to Pullse?',
-    answer: 'Most teams are fully migrated and operational within 5-7 days. We provide dedicated migration assistance, automated data import, and hands-on onboarding to ensure a smooth transition with zero downtime.',
+    question: 'How long does it actually take to switch from [Competitor] to Pullse?',
+    answer: 'Most teams are fully operational within 2-5 business days. We provide dedicated migration assistance, automated data import for tickets and contacts, and hands-on onboarding. The exact timeline depends on your data volume and customization needs, but we aim to minimize disruption with parallel running during transition.',
+  },
+  {
+    question: 'What are the hidden costs I should know about?',
+    answer: 'With Pullse, there are no hidden costs. Our pricing is per user/month plus usage-based AI actions. Unlike competitors, we don\'t charge extra for AI features, advanced analytics, or workflows. Implementation assistance and migration support are included. The only variable cost is AI usage, which scales with the value you receive.',
+  },
+  {
+    question: 'How does your pricing actually compare for a team of 10 agents?',
+    answer: 'For 10 agents with AI features: Pullse offers transparent pricing (contact sales), Zendesk costs ~$1,650/month ($165/agent with AI add-on), Intercom varies widely ($390+ base plus per-resolution fees), Freshdesk requires ~$760/month ($76/agent with AI add-ons), Dixa starts at $490/month minimum (7 seats required), and Gladly requires $1,500-1,800/month minimum (10-seat minimum).',
   },
   {
     question: 'Can I keep my existing integrations?',
-    answer: 'Yes! Pullse integrates with 100+ tools including all major CRMs, e-commerce platforms, and communication channels. Most integrations can be set up in minutes.',
+    answer: 'Pullse integrates with 100+ popular tools including major CRMs (Salesforce, HubSpot), e-commerce platforms (Shopify, WooCommerce), and communication channels (Slack, email, SMS, social). We provide migration assistance to ensure your critical integrations transfer smoothly. If you have a specific integration requirement, our team can help evaluate compatibility.',
   },
   {
-    question: 'What happens to my historical data?',
-    answer: 'We migrate all your ticket history, customer data, and knowledge base content. Our team handles the technical migration while you maintain full access to historical conversations.',
+    question: 'What happens to my historical data and conversations?',
+    answer: 'We migrate all your historical tickets, customer data, and knowledge base content. During the 2-5 day implementation, we run both systems in parallel so you maintain access to all historical conversations. Your team never loses context, and customers experience no disruption.',
   },
   {
-    question: 'Is there a learning curve for my team?',
-    answer: 'Pullse is designed to be intuitive from day one. Most teams are productive within hours, and we provide comprehensive training and documentation to get everyone up to speed quickly.',
+    question: 'Is there really a free trial?',
+    answer: 'Yes, we offer a trial period to experience the platform. Contact our sales team to discuss trial options that make sense for your team size and requirements.',
   },
   {
-    question: 'How does Pullse pricing compare?',
-    answer: 'Pullse includes all features in one transparent price - no hidden costs for AI, analytics, or workflows. Teams typically save 30-50% compared to competitor platforms when you factor in add-ons and per-conversation fees.',
-  },
-  {
-    question: 'Do you offer a trial period?',
-    answer: 'Yes, we offer a 14-day free trial with full access to all features. No credit card required.',
+    question: 'What if Pullse is missing a feature I need?',
+    answer: 'We\'re honest about our capabilities. While we have all core AI features (autonomous agent, copilot, Auto-QA), we have fewer integrations than Zendesk (100+ vs 1700+). If you need a specific feature, contact us - we prioritize our roadmap based on customer needs and might already have it in development.',
   },
 ];
 
 export const migrationFeatures = [
   {
-    title: 'Automated Data Import',
-    description: 'Seamlessly migrate tickets, contacts, and knowledge base articles automatically',
+    title: 'Automated Data Migration',
+    description: 'Import all historical tickets, contacts, and knowledge base articles with our automated tools',
   },
   {
-    title: 'Dedicated Migration Team',
-    description: 'Personal support from our migration specialists throughout the process',
+    title: 'Dedicated Migration Specialist',
+    description: 'Personal support from our team throughout the 2-5 day transition process',
   },
   {
-    title: 'Zero Downtime',
-    description: 'Run both platforms in parallel during transition for business continuity',
+    title: 'Parallel Running Period',
+    description: 'Run both platforms simultaneously during migration to ensure zero data loss or downtime',
   },
   {
-    title: 'Team Training',
-    description: 'Comprehensive onboarding and training for your entire team',
+    title: 'Team Training Included',
+    description: 'Comprehensive onboarding sessions to get your entire team productive quickly',
   },
 ];
 
 export const stats = [
-  { label: 'Average Setup Time', value: '5 Days', highlight: true },
-  { label: 'Customer Satisfaction', value: '98%', highlight: true },
-  { label: 'Average Cost Savings', value: '40%', highlight: true },
+  { label: 'Typical Setup Time', value: '2-5 Days', highlight: true },
+  { label: 'All Features Included', value: 'No Add-ons', highlight: true },
   { label: 'Integrations', value: '100+', highlight: false },
+  { label: 'AI Features Standard', value: '3 Core', highlight: true },
+];
+
+// Cost comparison data for calculator
+export interface PricingComparison {
+  platform: string;
+  basePrice: number;
+  aiAddOn: number;
+  perResolutionFee: number;
+  minimumSeats: number;
+  notes: string;
+}
+
+export const pricingComparisons: PricingComparison[] = [
+  {
+    platform: 'Pullse',
+    basePrice: 0, // Contact sales
+    aiAddOn: 0,
+    perResolutionFee: 0, // Usage-based included
+    minimumSeats: 1,
+    notes: 'Single tier pricing with usage-based AI actions',
+  },
+  {
+    platform: 'Zendesk',
+    basePrice: 115,
+    aiAddOn: 50,
+    perResolutionFee: 0, // Plus pay-per-resolution
+    minimumSeats: 1,
+    notes: 'Suite Professional + Advanced AI add-on',
+  },
+  {
+    platform: 'Intercom',
+    basePrice: 85, // Advanced plan
+    aiAddOn: 0,
+    perResolutionFee: 0.99,
+    minimumSeats: 1,
+    notes: 'Advanced plan + $0.99 per AI resolution',
+  },
+  {
+    platform: 'Freshdesk',
+    basePrice: 47,
+    aiAddOn: 29,
+    perResolutionFee: 0,
+    minimumSeats: 1,
+    notes: 'Pro plan + Freddy AI Copilot add-on',
+  },
+  {
+    platform: 'Dixa',
+    basePrice: 109, // Growth plan
+    aiAddOn: 0,
+    perResolutionFee: 0,
+    minimumSeats: 7,
+    notes: 'Growth plan with 7-seat minimum',
+  },
+  {
+    platform: 'Gladly',
+    basePrice: 165, // Average
+    aiAddOn: 0,
+    perResolutionFee: 0,
+    minimumSeats: 10,
+    notes: 'Hero plan with 10-user minimum',
+  },
 ];

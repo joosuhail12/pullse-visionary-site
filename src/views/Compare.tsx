@@ -51,15 +51,15 @@ const Compare = () => {
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Why Teams Choose{' '}
+              Choose the Right Platform{' '}
               <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
-                Pullse
+                for Your Team
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              The all-in-one AI-powered customer support platform that outperforms
-              legacy tools at a fraction of the cost
+              An honest comparison of Pullse vs leading customer support platforms.
+              All data verified from official sources.
             </p>
 
             {/* Quick Stats */}
@@ -148,8 +148,11 @@ const Compare = () => {
                   <h2 className="text-3xl md:text-4xl font-bold mb-3">
                     Pullse vs {currentCompetitor.name}
                   </h2>
-                  <p className="text-lg text-muted-foreground">
+                  <p className="text-lg text-muted-foreground mb-2">
                     {currentCompetitor.tagline}
+                  </p>
+                  <p className="text-sm text-purple-600 font-medium">
+                    Best for: {currentCompetitor.bestFor}
                   </p>
                 </div>
 
@@ -158,7 +161,7 @@ const Compare = () => {
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"></div>
-                      <h3 className="text-xl font-bold">Pullse</h3>
+                      <h3 className="text-xl font-bold">Why Choose Pullse</h3>
                     </div>
                     {currentCompetitor.whySwitch.map((reason, index) => (
                       <motion.div
@@ -178,15 +181,40 @@ const Compare = () => {
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-3 h-3 rounded-full bg-gray-400"></div>
-                      <h3 className="text-xl font-bold">{currentCompetitor.name}</h3>
+                      <h3 className="text-xl font-bold">{currentCompetitor.name} Strengths</h3>
                     </div>
+
+                    {currentCompetitor.strengths && (
+                      <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 mb-4">
+                        <p className="text-xs text-blue-600 font-semibold mb-2 uppercase">Where {currentCompetitor.name} Excels</p>
+                        <ul className="space-y-2">
+                          {currentCompetitor.strengths.map((strength, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-sm text-blue-900">
+                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                              {strength}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
                       <p className="text-sm text-gray-600 mb-4">
-                        <strong>Pricing Note:</strong>
+                        <strong>Pricing Reality:</strong>
                       </p>
-                      <p className="text-sm text-gray-700">
+                      <p className="text-sm text-gray-700 mb-4">
                         {currentCompetitor.pricingNote}
                       </p>
+                      {currentCompetitor.whenToChoose && (
+                        <>
+                          <p className="text-sm text-gray-600 mb-2">
+                            <strong>When to Choose {currentCompetitor.name}:</strong>
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            {currentCompetitor.whenToChoose}
+                          </p>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -194,7 +222,7 @@ const Compare = () => {
                 <div className="pt-6 border-t border-gray-200 text-center">
                   <Button size="lg" asChild>
                     <Link href="/contact-sales">
-                      Switch to Pullse
+                      Compare Pricing for Your Team
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
@@ -222,10 +250,10 @@ const Compare = () => {
           <div className="max-w-5xl mx-auto mb-20">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4">
-                Switch in Days, Not Months
+                Migration in 2-5 Days
               </h2>
               <p className="text-lg text-muted-foreground">
-                We make migration painless with dedicated support every step of the way
+                Dedicated support, automated data import, and parallel running for zero disruption
               </p>
             </div>
 
