@@ -14,6 +14,7 @@ const StoryQuoteBlock = ({
   title,
   quote,
   content,
+  index,
 }: StoryQuoteBlockProps) => {
   return (
     <motion.div
@@ -21,18 +22,23 @@ const StoryQuoteBlock = ({
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3 }}
-      className="max-w-4xl mx-auto"
+      className="max-w-4xl mx-auto relative"
     >
-      <div className="border-t border-gray-200 pt-8">
-        <h3 className="text-3xl font-medium mb-6 text-foreground">
+      {/* Number Badge */}
+      <div className="absolute -left-2 top-0 text-sm font-semibold text-muted-foreground">
+        0{index + 1}
+      </div>
+
+      <div className="border-l-2 border-gray-300 pl-10 pt-2">
+        <h3 className="text-3xl font-medium mb-8 text-foreground">
           {title}
         </h3>
-        <blockquote className="mb-6 p-8 rounded-2xl bg-gray-50">
-          <p className="text-xl leading-relaxed text-foreground font-medium">
+        <blockquote className="mb-8 p-10 rounded-2xl bg-gray-50">
+          <p className="text-2xl leading-relaxed text-foreground font-medium">
             {quote}
           </p>
         </blockquote>
-        <p className="text-base leading-relaxed text-muted-foreground">{content}</p>
+        <p className="text-base leading-loose text-muted-foreground">{content}</p>
       </div>
     </motion.div>
   );

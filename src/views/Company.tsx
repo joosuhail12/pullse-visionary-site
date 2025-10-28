@@ -33,25 +33,37 @@ const Company = () => {
           {/* ========================================
               SECTION 1: HERO - "The Vision"
           ======================================== */}
-          <div className="max-w-4xl mx-auto text-center mb-24 relative">
+          <div className="max-w-5xl mx-auto text-center mb-40 relative pt-8">
+            {/* Antler Badge - Top Right */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
+              className="absolute top-0 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white"
+            >
+              <Image
+                src={antlerLogo}
+                alt="Antler"
+                width={50}
+                height={20}
+                className="h-4 w-auto"
+              />
+              <span className="text-xs font-medium text-muted-foreground">
+                Backed by Antler
+              </span>
+            </motion.div>
+
             <div className="relative z-10">
-              {/* Antler Badge - Minimal */}
+              {/* Accent Line Element */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.3 }}
-                className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-100 mb-8"
+                transition={{ delay: 0.15, duration: 0.3 }}
+                className="flex items-center justify-center gap-2 mb-8"
               >
-                <Image
-                  src={antlerLogo}
-                  alt="Antler"
-                  width={60}
-                  height={24}
-                  className="h-5 w-auto"
-                />
-                <span className="text-sm font-medium text-muted-foreground">
-                  Backed by Antler
-                </span>
+                <div className="w-12 h-px bg-gray-300"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                <div className="w-12 h-px bg-gray-300"></div>
               </motion.div>
 
               {/* Main Headline */}
@@ -59,7 +71,7 @@ const Company = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.3 }}
-                className="text-7xl font-semibold mb-8 leading-tight text-foreground"
+                className="text-6xl md:text-8xl font-semibold mb-10 leading-[0.95] tracking-tight text-foreground"
               >
                 Building the Operating System
                 <br />
@@ -70,8 +82,8 @@ const Company = () => {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto"
+                transition={{ delay: 0.3, duration: 0.3 }}
+                className="text-xl md:text-2xl text-muted-foreground mb-14 max-w-3xl mx-auto leading-relaxed"
               >
                 One AI brain. Infinite business functions. Starting with customer support.
               </motion.p>
@@ -80,11 +92,11 @@ const Company = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
+                transition={{ delay: 0.35, duration: 0.3 }}
               >
                 <Button
                   size="lg"
-                  className="text-lg px-8 py-6"
+                  className="text-lg px-10 py-6"
                   asChild
                 >
                   <Link href={cta.primaryCTA.link}>
@@ -99,23 +111,23 @@ const Company = () => {
           {/* ========================================
               SECTION 2: THE STORY - "Why We Exist"
           ======================================== */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="max-w-5xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <h2 className="text-5xl font-semibold mb-6">
+              <h2 className="text-5xl font-semibold mb-6 tracking-tight">
                 Why We're Building Pullse
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 The journey from chaos to clarity
               </p>
             </motion.div>
 
-            <div className="space-y-12">
+            <div className="space-y-16">
               {/* Problem */}
               <StoryQuoteBlock
                 title="The Problem We Saw"
@@ -148,7 +160,7 @@ const Company = () => {
           {/* ========================================
               SECTION 3: OUR APPROACH (Mission + Principles + Vision)
           ======================================== */}
-          <div className="mb-32">
+          <div className="mb-40">
             <ApproachSection
               title={ourApproach.title}
               subtitle={ourApproach.subtitle}
@@ -161,25 +173,25 @@ const Company = () => {
           {/* ========================================
               SECTION 4: THE TEAM & JOURNEY
           ======================================== */}
-          <div className="max-w-6xl mx-auto mb-32">
+          <div className="max-w-6xl mx-auto mb-40">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <h2 className="text-5xl font-semibold mb-6">
+              <h2 className="text-5xl font-semibold mb-6 tracking-tight">
                 Who's Building This
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 The team and journey behind Pullse
               </p>
             </motion.div>
 
             {/* Team Section - Side by Side Cards */}
-            <div className="max-w-6xl mx-auto mb-16">
-              <div className="grid md:grid-cols-2 gap-6">
+            <div className="max-w-6xl mx-auto mb-20">
+              <div className="grid md:grid-cols-2 gap-8">
                 {team.map((member) => (
                   <motion.div
                     key={member.name}
@@ -187,21 +199,21 @@ const Company = () => {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3 }}
-                    className="border border-gray-200 bg-white p-8 rounded-2xl transition-colors duration-200 hover:border-gray-400"
+                    className="border border-gray-200 bg-white p-10 rounded-2xl transition-all duration-200 hover:border-gray-400 hover:-translate-y-1"
                   >
-                    <div className="flex flex-col items-center text-center space-y-4">
-                      {/* Avatar/Photo */}
+                    <div className="flex flex-col items-center text-center space-y-5">
+                      {/* Avatar/Photo - Larger */}
                       {member.image ? (
                         <Image
                           src={member.image}
                           alt={member.name}
-                          width={96}
-                          height={96}
+                          width={128}
+                          height={128}
                           className="rounded-full"
                         />
                       ) : (
-                        <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center">
-                          <span className="text-2xl font-semibold text-foreground">
+                        <div className="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200">
+                          <span className="text-3xl font-semibold text-foreground">
                             {member.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
@@ -209,12 +221,12 @@ const Company = () => {
 
                       {/* Name & Title */}
                       <div>
-                        <h3 className="text-xl font-medium mb-1">{member.name}</h3>
-                        <p className="text-base text-muted-foreground">{member.title}</p>
+                        <h3 className="text-xl font-medium mb-2">{member.name}</h3>
+                        <p className="text-base text-primary font-medium">{member.title}</p>
                       </div>
 
                       {/* Condensed Bio */}
-                      <p className="text-sm leading-relaxed text-muted-foreground">
+                      <p className="text-base leading-loose text-muted-foreground">
                         {member.bio}
                       </p>
 
@@ -224,7 +236,7 @@ const Company = () => {
                           href={member.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
                         >
                           LinkedIn →
                         </a>
@@ -235,24 +247,29 @@ const Company = () => {
               </div>
             </div>
 
-            {/* Antler Card - Simplified */}
+            {/* Antler Card - Special Featured Treatment */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
-              className="p-6 rounded-2xl border border-gray-200 bg-gray-50 mb-16"
+              className="p-10 rounded-2xl border border-gray-200 bg-white border-l-4 border-l-primary mb-20 hover:border-gray-400 transition-all duration-200"
             >
-              <div className="flex items-center gap-6">
-                <Image
-                  src={antlerLogo}
-                  alt="Antler"
-                  width={80}
-                  height={32}
-                  className="h-8 w-auto"
-                />
-                <div className="flex-1">
-                  <p className="text-sm text-muted-foreground">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                  <div className="p-6 rounded-xl bg-gray-50">
+                    <Image
+                      src={antlerLogo}
+                      alt="Antler"
+                      width={120}
+                      height={48}
+                      className="h-10 w-auto"
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h4 className="text-base font-semibold mb-2 text-foreground">Backed by Antler</h4>
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     {antler.description}
                   </p>
                 </div>
@@ -260,7 +277,7 @@ const Company = () => {
                   href={antler.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex-shrink-0 text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
                 >
                   Learn more →
                 </a>
@@ -268,12 +285,22 @@ const Company = () => {
             </motion.div>
 
             {/* Journey Timeline */}
-            <div className="mb-16">
-              <h3 className="text-3xl font-medium text-center mb-12">The Journey</h3>
+            <div className="mb-20">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+                className="flex items-center justify-center gap-3 mb-16"
+              >
+                <div className="w-8 h-px bg-gray-300"></div>
+                <h3 className="text-3xl font-medium">The Journey</h3>
+                <div className="w-8 h-px bg-gray-300"></div>
+              </motion.div>
               <Timeline milestones={timeline} />
             </div>
 
-            {/* Platform Vision - Simplified */}
+            {/* Platform Vision - Enhanced Treatment */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -281,9 +308,12 @@ const Company = () => {
               transition={{ duration: 0.3 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="p-8 rounded-2xl border border-gray-200 bg-gray-50">
-                <h3 className="text-xl font-medium mb-4">Beyond Customer Support</h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
+              <div className="p-10 rounded-2xl border border-gray-200 bg-white border-t-4 border-t-primary">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-1 h-8 bg-primary rounded-full"></div>
+                  <h3 className="text-2xl font-medium text-foreground">Beyond Customer Support</h3>
+                </div>
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   {platformVision}
                 </p>
               </div>
@@ -299,20 +329,31 @@ const Company = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
-              className="rounded-2xl border border-gray-200 bg-white p-12 text-center"
+              className="rounded-2xl border border-gray-200 bg-white p-16 text-center relative overflow-hidden"
             >
-              <div className="space-y-8">
-                <h2 className="text-5xl font-semibold">
+              {/* Accent Corner Element */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-tr-full"></div>
+
+              <div className="space-y-10 relative z-10">
+                {/* Decorative Element */}
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-12 h-px bg-gray-300"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                  <div className="w-12 h-px bg-gray-300"></div>
+                </div>
+
+                <h2 className="text-5xl font-semibold tracking-tight leading-tight">
                   {cta.headline}
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                   {cta.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <div className="flex flex-col sm:flex-row gap-5 items-center justify-center pt-4">
                   <Button
                     size="lg"
-                    className="text-lg px-10 py-6"
+                    className="text-lg px-12 py-7 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
@@ -323,7 +364,7 @@ const Company = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-lg px-10 py-6"
+                    className="text-lg px-12 py-7 hover:bg-gray-50 transition-all"
                     asChild
                   >
                     <Link href={cta.secondaryCTA.link} target="_blank" rel="noopener noreferrer">
@@ -333,13 +374,13 @@ const Company = () => {
                 </div>
 
                 {/* Trust Indicators */}
-                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-gray-200">
+                <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 pt-10 border-t border-gray-200">
                   <div className="flex items-center gap-2">
                     <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto opacity-60" />
-                    <span className="text-sm text-muted-foreground">Antler-backed</span>
+                    <span className="text-sm font-medium text-muted-foreground">Antler-backed</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">Launching Q4 2025</span>
-                  <span className="text-sm text-muted-foreground">Limited early access</span>
+                  <span className="text-sm font-medium text-muted-foreground">Launching Q4 2025</span>
+                  <span className="text-sm font-medium text-muted-foreground">Limited early access</span>
                 </div>
               </div>
             </motion.div>
