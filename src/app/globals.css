@@ -11,21 +11,10 @@
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
+/* Float animation defined below at line 115 - removed duplicate */
 
 .animate-shimmer {
   animation: shimmer 2s infinite;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -281,27 +270,10 @@ All colors MUST be HSL.
     }
   }
 
-  @keyframes hue-shift {
-    0%, 100% {
-      filter: hue-rotate(0deg) brightness(1);
-    }
-    25% {
-      filter: hue-rotate(15deg) brightness(1.05);
-    }
-    50% {
-      filter: hue-rotate(30deg) brightness(1.1);
-    }
-    75% {
-      filter: hue-rotate(15deg) brightness(1.05);
-    }
-  }
+  /* Hue-shift animation removed - orb now uses direct framer-motion animations */
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-hue-shift {
-    animation: hue-shift 20s ease-in-out infinite;
   }
 
   .animate-float-slow {
@@ -420,10 +392,7 @@ All colors MUST be HSL.
     box-shadow: var(--glow-subtle);
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
+  /* Smooth scrolling - Removed to prevent conflict with framer-motion */
 
   /* Custom scrollbar - Light Mode */
   ::-webkit-scrollbar {

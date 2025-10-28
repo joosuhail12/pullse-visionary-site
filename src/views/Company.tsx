@@ -35,7 +35,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-7xl mx-auto mb-32 relative min-h-[600px] md:min-h-[700px]">
             {/* Gradient Mesh Background */}
-            <GradientMesh variant="multi" opacity={0.4} />
+            <GradientMesh variant="multi" opacity={0.3} />
 
             {/* Floating Shapes - Reduced */}
             <FloatingShapes variant="minimal" />
@@ -52,8 +52,7 @@ const Company = () => {
                 transition={{
                   type: 'spring',
                   stiffness: 100,
-                  damping: 20,
-                  duration: 0.5
+                  damping: 20
                 }}
                 className="space-y-10 md:space-y-12"
               >
@@ -62,10 +61,10 @@ const Company = () => {
                   initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{
-                    delay: 0.1,
+                    delay: 0.15,
                     type: 'spring',
-                    stiffness: 120,
-                    damping: 15
+                    stiffness: 100,
+                    damping: 20
                   }}
                   whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(124, 58, 237, 0.2)' }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg transition-all duration-300 cursor-pointer"
@@ -87,7 +86,7 @@ const Company = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.15,
+                    delay: 0.3,
                     duration: 0.5,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
@@ -98,12 +97,12 @@ const Company = () => {
                   </span>
                 </motion.h1>
 
-                {/* Subheadline */}
+                {/* Subheadline - Removed blur filter */}
                 <motion.p
-                  initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.2,
+                    delay: 0.45,
                     duration: 0.5,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
@@ -118,7 +117,7 @@ const Company = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.25,
+                    delay: 0.6,
                     type: 'spring',
                     stiffness: 100,
                     damping: 20
@@ -150,47 +149,44 @@ const Company = () => {
 
               {/* RIGHT SIDE - Animated Visual */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, rotate: -5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{
-                  delay: 0.3,
+                  delay: 0.45,
                   type: 'spring',
-                  stiffness: 80,
+                  stiffness: 100,
                   damping: 20
                 }}
                 className="hidden md:block relative h-[600px]"
               >
-                {/* Large Gradient Orb with Hue Rotation */}
+                {/* Large Gradient Orb - Aligned durations 12s */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
                     animate={{
-                      scale: [1, 1.08, 1],
-                      rotate: [0, 180, 360],
+                      scale: [1, 1.05, 1],
+                      rotate: [0, 360],
                     }}
                     transition={{
                       scale: {
-                        duration: 8,
+                        duration: 12,
                         repeat: Infinity,
-                        ease: [0.45, 0.05, 0.55, 0.95],
+                        ease: [0.25, 0.1, 0.25, 1],
                       },
                       rotate: {
-                        duration: 25,
+                        duration: 24,
                         repeat: Infinity,
                         ease: 'linear',
                       }
                     }}
-                    style={{
-                      filter: 'hue-rotate(0deg)',
-                    }}
-                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-3xl animate-hue-shift"
+                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-2xl"
                   ></motion.div>
                 </div>
 
-                {/* Floating Data Points with Smoother Animation */}
+                {/* Floating Data Points - Cleaner 24s/6s pattern */}
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{
-                    duration: 50,
+                    duration: 24,
                     repeat: Infinity,
                     ease: 'linear'
                   }}
@@ -201,14 +197,14 @@ const Company = () => {
                       key={i}
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{
-                        opacity: [0.4, 0.8, 0.4],
-                        scale: [0.8, 1.2, 0.8],
+                        opacity: [0.4, 0.7, 0.4],
+                        scale: [0.9, 1.1, 0.9],
                       }}
                       transition={{
-                        delay: 0.4 + i * 0.15,
-                        duration: 3.5,
+                        delay: 0.6 + i * 0.15,
+                        duration: 6,
                         repeat: Infinity,
-                        ease: [0.45, 0.05, 0.55, 0.95],
+                        ease: [0.25, 0.1, 0.25, 1],
                       }}
                       className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-lg shadow-primary/50"
                       style={{
@@ -229,20 +225,20 @@ const Company = () => {
                       scale: 1,
                     }}
                     transition={{
-                      delay: 0.5,
+                      delay: 0.6,
                       type: 'spring',
-                      stiffness: 80,
-                      damping: 15
+                      stiffness: 100,
+                      damping: 20
                     }}
                   >
                     <motion.div
                       animate={{
-                        y: [-8, 8, -8],
+                        y: [-6, 6, -6],
                       }}
                       transition={{
                         duration: 6,
                         repeat: Infinity,
-                        ease: [0.45, 0.05, 0.55, 0.95],
+                        ease: [0.25, 0.1, 0.25, 1],
                       }}
                     >
                       <GlassCard
@@ -254,9 +250,9 @@ const Company = () => {
                             rotate: [0, 5, -5, 0],
                           }}
                           transition={{
-                            duration: 4,
+                            duration: 6,
                             repeat: Infinity,
-                            ease: [0.45, 0.05, 0.55, 0.95],
+                            ease: [0.25, 0.1, 0.25, 1],
                           }}
                         >
                           <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
@@ -276,7 +272,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-full mx-auto mb-32 relative overflow-hidden">
             {/* Gradient Mesh for Story Section */}
-            <GradientMesh variant="purple" opacity={0.25} className="-top-40" />
+            <GradientMesh variant="purple" opacity={0.3} className="-top-40" />
 
             {/* Section Header */}
             <motion.div
@@ -292,12 +288,11 @@ const Company = () => {
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{
-                  delay: 0.1,
                   type: 'spring',
-                  stiffness: 120,
-                  damping: 15
+                  stiffness: 100,
+                  damping: 20
                 }}
                 className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 mb-6"
               >
@@ -308,9 +303,8 @@ const Company = () => {
               <motion.h2
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{
-                  delay: 0.15,
                   duration: 0.4,
                   ease: [0.25, 0.1, 0.25, 1]
                 }}
@@ -321,11 +315,10 @@ const Company = () => {
                 </span>
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{
-                  delay: 0.2,
                   duration: 0.4,
                   ease: [0.25, 0.1, 0.25, 1]
                 }}
@@ -340,11 +333,10 @@ const Company = () => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                 {/* Problem Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: '-50px' }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
                   transition={{
-                    delay: 0.1,
                     duration: 0.5,
                     type: 'spring',
                     stiffness: 100,
@@ -362,11 +354,10 @@ const Company = () => {
 
                 {/* Insight Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: '-50px' }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
                   transition={{
-                    delay: 0.2,
                     duration: 0.5,
                     type: 'spring',
                     stiffness: 100,
@@ -384,11 +375,10 @@ const Company = () => {
 
                 {/* Solution Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: '-50px' }}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-100px' }}
                   transition={{
-                    delay: 0.3,
                     duration: 0.5,
                     type: 'spring',
                     stiffness: 100,
@@ -412,7 +402,7 @@ const Company = () => {
           ======================================== */}
           <div className="mb-32 relative">
             {/* Gradient Mesh for Approach Section */}
-            <GradientMesh variant="blue" opacity={0.35} className="-top-40" />
+            <GradientMesh variant="blue" opacity={0.3} className="-top-40" />
 
             <div className="relative z-10">
               <ApproachSection
@@ -594,7 +584,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-5xl mx-auto relative">
             {/* Gradient Mesh for CTA */}
-            <GradientMesh variant="multi" opacity={0.4} />
+            <GradientMesh variant="multi" opacity={0.3} />
 
             <GlassCard
               initial={{ opacity: 0, y: 30 }}

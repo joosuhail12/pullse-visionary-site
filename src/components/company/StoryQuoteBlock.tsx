@@ -57,8 +57,8 @@ const StoryQuoteBlock = ({
         <div className="relative z-10">
           <motion.div
             className={`inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br ${config.gradient} shadow-2xl items-center justify-center mb-6`}
-            whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.05 }}
-            transition={{ duration: 0.5 }}
+            whileHover={{ rotate: [0, 360] }}
+            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Icon className="w-8 h-8 text-white" />
           </motion.div>
@@ -72,11 +72,11 @@ const StoryQuoteBlock = ({
         {/* Quote - Sized for Grid Column */}
         <blockquote className="relative z-10 flex-1 flex items-center">
           <div className="relative">
-            {/* Quote Mark - Smaller */}
+            {/* Quote Mark - Aligned to 6s pattern */}
             <motion.div
               className={`absolute -top-4 -left-3 text-6xl font-serif bg-gradient-to-br ${config.gradient} bg-clip-text text-transparent opacity-20`}
               animate={{ opacity: [0.15, 0.25, 0.15] }}
-              transition={{ duration: 4, repeat: Infinity, ease: [0.45, 0.05, 0.55, 0.95] }}
+              transition={{ duration: 6, repeat: Infinity, ease: [0.25, 0.1, 0.25, 1] }}
             >
               "
             </motion.div>
@@ -97,7 +97,7 @@ const StoryQuoteBlock = ({
             <motion.div
               className={`w-7 h-7 rounded-lg bg-gradient-to-br ${config.gradient} flex items-center justify-center shadow-lg`}
               whileHover={{ rotate: 360, scale: 1.1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <span className="text-xs font-bold text-white">
                 {index + 1}
