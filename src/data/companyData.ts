@@ -49,11 +49,11 @@ export interface TeamMember {
 
 export const story = {
   problem:
-    "After years of working with business software, we kept seeing the same pattern everywhere: companies drowning in 100+ disconnected SaaS tools. Sales uses Salesforce, support uses Zendesk, marketing uses HubSpot - each team has 10+ specialized tools that don't talk to each other. Data silos everywhere. Endless context switching. Fragmentation that costs companies millions in inefficiency.",
+    "Companies are drowning in 100+ disconnected tools. Sales uses Salesforce, support uses Zendesk, marketing uses HubSpot—each team has 10+ specialized apps that don't talk to each other. Data silos everywhere. Endless context switching. Fragmentation costing millions.",
   insight:
-    "Then we realized something fundamental: AI works on the principle of aggregation. Unlike traditional software that benefits from specialization, AI gets smarter by connecting disparate data. The more context AI has across your entire business, the more intelligent and autonomous it becomes. This meant the future of business software had to be completely different.",
+    "Then we realized: AI works through aggregation, not specialization. The more context AI has across your business, the smarter it becomes. This changes everything about how business software should work.",
   solution:
-    "The future isn't more specialized point solutions - it's AI-native platforms that solve entire business functions end-to-end, unified by a central AI brain that understands your whole company. We're starting with customer support, building the first truly end-to-end AI-native solution. Eventually, we'll build specialized solutions for every business function, all connected by one intelligent core.",
+    "The future isn't more specialized tools—it's AI-native platforms that solve entire business functions end-to-end. We're starting with customer support. Eventually, every business function, unified by one intelligent core.",
 };
 
 export const mission =
@@ -113,36 +113,45 @@ export const values: Value[] = [
     icon: Brain,
     title: "AI-Native by Design",
     description:
-      "We don't bolt AI onto legacy software. Every solution is built from the ground up for AI aggregation—because AI gets smarter by connecting data, not fragmenting it. We question assumptions, understand first principles, and build the future others don't see yet.",
+      "We build from scratch for AI aggregation—not bolting AI onto legacy software. We question assumptions and build the future others don't see yet.",
   },
   {
     icon: Eye,
     title: "Radically Transparent",
     description:
-      "We build in public. Our pricing, roadmap, and journey are completely open. No hidden costs, no surprise fees, no marketing fluff. Real pricing comparisons. Honest about what we're building and where we're headed. Trust through transparency.",
+      "Our pricing, roadmap, and journey are completely open. No hidden costs, no surprise fees, no fluff. Trust through transparency.",
   },
   {
     icon: Heart,
     title: "Customer Obsessed",
     description:
-      "Even before our first customer, every decision starts with one question: Will this genuinely help teams succeed? We're ruthlessly committed to simplicity—one platform per function, no expensive add-ons, no complexity. Real people. Real problems. Real solutions.",
+      "Every decision starts with: Will this genuinely help teams succeed? We're committed to simplicity—no expensive add-ons, no complexity.",
   },
   {
     icon: Zap,
     title: "Speed & Conviction",
     description:
-      "Ship quickly. Learn from feedback. Iterate constantly. The faster we ship, the faster we learn what actually helps teams succeed. We move with conviction because the world needs better business software now, not years from now.",
+      "Ship quickly. Learn fast. Iterate constantly. The world needs better business software now, not years from now.",
   },
 ];
+
+// Unified "Our Approach" section combining mission, principles, and vision
+export const ourApproach = {
+  title: "How We're Building the Future",
+  subtitle: "Our mission, principles, and commitments",
+  mission: mission,
+  principles: values,
+  vision: vision,
+};
 
 export const team: TeamMember[] = [
   {
     name: "Suhail Joo",
     role: "Founder",
     title: "Founder & CEO",
-    bio: "Building Pullse to solve the AI-native business software problem from first principles.",
-    background: "Previously worked in customer support operations, experiencing firsthand the pain of fragmented tools and disconnected systems. Saw the opportunity to rebuild business software for the AI era.",
-    whyThis: "After years of watching teams struggle with 100+ disconnected tools, I realized AI changes everything. The future isn't more specialized point solutions—it's unified platforms where AI gets smarter through aggregation, not fragmentation.",
+    bio: "Building Pullse to solve the AI-native business software problem from first principles. After years in customer support operations, I saw firsthand how 100+ disconnected tools fragment teams and cost companies millions.",
+    background: undefined,
+    whyThis: undefined,
     image: undefined, // Will use initials fallback
     linkedin: "https://linkedin.com/in/yourprofile",
   },
@@ -150,9 +159,9 @@ export const team: TeamMember[] = [
     name: "Manminder Tomar",
     role: "Co-founder",
     title: "Co-founder & CTO",
-    bio: "Leading the technical vision and architecture for Pullse's AI-native platform.",
-    background: "Engineering leader with deep experience in building scalable systems and AI infrastructure. Passionate about creating technology that's both powerful and accessible.",
-    whyThis: "The best products come from understanding both the problem deeply and the technology intimately. AI-native platforms require rethinking architecture from the ground up—that's the challenge that excites me.",
+    bio: "Leading Pullse's technical vision and AI-native architecture. Engineering leader with deep experience in scalable systems and AI infrastructure, passionate about creating powerful yet accessible technology.",
+    background: undefined,
+    whyThis: undefined,
     image: undefined, // Will use initials fallback
     linkedin: "https://linkedin.com/in/manminder-tomar",
   },
@@ -166,16 +175,16 @@ export const antler = {
 };
 
 export const cta = {
-  headline: "Be Among the First",
+  headline: "Help Us Build the Future",
   description:
-    "We're preparing to launch our first AI-native solution and looking for early partners to help shape the future of business software. Join our waitlist to get exclusive early access.",
+    "We're launching Q4 2025 and looking for early partners to shape the first truly AI-native business platform. Join us.",
   primaryCTA: {
     text: "Request Early Access",
-    link: "/contact-sales", // Or dedicated early access form
+    link: "/contact-sales",
   },
   secondaryCTA: {
     text: "Follow Our Journey",
-    link: "https://twitter.com/pullse", // Or newsletter signup
+    link: "https://twitter.com/pullse",
   },
 };
 
@@ -209,20 +218,6 @@ export const whySupportFirst = {
   ],
 };
 
-export const platformVision = {
-  headline: "Beyond Customer Support",
-  description:
-    "We're starting with customer support, but the vision is bigger: AI-native solutions for every business function, all unified by a central intelligence that understands your entire company.",
-  currentFocus: {
-    name: "Customer Support",
-    status: "Building Now",
-    tagline: "Launching Q4 2025",
-    icon: Users,
-  },
-  futureVision: {
-    title: "The Unified Future",
-    description:
-      "Imagine AI-native solutions for sales, marketing, operations—all connected. The more functions you use, the smarter the entire system becomes. One company brain, infinite possibilities.",
-    examples: ["Sales & CRM", "Marketing", "Operations"],
-  },
-};
+// Simplified platform vision - single paragraph
+export const platformVision =
+  "We're starting with customer support, but our vision is bigger: AI-native solutions for every business function—sales, marketing, operations—all unified by one intelligent core. The more functions you use, the smarter the entire system becomes.";

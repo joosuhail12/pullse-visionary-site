@@ -10,19 +10,16 @@ import { ArrowRight, ExternalLink, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timeline from '@/components/company/Timeline';
-import MissionVisionSplit from '@/components/company/MissionVisionSplit';
 import StoryQuoteBlock from '@/components/company/StoryQuoteBlock';
-import PrincipleCard from '@/components/company/PrincipleCard';
+import ApproachSection from '@/components/company/ApproachSection';
 import {
   story,
-  mission,
-  vision,
   timeline,
-  values,
   team,
   antler,
   cta,
   platformVision,
+  ourApproach,
 } from '@/data/companyData';
 import antlerLogo from '@/assets/antler-logo.png';
 
@@ -90,7 +87,7 @@ const Company = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto"
               >
-                Starting with customer support. Scaling to every business function.
+                One AI brain. Infinite business functions. Starting with customer support.
               </motion.p>
 
               {/* CTA */}
@@ -133,13 +130,16 @@ const Company = () => {
 
             <div className="space-y-16">
               {/* Problem */}
-              <StoryQuoteBlock
-                title="The Problem We Saw"
-                quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
-                content={story.problem}
-                index={0}
-                accentColor="red"
-              />
+              <div className="relative">
+                <div className="absolute -left-12 top-0 text-6xl font-bold text-red-600/10">01</div>
+                <StoryQuoteBlock
+                  title="The Problem We Saw"
+                  quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
+                  content={story.problem}
+                  index={0}
+                  accentColor="red"
+                />
+              </div>
 
               {/* Visual Connector */}
               <div className="flex justify-center">
@@ -155,13 +155,16 @@ const Company = () => {
               </div>
 
               {/* Insight */}
-              <StoryQuoteBlock
-                title="The Insight"
-                quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
-                content={story.insight}
-                index={1}
-                accentColor="blue"
-              />
+              <div className="relative">
+                <div className="absolute -left-12 top-0 text-6xl font-bold text-blue-600/10">02</div>
+                <StoryQuoteBlock
+                  title="The Insight"
+                  quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
+                  content={story.insight}
+                  index={1}
+                  accentColor="blue"
+                />
+              </div>
 
               {/* Visual Connector */}
               <div className="flex justify-center">
@@ -177,71 +180,34 @@ const Company = () => {
               </div>
 
               {/* Solution */}
-              <StoryQuoteBlock
-                title="What We're Building"
-                quote="The future isn't more specialized tools—it's unified AI-native platforms."
-                content={story.solution}
-                index={2}
-                accentColor="purple"
-              />
-            </div>
-          </div>
-
-          {/* ========================================
-              SECTION 3: MISSION & VISION
-          ======================================== */}
-          <div className="max-w-7xl mx-auto mb-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Our Mission & Vision
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Where we're going and how we'll get there
-              </p>
-            </motion.div>
-
-            <MissionVisionSplit mission={mission} vision={vision} />
-          </div>
-
-          {/* ========================================
-              SECTION 4: WHAT WE STAND FOR
-          ======================================== */}
-          <div className="max-w-7xl mx-auto mb-40">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-20"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Principles That Guide Us
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                The core beliefs that shape everything we build
-              </p>
-            </motion.div>
-
-            {/* 4 Core Principles - 2x2 Grid */}
-            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {values.map((value, index) => (
-                <PrincipleCard
-                  key={value.title}
-                  icon={value.icon}
-                  title={value.title}
-                  description={value.description}
-                  index={index}
+              <div className="relative">
+                <div className="absolute -left-12 top-0 text-6xl font-bold text-purple-600/10">03</div>
+                <StoryQuoteBlock
+                  title="What We're Building"
+                  quote="The future isn't more specialized tools—it's unified AI-native platforms."
+                  content={story.solution}
+                  index={2}
+                  accentColor="purple"
                 />
-              ))}
+              </div>
             </div>
           </div>
 
           {/* ========================================
-              SECTION 5: THE TEAM & JOURNEY
+              SECTION 3: OUR APPROACH (Mission + Principles + Vision)
+          ======================================== */}
+          <div className="mb-40">
+            <ApproachSection
+              title={ourApproach.title}
+              subtitle={ourApproach.subtitle}
+              mission={ourApproach.mission}
+              principles={ourApproach.principles}
+              vision={ourApproach.vision}
+            />
+          </div>
+
+          {/* ========================================
+              SECTION 4: THE TEAM & JOURNEY
           ======================================== */}
           <div className="max-w-7xl mx-auto mb-40">
             <motion.div
@@ -299,20 +265,10 @@ const Company = () => {
                         <p className="text-base text-primary font-semibold">{member.title}</p>
                       </div>
 
-                      {/* Consolidated Bio */}
+                      {/* Condensed Bio */}
                       <p className="text-sm leading-relaxed text-muted-foreground">
                         {member.bio}
-                        {member.background && ` ${member.background}`}
                       </p>
-
-                      {/* Personal Quote/Why This (if exists) */}
-                      {member.whyThis && (
-                        <div className="pt-4 border-t border-gray-200">
-                          <p className="text-xs italic text-foreground leading-relaxed">
-                            "{member.whyThis}"
-                          </p>
-                        </div>
-                      )}
 
                       {/* Social Links */}
                       <div className="flex gap-3 pt-2">
@@ -380,53 +336,19 @@ const Company = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-4xl mx-auto text-center space-y-12"
+              className="max-w-4xl mx-auto"
             >
-              <div>
-                <h3 className="text-3xl font-bold mb-6">{platformVision.headline}</h3>
+              <div className="p-8 md:p-10 rounded-3xl border-2 border-gray-200 bg-gradient-to-br from-gray-50 to-white">
+                <h3 className="text-2xl font-bold mb-4">Beyond Customer Support</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  {platformVision.description}
+                  {platformVision}
                 </p>
-              </div>
-
-              {/* Current Focus */}
-              <div className="p-10 rounded-3xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 to-primary/5 shadow-xl">
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <platformVision.currentFocus.icon className="h-8 w-8 text-primary" />
-                  <h4 className="text-2xl font-bold">{platformVision.currentFocus.name}</h4>
-                </div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-3">
-                  <span className="text-sm font-bold text-primary">
-                    {platformVision.currentFocus.status}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {platformVision.currentFocus.tagline}
-                </p>
-              </div>
-
-              {/* Future Vision */}
-              <div className="p-10 rounded-3xl border-2 border-gray-200 bg-gradient-to-br from-gray-50 to-white">
-                <h4 className="text-2xl font-bold mb-6">{platformVision.futureVision.title}</h4>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {platformVision.futureVision.description}
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {platformVision.futureVision.examples.map((example) => (
-                    <div
-                      key={example}
-                      className="px-5 py-2.5 rounded-full bg-gray-100 border border-gray-200 text-sm font-medium text-muted-foreground"
-                    >
-                      {example}
-                    </div>
-                  ))}
-                </div>
               </div>
             </motion.div>
           </div>
 
           {/* ========================================
-              SECTION 6: FINAL CTA
+              SECTION 5: FINAL CTA
           ======================================== */}
           <div className="max-w-5xl mx-auto">
             <motion.div
@@ -446,16 +368,28 @@ const Company = () => {
                   {cta.description}
                 </p>
 
-                <Button
-                  size="lg"
-                  className="text-lg px-10 py-7 shadow-xl shadow-primary/20"
-                  asChild
-                >
-                  <Link href={cta.primaryCTA.link}>
-                    {cta.primaryCTA.text}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                  <Button
+                    size="lg"
+                    className="text-lg px-10 py-7 shadow-xl shadow-primary/20"
+                    asChild
+                  >
+                    <Link href={cta.primaryCTA.link}>
+                      {cta.primaryCTA.text}
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="text-lg px-10 py-7"
+                    asChild
+                  >
+                    <Link href={cta.secondaryCTA.link} target="_blank" rel="noopener noreferrer">
+                      {cta.secondaryCTA.text}
+                    </Link>
+                  </Button>
+                </div>
 
                 {/* Trust Indicators */}
                 <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-gray-200">
