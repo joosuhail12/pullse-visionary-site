@@ -281,8 +281,27 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes hue-shift {
+    0%, 100% {
+      filter: hue-rotate(0deg) brightness(1);
+    }
+    25% {
+      filter: hue-rotate(15deg) brightness(1.05);
+    }
+    50% {
+      filter: hue-rotate(30deg) brightness(1.1);
+    }
+    75% {
+      filter: hue-rotate(15deg) brightness(1.05);
+    }
+  }
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-hue-shift {
+    animation: hue-shift 20s ease-in-out infinite;
   }
 
   .animate-float-slow {

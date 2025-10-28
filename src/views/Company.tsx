@@ -45,20 +45,31 @@ const Company = () => {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
 
             {/* Split Layout Container */}
-            <div className="relative z-10 grid md:grid-cols-[60%_40%] gap-8 items-center">
+            <div className="relative z-10 grid md:grid-cols-[60%_40%] gap-10 items-center">
               {/* LEFT SIDE - Content */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7 }}
-                className="space-y-8 md:space-y-10"
+                transition={{
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 20,
+                  duration: 0.5
+                }}
+                className="space-y-10 md:space-y-12"
               >
                 {/* Antler Badge - Top Left */}
                 <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg"
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    delay: 0.1,
+                    type: 'spring',
+                    stiffness: 120,
+                    damping: 15
+                  }}
+                  whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(124, 58, 237, 0.2)' }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg transition-all duration-300 cursor-pointer"
                 >
                   <Image
                     src={antlerLogo}
@@ -74,21 +85,29 @@ const Company = () => {
 
                 {/* Main Headline - Single Gradient, Left-Aligned */}
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.7 }}
+                  transition={{
+                    delay: 0.15,
+                    duration: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1]
+                  }}
                   className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight"
                 >
-                  <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-primary bg-clip-text text-transparent" style={{ textShadow: '0 0 40px rgba(124, 58, 237, 0.1)' }}>
                     Building the Operating System for AI-Native Business
                   </span>
                 </motion.h1>
 
                 {/* Subheadline */}
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.7 }}
+                  initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.2,
+                    duration: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1]
+                  }}
                   className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium max-w-2xl"
                 >
                   One AI brain. Infinite business functions.{' '}
@@ -97,14 +116,19 @@ const Company = () => {
 
                 {/* CTA Buttons - Stacked Vertically */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.7 }}
+                  transition={{
+                    delay: 0.25,
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20
+                  }}
                   className="flex flex-col gap-4 max-w-md"
                 >
                   <Button
                     size="lg"
-                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all w-full"
+                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] w-full"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
@@ -115,7 +139,7 @@ const Company = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-lg px-12 py-7 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all w-full"
+                    className="text-lg px-12 py-7 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all duration-300 hover:scale-[1.02] w-full"
                     asChild
                   >
                     <Link href="/product">
@@ -127,44 +151,67 @@ const Company = () => {
 
               {/* RIGHT SIDE - Animated Visual */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
+                initial={{ opacity: 0, scale: 0.95, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{
+                  delay: 0.3,
+                  type: 'spring',
+                  stiffness: 80,
+                  damping: 20
+                }}
                 className="hidden md:block relative h-[600px]"
               >
-                {/* Large Gradient Orb */}
+                {/* Large Gradient Orb with Hue Rotation */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
                     animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 90, 0],
+                      scale: [1, 1.08, 1],
+                      rotate: [0, 180, 360],
                     }}
                     transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
+                      scale: {
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: [0.45, 0.05, 0.55, 0.95],
+                      },
+                      rotate: {
+                        duration: 25,
+                        repeat: Infinity,
+                        ease: 'linear',
+                      }
                     }}
-                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-3xl"
+                    style={{
+                      filter: 'hue-rotate(0deg)',
+                    }}
+                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-3xl animate-hue-shift"
                   ></motion.div>
                 </div>
 
-                {/* Floating Data Points */}
+                {/* Floating Data Points with Smoother Animation */}
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                  transition={{
+                    duration: 50,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
                   className="absolute inset-0"
                 >
                   {[...Array(8)].map((_, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: [0.3, 0.7, 0.3] }}
-                      transition={{
-                        duration: 3,
-                        delay: i * 0.5,
-                        repeat: Infinity,
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{
+                        opacity: [0.4, 0.8, 0.4],
+                        scale: [0.8, 1.2, 0.8],
                       }}
-                      className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-lg"
+                      transition={{
+                        delay: 0.4 + i * 0.15,
+                        duration: 3.5,
+                        repeat: Infinity,
+                        ease: [0.45, 0.05, 0.55, 0.95],
+                      }}
+                      className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-lg shadow-primary/50"
                       style={{
                         top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 8)}%`,
                         left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 8)}%`,
@@ -173,16 +220,53 @@ const Company = () => {
                   ))}
                 </motion.div>
 
-                {/* Center Glass Card */}
+                {/* Center Glass Card with Float Animation */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <GlassCard
-                    intensity="strong"
-                    className="p-8 max-w-sm text-center"
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                    }}
+                    transition={{
+                      delay: 0.5,
+                      type: 'spring',
+                      stiffness: 80,
+                      damping: 15
+                    }}
                   >
-                    <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
-                    <h3 className="text-2xl font-bold mb-2 text-gray-900">AI-Powered</h3>
-                    <p className="text-sm text-gray-600">Unified platform connecting all your business functions</p>
-                  </GlassCard>
+                    <motion.div
+                      animate={{
+                        y: [-8, 8, -8],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: [0.45, 0.05, 0.55, 0.95],
+                      }}
+                    >
+                      <GlassCard
+                        intensity="strong"
+                        className="p-8 max-w-sm text-center hover:scale-[1.02] transition-transform duration-300"
+                      >
+                        <motion.div
+                          animate={{
+                            rotate: [0, 5, -5, 0],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: [0.45, 0.05, 0.55, 0.95],
+                          }}
+                        >
+                          <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
+                        </motion.div>
+                        <h3 className="text-2xl font-bold mb-2 text-gray-900">AI-Powered</h3>
+                        <p className="text-sm text-gray-600">Unified platform connecting all your business functions</p>
+                      </GlassCard>
+                    </motion.div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
@@ -197,43 +281,77 @@ const Company = () => {
 
             {/* Section Header */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{
+                duration: 0.5,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
               className="text-center mb-16 relative z-10 container mx-auto px-4"
             >
               <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, type: 'spring' }}
+                transition={{
+                  delay: 0.1,
+                  type: 'spring',
+                  stiffness: 120,
+                  damping: 15
+                }}
                 className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 mb-6"
               >
                 <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                   Our Story
                 </span>
               </motion.div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-                <span className="bg-gradient-to-r from-gray-900 to-purple-600 bg-clip-text text-transparent">
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.15,
+                  duration: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="text-5xl md:text-6xl font-bold mb-6 tracking-tight"
+              >
+                <span className="bg-gradient-to-r from-gray-900 via-purple-700 to-purple-600 bg-clip-text text-transparent">
                   Why We're Building Pullse
                 </span>
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.2,
+                  duration: 0.4,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium"
+              >
                 The journey from chaos to clarity
-              </p>
+              </motion.p>
             </motion.div>
 
             {/* Horizontal Scroll Carousel */}
             <div className="relative z-10">
-              <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-8">
-                <div className="flex gap-6 px-4 md:px-8">
+              <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-8 scroll-smooth">
+                <div className="flex gap-8 px-4 md:px-8">
                   {/* Problem Card */}
                   <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{
+                      delay: 0.1,
+                      duration: 0.5,
+                      type: 'spring',
+                      stiffness: 100,
+                      damping: 20
+                    }}
                     className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
                   >
                     <StoryQuoteBlock
@@ -247,10 +365,16 @@ const Company = () => {
 
                   {/* Insight Card */}
                   <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{
+                      delay: 0.15,
+                      duration: 0.5,
+                      type: 'spring',
+                      stiffness: 100,
+                      damping: 20
+                    }}
                     className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
                   >
                     <StoryQuoteBlock
@@ -264,10 +388,16 @@ const Company = () => {
 
                   {/* Solution Card */}
                   <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{
+                      delay: 0.2,
+                      duration: 0.5,
+                      type: 'spring',
+                      stiffness: 100,
+                      damping: 20
+                    }}
                     className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
                   >
                     <StoryQuoteBlock
@@ -281,15 +411,34 @@ const Company = () => {
                 </div>
               </div>
 
-              {/* Progress Indicators */}
-              <div className="flex items-center justify-center gap-3 mt-8">
+              {/* Progress Indicators with Smooth Transitions */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.4,
+                  duration: 0.3
+                }}
+                className="flex items-center justify-center gap-3 mt-8"
+              >
                 {[0, 1, 2].map((i) => (
-                  <div
+                  <motion.div
                     key={i}
-                    className="w-2 h-2 rounded-full bg-gray-300 hover:bg-primary transition-colors cursor-pointer"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 0.5 + i * 0.1,
+                      type: 'spring',
+                      stiffness: 200,
+                      damping: 15
+                    }}
+                    whileHover={{ scale: 1.3, backgroundColor: 'hsl(262, 83%, 58%)' }}
+                    className="w-2 h-2 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300 cursor-pointer"
                   />
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
 
