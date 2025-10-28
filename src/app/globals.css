@@ -424,6 +424,16 @@ All colors MUST be HSL.
     background: hsl(262 83% 58% / 0.6);
   }
 
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Flowy background animation */
   @keyframes flow {
     0%, 100% {

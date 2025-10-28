@@ -34,122 +34,174 @@ const Company = () => {
           {/* ========================================
               SECTION 1: HERO - "The Vision"
           ======================================== */}
-          <div className="max-w-6xl mx-auto mb-40 relative">
+          <div className="max-w-7xl mx-auto mb-60 relative min-h-[600px] md:min-h-[700px]">
             {/* Gradient Mesh Background */}
-            <GradientMesh variant="multi" opacity={0.5} />
+            <GradientMesh variant="multi" opacity={0.4} />
 
-            {/* Floating Shapes */}
-            <FloatingShapes variant="full" />
+            {/* Floating Shapes - Reduced */}
+            <FloatingShapes variant="minimal" />
 
-            {/* Hero Content - Glassmorphic Card */}
-            <GlassCard
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              intensity="medium"
-              gradient
-              className="relative z-10 p-12 md:p-16 text-center"
-            >
-              {/* Antler Badge - Floating Top Right */}
+            {/* Subtle Grid Overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
+
+            {/* Split Layout Container */}
+            <div className="relative z-10 grid md:grid-cols-[60%_40%] gap-8 items-center">
+              {/* LEFT SIDE - Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                className="space-y-8 md:space-y-10"
+              >
+                {/* Antler Badge - Top Left */}
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg"
+                >
+                  <Image
+                    src={antlerLogo}
+                    alt="Antler"
+                    width={50}
+                    height={20}
+                    className="h-4 w-auto"
+                  />
+                  <span className="text-xs font-semibold text-gray-700">
+                    Backed by Antler
+                  </span>
+                </motion.div>
+
+                {/* Main Headline - Single Gradient, Left-Aligned */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.7 }}
+                  className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight"
+                >
+                  <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
+                    Building the Operating System for AI-Native Business
+                  </span>
+                </motion.h1>
+
+                {/* Subheadline */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.7 }}
+                  className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium max-w-2xl"
+                >
+                  One AI brain. Infinite business functions.{' '}
+                  <span className="text-primary font-semibold">Starting with customer support.</span>
+                </motion.p>
+
+                {/* CTA Buttons - Stacked Vertically */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.7 }}
+                  className="flex flex-col gap-4 max-w-md"
+                >
+                  <Button
+                    size="lg"
+                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all w-full"
+                    asChild
+                  >
+                    <Link href={cta.primaryCTA.link}>
+                      {cta.primaryCTA.text}
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="text-lg px-12 py-7 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all w-full"
+                    asChild
+                  >
+                    <Link href="/product">
+                      Explore Platform
+                    </Link>
+                  </Button>
+                </motion.div>
+              </motion.div>
+
+              {/* RIGHT SIDE - Animated Visual */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-                className="absolute -top-4 -right-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg"
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="hidden md:block relative h-[600px]"
               >
-                <Image
-                  src={antlerLogo}
-                  alt="Antler"
-                  width={50}
-                  height={20}
-                  className="h-4 w-auto"
-                />
-                <span className="text-xs font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                  Backed by Antler
-                </span>
-              </motion.div>
+                {/* Large Gradient Orb */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 90, 0],
+                    }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-3xl"
+                  ></motion.div>
+                </div>
 
-              {/* Sparkle Icon */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.4, type: 'spring' }}
-                className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-purple-600 mb-8 shadow-lg shadow-primary/30"
-              >
-                <Sparkles className="w-8 h-8 text-white" />
-              </motion.div>
-
-              {/* Main Headline with Gradient */}
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-6xl md:text-8xl font-bold mb-8 leading-[0.95] tracking-tight"
-              >
-                <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
-                  Building the Operating System
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
-                  for AI-Native Business
-                </span>
-              </motion.h1>
-
-              {/* Subheadline */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
-              >
-                One AI brain. Infinite business functions.{' '}
-                <span className="text-primary font-semibold">Starting with customer support.</span>
-              </motion.p>
-
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 items-center justify-center"
-              >
-                <Button
-                  size="lg"
-                  className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all"
-                  asChild
+                {/* Floating Data Points */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                  className="absolute inset-0"
                 >
-                  <Link href={cta.primaryCTA.link}>
-                    {cta.primaryCTA.text}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-lg px-12 py-7 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all"
-                  asChild
-                >
-                  <Link href="/product">
-                    Explore Platform
-                  </Link>
-                </Button>
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0.3, 0.7, 0.3] }}
+                      transition={{
+                        duration: 3,
+                        delay: i * 0.5,
+                        repeat: Infinity,
+                      }}
+                      className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-lg"
+                      style={{
+                        top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 8)}%`,
+                        left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 8)}%`,
+                      }}
+                    />
+                  ))}
+                </motion.div>
+
+                {/* Center Glass Card */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <GlassCard
+                    intensity="strong"
+                    className="p-8 max-w-sm text-center"
+                  >
+                    <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
+                    <h3 className="text-2xl font-bold mb-2 text-gray-900">AI-Powered</h3>
+                    <p className="text-sm text-gray-600">Unified platform connecting all your business functions</p>
+                  </GlassCard>
+                </div>
               </motion.div>
-            </GlassCard>
+            </div>
           </div>
 
           {/* ========================================
               SECTION 2: THE STORY - "Why We Exist"
           ======================================== */}
-          <div className="max-w-6xl mx-auto mb-40 relative">
+          <div className="max-w-full mx-auto mb-40 relative overflow-hidden">
             {/* Gradient Mesh for Story Section */}
-            <GradientMesh variant="purple" opacity={0.3} className="-top-40" />
+            <GradientMesh variant="purple" opacity={0.25} className="-top-40" />
 
+            {/* Section Header */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center mb-24 relative z-10"
+              className="text-center mb-16 relative z-10 container mx-auto px-4"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -162,43 +214,82 @@ const Company = () => {
                   Our Story
                 </span>
               </motion.div>
-              <h2 className="text-6xl font-bold mb-6 tracking-tight">
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
                 <span className="bg-gradient-to-r from-gray-900 to-purple-600 bg-clip-text text-transparent">
                   Why We're Building Pullse
                 </span>
               </h2>
-              <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
                 The journey from chaos to clarity
               </p>
             </motion.div>
 
-            <div className="space-y-12 relative z-10">
-              {/* Problem */}
-              <StoryQuoteBlock
-                title="The Problem We Saw"
-                quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
-                content={story.problem}
-                index={0}
-                accentColor="red"
-              />
+            {/* Horizontal Scroll Carousel */}
+            <div className="relative z-10">
+              <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-8">
+                <div className="flex gap-6 px-4 md:px-8">
+                  {/* Problem Card */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
+                  >
+                    <StoryQuoteBlock
+                      title="The Problem We Saw"
+                      quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
+                      content={story.problem}
+                      index={0}
+                      accentColor="red"
+                    />
+                  </motion.div>
 
-              {/* Insight */}
-              <StoryQuoteBlock
-                title="The Insight"
-                quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
-                content={story.insight}
-                index={1}
-                accentColor="blue"
-              />
+                  {/* Insight Card */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
+                  >
+                    <StoryQuoteBlock
+                      title="The Insight"
+                      quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
+                      content={story.insight}
+                      index={1}
+                      accentColor="blue"
+                    />
+                  </motion.div>
 
-              {/* Solution */}
-              <StoryQuoteBlock
-                title="What We're Building"
-                quote="The future isn't more specialized tools—it's unified AI-native platforms."
-                content={story.solution}
-                index={2}
-                accentColor="purple"
-              />
+                  {/* Solution Card */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
+                  >
+                    <StoryQuoteBlock
+                      title="What We're Building"
+                      quote="The future isn't more specialized tools—it's unified AI-native platforms."
+                      content={story.solution}
+                      index={2}
+                      accentColor="purple"
+                    />
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Progress Indicators */}
+              <div className="flex items-center justify-center gap-3 mt-8">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="w-2 h-2 rounded-full bg-gray-300 hover:bg-primary transition-colors cursor-pointer"
+                  />
+                ))}
+              </div>
             </div>
           </div>
 

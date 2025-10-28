@@ -21,20 +21,20 @@ const StoryQuoteBlock = ({
   const colorConfig = {
     red: {
       gradient: 'from-red-500 to-orange-500',
-      bgGradient: 'from-red-500/10 to-orange-500/10',
-      border: 'border-red-500/30',
+      bgGradient: 'from-red-500/20 via-orange-500/10 to-transparent',
+      border: 'border-red-500/20',
       icon: AlertCircle,
     },
     blue: {
       gradient: 'from-blue-500 to-cyan-500',
-      bgGradient: 'from-blue-500/10 to-cyan-500/10',
-      border: 'border-blue-500/30',
+      bgGradient: 'from-blue-500/20 via-cyan-500/10 to-transparent',
+      border: 'border-blue-500/20',
       icon: Lightbulb,
     },
     purple: {
       gradient: 'from-purple-500 to-pink-500',
-      bgGradient: 'from-purple-500/10 to-pink-500/10',
-      border: 'border-purple-500/30',
+      bgGradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
+      border: 'border-purple-500/20',
       icon: Rocket,
     },
   };
@@ -43,55 +43,55 @@ const StoryQuoteBlock = ({
   const Icon = config.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6 }}
-      className="max-w-5xl mx-auto relative group"
-    >
-      {/* Glassmorphic Card */}
-      <div className={`relative p-10 md:p-12 rounded-3xl bg-white/70 backdrop-blur-md border ${config.border} shadow-xl hover:shadow-2xl transition-all duration-300`}>
-        {/* Number Badge with Gradient */}
-        <div className="absolute -top-4 -left-4">
-          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${config.gradient} shadow-lg flex items-center justify-center`}>
-            <span className="text-xl font-bold text-white">
-              0{index + 1}
-            </span>
-          </div>
-        </div>
+    <div className="relative h-full">
+      {/* Hero-Style Card with Gradient Background */}
+      <div className={`relative h-full min-h-[500px] md:min-h-[600px] p-10 md:p-16 rounded-3xl bg-gradient-to-br ${config.bgGradient} backdrop-blur-md border ${config.border} shadow-2xl overflow-hidden flex flex-col justify-between`}>
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
-        {/* Icon Badge */}
-        <div className="absolute -top-4 -right-4">
-          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${config.gradient} shadow-lg flex items-center justify-center`}>
-            <Icon className="w-6 h-6 text-white" />
+        {/* Large Icon at Top */}
+        <div className="relative z-10">
+          <div className={`inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br ${config.gradient} shadow-2xl items-center justify-center mb-8`}>
+            <Icon className="w-10 h-10 text-white" />
           </div>
-        </div>
 
-        {/* Title with Gradient */}
-        <h3 className="text-4xl font-bold mb-10 tracking-tight">
-          <span className={`bg-gradient-to-r ${config.gradient} bg-clip-text text-transparent`}>
+          {/* Title */}
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
             {title}
-          </span>
-        </h3>
+          </h3>
+        </div>
 
-        {/* Quote Block with Glass Effect */}
-        <blockquote className={`relative mb-10 p-8 md:p-10 rounded-2xl bg-gradient-to-br ${config.bgGradient} border ${config.border} backdrop-blur-sm`}>
-          {/* Quote Mark */}
-          <div className={`absolute -top-3 -left-3 text-6xl font-serif bg-gradient-to-br ${config.gradient} bg-clip-text text-transparent opacity-30`}>
-            "
+        {/* Large Quote - Hero Element */}
+        <blockquote className="relative z-10 flex-1 flex items-center">
+          <div className="relative">
+            {/* Large Quote Mark */}
+            <div className={`absolute -top-6 -left-4 text-8xl font-serif bg-gradient-to-br ${config.gradient} bg-clip-text text-transparent opacity-20`}>
+              "
+            </div>
+            <p className="text-3xl md:text-4xl lg:text-5xl leading-tight font-bold text-gray-900 relative z-10">
+              {quote}
+            </p>
           </div>
-          <p className="text-2xl md:text-3xl leading-relaxed text-gray-800 font-semibold relative z-10">
-            {quote}
-          </p>
         </blockquote>
 
-        {/* Content */}
-        <p className="text-lg leading-relaxed text-gray-700 font-medium">
-          {content}
-        </p>
+        {/* Content at Bottom */}
+        <div className="relative z-10 pt-8 border-t border-gray-200/50">
+          <p className="text-base md:text-lg leading-relaxed text-gray-700 font-medium">
+            {content}
+          </p>
+
+          {/* Card Number */}
+          <div className="mt-6 inline-flex items-center gap-2">
+            <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${config.gradient} flex items-center justify-center`}>
+              <span className="text-sm font-bold text-white">
+                {index + 1}
+              </span>
+            </div>
+            <span className="text-sm text-gray-500 font-medium">of 3</span>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
