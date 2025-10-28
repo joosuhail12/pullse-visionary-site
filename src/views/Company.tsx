@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ExternalLink, Linkedin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timeline from '@/components/company/Timeline';
