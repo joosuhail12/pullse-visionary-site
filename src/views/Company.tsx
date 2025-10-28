@@ -19,7 +19,6 @@ import {
   team,
   antler,
   cta,
-  platformVision,
   ourApproach,
 } from '@/data/companyData';
 import antlerLogo from '@/assets/antler-logo.png';
@@ -34,7 +33,7 @@ const Company = () => {
           {/* ========================================
               SECTION 1: HERO - "The Vision"
           ======================================== */}
-          <div className="max-w-7xl mx-auto mb-60 relative min-h-[600px] md:min-h-[700px]">
+          <div className="max-w-7xl mx-auto mb-32 relative min-h-[600px] md:min-h-[700px]">
             {/* Gradient Mesh Background */}
             <GradientMesh variant="multi" opacity={0.4} />
 
@@ -83,7 +82,7 @@ const Company = () => {
                   </span>
                 </motion.div>
 
-                {/* Main Headline - Single Gradient, Left-Aligned */}
+                {/* Main Headline - Clear, Benefit-Focused */}
                 <motion.h1
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -92,10 +91,10 @@ const Company = () => {
                     duration: 0.5,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
-                  className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight"
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
                 >
-                  <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-primary bg-clip-text text-transparent" style={{ textShadow: '0 0 40px rgba(124, 58, 237, 0.1)' }}>
-                    Building the Operating System for AI-Native Business
+                  <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-primary bg-clip-text text-transparent">
+                    Replace Your Entire Support Stack with One Intelligent Platform
                   </span>
                 </motion.h1>
 
@@ -110,8 +109,8 @@ const Company = () => {
                   }}
                   className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium max-w-2xl"
                 >
-                  One AI brain. Infinite business functions.{' '}
-                  <span className="text-primary font-semibold">Starting with customer support.</span>
+                  AI-native software that solves entire business functions—starting with customer support.{' '}
+                  <span className="text-primary font-semibold">No more tool chaos. No more data silos.</span>
                 </motion.p>
 
                 {/* CTA Buttons - Stacked Vertically */}
@@ -275,7 +274,7 @@ const Company = () => {
           {/* ========================================
               SECTION 2: THE STORY - "Why We Exist"
           ======================================== */}
-          <div className="max-w-full mx-auto mb-40 relative overflow-hidden">
+          <div className="max-w-full mx-auto mb-32 relative overflow-hidden">
             {/* Gradient Mesh for Story Section */}
             <GradientMesh variant="purple" opacity={0.25} className="-top-40" />
 
@@ -336,116 +335,82 @@ const Company = () => {
               </motion.p>
             </motion.div>
 
-            {/* Horizontal Scroll Carousel */}
-            <div className="relative z-10">
-              <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-8 scroll-smooth">
-                <div className="flex gap-8 px-4 md:px-8">
-                  {/* Problem Card */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{
-                      delay: 0.1,
-                      duration: 0.5,
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20
-                    }}
-                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
-                  >
-                    <StoryQuoteBlock
-                      title="The Problem We Saw"
-                      quote="Companies drowning in 100+ disconnected tools. Data silos everywhere. Fragmentation costing millions."
-                      content={story.problem}
-                      index={0}
-                      accentColor="red"
-                    />
-                  </motion.div>
-
-                  {/* Insight Card */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{
-                      delay: 0.15,
-                      duration: 0.5,
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20
-                    }}
-                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
-                  >
-                    <StoryQuoteBlock
-                      title="The Insight"
-                      quote="AI doesn't get smarter through specialization. It gets smarter through aggregation."
-                      content={story.insight}
-                      index={1}
-                      accentColor="blue"
-                    />
-                  </motion.div>
-
-                  {/* Solution Card */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -30, scale: 0.95, filter: 'blur(4px)' }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{
-                      delay: 0.2,
-                      duration: 0.5,
-                      type: 'spring',
-                      stiffness: 100,
-                      damping: 20
-                    }}
-                    className="flex-shrink-0 w-[90vw] md:w-[80vw] lg:w-[70vw] snap-center"
-                  >
-                    <StoryQuoteBlock
-                      title="What We're Building"
-                      quote="The future isn't more specialized tools—it's unified AI-native platforms."
-                      content={story.solution}
-                      index={2}
-                      accentColor="purple"
-                    />
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Progress Indicators with Smooth Transitions */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.4,
-                  duration: 0.3
-                }}
-                className="flex items-center justify-center gap-3 mt-8"
-              >
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.5 + i * 0.1,
-                      type: 'spring',
-                      stiffness: 200,
-                      damping: 15
-                    }}
-                    whileHover={{ scale: 1.3, backgroundColor: 'hsl(262, 83%, 58%)' }}
-                    className="w-2 h-2 rounded-full bg-gray-300 hover:bg-primary transition-all duration-300 cursor-pointer"
+            {/* 3-Column Grid Layout (Mobile: Stacked) */}
+            <div className="relative z-10 max-w-7xl mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                {/* Problem Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.5,
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20
+                  }}
+                >
+                  <StoryQuoteBlock
+                    title="The Problem"
+                    quote="Your team is drowning in disconnected tools"
+                    content={story.problem}
+                    index={0}
+                    accentColor="red"
                   />
-                ))}
-              </motion.div>
+                </motion.div>
+
+                {/* Insight Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{
+                    delay: 0.2,
+                    duration: 0.5,
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20
+                  }}
+                >
+                  <StoryQuoteBlock
+                    title="The Insight"
+                    quote="One brain beats 100 specialized tools"
+                    content={story.insight}
+                    index={1}
+                    accentColor="blue"
+                  />
+                </motion.div>
+
+                {/* Solution Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{
+                    delay: 0.3,
+                    duration: 0.5,
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20
+                  }}
+                >
+                  <StoryQuoteBlock
+                    title="The Solution"
+                    quote="AI-native platforms that replace your entire stack"
+                    content={story.solution}
+                    index={2}
+                    accentColor="purple"
+                  />
+                </motion.div>
+              </div>
             </div>
           </div>
 
           {/* ========================================
               SECTION 3: OUR APPROACH (Mission + Principles + Vision)
           ======================================== */}
-          <div className="mb-40 relative">
+          <div className="mb-32 relative">
             {/* Gradient Mesh for Approach Section */}
             <GradientMesh variant="blue" opacity={0.35} className="-top-40" />
 
@@ -463,7 +428,7 @@ const Company = () => {
           {/* ========================================
               SECTION 4: THE TEAM & JOURNEY
           ======================================== */}
-          <div className="max-w-6xl mx-auto mb-40 relative">
+          <div className="max-w-6xl mx-auto mb-32 relative">
             {/* Gradient Mesh for Team Section */}
             <GradientMesh variant="orange" opacity={0.3} className="-top-40" />
 
@@ -622,34 +587,6 @@ const Company = () => {
               <Timeline milestones={timeline} />
             </div>
 
-            {/* Platform Vision - Glassmorphic Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto relative z-10"
-            >
-              <div className="relative p-12 rounded-3xl bg-white/80 backdrop-blur-lg border border-white/40 shadow-2xl">
-                {/* Icon Badge */}
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl flex items-center justify-center">
-                    <Sparkles className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-
-                <div className="pt-8 text-center">
-                  <h3 className="text-3xl font-bold mb-6">
-                    <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                      Beyond Customer Support
-                    </span>
-                  </h3>
-                  <p className="text-xl text-gray-700 leading-relaxed font-medium">
-                    {platformVision}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
           {/* ========================================
@@ -684,19 +621,34 @@ const Company = () => {
                   <Sparkles className="w-10 h-10 text-white" />
                 </motion.div>
 
-                <h2 className="text-6xl md:text-7xl font-bold tracking-tight leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
                   <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
                     {cta.headline}
                   </span>
                 </h2>
-                <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+
+                {/* Trust Indicators - Moved Up */}
+                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-sm border border-white/40 shadow-lg">
+                    <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto" />
+                    <span className="text-sm font-semibold text-gray-700">Antler-backed</span>
+                  </div>
+                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20">
+                    <span className="text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Launching Q4 2025</span>
+                  </div>
+                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
+                    <span className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Limited Early Access</span>
+                  </div>
+                </div>
+
+                <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
                   {cta.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-6 items-center justify-center pt-6">
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
                   <Button
                     size="lg"
-                    className="text-lg px-14 py-8 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-2xl shadow-primary/40 hover:shadow-3xl hover:shadow-primary/50 transition-all hover:scale-105"
+                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-2xl shadow-primary/40 hover:shadow-3xl hover:shadow-primary/50 transition-all hover:scale-105"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
@@ -707,27 +659,13 @@ const Company = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-lg px-14 py-8 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all hover:scale-105"
+                    className="text-base px-8 py-6 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all hover:scale-105"
                     asChild
                   >
                     <Link href={cta.secondaryCTA.link} target="_blank" rel="noopener noreferrer">
                       {cta.secondaryCTA.text}
                     </Link>
                   </Button>
-                </div>
-
-                {/* Trust Indicators */}
-                <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 pt-12">
-                  <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm">
-                    <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto" />
-                    <span className="text-sm font-semibold text-gray-700">Antler-backed</span>
-                  </div>
-                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20">
-                    <span className="text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Launching Q4 2025</span>
-                  </div>
-                  <div className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
-                    <span className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Limited early access</span>
-                  </div>
                 </div>
               </div>
             </GlassCard>

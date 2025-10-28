@@ -49,18 +49,18 @@ export interface TeamMember {
 
 export const story = {
   problem:
-    "Companies are drowning in 100+ disconnected tools. Sales uses Salesforce, support uses Zendesk, marketing uses HubSpot—each team has 10+ specialized apps that don't talk to each other. Data silos everywhere. Endless context switching. Fragmentation costing millions.",
+    "Your support team switches between Zendesk, Slack, Intercom, Jira, your knowledge base, and 6 other tools—just to answer one customer question. They lose hours to context switching. Critical customer data sits trapped in silos. You're paying $2,000/month per team member just to stitch together basic workflows. This isn't productivity. It's chaos.",
   insight:
-    "Then we realized: AI works through aggregation, not specialization. The more context AI has across your business, the smarter it becomes. This changes everything about how business software should work.",
+    "Then we had a realization: imagine if your AI could see everything—every customer interaction, every support ticket, every product update, every team conversation. Each new data point makes it smarter. That's how AI actually works: through aggregation, not specialization. One brain that knows your entire business beats 100 specialized tools that don't talk to each other.",
   solution:
-    "The future isn't more specialized tools—it's AI-native platforms that solve entire business functions end-to-end. We're starting with customer support. Eventually, every business function, unified by one intelligent core.",
+    "We're building AI-native platforms that solve entire business functions end-to-end. Starting with customer support—where one unified system replaces your entire support stack. No more tool chaos. No more data silos. Just intelligent, connected software that actually understands your business.",
 };
 
 export const mission =
-  "To build AI-native solutions that solve entire business functions end-to-end, starting with customer support. Making powerful AI accessible to teams of all sizes, with transparent pricing and genuine simplicity.";
+  "Build AI-native software that solves entire business functions—replacing 10+ disconnected tools with one intelligent platform.";
 
 export const vision =
-  "A future where every business function - from customer support to sales to operations - is powered by specialized AI agents, all unified by a central company brain that understands your entire organization. No more fragmentation, no more data silos, just intelligent, connected business operations.";
+  "We're starting with customer support, but the vision is bigger: AI-native solutions for every business function—sales, marketing, operations, finance—all connected through one unified platform. The more functions you use, the smarter your entire system becomes. One company brain that understands everything, eliminates data silos, and makes every team dramatically more effective.";
 
 export const timeline: Milestone[] = [
   {
@@ -113,25 +113,25 @@ export const values: Value[] = [
     icon: Brain,
     title: "AI-Native by Design",
     description:
-      "We build from scratch for AI aggregation—not bolting AI onto legacy software. We question assumptions and build the future others don't see yet.",
+      "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter. That's why Pullse can replace your entire support stack with one platform.",
   },
   {
     icon: Eye,
     title: "Radically Transparent",
     description:
-      "Our pricing, roadmap, and journey are completely open. No hidden costs, no surprise fees, no fluff. Trust through transparency.",
+      "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no pricing tiers that gatekeep basic features, no locked data. We earn trust by being radically open.",
   },
   {
     icon: Heart,
-    title: "Customer Obsessed",
+    title: "End User Obsessed",
     description:
-      "Every decision starts with: Will this genuinely help teams succeed? We're committed to simplicity—no expensive add-ons, no complexity.",
+      "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces, no mandatory \"success manager\" upsells, and powerful features available to teams of any size.",
   },
   {
     icon: Zap,
     title: "Speed & Conviction",
     description:
-      "Ship quickly. Learn fast. Iterate constantly. The world needs better business software now, not years from now.",
+      "We ship fast, learn faster. No 18-month roadmaps or bureaucratic processes. The world needs better business software now—so we build, test, and iterate in public. Speed is a feature.",
   },
 ];
 
@@ -149,7 +149,7 @@ export const team: TeamMember[] = [
     name: "Suhail Joo",
     role: "Founder",
     title: "Founder & CEO",
-    bio: "Building Pullse to solve the AI-native business software problem from first principles. After years in customer support operations, I saw firsthand how 100+ disconnected tools fragment teams and cost companies millions.",
+    bio: "Previously built and scaled customer support operations for high-growth startups, managing teams serving millions of users. Spent 5+ years inside the broken world of support tools—watching teams juggle 10+ disconnected systems, lose critical context, and burn out from tool chaos. Started Pullse to build the AI-native support platform he wished existed: one intelligent system that actually understands your business and replaces your entire support stack.",
     background: undefined,
     whyThis: undefined,
     image: undefined, // Will use initials fallback
@@ -159,7 +159,7 @@ export const team: TeamMember[] = [
     name: "Manminder Tomar",
     role: "Co-founder",
     title: "Co-founder & CTO",
-    bio: "Leading Pullse's technical vision and AI-native architecture. Engineering leader with deep experience in scalable systems and AI infrastructure, passionate about creating powerful yet accessible technology.",
+    bio: "Engineering leader with 8+ years building scalable systems and AI infrastructure. Previously architected distributed systems serving millions of requests per day. Deep expertise in LLMs, vector databases, and real-time data pipelines. At Pullse, architecting the AI aggregation engine that makes every data point strengthen the entire platform—the technical foundation that lets one system replace 10+ specialized tools.",
     background: undefined,
     whyThis: undefined,
     image: undefined, // Will use initials fallback
@@ -175,9 +175,9 @@ export const antler = {
 };
 
 export const cta = {
-  headline: "Help Us Build the Future",
+  headline: "Replace Your Support Stack with One Intelligent Platform",
   description:
-    "We're launching Q4 2025 and looking for early partners to shape the first truly AI-native business platform. Join us.",
+    "Launching Q4 2025. We're accepting a limited number of early access partners who want to be first to experience truly AI-native support software. No more tool chaos. No more data silos. Just intelligent, connected support that actually understands your business.",
   primaryCTA: {
     text: "Request Early Access",
     link: "/contact-sales",
@@ -218,6 +218,4 @@ export const whySupportFirst = {
   ],
 };
 
-// Simplified platform vision - single paragraph
-export const platformVision =
-  "We're starting with customer support, but our vision is bigger: AI-native solutions for every business function—sales, marketing, operations—all unified by one intelligent core. The more functions you use, the smarter the entire system becomes.";
+// Platform vision is now integrated into the main vision statement above
