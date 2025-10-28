@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -14,6 +15,7 @@ import GradientMesh from '@/components/company/GradientMesh';
 import FloatingShapes from '@/components/company/FloatingShapes';
 import GlassCard from '@/components/company/GlassCard';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
+import LiquidEther from '@/components/LiquidEther';
 import {
   story,
   timeline,
@@ -43,6 +45,22 @@ const Company = () => {
               SECTION 1: HERO - "The Vision"
           ======================================== */}
           <div className="max-w-7xl mx-auto mb-40 relative min-h-[600px] md:min-h-[700px]">
+            {/* Hero-specific Liquid Ether - Higher Intensity */}
+            <div className="absolute inset-0 -z-10 opacity-45 rounded-3xl overflow-hidden">
+              <Suspense fallback={<div className="w-full h-full" />}>
+                <LiquidEther
+                  colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+                  mouseForce={25}
+                  cursorSize={120}
+                  isViscous={false}
+                  resolution={0.55}
+                  autoDemo
+                  autoSpeed={0.4}
+                  autoIntensity={1.8}
+                />
+              </Suspense>
+            </div>
+
             {/* Floating Shapes - Reduced */}
             <FloatingShapes variant="minimal" />
 
