@@ -41,7 +41,7 @@ const ApproachSection = ({
             Our Approach
           </span>
         </motion.div>
-        <h2 className="text-6xl font-bold mb-6 tracking-tight">
+        <h2 className="text-6xl font-bold mb-6 tracking-[-0.01em]">
           <span className="bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
             {title}
           </span>
@@ -66,8 +66,8 @@ const ApproachSection = ({
           </div>
         </div>
 
-        <div className="relative p-12 md:p-16 pt-16 rounded-3xl bg-white/80 backdrop-blur-lg border border-white/40 shadow-2xl">
-          <blockquote className="text-3xl md:text-4xl leading-relaxed font-bold text-center max-w-4xl mx-auto">
+        <div className="relative p-12 md:p-16 pt-16 rounded-3xl bg-white/80 backdrop-blur-xl border border-gray-200/40 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)]">
+          <blockquote className="text-3xl md:text-4xl xl:text-5xl leading-[1.3] font-semibold text-center max-w-4xl mx-auto">
             <span className="bg-gradient-to-r from-gray-800 via-primary to-blue-600 bg-clip-text text-transparent">
               {mission}
             </span>
@@ -91,7 +91,7 @@ const ApproachSection = ({
           </h3>
           <p className="text-lg text-gray-600">The values that guide everything we build</p>
         </motion.div>
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 max-w-6xl mx-auto">
           {principles.map((principle, index) => (
             <PrincipleCard
               key={principle.title}
@@ -112,7 +112,7 @@ const ApproachSection = ({
         transition={{ duration: 0.6 }}
         className="max-w-5xl mx-auto"
       >
-        <div className="relative p-10 md:p-12 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-blue-500/30 backdrop-blur-sm shadow-xl">
+        <div className="relative p-10 md:p-12 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-blue-500/30 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)]">
           {/* Decorative Corner Elements */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-bl-full blur-2xl"></div>
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-tr-full blur-2xl"></div>

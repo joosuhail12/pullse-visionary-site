@@ -28,13 +28,13 @@ const PrincipleCard = ({ icon: Icon, title, description, index }: PrincipleCardP
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group h-full"
     >
-      <div className="h-full relative p-10 rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+      <div className="h-full relative p-10 md:p-12 rounded-3xl bg-white/70 backdrop-blur-md border border-gray-100/40 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:border-gray-200/60 transition-all duration-300 hover:-translate-y-1">
         {/* Gradient Corner Accent */}
         <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full blur-xl`}></div>
 
-        <div className="space-y-6 relative z-10">
+        <div className="space-y-8 relative z-10">
           {/* Icon with Gradient Background */}
-          <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${gradient} shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform duration-300`}>
+          <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${gradient} shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform duration-300`}>
             <Icon className="h-8 w-8 text-white" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900">

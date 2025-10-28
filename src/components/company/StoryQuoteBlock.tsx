@@ -20,21 +20,21 @@ const StoryQuoteBlock = ({
 }: StoryQuoteBlockProps) => {
   const colorConfig = {
     red: {
-      gradient: 'from-red-500 to-orange-500',
-      bgGradient: 'from-red-500/20 via-orange-500/10 to-transparent',
-      border: 'border-red-500/20',
+      gradient: 'from-purple-500 to-purple-600',
+      bgGradient: 'from-purple-500/20 via-purple-600/10 to-transparent',
+      border: 'border-purple-500/20',
       icon: AlertCircle,
     },
     blue: {
-      gradient: 'from-blue-500 to-cyan-500',
-      bgGradient: 'from-blue-500/20 via-cyan-500/10 to-transparent',
-      border: 'border-blue-500/20',
+      gradient: 'from-primary to-purple-500',
+      bgGradient: 'from-primary/20 via-purple-500/10 to-transparent',
+      border: 'border-primary/20',
       icon: Lightbulb,
     },
     purple: {
-      gradient: 'from-purple-500 to-pink-500',
-      bgGradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
-      border: 'border-purple-500/20',
+      gradient: 'from-purple-400 to-primary',
+      bgGradient: 'from-purple-400/20 via-primary/10 to-transparent',
+      border: 'border-purple-400/20',
       icon: Rocket,
     },
   };
@@ -45,11 +45,11 @@ const StoryQuoteBlock = ({
   return (
     <motion.div
       className="relative h-full"
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.01, y: -2 }}
       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
     >
       {/* Compact Card for Grid Layout */}
-      <div className={`relative h-full min-h-[450px] p-8 md:p-10 rounded-3xl bg-gradient-to-br ${config.bgGradient} backdrop-blur-md border ${config.border} shadow-2xl hover:shadow-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 group`}>
+      <div className={`relative h-full min-h-[450px] p-10 md:p-12 lg:p-14 rounded-3xl bg-gradient-to-br ${config.bgGradient} backdrop-blur-md border ${config.border} ring-1 ring-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden flex flex-col justify-between transition-all duration-300 group`}>
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
@@ -80,7 +80,7 @@ const StoryQuoteBlock = ({
             >
               "
             </motion.div>
-            <p className="text-xl md:text-2xl leading-tight font-bold text-gray-900 relative z-10">
+            <p className="text-2xl md:text-3xl xl:text-4xl leading-snug font-semibold italic text-gray-900 relative z-10">
               {quote}
             </p>
           </div>

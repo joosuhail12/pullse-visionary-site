@@ -33,9 +33,9 @@ const Company = () => {
           {/* ========================================
               SECTION 1: HERO - "The Vision"
           ======================================== */}
-          <div className="max-w-7xl mx-auto mb-32 relative min-h-[600px] md:min-h-[700px]">
+          <div className="max-w-7xl mx-auto mb-40 relative min-h-[600px] md:min-h-[700px]">
             {/* Gradient Mesh Background */}
-            <GradientMesh variant="multi" opacity={0.3} />
+            <GradientMesh variant="multi" opacity={0.15} />
 
             {/* Floating Shapes - Reduced */}
             <FloatingShapes variant="minimal" />
@@ -67,7 +67,7 @@ const Company = () => {
                     damping: 20
                   }}
                   whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(124, 58, 237, 0.2)' }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-white/40 shadow-lg transition-all duration-300 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-lg border border-gray-200/60 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer"
                 >
                   <Image
                     src={antlerLogo}
@@ -90,7 +90,7 @@ const Company = () => {
                     duration: 0.5,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-[-0.02em]"
                 >
                   <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-primary bg-clip-text text-transparent">
                     Replace Your Entire Support Stack with One Intelligent Platform
@@ -106,7 +106,7 @@ const Company = () => {
                     duration: 0.5,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
-                  className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium max-w-2xl"
+                  className="text-xl md:text-2xl text-gray-700 leading-[1.6] font-medium max-w-2xl"
                 >
                   AI-native software that solves entire business functions—starting with customer support.{' '}
                   <span className="text-primary font-semibold">No more tool chaos. No more data silos.</span>
@@ -126,7 +126,7 @@ const Company = () => {
                 >
                   <Button
                     size="lg"
-                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-[1.02] w-full"
+                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-[0_8px_24px_rgba(124,58,237,0.20)] hover:shadow-[0_12px_32px_rgba(124,58,237,0.25)] transition-all duration-300 hover:scale-[1.02] w-full"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
@@ -178,7 +178,7 @@ const Company = () => {
                         ease: 'linear',
                       }
                     }}
-                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/30 via-purple-600/30 to-pink-600/30 blur-2xl"
+                    className="w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 via-purple-600/15 to-transparent blur-2xl"
                   ></motion.div>
                 </div>
 
@@ -272,7 +272,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-full mx-auto mb-32 relative overflow-hidden">
             {/* Gradient Mesh for Story Section */}
-            <GradientMesh variant="purple" opacity={0.3} className="-top-40" />
+            <GradientMesh variant="purple" opacity={0.15} className="-top-40" />
 
             {/* Section Header */}
             <motion.div
@@ -308,7 +308,7 @@ const Company = () => {
                   duration: 0.4,
                   ease: [0.25, 0.1, 0.25, 1]
                 }}
-                className="text-5xl md:text-6xl font-bold mb-6 tracking-tight"
+                className="text-5xl md:text-6xl font-bold mb-6 tracking-[-0.01em]"
               >
                 <span className="bg-gradient-to-r from-gray-900 via-purple-700 to-purple-600 bg-clip-text text-transparent">
                   Why We're Building Pullse
@@ -400,9 +400,9 @@ const Company = () => {
           {/* ========================================
               SECTION 3: OUR APPROACH (Mission + Principles + Vision)
           ======================================== */}
-          <div className="mb-32 relative">
+          <div className="mb-40 relative">
             {/* Gradient Mesh for Approach Section */}
-            <GradientMesh variant="blue" opacity={0.3} className="-top-40" />
+            <GradientMesh variant="blue" opacity={0.15} className="-top-40" />
 
             <div className="relative z-10">
               <ApproachSection
@@ -420,7 +420,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-6xl mx-auto mb-32 relative">
             {/* Gradient Mesh for Team Section */}
-            <GradientMesh variant="orange" opacity={0.3} className="-top-40" />
+            <GradientMesh variant="orange" opacity={0.15} className="-top-40" />
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -440,7 +440,7 @@ const Company = () => {
                   The Team
                 </span>
               </motion.div>
-              <h2 className="text-6xl font-bold mb-6 tracking-tight">
+              <h2 className="text-6xl font-bold mb-6 tracking-[-0.01em]">
                 <span className="bg-gradient-to-r from-gray-900 to-orange-600 bg-clip-text text-transparent">
                   Who's Building This
                 </span>
@@ -452,7 +452,7 @@ const Company = () => {
 
             {/* Team Section - Glassmorphic Cards */}
             <div className="max-w-6xl mx-auto mb-24 relative z-10">
-              <div className="grid md:grid-cols-2 gap-10">
+              <div className="grid md:grid-cols-2 gap-10 xl:gap-12">
                 {team.map((member, idx) => (
                   <motion.div
                     key={member.name}
@@ -462,7 +462,7 @@ const Company = () => {
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     className="relative group"
                   >
-                    <div className="relative p-10 rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div className="relative p-12 md:p-14 lg:p-16 rounded-3xl bg-white/70 backdrop-blur-md border border-gray-100/40 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:border-gray-200/60 transition-all duration-300 hover:-translate-y-1">
                       {/* Gradient Corner Accent */}
                       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-bl-full blur-2xl"></div>
 
@@ -584,7 +584,7 @@ const Company = () => {
           ======================================== */}
           <div className="max-w-5xl mx-auto relative">
             {/* Gradient Mesh for CTA */}
-            <GradientMesh variant="multi" opacity={0.3} />
+            <GradientMesh variant="multi" opacity={0.15} />
 
             <GlassCard
               initial={{ opacity: 0, y: 30 }}
@@ -611,7 +611,7 @@ const Company = () => {
                   <Sparkles className="w-10 h-10 text-white" />
                 </motion.div>
 
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.01em] leading-tight">
                   <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
                     {cta.headline}
                   </span>
@@ -638,7 +638,7 @@ const Company = () => {
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
                   <Button
                     size="lg"
-                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-2xl shadow-primary/40 hover:shadow-3xl hover:shadow-primary/50 transition-all hover:scale-105"
+                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-[0_8px_24px_rgba(124,58,237,0.20)] hover:shadow-[0_12px_32px_rgba(124,58,237,0.25)] transition-all hover:scale-105"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
