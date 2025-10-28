@@ -13,6 +13,7 @@ import ApproachSection from '@/components/company/ApproachSection';
 import GradientMesh from '@/components/company/GradientMesh';
 import FloatingShapes from '@/components/company/FloatingShapes';
 import GlassCard from '@/components/company/GlassCard';
+import PageLiquidBackground from '@/components/PageLiquidBackground';
 import {
   story,
   timeline,
@@ -25,7 +26,15 @@ import antlerLogo from '@/assets/antler-logo.png';
 
 const Company = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 relative">
+      {/* Liquid Ether Background Layer */}
+      <PageLiquidBackground opacity={0.22} />
+
+      {/* Continuous Gradient Mesh Layer */}
+      <div className="fixed inset-0 -z-40 pointer-events-none">
+        <GradientMesh variant="multi" opacity={0.18} />
+      </div>
+
       <Navigation />
 
       <div className="pt-32 pb-20">
@@ -34,9 +43,6 @@ const Company = () => {
               SECTION 1: HERO - "The Vision"
           ======================================== */}
           <div className="max-w-7xl mx-auto mb-40 relative min-h-[600px] md:min-h-[700px]">
-            {/* Gradient Mesh Background */}
-            <GradientMesh variant="multi" opacity={0.15} />
-
             {/* Floating Shapes - Reduced */}
             <FloatingShapes variant="minimal" />
 
@@ -271,9 +277,6 @@ const Company = () => {
               SECTION 2: THE STORY - "Why We Exist"
           ======================================== */}
           <div className="max-w-full mx-auto mb-32 relative overflow-hidden">
-            {/* Gradient Mesh for Story Section */}
-            <GradientMesh variant="purple" opacity={0.15} className="-top-40" />
-
             {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -401,9 +404,6 @@ const Company = () => {
               SECTION 3: OUR APPROACH (Mission + Principles + Vision)
           ======================================== */}
           <div className="mb-40 relative">
-            {/* Gradient Mesh for Approach Section */}
-            <GradientMesh variant="blue" opacity={0.15} className="-top-40" />
-
             <div className="relative z-10">
               <ApproachSection
                 title={ourApproach.title}
@@ -419,9 +419,6 @@ const Company = () => {
               SECTION 4: THE TEAM & JOURNEY
           ======================================== */}
           <div className="max-w-6xl mx-auto mb-32 relative">
-            {/* Gradient Mesh for Team Section */}
-            <GradientMesh variant="orange" opacity={0.15} className="-top-40" />
-
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -583,9 +580,6 @@ const Company = () => {
               SECTION 5: FINAL CTA
           ======================================== */}
           <div className="max-w-5xl mx-auto relative">
-            {/* Gradient Mesh for CTA */}
-            <GradientMesh variant="multi" opacity={0.15} />
-
             <GlassCard
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
