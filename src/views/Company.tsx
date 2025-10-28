@@ -368,7 +368,6 @@ const Company = () => {
                   </a>
                 </div>
               </motion.div>
-            </div>
 
             {/* Journey Timeline */}
             <div className="mb-20">
