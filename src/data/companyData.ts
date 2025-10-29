@@ -52,12 +52,31 @@ export interface TeamMember {
 }
 
 export const story = {
-  problem:
-    "Your support team switches between Zendesk, Slack, Intercom, Jira, your knowledge base, and 6 other tools—just to answer one customer question. They lose hours to context switching. Critical customer data sits trapped in silos. You're paying $2,000/month per team member just to stitch together basic workflows. This isn't productivity. It's chaos.",
-  insight:
-    "Then we had a realization: imagine if your AI could see everything—every customer interaction, every support ticket, every product update, every team conversation. Each new data point makes it smarter. That's how AI actually works: through aggregation, not specialization. One brain that knows your entire business beats 100 specialized tools that don't talk to each other.",
-  solution:
-    "We're building AI-native platforms that solve entire business functions end-to-end. Starting with customer support—where one unified system replaces your entire support stack. No more tool chaos. No more data silos. Just intelligent, connected software that actually understands your business.",
+  problem: {
+    title: "The Breaking Point",
+    paragraphs: [
+      "After years managing support teams, I watched talented people burn out—not from helping customers, but from fighting their tools.",
+      "Every question meant switching between 10 systems. Zendesk for tickets. Slack for team chat. Intercom for live chat. Jira for bugs. The knowledge base. The CRM. The analytics dashboard. Each tool worked fine alone, but together? Chaos.",
+      "The breaking point came when I calculated we were spending $100,000 per year on tools that made our team less effective, not more. Our best agents spent more time context-switching than actually helping customers.",
+      "That's when I knew: the problem wasn't the tools. It was the approach."
+    ]
+  },
+  insight: {
+    title: "The Realization",
+    paragraphs: [
+      "Then it hit me: AI doesn't work like humans. We need specialized tools because we can't hold everything in our heads at once. But AI? AI aggregates. The more data it sees, the smarter it gets.",
+      "Imagine if your AI could see everything—every customer conversation, every support ticket, every product update, every team discussion. Each new interaction makes it smarter. That's the power of aggregation.",
+      "One intelligent brain that understands your entire business beats 100 specialized tools that don't talk to each other. That's not just theory—that's how AI actually works."
+    ]
+  },
+  solution: {
+    title: "Building the Future",
+    paragraphs: [
+      "We're building AI-native platforms that solve entire business functions end-to-end. Not tools with AI features. Platforms designed from scratch around AI aggregation.",
+      "Starting with customer support—where the problem is most painful. One unified system replacing your entire support stack. No integrations needed. No data silos. Just intelligent software that actually understands your business.",
+      "This is what business software should have been all along. We just needed AI to make it possible."
+    ]
+  },
 };
 
 export const mission =

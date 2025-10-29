@@ -8,11 +8,12 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import StoryQuoteBlock from '@/components/company/StoryQuoteBlock';
+import StoryAlternatingBlock from '@/components/company/StoryAlternatingBlock';
 import ValuesSection from '@/components/company/ValuesSection';
 import WhySupportSection from '@/components/company/WhySupportSection';
 import TeamCard from '@/components/company/TeamCard';
 import JourneySection from '@/components/company/JourneySection';
+import { MessageSquare, Lightbulb, Rocket, Mail, Phone, Headphones, Search, FileText, BarChart3 } from 'lucide-react';
 import GradientMesh from '@/components/company/GradientMesh';
 import FloatingShapes from '@/components/company/FloatingShapes';
 import GlassCard from '@/components/company/GlassCard';
@@ -49,7 +50,7 @@ const Company = () => {
       ======================================== */}
       <section className="relative overflow-hidden pt-32 pb-20 min-h-screen">
         {/* Hero-specific Liquid Ether - Full Width */}
-        <div className="absolute inset-0 -z-10 opacity-45">
+        <div className="absolute inset-0 -z-10 opacity-28">
               <Suspense fallback={<div className="w-full h-full" />}>
                 <LiquidEther
                   colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
@@ -123,7 +124,7 @@ const Company = () => {
                   className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-[-0.02em]"
                 >
                   <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-primary bg-clip-text text-transparent">
-                    Replace Your Entire Support Stack with One Intelligent Platform
+                    One Platform. Entire Support Stack.
                   </span>
                 </motion.h1>
 
@@ -142,7 +143,7 @@ const Company = () => {
                   <span className="text-primary font-semibold">No more tool chaos. No more data silos.</span>
                 </motion.p>
 
-                {/* CTA Buttons - Stacked Vertically */}
+                {/* CTA Buttons - Horizontal on Desktop */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -152,11 +153,11 @@ const Company = () => {
                     stiffness: 100,
                     damping: 20
                   }}
-                  className="flex flex-col gap-4 max-w-md"
+                  className="flex flex-col sm:flex-row gap-4 items-center"
                 >
                   <Button
                     size="lg"
-                    className="text-lg px-12 py-7 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-[0_8px_24px_rgba(124,58,237,0.20)] hover:shadow-[0_12px_32px_rgba(124,58,237,0.25)] transition-all duration-300 hover:scale-[1.02] w-full"
+                    className="text-lg px-10 py-6 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-[0_8px_24px_rgba(124,58,237,0.20)] hover:shadow-[0_12px_32px_rgba(124,58,237,0.25)] transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                     asChild
                   >
                     <Link href={cta.primaryCTA.link}>
@@ -167,7 +168,7 @@ const Company = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="text-lg px-12 py-7 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all duration-300 hover:scale-[1.02] w-full"
+                    className="text-base px-8 py-5 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                     asChild
                   >
                     <Link href="/product">
@@ -177,7 +178,7 @@ const Company = () => {
                 </motion.div>
               </motion.div>
 
-              {/* RIGHT SIDE - Animated Visual */}
+              {/* RIGHT SIDE - Icon Arrangement Visual */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -187,9 +188,9 @@ const Company = () => {
                   stiffness: 100,
                   damping: 20
                 }}
-                className="hidden md:block relative h-[600px]"
+                className="relative h-[600px]"
               >
-                {/* Large Gradient Orb - Aligned durations 12s */}
+                {/* Background Gradient Orb */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
                     animate={{
@@ -212,87 +213,111 @@ const Company = () => {
                   ></motion.div>
                 </div>
 
-                {/* Floating Data Points - Cleaner 24s/6s pattern */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 24,
-                    repeat: Infinity,
-                    ease: 'linear'
-                  }}
-                  className="absolute inset-0"
-                >
-                  {[...Array(8)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{
-                        opacity: [0.4, 0.7, 0.4],
-                        scale: [0.9, 1.1, 0.9],
-                      }}
-                      transition={{
-                        delay: 0.6 + i * 0.15,
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: [0.25, 0.1, 0.25, 1],
-                      }}
-                      className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-primary to-purple-600 shadow-lg shadow-primary/50"
-                      style={{
-                        top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 8)}%`,
-                        left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 8)}%`,
-                      }}
-                    />
-                  ))}
-                </motion.div>
-
-                {/* Center Glass Card with Float Animation */}
+                {/* Center: Unified Platform Icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
-                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{
                       delay: 0.6,
                       type: 'spring',
                       stiffness: 100,
                       damping: 20
                     }}
+                    className="relative"
                   >
                     <motion.div
                       animate={{
-                        y: [-6, 6, -6],
+                        y: [-8, 8, -8],
                       }}
                       transition={{
                         duration: 6,
                         repeat: Infinity,
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
+                      className="relative z-20"
                     >
-                      <GlassCard
-                        intensity="strong"
-                        className="p-8 max-w-sm text-center hover:scale-[1.02] transition-transform duration-300"
-                      >
-                        <motion.div
-                          animate={{
-                            rotate: [0, 5, -5, 0],
-                          }}
-                          transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: [0.25, 0.1, 0.25, 1],
-                          }}
-                        >
-                          <Sparkles className="w-12 h-12 mx-auto mb-4 text-primary" />
-                        </motion.div>
-                        <h3 className="text-2xl font-bold mb-2 text-gray-900">AI-Powered</h3>
-                        <p className="text-sm text-gray-600">Unified platform connecting all your business functions</p>
-                      </GlassCard>
+                      <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-primary to-purple-600 shadow-2xl shadow-primary/40 flex items-center justify-center backdrop-blur-sm border-4 border-white/20">
+                        <Sparkles className="w-16 h-16 text-white" />
+                      </div>
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary to-purple-600 blur-xl opacity-50 -z-10"></div>
                     </motion.div>
                   </motion.div>
                 </div>
+
+                {/* Orbiting Tool Icons - Representing Unified Stack */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
+                  className="absolute inset-0"
+                >
+                  {[
+                    { Icon: Sparkles, color: 'from-blue-500 to-cyan-500', delay: 0.7 },
+                    { Icon: ArrowRight, color: 'from-purple-500 to-pink-500', delay: 0.8 },
+                    { Icon: Sparkles, color: 'from-orange-500 to-red-500', delay: 0.9 },
+                    { Icon: ArrowRight, color: 'from-green-500 to-emerald-500', delay: 1.0 },
+                    { Icon: Sparkles, color: 'from-indigo-500 to-purple-500', delay: 1.1 },
+                    { Icon: ArrowRight, color: 'from-pink-500 to-rose-500', delay: 1.2 },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{
+                        opacity: [0.6, 1, 0.6],
+                        scale: [0.95, 1.05, 0.95],
+                      }}
+                      transition={{
+                        delay: item.delay,
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                      className="absolute"
+                      style={{
+                        top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 6)}%`,
+                        left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 6)}%`,
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} shadow-lg flex items-center justify-center backdrop-blur-sm border-2 border-white/30`}>
+                        <item.Icon className="w-8 h-8 text-white" />
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {/* Connecting Lines */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgb(124, 58, 237)" />
+                      <stop offset="100%" stopColor="rgb(147, 51, 234)" />
+                    </linearGradient>
+                  </defs>
+                  {[0, 1, 2, 3, 4, 5].map((i) => (
+                    <motion.line
+                      key={i}
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 0.3 }}
+                      transition={{
+                        delay: 1.2 + i * 0.1,
+                        duration: 1,
+                        ease: [0.25, 0.1, 0.25, 1]
+                      }}
+                      x1="50%"
+                      y1="50%"
+                      x2={`${50 + 40 * Math.cos((i * Math.PI * 2) / 6)}%`}
+                      y2={`${50 + 40 * Math.sin((i * Math.PI * 2) / 6)}%`}
+                      stroke="url(#lineGradient)"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
+                    />
+                  ))}
+                </svg>
               </motion.div>
             </div>
           </div>
@@ -359,72 +384,40 @@ const Company = () => {
               </motion.p>
             </motion.div>
 
-            {/* 3-Column Grid Layout (Mobile: Stacked) */}
-            <div className="relative z-10">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                {/* Problem Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{
-                    duration: 0.5,
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 20
-                  }}
-                >
-                  <StoryQuoteBlock
-                    title="The Problem"
-                    quote="Your team is drowning in disconnected tools"
-                    content={story.problem}
-                    index={0}
-                    accentColor="red"
-                  />
-                </motion.div>
+            {/* Alternating Story Blocks */}
+            <div className="relative z-10 space-y-24 md:space-y-32">
+              {/* Problem */}
+              <StoryAlternatingBlock
+                title={story.problem.title}
+                paragraphs={story.problem.paragraphs}
+                icon={MessageSquare}
+                supportingIcons={[Mail, Phone, Headphones, Search, FileText, BarChart3]}
+                accentColor="purple"
+                imagePosition="left"
+                index={0}
+              />
 
-                {/* Insight Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{
-                    duration: 0.5,
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 20
-                  }}
-                >
-                  <StoryQuoteBlock
-                    title="The Insight"
-                    quote="One brain beats 100 specialized tools"
-                    content={story.insight}
-                    index={1}
-                    accentColor="blue"
-                  />
-                </motion.div>
+              {/* Insight */}
+              <StoryAlternatingBlock
+                title={story.insight.title}
+                paragraphs={story.insight.paragraphs}
+                icon={Lightbulb}
+                supportingIcons={[Sparkles, Sparkles, Sparkles]}
+                accentColor="blue"
+                imagePosition="right"
+                index={1}
+              />
 
-                {/* Solution Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{
-                    duration: 0.5,
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 20
-                  }}
-                >
-                  <StoryQuoteBlock
-                    title="The Solution"
-                    quote="AI-native platforms that replace your entire stack"
-                    content={story.solution}
-                    index={2}
-                    accentColor="purple"
-                  />
-                </motion.div>
-              </div>
+              {/* Solution */}
+              <StoryAlternatingBlock
+                title={story.solution.title}
+                paragraphs={story.solution.paragraphs}
+                icon={Rocket}
+                supportingIcons={[MessageSquare, Mail, Search, BarChart3]}
+                accentColor="orange"
+                imagePosition="left"
+                index={2}
+              />
             </div>
           </div>
         </div>
