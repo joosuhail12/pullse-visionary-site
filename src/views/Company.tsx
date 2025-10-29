@@ -1,20 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Users, Calendar, Layers, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import StoryAlternatingBlock from '@/components/company/StoryAlternatingBlock';
+import ManifestoText from '@/components/company/ManifestoText';
 import ValuesSection from '@/components/company/ValuesSection';
 import WhySupportSection from '@/components/company/WhySupportSection';
 import TeamCard from '@/components/company/TeamCard';
 import JourneySection from '@/components/company/JourneySection';
-import { MessageSquare, Lightbulb, Rocket, Mail, Phone, Headphones, Search, FileText, BarChart3 } from 'lucide-react';
 import GlassCard from '@/components/company/GlassCard';
+import LiquidEther from '@/components/LiquidEther';
 import {
   story,
   timeline,
@@ -25,169 +25,168 @@ import {
   vision,
   values,
   whySupportFirst,
+  founderManifesto,
 } from '@/data/companyData';
 import antlerLogo from '@/assets/antler-logo.png';
 
 const Company = () => {
-  // Mouse tracking for interactive gradient
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <div className="min-h-screen bg-white relative">
       <Navigation />
 
       {/* ========================================
-          SECTION 1: HERO - Visual Manifesto
+          SECTION 1: HERO - Founder-Led
       ======================================== */}
-      <section className="relative overflow-hidden flex items-center justify-center" style={{ minHeight: '85vh' }}>
-        {/* Background: Gradient Mesh with Mouse Tracking */}
-        <div className="fixed inset-0 -z-10 pointer-events-none">
-          <div
-            className="absolute w-[600px] h-[600px] rounded-full blur-[100px] opacity-20 transition-all duration-300 ease-out"
-            style={{
-              background: 'radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(147, 51, 234, 0.2) 40%, transparent 70%)',
-              left: `${mousePosition.x}px`,
-              top: `${mousePosition.y}px`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-          <div
-            className="absolute w-[400px] h-[400px] rounded-full blur-[80px] opacity-15"
-            style={{
-              background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(124, 58, 237, 0.2) 50%, transparent 70%)',
-              left: `${mousePosition.x * 0.5}px`,
-              top: `${mousePosition.y * 0.5}px`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
+      <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        {/* Liquid Ether Background */}
+        <div className="absolute inset-0 -z-10 opacity-25">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#7C3AED", "#8B5CF6", "#A78BFA"]}
+              mouseForce={20}
+              cursorSize={100}
+              isViscous={false}
+              resolution={0.6}
+              autoDemo
+              autoSpeed={0.3}
+              autoIntensity={1.5}
+            />
+          </Suspense>
         </div>
 
-        {/* Noise Texture Overlay */}
-        <svg className="fixed inset-0 -z-10 w-full h-full opacity-[0.03] pointer-events-none">
-          <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-        </svg>
+        {/* Subtle Gradient Orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-primary/20 to-purple-600/20 blur-[100px] pointer-events-none -z-10"
+        />
 
         {/* Content Container */}
-        <div className="container mx-auto px-4 py-20">
-          <div className="max-w-5xl mx-auto text-center space-y-12">
-            {/* Manifesto Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="text-7xl md:text-8xl lg:text-9xl font-black leading-[0.95] tracking-[-0.04em] text-gray-900"
-            >
-              Juggling 10 tools to answer one customer question?
-            </motion.h1>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            {/* Text Content */}
+            <div className="flex flex-col items-center text-center">
+              <div className="space-y-10 w-full">
+                {/* Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-sm"
+                >
+                  <Image src={antlerLogo} alt="Antler" width={50} height={20} className="h-3 w-auto" />
+                  <span className="text-xs font-semibold text-primary">Antler-backed</span>
+                  <span className="text-xs text-muted-foreground">• Founded 2024</span>
+                </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.2,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-[-0.03em]"
-            >
-              <span className="bg-gradient-to-r from-primary via-purple-600 to-purple-700 bg-clip-text text-transparent">
-                That's not a workflow.
-              </span>
-            </motion.p>
+                {/* Headline */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+                  className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] tracking-tight"
+                >
+                  Building the support platform
+                  <span className="block text-primary">we always wished existed</span>
+                </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-[-0.03em] text-gray-900"
-            >
-              That's insanity.
-            </motion.p>
+                {/* Subheadline */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                  className="text-xl sm:text-2xl text-muted-foreground leading-relaxed"
+                >
+                  After years managing support teams drowning in 10+ disconnected tools, we're building one AI-native platform that actually works together.
+                </motion.p>
 
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.6,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium max-w-3xl mx-auto pt-8"
-            >
-              We're building AI-native platforms that replace your entire support stack with one intelligent system. No integrations. No data silos. Just software that actually understands your business.
-            </motion.p>
+                {/* Stat Cards */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+                  className="flex flex-wrap gap-6 justify-center"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                      <Users className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-foreground">5+ years</div>
+                      <div className="text-xs text-muted-foreground">Support experience</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                      <Layers className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-foreground">7 in 1</div>
+                      <div className="text-xs text-muted-foreground">Products unified</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                      <Calendar className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-foreground">Q4 2025</div>
+                      <div className="text-xs text-muted-foreground">Launch timeline</div>
+                    </div>
+                  </div>
+                </motion.div>
 
-            {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.8,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="pt-4"
-            >
-              <Button
-                size="lg"
-                className="text-lg px-12 py-7 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-[0_8px_24px_rgba(124,58,237,0.20)] hover:shadow-[0_12px_32px_rgba(124,58,237,0.25)] transition-all duration-300 hover:scale-105"
-                asChild
-              >
-                <Link href={cta.primaryCTA.link}>
-                  {cta.primaryCTA.text}
-                  <ArrowRight className="ml-2 h-6 w-6" />
-                </Link>
-              </Button>
-            </motion.div>
+                {/* Divider */}
+                <motion.div
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  animate={{ opacity: 1, scaleX: 1 }}
+                  transition={{ duration: 0.5, delay: 0.35, ease: 'easeOut' }}
+                  className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+                />
 
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 1.0,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 pt-6"
-            >
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg">
-                <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto" />
-                <span className="text-sm font-semibold text-gray-700">Antler-backed</span>
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center"
+                >
+                  <Button
+                    size="lg"
+                    className="text-base px-8 py-7 shadow-xl shadow-primary/20 group"
+                    asChild
+                  >
+                    <Link href={cta.primaryCTA.link}>
+                      Join Early Access
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-base px-8 py-6 bg-white/60 backdrop-blur-sm border-white/40 hover:bg-white/80 transition-all duration-300"
+                    asChild
+                  >
+                    <Link href="#story">
+                      Read Our Story
+                    </Link>
+                  </Button>
+                </motion.div>
               </div>
-              <div className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20">
-                <span className="text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Launching Q4 2025</span>
-              </div>
-              <div className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
-                <span className="text-sm font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Limited Early Access</span>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================
-          SECTION 2: THE STORY - "Why We Exist"
+          SECTION 2: FOUNDER MANIFESTO
       ======================================== */}
       <section className="relative py-24 overflow-hidden">
         <div className="container mx-auto px-4">
@@ -201,7 +200,7 @@ const Company = () => {
                 duration: 0.5,
                 ease: [0.25, 0.1, 0.25, 1]
               }}
-              className="text-center mb-16 relative z-10"
+              className="text-center mb-20 relative z-10"
             >
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
@@ -212,10 +211,10 @@ const Company = () => {
                   stiffness: 100,
                   damping: 20
                 }}
-                className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 mb-6"
+                className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 mb-6"
               >
-                <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Our Story
+                <span className="text-sm font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                  Our Manifesto
                 </span>
               </motion.div>
               <motion.h2
@@ -228,8 +227,8 @@ const Company = () => {
                 }}
                 className="text-5xl md:text-6xl font-bold mb-6 tracking-[-0.01em]"
               >
-                <span className="bg-gradient-to-r from-gray-900 via-purple-700 to-purple-600 bg-clip-text text-transparent">
-                  Why We're Building Pullse
+                <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
+                  What We Believe
                 </span>
               </motion.h2>
               <motion.p
@@ -242,44 +241,13 @@ const Company = () => {
                 }}
                 className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium"
               >
-                The journey from chaos to clarity
+                Our vision for the future of business software
               </motion.p>
             </motion.div>
 
-            {/* Alternating Story Blocks */}
-            <div className="relative z-10 space-y-24 md:space-y-32">
-              {/* Problem */}
-              <StoryAlternatingBlock
-                title={story.problem.title}
-                paragraphs={story.problem.paragraphs}
-                icon={MessageSquare}
-                supportingIcons={[Mail, Phone, Headphones, Search, FileText, BarChart3]}
-                accentColor="purple"
-                imagePosition="left"
-                index={0}
-              />
-
-              {/* Insight */}
-              <StoryAlternatingBlock
-                title={story.insight.title}
-                paragraphs={story.insight.paragraphs}
-                icon={Lightbulb}
-                supportingIcons={[Sparkles, Sparkles, Sparkles]}
-                accentColor="blue"
-                imagePosition="right"
-                index={1}
-              />
-
-              {/* Solution */}
-              <StoryAlternatingBlock
-                title={story.solution.title}
-                paragraphs={story.solution.paragraphs}
-                icon={Rocket}
-                supportingIcons={[MessageSquare, Mail, Search, BarChart3]}
-                accentColor="orange"
-                imagePosition="left"
-                index={2}
-              />
+            {/* Manifesto Content */}
+            <div className="relative z-10">
+              <ManifestoText data={founderManifesto} />
             </div>
           </div>
         </div>

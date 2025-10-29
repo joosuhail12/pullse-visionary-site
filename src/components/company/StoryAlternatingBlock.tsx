@@ -105,6 +105,7 @@ const StoryAlternatingBlock = ({
                     top: `${30 + 40 * Math.sin((i * Math.PI * 2) / supportingIcons.length)}%`,
                     left: `${30 + 40 * Math.cos((i * Math.PI * 2) / supportingIcons.length)}%`,
                   }}
+                  suppressHydrationWarning
                 >
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${config.gradient} shadow-lg flex items-center justify-center opacity-60`}>
                     <Icon className="w-8 h-8 text-white" />

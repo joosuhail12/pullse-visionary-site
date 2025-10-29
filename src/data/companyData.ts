@@ -55,26 +55,22 @@ export const story = {
   problem: {
     title: "The Breaking Point",
     paragraphs: [
-      "After years managing support teams, I watched talented people burn out—not from helping customers, but from fighting their tools.",
-      "Every question meant switching between 10 systems. Zendesk for tickets. Slack for team chat. Intercom for live chat. Jira for bugs. The knowledge base. The CRM. The analytics dashboard. Each tool worked fine alone, but together? Chaos.",
-      "The breaking point came when I calculated we were spending $100,000 per year on tools that made our team less effective, not more. Our best agents spent more time context-switching than actually helping customers.",
-      "That's when I knew: the problem wasn't the tools. It was the approach."
+      "After years managing support teams, I watched talented people burn out—not from helping customers, but from fighting their tools. Every question meant switching between 10 systems: Zendesk, Slack, Intercom, Jira, knowledge base, CRM, analytics. Each tool worked alone, but together? Pure chaos.",
+      "The breaking point: we were spending $100,000 per year on tools that made our team less effective, not more. Our best agents spent more time context-switching than actually helping customers. That's when I knew—the problem wasn't the tools. It was the approach."
     ]
   },
   insight: {
     title: "The Realization",
     paragraphs: [
-      "Then it hit me: AI doesn't work like humans. We need specialized tools because we can't hold everything in our heads at once. But AI? AI aggregates. The more data it sees, the smarter it gets.",
-      "Imagine if your AI could see everything—every customer conversation, every support ticket, every product update, every team discussion. Each new interaction makes it smarter. That's the power of aggregation.",
+      "Then it hit me: AI doesn't work like humans. We need specialized tools because we can't hold everything in our heads at once. But AI aggregates—the more data it sees, the smarter it gets. What if your AI could see everything: every conversation, ticket, product update, team discussion? Each interaction makes it smarter.",
       "One intelligent brain that understands your entire business beats 100 specialized tools that don't talk to each other. That's not just theory—that's how AI actually works."
     ]
   },
   solution: {
     title: "Building the Future",
     paragraphs: [
-      "We're building AI-native platforms that solve entire business functions end-to-end. Not tools with AI features. Platforms designed from scratch around AI aggregation.",
-      "Starting with customer support—where the problem is most painful. One unified system replacing your entire support stack. No integrations needed. No data silos. Just intelligent software that actually understands your business.",
-      "This is what business software should have been all along. We just needed AI to make it possible."
+      "We're building AI-native platforms that solve entire business functions end-to-end. Not tools with AI features—platforms designed from scratch around AI aggregation. Starting with customer support, where the problem is most painful.",
+      "One unified system replacing your entire support stack. No integrations needed. No data silos. Just intelligent software that actually understands your business. This is what business software should have been all along. We just needed AI to make it possible."
     ]
   },
 };
@@ -84,6 +80,73 @@ export const mission =
 
 export const vision =
   "We're starting with customer support, but the vision is bigger: AI-native solutions for every business function—sales, marketing, operations, finance—all connected through one unified platform. The more functions you use, the smarter your entire system becomes. One company brain that understands everything, eliminates data silos, and makes every team dramatically more effective.";
+
+export const visionManifesto = {
+  vision: {
+    headline: "The Future of Business Software",
+    statement: "Software that thinks, learns, and grows with your business. Where data flows freely across every function, insights emerge automatically, and each new capability makes your entire system smarter. This is the future we're building—one where AI doesn't just assist, it amplifies everything your team does.",
+    icon: Telescope,
+  },
+  beliefs: [
+    {
+      title: "Intelligence Through Aggregation",
+      description: "AI gets smarter when it sees everything. Fragmented tools create fragmented intelligence. One unified platform creates exponential learning—where every interaction across every function makes your entire system more intelligent.",
+      icon: Brain,
+      color: "purple" as const,
+    },
+    {
+      title: "Connected, Not Siloed",
+      description: "Every business function should inform every other. Sales learns from support. Marketing learns from operations. True intelligence requires connection. We're building platforms where knowledge flows freely, not gets trapped in isolated tools.",
+      icon: Network,
+      color: "blue" as const,
+    },
+    {
+      title: "Built for Users, Not Buyers",
+      description: "The best software optimizes for the people doing the work, not the people signing contracts. That means genuinely simple interfaces, no mandatory upsells, and powerful features available to teams of any size. Users first, always.",
+      icon: Heart,
+      color: "pink" as const,
+    },
+    {
+      title: "Radically Transparent",
+      description: "No hidden fees. No data lock-in. No gatekeeping features behind enterprise tiers. We earn trust through openness, not contracts. Every decision we make, every dollar we charge—it's transparent. That's how software should be.",
+      icon: Eye,
+      color: "orange" as const,
+    },
+    {
+      title: "Speed Over Perfection",
+      description: "The world needs better software now, not in 18 months. We ship fast, learn faster, and iterate in public. Speed isn't reckless—it's respectful of the teams suffering with broken tools today. Action over endless planning.",
+      icon: Zap,
+      color: "red" as const,
+    },
+    {
+      title: "AI-Native From Day One",
+      description: "We don't bolt AI features onto legacy architecture. We design from scratch for AI aggregation—where every data point strengthens the whole system. That's the difference between AI features and AI-native platforms.",
+      icon: Sparkles,
+      color: "green" as const,
+    },
+  ],
+  rally: {
+    headline: "Build the Future With Us",
+    message: "We're just getting started. Join us as an early partner and help shape the future of AI-native business software. Be part of the movement to replace fragmented tools with intelligent, unified platforms.",
+    cta: {
+      text: "Join Early Access",
+      link: "/contact-sales",
+    },
+  },
+};
+
+export const founderManifesto = {
+  paragraphs: [
+    "Business software is broken. Not because the tools don't work—they do—but because they don't work together. Every company drowns in dozens of disconnected systems: one for tickets, another for chat, another for analytics, another for workflows. Each tool promises to solve a problem, but together they create a bigger one: chaos. Teams spend more time switching contexts than serving customers. Data lives in silos. Insights get lost in translation. And every new tool just adds to the noise.",
+    "But AI changes everything. Unlike humans, AI doesn't need specialized tools—it needs aggregated data. The more information AI sees across your entire business, the smarter it becomes. Support conversations inform sales insights. Product feedback shapes marketing. Operations data predicts bottlenecks. When AI can see everything, it doesn't just assist—it thinks. This is the difference between AI features bolted onto legacy software and AI-native platforms built from the ground up for intelligence.",
+    "We're building the future of business software—platforms that solve entire functions, not fragments of workflows. Where one intelligent system replaces your entire support stack. Where every conversation makes the whole platform smarter. Where data flows freely across every tool, and insights emerge automatically. This isn't incremental improvement. This is rethinking software from first principles, designed for an AI-native world. Starting with customer support, expanding to every business function.",
+    "The companies that win the next decade won't be the ones with the most tools—they'll be the ones with the smartest systems. We're not just building better software. We're building the infrastructure for AI-amplified teams. Where technology doesn't add complexity, it removes it. Where every employee has the intelligence of the entire company at their fingertips. This is the future we're building. And we're just getting started.",
+  ],
+  cta: {
+    text: "Join Early Access",
+    link: "/contact-sales",
+  },
+};
 
 export const timeline: Milestone[] = [
   {
