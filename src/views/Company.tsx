@@ -8,9 +8,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Timeline from '@/components/company/Timeline';
 import StoryQuoteBlock from '@/components/company/StoryQuoteBlock';
-import ApproachSection from '@/components/company/ApproachSection';
+import ValuesSection from '@/components/company/ValuesSection';
+import WhySupportSection from '@/components/company/WhySupportSection';
+import TeamCard from '@/components/company/TeamCard';
+import JourneySection from '@/components/company/JourneySection';
 import GradientMesh from '@/components/company/GradientMesh';
 import FloatingShapes from '@/components/company/FloatingShapes';
 import GlassCard from '@/components/company/GlassCard';
@@ -22,7 +24,10 @@ import {
   team,
   antler,
   cta,
-  ourApproach,
+  mission,
+  vision,
+  values,
+  whySupportFirst,
 } from '@/data/companyData';
 import antlerLogo from '@/assets/antler-logo.png';
 
@@ -426,26 +431,30 @@ const Company = () => {
       </section>
 
       {/* ========================================
-          SECTION 3: OUR APPROACH (Mission + Principles + Vision)
+          SECTION 3: OUR VALUES
       ======================================== */}
-      <section className="relative py-24">
+      <section className="relative py-32">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <ApproachSection
-              title={ourApproach.title}
-              subtitle={ourApproach.subtitle}
-              mission={ourApproach.mission}
-              principles={ourApproach.principles}
-              vision={ourApproach.vision}
-            />
-          </div>
+          <ValuesSection values={values} />
         </div>
       </section>
 
       {/* ========================================
-          SECTION 4: THE TEAM & JOURNEY
+          SECTION 4: WHY SUPPORT FIRST
       ======================================== */}
-      <section className="relative py-24">
+      <section className="relative py-32">
+        <div className="container mx-auto px-4">
+          <WhySupportSection
+            headline={whySupportFirst.headline}
+            reasons={whySupportFirst.reasons}
+          />
+        </div>
+      </section>
+
+      {/* ========================================
+          SECTION 5: THE TEAM
+      ======================================== */}
+      <section className="relative py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -472,142 +481,31 @@ const Company = () => {
                 </span>
               </h2>
               <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-                The team and journey behind Pullse
+                Meet the founders behind Pullse
               </p>
             </motion.div>
 
-            {/* Team Section - Glassmorphic Cards */}
-            <div className="mb-24 relative z-10">
-              <div className="grid md:grid-cols-2 gap-10 xl:gap-12">
-                {team.map((member, idx) => (
-                  <motion.div
-                    key={member.name}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className="relative group"
-                  >
-                    <div className="relative p-12 md:p-14 lg:p-16 rounded-3xl bg-white/70 backdrop-blur-md border border-gray-100/40 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:border-gray-200/60 transition-all duration-300 hover:-translate-y-1">
-                      {/* Gradient Corner Accent */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-bl-full blur-2xl"></div>
-
-                      <div className="flex flex-col items-center text-center space-y-6 relative z-10">
-                        {/* Avatar with Gradient Ring */}
-                        {member.image ? (
-                          <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-full blur-lg opacity-40"></div>
-                            <Image
-                              src={member.image}
-                              alt={member.name}
-                              width={140}
-                              height={140}
-                              className="rounded-full relative z-10"
-                            />
-                          </div>
-                        ) : (
-                          <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-full blur-lg opacity-40"></div>
-                            <div className="relative z-10 w-36 h-36 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-xl">
-                              <span className="text-4xl font-bold text-white">
-                                {member.name.split(' ').map(n => n[0]).join('')}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Name & Title */}
-                        <div>
-                          <h3 className="text-2xl font-bold mb-2 text-gray-900">{member.name}</h3>
-                          <p className="text-base font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{member.title}</p>
-                        </div>
-
-                        {/* Bio */}
-                        <p className="text-base leading-relaxed text-gray-700 font-medium">
-                          {member.bio}
-                        </p>
-
-                        {/* Social Links */}
-                        {member.linkedin && (
-                          <a
-                            href={member.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
-                          >
-                            Connect on LinkedIn →
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Antler Card - Glassmorphic Treatment */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative mb-24 group"
-            >
-              <div className="relative p-10 rounded-3xl bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-red-500/10 border border-orange-500/30 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="flex flex-col md:flex-row items-center gap-8">
-                  <div className="flex-shrink-0">
-                    <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg">
-                      <Image
-                        src={antlerLogo}
-                        alt="Antler"
-                        width={140}
-                        height={56}
-                        className="h-12 w-auto"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold mb-3 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Backed by Antler</h4>
-                    <p className="text-base text-gray-700 leading-relaxed font-medium">
-                      {antler.description}
-                    </p>
-                  </div>
-                  <a
-                    href={antler.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-shrink-0 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
-                  >
-                    Learn more →
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Journey Timeline */}
-            <div className="mb-24 relative z-10">
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="text-center mb-16"
-              >
-                <h3 className="text-4xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                    The Journey
-                  </span>
-                </h3>
-                <p className="text-lg text-gray-600">Our path from idea to reality</p>
-              </motion.div>
-              <Timeline milestones={timeline} />
+            {/* Team Cards */}
+            <div className="grid md:grid-cols-2 gap-10 xl:gap-12">
+              {team.map((member, idx) => (
+                <TeamCard key={member.name} member={member} index={idx} />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================
-          SECTION 5: FINAL CTA
+          SECTION 6: THE JOURNEY
+      ======================================== */}
+      <section className="relative py-32">
+        <div className="container mx-auto px-4">
+          <JourneySection milestones={timeline} antler={antler} />
+        </div>
+      </section>
+
+      {/* ========================================
+          SECTION 7: FINAL CTA
       ======================================== */}
       <section className="relative py-24">
         <div className="container mx-auto px-4">

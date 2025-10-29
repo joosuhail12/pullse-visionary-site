@@ -41,6 +41,10 @@ export interface TeamMember {
   bio: string; // Extended bio
   background?: string; // Previous experience highlight
   whyThis?: string; // Why this mission matters
+  credentials?: string[]; // Specific achievements/metrics
+  personalWhy?: string; // Personal motivation story
+  companies?: string; // Previous companies (optional)
+  metrics?: string; // Specific achievements
   image?: string;
   linkedin?: string;
   twitter?: string;
@@ -150,6 +154,12 @@ export const team: TeamMember[] = [
     role: "Founder",
     title: "Founder & CEO",
     bio: "Previously built and scaled customer support operations for high-growth startups, managing teams serving millions of users. Spent 5+ years inside the broken world of support tools—watching teams juggle 10+ disconnected systems, lose critical context, and burn out from tool chaos. Started Pullse to build the AI-native support platform he wished existed: one intelligent system that actually understands your business and replaces your entire support stack.",
+    credentials: [
+      "5+ years in customer support operations",
+      "Managed teams serving 5M+ users",
+      "Built support from 0 to scale"
+    ],
+    personalWhy: "I've lived the pain. After years of managing support teams, I watched talented people burn out—not from helping customers, but from fighting their tools. Switching between 10 systems to answer one question. Losing critical context because data lived in silos. Spending hours on manual workflows instead of solving real problems. The breaking point came when I realized we were spending $100k/year on tools that made our team less effective, not more. That's when I knew: the solution isn't better integrations or another point solution. It's AI-native software built from the ground up to understand your entire business, not just one workflow. That's why I started Pullse.",
     background: undefined,
     whyThis: undefined,
     image: undefined, // Will use initials fallback
@@ -160,6 +170,12 @@ export const team: TeamMember[] = [
     role: "Co-founder",
     title: "Co-founder & CTO",
     bio: "Engineering leader with 8+ years building scalable systems and AI infrastructure. Previously architected distributed systems serving millions of requests per day. Deep expertise in LLMs, vector databases, and real-time data pipelines. At Pullse, architecting the AI aggregation engine that makes every data point strengthen the entire platform—the technical foundation that lets one system replace 10+ specialized tools.",
+    credentials: [
+      "8+ years building distributed systems",
+      "Architected systems serving 100M+ requests/day",
+      "Deep expertise in LLMs & vector databases"
+    ],
+    personalWhy: "As an engineer, I've always been frustrated by fragmented software architecture. Why do businesses need 10 different tools for one function? The answer isn't technical—it's historical. Legacy software wasn't designed for AI. But here's what excites me: AI fundamentally changes the equation. When your system can understand natural language, learn from every interaction, and connect data across contexts, you don't need specialized tools anymore. You need one intelligent platform that gets smarter with every data point. That's the technical challenge that drives me—building the AI aggregation architecture that makes this possible. Not bolting AI features onto legacy tools, but reimagining business software from first principles.",
     background: undefined,
     whyThis: undefined,
     image: undefined, // Will use initials fallback
