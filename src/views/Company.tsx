@@ -39,14 +39,12 @@ const Company = () => {
 
       <Navigation />
 
-      <div className="pt-32 pb-20">
-        <div className="container mx-auto px-4">
-          {/* ========================================
-              SECTION 1: HERO - "The Vision"
-          ======================================== */}
-          <div className="max-w-7xl mx-auto mb-40 relative min-h-[600px] md:min-h-[700px]">
-            {/* Hero-specific Liquid Ether - Higher Intensity */}
-            <div className="absolute inset-0 -z-10 opacity-45 rounded-3xl overflow-hidden">
+      {/* ========================================
+          SECTION 1: HERO - "The Vision"
+      ======================================== */}
+      <section className="relative overflow-hidden pt-32 pb-20 min-h-screen">
+        {/* Hero-specific Liquid Ether - Full Width */}
+        <div className="absolute inset-0 -z-10 opacity-45">
               <Suspense fallback={<div className="w-full h-full" />}>
                 <LiquidEther
                   colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
@@ -59,13 +57,16 @@ const Company = () => {
                   autoIntensity={1.8}
                 />
               </Suspense>
-            </div>
+        </div>
 
-            {/* Floating Shapes - Reduced */}
+        {/* Full-width Grid Overlay */}
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
+
+        {/* Contained Content */}
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Floating Shapes */}
             <FloatingShapes variant="minimal" />
-
-            {/* Subtle Grid Overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
 
             {/* Split Layout Container */}
             <div className="relative z-10 grid md:grid-cols-[60%_40%] gap-10 items-center">
@@ -290,11 +291,15 @@ const Company = () => {
               </motion.div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* ========================================
-              SECTION 2: THE STORY - "Why We Exist"
-          ======================================== */}
-          <div className="max-w-full mx-auto mb-32 relative overflow-hidden">
+      {/* ========================================
+          SECTION 2: THE STORY - "Why We Exist"
+      ======================================== */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
             {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -304,7 +309,7 @@ const Company = () => {
                 duration: 0.5,
                 ease: [0.25, 0.1, 0.25, 1]
               }}
-              className="text-center mb-16 relative z-10 container mx-auto px-4"
+              className="text-center mb-16 relative z-10"
             >
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
@@ -350,7 +355,7 @@ const Company = () => {
             </motion.div>
 
             {/* 3-Column Grid Layout (Mobile: Stacked) */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4">
+            <div className="relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                 {/* Problem Card */}
                 <motion.div
@@ -417,26 +422,32 @@ const Company = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* ========================================
-              SECTION 3: OUR APPROACH (Mission + Principles + Vision)
-          ======================================== */}
-          <div className="mb-40 relative">
-            <div className="relative z-10">
-              <ApproachSection
-                title={ourApproach.title}
-                subtitle={ourApproach.subtitle}
-                mission={ourApproach.mission}
-                principles={ourApproach.principles}
-                vision={ourApproach.vision}
-              />
-            </div>
+      {/* ========================================
+          SECTION 3: OUR APPROACH (Mission + Principles + Vision)
+      ======================================== */}
+      <section className="relative py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <ApproachSection
+              title={ourApproach.title}
+              subtitle={ourApproach.subtitle}
+              mission={ourApproach.mission}
+              principles={ourApproach.principles}
+              vision={ourApproach.vision}
+            />
           </div>
+        </div>
+      </section>
 
-          {/* ========================================
-              SECTION 4: THE TEAM & JOURNEY
-          ======================================== */}
-          <div className="max-w-6xl mx-auto mb-32 relative">
+      {/* ========================================
+          SECTION 4: THE TEAM & JOURNEY
+      ======================================== */}
+      <section className="relative py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -466,7 +477,7 @@ const Company = () => {
             </motion.div>
 
             {/* Team Section - Glassmorphic Cards */}
-            <div className="max-w-6xl mx-auto mb-24 relative z-10">
+            <div className="mb-24 relative z-10">
               <div className="grid md:grid-cols-2 gap-10 xl:gap-12">
                 {team.map((member, idx) => (
                   <motion.div
@@ -591,12 +602,15 @@ const Company = () => {
               </motion.div>
               <Timeline milestones={timeline} />
             </div>
-
           </div>
+        </div>
+      </section>
 
-          {/* ========================================
-              SECTION 5: FINAL CTA
-          ======================================== */}
+      {/* ========================================
+          SECTION 5: FINAL CTA
+      ======================================== */}
+      <section className="relative py-24">
+        <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto relative">
             <GlassCard
               initial={{ opacity: 0, y: 30 }}
@@ -673,7 +687,7 @@ const Company = () => {
             </GlassCard>
           </div>
         </div>
-      </div>
+      </section>
 
       <Footer />
     </div>
