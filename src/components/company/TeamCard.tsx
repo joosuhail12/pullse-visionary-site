@@ -11,85 +11,99 @@ interface TeamCardProps {
 }
 
 const TeamCard = ({ member, index }: TeamCardProps) => {
+  // Determine gradient based on role
+  const isFounder = member.role === 'Founder';
+  const gradient = isFounder
+    ? 'from-primary to-purple-600'
+    : 'from-blue-500 to-cyan-500';
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.15, type: 'spring' }}
       className="relative group h-full"
     >
-      <div className="h-full relative p-12 md:p-14 lg:p-16 rounded-3xl bg-white/70 backdrop-blur-md border border-gray-100/40 shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] hover:border-gray-200/60 transition-all duration-300 hover:-translate-y-1">
-        {/* Gradient Corner Accent */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-bl-full blur-2xl"></div>
+      {/* Enhanced glassmorphic card with role-specific gradient accent */}
+      <div className={`h-full relative p-10 md:p-12 rounded-3xl bg-white/75 backdrop-blur-xl border-2 border-transparent bg-gradient-to-br from-white/90 to-white/70 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2`}>
+        {/* Gradient border accent */}
+        <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 pointer-events-none`}></div>
 
-        <div className="flex flex-col items-center text-center space-y-6 relative z-10">
-          {/* Avatar with Gradient Ring */}
+        {/* Top corner gradient accent with role color */}
+        <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-[100px] blur-2xl`}></div>
+
+        <div className="flex flex-col items-center text-center space-y-7 relative z-10">
+          {/* Larger Avatar with enhanced gradient ring */}
           {member.image ? (
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-full blur-lg opacity-40"></div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${gradient} rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300`}></div>
               <Image
                 src={member.image}
                 alt={member.name}
-                width={140}
-                height={140}
-                className="rounded-full relative z-10"
+                width={160}
+                height={160}
+                className="rounded-full relative z-10 ring-4 ring-white/50"
               />
             </div>
           ) : (
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-full blur-lg opacity-40"></div>
-              <div className="relative z-10 w-36 h-36 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-xl">
-                <span className="text-4xl font-bold text-white">
+              <div className={`absolute inset-0 bg-gradient-to-br ${gradient} rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300`}></div>
+              <div className={`relative z-10 w-40 h-40 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center shadow-2xl ring-4 ring-white/30`}>
+                <span className="text-5xl font-bold text-white">
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </span>
               </div>
             </div>
           )}
 
-          {/* Name & Title */}
-          <div>
-            <h3 className="text-2xl font-bold mb-2 text-gray-900">{member.name}</h3>
-            <p className="text-base font-semibold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{member.title}</p>
+          {/* Name & Title - Larger and more prominent */}
+          <div className="space-y-2">
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">{member.name}</h3>
+            <p className={`text-lg font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>{member.title}</p>
           </div>
 
-          {/* Credentials - New */}
+          {/* Compact Credentials */}
           {member.credentials && member.credentials.length > 0 && (
-            <div className="w-full space-y-2">
+            <div className="w-full space-y-2.5">
               {member.credentials.map((credential, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-2 text-sm text-gray-700 font-medium bg-gradient-to-r from-primary/5 to-purple-600/5 rounded-full px-4 py-2 border border-primary/10"
+                  className={`flex items-center justify-center gap-2.5 text-sm text-gray-700 font-medium bg-gradient-to-r ${gradient} bg-opacity-5 rounded-full px-5 py-2.5 border border-gray-200/60`}
                 >
-                  <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                  <CheckCircle2 className={`h-4 w-4 flex-shrink-0 ${isFounder ? 'text-primary' : 'text-blue-500'}`} />
                   <span>{credential}</span>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Bio */}
-          <p className="text-base leading-relaxed text-gray-700 font-medium">
+          {/* Bio - Slightly smaller */}
+          <p className="text-sm md:text-base leading-relaxed text-gray-600">
             {member.bio}
           </p>
 
-          {/* Personal Why - New */}
+          {/* Personal Why - MUCH more prominent */}
           {member.personalWhy && (
-            <div className="w-full pt-6 border-t border-gray-200/50">
-              <h4 className="text-sm font-bold text-primary mb-3 uppercase tracking-wide">Why Pullse?</h4>
-              <p className="text-sm leading-relaxed text-gray-600 italic">
+            <div className={`w-full p-6 md:p-8 rounded-2xl bg-gradient-to-br ${gradient} bg-opacity-5 border-2 ${isFounder ? 'border-primary/20' : 'border-blue-500/20'}`}>
+              <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${gradient} bg-opacity-10 border ${isFounder ? 'border-primary/30' : 'border-blue-500/30'} mb-4`}>
+                <span className={`text-xs font-bold uppercase tracking-wider ${isFounder ? 'text-primary' : 'text-blue-600'}`}>
+                  Why This Matters
+                </span>
+              </div>
+              <p className="text-sm md:text-base leading-relaxed text-gray-700 italic text-left">
                 "{member.personalWhy}"
               </p>
             </div>
           )}
 
-          {/* Social Links */}
+          {/* Enhanced LinkedIn button */}
           {member.linkedin && (
             <a
               href={member.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className={`inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r ${gradient} text-white font-bold text-sm shadow-xl hover:shadow-2xl transition-all hover:scale-105 mt-4`}
             >
               Connect on LinkedIn →
             </a>

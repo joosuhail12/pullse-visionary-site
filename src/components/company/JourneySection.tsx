@@ -38,13 +38,13 @@ const JourneySection = ({ milestones, antler }: JourneySectionProps) => {
             Our Journey
           </span>
         </motion.div>
-        <h2 className="text-6xl font-bold mb-6 tracking-[-0.01em]">
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-[-0.01em]">
           <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
-            From Idea to Reality
+            The Journey So Far
           </span>
         </h2>
-        <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-          The milestones that brought us here
+        <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Six milestones from vision to launch
         </p>
       </motion.div>
 

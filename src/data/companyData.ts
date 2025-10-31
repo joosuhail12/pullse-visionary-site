@@ -32,6 +32,7 @@ export interface Value {
   icon: LucideIcon;
   title: string;
   description: string;
+  size?: 'small' | 'large'; // For asymmetric grid layouts
 }
 
 export interface TeamMember {
@@ -195,41 +196,83 @@ export const timeline: Milestone[] = [
   },
 ];
 
+// Merged approach: combining values + why support first into unified principles
+export const ourApproach = {
+  title: "How We Build Different",
+  subtitle: "Six principles that guide everything we do",
+  principles: [
+    {
+      icon: Brain,
+      title: "AI-Native by Design",
+      description:
+        "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter. That's why Pullse can replace your entire support stack with one platform.",
+      size: "large" as const, // Featured card
+    },
+    {
+      icon: Eye,
+      title: "Radically Transparent",
+      description:
+        "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no pricing tiers that gatekeep basic features, no locked data. We earn trust by being radically open.",
+      size: "large" as const, // Featured card
+    },
+    {
+      icon: Heart,
+      title: "End User Obsessed",
+      description:
+        "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces, no mandatory upsells, and powerful features available to teams of any size.",
+      size: "small" as const,
+    },
+    {
+      icon: Zap,
+      title: "Ship Fast, Learn Faster",
+      description:
+        "No 18-month roadmaps or bureaucratic processes. The world needs better software now—so we build, test, and iterate in public. Speed is a feature.",
+      size: "small" as const,
+    },
+    {
+      icon: Target,
+      title: "AI-Ready Function First",
+      description:
+        "We start with support because it has clear inputs, outputs, and success metrics. This makes it ideal for autonomous AI agents to deliver immediate, measurable value.",
+      size: "small" as const,
+    },
+    {
+      icon: Users,
+      title: "Built for Everyone",
+      description:
+        "Every business needs support. By starting here, we can help the most companies while proving our unified platform architecture works at any scale.",
+      size: "small" as const,
+    },
+  ],
+};
+
+// Legacy export for backwards compatibility (if needed elsewhere)
 export const values: Value[] = [
   {
     icon: Brain,
     title: "AI-Native by Design",
     description:
-      "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter. That's why Pullse can replace your entire support stack with one platform.",
+      "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter.",
   },
   {
     icon: Eye,
     title: "Radically Transparent",
     description:
-      "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no pricing tiers that gatekeep basic features, no locked data. We earn trust by being radically open.",
+      "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no gatekeep features, no locked data.",
   },
   {
     icon: Heart,
     title: "End User Obsessed",
     description:
-      "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces, no mandatory \"success manager\" upsells, and powerful features available to teams of any size.",
+      "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces and powerful features for all.",
   },
   {
     icon: Zap,
     title: "Speed & Conviction",
     description:
-      "We ship fast, learn faster. No 18-month roadmaps or bureaucratic processes. The world needs better business software now—so we build, test, and iterate in public. Speed is a feature.",
+      "We ship fast, learn faster. No 18-month roadmaps. The world needs better business software now—so we build, test, and iterate in public.",
   },
 ];
-
-// Unified "Our Approach" section combining mission, principles, and vision
-export const ourApproach = {
-  title: "How We're Building the Future",
-  subtitle: "Our mission, principles, and commitments",
-  mission: mission,
-  principles: values,
-  vision: vision,
-};
 
 export const team: TeamMember[] = [
   {
