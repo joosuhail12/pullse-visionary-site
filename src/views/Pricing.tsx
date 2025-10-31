@@ -56,7 +56,6 @@ import {
   testimonials,
   trustSignals,
   descriptiveFeatures,
-  addOns,
   currencies,
 } from '@/data/pricingData';
 
@@ -806,87 +805,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 7: ADD-ONS MARKETPLACE
-      ======================================== */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
-                  Supercharge your support
-                </span>
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Optional add-ons for advanced needs
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {addOns.map((addon, index) => (
-                <motion.div
-                  key={addon.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl hover:shadow-2xl transition-all duration-500"
-                >
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 rounded-xl bg-primary/10">
-                      <addon.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                        {addon.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 mb-4">
-                        {addon.description}
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-primary">
-                          ${addon.price.toLocaleString()}
-                        </span>
-                        <span className="text-sm text-gray-600">
-                          /{addon.billingPeriod}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2 mb-6">
-                    {addon.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    asChild
-                  >
-                    <Link href="/contact-sales">
-                      Add to plan
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================
-          SECTION 8: STARTUP PROGRAM
+          SECTION 7: STARTUP PROGRAM
       ======================================== */}
       <section className="py-24 bg-gradient-to-br from-orange-500/5 via-transparent to-amber-500/5">
         <div className="container mx-auto px-4">
@@ -974,7 +893,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 9: FAQ
+          SECTION 8: FAQ
       ======================================== */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -1033,7 +952,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 10: FINAL CTA
+          SECTION 9: FINAL CTA
       ======================================== */}
       <section className="py-16 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10">
         <div className="container mx-auto px-4">
