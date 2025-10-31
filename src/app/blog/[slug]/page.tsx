@@ -59,7 +59,7 @@ const BlogPostPage = async ({ params }: PageProps) => {
       notFound();
     }
 
-    return <BlogDetail post={post} />;
+    return <BlogDetail post={post} slug={slug} />;
   } catch (error) {
     console.error("Failed to fetch blog post:", error);
     notFound();

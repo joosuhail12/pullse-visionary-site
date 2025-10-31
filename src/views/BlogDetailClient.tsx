@@ -17,6 +17,7 @@ import ArticleStructuredData from '@/components/blog/ArticleStructuredData';
 interface BlogDetailClientProps {
   post: BlogPost;
   relatedPosts: BlogPostCard[];
+  canonicalUrl: string;
 }
 
 const hasImageAsset = (image: unknown): boolean =>
@@ -34,7 +35,7 @@ const getCategoryStyle = (color: string) => {
   return styles[color] ?? styles.blue;
 };
 
-export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClientProps) {
+export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: BlogDetailClientProps) {
   const [readingProgress, setReadingProgress] = useState(0);
   const [showProgress, setShowProgress] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -83,8 +84,6 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
     };
   }, []);
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -95,7 +94,7 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
   return (
     <div className="min-h-screen bg-background">
       {/* Structured Data for SEO */}
-      <ArticleStructuredData post={post} url={currentUrl} />
+      <ArticleStructuredData post={post} url={canonicalUrl} />
 
       {/* Skip to Content Link for Accessibility */}
       <a
@@ -113,102 +112,118 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
         style={{ width: `${readingProgress}%` }}
       />
 
-      {/* Immersive Hero Section */}
-      <section className="relative isolate h-[60vh] overflow-hidden md:h-[80vh]">
-        {/* Background Image with Gradient Overlay */}
-        {hasImageAsset(post.featuredImage) ? (
-          <>
-            <Image
-              src={urlFor(post.featuredImage!).width(1920).height(1080).url()}
-              alt={post.title}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30" />
-          </>
-        ) : (
-          <div className={`absolute inset-0 ${categoryStyle.bg}`}>
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-pink/10 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+      {/* Hero Image Section - Premium Magazine Style */}
+      <section className="relative isolate overflow-hidden bg-gray-50">
+        {/* Container for rounded corners on desktop */}
+        <div className="relative h-[60vh] md:h-[70vh] md:mx-6 lg:mx-12 md:mt-6 md:rounded-2xl md:overflow-hidden md:shadow-2xl">
+          {hasImageAsset(post.featuredImage) ? (
+            <>
+              <Image
+                src={urlFor(post.featuredImage!).width(2400).height(1600).url()}
+                alt={post.title}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover transition-transform duration-700 hover:scale-[1.02]"
+                quality={95}
+                placeholder="blur"
+                blurDataURL={urlFor(post.featuredImage!).width(20).height(20).blur(10).url()}
+              />
+
+              {/* Sophisticated gradient overlay - cinematic feel */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent pointer-events-none" />
+
+              {/* Edge vignette for depth */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-black/15 pointer-events-none" />
+
+              {/* Top fade for badge readability */}
+              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
+            </>
+          ) : (
+            <div className={`absolute inset-0 ${categoryStyle.bg}`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-pink/10 to-transparent" />
+            </div>
+          )}
+
+          {/* Category Badge - Premium glassmorphism */}
+          <div className="absolute left-6 top-6 md:left-8 md:top-8 z-10">
+            <div className={`group inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-bold uppercase tracking-wider ${categoryStyle.text} shadow-2xl shadow-black/20 backdrop-blur-xl border border-white/60 ring-1 ring-black/5 transition-all duration-300 hover:scale-105 hover:shadow-3xl`}>
+              <Tag className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
+              {post.category.title}
+            </div>
           </div>
-        )}
 
-        {/* Hero Content */}
-        <div className="relative flex h-full items-end">
-          <div className="container mx-auto px-4 pb-16 md:pb-20">
-            <div className="max-w-4xl">
-              {/* Breadcrumb */}
-              <nav className="mb-6 flex items-center gap-2 text-sm text-white/70">
-                <Link
-                  href="/"
-                  className="transition-colors hover:text-white"
-                >
-                  <Home className="h-4 w-4" />
-                </Link>
-                <ChevronRight className="h-4 w-4" />
-                <Link
-                  href="/blog"
-                  className="transition-colors hover:text-white"
-                >
-                  Blog
-                </Link>
-                <ChevronRight className="h-4 w-4" />
-                <span className="text-white">{post.category.title}</span>
-              </nav>
+          {/* Reading time badge - bottom right */}
+          <div className="absolute right-6 bottom-6 md:right-8 md:bottom-8 z-10">
+            <div className="inline-flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-xs font-medium text-white shadow-xl backdrop-blur-md border border-white/10">
+              <Clock className="h-3.5 w-3.5" />
+              {post.readTime} min read
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Category Badge */}
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-xl">
-                <Tag className="h-3.5 w-3.5" />
-                {post.category.title}
-              </div>
+      {/* Content Section - Overlapping Card Style */}
+      <section className="relative -mt-12 md:-mt-16 bg-transparent">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-white rounded-t-3xl md:rounded-t-[2rem] shadow-2xl shadow-black/10 pt-10 pb-8 md:pt-12 md:pb-10 px-6 md:px-12 border-t-4 border-primary/10">
+            {/* Breadcrumb */}
+            <nav className="mb-4 flex items-center gap-2 text-xs text-gray-600">
+              <Link
+                href="/"
+                className="transition-colors hover:text-gray-900"
+              >
+                <Home className="h-3.5 w-3.5" />
+              </Link>
+              <ChevronRight className="h-3.5 w-3.5" />
+              <Link
+                href="/blog"
+                className="transition-colors hover:text-gray-900"
+              >
+                Blog
+              </Link>
+              <ChevronRight className="h-3.5 w-3.5" />
+              <span className="text-gray-900">{post.category.title}</span>
+            </nav>
 
-              {/* Title */}
-              <h1 className="mb-6 text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-                {post.title}
-              </h1>
+            {/* Title */}
+            <h1 className="mb-4 text-3xl font-semibold leading-snug text-gray-900 md:text-4xl lg:text-5xl">
+              {post.title}
+            </h1>
 
-              {/* Excerpt */}
-              <p className="mb-8 text-xl leading-relaxed text-white/90 md:text-2xl">
-                {post.excerpt}
-              </p>
+            {/* Excerpt */}
+            <p className="mb-6 text-lg leading-relaxed text-gray-700 md:text-xl">
+              {post.excerpt}
+            </p>
 
-              {/* Author & Meta */}
-              <div className="flex flex-wrap items-center gap-4 text-sm text-white/80">
-                {post.author && (
-                  <div className="flex items-center gap-3">
-                    {hasImageAsset(post.author.avatar) ? (
-                      <Image
-                        src={urlFor(post.author.avatar!).width(48).height(48).url()}
-                        alt={post.author.name}
-                        width={48}
-                        height={48}
-                        className="rounded-full ring-2 ring-white/30"
-                      />
-                    ) : (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md ring-2 ring-white/30">
-                        <User className="h-5 w-5 text-white" />
-                      </div>
-                    )}
-                    <div>
-                      <p className="font-bold text-white">{post.author.name}</p>
-                      {post.author.jobTitle && (
-                        <p className="text-white/70">{post.author.jobTitle}</p>
-                      )}
+            {/* Author & Meta */}
+            <div className="flex flex-wrap items-center gap-4 border-t border-gray-100 py-5 text-sm text-gray-600">
+              {post.author && (
+                <div className="flex items-center gap-3">
+                  {hasImageAsset(post.author.avatar) ? (
+                    <Image
+                      src={urlFor(post.author.avatar!).width(48).height(48).url()}
+                      alt={post.author.name}
+                      width={48}
+                      height={48}
+                      className="rounded-full ring-2 ring-gray-200"
+                    />
+                  ) : (
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 ring-2 ring-gray-200">
+                      <User className="h-5 w-5 text-gray-500" />
                     </div>
-                  </div>
-                )}
-
-                <div className="flex items-center gap-4">
-                  <span>•</span>
-                  <time>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</time>
-                  <span>•</span>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    {post.readTime} min read
+                  )}
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">{post.author.name}</p>
+                    {post.author.jobTitle && (
+                      <p className="text-xs text-gray-600">{post.author.jobTitle}</p>
+                    )}
                   </div>
                 </div>
+              )}
+
+              <div className="flex items-center text-xs text-gray-600">
+                <time>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</time>
               </div>
             </div>
           </div>
@@ -222,7 +237,7 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
           <div className="hidden lg:block">
             <ShareButtons
               title={post.title}
-              url={currentUrl}
+              url={canonicalUrl}
               className="sticky top-32"
             />
           </div>
@@ -293,7 +308,7 @@ export default function BlogDetailClient({ post, relatedPosts }: BlogDetailClien
       <div className="fixed bottom-0 left-0 right-0 z-40 flex justify-center gap-3 border-t border-border/60 bg-background/95 p-4 backdrop-blur-md lg:hidden">
         <ShareButtons
           title={post.title}
-          url={currentUrl}
+          url={canonicalUrl}
           className="flex-row"
         />
       </div>

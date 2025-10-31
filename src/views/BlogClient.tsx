@@ -290,9 +290,9 @@ const FeaturedPostLarge = ({ post }: FeaturedPostProps) => {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-card/60 shadow-2xl shadow-primary/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg shadow-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/8"
     >
-      {/* Image with gradient overlay */}
+      {/* Image - No overlay, full visibility */}
       <div className="relative h-[400px] overflow-hidden bg-muted md:h-[500px]">
         {hasImageAsset(post.featuredImage) ? (
           <>
@@ -301,65 +301,65 @@ const FeaturedPostLarge = ({ post }: FeaturedPostProps) => {
               alt={post.title}
               fill
               sizes="(min-width: 1024px) 60vw, 100vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               priority
             />
-            {/* Gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            {/* Category badge - minimal overlay */}
+            <div className="absolute left-5 top-5">
+              <div className={`inline-flex items-center rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold tracking-wide ${categoryStyle.text} shadow-sm backdrop-blur-sm`}>
+                {post.category.title}
+              </div>
+            </div>
           </>
         ) : (
           <div className={`flex h-full w-full items-center justify-center ${categoryStyle.bg}`}>
             <BookOpen className={`h-20 w-20 ${categoryStyle.text} opacity-40`} />
           </div>
         )}
+      </div>
 
-        {/* Content overlay on image */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-          {/* Category badge */}
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md">
-            <span className={categoryStyle.text}>{post.category.title}</span>
-            <span className="text-white/60">•</span>
-            <span className="flex items-center gap-1 text-white/80">
-              <Clock className="h-3 w-3" />
-              {post.readTime} min read
-            </span>
-          </div>
-
-          {/* Title */}
-          <h2 className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl">
-            {post.title}
-          </h2>
-
-          {/* Excerpt */}
-          <p className="mb-6 line-clamp-2 text-lg text-white/90 md:text-xl">
-            {post.excerpt}
-          </p>
-
-          {/* Author */}
-          {post.author && (
-            <div className="flex items-center gap-3">
-              {hasImageAsset(post.author.avatar) ? (
-                <Image
-                  src={urlFor(post.author.avatar!).width(48).height(48).url()}
-                  alt={post.author.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover ring-2 ring-white/30"
-                />
-              ) : (
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md ring-2 ring-white/30">
-                  <User className="h-5 w-5 text-white" />
-                </div>
-              )}
-              <div>
-                <p className="font-bold text-white">{post.author.name}</p>
-                <time className="text-sm text-white/70">
-                  {format(new Date(post.publishedAt), "MMM d, yyyy")}
-                </time>
-              </div>
-            </div>
-          )}
+      {/* Content below image */}
+      <div className="flex flex-col gap-2.5 p-5 md:p-6">
+        {/* Read time */}
+        <div className="flex items-center gap-1 text-xs text-gray-600">
+          <Clock className="h-3 w-3" />
+          <span>{post.readTime} min read</span>
         </div>
+
+        {/* Title */}
+        <h2 className="text-xl font-semibold leading-snug text-gray-900 md:text-2xl">
+          {post.title}
+        </h2>
+
+        {/* Excerpt */}
+        <p className="line-clamp-2 text-sm leading-relaxed text-gray-700">
+          {post.excerpt}
+        </p>
+
+        {/* Author */}
+        {post.author && (
+          <div className="flex items-center gap-2.5">
+            {hasImageAsset(post.author.avatar) ? (
+              <Image
+                src={urlFor(post.author.avatar!).width(32).height(32).url()}
+                alt={post.author.name}
+                width={32}
+                height={32}
+                className="rounded-full object-cover ring-1 ring-gray-200"
+              />
+            ) : (
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-1 ring-gray-200">
+                <User className="h-3.5 w-3.5 text-gray-500" />
+              </div>
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-gray-900 text-xs">{post.author.name}</p>
+              <time className="text-[10px] text-gray-600">
+                {format(new Date(post.publishedAt), "MMM d, yyyy")}
+              </time>
+            </div>
+          </div>
+        )}
       </div>
     </Link>
   );

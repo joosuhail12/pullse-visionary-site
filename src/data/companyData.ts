@@ -137,14 +137,15 @@ export const visionManifesto = {
 
 export const founderManifesto = {
   paragraphs: [
-    "Business software is broken. Not because the tools don't work—they do—but because they don't work together. Every company drowns in dozens of disconnected systems: one for tickets, another for chat, another for analytics, another for workflows. Each tool promises to solve a problem, but together they create a bigger one: chaos. Teams spend more time switching contexts than serving customers. Data lives in silos. Insights get lost in translation. And every new tool just adds to the noise.",
-    "But AI changes everything. Unlike humans, AI doesn't need specialized tools—it needs aggregated data. The more information AI sees across your entire business, the smarter it becomes. Support conversations inform sales insights. Product feedback shapes marketing. Operations data predicts bottlenecks. When AI can see everything, it doesn't just assist—it thinks. This is the difference between AI features bolted onto legacy software and AI-native platforms built from the ground up for intelligence.",
-    "We're building the future of business software—platforms that solve entire functions, not fragments of workflows. Where one intelligent system replaces your entire support stack. Where every conversation makes the whole platform smarter. Where data flows freely across every tool, and insights emerge automatically. This isn't incremental improvement. This is rethinking software from first principles, designed for an AI-native world. Starting with customer support, expanding to every business function.",
-    "The companies that win the next decade won't be the ones with the most tools—they'll be the ones with the smartest systems. We're not just building better software. We're building the infrastructure for AI-amplified teams. Where technology doesn't add complexity, it removes it. Where every employee has the intelligence of the entire company at their fingertips. This is the future we're building. And we're just getting started.",
+    "For a decade, we glorified \"there's an app for that\"—and got exactly what we asked for: fragmentation. Today's enterprises manage an average of 275 SaaS applications, burning nearly 9% of every employee's week just switching between tools. Employees toggle between apps ~1,200 times per day. The financial waste runs into millions annually in unused licenses alone.",
+    "AI changes the calculus, but only if we change the architecture. Models thrive on aggregation and continuity; they fail when context is shattered across dozens of disconnected tools. While 71% of companies now use generative AI, most implementations stall inside fragmented stacks that starve models of the complete picture.",
+    "We believe the future belongs to specialized agentic AI—purpose-built agents that run entire business functions end-to-end, coordinated by a central brain that shares context and enables seamless handoffs. Not bolt-on bots. Not more point solutions. Intelligent systems that read, decide, and act safely under guardrails—then involve humans when judgment is truly required. Crucially, humans always retain parallel control: every action AI can take, humans can take manually. No forced automation. No all-or-nothing adoption.",
+    "That's Pullse: we're building enterprise-grade AI for SMBs and mid-market companies with interfaces that stay simple as capabilities scale. Why? Because a 50-person company improving support efficiency by 40% transforms their entire operation—the percentage value unlocked in growing businesses dwarfs what's available in mature enterprises. Starting with customer support, we're making AI-native enterprise capabilities accessible to companies who've been priced out or overwhelmed by traditional solutions.",
+    "Fewer systems. More outcomes. Software that finally gets out of your way.",
   ],
   cta: {
-    text: "Join Early Access",
-    link: "/contact-sales",
+    text: "Read the Complete Manifesto",
+    link: "/blog/the-era-of-tool-sprawl-is-ending-here-s-what-comes-next",
   },
 };
 

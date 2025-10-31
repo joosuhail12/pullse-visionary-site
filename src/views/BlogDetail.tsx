@@ -8,9 +8,10 @@ import PageLiquidBackground from '@/components/PageLiquidBackground';
 
 interface BlogDetailProps {
   post: BlogPost;
+  slug: string;
 }
 
-const BlogDetail = async ({ post }: BlogDetailProps) => {
+const BlogDetail = async ({ post, slug }: BlogDetailProps) => {
   // Fetch related posts from the same category
   let relatedPosts: BlogPostCard[] = [];
 
@@ -24,11 +25,15 @@ const BlogDetail = async ({ post }: BlogDetailProps) => {
     // Continue with empty related posts
   }
 
+  // Construct the canonical URL from slug
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pullse.ai';
+  const canonicalUrl = `${baseUrl}/blog/${slug}`;
+
   return (
     <>
       <PageLiquidBackground opacity={0.08} />
       <Navigation />
-      <BlogDetailClient post={post} relatedPosts={relatedPosts} />
+      <BlogDetailClient post={post} relatedPosts={relatedPosts} canonicalUrl={canonicalUrl} />
       <Footer />
     </>
   );
