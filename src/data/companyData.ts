@@ -32,7 +32,8 @@ export interface Value {
   icon: LucideIcon;
   title: string;
   description: string;
-  size?: 'small' | 'large'; // For asymmetric grid layouts
+  inPractice: string; // Concrete example of principle in action
+  size?: 'small' | 'large'; // For asymmetric grid layouts (deprecated, keeping for backwards compatibility)
 }
 
 export interface TeamMember {
@@ -197,50 +198,59 @@ export const timeline: Milestone[] = [
 ];
 
 // Merged approach: combining values + why support first into unified principles
+// Story structure: Foundation (Row 1) → Execution (Row 2)
 export const ourApproach = {
   title: "How We Build Different",
-  subtitle: "Six principles that guide everything we do",
+  subtitle: "The foundation and execution that drives everything we do",
   principles: [
+    // ============ FOUNDATION ROW ============
     {
       icon: Brain,
       title: "AI-Native by Design",
       description:
-        "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter. That's why Pullse can replace your entire support stack with one platform.",
-      size: "large" as const, // Featured card
+        "Legacy tools add AI features. We designed from scratch so AI understands your entire business—every conversation, ticket, and customer interaction feeds one intelligent brain that gets smarter with each data point.",
+      inPractice: "Your support AI learns from sales conversations, product updates, and team discussions. When a customer asks about a feature, the AI already knows what sales promised and what product shipped. Context never gets lost.",
+      size: "large" as const, // Deprecated but kept for backwards compatibility
     },
     {
       icon: Eye,
       title: "Radically Transparent",
       description:
-        "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no pricing tiers that gatekeep basic features, no locked data. We earn trust by being radically open.",
-      size: "large" as const, // Featured card
+        "We publish our pricing, roadmap, and decision-making in the open. No hidden fees, no enterprise-only features that should be standard, no data lock-in. You own your data, you see our plans, you know exactly what you're paying for.",
+      inPractice: "Our pricing page shows every feature at every tier. Our public roadmap shows what we're building next. Export your data anytime with one click—no hoops, no retention policies, no questions asked.",
+      size: "large" as const,
     },
     {
       icon: Heart,
       title: "End User Obsessed",
       description:
-        "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces, no mandatory upsells, and powerful features available to teams of any size.",
+        "Support agents don't have time for complicated interfaces or mandatory training sessions. We design for the person answering tickets at 11pm, not the executive signing the contract. If it's not genuinely simple, we don't ship it.",
+      inPractice: "New agents go live in under 10 minutes. No week-long onboarding, no certification courses, no admin setup maze. The AI guides them through their first tickets, and advanced features appear only when they're ready.",
       size: "small" as const,
     },
+    // ============ EXECUTION ROW ============
     {
       icon: Zap,
       title: "Ship Fast, Learn Faster",
       description:
-        "No 18-month roadmaps or bureaucratic processes. The world needs better software now—so we build, test, and iterate in public. Speed is a feature.",
+        "We built our first working prototype in 3 months. We launch features weekly, not quarterly. Every Friday, something new ships. The teams using broken tools today can't wait 18 months for our perfect vision—they need better software now.",
+      inPractice: "Weekly releases every Friday at 2pm PST. Public changelog shows exactly what shipped. Beta features available immediately for teams who want to test early. If something breaks, we fix it that day, not next sprint.",
       size: "small" as const,
     },
     {
       icon: Target,
-      title: "AI-Ready Function First",
+      title: "Start Where AI Delivers Most",
       description:
-        "We start with support because it has clear inputs, outputs, and success metrics. This makes it ideal for autonomous AI agents to deliver immediate, measurable value.",
+        "Support has clear inputs (customer questions), measurable outputs (resolution time, CSAT), and structured workflows. This makes it perfect for AI to deliver immediate, quantifiable value. We prove the platform here, then expand to other functions.",
+      inPractice: "Day one: Your AI handles password resets, shipping questions, basic troubleshooting—the repetitive 40% of tickets. Week two: It's learning your product specifics. Month one: It's resolving 60% of tickets autonomously while your team focuses on complex cases.",
       size: "small" as const,
     },
     {
       icon: Users,
-      title: "Built for Everyone",
+      title: "Built for Growing Teams",
       description:
-        "Every business needs support. By starting here, we can help the most companies while proving our unified platform architecture works at any scale.",
+        "A 5-person startup and a 500-person company both need great support, but they can't both afford enterprise software. We price for small teams and scale without forcing upgrades. The same powerful features, the same intelligent platform, regardless of size.",
+      inPractice: "Start at $29/agent/month with full AI capabilities—not a limited 'starter' version. Add agents anytime without contracts or tier changes. Scale from 3 agents to 30 without losing features or migrating plans. Pay for what you use, nothing more.",
       size: "small" as const,
     },
   ],
@@ -253,24 +263,28 @@ export const values: Value[] = [
     title: "AI-Native by Design",
     description:
       "We don't bolt AI features onto legacy software. We architect from scratch for AI aggregation—where every data point makes the whole system smarter.",
+    inPractice: "Context flows across all systems automatically.",
   },
   {
     icon: Eye,
     title: "Radically Transparent",
     description:
       "Every feature we build, every decision we make, every dollar we charge—it's all transparent. No hidden fees, no gatekeep features, no locked data.",
+    inPractice: "Public pricing, roadmap, and data export anytime.",
   },
   {
     icon: Heart,
     title: "End User Obsessed",
     description:
       "We optimize for the people doing the work, not the people buying the software. That means genuinely simple interfaces and powerful features for all.",
+    inPractice: "Simple by default, powerful when needed.",
   },
   {
     icon: Zap,
     title: "Speed & Conviction",
     description:
       "We ship fast, learn faster. No 18-month roadmaps. The world needs better business software now—so we build, test, and iterate in public.",
+    inPractice: "Weekly releases every Friday.",
   },
 ];
 

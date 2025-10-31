@@ -457,43 +457,158 @@ const Company = () => {
               </p>
             </motion.div>
 
-            {/* Asymmetric Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              {ourApproach.principles.map((principle, idx) => {
-                const isLarge = principle.size === 'large';
-                const colSpan = isLarge ? 'md:col-span-6' : 'md:col-span-4';
+            {/* Symmetric 3x2 Grid with Narrative Flow */}
+            <div className="space-y-8">
+              {/* Foundation Row Label */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="flex items-center gap-3"
+              >
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary/30 to-primary/30" />
+                <span className="text-sm font-bold uppercase tracking-wider text-primary/70">Foundation</span>
+                <div className="h-px w-12 bg-gradient-to-r from-primary/30 to-transparent" />
+              </motion.div>
 
-                return (
+              {/* Foundation Row (First 3 principles) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {ourApproach.principles.slice(0, 3).map((principle, idx) => (
                   <motion.div
                     key={principle.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`${colSpan} group`}
+                    className="group relative"
                   >
-                    <div className="relative h-full bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl p-8 hover:bg-white/80 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500">
-                      {/* Icon */}
-                      <div className="mb-6">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 text-primary group-hover:scale-110 transition-transform duration-300">
-                          <principle.icon className="w-7 h-7" />
-                        </div>
+                    <div className="relative h-full bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl p-8 hover:bg-white/80 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                      {/* Spotlight effect on hover */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
                       </div>
 
-                      {/* Content */}
-                      <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900">
-                        {principle.title}
-                      </h3>
-                      <p className={`text-gray-700 leading-relaxed ${isLarge ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
-                        {principle.description}
-                      </p>
+                      <div className="relative z-10">
+                        {/* Icon with enhanced hover effect */}
+                        <div className="mb-6">
+                          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 text-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                            <principle.icon className="w-8 h-8" />
+                          </div>
+                        </div>
 
-                      {/* Gradient accent on hover */}
-                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-3xl" />
+                        {/* Content */}
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900 group-hover:text-primary transition-colors duration-300">
+                          {principle.title}
+                        </h3>
+                        <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-5">
+                          {principle.description}
+                        </p>
+
+                        {/* In Practice Section */}
+                        <div className="pt-4 border-t border-gray-200/60">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-1 h-1 rounded-full bg-primary" />
+                            <span className="text-xs font-bold uppercase tracking-wider text-primary/70">In Practice</span>
+                          </div>
+                          <p className="text-sm text-gray-600 leading-relaxed italic">
+                            {principle.inPractice}
+                          </p>
+                        </div>
+
+                        {/* Enhanced gradient accent on hover */}
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary/0 via-primary/60 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-3xl" />
+                      </div>
                     </div>
                   </motion.div>
-                );
-              })}
+                ))}
+              </div>
+
+              {/* Visual Connector with Arrow */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="flex items-center justify-center py-4"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/30" />
+                  <div className="w-2 h-2 rounded-full bg-primary/40 animate-pulse" />
+                  <div className="h-px w-4 bg-primary/30" />
+                  <svg className="w-4 h-4 text-primary/50" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v10.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clipRule="evenodd" />
+                  </svg>
+                  <div className="h-px w-4 bg-primary/30" />
+                  <div className="w-2 h-2 rounded-full bg-primary/40 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/30" />
+                </div>
+              </motion.div>
+
+              {/* Execution Row Label */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="flex items-center gap-3"
+              >
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/30 to-purple-500/30" />
+                <span className="text-sm font-bold uppercase tracking-wider text-purple-600/70">Execution</span>
+                <div className="h-px w-12 bg-gradient-to-r from-purple-500/30 to-transparent" />
+              </motion.div>
+
+              {/* Execution Row (Last 3 principles) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {ourApproach.principles.slice(3, 6).map((principle, idx) => (
+                  <motion.div
+                    key={principle.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: (idx + 3) * 0.1 }}
+                    className="group relative"
+                  >
+                    <div className="relative h-full bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl p-8 hover:bg-white/80 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                      {/* Spotlight effect on hover */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-primary/5" />
+                      </div>
+
+                      <div className="relative z-10">
+                        {/* Icon with enhanced hover effect */}
+                        <div className="mb-6">
+                          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-primary/20 text-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                            <principle.icon className="w-8 h-8" />
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
+                          {principle.title}
+                        </h3>
+                        <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-5">
+                          {principle.description}
+                        </p>
+
+                        {/* In Practice Section */}
+                        <div className="pt-4 border-t border-gray-200/60">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-1 h-1 rounded-full bg-purple-600" />
+                            <span className="text-xs font-bold uppercase tracking-wider text-purple-600/70">In Practice</span>
+                          </div>
+                          <p className="text-sm text-gray-600 leading-relaxed italic">
+                            {principle.inPractice}
+                          </p>
+                        </div>
+
+                        {/* Enhanced gradient accent on hover */}
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/60 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-3xl" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
