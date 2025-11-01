@@ -57,6 +57,7 @@ import {
   trustSignals,
   descriptiveFeatures,
   currencies,
+  featureComparison,
 } from '@/data/pricingData';
 
 const Pricing = () => {
@@ -465,7 +466,203 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 4: PRICING CALCULATORS
+          SECTION 4: FEATURE COMPARISON TABLE
+      ======================================== */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
+                  Compare plans in detail
+                </span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                See exactly what's included in each plan and find the perfect fit for your team
+              </p>
+            </motion.div>
+
+            {/* Desktop Table View */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="hidden md:block overflow-hidden rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-2xl"
+            >
+              {/* Table Header */}
+              <div className="grid grid-cols-3 gap-6 p-6 bg-gradient-to-r from-primary/5 to-purple-500/5 border-b border-gray-200 sticky top-0 z-10 backdrop-blur-xl">
+                <div className="font-bold text-gray-900 text-lg">Feature</div>
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-white border-2 border-gray-300 shadow-sm">
+                    <span className="font-bold text-gray-900 text-lg">Standard</span>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-purple-600 shadow-lg">
+                    <Star className="h-4 w-4 fill-white text-white" />
+                    <span className="font-bold text-white text-lg">Pro</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Table Body */}
+              <div className="divide-y divide-gray-200">
+                {featureComparison.map((category, categoryIdx) => (
+                  <div key={categoryIdx}>
+                    {/* Category Header */}
+                    <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50">
+                      <h3 className="font-bold text-gray-900 text-base uppercase tracking-wide">
+                        {category.category}
+                      </h3>
+                    </div>
+
+                    {/* Category Features */}
+                    {category.features.map((feature, featureIdx) => (
+                      <div
+                        key={featureIdx}
+                        className="grid grid-cols-3 gap-6 p-6 hover:bg-gray-50/50 transition-colors"
+                      >
+                        <div>
+                          <div className="font-medium text-gray-900 mb-1">
+                            {feature.name}
+                          </div>
+                          {feature.description && (
+                            <div className="text-xs text-gray-500 leading-relaxed">
+                              {feature.description}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Standard Column */}
+                        <div className="flex items-center justify-center">
+                          {typeof feature.standard === 'boolean' ? (
+                            feature.standard ? (
+                              <CheckCircle2 className="h-6 w-6 text-green-600" />
+                            ) : (
+                              <X className="h-6 w-6 text-gray-300" />
+                            )
+                          ) : (
+                            <span className="text-sm font-semibold text-gray-700">
+                              {feature.standard}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Pro Column */}
+                        <div className="flex items-center justify-center">
+                          {typeof feature.pro === 'boolean' ? (
+                            feature.pro ? (
+                              <CheckCircle2 className="h-6 w-6 text-primary" />
+                            ) : (
+                              <X className="h-6 w-6 text-gray-300" />
+                            )
+                          ) : (
+                            <span className="text-sm font-semibold text-primary">
+                              {feature.pro}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-6">
+              {featureComparison.map((category, categoryIdx) => (
+                <motion.div
+                  key={categoryIdx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: categoryIdx * 0.1 }}
+                  className="rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl overflow-hidden"
+                >
+                  {/* Category Header */}
+                  <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50 border-b border-gray-200">
+                    <h3 className="font-bold text-gray-900 text-base uppercase tracking-wide">
+                      {category.category}
+                    </h3>
+                  </div>
+
+                  {/* Features */}
+                  <div className="p-6 space-y-6">
+                    {category.features.map((feature, featureIdx) => (
+                      <div key={featureIdx} className="space-y-3">
+                        <div>
+                          <div className="font-medium text-gray-900 mb-1">
+                            {feature.name}
+                          </div>
+                          {feature.description && (
+                            <div className="text-xs text-gray-500 leading-relaxed">
+                              {feature.description}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Plan Comparison */}
+                        <div className="grid grid-cols-2 gap-4">
+                          {/* Standard */}
+                          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+                            <div className="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                              Standard
+                            </div>
+                            <div className="flex items-center justify-center">
+                              {typeof feature.standard === 'boolean' ? (
+                                feature.standard ? (
+                                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                ) : (
+                                  <X className="h-5 w-5 text-gray-300" />
+                                )
+                              ) : (
+                                <span className="text-sm font-semibold text-gray-700 text-center">
+                                  {feature.standard}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Pro */}
+                          <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 border-2 border-primary/30">
+                            <div className="text-xs font-semibold text-primary mb-2 uppercase tracking-wide flex items-center justify-center gap-1">
+                              <Star className="h-3 w-3 fill-current" />
+                              Pro
+                            </div>
+                            <div className="flex items-center justify-center">
+                              {typeof feature.pro === 'boolean' ? (
+                                feature.pro ? (
+                                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                                ) : (
+                                  <X className="h-5 w-5 text-gray-300" />
+                                )
+                              ) : (
+                                <span className="text-sm font-semibold text-primary text-center">
+                                  {feature.pro}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          SECTION 5: PRICING CALCULATORS
       ======================================== */}
       <section className="py-24 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50">
         <div className="container mx-auto px-4">
@@ -704,7 +901,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 5: TESTIMONIALS WITH METRICS
+          SECTION 6: TESTIMONIALS WITH METRICS
       ======================================== */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -773,7 +970,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 6: TRUST SIGNALS
+          SECTION 7: TRUST SIGNALS
       ======================================== */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-transparent">
         <div className="container mx-auto px-4">
@@ -805,7 +1002,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 7: STARTUP PROGRAM
+          SECTION 8: STARTUP PROGRAM
       ======================================== */}
       <section className="py-24 bg-gradient-to-br from-orange-500/5 via-transparent to-amber-500/5">
         <div className="container mx-auto px-4">
@@ -893,7 +1090,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 8: FAQ
+          SECTION 9: FAQ
       ======================================== */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -952,7 +1149,7 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 9: FINAL CTA
+          SECTION 10: FINAL CTA
       ======================================== */}
       <section className="py-16 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10">
         <div className="container mx-auto px-4">

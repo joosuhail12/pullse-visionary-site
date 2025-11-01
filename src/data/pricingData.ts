@@ -112,6 +112,16 @@ export interface Currency {
   rate: number; // Conversion rate from USD
 }
 
+export interface FeatureComparison {
+  category: string;
+  features: {
+    name: string;
+    description?: string;
+    standard: boolean | string;
+    pro: boolean | string;
+  }[];
+}
+
 // ============================================
 // PRICING TIERS
 // ============================================
@@ -642,4 +652,240 @@ export const currencies: Currency[] = [
   { code: "USD", symbol: "$", rate: 1 },
   { code: "EUR", symbol: "€", rate: 0.92 },
   { code: "GBP", symbol: "£", rate: 0.79 },
+];
+
+// ============================================
+// FEATURE COMPARISON TABLE
+// ============================================
+
+export const featureComparison: FeatureComparison[] = [
+  {
+    category: "Core Features",
+    features: [
+      {
+        name: "Unified Inbox (email + chat)",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Smart Assignments & Collision Detection",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "SLAs and Automation Rules",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Visual Workflow Builder",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Integrations & API Access",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "SSO, RBAC & Activity Logs",
+        standard: true,
+        pro: true,
+      },
+    ],
+  },
+  {
+    category: "AI Capabilities",
+    features: [
+      {
+        name: "AI Copilot (draft, summarize, translate, rewrite)",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Customer-Facing AI Agent with RAG",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Copilot Tools/Actions with Approvals",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "AI Agent Profiles",
+        standard: "4 profiles",
+        pro: "Unlimited",
+      },
+      {
+        name: "AI Copilot Profiles",
+        standard: "4 profiles",
+        pro: "Unlimited",
+      },
+      {
+        name: "Multilingual Support & Sentiment Detection",
+        standard: true,
+        pro: true,
+      },
+    ],
+  },
+  {
+    category: "Scale & Limits",
+    features: [
+      {
+        name: "Action Throughput Ceiling",
+        description: "Maximum actions per month (throughput control)",
+        standard: "10,000/month",
+        pro: "Unlimited",
+      },
+      {
+        name: "Grace Period for Overages",
+        standard: "10% (up to 11,000)",
+        pro: "N/A (unlimited)",
+      },
+      {
+        name: "Team Seats",
+        standard: "Unlimited",
+        pro: "Unlimited",
+      },
+      {
+        name: "Credit Rollover",
+        standard: false,
+        pro: "10% monthly",
+      },
+    ],
+  },
+  {
+    category: "Help Centers",
+    features: [
+      {
+        name: "Appo Help Centers",
+        standard: "1 center",
+        pro: "Unlimited",
+      },
+      {
+        name: "Custom Domain & Theming",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Multi-Brand Support",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "Locale-Specific Content",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "Shared Content Across Centers",
+        standard: false,
+        pro: true,
+      },
+    ],
+  },
+  {
+    category: "Quality Assurance",
+    features: [
+      {
+        name: "Rep QA Scorecards",
+        description: "Automated quality scoring for human agents",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "AI Bot Performance Scorecards",
+        description: "Track and improve AI Agent quality",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "Custom Scoring Rubrics",
+        description: "Define quality, compliance, and tone criteria",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "AI-Generated Coaching & Feedback",
+        description: "Automated coaching suggestions for team",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "Supervisor Review & Calibration",
+        description: "Override scores and calibrate QA standards",
+        standard: false,
+        pro: true,
+      },
+      {
+        name: "QA Analytics & Trends",
+        description: "Track coaching impact and quality trends",
+        standard: false,
+        pro: true,
+      },
+    ],
+  },
+  {
+    category: "Analytics & Reporting",
+    features: [
+      {
+        name: "Deflection Rate Tracking",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "AI Performance Metrics",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Team Efficiency Dashboard",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "ROI Reporting",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Custom Reports & Exports",
+        standard: true,
+        pro: true,
+      },
+    ],
+  },
+  {
+    category: "Support & Enterprise",
+    features: [
+      {
+        name: "14-Day Trial with 1,000 Credits",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Email Support",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Onboarding Assistance",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Priority Support Add-On Available",
+        description: "Dedicated Slack channel with <15min response",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Custom Integrations Available",
+        description: "We build custom integrations for your tools",
+        standard: true,
+        pro: true,
+      },
+    ],
+  },
 ];
