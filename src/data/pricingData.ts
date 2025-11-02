@@ -113,12 +113,19 @@ export interface Currency {
 }
 
 export interface FeatureComparison {
+  id: string;
   category: string;
+  icon: string; // Emoji for visual appeal
+  categoryDescription: string; // Short description of category value
+  defaultExpanded?: boolean; // Category starts expanded
   features: {
     name: string;
-    description?: string;
-    standard: boolean | string;
-    pro: boolean | string;
+    description?: string; // Brief description shown below feature name
+    tooltip?: string; // "Why this matters" - shown on hover
+    standard: boolean | string | 'coming-soon';
+    pro: boolean | string | 'coming-soon';
+    comingSoon?: boolean; // Yellow "Coming Soon" badge
+    proOnly?: boolean; // Visual emphasis for Pro-exclusive features
   }[];
 }
 
@@ -659,230 +666,479 @@ export const currencies: Currency[] = [
 // ============================================
 
 export const featureComparison: FeatureComparison[] = [
+  // ============================================
+  // CATEGORY 1: AI-POWERED SUPPORT (Lead with differentiation!)
+  // ============================================
   {
-    category: "Core Features",
+    id: "ai-support",
+    category: "AI-Powered Support",
+    icon: "🤖",
+    categoryDescription: "Industry-leading AI that handles 60-70% of support automatically",
+    defaultExpanded: true, // Start expanded to showcase strength
     features: [
       {
-        name: "Unified Inbox (email + chat)",
+        name: "AI Copilot for Agents",
+        description: "Draft, summarize, translate, rewrite, and extract data",
+        tooltip: "Reduces agent response time by 60% with instant AI assistance for common tasks",
         standard: true,
         pro: true,
       },
       {
-        name: "Smart Assignments & Collision Detection",
+        name: "Customer-Facing AI Agent",
+        description: "RAG-powered bot handles customer conversations",
+        tooltip: "Resolves 60-70% of common questions automatically using your help docs and past conversations",
         standard: true,
         pro: true,
       },
       {
-        name: "SLAs and Automation Rules",
+        name: "AI Agent Personas",
+        description: "Separate AI personalities with unique prompts and knowledge",
+        tooltip: "Create different AI personalities for different teams, brands, or use cases",
+        standard: "4 personas",
+        pro: "Unlimited",
+      },
+      {
+        name: "AI Copilot Personas",
+        description: "Separate Copilot configurations for different workflows",
+        tooltip: "Customize AI assistance for different agent roles or departments",
+        standard: "4 personas",
+        pro: "Unlimited",
+      },
+      {
+        name: "Auto-QA Suite",
+        description: "AI scores every conversation for quality and compliance",
+        tooltip: "Catch quality issues before customers complain and improve team performance 3x faster with automated scoring",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "AI-Generated Coaching",
+        description: "Automated feedback and improvement suggestions",
+        tooltip: "AI analyzes patterns and generates personalized coaching for each team member",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "Supervisor QA Review & Calibration",
+        description: "Override scores and calibrate quality standards",
+        tooltip: "Maintain consistent quality standards across your team with supervisor oversight",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 2: CHANNELS & COMMUNICATION
+  // ============================================
+  {
+    id: "channels",
+    category: "Channels & Communication",
+    icon: "📨",
+    categoryDescription: "Multi-channel support with unified conversation history",
+    features: [
+      {
+        name: "Email Support",
+        description: "Full email ticketing with threading",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Live Chat Widget",
+        description: "Embeddable chat widget for your website",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Multilingual Support",
+        description: "Automatic language detection and translation",
+        tooltip: "Communicate with customers in their native language without hiring multilingual agents",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Sentiment Detection",
+        description: "AI-powered sentiment analysis on conversations",
+        tooltip: "Automatically detect frustrated customers and prioritize their conversations",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Voice/Phone Support",
+        description: "Integrated call center capabilities",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+      {
+        name: "Social Messaging",
+        description: "WhatsApp, Facebook Messenger, Instagram DM",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 3: TICKETING & WORKFLOW
+  // ============================================
+  {
+    id: "ticketing",
+    category: "Ticketing & Workflow",
+    icon: "🎯",
+    categoryDescription: "Powerful automation to eliminate repetitive work",
+    features: [
+      {
+        name: "Unified Inbox",
+        description: "All channels in one place",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Smart Assignment Rules",
+        description: "Auto-assign conversations to the right agent",
+        tooltip: "Route conversations based on skills, workload, language, or custom rules",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Collision Detection",
+        description: "Prevents multiple agents working on same conversation",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Macros & Saved Replies",
+        description: "Reusable response templates",
         standard: true,
         pro: true,
       },
       {
         name: "Visual Workflow Builder",
+        description: "Drag-and-drop automation or describe in plain English",
+        tooltip: "Build complex automations without code—AI generates workflows from your description",
         standard: true,
         pro: true,
       },
       {
-        name: "Integrations & API Access",
+        name: "Trigger Automations",
+        description: "If-then rules for automatic actions",
         standard: true,
         pro: true,
       },
       {
-        name: "SSO, RBAC & Activity Logs",
+        name: "Time-Based Automations",
+        description: "Schedule actions or add delays to workflows",
         standard: true,
         pro: true,
+      },
+      {
+        name: "SLA Management",
+        description: "Track and enforce response time SLAs",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
       },
     ],
   },
+
+  // ============================================
+  // CATEGORY 4: TEAM COLLABORATION
+  // ============================================
   {
-    category: "AI Capabilities",
+    id: "collaboration",
+    category: "Team Collaboration",
+    icon: "👥",
+    categoryDescription: "Work together seamlessly without stepping on toes",
     features: [
       {
-        name: "AI Copilot (draft, summarize, translate, rewrite)",
+        name: "Internal Notes & Mentions",
+        description: "Leave private notes and @mention teammates",
         standard: true,
         pro: true,
       },
       {
-        name: "Customer-Facing AI Agent with RAG",
+        name: "Team Inboxes & Groups",
+        description: "Organize agents into teams with shared queues",
+        tooltip: "Route conversations to specific teams and track team-level performance",
         standard: true,
         pro: true,
       },
       {
-        name: "Copilot Tools/Actions with Approvals",
+        name: "Shared Drafts",
+        description: "Collaborate on responses before sending",
         standard: true,
         pro: true,
       },
       {
-        name: "AI Agent Profiles",
-        standard: "4 profiles",
-        pro: "Unlimited",
+        name: "Collision Detection",
+        description: "Prevents duplicate work on same conversation",
+        standard: true,
+        pro: true,
       },
       {
-        name: "AI Copilot Profiles",
-        standard: "4 profiles",
-        pro: "Unlimited",
+        name: "Activity Logs",
+        description: "Full audit trail of who did what and when",
+        standard: true,
+        pro: true,
       },
       {
-        name: "Multilingual Support & Sentiment Detection",
+        name: "Role-Based Permissions (RBAC)",
+        description: "Control what each team member can see and do",
         standard: true,
         pro: true,
       },
     ],
   },
+
+  // ============================================
+  // CATEGORY 5: KNOWLEDGE & SELF-SERVICE
+  // ============================================
   {
-    category: "Scale & Limits",
-    features: [
-      {
-        name: "Action Throughput Ceiling",
-        description: "Maximum actions per month (throughput control)",
-        standard: "10,000/month",
-        pro: "Unlimited",
-      },
-      {
-        name: "Grace Period for Overages",
-        standard: "10% (up to 11,000)",
-        pro: "N/A (unlimited)",
-      },
-      {
-        name: "Team Seats",
-        standard: "Unlimited",
-        pro: "Unlimited",
-      },
-      {
-        name: "Credit Rollover",
-        standard: false,
-        pro: "10% monthly",
-      },
-    ],
-  },
-  {
-    category: "Help Centers",
+    id: "knowledge",
+    category: "Knowledge & Self-Service",
+    icon: "📚",
+    categoryDescription: "Empower customers to help themselves",
     features: [
       {
         name: "Appo Help Centers",
-        standard: "1 center",
+        description: "Branded knowledge base with custom domain",
+        tooltip: "Publish help articles that both customers and AI can use to resolve questions",
+        standard: "1 help center",
         pro: "Unlimited",
       },
       {
         name: "Custom Domain & Theming",
+        description: "Your branding, your domain (e.g., help.yoursite.com)",
         standard: true,
         pro: true,
       },
       {
-        name: "Multi-Brand Support",
+        name: "Multi-Brand Help Centers",
+        description: "Separate help centers for different brands",
+        tooltip: "Perfect for agencies or companies with multiple products",
         standard: false,
         pro: true,
+        proOnly: true,
       },
       {
         name: "Locale-Specific Content",
+        description: "Different help centers for different regions/languages",
         standard: false,
         pro: true,
+        proOnly: true,
       },
       {
-        name: "Shared Content Across Centers",
+        name: "Shared Content Library",
+        description: "Share articles across multiple help centers",
         standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "AI-Powered Search",
+        description: "Semantic search finds answers even with fuzzy queries",
+        tooltip: "Customers find the right article even when they don't know the exact terms",
+        standard: true,
         pro: true,
       },
     ],
   },
+
+  // ============================================
+  // CATEGORY 6: ANALYTICS & REPORTING
+  // ============================================
   {
-    category: "Quality Assurance",
-    features: [
-      {
-        name: "Rep QA Scorecards",
-        description: "Automated quality scoring for human agents",
-        standard: false,
-        pro: true,
-      },
-      {
-        name: "AI Bot Performance Scorecards",
-        description: "Track and improve AI Agent quality",
-        standard: false,
-        pro: true,
-      },
-      {
-        name: "Custom Scoring Rubrics",
-        description: "Define quality, compliance, and tone criteria",
-        standard: false,
-        pro: true,
-      },
-      {
-        name: "AI-Generated Coaching & Feedback",
-        description: "Automated coaching suggestions for team",
-        standard: false,
-        pro: true,
-      },
-      {
-        name: "Supervisor Review & Calibration",
-        description: "Override scores and calibrate QA standards",
-        standard: false,
-        pro: true,
-      },
-      {
-        name: "QA Analytics & Trends",
-        description: "Track coaching impact and quality trends",
-        standard: false,
-        pro: true,
-      },
-    ],
-  },
-  {
+    id: "analytics",
     category: "Analytics & Reporting",
+    icon: "📊",
+    categoryDescription: "Data-driven insights to optimize your support operation",
     features: [
+      {
+        name: "Pre-Built Dashboards",
+        description: "Out-of-box reports for common metrics",
+        standard: true,
+        pro: true,
+      },
       {
         name: "Deflection Rate Tracking",
+        description: "Measure how many questions AI resolves vs escalates",
+        tooltip: "Track ROI by seeing how AI reduces human workload over time",
         standard: true,
         pro: true,
       },
       {
         name: "AI Performance Metrics",
+        description: "Track AI Agent accuracy, CSAT, and resolution rates",
         standard: true,
         pro: true,
       },
       {
-        name: "Team Efficiency Dashboard",
+        name: "Team Efficiency Reports",
+        description: "Agent productivity, response times, and workload",
         standard: true,
         pro: true,
       },
       {
-        name: "ROI Reporting",
+        name: "ROI Tracking",
+        description: "Calculate cost savings from AI automation",
+        tooltip: "See exactly how much money you're saving by automating support",
         standard: true,
         pro: true,
       },
       {
-        name: "Custom Reports & Exports",
+        name: "Data Export (CSV/API)",
+        description: "Export raw data for external analysis",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Custom Report Builder",
+        description: "Create your own reports and dashboards",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+      {
+        name: "Scheduled Reports",
+        description: "Auto-send reports via email on a schedule",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 7: INTEGRATIONS & API
+  // ============================================
+  {
+    id: "integrations",
+    category: "Integrations & API",
+    icon: "🔌",
+    categoryDescription: "Connect Pullse to your existing tools",
+    features: [
+      {
+        name: "REST API Access",
+        description: "Full API access for custom integrations",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Webhooks",
+        description: "Real-time event notifications to external systems",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Pre-Built Integrations",
+        description: "Connect to popular CRMs, tools, and platforms",
+        tooltip: "Shopify, Stripe, Salesforce, HubSpot, and more",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Custom Integration Development",
+        description: "We build custom integrations for your specific needs",
+        tooltip: "Available as paid add-on for both tiers",
         standard: true,
         pro: true,
       },
     ],
   },
+
+  // ============================================
+  // CATEGORY 8: SECURITY & COMPLIANCE
+  // ============================================
   {
-    category: "Support & Enterprise",
+    id: "security",
+    category: "Security & Compliance",
+    icon: "🔒",
+    categoryDescription: "Enterprise-grade security and compliance",
     features: [
       {
-        name: "14-Day Trial with 1,000 Credits",
+        name: "Data Encryption (at rest & in transit)",
+        description: "Bank-level encryption for all customer data",
         standard: true,
         pro: true,
       },
       {
-        name: "Email Support",
+        name: "SSO Authentication",
+        description: "Single Sign-On via SAML, OAuth, etc.",
         standard: true,
         pro: true,
       },
       {
-        name: "Onboarding Assistance",
+        name: "Role-Based Access Control (RBAC)",
+        description: "Granular permissions for team members",
         standard: true,
         pro: true,
       },
       {
-        name: "Priority Support Add-On Available",
-        description: "Dedicated Slack channel with <15min response",
+        name: "Activity & Audit Logs",
+        description: "Complete audit trail of all actions",
         standard: true,
         pro: true,
       },
       {
-        name: "Custom Integrations Available",
-        description: "We build custom integrations for your tools",
+        name: "SOC 2 Type II Certification",
+        description: "Industry-standard security certification",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+      {
+        name: "GDPR Compliance Features",
+        description: "Tools for GDPR data privacy compliance",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 9: SCALE & LIMITS (Moved to end)
+  // ============================================
+  {
+    id: "scale",
+    category: "Scale & Limits",
+    icon: "📈",
+    categoryDescription: "Pricing controls and usage limits",
+    features: [
+      {
+        name: "Action Throughput Ceiling",
+        description: "Maximum AI actions per month (throughput control, not free usage)",
+        tooltip: "This is a rate limit, not free credits. All actions still bill at standard rates.",
+        standard: "10,000/month",
+        pro: "Unlimited",
+      },
+      {
+        name: "Grace Period for Overages",
+        description: "Overage buffer before actions pause",
+        standard: "10% (up to 11,000)",
+        pro: "N/A (unlimited)",
+      },
+      {
+        name: "Team Seats",
+        description: "Number of support agents who can use Pullse",
+        standard: "Unlimited",
+        pro: "Unlimited",
+      },
+      {
+        name: "Credit Rollover",
+        description: "Unused credits carry to next month",
+        tooltip: "Pro plan: 10% of unused credits roll over each month",
+        standard: false,
+        pro: "10% monthly",
+      },
+      {
+        name: "14-Day Trial",
+        description: "No credit card required, 1,000 credits included",
         standard: true,
         pro: true,
       },

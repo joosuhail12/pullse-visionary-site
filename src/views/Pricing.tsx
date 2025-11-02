@@ -66,6 +66,10 @@ const Pricing = () => {
   const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD');
   const [expandedTier, setExpandedTier] = useState<string | null>(null);
 
+  // Feature table states
+  const [expandedCategories, setExpandedCategories] = useState<string[]>(['ai-support']); // AI category expanded by default
+  const [showTooltip, setShowTooltip] = useState<string | null>(null);
+
   // Calculator states
   const [teamSize, setTeamSize] = useState(5);
   const [expectedConversations, setExpectedConversations] = useState(1000);
@@ -136,6 +140,19 @@ const Pricing = () => {
       pricingTiers[1].monthlyPrice) *
       100
   );
+
+  // Helper functions for feature table
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
+  const isCategoryExpanded = (categoryId: string) => {
+    return expandedCategories.includes(categoryId);
+  };
 
   return (
     <div className="min-h-screen">
@@ -513,149 +530,280 @@ const Pricing = () => {
 
               {/* Table Body */}
               <div className="divide-y divide-gray-200">
-                {featureComparison.map((category, categoryIdx) => (
-                  <div key={categoryIdx}>
-                    {/* Category Header */}
-                    <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50">
-                      <h3 className="font-bold text-gray-900 text-base uppercase tracking-wide">
-                        {category.category}
-                      </h3>
-                    </div>
+                {featureComparison.map((category, categoryIdx) => {
+                  const isExpanded = isCategoryExpanded(category.id);
 
-                    {/* Category Features */}
-                    {category.features.map((feature, featureIdx) => (
-                      <div
-                        key={featureIdx}
-                        className="grid grid-cols-3 gap-6 p-6 hover:bg-gray-50/50 transition-colors"
+                  return (
+                    <div key={category.id}>
+                      {/* Collapsible Category Header */}
+                      <button
+                        onClick={() => toggleCategory(category.id)}
+                        className="w-full px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50 hover:from-gray-100 hover:to-gray-150/50 transition-all duration-200"
                       >
-                        <div>
-                          <div className="font-medium text-gray-900 mb-1">
-                            {feature.name}
-                          </div>
-                          {feature.description && (
-                            <div className="text-xs text-gray-500 leading-relaxed">
-                              {feature.description}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="text-2xl">{category.icon}</span>
+                            <div className="text-left">
+                              <h3 className="font-bold text-gray-900 text-base uppercase tracking-wide">
+                                {category.category}
+                              </h3>
+                              <p className="text-xs text-gray-600 mt-0.5 normal-case font-normal">
+                                {category.categoryDescription}
+                              </p>
                             </div>
-                          )}
-                        </div>
-
-                        {/* Standard Column */}
-                        <div className="flex items-center justify-center">
-                          {typeof feature.standard === 'boolean' ? (
-                            feature.standard ? (
-                              <CheckCircle2 className="h-6 w-6 text-green-600" />
-                            ) : (
-                              <X className="h-6 w-6 text-gray-300" />
-                            )
-                          ) : (
-                            <span className="text-sm font-semibold text-gray-700">
-                              {feature.standard}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-medium text-gray-500">
+                              {category.features.length} features
                             </span>
-                          )}
-                        </div>
-
-                        {/* Pro Column */}
-                        <div className="flex items-center justify-center">
-                          {typeof feature.pro === 'boolean' ? (
-                            feature.pro ? (
-                              <CheckCircle2 className="h-6 w-6 text-primary" />
+                            {isExpanded ? (
+                              <ChevronUp className="h-5 w-5 text-gray-600" />
                             ) : (
-                              <X className="h-6 w-6 text-gray-300" />
-                            )
-                          ) : (
-                            <span className="text-sm font-semibold text-primary">
-                              {feature.pro}
-                            </span>
-                          )}
+                              <ChevronDown className="h-5 w-5 text-gray-600" />
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+                      </button>
+
+                      {/* Category Features (Collapsible) */}
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            {category.features.map((feature, featureIdx) => (
+                              <div
+                                key={featureIdx}
+                                className={`grid grid-cols-3 gap-6 p-6 hover:bg-gray-50/50 transition-colors relative ${
+                                  feature.proOnly ? 'bg-gradient-to-r from-purple-50/30 to-transparent' : ''
+                                }`}
+                              >
+                                {/* Feature Name & Description */}
+                                <div className="relative group">
+                                  <div className="flex items-start gap-2">
+                                    <div className="flex-1">
+                                      <div className="font-medium text-gray-900 mb-1 flex items-center gap-2">
+                                        {feature.name}
+                                        {feature.tooltip && (
+                                          <div className="relative inline-block">
+                                            <AlertCircle className="h-4 w-4 text-gray-400 cursor-help" />
+                                            {/* Tooltip */}
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 shadow-xl">
+                                              <div className="font-semibold mb-1">Why this matters:</div>
+                                              {feature.tooltip}
+                                              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
+                                            </div>
+                                          </div>
+                                        )}
+                                        {feature.comingSoon && (
+                                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 border border-yellow-200">
+                                            Coming Soon
+                                          </span>
+                                        )}
+                                        {feature.proOnly && (
+                                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 border border-purple-200">
+                                            Pro Only
+                                          </span>
+                                        )}
+                                      </div>
+                                      {feature.description && (
+                                        <div className="text-xs text-gray-500 leading-relaxed">
+                                          {feature.description}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Standard Column */}
+                                <div className="flex items-center justify-center">
+                                  {feature.standard === 'coming-soon' ? (
+                                    <span className="text-xs font-medium text-yellow-600">Coming Soon</span>
+                                  ) : typeof feature.standard === 'boolean' ? (
+                                    feature.standard ? (
+                                      <CheckCircle2 className="h-6 w-6 text-green-600" />
+                                    ) : (
+                                      <X className="h-6 w-6 text-gray-300" />
+                                    )
+                                  ) : (
+                                    <span className="text-sm font-semibold text-gray-700">
+                                      {feature.standard}
+                                    </span>
+                                  )}
+                                </div>
+
+                                {/* Pro Column */}
+                                <div className="flex items-center justify-center">
+                                  {feature.pro === 'coming-soon' ? (
+                                    <span className="text-xs font-medium text-yellow-600">Coming Soon</span>
+                                  ) : typeof feature.pro === 'boolean' ? (
+                                    feature.pro ? (
+                                      <CheckCircle2 className="h-6 w-6 text-primary" />
+                                    ) : (
+                                      <X className="h-6 w-6 text-gray-300" />
+                                    )
+                                  ) : (
+                                    <span className="text-sm font-semibold text-primary">
+                                      {feature.pro}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
 
             {/* Mobile Card View */}
             <div className="md:hidden space-y-6">
-              {featureComparison.map((category, categoryIdx) => (
-                <motion.div
-                  key={categoryIdx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: categoryIdx * 0.1 }}
-                  className="rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl overflow-hidden"
-                >
-                  {/* Category Header */}
-                  <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50 border-b border-gray-200">
-                    <h3 className="font-bold text-gray-900 text-base uppercase tracking-wide">
-                      {category.category}
-                    </h3>
-                  </div>
+              {featureComparison.map((category, categoryIdx) => {
+                const isExpanded = isCategoryExpanded(category.id);
 
-                  {/* Features */}
-                  <div className="p-6 space-y-6">
-                    {category.features.map((feature, featureIdx) => (
-                      <div key={featureIdx} className="space-y-3">
-                        <div>
-                          <div className="font-medium text-gray-900 mb-1">
-                            {feature.name}
-                          </div>
-                          {feature.description && (
-                            <div className="text-xs text-gray-500 leading-relaxed">
-                              {feature.description}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Plan Comparison */}
-                        <div className="grid grid-cols-2 gap-4">
-                          {/* Standard */}
-                          <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
-                            <div className="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
-                              Standard
-                            </div>
-                            <div className="flex items-center justify-center">
-                              {typeof feature.standard === 'boolean' ? (
-                                feature.standard ? (
-                                  <CheckCircle2 className="h-5 w-5 text-green-600" />
-                                ) : (
-                                  <X className="h-5 w-5 text-gray-300" />
-                                )
-                              ) : (
-                                <span className="text-sm font-semibold text-gray-700 text-center">
-                                  {feature.standard}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Pro */}
-                          <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 border-2 border-primary/30">
-                            <div className="text-xs font-semibold text-primary mb-2 uppercase tracking-wide flex items-center justify-center gap-1">
-                              <Star className="h-3 w-3 fill-current" />
-                              Pro
-                            </div>
-                            <div className="flex items-center justify-center">
-                              {typeof feature.pro === 'boolean' ? (
-                                feature.pro ? (
-                                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                                ) : (
-                                  <X className="h-5 w-5 text-gray-300" />
-                                )
-                              ) : (
-                                <span className="text-sm font-semibold text-primary text-center">
-                                  {feature.pro}
-                                </span>
-                              )}
-                            </div>
+                return (
+                  <motion.div
+                    key={category.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: categoryIdx * 0.1 }}
+                    className="rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-xl overflow-hidden"
+                  >
+                    {/* Collapsible Category Header */}
+                    <button
+                      onClick={() => toggleCategory(category.id)}
+                      className="w-full px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/50 border-b border-gray-200"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">{category.icon}</span>
+                          <div className="text-left">
+                            <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide">
+                              {category.category}
+                            </h3>
+                            <p className="text-xs text-gray-600 mt-0.5 normal-case font-normal">
+                              {category.features.length} features
+                            </p>
                           </div>
                         </div>
+                        {isExpanded ? (
+                          <ChevronUp className="h-5 w-5 text-gray-600 flex-shrink-0" />
+                        ) : (
+                          <ChevronDown className="h-5 w-5 text-gray-600 flex-shrink-0" />
+                        )}
                       </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+                    </button>
+
+                    {/* Features (Collapsible) */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="p-6 space-y-6">
+                            {category.features.map((feature, featureIdx) => (
+                              <div
+                                key={featureIdx}
+                                className={`space-y-3 ${
+                                  feature.proOnly ? 'p-3 rounded-xl bg-gradient-to-r from-purple-50/30 to-transparent' : ''
+                                }`}
+                              >
+                                <div>
+                                  <div className="font-medium text-gray-900 mb-1 flex items-start gap-2 flex-wrap">
+                                    <span className="flex-1">{feature.name}</span>
+                                    {feature.comingSoon && (
+                                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 border border-yellow-200 flex-shrink-0">
+                                        Coming Soon
+                                      </span>
+                                    )}
+                                    {feature.proOnly && (
+                                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 border border-purple-200 flex-shrink-0">
+                                        Pro Only
+                                      </span>
+                                    )}
+                                  </div>
+                                  {feature.description && (
+                                    <div className="text-xs text-gray-500 leading-relaxed">
+                                      {feature.description}
+                                    </div>
+                                  )}
+                                  {feature.tooltip && (
+                                    <div className="mt-2 p-2 rounded-lg bg-blue-50 border border-blue-200">
+                                      <div className="text-xs text-blue-900">
+                                        <span className="font-semibold">💡 Why this matters:</span> {feature.tooltip}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Plan Comparison */}
+                                <div className="grid grid-cols-2 gap-4">
+                                  {/* Standard */}
+                                  <div className="p-3 rounded-xl bg-gray-50 border border-gray-200">
+                                    <div className="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">
+                                      Standard
+                                    </div>
+                                    <div className="flex items-center justify-center">
+                                      {feature.standard === 'coming-soon' ? (
+                                        <span className="text-xs font-medium text-yellow-600">Coming Soon</span>
+                                      ) : typeof feature.standard === 'boolean' ? (
+                                        feature.standard ? (
+                                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                        ) : (
+                                          <X className="h-5 w-5 text-gray-300" />
+                                        )
+                                      ) : (
+                                        <span className="text-sm font-semibold text-gray-700 text-center">
+                                          {feature.standard}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+
+                                  {/* Pro */}
+                                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 border-2 border-primary/30">
+                                    <div className="text-xs font-semibold text-primary mb-2 uppercase tracking-wide flex items-center justify-center gap-1">
+                                      <Star className="h-3 w-3 fill-current" />
+                                      Pro
+                                    </div>
+                                    <div className="flex items-center justify-center">
+                                      {feature.pro === 'coming-soon' ? (
+                                        <span className="text-xs font-medium text-yellow-600">Coming Soon</span>
+                                      ) : typeof feature.pro === 'boolean' ? (
+                                        feature.pro ? (
+                                          <CheckCircle2 className="h-5 w-5 text-primary" />
+                                        ) : (
+                                          <X className="h-5 w-5 text-gray-300" />
+                                        )
+                                      ) : (
+                                        <span className="text-sm font-semibold text-primary text-center">
+                                          {feature.pro}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
