@@ -70,11 +70,10 @@ const Pricing = () => {
   const [expandedCategories, setExpandedCategories] = useState<string[]>(['ai-support']); // AI category expanded by default
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
 
-  // Calculator states
-  const [teamSize, setTeamSize] = useState(5);
-  const [expectedConversations, setExpectedConversations] = useState(1000);
-  const [currentResponseTime, setCurrentResponseTime] = useState(120); // minutes
+  // Unified calculator states
+  const [monthlyConversations, setMonthlyConversations] = useState(2000);
   const [currentTeamSize, setCurrentTeamSize] = useState(8);
+  const [costPerAgent, setCostPerAgent] = useState(4000);
 
   // Get currency info
   const selectedCurrency = currencies.find(c => c.code === currency) || currencies[0];
@@ -84,50 +83,74 @@ const Pricing = () => {
     return Math.round(usdPrice * selectedCurrency.rate);
   };
 
-  // Calculator logic
-  const calculateCost = () => {
-    const estimatedCredits = expectedConversations * 10; // ~10 actions per conversation
-    const paygCost = estimatedCredits * creditPricing.payg;
-    const commitCost = estimatedCredits * creditPricing.commit;
-    const savings = paygCost - commitCost;
+  // Unified calculator logic
+  const calculateInvestment = () => {
+    // AI handles 65% of conversations automatically
+    const aiAutomationRate = 0.65;
+    const conversationsHandledByAI = Math.round(monthlyConversations * aiAutomationRate);
+    const conversationsForAgents = monthlyConversations - conversationsHandledByAI;
 
-    // Determine recommended tier
-    const recommendedTier = teamSize <= 4 && expectedConversations <= 1000 ? 'standard' : 'pro';
+    // Calculate new team size needed (500 conversations per agent capacity)
+    const agentsNeeded = Math.max(1, Math.ceil(conversationsForAgents / 500));
+    const agentsReduced = Math.max(0, currentTeamSize - agentsNeeded);
+
+    // Calculate costs
+    const currentMonthlyCost = currentTeamSize * costPerAgent;
+
+    // Pullse cost: seat pricing + credit usage
+    const seatCost = agentsNeeded * (billingCycle === 'annual' ? pricingTiers[1].annualPrice : pricingTiers[1].monthlyPrice);
+    const estimatedCredits = monthlyConversations * 10; // ~10 actions per conversation
+    const creditCost = estimatedCredits * creditPricing.commit;
+    const pullseMonthlyCost = seatCost + creditCost;
+
+    // Savings
+    const monthlySavings = Math.max(0, currentMonthlyCost - pullseMonthlyCost);
+    const annualSavings = monthlySavings * 12;
+
+    // Time metrics
+    const currentAvgResponseTime = 120; // 2 hours typical
+    const pullseAvgResponseTime = 12; // 12 minutes with AI
+    const responseTimeImprovement = Math.round(((currentAvgResponseTime - pullseAvgResponseTime) / currentAvgResponseTime) * 100);
+
+    // Hours saved calculation
+    const conversationsPerAgent = currentTeamSize > 0 ? monthlyConversations / currentTeamSize : 0;
+    const currentTimeSpent = conversationsPerAgent * currentAvgResponseTime; // minutes per agent
+    const newTimeSpent = (conversationsForAgents / agentsNeeded) * pullseAvgResponseTime;
+    const hoursSavedPerMonth = Math.round(((currentTimeSpent * currentTeamSize) - (newTimeSpent * agentsNeeded)) / 60);
+
+    // Traditional helpdesk comparison (per-seat model)
+    const traditionalHelpdeskCostPerSeat = 89; // Average competitor pricing
+    const traditionalHelpdeskMonthlyCost = currentTeamSize * traditionalHelpdeskCostPerSeat;
+    const savingsVsTraditional = Math.max(0, traditionalHelpdeskMonthlyCost - pullseMonthlyCost);
 
     return {
-      estimatedCredits,
-      paygCost,
-      commitCost,
-      savings,
-      recommendedTier,
+      // AI Impact
+      aiAutomationRate: Math.round(aiAutomationRate * 100),
+      conversationsHandledByAI,
+
+      // Team metrics
+      agentsNeeded,
+      agentsReduced,
+      currentTeamSize,
+
+      // Cost breakdown
+      seatCost,
+      creditCost,
+      pullseMonthlyCost,
+      currentMonthlyCost,
+      monthlySavings,
+      annualSavings,
+      savingsVsTraditional,
+
+      // Time metrics
+      responseTimeImprovement,
+      pullseAvgResponseTime,
+      currentAvgResponseTime,
+      hoursSavedPerMonth,
     };
   };
 
-  const calculateROI = () => {
-    // Time savings calculation
-    const conversationsPerAgent = currentTeamSize > 0 ? expectedConversations / currentTeamSize : 0;
-    const currentTimeSpent = conversationsPerAgent * currentResponseTime; // minutes per month
-    const aiResponseTime = 12; // minutes (from testimonial)
-    const newTimeSpent = conversationsPerAgent * aiResponseTime;
-    const timeSavingsPercent = currentTimeSpent > 0 ? ((currentTimeSpent - newTimeSpent) / currentTimeSpent) * 100 : 0;
-
-    // Cost savings calculation
-    const avgAgentCost = 4000; // $4k per month per agent
-    const agentsNeeded = Math.ceil(expectedConversations / 500); // 500 conversations per agent
-    const currentCost = currentTeamSize * avgAgentCost;
-    const newCost = agentsNeeded * avgAgentCost;
-    const costSavings = Math.max(0, currentCost - newCost);
-
-    return {
-      timeSavingsPercent: Math.round(timeSavingsPercent),
-      costSavings,
-      newTeamSize: agentsNeeded,
-      monthlyHoursSaved: Math.round((currentTimeSpent - newTimeSpent) / 60), // convert to hours
-    };
-  };
-
-  const costCalc = calculateCost();
-  const roiCalc = calculateROI();
+  const investment = calculateInvestment();
 
   // Calculate savings percentages for billing toggle
   const standardSavings = Math.round(
@@ -826,82 +849,55 @@ const Pricing = () => {
       </section>
 
       {/* ========================================
-          SECTION 5: PRICING CALCULATORS
+          SECTION 5: PULLSE INVESTMENT CALCULATOR
       ======================================== */}
       <section className="py-24 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-16"
             >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                <BarChart3 className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+                  Investment Calculator
+                </span>
+              </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
-                  Calculate your costs & savings
+                  Calculate your Pullse investment
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Get an instant estimate of your monthly costs and potential ROI
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                See your total cost and the complete value story in one place
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Cost Calculator */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="p-8 rounded-3xl bg-white/80 backdrop-blur-xl border-2 border-primary/20 shadow-xl"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-primary/10">
-                    <BarChart3 className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      Cost Calculator
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      Estimate your monthly investment
-                    </p>
-                  </div>
-                </div>
-
-                {/* Team Size */}
-                <div className="mb-6">
+            {/* Calculator Inputs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12 p-8 rounded-3xl bg-white/80 backdrop-blur-xl border-2 border-gray-200 shadow-xl"
+            >
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* Monthly Conversations */}
+                <div>
                   <div className="flex items-center justify-between mb-3">
-                    <label className="text-sm font-medium text-gray-700">
-                      Team Size
-                    </label>
-                    <span className="text-xl font-bold text-primary">
-                      {teamSize} agents
-                    </span>
-                  </div>
-                  <Slider
-                    value={[teamSize]}
-                    onValueChange={(value) => setTeamSize(value[0])}
-                    min={1}
-                    max={50}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Expected Conversations */}
-                <div className="mb-8">
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-semibold text-gray-700">
                       Monthly Conversations
                     </label>
-                    <span className="text-xl font-bold text-primary">
-                      {expectedConversations.toLocaleString()}
+                    <span className="text-2xl font-bold text-primary">
+                      {monthlyConversations.toLocaleString()}
                     </span>
                   </div>
                   <Slider
-                    value={[expectedConversations]}
-                    onValueChange={(value) => setExpectedConversations(value[0])}
+                    value={[monthlyConversations]}
+                    onValueChange={(value) => setMonthlyConversations(value[0])}
                     min={100}
                     max={10000}
                     step={100}
@@ -909,90 +905,14 @@ const Pricing = () => {
                   />
                 </div>
 
-                {/* Results */}
-                <div className="space-y-4 pt-6 border-t border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">
-                      Recommended Plan
-                    </span>
-                    <span className="text-lg font-bold text-primary capitalize">
-                      {costCalc.recommendedTier}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">
-                      Estimated Credits/Month
-                    </span>
-                    <span className="text-lg font-bold text-gray-900">
-                      {costCalc.estimatedCredits.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-green-50 border border-green-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold text-green-800">
-                        With Commit Pricing
-                      </span>
-                      <span className="text-2xl font-bold text-green-700">
-                        ${costCalc.commitCost.toFixed(0)}
-                        <span className="text-sm font-normal">/mo</span>
-                      </span>
-                    </div>
-                    <p className="text-xs text-green-700">
-                      Save ${costCalc.savings.toFixed(0)}/month vs pay-as-you-go
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* ROI Calculator */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="p-8 rounded-3xl bg-white/80 backdrop-blur-xl border-2 border-purple-500/20 shadow-xl"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-purple-500/10">
-                    <TrendingUp className="h-6 w-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      ROI Calculator
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      See your potential savings
-                    </p>
-                  </div>
-                </div>
-
-                {/* Current Response Time */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="text-sm font-medium text-gray-700">
-                      Current Avg Response Time
-                    </label>
-                    <span className="text-xl font-bold text-purple-600">
-                      {currentResponseTime} min
-                    </span>
-                  </div>
-                  <Slider
-                    value={[currentResponseTime]}
-                    onValueChange={(value) => setCurrentResponseTime(value[0])}
-                    min={10}
-                    max={480}
-                    step={10}
-                    className="w-full"
-                  />
-                </div>
-
                 {/* Current Team Size */}
-                <div className="mb-8">
+                <div>
                   <div className="flex items-center justify-between mb-3">
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-semibold text-gray-700">
                       Current Team Size
                     </label>
-                    <span className="text-xl font-bold text-purple-600">
-                      {currentTeamSize} agents
+                    <span className="text-2xl font-bold text-primary">
+                      {currentTeamSize}
                     </span>
                   </div>
                   <Slider
@@ -1005,43 +925,201 @@ const Pricing = () => {
                   />
                 </div>
 
-                {/* Results */}
-                <div className="space-y-4 pt-6 border-t border-gray-200">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-purple-50 border border-purple-200">
-                      <p className="text-xs font-medium text-purple-700 mb-1">
-                        Time Saved
-                      </p>
-                      <p className="text-2xl font-bold text-purple-600">
-                        {roiCalc.timeSavingsPercent}%
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-xl bg-purple-50 border border-purple-200">
-                      <p className="text-xs font-medium text-purple-700 mb-1">
-                        New Team Size
-                      </p>
-                      <p className="text-2xl font-bold text-purple-600">
-                        {roiCalc.newTeamSize} agents
-                      </p>
-                    </div>
+                {/* Cost Per Agent */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="text-sm font-semibold text-gray-700">
+                      Cost Per Agent
+                    </label>
+                    <span className="text-2xl font-bold text-primary">
+                      ${costPerAgent.toLocaleString()}
+                    </span>
                   </div>
-                  <div className="p-5 rounded-xl bg-gradient-to-r from-purple-500 to-primary text-white">
-                    <p className="text-sm font-semibold mb-2">
-                      💰 Monthly Cost Savings
-                    </p>
-                    <p className="text-3xl font-bold">
-                      ${roiCalc.costSavings.toLocaleString()}
-                      <span className="text-base font-normal opacity-90">/month</span>
-                    </p>
-                    <p className="text-sm opacity-90 mt-2">
-                      {roiCalc.monthlyHoursSaved.toLocaleString()} hours saved per month
-                    </p>
-                  </div>
+                  <Slider
+                    value={[costPerAgent]}
+                    onValueChange={(value) => setCostPerAgent(value[0])}
+                    min={2000}
+                    max={8000}
+                    step={500}
+                    className="w-full"
+                  />
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Hero Result: Monthly Investment */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="mb-8 p-10 rounded-3xl bg-gradient-to-br from-primary via-purple-500 to-purple-600 shadow-2xl text-white text-center"
+            >
+              <p className="text-lg font-semibold mb-2 opacity-90">Your Monthly Pullse Investment</p>
+              <p className="text-6xl md:text-7xl font-bold mb-4">
+                ${Math.round(investment.pullseMonthlyCost).toLocaleString()}
+              </p>
+              <p className="text-lg opacity-90">
+                ${Math.round(investment.seatCost).toLocaleString()} for {investment.agentsNeeded} {investment.agentsNeeded === 1 ? 'seat' : 'seats'} + ${Math.round(investment.creditCost).toLocaleString()} for credits
+              </p>
+            </motion.div>
+
+            {/* The AI Impact - 4 Metrics Grid */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">The AI Impact</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* AI Automation */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="p-6 rounded-2xl bg-white border-2 border-blue-200 shadow-lg"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-blue-100">
+                      <Bot className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">AI Automation</p>
+                  </div>
+                  <p className="text-4xl font-bold text-blue-600 mb-2">{investment.aiAutomationRate}%</p>
+                  <p className="text-sm text-gray-600">
+                    {investment.conversationsHandledByAI.toLocaleString()} conversations handled automatically
+                  </p>
+                </motion.div>
+
+                {/* Team Efficiency */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="p-6 rounded-2xl bg-white border-2 border-green-200 shadow-lg"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-green-100">
+                      <Users className="h-6 w-6 text-green-600" />
+                    </div>
+                    <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Team Efficiency</p>
+                  </div>
+                  <p className="text-4xl font-bold text-green-600 mb-2">{investment.agentsNeeded}</p>
+                  <p className="text-sm text-gray-600">
+                    agents needed ({investment.agentsReduced} fewer than current)
+                  </p>
+                </motion.div>
+
+                {/* Cost Savings */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="p-6 rounded-2xl bg-white border-2 border-purple-200 shadow-lg"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-purple-100">
+                      <TrendingUp className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Cost Savings</p>
+                  </div>
+                  <p className="text-4xl font-bold text-purple-600 mb-2">
+                    ${Math.round(investment.savingsVsTraditional).toLocaleString()}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    per month vs traditional helpdesk
+                  </p>
+                </motion.div>
+
+                {/* Speed Boost */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="p-6 rounded-2xl bg-white border-2 border-orange-200 shadow-lg"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-xl bg-orange-100">
+                      <Zap className="h-6 w-6 text-orange-600" />
+                    </div>
+                    <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Speed Boost</p>
+                  </div>
+                  <p className="text-4xl font-bold text-orange-600 mb-2">{investment.pullseAvgResponseTime}min</p>
+                  <p className="text-sm text-gray-600">
+                    average response time ({investment.responseTimeImprovement}% faster)
+                  </p>
+                </motion.div>
+              </div>
             </div>
 
-            {/* CTA Below Calculators */}
+            {/* Before/After Comparison */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="mb-8 p-8 rounded-3xl bg-white border-2 border-gray-200 shadow-xl"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Before vs After Pullse</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Before */}
+                <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200">
+                  <p className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-4">Before Pullse</p>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Team Size</span>
+                      <span className="text-xl font-bold text-gray-900">{investment.currentTeamSize} agents</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Monthly Cost</span>
+                      <span className="text-xl font-bold text-gray-900">${investment.currentMonthlyCost.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Response Time</span>
+                      <span className="text-xl font-bold text-gray-900">{investment.currentAvgResponseTime}min</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* After */}
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-500/10 border-2 border-primary/30">
+                  <p className="text-sm font-bold text-primary uppercase tracking-wide mb-4">With Pullse</p>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Team Size</span>
+                      <span className="text-xl font-bold text-primary">{investment.agentsNeeded} agents + AI</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Monthly Cost</span>
+                      <span className="text-xl font-bold text-primary">${Math.round(investment.pullseMonthlyCost).toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Response Time</span>
+                      <span className="text-xl font-bold text-primary">{investment.pullseAvgResponseTime}min</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Annual Impact Banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              className="p-10 rounded-3xl bg-gradient-to-r from-green-500 to-emerald-600 shadow-2xl text-white text-center"
+            >
+              <p className="text-lg font-semibold mb-3 opacity-90">Annual Impact</p>
+              <p className="text-5xl md:text-6xl font-bold mb-4">
+                ${investment.annualSavings.toLocaleString()} saved
+              </p>
+              <p className="text-xl opacity-90">
+                {(investment.hoursSavedPerMonth * 12).toLocaleString()} hours saved per year
+              </p>
+            </motion.div>
+
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1050,15 +1128,15 @@ const Pricing = () => {
             >
               <Button
                 size="lg"
-                variant="outline"
-                className="border-2"
+                className="bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-lg text-lg px-12 py-6"
                 asChild
               >
                 <Link href="/contact-sales">
-                  See these numbers in your dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  Start your free trial
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+              <p className="text-sm text-gray-600 mt-4">14-day free trial • No credit card required</p>
             </motion.div>
           </div>
         </div>
