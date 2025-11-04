@@ -8,8 +8,12 @@ export interface PricingTier {
   id: 'standard' | 'pro';
   name: string;
   tagline: string;
-  monthlyPrice: number;
-  annualPrice: number;
+  monthlyPricePerSeat: number; // Base platform fee per seat per month
+  creditPricing: {
+    payAsYouGo: number; // Cost per credit for AI usage (PAYG)
+    preCommitted: number; // Cost per credit for AI usage (pre-committed)
+    minimumCommit?: number; // Minimum monthly credit commit (Pro only)
+  };
   popular?: boolean;
   features: string[];
   limits: {
@@ -48,6 +52,13 @@ export interface BillableAction {
 export interface FAQ {
   question: string;
   answer: string;
+}
+
+export interface FAQCategory {
+  id: string;
+  category: string;
+  icon: string;
+  questions: FAQ[];
 }
 
 export interface StartupProgram {
@@ -121,11 +132,11 @@ export interface FeatureComparison {
   features: {
     name: string;
     description?: string; // Brief description shown below feature name
-    tooltip?: string; // "Why this matters" - shown on hover
     standard: boolean | string | 'coming-soon';
     pro: boolean | string | 'coming-soon';
     comingSoon?: boolean; // Yellow "Coming Soon" badge
     proOnly?: boolean; // Visual emphasis for Pro-exclusive features
+    usesCredits?: boolean; // Indicates this feature consumes AI credits
   }[];
 }
 
@@ -138,8 +149,11 @@ export const pricingTiers: PricingTier[] = [
     id: 'standard',
     name: 'Standard',
     tagline: 'The full help desk for growing teams.',
-    monthlyPrice: 59,
-    annualPrice: 49,
+    monthlyPricePerSeat: 49,
+    creditPricing: {
+      payAsYouGo: 0.10,
+      preCommitted: 0.08,
+    },
     popular: false,
     features: [
       'All features on (nothing crippled)',
@@ -154,29 +168,31 @@ export const pricingTiers: PricingTier[] = [
       'Integrations & API access',
     ],
     limits: {
-      actionsPerMonth: 10000,
-      gracePeriod: '10% grace (to 11,000)',
-      agentProfiles: 4,
-      copilotProfiles: 4,
+      agentProfiles: 2,
+      copilotProfiles: 1,
       helpCenters: 1,
+      rollover: 'Credits rollover until consumed (non-refundable)',
     },
     includes: [
-      '10,000 actions / org / month (throughput ceiling)',
-      '4 AI Agent profiles + 4 Copilot profiles',
+      '2 AI chatbots + 1 Copilot profile',
       '1 Appo Help Center (custom domain/theme)',
-      '14-day trial with 1,000 credits included',
+      '50 chatbot credits/month + 20 credits/seat/month included',
+      'Credits rollover until consumed',
     ],
     footnote:
-      'Actions are billed via credits. The 10,000/month ceiling is a throughput control, not free usage. All AI work bills at standard credit rates.',
-    ctaText: 'Start 14-day trial',
+      'Base platform: $49/seat/month. Includes 50 chatbot credits + 20 credits per seat monthly. Additional AI actions billed via credits ($0.10 PAYG, $0.08 pre-committed). Credits rollover until consumed, expire at contract expiry, and are non-refundable.',
+    ctaText: 'Contact Sales',
     ctaLink: '/contact-sales',
   },
   {
     id: 'pro',
     name: 'Pro',
     tagline: 'Unlimited scale, multi-brand, and advanced QA.',
-    monthlyPrice: 89,
-    annualPrice: 79,
+    monthlyPricePerSeat: 79,
+    creditPricing: {
+      payAsYouGo: 0.10,
+      preCommitted: 0.08,
+    },
     popular: true,
     features: [
       'Everything in Standard',
@@ -193,22 +209,21 @@ export const pricingTiers: PricingTier[] = [
       agentProfiles: 'unlimited',
       copilotProfiles: 'unlimited',
       helpCenters: 'unlimited',
-      creditsIncluded: 10000,
-      commitAmount: 10000,
-      rollover: '10% monthly rollover',
+      rollover: 'Credits rollover until consumed (non-refundable)',
     },
     includes: [
       'Everything in Standard',
       'No action ceiling',
-      '10,000 credits / month commit at $0.08/credit',
-      'Unlimited profiles (Agents + Copilots)',
+      '100 chatbot credits/month + 50 credits/seat/month included',
+      'Pre-committed credits at $0.08/credit (no minimum)',
+      'Unlimited chatbots + Unlimited Copilot profiles',
       'Unlimited help centers',
       'Full Auto-QA suite',
-      '10% credit rollover month-to-month',
+      'Credits rollover until consumed',
     ],
     footnote:
-      'Pro includes a 10,000 credit/month minimum commit billed at $0.08/credit. Overage also bills at $0.08. 10% unused credits roll to next month.',
-    ctaText: 'Start 14-day trial',
+      'Base platform: $79/seat/month. Includes 100 chatbot credits + 50 credits per seat monthly. Additional AI actions billed via credits ($0.10 PAYG, $0.08 pre-committed). Credits rollover until consumed, expire at contract expiry, and are non-refundable.',
+    ctaText: 'Contact Sales',
     ctaLink: '/contact-sales',
   },
 ];
@@ -222,7 +237,7 @@ export const creditPricing: CreditPricing = {
   prepaid: 0.08,
   commit: 0.08,
   description:
-    '1 credit = 1 AI action. Every Copilot task, every AI Agent message turn, and each tool/API call bills exactly 1 credit. No size tiers. No bundling. No token talk.',
+    '1 credit = 1 AI action (billed separately from base platform). Every Copilot task, every AI Agent message turn, and each tool/API call bills exactly 1 credit. No size tiers. No bundling. No token talk.',
 };
 
 // ============================================
@@ -340,58 +355,87 @@ export const helpCenterComparison = {
 // FAQS
 // ============================================
 
-export const faqs: FAQ[] = [
+export const faqCategories: FAQCategory[] = [
   {
-    question: 'Is there a free trial?',
-    answer:
-      'Yes—14 days with 1,000 credits included. No credit card required. You can explore all features and test AI capabilities with real conversations before committing.',
+    id: 'getting-started',
+    category: 'Getting Started',
+    icon: '💡',
+    questions: [
+      {
+        question: 'Is there a free trial?',
+        answer:
+          'Yes—we offer 14-day trials arranged through our sales team to ensure proper setup and onboarding. This personalized approach helps you get the most value from your trial period. Contact us to get started with a trial tailored to your needs.',
+      },
+      {
+        question: 'Is there a free plan?',
+        answer:
+          "No. We price on value delivered, not shelfware. Every feature is available from day one—we'd rather you pay for software that actually helps your team than maintain a crippled free tier that creates bad experiences.",
+      },
+      {
+        question: 'Can we change plans anytime?',
+        answer:
+          'Yes. You can switch between Standard and Pro plans anytime. The main difference is that Pro includes unlimited AI profiles, unlimited help centers, and the full Auto-QA suite for quality assurance and team coaching.',
+      },
+    ],
   },
   {
-    question: 'Is there a free plan?',
-    answer:
-      "No. We price on value delivered, not shelfware. Every feature is available from day one—we'd rather you pay for software that actually helps your team than maintain a crippled free tier that creates bad experiences.",
+    id: 'pricing-credits',
+    category: 'Pricing & Credits',
+    icon: '💰',
+    questions: [
+      {
+        question: 'What credits are included with each plan?',
+        answer:
+          'Standard includes 50 chatbot credits + 20 credits per seat monthly. Pro includes 100 chatbot credits + 50 credits per seat monthly. These included credits refresh each month and can be used for any AI actions across the platform.',
+      },
+      {
+        question: 'Do credits roll over?',
+        answer:
+          'Yes. All credits—whether included, pay-as-you-go, or pre-committed—rollover until consumed. Credits expire only at contract expiry and are non-refundable. Use them at your own pace without worrying about monthly limits.',
+      },
+      {
+        question: 'What counts as an action?',
+        answer:
+          'Any Copilot task (draft, summarize, translate, etc.), any AI Agent message turn, or any tool/API call = 1 credit. Longer conversations or complex work consume multiple actions—no hidden multipliers, just straightforward billing by actual work performed.',
+      },
+      {
+        question: 'Is there a per-resolution price?',
+        answer:
+          'No. We bill by actual work (actions), not fuzzy outcomes. A 2-message exchange bills differently than a 15-message conversation with tool calls—you pay for what AI actually does, not arbitrary "resolution" definitions.',
+      },
+      {
+        question: 'Can we cap our AI spend?',
+        answer:
+          'Yes. Set organization-level budgets with 80% and 100% threshold alerts. Admins choose soft-warn (notify but continue) or hard-stop (pause AI actions). Full control over usage and costs.',
+      },
+    ],
   },
   {
-    question: 'What happens when Standard hits 10,000 actions?',
-    answer:
-      'You get a 10% grace period (up to 11,000 actions). After that, new AI actions pause until the monthly reset or you upgrade to Pro. All actions are billed separately via credits—the 10,000 ceiling is a throughput control, not free usage.',
-  },
-  {
-    question: 'Can Copilot execute actions like refunds or plan changes?',
-    answer:
-      'Yes. Copilot can run tools and actions on demand, with built-in approval workflows and full audit trails. Reps maintain control while AI handles the execution, making complex operations faster and error-free.',
-  },
-  {
-    question: 'Do credits roll over?',
-    answer:
-      'Prepaid credit packs are valid for 12 months from purchase. Pro plan commits include 10% monthly rollover—unused credits carry to the next month (up to the rollover cap).',
-  },
-  {
-    question: 'What counts as an action?',
-    answer:
-      'Any Copilot task (draft, summarize, translate, etc.), any AI Agent message turn, or any tool/API call = 1 credit. Longer conversations or complex work consume multiple actions—no hidden multipliers, just straightforward billing by actual work performed.',
-  },
-  {
-    question: 'Is there a per-resolution price?',
-    answer:
-      'No. We bill by actual work (actions), not fuzzy outcomes. A 2-message exchange bills differently than a 15-message conversation with tool calls—you pay for what AI actually does, not arbitrary "resolution" definitions.',
-  },
-  {
-    question: 'Can we cap our AI spend?',
-    answer:
-      'Yes. Set organization-level budgets with 80% and 100% threshold alerts. Admins choose soft-warn (notify but continue) or hard-stop (pause AI actions). Full control over usage and costs.',
-  },
-  {
-    question: 'How many profiles can we create?',
-    answer:
-      'Standard: 4 AI Agent profiles + 4 Copilot profiles. Pro: Unlimited on both. Profiles are separate AI personas with unique prompts, knowledge bases, and tool access—perfect for different teams, brands, or use cases.',
-  },
-  {
-    question: 'Can we change plans anytime?',
-    answer:
-      'Yes. Upgrades prorate immediately. Downgrades take effect at the next billing cycle. Pro includes a 10,000 credit/month commit—upgrading adds the commit, downgrading removes it at cycle end.',
+    id: 'features-limits',
+    category: 'Features & Limits',
+    icon: '✨',
+    questions: [
+      {
+        question: 'Are there any action limits or throughput ceilings?',
+        answer:
+          'No. Both Standard and Pro plans have no action ceilings or throughput limits. Use as many AI actions as you need—you only pay for what you use through credits. There are no monthly caps, no throttling, and no hard stops.',
+      },
+      {
+        question: 'Can Copilot execute actions like refunds or plan changes?',
+        answer:
+          'Yes. Copilot can run tools and actions on demand, with built-in approval workflows and full audit trails. Reps maintain control while AI handles the execution, making complex operations faster and error-free.',
+      },
+      {
+        question: 'How many profiles can we create?',
+        answer:
+          'Standard: 2 AI chatbots + 1 Copilot profile. Pro: Unlimited chatbots and Copilot profiles. Profiles are separate AI personas with unique prompts, knowledge bases, and tool access—perfect for different teams, brands, or use cases.',
+      },
+    ],
   },
 ];
+
+// Maintain backward compatibility - flatten for components still using old structure
+export const faqs: FAQ[] = faqCategories.flatMap(category => category.questions);
 
 // ============================================
 // POLICY FOOTNOTES
@@ -399,19 +443,22 @@ export const faqs: FAQ[] = [
 
 export const policyFootnotes: PolicyFootnote[] = [
   {
-    text: 'Action ceilings are throughput controls, not free usage. All AI actions bill via credits at standard rates.',
+    text: 'Base platform pricing: $49/seat/month (Standard) or $79/seat/month (Pro). AI usage billed separately via credits.',
   },
   {
-    text: 'Prepaid credits are consumed before any monthly commit or pay-as-you-go charges.',
+    text: 'Plans include baseline monthly credits. Additional AI usage beyond included credits bills at standard rates ($0.10 PAYG, $0.08 pre-committed).',
   },
   {
-    text: "Pro's 10,000-credit monthly commit bills whether used or not. 10% of unused credits roll over to the following month.",
+    text: 'Pre-committed credits are consumed first, then pay-as-you-go charges apply for additional usage.',
+  },
+  {
+    text: 'All credits rollover until consumed and expire at contract expiry. Included monthly credits refresh each billing cycle.',
   },
   {
     text: 'No per-resolution caps or conversation limits. Longer conversations consume more actions and bill accordingly.',
   },
   {
-    text: 'Taxes, regulatory fees, and currency conversion charges may apply based on your location.',
+    text: 'All pricing shown in USD. Additional charges may apply based on your location.',
   },
 ];
 
@@ -420,15 +467,15 @@ export const policyFootnotes: PolicyFootnote[] = [
 // ============================================
 
 export const startupProgram: StartupProgram = {
-  headline: 'Startup plan — 70% off seats for 12 months',
+  headline: 'Startup plan — 50% off for 12 months',
   subhead: "If you're building, we'll meet you where you are.",
-  discount: '70% off',
+  discount: '50% off',
   duration: '12 months',
   benefits: [
-    '70% off Standard or Pro seat price for the first 12 months',
+    '50% off base platform pricing ($24.50 Standard, $39.50 Pro per seat/month) for the first 12 months',
     'Keep all plan entitlements (no feature reductions)',
-    'Credits billed at standard rates (never below $0.08)',
-    'Optional 35% discount for months 13-24, then standard pricing',
+    'AI usage credits billed at standard rates ($0.10 PAYG, $0.08 pre-committed)',
+    '25% off base platform for year 2, then standard pricing',
   ],
   eligibility: [
     {
@@ -441,7 +488,7 @@ export const startupProgram: StartupProgram = {
     },
     {
       requirement: 'Seat limit',
-      detail: 'Up to 20 seats under discount',
+      detail: 'Up to 15 seats under discount',
     },
     {
       requirement: 'Customer status',
@@ -454,7 +501,7 @@ export const startupProgram: StartupProgram = {
     'LinkedIn company page or official website',
   ],
   afterPeriod:
-    'After 12 months: Optionally step down to 35% off seats for months 13-24, then standard pricing. We want you to succeed, not trap you in discounts.',
+    'After 12 months: Automatically receive 25% off for year 2, then standard pricing. We want you to succeed, not trap you in discounts.',
   ctaText: 'Apply for startup program',
   ctaLink: '/contact-sales?program=startup',
 };
@@ -464,9 +511,9 @@ export const startupProgram: StartupProgram = {
 // ============================================
 
 export const trialBenefits: string[] = [
-  '14-day trial',
-  'No credit card required',
-  'Cancel anytime',
+  'Sales-assisted trials',
+  'Personalized setup',
+  'Onboarding included',
 ];
 
 // ============================================
@@ -520,19 +567,14 @@ export const trustSignals: TrustSignal[] = [
     description: "Enterprise-grade reliability with guaranteed uptime and automatic failover",
   },
   {
-    icon: Lock,
-    title: "SOC 2 Type II & GDPR",
-    description: "Bank-level security with full compliance certifications",
-  },
-  {
     icon: CheckCircle2,
     title: "No Cancellation Fees",
     description: "Cancel anytime, no questions asked. Keep your data for 90 days",
   },
   {
     icon: Clock,
-    title: "Setup in 5 Minutes",
-    description: "Connect your email, import help docs, and go live—no IT team needed",
+    title: "Fast Setup, Meaningful Implementation",
+    description: "3x faster implementation than legacy platforms—go live in days, not months",
   },
 ];
 
@@ -667,115 +709,42 @@ export const currencies: Currency[] = [
 
 export const featureComparison: FeatureComparison[] = [
   // ============================================
-  // CATEGORY 1: AI-POWERED SUPPORT (Lead with differentiation!)
-  // ============================================
-  {
-    id: "ai-support",
-    category: "AI-Powered Support",
-    icon: "🤖",
-    categoryDescription: "Industry-leading AI that handles 60-70% of support automatically",
-    defaultExpanded: true, // Start expanded to showcase strength
-    features: [
-      {
-        name: "AI Copilot for Agents",
-        description: "Draft, summarize, translate, rewrite, and extract data",
-        tooltip: "Reduces agent response time by 60% with instant AI assistance for common tasks",
-        standard: true,
-        pro: true,
-      },
-      {
-        name: "Customer-Facing AI Agent",
-        description: "RAG-powered bot handles customer conversations",
-        tooltip: "Resolves 60-70% of common questions automatically using your help docs and past conversations",
-        standard: true,
-        pro: true,
-      },
-      {
-        name: "AI Agent Personas",
-        description: "Separate AI personalities with unique prompts and knowledge",
-        tooltip: "Create different AI personalities for different teams, brands, or use cases",
-        standard: "4 personas",
-        pro: "Unlimited",
-      },
-      {
-        name: "AI Copilot Personas",
-        description: "Separate Copilot configurations for different workflows",
-        tooltip: "Customize AI assistance for different agent roles or departments",
-        standard: "4 personas",
-        pro: "Unlimited",
-      },
-      {
-        name: "Auto-QA Suite",
-        description: "AI scores every conversation for quality and compliance",
-        tooltip: "Catch quality issues before customers complain and improve team performance 3x faster with automated scoring",
-        standard: false,
-        pro: true,
-        proOnly: true,
-      },
-      {
-        name: "AI-Generated Coaching",
-        description: "Automated feedback and improvement suggestions",
-        tooltip: "AI analyzes patterns and generates personalized coaching for each team member",
-        standard: false,
-        pro: true,
-        proOnly: true,
-      },
-      {
-        name: "Supervisor QA Review & Calibration",
-        description: "Override scores and calibrate quality standards",
-        tooltip: "Maintain consistent quality standards across your team with supervisor oversight",
-        standard: false,
-        pro: true,
-        proOnly: true,
-      },
-    ],
-  },
-
-  // ============================================
-  // CATEGORY 2: CHANNELS & COMMUNICATION
+  // CATEGORY 1: CHANNELS & COMMUNICATION
   // ============================================
   {
     id: "channels",
     category: "Channels & Communication",
     icon: "📨",
-    categoryDescription: "Multi-channel support with unified conversation history",
+    categoryDescription: "Meet customers where they are with multi-channel support",
     features: [
       {
         name: "Email Support",
-        description: "Full email ticketing with threading",
+        description: "Full email ticketing with automatic threading and rich formatting",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Email Auto-Replies",
+        description: "Automated acknowledgment and out-of-office responses",
         standard: true,
         pro: true,
       },
       {
         name: "Live Chat Widget",
-        description: "Embeddable chat widget for your website",
-        standard: true,
-        pro: true,
-      },
-      {
-        name: "Multilingual Support",
-        description: "Automatic language detection and translation",
-        tooltip: "Communicate with customers in their native language without hiring multilingual agents",
-        standard: true,
-        pro: true,
-      },
-      {
-        name: "Sentiment Detection",
-        description: "AI-powered sentiment analysis on conversations",
-        tooltip: "Automatically detect frustrated customers and prioritize their conversations",
+        description: "Customizable chat widget for your website or app",
         standard: true,
         pro: true,
       },
       {
         name: "Voice/Phone Support",
-        description: "Integrated call center capabilities",
+        description: "Integrated voice calls with transcription and recording",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
       },
       {
         name: "Social Messaging",
-        description: "WhatsApp, Facebook Messenger, Instagram DM",
+        description: "WhatsApp, Facebook Messenger, Instagram DMs",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
@@ -784,7 +753,7 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 3: TICKETING & WORKFLOW
+  // CATEGORY 2: TICKETING & WORKFLOW
   // ============================================
   {
     id: "ticketing",
@@ -794,51 +763,82 @@ export const featureComparison: FeatureComparison[] = [
     features: [
       {
         name: "Unified Inbox",
-        description: "All channels in one place",
+        description: "Email, chat, and social messages in one unified view",
         standard: true,
         pro: true,
       },
       {
+        name: "AI Writing Tools",
+        description: "Rewrite, shorten, elaborate, change tone, and improve responses",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
+        name: "Conversation Summaries",
+        description: "AI-generated summaries of entire conversations",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
         name: "Smart Assignment Rules",
-        description: "Auto-assign conversations to the right agent",
-        tooltip: "Route conversations based on skills, workload, language, or custom rules",
+        description: "Automatically route conversations to the right agent",
         standard: true,
         pro: true,
       },
       {
         name: "Collision Detection",
-        description: "Prevents multiple agents working on same conversation",
+        description: "Real-time alerts prevent duplicate work",
         standard: true,
         pro: true,
       },
       {
         name: "Macros & Saved Replies",
-        description: "Reusable response templates",
+        description: "Pre-written response templates for common questions",
         standard: true,
         pro: true,
       },
       {
         name: "Visual Workflow Builder",
-        description: "Drag-and-drop automation or describe in plain English",
-        tooltip: "Build complex automations without code—AI generates workflows from your description",
+        description: "Build automations with drag-and-drop or natural language",
         standard: true,
         pro: true,
       },
       {
         name: "Trigger Automations",
-        description: "If-then rules for automatic actions",
+        description: "Execute actions automatically based on conditions",
         standard: true,
         pro: true,
       },
       {
         name: "Time-Based Automations",
-        description: "Schedule actions or add delays to workflows",
+        description: "Schedule actions and add delays to workflows",
         standard: true,
         pro: true,
       },
       {
+        name: "Custom Fields",
+        description: "Track business-specific data on conversations",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Custom Objects",
+        description: "Create custom data structures and relationships",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Sentiment Detection",
+        description: "Automatically detect frustrated or angry customers",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
         name: "SLA Management",
-        description: "Track and enforce response time SLAs",
+        description: "Set and track response time SLAs",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
@@ -847,48 +847,157 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 4: TEAM COLLABORATION
+  // CATEGORY 3: AGENTIC CHATBOTS & COPILOTS
+  // ============================================
+  {
+    id: "ai-chatbots-copilots",
+    category: "Agentic Chatbots & Copilots",
+    icon: "🤖",
+    categoryDescription: "AI agents that automate customer support and augment agent capabilities",
+    defaultExpanded: true,
+    features: [
+      {
+        name: "Agentic Chatbots",
+        description: "Customer-facing AI chatbots with RAG and autonomous reasoning",
+        standard: "2 chatbots",
+        pro: "Unlimited",
+        usesCredits: true,
+      },
+      {
+        name: "Agentic Copilots for Agents",
+        description: "AI assistants that execute actions and provide knowledge on-demand",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
+        name: "Copilot Profiles",
+        description: "Multiple AI personas for different teams or use cases",
+        standard: "1 profile",
+        pro: "Unlimited",
+        usesCredits: true,
+      },
+      {
+        name: "Knowledge Management",
+        description: "Multi-source knowledge ingestion: snippets, files, websites, and help articles",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Actions",
+        description: "Visual builder to convert any API into AI-executable tools",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Multilingual Support",
+        description: "Automatic language detection and real-time translation",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
+        usesCredits: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 4: QA & COACHING
+  // ============================================
+  {
+    id: "qa-coaching",
+    category: "QA & Coaching",
+    icon: "📊",
+    categoryDescription: "Automated quality assurance and AI-powered team coaching (Pro only)",
+    features: [
+      {
+        name: "Auto QA Scorecards",
+        description: "AI automatically scores every conversation for quality and compliance",
+        standard: false,
+        pro: true,
+        proOnly: true,
+        usesCredits: true,
+      },
+      {
+        name: "Custom QA Rubrics",
+        description: "Define your own scoring criteria and quality standards",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "Auto Feedback and Coaching",
+        description: "AI generates personalized coaching and improvement suggestions",
+        standard: false,
+        pro: true,
+        proOnly: true,
+        usesCredits: true,
+      },
+      {
+        name: "Supervisor Coaching and Scorecard Overrides",
+        description: "Human oversight with manual score adjustments and coaching",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "Score & Coaching Dispute System",
+        description: "Agents can contest scores with supervisor review workflow",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "Performance Analytics",
+        description: "Track quality trends, coaching impact, and team performance",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+    ],
+  },
+
+  // ============================================
+  // CATEGORY 5: TEAM COLLABORATION
   // ============================================
   {
     id: "collaboration",
     category: "Team Collaboration",
     icon: "👥",
-    categoryDescription: "Work together seamlessly without stepping on toes",
+    categoryDescription: "Coordinate seamlessly across teams without duplicating work",
     features: [
       {
         name: "Internal Notes & Mentions",
-        description: "Leave private notes and @mention teammates",
+        description: "Private team communication within conversations",
         standard: true,
         pro: true,
       },
       {
         name: "Team Inboxes & Groups",
-        description: "Organize agents into teams with shared queues",
-        tooltip: "Route conversations to specific teams and track team-level performance",
+        description: "Organize agents into teams with dedicated queues",
         standard: true,
         pro: true,
       },
       {
         name: "Shared Drafts",
-        description: "Collaborate on responses before sending",
+        description: "Collaborate on complex responses before sending",
         standard: true,
         pro: true,
       },
       {
         name: "Collision Detection",
-        description: "Prevents duplicate work on same conversation",
+        description: "Real-time visibility into who's working on what",
         standard: true,
         pro: true,
       },
       {
         name: "Activity Logs",
-        description: "Full audit trail of who did what and when",
+        description: "Complete audit trail of every action and change",
         standard: true,
         pro: true,
       },
       {
         name: "Role-Based Permissions (RBAC)",
-        description: "Control what each team member can see and do",
+        description: "Granular control over what each team member can access",
         standard: true,
         pro: true,
       },
@@ -896,53 +1005,76 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 5: KNOWLEDGE & SELF-SERVICE
+  // CATEGORY 6: APPO - PUBLIC HELP CENTERS
   // ============================================
   {
     id: "knowledge",
-    category: "Knowledge & Self-Service",
+    category: "Appo - Public Help Centers",
     icon: "📚",
-    categoryDescription: "Empower customers to help themselves",
+    categoryDescription: "Build self-service knowledge bases that reduce ticket volume",
     features: [
       {
-        name: "Appo Help Centers",
-        description: "Branded knowledge base with custom domain",
-        tooltip: "Publish help articles that both customers and AI can use to resolve questions",
+        name: "Collections",
+        description: "Organize articles into hierarchical collections and categories",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Articles",
+        description: "Rich text editor for creating help documentation",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Multi Brand Helpcenters",
+        description: "Run separate help centers for different brands or products",
         standard: "1 help center",
         pro: "Unlimited",
       },
       {
         name: "Custom Domain & Theming",
-        description: "Your branding, your domain (e.g., help.yoursite.com)",
+        description: "Full branding control with custom domain and styling",
         standard: true,
         pro: true,
       },
       {
-        name: "Multi-Brand Help Centers",
-        description: "Separate help centers for different brands",
-        tooltip: "Perfect for agencies or companies with multiple products",
-        standard: false,
-        pro: true,
-        proOnly: true,
-      },
-      {
-        name: "Locale-Specific Content",
-        description: "Different help centers for different regions/languages",
-        standard: false,
-        pro: true,
-        proOnly: true,
-      },
-      {
         name: "Shared Content Library",
-        description: "Share articles across multiple help centers",
+        description: "Reuse articles across multiple help centers",
         standard: false,
         pro: true,
         proOnly: true,
       },
       {
-        name: "AI-Powered Search",
-        description: "Semantic search finds answers even with fuzzy queries",
-        tooltip: "Customers find the right article even when they don't know the exact terms",
+        name: "AI Writing Agents",
+        description: "AI assists with writing, expanding, and improving articles",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
+        name: "AI Powered SEO Optimization",
+        description: "Automatic SEO recommendations and meta tag generation",
+        standard: true,
+        pro: true,
+        usesCredits: true,
+      },
+      {
+        name: "Real Time and Live Collaborative Editing",
+        description: "Multiple team members edit articles simultaneously",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Content Gap Analysis",
+        description: "AI identifies missing articles based on support conversations",
+        standard: false,
+        pro: true,
+        proOnly: true,
+        usesCredits: true,
+      },
+      {
+        name: "AI Citations",
+        description: "AI chatbots cite specific help center articles in responses",
         standard: true,
         pro: true,
       },
@@ -950,62 +1082,60 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 6: ANALYTICS & REPORTING
+  // CATEGORY 7: ANALYTICS & REPORTING
   // ============================================
   {
     id: "analytics",
     category: "Analytics & Reporting",
     icon: "📊",
-    categoryDescription: "Data-driven insights to optimize your support operation",
+    categoryDescription: "Make data-driven decisions with real-time support metrics",
     features: [
       {
         name: "Pre-Built Dashboards",
-        description: "Out-of-box reports for common metrics",
+        description: "Ready-to-use reports for key support metrics",
         standard: true,
         pro: true,
       },
       {
         name: "Deflection Rate Tracking",
-        description: "Measure how many questions AI resolves vs escalates",
-        tooltip: "Track ROI by seeing how AI reduces human workload over time",
+        description: "Measure conversations resolved by AI vs. escalated to agents",
         standard: true,
         pro: true,
       },
       {
         name: "AI Performance Metrics",
-        description: "Track AI Agent accuracy, CSAT, and resolution rates",
+        description: "Track chatbot accuracy, customer satisfaction, and resolution quality",
         standard: true,
         pro: true,
       },
       {
         name: "Team Efficiency Reports",
-        description: "Agent productivity, response times, and workload",
+        description: "Agent productivity, response times, and workload distribution",
         standard: true,
         pro: true,
       },
       {
         name: "ROI Tracking",
-        description: "Calculate cost savings from AI automation",
-        tooltip: "See exactly how much money you're saving by automating support",
+        description: "Calculate cost savings from AI automation and efficiency gains",
         standard: true,
         pro: true,
       },
       {
         name: "Data Export (CSV/API)",
-        description: "Export raw data for external analysis",
+        description: "Export raw data to external BI tools or spreadsheets",
         standard: true,
         pro: true,
       },
       {
         name: "Custom Report Builder",
-        description: "Create your own reports and dashboards",
+        description: "Build custom dashboards with drag-and-drop report designer",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
       },
       {
         name: "Scheduled Reports",
-        description: "Auto-send reports via email on a schedule",
+        description: "Automatically email reports to stakeholders on a schedule",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
@@ -1014,37 +1144,29 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 7: INTEGRATIONS & API
+  // CATEGORY 8: INTEGRATIONS & API
   // ============================================
   {
     id: "integrations",
     category: "Integrations & API",
     icon: "🔌",
-    categoryDescription: "Connect Pullse to your existing tools",
+    categoryDescription: "Connect Pullse to your existing tech stack",
     features: [
       {
         name: "REST API Access",
-        description: "Full API access for custom integrations",
+        description: "Comprehensive API for building custom integrations",
         standard: true,
         pro: true,
       },
       {
         name: "Webhooks",
-        description: "Real-time event notifications to external systems",
+        description: "Real-time event notifications pushed to your systems",
         standard: true,
         pro: true,
       },
       {
         name: "Pre-Built Integrations",
-        description: "Connect to popular CRMs, tools, and platforms",
-        tooltip: "Shopify, Stripe, Salesforce, HubSpot, and more",
-        standard: true,
-        pro: true,
-      },
-      {
-        name: "Custom Integration Development",
-        description: "We build custom integrations for your specific needs",
-        tooltip: "Available as paid add-on for both tiers",
+        description: "Native connections to popular platforms and tools",
         standard: true,
         pro: true,
       },
@@ -1052,96 +1174,239 @@ export const featureComparison: FeatureComparison[] = [
   },
 
   // ============================================
-  // CATEGORY 8: SECURITY & COMPLIANCE
+  // CATEGORY 9: SECURITY & COMPLIANCE
   // ============================================
   {
     id: "security",
     category: "Security & Compliance",
     icon: "🔒",
-    categoryDescription: "Enterprise-grade security and compliance",
+    categoryDescription: "Enterprise-grade security built into every layer",
     features: [
       {
         name: "Data Encryption (at rest & in transit)",
-        description: "Bank-level encryption for all customer data",
+        description: "AES-256 encryption for stored data and TLS 1.3 for transmission",
         standard: true,
         pro: true,
       },
       {
         name: "SSO Authentication",
-        description: "Single Sign-On via SAML, OAuth, etc.",
-        standard: true,
-        pro: true,
+        description: "Single Sign-On via SAML 2.0, OAuth 2.0, and OpenID Connect",
+        standard: "coming-soon",
+        pro: "coming-soon",
+        comingSoon: true,
       },
       {
         name: "Role-Based Access Control (RBAC)",
-        description: "Granular permissions for team members",
+        description: "Fine-grained permissions for users, teams, and resources",
         standard: true,
         pro: true,
       },
       {
         name: "Activity & Audit Logs",
-        description: "Complete audit trail of all actions",
+        description: "Immutable audit trail of every user action and system event",
         standard: true,
         pro: true,
       },
       {
         name: "SOC 2 Type II Certification",
-        description: "Industry-standard security certification",
+        description: "Third-party verified security and availability controls",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
       },
       {
         name: "GDPR Compliance Features",
-        description: "Tools for GDPR data privacy compliance",
+        description: "Tools for European data privacy regulation compliance",
         standard: "coming-soon",
         pro: "coming-soon",
         comingSoon: true,
+      },
+      {
+        name: "Data Retention",
+        description: "Historical data storage for conversations, reports, and analytics",
+        standard: "90 days",
+        pro: "180 days",
       },
     ],
   },
 
   // ============================================
-  // CATEGORY 9: SCALE & LIMITS (Moved to end)
+  // CATEGORY 10: SUPPORT & CUSTOMER SUCCESS
   // ============================================
   {
-    id: "scale",
-    category: "Scale & Limits",
-    icon: "📈",
-    categoryDescription: "Pricing controls and usage limits",
+    id: "support",
+    category: "Support & Customer Success",
+    icon: "🤝",
+    categoryDescription: "World-class support to ensure your success with Pullse",
     features: [
       {
-        name: "Action Throughput Ceiling",
-        description: "Maximum AI actions per month (throughput control, not free usage)",
-        tooltip: "This is a rate limit, not free credits. All actions still bill at standard rates.",
-        standard: "10,000/month",
-        pro: "Unlimited",
-      },
-      {
-        name: "Grace Period for Overages",
-        description: "Overage buffer before actions pause",
-        standard: "10% (up to 11,000)",
-        pro: "N/A (unlimited)",
-      },
-      {
-        name: "Team Seats",
-        description: "Number of support agents who can use Pullse",
-        standard: "Unlimited",
-        pro: "Unlimited",
-      },
-      {
-        name: "Credit Rollover",
-        description: "Unused credits carry to next month",
-        tooltip: "Pro plan: 10% of unused credits roll over each month",
-        standard: false,
-        pro: "10% monthly",
-      },
-      {
-        name: "14-Day Trial",
-        description: "No credit card required, 1,000 credits included",
+        name: "Email & Chat Support",
+        description: "3-day response time, 7-day resolution time",
         standard: true,
         pro: true,
+      },
+      {
+        name: "Priority Support",
+        description: "24-hour response time, 3-day resolution time",
+        standard: false,
+        pro: true,
+        proOnly: true,
+      },
+      {
+        name: "Help Documentation",
+        description: "Comprehensive docs, guides, and knowledge base",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Onboarding & Implementation",
+        description: "Guided setup and implementation assistance for all customers",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Team Training Sessions",
+        description: "Training sessions to get your team up to speed",
+        standard: true,
+        pro: true,
+      },
+      {
+        name: "Digital Customer Success",
+        description: "Scaled CS with resources, webinars, and community access",
+        standard: "Under 10 agents",
+        pro: "Under 10 agents",
+      },
+      {
+        name: "Dedicated Customer Success Manager",
+        description: "Dedicated CSM for teams with 10+ agents",
+        standard: "10+ agents",
+        pro: "10+ agents",
+      },
+      {
+        name: "Business Reviews",
+        description: "Regular account reviews and optimization sessions",
+        standard: "Annual (10+ agents)",
+        pro: "Quarterly (10+ agents)",
       },
     ],
   },
 ];
+
+// ========================================
+// COMPETITIVE PRICING DATA
+// ========================================
+
+export interface CompetitorPricingDetail {
+  id: string;
+  name: string;
+  plan: string;
+  baseCostPerSeat: number;
+  perResolutionCost?: number; // For Intercom and Zendesk
+  perSessionCost?: number; // For Freshdesk - applied to 60% of conversations
+  minimumSeats?: number;
+  addOns?: {
+    name: string;
+    costPerSeat: number;
+  }[];
+  aiAgentPerConversationCost?: number; // For Dixa - applied to 60% of conversations
+  autoQAPerConversationCost?: number; // For Dixa - applied to 100% of conversations
+  connectorTasksPerConversation?: number; // For Freshdesk - number of tasks per conversation
+  connectorTaskCostPer5000?: number; // For Freshdesk - cost per 5,000 connector tasks
+  costBreakdown: string;
+  features: {
+    aiAgent: boolean;
+    aiCopilot: boolean;
+    autoQA: boolean;
+    helpCenter: boolean;
+  };
+  missingFeatures: string[];
+}
+
+export const competitorPricingDetails: CompetitorPricingDetail[] = [
+  {
+    id: 'zendesk',
+    name: 'Zendesk',
+    plan: 'Suite Professional + Advanced AI + QA',
+    baseCostPerSeat: 190, // $115 base + $75 AI & QA
+    perResolutionCost: 1.5,
+    costBreakdown: '$115 base + $75 AI & QA + $1.50 per AI resolution',
+    features: {
+      aiAgent: true,
+      aiCopilot: true,
+      autoQA: true,
+      helpCenter: true,
+    },
+    missingFeatures: [],
+  },
+  {
+    id: 'intercom',
+    name: 'Intercom',
+    plan: 'Advanced + Copilot + Fin AI',
+    baseCostPerSeat: 132,
+    perResolutionCost: 0.99,
+    costBreakdown: '$132/seat + $0.99 per AI resolution',
+    features: {
+      aiAgent: true,
+      aiCopilot: true,
+      autoQA: false,
+      helpCenter: true,
+    },
+    missingFeatures: ['Auto QA'],
+  },
+  {
+    id: 'freshdesk',
+    name: 'Freshdesk',
+    plan: 'Omni Enterprise + Freddy Copilot',
+    baseCostPerSeat: 104,
+    addOns: [
+      { name: 'Freddy Copilot', costPerSeat: 29 },
+    ],
+    perSessionCost: 89, // per 1000 AI agent sessions (applied to 60% of conversations)
+    connectorTasksPerConversation: 2,
+    connectorTaskCostPer5000: 79,
+    costBreakdown: '$104 base + $29 Copilot + $89 per 1,000 AI sessions + $79 per 5,000 connector tasks',
+    features: {
+      aiAgent: true,
+      aiCopilot: true,
+      autoQA: false,
+      helpCenter: true,
+    },
+    missingFeatures: ['Auto QA'],
+  },
+  {
+    id: 'dixa',
+    name: 'Dixa',
+    plan: 'Prime Plan',
+    baseCostPerSeat: 179,
+    minimumSeats: 7,
+    addOns: [
+      { name: 'AI Copilot', costPerSeat: 39 },
+      { name: 'QA', costPerSeat: 29 },
+      { name: 'Advanced Insights', costPerSeat: 29 },
+    ],
+    aiAgentPerConversationCost: 0.40,
+    autoQAPerConversationCost: 0.05,
+    costBreakdown: '$179 base + $97 add-ons/seat + $0.40 per AI conversation + $0.05 per conversation (Auto QA)',
+    features: {
+      aiAgent: true,
+      aiCopilot: true,
+      autoQA: true,
+      helpCenter: false,
+    },
+    missingFeatures: ['Help Center'],
+  },
+];
+
+// Pullse pricing for comparison
+export const pullsePricingForComparison = {
+  plan: 'Pro Plan',
+  baseCostPerSeat: 79, // Annual pricing
+  creditCost: 0.08, // Per credit
+  actionsPerConversation: 1.4, // 80% tickets use 1 action, 20% use 3 actions = (0.8 × 1) + (0.2 × 3) = 1.4
+  features: {
+    aiAgent: true,
+    aiCopilot: true,
+    autoQA: true,
+    helpCenter: true,
+  },
+};

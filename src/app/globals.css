@@ -422,6 +422,25 @@ All colors MUST be HSL.
     display: none;
   }
 
+  /* Custom scrollbar for pricing cards */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(220 13% 95%);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(262 83% 58% / 0.3);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(262 83% 58% / 0.5);
+  }
+
   /* Flowy background animation */
   @keyframes flow {
     0%, 100% {

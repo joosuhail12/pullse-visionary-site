@@ -5,7 +5,6 @@ export interface ComparisonFeature {
   intercom?: boolean | string;
   freshdesk?: boolean | string;
   dixa?: boolean | string;
-  gladly?: boolean | string;
   category: string;
 }
 
@@ -86,22 +85,6 @@ export const competitors: Competitor[] = [
     whenToChoose: "Choose Dixa if you have 7+ agents and voice support is your primary channel with high call volume.",
     strengths: ['Strong voice support', 'Unified agent desktop', 'Conversation routing', '55% automation with Mim AI']
   },
-  {
-    id: 'gladly',
-    name: 'Gladly',
-    logo: '/competitors/gladly.svg',
-    tagline: 'Radically personal service',
-    bestFor: 'High-touch brands with premium customer service models',
-    whySwitch: [
-      "Much more affordable - Gladly requires $150-180/user with 10-user minimum ($1,500-1,800/month)",
-      "Better AI automation capabilities for scaling support",
-      "Lower entry point for smaller teams",
-      "Modern tech stack with faster innovation"
-    ],
-    pricingNote: "Gladly pricing starts at $150-180/user/month with a 10-user minimum, making the entry point $1,500-1,800/month minimum.",
-    whenToChoose: "Choose Gladly if you're a premium brand (luxury retail, high-end services) where every customer interaction must be deeply personalized.",
-    strengths: ['Person-centric model', 'Premium brand focus', 'Customer lifetime view', 'High-touch support']
-  },
 ];
 
 export const comparisonFeatures: ComparisonFeature[] = [
@@ -114,7 +97,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: '$0.99/resolution',
     freshdesk: 'Add-on required',
     dixa: 'Mim AI included',
-    gladly: false,
   },
   {
     category: 'AI & Automation',
@@ -124,7 +106,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Limited free',
     freshdesk: 'Add-on $29/mo',
     dixa: 'Included',
-    gladly: 'Limited',
   },
   {
     category: 'AI & Automation',
@@ -134,7 +115,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: false,
     freshdesk: false,
     dixa: 'Manual setup',
-    gladly: false,
   },
   {
     category: 'AI & Automation',
@@ -144,7 +124,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: true,
     freshdesk: 'Pro plan+',
     dixa: true,
-    gladly: 'Limited',
   },
   {
     category: 'AI & Automation',
@@ -154,7 +133,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: true,
     freshdesk: 'Basic',
     dixa: true,
-    gladly: true,
   },
 
   // Platform & Core Features
@@ -166,7 +144,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Messaging-focused',
     freshdesk: true,
     dixa: true,
-    gladly: true,
   },
   {
     category: 'Platform',
@@ -176,7 +153,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Limited',
     freshdesk: 'Basic',
     dixa: true,
-    gladly: 'Basic',
   },
   {
     category: 'Platform',
@@ -186,7 +162,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Limited',
     freshdesk: 'Enterprise only',
     dixa: true,
-    gladly: true,
   },
   {
     category: 'Platform',
@@ -196,7 +171,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: '300+',
     freshdesk: '300+',
     dixa: '100+',
-    gladly: '50+',
   },
   {
     category: 'Platform',
@@ -206,7 +180,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: true,
     freshdesk: true,
     dixa: true,
-    gladly: true,
   },
 
   // Pricing & Setup
@@ -218,7 +191,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Pay per use',
     freshdesk: false,
     dixa: true,
-    gladly: 'Limited',
   },
   {
     category: 'Pricing',
@@ -228,7 +200,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: false,
     freshdesk: false,
     dixa: false,
-    gladly: 'Yes',
   },
   {
     category: 'Pricing',
@@ -238,7 +209,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: true,
     freshdesk: true,
     dixa: '7 seat min',
-    gladly: '10 seat min',
   },
   {
     category: 'Pricing',
@@ -248,7 +218,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Variable',
     freshdesk: 'Clear tiers',
     dixa: 'Clear',
-    gladly: 'Contact sales',
   },
 
   // Implementation & Support
@@ -260,7 +229,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: '1-2 weeks',
     freshdesk: '1-2 weeks',
     dixa: '1-2 weeks',
-    gladly: '2+ weeks',
   },
   {
     category: 'Setup & Support',
@@ -270,7 +238,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: true,
     freshdesk: true,
     dixa: true,
-    gladly: true,
   },
   {
     category: 'Setup & Support',
@@ -280,7 +247,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Limited',
     freshdesk: 'Limited',
     dixa: 'Limited',
-    gladly: 'Limited',
   },
   {
     category: 'Setup & Support',
@@ -290,7 +256,6 @@ export const comparisonFeatures: ComparisonFeature[] = [
     intercom: 'Enterprise only',
     freshdesk: 'Pro+',
     dixa: 'All plans',
-    gladly: 'All plans',
   },
 ];
 
@@ -305,7 +270,7 @@ export const faqs = [
   },
   {
     question: 'How does your pricing actually compare for a team of 10 agents?',
-    answer: 'For 10 agents with AI features: Pullse offers transparent pricing (contact sales), Zendesk costs ~$1,650/month ($165/agent with AI add-on), Intercom varies widely ($390+ base plus per-resolution fees), Freshdesk requires ~$760/month ($76/agent with AI add-ons), Dixa starts at $490/month minimum (7 seats required), and Gladly requires $1,500-1,800/month minimum (10-seat minimum).',
+    answer: 'For 10 agents with AI features: Pullse offers transparent pricing (contact sales), Zendesk costs ~$1,650/month ($165/agent with AI add-on), Intercom varies widely ($390+ base plus per-resolution fees), Freshdesk requires ~$760/month ($76/agent with AI add-ons), and Dixa starts at $490/month minimum (7 seats required).',
   },
   {
     question: 'Can I keep my existing integrations?',
@@ -401,13 +366,5 @@ export const pricingComparisons: PricingComparison[] = [
     perResolutionFee: 0,
     minimumSeats: 7,
     notes: 'Growth plan with 7-seat minimum',
-  },
-  {
-    platform: 'Gladly',
-    basePrice: 165, // Average
-    aiAddOn: 0,
-    perResolutionFee: 0,
-    minimumSeats: 10,
-    notes: 'Hero plan with 10-user minimum',
   },
 ];

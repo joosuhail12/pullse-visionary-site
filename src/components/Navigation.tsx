@@ -9,7 +9,7 @@ import {
   Brain, Workflow, Sparkles, Inbox, BookOpen, CheckCircle2, Wand2, Heart,
   BarChart3, Building2, Banknote, ShoppingCart,
   FileText, Calendar, Video, Activity, Shield, Scale, Users, Phone,
-  Newspaper, Rocket, LayoutGrid
+  Newspaper, Rocket, LayoutGrid, Play
 } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -48,6 +48,12 @@ const navigationData = {
       category: "Compare",
       links: [
         { href: "/compare", label: "Compare", description: "Pullse vs Competitors", icon: BarChart3 },
+      ],
+    },
+    {
+      category: "Product Tour",
+      links: [
+        { href: "/product-tour", label: "Product Tour", description: "See the platform in action", icon: Play },
       ],
     },
   ],
@@ -203,7 +209,7 @@ export function Navigation() {
               </motion.div>
 
               {/* Desktop Navigation */}
-              <NavigationMenu.Root className="hidden lg:flex">
+              <NavigationMenu.Root className="hidden lg:flex" suppressHydrationWarning>
                 <NavigationMenu.List className="flex items-center space-x-1">
                   {/* Product Dropdown */}
                   <NavigationMenu.Item className="relative">
@@ -610,7 +616,9 @@ export function Navigation() {
                   className="hidden sm:block"
                 >
                   <Link
-                    href="/login"
+                    href="https://app.pullse.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group relative inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium text-gray-700 border-2 border-gray-200 hover:border-purple-400 overflow-hidden transition-all duration-300"
                   >
                     {/* Animated gradient background fill */}
@@ -819,7 +827,9 @@ export function Navigation() {
               {/* Mobile Menu Footer */}
               <div className="p-6 border-t border-gray-100 space-y-3">
                 <Link
-                  href="/login"
+                  href="https://app.pullse.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full px-4 py-3 rounded-full text-center text-sm font-medium text-gray-700 border border-gray-200 hover:bg-gray-50 transition-colors"
                 >

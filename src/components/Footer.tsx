@@ -20,6 +20,7 @@ const Footer = () => {
       links: [
         { name: "B2B SaaS", path: "/solutions/b2b-saas" },
         { name: "Ecommerce", path: "/solutions/ecommerce" },
+        { name: "Fintech", path: "/solutions/fintech" },
       ],
     },
     {
