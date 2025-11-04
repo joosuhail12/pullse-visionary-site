@@ -5,6 +5,7 @@ export interface ComparisonFeature {
   intercom?: boolean | string;
   freshdesk?: boolean | string;
   dixa?: boolean | string;
+  gladly?: boolean | string;
   category: string;
 }
 
