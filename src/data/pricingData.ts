@@ -137,6 +137,7 @@ export interface FeatureComparison {
     comingSoon?: boolean; // Yellow "Coming Soon" badge
     proOnly?: boolean; // Visual emphasis for Pro-exclusive features
     usesCredits?: boolean; // Indicates this feature consumes AI credits
+    tooltip?: string; // Optional tooltip text for additional context
   }[];
 }
 
