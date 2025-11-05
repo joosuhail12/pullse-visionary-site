@@ -92,16 +92,11 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
   if (error) {
     return (
       <div className={`flex items-center justify-center min-h-[600px] ${className}`}>
-        <div className="text-center glass p-8 rounded-2xl border border-red-200">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
-            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <p className="text-red-600 font-semibold mb-3 text-lg">{error}</p>
+        <div className="text-center">
+          <p className="text-red-600 mb-3">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-colors"
+            className="text-sm text-gray-600 hover:text-gray-900 underline"
           >
             Reload page
           </button>
@@ -113,14 +108,10 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
   return (
     <div className={`relative ${className}`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center min-h-[600px] z-10">
-          <div className="text-center glass-strong p-10 rounded-3xl border border-primary/20 shadow-2xl">
-            <div className="relative inline-block mb-6">
-              <Loader2 className="h-16 w-16 text-primary animate-spin" />
-              <div className="absolute inset-0 blur-xl bg-primary/20 animate-pulse" />
-            </div>
-            <p className="text-gray-700 font-semibold text-lg mb-2">Setting up your booking calendar</p>
-            <p className="text-gray-500 text-sm">This will only take a moment...</p>
+        <div className="absolute inset-0 flex items-center justify-center min-h-[600px] z-10 bg-white">
+          <div className="text-center">
+            <Loader2 className="h-8 w-8 text-gray-400 animate-spin mx-auto mb-3" />
+            <p className="text-sm text-gray-500">Loading calendar...</p>
           </div>
         </div>
       )}
@@ -136,8 +127,7 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
       />
       <style jsx>{`
         .cal-embed-container :global(iframe) {
-          border-radius: 1rem;
-          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          border-radius: 0.5rem;
         }
       `}</style>
     </div>
