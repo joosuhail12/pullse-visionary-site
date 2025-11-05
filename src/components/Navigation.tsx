@@ -64,7 +64,6 @@ const navigationData = {
     { href: "/solutions/fintech", label: "Fintech", description: "Secure & compliant", icon: Banknote },
   ],
   resources: [
-    { href: "/resources", label: "All Resources", description: "Browse all content", icon: LayoutGrid },
     { href: "/blog", label: "Blog", description: "News & insights", icon: Newspaper },
     { href: "/security", label: "Security", description: "Trust & compliance", icon: Shield },
     { href: "/company", label: "Company", description: "About us", icon: Users },
