@@ -3,6 +3,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+import { CalEmbed } from "@/components/CalEmbed";
 import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -344,20 +345,11 @@ const ContactSales = () => {
                     Skip the wait! Choose a time that works for you:
                   </p>
 
-                  {/* Cal.com Embed Placeholder */}
-                  <div className="glass-elevated p-10 rounded-3xl min-h-[450px] flex items-center justify-center bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5 border-2 border-primary/10">
-                    <div className="text-center">
-                      <Calendar className="h-20 w-20 text-primary/60 mx-auto mb-6" strokeWidth={1.5} />
-                      <p className="text-gray-700 mb-4 text-lg">
-                        <strong className="text-primary">Cal.com Integration Ready</strong>
-                      </p>
-                      <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
-                        To enable calendar booking, add your Cal.com embed code below.
-                        <br />
-                        <span className="text-primary font-medium">Example: cal.com/yourcompany/demo-call</span>
-                      </p>
-                    </div>
-                  </div>
+                  {/* Cal.com Booking Widget */}
+                  <CalEmbed
+                    calLink="suhailjoo/pullse-demo"
+                    className="glass-elevated p-10 rounded-3xl border-2 border-primary/10"
+                  />
 
                   <div className="mt-8 flex gap-4 justify-center flex-wrap">
                     <Button
