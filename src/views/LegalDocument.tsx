@@ -194,17 +194,17 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
                 </div>
 
                 {/* Document Sections */}
-                <div className="prose prose-lg max-w-none">
+                <div className="legal-content max-w-none">
                   {document.sections.map((section, index) => (
                     <section
                       key={section.id}
                       id={section.id}
                       className={index > 0 ? 'mt-12 pt-12 border-t border-gray-200' : ''}
                     >
-                      <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
                         {section.title}
                       </h2>
-                      <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                      <div className="legal-text whitespace-pre-line">
                         {section.content}
                       </div>
                     </section>
@@ -230,8 +230,20 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
 
       <Footer />
 
-      {/* Print Styles */}
+      {/* Legal Document Styles */}
       <style jsx global>{`
+        .legal-content {
+          font-size: 16px;
+          line-height: 1.75;
+        }
+
+        .legal-text {
+          font-size: 16px;
+          line-height: 1.8;
+          color: #374151;
+          letter-spacing: 0.01em;
+        }
+
         @media print {
           nav,
           footer,
@@ -245,7 +257,7 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
             box-shadow: none !important;
           }
 
-          .prose {
+          .legal-content {
             max-width: 100% !important;
           }
 
