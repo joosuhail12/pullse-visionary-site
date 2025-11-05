@@ -1,72 +1,246 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { getSupabaseServer, type StartupApplication } from '@/lib/supabase-server';
 
-// Email validation regex
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// =======================
+// Schema Validation (Zod)
+// =======================
 
-// URL validation regex
-const URL_REGEX = /^https?:\/\/.+\..+/;
+const StartupApplicationSchema = z.object({
+  companyName: z.string().min(1, 'Company name is required').max(200, 'Company name too long'),
+  website: z.string().url('Invalid website URL'),
+  email: z.string().email('Invalid email address').toLowerCase(),
+  foundingDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
+  annualRevenue: z.enum(['<500k', '500k-1m', '1m-2m', '>2m'], {
+    errorMap: () => ({ message: 'Invalid revenue range' }),
+  }),
+  totalFunding: z.enum(['<1m', '1m-3m', '3m-5m', '>5m'], {
+    errorMap: () => ({ message: 'Invalid funding range' }),
+  }),
+  seatsNeeded: z.string().regex(/^\d+$/, 'Seats must be a number').transform(Number).pipe(
+    z.number().min(1, 'At least 1 seat required').max(15, 'Maximum 15 seats allowed')
+  ),
+  customerStatus: z.enum(['new', 'trial'], {
+    errorMap: () => ({ message: 'Invalid customer status' }),
+  }),
+  // Optional fields
+  currentTools: z.string().max(1000, 'Current tools description too long').optional().default(''),
+  useCase: z.string().max(2000, 'Use case description too long').optional().default(''),
+});
+
+type StartupApplicationInput = z.infer<typeof StartupApplicationSchema>;
+
+// =======================
+// Error Response Types
+// =======================
+
+type ApiError = {
+  error: {
+    code: string;
+    message: string;
+    details?: unknown;
+  };
+  requestId?: string;
+};
+
+type ApiSuccess<T> = {
+  success: true;
+  data: T;
+  requestId?: string;
+};
+
+// =======================
+// Rate Limiting (Simple In-Memory)
+// =======================
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 3; // 3 requests per minute
+
+function checkRateLimit(identifier: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(identifier);
+
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(identifier, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+
+  if (record.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  record.count++;
+  return true;
+}
+
+// Cleanup old entries every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (now > value.resetAt) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, 5 * 60 * 1000);
+
+// =======================
+// Helper Functions
+// =======================
+
+function createErrorResponse(
+  code: string,
+  message: string,
+  status: number,
+  details?: unknown,
+  requestId?: string
+): NextResponse<ApiError> {
+  return NextResponse.json(
+    {
+      error: { code, message, ...(details && { details }) },
+      ...(requestId && { requestId }),
+    },
+    {
+      status,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Content-Type-Options': 'nosniff',
+      },
+    }
+  );
+}
+
+function createSuccessResponse<T>(
+  data: T,
+  status: number = 200,
+  requestId?: string
+): NextResponse<ApiSuccess<T>> {
+  return NextResponse.json(
+    {
+      success: true,
+      data,
+      ...(requestId && { requestId }),
+    },
+    {
+      status,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Content-Type-Options': 'nosniff',
+      },
+    }
+  );
+}
+
+function generateRequestId(): string {
+  return `req_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+}
+
+// =======================
+// POST Handler
+// =======================
 
 export async function POST(request: NextRequest) {
+  const requestId = generateRequestId();
+
   try {
-    // Parse request body
-    const body = await request.json();
-
-    // Validate required fields
-    const requiredFields = [
-      'companyName',
-      'website',
-      'email',
-      'foundingDate',
-      'annualRevenue',
-      'totalFunding',
-      'seatsNeeded',
-      'customerStatus',
-      'currentTools',
-      'useCase',
-    ];
-
-    for (const field of requiredFields) {
-      if (!body[field] || body[field].trim() === '') {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
-    }
-
-    // Validate email format
-    if (!EMAIL_REGEX.test(body.email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
+    // 1. Check Content-Type
+    const contentType = request.headers.get('content-type');
+    if (!contentType?.includes('application/json')) {
+      return createErrorResponse(
+        'INVALID_CONTENT_TYPE',
+        'Content-Type must be application/json',
+        415,
+        undefined,
+        requestId
       );
     }
 
-    // Validate website URL
-    if (!URL_REGEX.test(body.website)) {
-      return NextResponse.json(
-        { error: 'Invalid website URL. Please include http:// or https://' },
-        { status: 400 }
+    // 2. Parse and validate request body
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return createErrorResponse(
+        'INVALID_JSON',
+        'Request body must be valid JSON',
+        400,
+        undefined,
+        requestId
       );
     }
 
-    // Prepare data for insertion (convert camelCase to snake_case for database)
+    // 3. Validate with Zod
+    const validation = StartupApplicationSchema.safeParse(body);
+    if (!validation.success) {
+      return createErrorResponse(
+        'VALIDATION_ERROR',
+        'Invalid request data',
+        400,
+        validation.error.format(),
+        requestId
+      );
+    }
+
+    const validatedData = validation.data;
+
+    // 4. Rate limiting (by email)
+    if (!checkRateLimit(validatedData.email)) {
+      return createErrorResponse(
+        'RATE_LIMIT_EXCEEDED',
+        'Too many requests. Please try again in a minute.',
+        429,
+        undefined,
+        requestId
+      );
+    }
+
+    // 5. Check for duplicate recent submissions (within last 24 hours)
+    const supabase = getSupabaseServer();
+    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+
+    const { data: existingApplications, error: checkError } = await supabase
+      .from('startup_applications')
+      .select('id, submitted_at')
+      .eq('email', validatedData.email)
+      .gte('submitted_at', oneDayAgo)
+      .limit(1);
+
+    if (checkError) {
+      console.error('Database check error:', checkError);
+      return createErrorResponse(
+        'DATABASE_ERROR',
+        'Failed to process request',
+        500,
+        undefined,
+        requestId
+      );
+    }
+
+    if (existingApplications && existingApplications.length > 0) {
+      return createErrorResponse(
+        'DUPLICATE_SUBMISSION',
+        'You have already submitted an application recently. Please wait 24 hours before submitting again.',
+        409,
+        { existingApplicationId: existingApplications[0].id },
+        requestId
+      );
+    }
+
+    // 6. Prepare data for insertion
     const applicationData: Omit<StartupApplication, 'id' | 'submitted_at' | 'created_at' | 'status'> = {
-      company_name: body.companyName.trim(),
-      website: body.website.trim(),
-      email: body.email.trim().toLowerCase(),
-      founding_date: body.foundingDate.trim(),
-      annual_revenue: body.annualRevenue.trim(),
-      total_funding: body.totalFunding.trim(),
-      seats_needed: body.seatsNeeded.trim(),
-      customer_status: body.customerStatus.trim(),
-      current_tools: body.currentTools.trim(),
-      use_case: body.useCase.trim(),
+      company_name: validatedData.companyName.trim(),
+      website: validatedData.website.trim(),
+      email: validatedData.email,
+      founding_date: validatedData.foundingDate,
+      annual_revenue: validatedData.annualRevenue,
+      total_funding: validatedData.totalFunding,
+      seats_needed: validatedData.seatsNeeded.toString(),
+      customer_status: validatedData.customerStatus,
+      current_tools: validatedData.currentTools.trim(),
+      use_case: validatedData.useCase.trim(),
     };
 
-    // Insert into Supabase
-    const supabase = getSupabaseServer();
+    // 7. Insert into Supabase
     const { data, error } = await supabase
       .from('startup_applications')
       .insert([applicationData])
@@ -74,58 +248,131 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json(
-        { error: 'Failed to submit application. Please try again.' },
-        { status: 500 }
+      console.error('Supabase insert error:', error);
+      return createErrorResponse(
+        'DATABASE_ERROR',
+        'Failed to submit application. Please try again.',
+        500,
+        undefined,
+        requestId
       );
     }
 
-    // Success response
-    return NextResponse.json(
+    // 8. Success response
+    return createSuccessResponse(
       {
-        success: true,
-        message: 'Application submitted successfully!',
         id: data.id,
+        message: 'Application submitted successfully!',
+        submittedAt: data.submitted_at,
       },
-      { status: 201 }
+      201,
+      requestId
     );
 
   } catch (error) {
-    console.error('API error:', error);
-    return NextResponse.json(
-      { error: 'An unexpected error occurred. Please try again.' },
-      { status: 500 }
+    console.error('Unexpected API error:', error, 'RequestID:', requestId);
+    return createErrorResponse(
+      'INTERNAL_ERROR',
+      'An unexpected error occurred. Please try again.',
+      500,
+      undefined,
+      requestId
     );
   }
 }
 
-// Optional: Add GET method to retrieve applications (for admin use)
-export async function GET(request: NextRequest) {
-  try {
-    // You can add authentication/authorization here later
-    const supabase = getSupabaseServer();
-    const { data, error } = await supabase
-      .from('startup_applications')
-      .select('*')
-      .order('submitted_at', { ascending: false })
-      .limit(100);
+// =======================
+// GET Handler (Admin Only)
+// =======================
 
-    if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json(
-        { error: 'Failed to fetch applications' },
-        { status: 500 }
+export async function GET(request: NextRequest) {
+  const requestId = generateRequestId();
+
+  try {
+    // 1. Check for admin authentication
+    // TODO: Replace with proper authentication (e.g., NextAuth, API key, etc.)
+    const authHeader = request.headers.get('authorization');
+    const adminKey = process.env.ADMIN_API_KEY;
+
+    if (!adminKey || authHeader !== `Bearer ${adminKey}`) {
+      return createErrorResponse(
+        'UNAUTHORIZED',
+        'Authentication required',
+        401,
+        undefined,
+        requestId
       );
     }
 
-    return NextResponse.json({ applications: data }, { status: 200 });
+    // 2. Parse query parameters for pagination
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') || '1');
+    const limit = Math.min(parseInt(url.searchParams.get('limit') || '20'), 100); // Max 100
+    const status = url.searchParams.get('status');
+
+    if (page < 1 || limit < 1) {
+      return createErrorResponse(
+        'INVALID_PARAMETERS',
+        'Page and limit must be positive numbers',
+        400,
+        undefined,
+        requestId
+      );
+    }
+
+    // 3. Calculate pagination
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
+    // 4. Build query
+    const supabase = getSupabaseServer();
+    let query = supabase
+      .from('startup_applications')
+      .select('*', { count: 'exact' })
+      .order('submitted_at', { ascending: false })
+      .range(from, to);
+
+    if (status) {
+      query = query.eq('status', status);
+    }
+
+    // 5. Execute query
+    const { data, error, count } = await query;
+
+    if (error) {
+      console.error('Supabase query error:', error);
+      return createErrorResponse(
+        'DATABASE_ERROR',
+        'Failed to fetch applications',
+        500,
+        undefined,
+        requestId
+      );
+    }
+
+    // 6. Success response with pagination metadata
+    return createSuccessResponse(
+      {
+        applications: data,
+        pagination: {
+          page,
+          limit,
+          total: count || 0,
+          totalPages: count ? Math.ceil(count / limit) : 0,
+        },
+      },
+      200,
+      requestId
+    );
 
   } catch (error) {
-    console.error('API error:', error);
-    return NextResponse.json(
-      { error: 'An unexpected error occurred' },
-      { status: 500 }
+    console.error('Unexpected API error:', error, 'RequestID:', requestId);
+    return createErrorResponse(
+      'INTERNAL_ERROR',
+      'An unexpected error occurred',
+      500,
+      undefined,
+      requestId
     );
   }
 }

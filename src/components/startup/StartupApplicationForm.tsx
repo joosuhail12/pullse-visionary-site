@@ -96,12 +96,26 @@ const StartupApplicationForm = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit application');
+        // Handle API error response with error codes
+        const errorMessage = result.error?.message || 'Failed to submit application';
+        const errorCode = result.error?.code;
+
+        // Provide user-friendly messages for specific error codes
+        if (errorCode === 'DUPLICATE_SUBMISSION') {
+          throw new Error('You have already submitted an application. Please check your email or wait 24 hours before submitting again.');
+        } else if (errorCode === 'RATE_LIMIT_EXCEEDED') {
+          throw new Error('Too many submission attempts. Please wait a minute and try again.');
+        } else if (errorCode === 'VALIDATION_ERROR') {
+          throw new Error('Please check your form data and try again.');
+        } else {
+          throw new Error(errorMessage);
+        }
       }
 
+      // Success - API returns: { success: true, data: { id, message, submittedAt } }
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
