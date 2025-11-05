@@ -157,106 +157,595 @@ Address: [Your Company Address]`,
     sections: [
       {
         id: 'introduction',
-        title: '1. Introduction',
-        content: `At Pullse, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our Services.
+        title: '1. Introduction and Scope',
+        content: `At Pullse, Inc. ("Pullse," "we," "us," or "our"), protecting your privacy is fundamental to our business. This Privacy Policy ("Policy") explains in detail how we collect, use, process, disclose, and safeguard your personal information when you:
 
-By using Pullse, you agree to the collection and use of information in accordance with this policy.`,
+• Access or use our website (pullse.ai)
+• Use our AI-powered customer support platform and services
+• Interact with our customer support, sales, or marketing teams
+• Attend our events or webinars
+• Apply for employment with us
+
+This Policy applies to all users worldwide and is designed to comply with:
+• EU General Data Protection Regulation (GDPR)
+• California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA)
+• UK Data Protection Act 2018 and UK GDPR
+• Canadian Personal Information Protection and Electronic Documents Act (PIPEDA)
+• Other applicable privacy and data protection laws
+
+**By using our Services, you acknowledge that you have read, understood, and agree to be bound by this Privacy Policy.** If you do not agree, please discontinue use of our Services immediately.
+
+**Controller Information:**
+Pullse, Inc. acts as the data controller for personal information collected through our Services. For EU/UK users, our representative can be contacted at eu-rep@pullse.ai.`,
       },
       {
         id: 'information-we-collect',
         title: '2. Information We Collect',
-        content: `We collect several types of information:
+        content: `We collect information in various ways to provide, maintain, and improve our Services:
 
-**Information You Provide:**
-• Account information (name, email, company name)
-• Billing information (payment details, address)
-• Support data (messages, tickets, feedback)
-• Profile information (preferences, settings)
+**2.1 Information You Provide Directly**
 
-**Information Collected Automatically:**
-• Usage data (features used, time spent, interactions)
-• Device information (browser type, operating system)
-• Log data (IP address, access times, pages viewed)
-• Cookies and similar tracking technologies
+*Account and Registration Information:*
+• Full name, email address, and username
+• Company name, job title, and department
+• Phone number and business address
+• Password and authentication credentials
+• Profile photo and bio (optional)
+• Communication preferences and notification settings
 
-**Customer Data:**
-• Data you upload or transmit through the Services
-• Support tickets and customer interactions
-• Integration data from connected services`,
+*Business and Billing Information:*
+• Payment card details (processed by our PCI-DSS compliant payment processors)
+• Billing address and tax identification numbers
+• Purchase history and transaction records
+• Subscription plan and usage tier
+• Invoice and payment correspondence
+
+*Communications and Support Data:*
+• Messages sent through our platform or to our support team
+• Feedback, survey responses, and testimonials
+• Questions, inquiries, and technical support requests
+• Recordings of calls with our sales or support team (with your consent)
+• Event registration and attendance information
+
+*Customer Support Content:*
+• Support tickets and conversations you create
+• Files, documents, and attachments you upload
+• Customer interaction data you process through our Services
+• Integration configurations and API keys
+
+**2.2 Information Collected Automatically**
+
+*Usage and Analytics Data:*
+• Features and tools you access and use
+• Time spent on different sections of our platform
+• Click patterns, navigation paths, and user flows
+• Search queries and filter preferences
+• A/B test variations you're exposed to
+• Error logs and diagnostic information
+• Performance metrics (load times, response times)
+
+*Device and Technical Information:*
+• IP address and approximate geographic location (city/country level)
+• Browser type, version, and language settings
+• Operating system and device type (desktop, mobile, tablet)
+• Screen resolution and display properties
+• Referring and exit pages
+• Date and time stamps of access
+• Unique device identifiers
+• Network information and ISP details
+
+*Cookies and Tracking Technologies:*
+• Session cookies for authentication and security
+• Persistent cookies for preferences and personalization
+• Analytics cookies (Google Analytics, Mixpanel)
+• Marketing and advertising cookies (with consent)
+• Web beacons and pixel tags
+• Local storage and session storage data
+• Device fingerprinting data (for security purposes)
+
+**2.3 AI Training and Model Data**
+
+*AI Interaction Data:*
+• Inputs you provide to our AI models
+• Outputs generated by our AI systems
+• Feedback on AI-generated responses
+• Model performance metrics
+• Training data you explicitly provide
+• Anonymized interaction patterns for model improvement
+
+**2.4 Information from Third Parties**
+
+*Business Partners and Integrations:*
+• Data from third-party services you connect (e.g., CRM, helpdesk, chat platforms)
+• API integration data and synchronization logs
+• Single Sign-On (SSO) provider information
+• OAuth authorization tokens
+
+*Public Sources and Data Enrichment:*
+• Publicly available company information
+• Business contact data from professional networking sites
+• Industry classifications and company size data
+• News articles and press releases mentioning your company
+
+*Marketing and Analytics Partners:*
+• Lead generation and qualification data
+• Campaign performance and attribution data
+• Demographic and firmographic information
+• Website visitor behavior from advertising networks
+
+**2.5 Sensitive Personal Information**
+
+We do not intentionally collect sensitive personal information (such as racial or ethnic origin, political opinions, religious beliefs, health data, or biometric data) unless explicitly required for specific features with your express consent. If you provide such information, you do so voluntarily and consent to its processing as described in this Policy.`,
+      },
+      {
+        id: 'legal-basis',
+        title: '3. Legal Basis for Processing (GDPR)',
+        content: `For users in the European Economic Area (EEA), UK, and Switzerland, we process your personal data only when we have a valid legal basis:
+
+**3.1 Contractual Necessity**
+Processing is necessary to perform our contract with you or to take steps before entering into a contract:
+• Creating and managing your account
+• Providing access to our Services
+• Processing payments and billing
+• Delivering customer support
+• Fulfilling our contractual obligations
+
+**3.2 Legitimate Interests**
+Processing is necessary for our legitimate business interests, balanced against your rights:
+• Improving and optimizing our Services
+• Conducting analytics and research
+• Detecting and preventing fraud, abuse, and security threats
+• Maintaining system security and integrity
+• Conducting internal business operations
+• Enforcing our Terms of Service
+
+**3.3 Legal Obligation**
+Processing is necessary to comply with legal requirements:
+• Tax and accounting obligations
+• Responding to legal requests and court orders
+• Regulatory compliance and reporting
+• Protecting our legal rights
+• Preventing illegal activities
+
+**3.4 Consent**
+Where required by law or where we don't have another legal basis, we process data based on your explicit consent:
+• Marketing communications and newsletters
+• Non-essential cookies and tracking
+• Sharing data with third parties for marketing
+• Processing sensitive personal information
+• Recording calls or meetings
+
+You may withdraw consent at any time by contacting privacy@pullse.ai or using our preference center.`,
       },
       {
         id: 'how-we-use-information',
-        title: '3. How We Use Your Information',
-        content: `We use your information to:
+        title: '4. How We Use Your Information',
+        content: `We use the information we collect for the following purposes:
 
-• Provide and maintain our Services
-• Process transactions and send confirmations
-• Send service-related communications
-• Respond to support requests
-• Improve and optimize our Services
-• Personalize your experience
-• Detect and prevent fraud or abuse
-• Comply with legal obligations
-• Send marketing communications (with your consent)`,
+**4.1 Service Delivery and Management**
+• Creating, maintaining, and securing your account
+• Providing access to features and functionality
+• Processing and fulfilling transactions
+• Authenticating users and preventing unauthorized access
+• Hosting and storing your data securely
+• Managing subscriptions and billing
+• Sending transactional emails and notifications
+• Providing technical support and troubleshooting
+
+**4.2 Product Improvement and Development**
+• Analyzing usage patterns to identify improvement opportunities
+• Conducting A/B testing and experiments
+• Developing new features and products
+• Training and improving our AI models
+• Fixing bugs and technical issues
+• Optimizing performance and user experience
+• Conducting quality assurance testing
+
+**4.3 AI and Machine Learning**
+• Training AI models to improve response quality
+• Generating AI-powered insights and recommendations
+• Personalizing AI responses based on your preferences
+• Analyzing patterns to enhance AI accuracy
+• Anonymizing data for machine learning research
+• Improving natural language processing capabilities
+
+**4.4 Communications**
+• Responding to your inquiries and support requests
+• Sending service announcements and updates
+• Providing onboarding and educational content
+• Sharing product updates and new features
+• Requesting feedback and conducting surveys
+• Sending marketing communications (with consent)
+• Notifying you of changes to our policies
+
+**4.5 Security and Fraud Prevention**
+• Detecting and preventing fraud, abuse, and security threats
+• Investigating suspicious activities
+• Monitoring for unauthorized access attempts
+• Implementing and maintaining security measures
+• Verifying identity during account recovery
+• Enforcing our Terms of Service and policies
+• Protecting our users, systems, and data
+
+**4.6 Analytics and Research**
+• Understanding how users interact with our Services
+• Analyzing market trends and user preferences
+• Conducting business intelligence and reporting
+• Measuring marketing campaign effectiveness
+• Tracking conversion rates and user journeys
+• Benchmarking performance metrics
+
+**4.7 Legal and Compliance**
+• Complying with applicable laws and regulations
+• Responding to legal requests and court orders
+• Protecting our legal rights and interests
+• Resolving disputes and enforcing agreements
+• Maintaining records for audit purposes
+• Meeting regulatory reporting requirements
+
+**4.8 Marketing and Advertising**
+• Delivering personalized marketing content
+• Showing relevant advertisements
+• Measuring ad performance and ROI
+• Building lookalike audiences for advertising
+• Conducting email marketing campaigns
+• Retargeting website visitors
+• Managing referral and affiliate programs`,
       },
       {
         id: 'data-sharing',
-        title: '4. How We Share Your Information',
-        content: `We may share your information with:
+        title: '5. How We Share Your Information',
+        content: `We share your personal information only in the following circumstances:
 
-**Service Providers:**
-Third-party vendors who perform services on our behalf (hosting, analytics, payment processing, customer support)
+**5.1 Service Providers and Vendors**
+We engage trusted third-party companies to perform functions on our behalf:
 
-**Business Transfers:**
-In connection with mergers, acquisitions, or asset sales
+*Infrastructure and Hosting:*
+• Amazon Web Services (AWS) - Cloud hosting and storage
+• Google Cloud Platform - Cloud infrastructure and services
+• Cloudflare - CDN and security services
 
-**Legal Requirements:**
-When required by law or to protect our rights and safety
+*Payment Processing:*
+• Stripe - Payment processing and billing
+• PayPal - Alternative payment processing
 
-**With Your Consent:**
-When you explicitly authorize us to share your information
+*Communication Services:*
+• SendGrid / Twilio - Transactional emails and SMS
+• Intercom - Customer support and messaging
+• Zoom - Video conferencing
 
-We do not sell your personal information to third parties.`,
+*Analytics and Monitoring:*
+• Google Analytics - Website analytics
+• Mixpanel - Product analytics
+• Sentry - Error tracking and monitoring
+• Datadog - Infrastructure monitoring
+
+*Marketing and Sales:*
+• HubSpot - CRM and marketing automation
+• Mailchimp - Email marketing campaigns
+• Google Ads - Advertising platform
+• LinkedIn - B2B advertising
+
+All service providers are contractually required to maintain confidentiality and security of your data and may only use it to provide services to us.
+
+**5.2 Business Partners and Integrations**
+• Third-party services you explicitly connect through our integrations
+• API partners when you authorize data sharing
+• OAuth providers for authentication
+
+**5.3 Corporate Transactions**
+In the event of a merger, acquisition, reorganization, bankruptcy, or sale of assets, your information may be transferred as part of that transaction. We will notify you via email and/or prominent notice on our website before your personal information becomes subject to a different privacy policy.
+
+**5.4 Legal Requirements and Protection**
+We may disclose your information when required by law or when we believe disclosure is necessary to:
+• Comply with legal obligations, court orders, or government requests
+• Enforce our Terms of Service or other agreements
+• Protect our rights, property, or safety
+• Protect the rights, property, or safety of our users or others
+• Prevent fraud, security breaches, or illegal activity
+• Respond to emergencies involving danger of death or serious physical injury
+
+**5.5 With Your Consent**
+We may share your information with third parties when you provide explicit consent.
+
+**5.6 Aggregated and Anonymized Data**
+We may share aggregated, de-identified, or anonymized data that cannot reasonably be used to identify you for:
+• Industry research and benchmarking
+• Public reports and case studies
+• Product development and improvement
+• Marketing and promotional purposes
+
+**Important: We do not sell, rent, or trade your personal information to third parties for their marketing purposes.**`,
       },
       {
         id: 'data-security',
-        title: '5. Data Security',
-        content: `We implement appropriate technical and organizational measures to protect your data:
+        title: '6. Data Security Measures',
+        content: `We employ industry-leading security measures to protect your personal information:
 
-• Encryption in transit and at rest
-• Access controls and authentication
-• Regular security audits
-• Employee training on data protection
-• Incident response procedures
+**6.1 Technical Safeguards**
 
-However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.`,
+*Encryption:*
+• TLS 1.3 encryption for all data in transit
+• AES-256 encryption for data at rest
+• End-to-end encryption for sensitive communications
+• Encrypted database backups
+• Secure key management systems
+
+*Access Controls:*
+• Multi-factor authentication (MFA) required for employees
+• Role-based access control (RBAC)
+• Principle of least privilege for data access
+• Regular access reviews and revocations
+• Secure authentication protocols (OAuth 2.0, SSO)
+
+*Network Security:*
+• Web Application Firewall (WAF)
+• DDoS protection through Cloudflare
+• Intrusion detection and prevention systems (IDS/IPS)
+• Network segmentation and isolation
+• Regular vulnerability scanning and penetration testing
+
+**6.2 Organizational Safeguards**
+
+*Employee Training and Policies:*
+• Mandatory security awareness training for all employees
+• Background checks for employees with data access
+• Confidentiality agreements and NDAs
+• Clear data handling policies and procedures
+• Regular security training updates
+
+*Physical Security:*
+• Data centers with 24/7 surveillance
+• Biometric access controls
+• Redundant power and cooling systems
+• Fire suppression and environmental controls
+
+**6.3 Operational Safeguards**
+
+*Monitoring and Incident Response:*
+• 24/7 security monitoring and logging
+• Real-time threat detection and alerting
+• Comprehensive incident response plan
+• Regular security drills and tabletop exercises
+• Breach notification procedures compliant with applicable laws
+
+*Audits and Compliance:*
+• Annual third-party security audits
+• SOC 2 Type II certification (in progress)
+• ISO 27001 compliance roadmap
+• Regular internal security assessments
+• Compliance with industry security standards
+
+**6.4 Data Backup and Recovery**
+
+• Automated daily backups
+• Geographically redundant backup storage
+• Regular backup testing and restoration drills
+• Business continuity and disaster recovery plans
+• Backup retention aligned with data retention policies
+
+**6.5 Application Security**
+
+• Secure software development lifecycle (SDLC)
+• Code reviews and static analysis
+• Dynamic application security testing (DAST)
+• Dependency scanning for vulnerabilities
+• Regular security patches and updates
+
+**6.6 Limitations and Disclaimer**
+
+While we implement comprehensive security measures, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security of your information. You are responsible for:
+• Maintaining the confidentiality of your account credentials
+• Using strong, unique passwords
+• Enabling MFA when available
+• Reporting suspicious activity immediately
+• Keeping your devices and software updated`,
       },
       {
         id: 'data-retention',
-        title: '6. Data Retention',
-        content: `We retain your information for as long as necessary to:
+        title: '7. Data Retention and Deletion',
+        content: `We retain your personal information only for as long as necessary to fulfill the purposes described in this Policy:
 
-• Provide the Services
-• Comply with legal obligations
-• Resolve disputes
-• Enforce our agreements
+**7.1 Retention Periods by Data Type**
 
-When you close your account, we will delete or anonymize your data within a reasonable timeframe, except where retention is required by law.`,
+*Account Data:*
+• Active accounts: Duration of your subscription plus 90 days
+• Closed accounts: 30 days after closure for reactivation, then deleted
+• Authentication logs: 1 year
+• Profile information: Until account deletion
+
+*Transactional Data:*
+• Payment records: 7 years (tax and accounting requirements)
+• Invoices and receipts: 7 years
+• Contract and agreement records: Duration of contract plus 7 years
+• Support tickets: 3 years after resolution
+
+*Usage and Analytics Data:*
+• Application logs: 90 days
+• Analytics data: 26 months (aligned with Google Analytics)
+• Error logs: 1 year
+• Performance metrics: 2 years
+
+*Marketing Data:*
+• Newsletter subscribers: Until unsubscribe plus 30 days
+• Campaign data: 3 years
+• Cookie data: As specified in Cookie Policy
+• Lead information: 2 years of inactivity
+
+*Legal and Compliance Data:*
+• Legal hold data: Duration of legal matter plus applicable statute of limitations
+• Regulatory compliance records: As required by applicable laws
+• Data breach records: 7 years
+
+**7.2 Extended Retention**
+
+We may retain data beyond standard periods when:
+• Required by applicable law or regulation
+• Necessary for pending legal proceedings
+• Subject to legal hold or preservation orders
+• Needed to establish, exercise, or defend legal claims
+• You have requested extended retention
+• Anonymized for research or statistical purposes
+
+**7.3 Data Deletion Process**
+
+When you request account deletion or data removal:
+
+1. **Immediate Actions (Within 24 hours):**
+   • Your account is disabled and inaccessible
+   • Your data is marked for deletion
+   • Third-party integrations are disconnected
+
+2. **Grace Period (30 days):**
+   • Data remains in our systems in case you change your mind
+   • You can request reactivation during this period
+   • Data is not accessible during grace period
+
+3. **Permanent Deletion (After 30 days):**
+   • Personal data is permanently deleted from production systems
+   • Backups containing your data are purged within 90 days
+   • Some metadata may be retained for legal/security purposes
+   • Anonymized data may be retained for analytics
+
+**7.4 Exceptions to Deletion**
+
+Even after account deletion, we may retain:
+• Anonymized or aggregated data that cannot identify you
+• Information required by law (e.g., tax records, transaction history)
+• Data necessary to prevent fraud or resolve disputes
+• Backup copies (deleted within 90 days per retention schedule)
+• Public communications (e.g., forum posts, testimonials) unless specifically requested
+
+**7.5 AI Training Data**
+
+Data used to train AI models is anonymized and cannot be deleted once incorporated into model weights. However, we will remove your identifiable data from training datasets upon request.`,
       },
       {
         id: 'your-rights',
-        title: '7. Your Privacy Rights',
-        content: `Depending on your location, you may have the following rights:
+        title: '8. Your Privacy Rights',
+        content: `**8.1 Rights for All Users**
 
-• **Access:** Request copies of your personal data
-• **Correction:** Request correction of inaccurate data
-• **Deletion:** Request deletion of your data
-• **Portability:** Request transfer of your data
-• **Opt-out:** Unsubscribe from marketing communications
-• **Objection:** Object to certain data processing
-• **Restriction:** Request restriction of processing
+Regardless of location, you have the right to:
+• Access information we hold about you
+• Correct inaccurate or incomplete data
+• Request deletion of your data (subject to legal retention requirements)
+• Object to marketing communications
+• Lodge a complaint with a supervisory authority
 
-To exercise these rights, contact us at privacy@pullse.ai.`,
+**8.2 European Economic Area (EEA), UK, and Swiss Users (GDPR/UK GDPR)**
+
+Under GDPR, you have the following rights:
+
+*Right of Access (Article 15):*
+• Obtain confirmation of whether we process your data
+• Receive a copy of your personal data
+• Access information about processing activities
+
+*Right to Rectification (Article 16):*
+• Correct inaccurate personal data
+• Complete incomplete personal data
+
+*Right to Erasure/Right to be Forgotten (Article 17):*
+• Request deletion of your personal data when:
+  - No longer necessary for the purposes collected
+  - You withdraw consent (where processing is based on consent)
+  - You object and there are no overriding legitimate grounds
+  - Data was unlawfully processed
+  - Required by legal obligation
+
+*Right to Restriction of Processing (Article 18):*
+• Limit how we use your data while we:
+  - Verify accuracy of disputed data
+  - Assess whether our legitimate interests override your objection
+  - Process your erasure request
+
+*Right to Data Portability (Article 20):*
+• Receive your data in a structured, machine-readable format
+• Transmit your data to another controller
+
+*Right to Object (Article 21):*
+• Object to processing based on legitimate interests
+• Object to direct marketing (absolute right)
+• Object to profiling and automated decision-making
+
+*Right to Withdraw Consent (Article 7):*
+• Withdraw consent at any time (where processing is based on consent)
+• Withdrawal does not affect lawfulness of prior processing
+
+*Right to Lodge a Complaint:*
+• File a complaint with your local supervisory authority
+• List of EU supervisory authorities: https://edpb.europa.eu/about-edpb/about-edpb/members_en
+
+**8.3 California Residents (CCPA/CPRA)**
+
+Under California law, you have the right to:
+
+*Right to Know and Access:*
+• Categories of personal information we collect
+• Categories of sources from which we collect
+• Business or commercial purpose for collecting
+• Categories of third parties with whom we share
+• Specific pieces of personal information we hold about you
+
+*Right to Delete:*
+• Request deletion of your personal information (subject to exceptions)
+
+*Right to Correct:*
+• Request correction of inaccurate personal information
+
+*Right to Opt-Out:*
+• Opt-out of the "sale" or "sharing" of personal information
+• Note: We do not sell personal information as commonly understood
+
+*Right to Limit Sensitive Personal Information:*
+• Limit use of sensitive personal information (if applicable)
+
+*Right to Non-Discrimination:*
+• Not be discriminated against for exercising your rights
+• Same quality of service regardless of rights exercised
+
+*Authorized Agent:*
+• Designate an authorized agent to make requests on your behalf
+
+**8.4 Canadian Residents (PIPEDA)**
+
+Under PIPEDA, you have the right to:
+• Access personal information we hold about you
+• Challenge accuracy and completeness of your information
+• Withdraw consent for certain uses
+• File a complaint with the Privacy Commissioner of Canada
+
+**8.5 Other Jurisdictions**
+
+If you reside in a jurisdiction with specific privacy laws not listed above, you may have additional rights under your local laws. Contact us at privacy@pullse.ai for information specific to your jurisdiction.
+
+**8.6 How to Exercise Your Rights**
+
+To exercise any of these rights:
+
+1. **Email:** privacy@pullse.ai with subject line "Privacy Rights Request"
+2. **Privacy Portal:** https://pullse.ai/privacy-requests (coming soon)
+3. **Account Settings:** Many rights can be exercised directly in your account settings
+
+**What to Include in Your Request:**
+• Your full name and email address associated with your account
+• Specific right you wish to exercise
+• Any relevant details (e.g., which data you want corrected)
+• Proof of identity (for security purposes)
+
+**Response Timeline:**
+• We will respond to verified requests within:
+  - 30 days (GDPR/UK GDPR)
+  - 45 days (CCPA/CPRA, extendable to 90 days)
+  - 30 days (PIPEDA)
+• We may request additional information to verify your identity
+• Complex requests may require additional time
+
+**Fee Waiver:**
+We do not charge a fee for most privacy rights requests. However, we may charge a reasonable fee or refuse to act on requests that are:
+• Manifestly unfounded or excessive
+• Repetitive in nature
+• Require disproportionate technical effort`,
       },
       {
         id: 'cookies-and-tracking',
@@ -273,36 +762,251 @@ You can control cookies through your browser settings. However, disabling cookie
       {
         id: 'international-transfers',
         title: '9. International Data Transfers',
-        content: `Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place, including:
+        content: `**9.1 Cross-Border Data Transfers**
 
-• Standard contractual clauses
-• Data protection agreements
-• Compliance with applicable data protection laws`,
+Pullse operates globally, and your personal information may be transferred to, stored, and processed in countries other than your country of residence, including the United States. These countries may have data protection laws different from those in your country.
+
+**9.2 Safeguards for International Transfers**
+
+When transferring data internationally, we implement appropriate safeguards:
+
+*For Transfers from EEA/UK/Switzerland:*
+• **Standard Contractual Clauses (SCCs):** We use the European Commission-approved SCCs for data transfers to countries without adequacy decisions
+• **UK International Data Transfer Agreement (IDTA):** For transfers subject to UK GDPR
+• **Swiss-US and EU-US Data Privacy Framework:** We are self-certifying (in progress)
+• **Binding Corporate Rules:** For intra-company transfers (under development)
+• **Transfer Impact Assessments:** We conduct assessments per Schrems II requirements
+
+*Additional Safeguards:*
+• Encryption in transit and at rest
+• Access controls and authentication
+• Regular security audits
+• Contractual data protection obligations with processors
+• Supplementary measures as recommended by EDPB
+
+**9.3 Data Processing Locations**
+
+Your data may be processed in the following regions:
+• **United States:** Primary data centers (AWS US-East, US-West)
+• **Europe:**  EU data centers for EU customers (optional)
+• **Asia-Pacific:** Limited processing through CDN and analytics services
+
+**9.4 Data Localization Options**
+
+For enterprise customers with specific data residency requirements, we offer:
+• EU-only data hosting
+• Regional data isolation
+• Custom data processing agreements
+• Contact sales@pullse.ai for more information`,
+      },
+      {
+        id: 'ai-automated-decisions',
+        title: '10. AI and Automated Decision-Making',
+        content: `**10.1 Use of Artificial Intelligence**
+
+Pullse uses AI and machine learning technologies to:
+• Generate automated responses to customer inquiries
+• Analyze sentiment and intent in customer communications
+• Provide recommendations for support ticket routing
+• Predict customer needs and suggest relevant content
+• Optimize response times and resource allocation
+
+**10.2 Automated Decision-Making**
+
+We use automated decision-making (including profiling) in limited circumstances:
+• **Fraud Detection:** Automated systems flag suspicious account activity
+• **Content Moderation:** AI flags potentially inappropriate content
+• **Spam Filtering:** Automated filtering of spam and malicious content
+
+**Important:** We do not make solely automated decisions that produce legal effects or similarly significantly affect you without human involvement.
+
+**10.3 Your Rights Regarding Automated Decisions**
+
+Under GDPR (Article 22), you have the right to:
+• Not be subject to solely automated decision-making with legal or significant effects
+• Request human review of automated decisions
+• Express your point of view
+• Contest automated decisions
+
+**10.4 AI Training and Data Use**
+
+• We may use anonymized interaction data to improve our AI models
+• Personal identifiers are removed before data is used for training
+• You can opt-out of having your data used for AI training in your account settings
+• AI-generated content is reviewed by humans for quality assurance
+• We do not use AI training data for purposes beyond improving our Services`,
+      },
+      {
+        id: 'data-breach',
+        title: '11. Data Breach Notification',
+        content: `**11.1 Our Commitment**
+
+We take data security seriously and have comprehensive measures to prevent data breaches. However, if a breach occurs that poses a risk to your rights and freedoms, we will:
+
+**11.2 Notification Timeline**
+
+• **GDPR Compliance:** Notify supervisory authorities within 72 hours of becoming aware of the breach
+• **User Notification:** Notify affected users without undue delay if the breach poses a high risk
+• **CCPA Compliance:** Comply with California breach notification requirements
+• **Other Jurisdictions:** Comply with applicable state and federal breach notification laws
+
+**11.3 Information Provided**
+
+Our breach notification will include:
+• Nature of the breach (what happened)
+• Categories and approximate number of affected users
+• Categories and approximate number of records affected
+• Likely consequences of the breach
+• Measures taken or proposed to address the breach
+• Contact point for more information
+• Recommended steps you should take to protect yourself
+
+**11.4 What We Do**
+
+In the event of a breach, we will:
+• Contain the breach and secure affected systems
+• Conduct a thorough investigation
+• Work with cybersecurity experts and law enforcement
+• Implement remediation measures
+• Provide credit monitoring services if appropriate
+• Update our security practices to prevent future incidents`,
       },
       {
         id: 'children-privacy',
-        title: '10. Children\'s Privacy',
-        content: `Our Services are not intended for children under 16. We do not knowingly collect personal information from children. If you believe we have collected data from a child, please contact us immediately.`,
+        title: '12. Children\'s Privacy',
+        content: `**12.1 Age Restrictions**
+
+Our Services are not directed to individuals under the age of 16 (or the applicable age of digital consent in your jurisdiction). We do not knowingly collect, use, or disclose personal information from children under 16.
+
+**12.2 Parental Rights**
+
+If you are a parent or guardian and believe your child under 16 has provided personal information to us:
+• Contact us immediately at privacy@pullse.ai
+• We will promptly investigate and delete the information
+• We may request proof of parental authority
+
+**12.3 Age Verification**
+
+We implement age gates and verification mechanisms where appropriate to prevent access by children.
+
+**12.4 COPPA Compliance**
+
+We comply with the US Children's Online Privacy Protection Act (COPPA) and do not collect personal information from children under 13.`,
+      },
+      {
+        id: 'ccpa-disclosures',
+        title: '13. Additional Disclosures for California Residents',
+        content: `**13.1 Do Not Sell My Personal Information**
+
+We do not sell personal information as defined under CCPA. We do not and will not sell your personal information to third parties for monetary or other valuable consideration.
+
+**13.2 Shine the Light**
+
+Under California Civil Code Section 1798.83 ("Shine the Light" law), California residents may request information about our disclosure of personal information to third parties for direct marketing purposes. We do not share personal information with third parties for their direct marketing purposes.
+
+**13.3 California Consumer Privacy Act Metrics**
+
+Upon request, we will provide California residents with:
+• Number of requests received, complied with, and denied
+• Median time to respond to requests
+• This information for the preceding calendar year
+
+**13.4 Authorized Agents**
+
+California residents may designate an authorized agent to make privacy requests on their behalf. The authorized agent must:
+• Provide proof of authorization
+• Verify their identity
+• Submit the request through our designated methods
+
+We may deny requests from agents that do not provide proof of authorization.`,
       },
       {
         id: 'changes-to-policy',
-        title: '11. Changes to This Privacy Policy',
-        content: `We may update this Privacy Policy from time to time. We will notify you of material changes by:
+        title: '14. Changes to This Privacy Policy',
+        content: `**14.1 Updates and Modifications**
 
-• Posting the updated policy on our website
-• Sending you an email notification
-• Displaying a notice in the Services
+We may update this Privacy Policy from time to time to reflect changes in:
+• Our data practices
+• Legal or regulatory requirements
+• Industry standards
+• Technology and security measures
+• Business operations
 
-Your continued use after changes indicates acceptance of the updated policy.`,
+**14.2 Notification Methods**
+
+We will notify you of material changes through:
+• Email notification to your registered email address (at least 30 days before changes take effect)
+• Prominent notice on our website and in the Services
+• In-app notifications
+• Updated "Last Modified" date at the top of this Policy
+
+**14.3 Your Acceptance**
+
+• Your continued use of our Services after the effective date constitutes acceptance of the updated Privacy Policy
+• If you do not agree with changes, you must stop using our Services and may request account deletion
+• For material changes requiring consent under applicable law, we will obtain your explicit consent before the changes take effect
+
+**14.4 Version History**
+
+We maintain a version history of this Privacy Policy. Previous versions are available upon request at privacy@pullse.ai.`,
       },
       {
         id: 'contact',
-        title: '12. Contact Us',
-        content: `If you have questions about this Privacy Policy, please contact us:
+        title: '15. Contact Information',
+        content: `**15.1 Privacy Inquiries**
 
-Email: privacy@pullse.ai
-Address: [Your Company Address]
-Data Protection Officer: dpo@pullse.ai`,
+For questions, concerns, or requests regarding this Privacy Policy or our data practices:
+
+**Email:** privacy@pullse.ai
+**Subject Line:** "Privacy Inquiry" or "Privacy Rights Request"
+
+**15.2 Data Protection Officer**
+
+For GDPR-related inquiries:
+**Email:** dpo@pullse.ai
+**EU Representative:** eu-rep@pullse.ai
+
+**15.3 Mailing Address**
+
+Pullse, Inc.
+Attention: Privacy Team
+[Your Company Address]
+[City, State, ZIP Code]
+[Country]
+
+**15.4 Response Time**
+
+We strive to respond to all privacy inquiries within:
+• 5 business days for general inquiries
+• Timeframes specified in Section 8 for rights requests
+• 48 hours for urgent security or breach-related matters
+
+**15.5 Supervisory Authorities**
+
+If you are located in the EEA, UK, or Switzerland, you have the right to lodge a complaint with your local data protection authority:
+
+• **EU:** Find your local authority at https://edpb.europa.eu/about-edpb/about-edpb/members_en
+• **UK:** Information Commissioner's Office (ICO) - https://ico.org.uk
+• **Switzerland:** Federal Data Protection and Information Commissioner (FDPIC) - https://www.edoeb.admin.ch
+
+**15.6 California Privacy Rights**
+
+California residents may contact us regarding California-specific privacy rights at:
+**Email:** california-privacy@pullse.ai
+
+**15.7 Security Concerns**
+
+To report security vulnerabilities or incidents:
+**Email:** security@pullse.ai
+**Responsible Disclosure:** https://pullse.ai/security/responsible-disclosure
+
+---
+
+**Effective Date:** January 5, 2025
+**Last Updated:** January 5, 2025
+**Version:** 2.0
+
+This Privacy Policy is governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.`,
       },
     ],
   },
