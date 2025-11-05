@@ -65,7 +65,6 @@ const navigationData = {
   ],
   resources: [
     { href: "/blog", label: "Blog", description: "News & insights", icon: Newspaper },
-    { href: "/security", label: "Security", description: "Trust & compliance", icon: Shield },
     { href: "/company", label: "Company", description: "About us", icon: Users },
     { href: "/legal", label: "Legal", description: "Terms & policies", icon: Scale },
   ],
