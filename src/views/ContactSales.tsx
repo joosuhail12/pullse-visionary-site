@@ -3,7 +3,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
-import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
+import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -158,18 +158,43 @@ const ContactSales = () => {
     "No commitment required",
   ];
 
-  // Enhanced Progress Indicator with Glass Design
+  // Simplified Progress Indicator - Just Progress Bar
   const ProgressIndicator = () => {
     const steps = [
-      { number: 1, label: "Contact Info", icon: Mail },
-      { number: 2, label: "Company", icon: Sparkles },
-      { number: 3, label: "Project", icon: Calendar },
+      { number: 1, label: "Contact Info" },
+      { number: 2, label: "Company" },
+      { number: 3, label: "Project" },
     ];
 
     return (
       <div className="mb-10">
+        {/* Step Labels */}
+        <div className="flex justify-between items-center mb-3">
+          {steps.map((step) => (
+            <motion.div
+              key={step.number}
+              className="flex-1 text-center"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: step.number * 0.1 }}
+            >
+              <span
+                className={`text-sm font-semibold transition-all duration-300 ${
+                  currentStep === step.number
+                    ? 'text-primary'
+                    : currentStep > step.number
+                    ? 'text-green-600'
+                    : 'text-gray-400'
+                }`}
+              >
+                Step {step.number}: {step.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+
         {/* Glowing Progress Bar */}
-        <div className="relative mb-8">
+        <div className="relative">
           <div className="h-3 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full overflow-hidden shadow-inner">
             <motion.div
               className="h-full bg-gradient-to-r from-primary via-purple-600 to-pink-500 relative overflow-hidden"
@@ -190,110 +215,6 @@ const ContactSales = () => {
               />
             </motion.div>
           </div>
-        </div>
-
-        {/* Glass Step Indicators */}
-        <div className="flex justify-between items-center gap-4">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            const isCompleted = currentStep > step.number;
-            const isCurrent = currentStep === step.number;
-            const isPending = currentStep < step.number;
-
-            return (
-              <div key={step.number} className="flex items-center flex-1">
-                <div className="flex flex-col items-center flex-1">
-                  <motion.div
-                    className={`relative w-14 h-14 rounded-2xl flex items-center justify-center font-bold mb-3 transition-all duration-500 cursor-pointer group ${
-                      isCompleted
-                        ? 'glass-elevated bg-gradient-to-br from-green-400 to-emerald-600 text-white shadow-lg shadow-green-500/30'
-                        : isCurrent
-                        ? 'glass-elevated bg-gradient-to-br from-primary to-purple-600 text-white shadow-xl shadow-primary/40 ring-4 ring-primary/20'
-                        : 'glass bg-gradient-to-br from-gray-50 to-gray-100 text-gray-400 shadow-sm'
-                    }`}
-                    whileHover={{ scale: 1.08, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    animate={{
-                      scale: isCurrent ? [1, 1.05, 1] : 1,
-                      boxShadow: isCurrent
-                        ? [
-                            '0 12px 40px 0 rgba(124, 58, 237, 0.2)',
-                            '0 16px 48px 0 rgba(124, 58, 237, 0.3)',
-                            '0 12px 40px 0 rgba(124, 58, 237, 0.2)',
-                          ]
-                        : undefined,
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: isCurrent ? Infinity : 0,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    {isCompleted ? (
-                      <motion.div
-                        initial={{ scale: 0, rotate: -180 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      >
-                        <CheckCircle2 className="w-7 h-7" />
-                      </motion.div>
-                    ) : (
-                      <Icon className="w-6 h-6" />
-                    )}
-
-                    {/* Glow effect */}
-                    {isCurrent && (
-                      <motion.div
-                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 blur-xl -z-10"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.5, 0.8, 0.5],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    )}
-                  </motion.div>
-
-                  <motion.span
-                    className={`text-sm font-semibold transition-all duration-300 ${
-                      isCurrent
-                        ? 'text-primary'
-                        : isCompleted
-                        ? 'text-green-600'
-                        : 'text-gray-400'
-                    }`}
-                    animate={{
-                      scale: isCurrent ? [1, 1.05, 1] : 1,
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: isCurrent ? Infinity : 0,
-                    }}
-                  >
-                    {step.label}
-                  </motion.span>
-                </div>
-
-                {index < steps.length - 1 && (
-                  <div className="h-0.5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 flex-1 mx-4 relative overflow-hidden">
-                    {currentStep > step.number && (
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-600"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.5, ease: "easeOut" }}
-                        style={{ transformOrigin: "left" }}
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
         </div>
       </div>
     );
