@@ -135,7 +135,7 @@ OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRE
       {
         id: 'governing-law',
         title: '13. Governing Law',
-        content: `These Terms are governed by the laws of [Your Jurisdiction], without regard to conflict of law principles. Any disputes shall be resolved in the courts of [Your Jurisdiction].`,
+        content: `These Terms are governed by the laws of the State of Delaware, United States, without regard to conflict of law principles. Any disputes shall be resolved in the courts of the State of Delaware.`,
       },
       {
         id: 'contact',
@@ -143,7 +143,7 @@ OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRE
         content: `If you have questions about these Terms, please contact us at:
 
 Email: legal@pullse.ai
-Address: [Your Company Address]`,
+Address: 111B S Governers Ave, STE 25219, Dover, DE 19904, United States`,
       },
     ],
   },
@@ -970,9 +970,9 @@ For GDPR-related inquiries:
 
 Pullse, Inc.
 Attention: Privacy Team
-[Your Company Address]
-[City, State, ZIP Code]
-[Country]
+111B S Governers Ave, STE 25219
+Dover, DE 19904
+United States
 
 **15.4 Response Time**
 
@@ -1006,7 +1006,7 @@ To report security vulnerabilities or incidents:
 **Last Updated:** January 5, 2025
 **Version:** 2.0
 
-This Privacy Policy is governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.`,
+This Privacy Policy is governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law provisions.`,
       },
     ],
   },
@@ -1138,7 +1138,7 @@ Collecting device characteristics to identify unique visitors.`,
         content: `If you have questions about our use of cookies, please contact us:
 
 Email: privacy@pullse.ai
-Address: [Your Company Address]`,
+Address: 111B S Governers Ave, STE 25219, Dover, DE 19904, United States`,
       },
     ],
   },
@@ -1317,7 +1317,7 @@ Your continued use after changes indicates acceptance of the updated AUP.`,
 
 Email: legal@pullse.ai
 Abuse reports: abuse@pullse.ai
-Address: [Your Company Address]`,
+Address: 111B S Governers Ave, STE 25219, Dover, DE 19904, United States`,
       },
     ],
   },
