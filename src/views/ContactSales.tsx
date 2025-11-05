@@ -3,7 +3,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
-import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -88,6 +88,7 @@ const ContactSales = () => {
 
   const prevStep = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
+    setErrors({});
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -157,70 +158,142 @@ const ContactSales = () => {
     "No commitment required",
   ];
 
-  // Progress Indicator Component
+  // Enhanced Progress Indicator with Glass Design
   const ProgressIndicator = () => {
     const steps = [
-      { number: 1, label: "Contact Info" },
-      { number: 2, label: "Company" },
-      { number: 3, label: "Project" },
+      { number: 1, label: "Contact Info", icon: Mail },
+      { number: 2, label: "Company", icon: Sparkles },
+      { number: 3, label: "Project", icon: Calendar },
     ];
 
     return (
-      <div className="mb-8">
-        {/* Progress Bar */}
-        <div className="relative mb-6">
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="mb-10">
+        {/* Glowing Progress Bar */}
+        <div className="relative mb-8">
+          <div className="h-3 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full overflow-hidden shadow-inner">
             <motion.div
-              className="h-full bg-gradient-to-r from-primary to-purple-600"
+              className="h-full bg-gradient-to-r from-primary via-purple-600 to-pink-500 relative overflow-hidden"
               initial={{ width: "0%" }}
               animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            />
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                animate={{
+                  x: ['-100%', '200%'],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+            </motion.div>
           </div>
         </div>
 
-        {/* Step Indicators */}
-        <div className="flex justify-between items-center">
-          {steps.map((step, index) => (
-            <div key={step.number} className="flex items-center flex-1">
-              <div className="flex flex-col items-center flex-1">
-                <motion.div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold mb-2 transition-all duration-300 ${
-                    currentStep > step.number
-                      ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white'
-                      : currentStep === step.number
-                      ? 'bg-gradient-to-r from-primary to-purple-600 text-white ring-4 ring-primary/20'
-                      : 'bg-gray-200 text-gray-500'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  animate={{ scale: currentStep === step.number ? [1, 1.05, 1] : 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {currentStep > step.number ? (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    >
-                      <CheckCircle2 className="w-5 h-5" />
-                    </motion.div>
-                  ) : (
-                    step.number
-                  )}
-                </motion.div>
-                <span
-                  className={`text-xs font-medium transition-colors duration-300 ${
-                    currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
-                  }`}
-                >
-                  {step.label}
-                </span>
+        {/* Glass Step Indicators */}
+        <div className="flex justify-between items-center gap-4">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            const isCompleted = currentStep > step.number;
+            const isCurrent = currentStep === step.number;
+            const isPending = currentStep < step.number;
+
+            return (
+              <div key={step.number} className="flex items-center flex-1">
+                <div className="flex flex-col items-center flex-1">
+                  <motion.div
+                    className={`relative w-14 h-14 rounded-2xl flex items-center justify-center font-bold mb-3 transition-all duration-500 cursor-pointer group ${
+                      isCompleted
+                        ? 'glass-elevated bg-gradient-to-br from-green-400 to-emerald-600 text-white shadow-lg shadow-green-500/30'
+                        : isCurrent
+                        ? 'glass-elevated bg-gradient-to-br from-primary to-purple-600 text-white shadow-xl shadow-primary/40 ring-4 ring-primary/20'
+                        : 'glass bg-gradient-to-br from-gray-50 to-gray-100 text-gray-400 shadow-sm'
+                    }`}
+                    whileHover={{ scale: 1.08, y: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                      scale: isCurrent ? [1, 1.05, 1] : 1,
+                      boxShadow: isCurrent
+                        ? [
+                            '0 12px 40px 0 rgba(124, 58, 237, 0.2)',
+                            '0 16px 48px 0 rgba(124, 58, 237, 0.3)',
+                            '0 12px 40px 0 rgba(124, 58, 237, 0.2)',
+                          ]
+                        : undefined,
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: isCurrent ? Infinity : 0,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {isCompleted ? (
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      >
+                        <CheckCircle2 className="w-7 h-7" />
+                      </motion.div>
+                    ) : (
+                      <Icon className="w-6 h-6" />
+                    )}
+
+                    {/* Glow effect */}
+                    {isCurrent && (
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 blur-xl -z-10"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0.5, 0.8, 0.5],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    )}
+                  </motion.div>
+
+                  <motion.span
+                    className={`text-sm font-semibold transition-all duration-300 ${
+                      isCurrent
+                        ? 'text-primary'
+                        : isCompleted
+                        ? 'text-green-600'
+                        : 'text-gray-400'
+                    }`}
+                    animate={{
+                      scale: isCurrent ? [1, 1.05, 1] : 1,
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: isCurrent ? Infinity : 0,
+                    }}
+                  >
+                    {step.label}
+                  </motion.span>
+                </div>
+
+                {index < steps.length - 1 && (
+                  <div className="h-0.5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 flex-1 mx-4 relative overflow-hidden">
+                    {currentStep > step.number && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-600"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        style={{ transformOrigin: "left" }}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
-              {index < steps.length - 1 && (
-                <div className="h-px bg-gray-200 flex-1 mx-2" />
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );
@@ -233,21 +306,26 @@ const ContactSales = () => {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
       className="space-y-6"
     >
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+      <div className="glass p-6 rounded-2xl border-2 border-primary/10">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-2">
           Let's start with your contact information
         </h3>
         <p className="text-gray-600 text-sm">
-          We'll use this to get in touch with you about your demo.
+          We'll use this to get in touch with you about your personalized demo.
         </p>
       </div>
 
       <div className="space-y-5">
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Full Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -255,23 +333,31 @@ const ContactSales = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="John Doe"
-            className={`glass h-12 text-base transition-all duration-200 ${
-              errors.name ? 'border-red-500 ring-2 ring-red-200' : 'focus:ring-2 focus:ring-primary/20'
+            className={`glass-elevated h-14 text-base transition-all duration-300 hover:shadow-lg ${
+              errors.name
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           />
           {errors.name && (
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.name}
             </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Work Email <span className="text-red-500">*</span>
           </label>
           <Input
@@ -280,24 +366,32 @@ const ContactSales = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="john@company.com"
-            className={`glass h-12 text-base transition-all duration-200 ${
-              errors.email ? 'border-red-500 ring-2 ring-red-200' : 'focus:ring-2 focus:ring-primary/20'
+            className={`glass-elevated h-14 text-base transition-all duration-300 hover:shadow-lg ${
+              errors.email
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           />
           {errors.email && (
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.email}
             </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
-            Phone <span className="text-gray-400 text-xs">(Optional)</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+            Phone <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>
           </label>
           <Input
             type="tel"
@@ -305,9 +399,9 @@ const ContactSales = () => {
             value={formData.phone}
             onChange={handleChange}
             placeholder="+1 (555) 000-0000"
-            className="glass h-12 text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+            className="glass-elevated h-14 text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg"
           />
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -319,21 +413,26 @@ const ContactSales = () => {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
       className="space-y-6"
     >
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+      <div className="glass p-6 rounded-2xl border-2 border-primary/10">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-2">
           Tell us about your company
         </h3>
         <p className="text-gray-600 text-sm">
-          This helps us understand your needs better.
+          This helps us tailor the demo to your specific needs and industry.
         </p>
       </div>
 
       <div className="space-y-5">
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Company Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -341,33 +440,41 @@ const ContactSales = () => {
             value={formData.company}
             onChange={handleChange}
             placeholder="Acme Inc."
-            className={`glass h-12 text-base transition-all duration-200 ${
-              errors.company ? 'border-red-500 ring-2 ring-red-200' : 'focus:ring-2 focus:ring-primary/20'
+            className={`glass-elevated h-14 text-base transition-all duration-300 hover:shadow-lg ${
+              errors.company
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           />
           {errors.company && (
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.company}
             </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Company Size <span className="text-red-500">*</span>
           </label>
           <select
             name="companySize"
             value={formData.companySize}
             onChange={handleChange}
-            className={`w-full px-4 h-12 rounded-xl border text-base focus:outline-none transition-all duration-200 bg-white ${
+            className={`glass-elevated w-full px-5 h-14 rounded-xl text-base font-medium focus:outline-none transition-all duration-300 hover:shadow-lg ${
               errors.companySize
-                ? 'border-red-500 ring-2 ring-red-200'
-                : 'border-gray-300 focus:ring-2 focus:ring-primary/20'
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           >
             <option value="">Select company size</option>
@@ -381,25 +488,31 @@ const ContactSales = () => {
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.companySize}
             </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Industry <span className="text-red-500">*</span>
           </label>
           <select
             name="industry"
             value={formData.industry}
             onChange={handleChange}
-            className={`w-full px-4 h-12 rounded-xl border text-base focus:outline-none transition-all duration-200 bg-white ${
+            className={`glass-elevated w-full px-5 h-14 rounded-xl text-base font-medium focus:outline-none transition-all duration-300 hover:shadow-lg ${
               errors.industry
-                ? 'border-red-500 ring-2 ring-red-200'
-                : 'border-gray-300 focus:ring-2 focus:ring-primary/20'
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           >
             <option value="">Select industry</option>
@@ -413,12 +526,13 @@ const ContactSales = () => {
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.industry}
             </motion.p>
           )}
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -430,31 +544,36 @@ const ContactSales = () => {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
       className="space-y-6"
     >
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+      <div className="glass p-6 rounded-2xl border-2 border-primary/10">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-2">
           Almost done! Project details
         </h3>
         <p className="text-gray-600 text-sm">
-          Tell us about your timeline and needs.
+          Share your timeline and current setup to help us prepare the perfect demo.
         </p>
       </div>
 
       <div className="space-y-5">
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Implementation Timeline <span className="text-red-500">*</span>
           </label>
           <select
             name="timeline"
             value={formData.timeline}
             onChange={handleChange}
-            className={`w-full px-4 h-12 rounded-xl border text-base focus:outline-none transition-all duration-200 bg-white ${
+            className={`glass-elevated w-full px-5 h-14 rounded-xl text-base font-medium focus:outline-none transition-all duration-300 hover:shadow-lg ${
               errors.timeline
-                ? 'border-red-500 ring-2 ring-red-200'
-                : 'border-gray-300 focus:ring-2 focus:ring-primary/20'
+                ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
             }`}
           >
             <option value="">When are you looking to implement?</option>
@@ -467,38 +586,49 @@ const ContactSales = () => {
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
+              className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1"
             >
+              <span className="w-1 h-1 rounded-full bg-red-600" />
               {errors.timeline}
             </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
-            Current Solution <span className="text-gray-400 text-xs">(Optional)</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+            Current Solution <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>
           </label>
           <Input
             name="currentSolution"
             value={formData.currentSolution}
             onChange={handleChange}
-            placeholder="e.g., Zendesk, Intercom"
-            className="glass h-12 text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+            placeholder="e.g., Zendesk, Intercom, or None"
+            className="glass-elevated h-14 text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg"
           />
-        </div>
+        </motion.div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-700 mb-2 block">
-            Additional Details <span className="text-gray-400 text-xs">(Optional)</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+            Additional Details <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>
           </label>
           <Textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Tell us about your specific needs or questions..."
-            className="glass min-h-32 text-base focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-none"
+            placeholder="Tell us about your specific needs, goals, or questions..."
+            className="glass-elevated min-h-36 text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg resize-none"
           />
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -507,75 +637,101 @@ const ContactSales = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen">
-        <PageLiquidBackground opacity={0.3} />
+        <PageLiquidBackground opacity={0.4} />
         <Navigation />
 
         <div className="pt-32 pb-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", duration: 0.6 }}
-                className="glass-strong p-12 rounded-3xl text-center"
+                transition={{ type: "spring", duration: 0.7, bounce: 0.3 }}
+                className="glass-gradient p-10 rounded-[2rem] text-center shadow-2xl border-2 border-primary/20"
               >
                 <motion.div
-                  className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", delay: 0.2, stiffness: 200 }}
+                  className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/30"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", delay: 0.2, stiffness: 200, damping: 15 }}
                 >
                   <motion.div
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
                   >
-                    <Check className="w-10 h-10 text-white" />
+                    <Check className="w-12 h-12 text-white" strokeWidth={3} />
                   </motion.div>
+
+                  {/* Glow effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-3xl bg-green-400/30 blur-2xl -z-10"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.5, 0.8, 0.5],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
                 </motion.div>
 
                 <motion.h2
-                  className="text-3xl font-bold text-gray-900 mb-4"
+                  className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.4 }}
                 >
                   Demo Request Received!
                 </motion.h2>
                 <motion.p
-                  className="text-lg text-gray-600 mb-8"
+                  className="text-xl text-gray-600 mb-8 font-medium"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.5 }}
                 >
                   Thank you, {formData.name}! We've received your demo request and our team will contact you within 24 hours.
                 </motion.p>
 
                 {/* Cal.com Integration Section */}
                 <motion.div
-                  className="border-t border-gray-200 pt-8 mt-8"
+                  className="border-t-2 border-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 pt-8 mt-8"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent mb-4">
                     Book Your Demo Now
                   </h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 mb-6 text-lg">
                     Skip the wait! Choose a time that works for you:
                   </p>
 
                   {/* Cal.com Embed Placeholder */}
-                  <div className="glass p-8 rounded-2xl min-h-[400px] flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
+                  <div className="glass-elevated p-10 rounded-3xl min-h-[450px] flex items-center justify-center bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5 border-2 border-primary/10">
                     <div className="text-center">
-                      <Calendar className="h-16 w-16 text-primary/40 mx-auto mb-4" />
-                      <p className="text-gray-600 mb-4">
-                        <strong>Cal.com Integration Ready</strong>
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          rotate: [0, 5, -5, 0],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <Calendar className="h-20 w-20 text-primary/60 mx-auto mb-6" strokeWidth={1.5} />
+                      </motion.div>
+                      <p className="text-gray-700 mb-4 text-lg">
+                        <strong className="text-primary">Cal.com Integration Ready</strong>
                       </p>
-                      <p className="text-sm text-gray-500 max-w-md">
+                      <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
                         To enable calendar booking, add your Cal.com embed code below.
                         <br />
-                        Example: cal.com/yourcompany/demo-call
+                        <span className="text-primary font-medium">Example: cal.com/yourcompany/demo-call</span>
                       </p>
                     </div>
                   </div>
@@ -585,7 +741,7 @@ const ContactSales = () => {
                       onClick={() => window.location.href = '/pricing'}
                       variant="outline"
                       size="lg"
-                      className="min-w-[160px]"
+                      className="min-w-[180px] h-14 text-base font-semibold glass-elevated border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all duration-300"
                     >
                       View Pricing
                     </Button>
@@ -593,7 +749,7 @@ const ContactSales = () => {
                       onClick={() => window.location.href = '/'}
                       variant="outline"
                       size="lg"
-                      className="min-w-[160px]"
+                      className="min-w-[180px] h-14 text-base font-semibold glass-elevated border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all duration-300"
                     >
                       Back to Home
                     </Button>
@@ -611,39 +767,50 @@ const ContactSales = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.4} />
       <Navigation />
 
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Info */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.6 }}
+                className="lg:sticky lg:top-32"
               >
-                <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <motion.h1
+                  className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent leading-tight"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
                   Book a Demo
-                </h1>
-                <p className="text-xl text-muted-foreground mb-8">
+                </motion.h1>
+                <motion.p
+                  className="text-2xl text-gray-600 mb-10 font-medium leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
                   See Pullse in action and discover how we can transform your customer support operations.
-                </p>
+                </motion.p>
 
-                <div className="space-y-6 mb-8">
+                <div className="space-y-5 mb-10">
                   {benefits.map((benefit, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 + 0.2 }}
-                      className="flex items-start gap-4"
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      className="flex items-start gap-4 group"
                     >
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 flex items-center justify-center flex-shrink-0">
-                        <Check className="h-5 w-5 text-primary" />
+                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
+                        <Check className="h-6 w-6 text-primary" strokeWidth={2.5} />
                       </div>
-                      <p className="text-lg pt-1.5 text-gray-700">{benefit}</p>
+                      <p className="text-lg pt-2 text-gray-700 font-medium">{benefit}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -651,25 +818,26 @@ const ContactSales = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="glass-strong p-6 rounded-2xl space-y-4"
+                  transition={{ delay: 0.7 }}
+                  className="glass-gradient p-7 rounded-3xl space-y-5 border-2 border-primary/10 shadow-xl"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Mail className="h-5 w-5 text-primary" />
+                  <div className="flex items-center gap-4 group cursor-pointer">
+                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
+                      <Mail className="h-6 w-6 text-primary" strokeWidth={2} />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Email Us</p>
-                      <p className="text-sm text-gray-600">sales@pullse.com</p>
+                      <p className="font-bold text-gray-900 text-lg">Email Us</p>
+                      <p className="text-base text-primary font-medium">sales@pullse.com</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <MessageSquare className="h-5 w-5 text-primary" />
+                  <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+                  <div className="flex items-center gap-4 group cursor-pointer">
+                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
+                      <MessageSquare className="h-6 w-6 text-green-600" strokeWidth={2} />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Live Chat</p>
-                      <p className="text-sm text-gray-600">Available 9am-6pm EST</p>
+                      <p className="font-bold text-gray-900 text-lg">Live Chat</p>
+                      <p className="text-base text-gray-600 font-medium">Available 9am-6pm EST</p>
                     </div>
                   </div>
                 </motion.div>
@@ -679,9 +847,13 @@ const ContactSales = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="glass-strong p-8 rounded-3xl shadow-2xl"
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="glass-gradient p-10 rounded-[2rem] shadow-2xl border-2 border-primary/20 relative overflow-hidden"
               >
+                {/* Decorative gradient orbs */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl -z-10" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-500/10 to-primary/10 rounded-full blur-3xl -z-10" />
+
                 <ProgressIndicator />
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -695,65 +867,109 @@ const ContactSales = () => {
                   <AnimatePresence>
                     {apiError && (
                       <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="glass-strong p-4 rounded-2xl border border-red-200 bg-red-50/50"
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        className="glass-elevated p-5 rounded-2xl border-2 border-red-300 bg-red-50/50 shadow-lg"
                       >
-                        <p className="text-sm text-red-600 text-center">{apiError}</p>
+                        <p className="text-sm text-red-700 text-center font-semibold">{apiError}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
                   {/* Navigation Buttons */}
-                  <div className="flex gap-3 pt-6">
+                  <div className="flex gap-4 pt-6">
                     {currentStep > 1 && (
-                      <Button
-                        type="button"
-                        onClick={prevStep}
-                        variant="outline"
-                        size="lg"
-                        className="flex-1 h-14"
-                        disabled={isSubmitting}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex-1"
                       >
-                        <ArrowLeft className="w-5 h-5 mr-2" />
-                        Back
-                      </Button>
+                        <Button
+                          type="button"
+                          onClick={prevStep}
+                          variant="outline"
+                          size="lg"
+                          className="w-full h-16 text-base font-bold glass-elevated border-2 border-gray-300 hover:border-gray-400 hover:shadow-xl transition-all duration-300"
+                          disabled={isSubmitting}
+                        >
+                          <ArrowLeft className="w-5 h-5 mr-2" strokeWidth={2.5} />
+                          Back
+                        </Button>
+                      </motion.div>
                     )}
 
                     {currentStep < totalSteps ? (
-                      <Button
-                        type="button"
-                        onClick={nextStep}
-                        size="lg"
-                        className="flex-1 h-14 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transition-all duration-200"
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex-1"
                       >
-                        Next Step
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
+                        <Button
+                          type="button"
+                          onClick={nextStep}
+                          size="lg"
+                          className="relative w-full h-16 text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30 overflow-hidden group"
+                        >
+                          <span className="relative z-10 flex items-center justify-center">
+                            Next Step
+                            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+                          </span>
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                            animate={{
+                              x: ['-100%', '200%'],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                          />
+                        </Button>
+                      </motion.div>
                     ) : (
-                      <Button
-                        type="submit"
-                        size="lg"
-                        className="flex-1 h-14 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transition-all duration-200"
-                        disabled={isSubmitting}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="flex-1"
                       >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Submitting...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-5 h-5 mr-2" />
-                            Book Demo
-                          </>
-                        )}
-                      </Button>
+                        <Button
+                          type="submit"
+                          size="lg"
+                          className="relative w-full h-16 text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30 overflow-hidden group"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? (
+                            <span className="flex items-center justify-center">
+                              <Loader2 className="w-6 h-6 mr-2 animate-spin" strokeWidth={2.5} />
+                              Submitting...
+                            </span>
+                          ) : (
+                            <span className="relative z-10 flex items-center justify-center">
+                              <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+                              Book Demo
+                            </span>
+                          )}
+                          {!isSubmitting && (
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                              animate={{
+                                x: ['-100%', '200%'],
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "linear",
+                              }}
+                            />
+                          )}
+                        </Button>
+                      </motion.div>
                     )}
                   </div>
 
-                  <p className="text-xs text-center text-muted-foreground pt-2">
+                  <p className="text-xs text-center text-gray-500 pt-2 font-medium">
                     By submitting this form, you agree to our Terms and Privacy Policy.
                   </p>
                 </form>
