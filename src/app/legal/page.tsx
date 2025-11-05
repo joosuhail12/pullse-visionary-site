@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import GenericPage from "@/views/GenericPage";
+import Legal from "@/views/Legal";
 
 export const metadata: Metadata = {
-  title: "Legal | Pullse",
-  description: "Terms of service, privacy policy, and legal information.",
+  title: "Legal | Pullse - Terms & Policies",
+  description: "Read our terms of service, privacy policy, cookie policy, and acceptable use policy.",
 };
 
-const LegalPage = () => (
-  <GenericPage title="Legal" description="Terms of service, privacy policy, and legal information." />
-);
+const LegalPage = () => <Legal />;
 
 export default LegalPage;

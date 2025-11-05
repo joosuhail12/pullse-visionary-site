@@ -107,19 +107,19 @@ const Footer = () => {
           </p>
           <div className="flex gap-6">
             <Link
-              href="/legal"
+              href="/legal/terms"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms
             </Link>
             <Link
-              href="/legal"
+              href="/legal/privacy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy
             </Link>
             <Link
-              href="/legal"
+              href="/legal/cookies"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Cookies
