@@ -23,6 +23,21 @@ const iconMap = {
   'check-circle': CheckCircle,
 };
 
+// Convert content to proper markdown format
+const formatMarkdownContent = (content: string): string => {
+  // Convert • bullets to proper markdown lists
+  return content
+    .split('\n')
+    .map(line => {
+      // Convert • to markdown list syntax
+      if (line.trim().startsWith('•')) {
+        return line.replace(/^(\s*)•/, '$1-');
+      }
+      return line;
+    })
+    .join('\n');
+};
+
 export default function LegalDocument({ document }: LegalDocumentProps) {
   const [activeSection, setActiveSection] = useState<string>('');
 
@@ -208,7 +223,7 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
                       </h2>
                       <div className="legal-text prose prose-gray max-w-none">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                          {section.content}
+                          {formatMarkdownContent(section.content)}
                         </ReactMarkdown>
                       </div>
                     </section>
@@ -253,25 +268,55 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
         }
 
         .legal-text.prose p {
-          margin-bottom: 1.25em;
+          margin-bottom: 1em;
           line-height: 1.8;
+        }
+
+        .legal-text.prose p:has(strong:only-child),
+        .legal-text.prose p:has(strong:first-child) {
+          margin-top: 1.5em;
+          margin-bottom: 0.75em;
         }
 
         .legal-text.prose strong {
           color: #1f2937;
           font-weight: 600;
+          font-size: 1.05em;
+        }
+
+        .legal-text.prose em {
+          font-style: normal;
+          font-weight: 600;
+          color: #4b5563;
+          display: block;
+          margin-top: 1.25em;
+          margin-bottom: 0.5em;
+          font-size: 0.95em;
         }
 
         .legal-text.prose ul,
         .legal-text.prose ol {
-          margin-top: 1em;
-          margin-bottom: 1.5em;
-          padding-left: 1.5em;
+          margin-top: 0.75em;
+          margin-bottom: 1.25em;
+          padding-left: 1.75em;
+        }
+
+        .legal-text.prose ul {
+          list-style-type: disc;
+        }
+
+        .legal-text.prose ol {
+          list-style-type: decimal;
         }
 
         .legal-text.prose li {
-          margin-bottom: 0.5em;
+          margin-bottom: 0.4em;
           line-height: 1.75;
+          padding-left: 0.25em;
+        }
+
+        .legal-text.prose ul > li::marker {
+          color: #7c3aed;
         }
 
         .legal-text.prose table {
