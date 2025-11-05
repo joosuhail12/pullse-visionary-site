@@ -9,6 +9,8 @@ import { ChevronRight, Printer, ArrowLeft, Scale, Shield, Cookie, CheckCircle } 
 import Link from 'next/link';
 import type { LegalDocument as LegalDocumentType } from '@/data/legalData';
 import { format } from 'date-fns';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface LegalDocumentProps {
   document: LegalDocumentType;
@@ -204,8 +206,10 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
                       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
                         {section.title}
                       </h2>
-                      <div className="legal-text whitespace-pre-line">
-                        {section.content}
+                      <div className="legal-text prose prose-gray max-w-none">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {section.content}
+                        </ReactMarkdown>
                       </div>
                     </section>
                   ))}
@@ -242,6 +246,87 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
           line-height: 1.8;
           color: #374151;
           letter-spacing: 0.01em;
+        }
+
+        .legal-text.prose {
+          color: #374151;
+        }
+
+        .legal-text.prose p {
+          margin-bottom: 1.25em;
+          line-height: 1.8;
+        }
+
+        .legal-text.prose strong {
+          color: #1f2937;
+          font-weight: 600;
+        }
+
+        .legal-text.prose ul,
+        .legal-text.prose ol {
+          margin-top: 1em;
+          margin-bottom: 1.5em;
+          padding-left: 1.5em;
+        }
+
+        .legal-text.prose li {
+          margin-bottom: 0.5em;
+          line-height: 1.75;
+        }
+
+        .legal-text.prose table {
+          width: 100%;
+          margin-top: 1.5em;
+          margin-bottom: 1.5em;
+          border-collapse: collapse;
+          font-size: 0.95em;
+        }
+
+        .legal-text.prose thead {
+          border-bottom: 2px solid #e5e7eb;
+        }
+
+        .legal-text.prose th {
+          padding: 0.75rem 1rem;
+          text-align: left;
+          font-weight: 600;
+          color: #1f2937;
+          background-color: #f9fafb;
+        }
+
+        .legal-text.prose td {
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #e5e7eb;
+        }
+
+        .legal-text.prose tr:last-child td {
+          border-bottom: none;
+        }
+
+        .legal-text.prose h3 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #1f2937;
+          margin-top: 2em;
+          margin-bottom: 1em;
+        }
+
+        .legal-text.prose h4 {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #1f2937;
+          margin-top: 1.5em;
+          margin-bottom: 0.75em;
+        }
+
+        .legal-text.prose a {
+          color: #7c3aed;
+          text-decoration: underline;
+          transition: color 0.2s;
+        }
+
+        .legal-text.prose a:hover {
+          color: #6d28d9;
         }
 
         @media print {
