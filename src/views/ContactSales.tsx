@@ -337,21 +337,78 @@ const ContactSales = () => {
                 </p>
 
                 {/* Cal.com Integration Section */}
-                <div className="border-t-2 border-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 pt-8 mt-8">
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent mb-4">
-                    Book Your Demo Now
-                  </h3>
-                  <p className="text-gray-600 mb-6 text-lg">
-                    Skip the wait! Choose a time that works for you:
-                  </p>
+                <div className="mt-12 space-y-8">
+                  {/* Divider with decorative elements */}
+                  <div className="relative py-8">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t-2 border-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+                    </div>
+                    <div className="relative flex justify-center">
+                      <span className="px-6 py-2 glass-strong rounded-full border border-primary/20 text-sm font-semibold text-primary">
+                        OR
+                      </span>
+                    </div>
+                  </div>
 
-                  {/* Cal.com Booking Widget */}
-                  <CalEmbed
-                    calLink="suhailjoo/pullse-demo"
-                    className="glass-elevated p-10 rounded-3xl border-2 border-primary/10"
-                  />
+                  {/* Booking Section */}
+                  <div className="relative">
+                    {/* Background decorative elements */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 via-purple-500/5 to-pink-500/5 rounded-[2.5rem] blur-3xl -z-10" />
 
-                  <div className="mt-8 flex gap-4 justify-center flex-wrap">
+                    <div className="glass-elevated p-8 md:p-12 rounded-3xl border-2 border-primary/10 space-y-6">
+                      {/* Header */}
+                      <div className="text-center space-y-3">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 mb-2">
+                          <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
+                          Book Your Demo Instantly
+                        </h3>
+                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                          Skip the wait! Pick a time that works best for you and meet with our team directly.
+                        </p>
+                      </div>
+
+                      {/* Calendar Embed */}
+                      <CalEmbed
+                        calLink="suhailjoo/pullse-demo"
+                        className="mt-8"
+                      />
+
+                      {/* Features */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-gray-200/50">
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-700 font-medium">30-minute demo</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-700 font-medium">Personalized walkthrough</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-700 font-medium">Q&A session</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-4 justify-center flex-wrap pt-4">
                     <Button
                       onClick={() => window.location.href = '/pricing'}
                       variant="outline"
