@@ -124,6 +124,12 @@ const Footer = () => {
             >
               Cookies
             </Link>
+            <Link
+              href="/legal/data-processing"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              DPA
+            </Link>
           </div>
         </div>
       </div>
