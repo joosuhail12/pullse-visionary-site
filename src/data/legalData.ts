@@ -36,10 +36,21 @@ By accessing or using our Services, you agree to be bound by these Terms. If you
         title: '2. Definitions',
         content: `For purposes of these Terms:
 
-• "Account" refers to your registered Pullse account
-• "Customer Data" means any data, content, or materials that you submit, upload, or transmit through the Services
-• "Platform" means the Pullse AI-powered customer support software and related services
-• "You" or "Customer" refers to the individual or entity accessing or using the Services`,
+• **"Account"** refers to your registered Pullse account and associated user credentials
+• **"Authorized Users"** means your employees, consultants, contractors, and agents who are authorized to use the Services on your behalf
+• **"Beta Features"** means Services or features identified as alpha, beta, pilot, limited release, developer preview, non-production, evaluation, or by similar designation
+• **"Customer Data"** means any data, content, information, or materials that you or your Authorized Users submit, upload, or transmit through the Services
+• **"Documentation"** means Pullse's user guides, technical documentation, and online help resources made available by Pullse
+• **"Downtime"** means periods when the Services are unavailable as measured by our monitoring systems
+• **"Effective Date"** means the date you first access or use the Services
+• **"Order Form"** means an ordering document specifying the Services purchased, pricing, and other commercial terms
+• **"Personal Data"** has the meaning set forth in applicable data protection laws and includes information that identifies or relates to an identifiable individual
+• **"Platform"** means the Pullse AI-powered customer support software and related services, including our APIs
+• **"Professional Services"** means consulting, implementation, training, or other professional services that we may provide
+• **"Service Level Agreement" or "SLA"** means our uptime commitments and remedies as described in Section 5
+• **"Subscription Term"** means the period during which you have purchased access to the Services
+• **"You" or "Customer"** refers to the individual or entity accessing or using the Services
+• **"Usage Data"** means technical logs, metrics, and analytics about your use of the Services`,
       },
       {
         id: 'account-registration',
@@ -66,80 +77,606 @@ By accessing or using our Services, you agree to be bound by these Terms. If you
 • Resell or redistribute the Services without permission`,
       },
       {
+        id: 'service-levels',
+        title: '5. Service Level Agreement (SLA)',
+        content: `**5.1 Uptime Commitment**
+
+We commit to maintaining the following service availability (the "Uptime Commitment"):
+
+• **Production Services:** 99.9% monthly uptime for paid plans
+• **Free Plans:** 99.5% monthly uptime, provided on a best-effort basis
+• **Measurement Period:** Calculated monthly based on calendar month
+
+**5.2 Uptime Calculation**
+
+Uptime Percentage = (Total Minutes in Month - Downtime Minutes) / Total Minutes in Month × 100
+
+**5.3 Exclusions from Downtime**
+
+Downtime does not include unavailability caused by:
+• Scheduled maintenance (with at least 24 hours advance notice via email or dashboard)
+• Emergency maintenance (security patches, critical updates)
+• Factors beyond our reasonable control (force majeure events, internet service provider failures, DDoS attacks)
+• Your equipment, software, or internet connection
+• Actions or inactions by you or your Authorized Users
+• Beta Features or features designated as "experimental"
+• Third-party services or integrations beyond our control
+• Your suspension or termination of Services due to breach
+
+**5.4 Service Credits**
+
+If we fail to meet the Uptime Commitment (for paid plans only), you may be eligible for Service Credits:
+
+| Monthly Uptime Percentage | Service Credit |
+|---------------------------|----------------|
+| Less than 99.9% but ≥ 99.0% | 10% of monthly fee |
+| Less than 99.0% but ≥ 95.0% | 25% of monthly fee |
+| Less than 95.0% | 50% of monthly fee |
+
+**Service Credit Terms:**
+• Credits are your sole remedy for service availability failures
+• Credits are calculated as a percentage of the monthly subscription fee for the affected Service
+• Credits will be applied to your next billing cycle
+• Credits do not entitle you to any refund or other payment
+• Credits must be requested within 30 days of the end of the month in which the Downtime occurred
+• To request credits, email support@pullse.ai with "SLA Credit Request" in the subject line and include:
+  - Your account details
+  - Dates and times of unavailability
+  - Request logs or error messages (if available)
+• Maximum aggregate Service Credits per month: 50% of monthly subscription fee
+
+**5.5 Support Services**
+
+We provide the following support based on your plan:
+
+*Free Plan:*
+• Community forum access
+• Documentation and knowledge base
+• Email support (best effort, 72-hour response time target)
+
+*Starter Plan:*
+• Email support (48-hour response time target)
+• Knowledge base and documentation
+• Community forum access
+
+*Professional Plan:*
+• Email support (24-hour response time target)
+• Chat support during business hours (9 AM - 6 PM EST, Monday-Friday)
+• Onboarding assistance
+• Priority bug fixes
+
+*Enterprise Plan:*
+• Email support (4-hour response time target for critical issues)
+• 24/7 chat support
+• Phone support during business hours
+• Dedicated customer success manager
+• Quarterly business reviews
+• Custom SLA terms available
+
+**5.6 Maintenance Windows**
+
+• Scheduled Maintenance: Typically performed during low-traffic periods (weekends, late night EST)
+• Advance Notice: Minimum 24 hours for scheduled maintenance; 4 hours for urgent maintenance
+• Emergency Maintenance: May be performed without notice for security or stability issues
+
+**5.7 Status Updates**
+
+• Real-time service status available at: status.pullse.ai
+• Incident notifications via email, dashboard, and status page
+• Post-incident reports for major outages (within 72 hours of resolution)`,
+      },
+      {
+        id: 'api-usage',
+        title: '6. API Usage and Rate Limits',
+        content: `**6.1 API Access**
+
+Depending on your plan, you may have access to our Application Programming Interface (API) to programmatically interact with the Services.
+
+**6.2 Rate Limits**
+
+To ensure fair usage and platform stability, we enforce the following API rate limits:
+
+*Free Plan:*
+• 100 requests per hour
+• 1,000 requests per day
+• Burst limit: 10 requests per second
+
+*Starter Plan:*
+• 1,000 requests per hour
+• 10,000 requests per day
+• Burst limit: 25 requests per second
+
+*Professional Plan:*
+• 10,000 requests per hour
+• 100,000 requests per day
+• Burst limit: 50 requests per second
+
+*Enterprise Plan:*
+• Custom rate limits negotiated in Order Form
+• Dedicated API endpoints available
+• Burst limit: 100+ requests per second
+
+**6.3 Rate Limit Enforcement**
+
+• HTTP 429 (Too Many Requests) responses when limits are exceeded
+• Retry-After header indicates when you can retry
+• Repeated violations may result in temporary or permanent API access suspension
+
+**6.4 API Terms**
+
+When using our API, you agree to:
+• Use API keys securely and not share them publicly
+• Implement proper error handling and exponential backoff
+• Cache responses when appropriate to minimize unnecessary requests
+• Not attempt to circumvent rate limits
+• Comply with our API documentation and best practices
+• Not use the API to build competing products or services
+• Not reverse engineer the API or attempt to discover source code
+• Provide attribution when required by Documentation
+
+**6.5 API Changes**
+
+• We may modify, deprecate, or discontinue API endpoints with reasonable notice
+• Breaking changes will be announced at least 90 days in advance
+• We maintain backward compatibility for at least one major version
+• API versioning follows semantic versioning (v1, v2, etc.)
+
+**6.6 Webhooks**
+
+• Webhook endpoints must respond within 5 seconds
+• Failed webhook deliveries will be retried up to 3 times
+• We are not responsible for webhook delivery failures caused by your infrastructure
+• You must maintain valid SSL certificates for webhook endpoints`,
+      },
+      {
+        id: 'beta-features',
+        title: '7. Beta Features and Early Access',
+        content: `**7.1 Beta Features**
+
+We may offer Beta Features for evaluation and feedback purposes. Beta Features are clearly identified in the Services interface or Documentation.
+
+**7.2 Beta Terms**
+
+Beta Features are provided "AS IS" and:
+• May not be fully functional or tested
+• May contain bugs or cause errors
+• May be substantially modified or discontinued without notice
+• Are not covered by our SLA or uptime commitments
+• May not have complete documentation
+• May have limited or no support
+• Should not be used for production or mission-critical purposes
+
+**7.3 Feedback**
+
+If you provide feedback, suggestions, or ideas about Beta Features ("Feedback"):
+• We may use Feedback without restriction or obligation to you
+• You grant us a perpetual, irrevocable, royalty-free license to use Feedback
+• Feedback does not include your Customer Data or confidential information
+
+**7.4 Data in Beta Features**
+
+• Data processed through Beta Features may not be recoverable if the feature is discontinued
+• We recommend not using sensitive or critical data with Beta Features
+• Data retention policies may differ for Beta Features
+
+**7.5 Transition from Beta**
+
+• When Beta Features become generally available, we will notify you
+• Separate fees may apply for continued use after general availability
+• You may opt out of continued use at that time without penalty`,
+      },
+      {
         id: 'data-and-privacy',
-        title: '5. Data and Privacy',
+        title: '8. Data and Privacy',
         content: `Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your personal information. By using the Services, you consent to our data practices as described in the Privacy Policy.
 
-You retain all rights to your Customer Data. We will not use your Customer Data except to provide and improve the Services.`,
+You retain all rights to your Customer Data. We will not use your Customer Data except to provide and improve the Services.
+
+For enterprise customers processing Personal Data, our Data Processing Agreement (DPA) applies and is incorporated by reference into these Terms.`,
       },
       {
         id: 'intellectual-property',
-        title: '6. Intellectual Property',
+        title: '9. Intellectual Property',
         content: `The Services, including all software, content, and trademarks, are the property of Pullse and its licensors. These Terms do not grant you any ownership rights to the Services.
 
 You retain ownership of your Customer Data. By submitting Customer Data, you grant us a license to use, process, and store it solely to provide the Services.`,
       },
       {
         id: 'payment-and-billing',
-        title: '7. Payment and Billing',
-        content: `Fees for the Services are as described in your selected plan. You agree to:
+        title: '10. Payment and Billing',
+        content: `**10.1 Fees and Payment**
 
-• Pay all fees as they become due
-• Provide accurate billing information
-• Update payment information as needed
+Fees for the Services are as described in your selected plan or Order Form. You agree to:
+
+• Pay all fees as they become due according to the billing schedule
+• Provide accurate and complete billing information
+• Update payment information promptly if it changes
+• Pay via credit card, ACH, or wire transfer (Enterprise plans only)
 • Accept responsibility for all charges incurred under your account
 
-We reserve the right to modify pricing with advance notice.`,
+**10.2 Billing**
+
+• Subscription fees are billed in advance on a monthly or annual basis
+• Usage-based fees (if applicable) are billed monthly in arrears
+• All fees are non-refundable except as expressly stated in these Terms or required by law
+• Invoices are due net 30 days from invoice date for Enterprise customers
+• Self-service plans are billed automatically to your payment method
+
+**10.3 Taxes**
+
+• Fees are exclusive of all taxes, duties, or similar governmental assessments
+• You are responsible for paying all applicable taxes except those based on Pullse's net income
+• If required by law, we may collect applicable taxes
+• You must provide valid tax exemption certificates if claiming exemption
+
+**10.4 Late Payment**
+
+• Late payments may accrue interest at 1.5% per month or the maximum legal rate, whichever is lower
+• We may suspend access to Services if payment is more than 15 days past due
+• You remain responsible for all fees during suspension
+• We may charge reasonable costs to collect overdue amounts
+
+**10.5 Price Changes**
+
+• We reserve the right to modify pricing with at least 30 days advance notice
+• Price changes take effect at your next renewal date
+• Continued use after price changes constitutes acceptance
+• Price changes do not apply to existing Enterprise Order Forms during their current term
+
+**10.6 Disputes**
+
+• You must notify us of billing disputes within 30 days of the charge
+• We will work with you to resolve disputes in good faith
+• Undisputed amounts remain due and payable`,
+      },
+      {
+        id: 'professional-services',
+        title: '11. Professional Services',
+        content: `**11.1 Service Offerings**
+
+We may offer Professional Services including:
+• Implementation and onboarding assistance
+• Custom integration development
+• Data migration services
+• Training and education
+• Strategic consulting
+• Technical advisory services
+
+**11.2 Engagement Terms**
+
+Professional Services are provided pursuant to:
+• A separate Statement of Work (SOW) or Order Form
+• These Terms of Service
+• Professional Services rates and estimates provided in writing
+• Subject to our then-current availability
+
+**11.3 Fees and Payment**
+
+• Professional Services are billed separately from subscription fees
+• May be charged on a fixed-fee, time-and-materials, or retainer basis
+• Travel expenses (if any) are billed separately at cost
+• Change requests may result in additional fees and timeline adjustments
+
+**11.4 Deliverables and Acceptance**
+
+• Deliverables (if any) are specified in the applicable SOW
+• You have 10 business days to review and accept deliverables
+• Acceptance deemed granted if no written objection within review period
+• One round of reasonable revisions included for deliverables
+
+**11.5 Intellectual Property**
+
+• Any pre-existing intellectual property remains our property
+• Custom deliverables created specifically for you are licensed to you
+• We may use general knowledge, skills, and experience gained
+• We may create de-identified case studies with your advance approval`,
       },
       {
         id: 'termination',
-        title: '8. Termination',
-        content: `Either party may terminate these Terms at any time. Upon termination:
+        title: '12. Termination',
+        content: `**12.1 Termination by You**
 
-• Your access to the Services will cease
-• You must pay any outstanding fees
+• Monthly subscriptions: Cancel at any time with at least 30 days notice; termination effective at end of current billing period
+• Annual subscriptions: Cancel at any time with at least 30 days notice; no refund for unused portion unless required by law
+• Enterprise agreements: Per terms specified in Order Form
+
+**12.2 Termination by Pullse**
+
+We may terminate or suspend your access immediately if:
+• You violate these Terms or our Acceptable Use Policy
+• You fail to pay fees when due (after 15-day cure period)
+• Your use poses security or legal risks to us or others
+• Required by law or court order
+• You become insolvent or enter bankruptcy proceedings
+
+**12.3 Effect of Termination**
+
+Upon termination or expiration:
+• Your access to the Services will cease immediately (or per notice period)
+• You must pay any outstanding fees and charges
 • You may export your Customer Data within 30 days
-• We may delete your Customer Data after this period
+• We will delete your Customer Data within 90 days unless legally required to retain
+• Sections that by their nature should survive will continue (Payment, IP, Liability, etc.)
 
-We may suspend or terminate your account if you violate these Terms.`,
+**12.4 Data Retention and Deletion**
+
+• Export your data before termination; we are not obligated to provide data after termination
+• Customer Data is permanently deleted 90 days after termination
+• Backup systems may retain data for additional 90 days
+• Some metadata may be retained for legal, security, or audit purposes
+• Anonymized usage data may be retained indefinitely
+
+**12.5 No Refunds**
+
+• Fees are non-refundable except where required by law
+• Termination does not entitle you to refund of prepaid fees
+• Unused Service Credits expire upon termination
+• Outstanding invoices remain due and payable`,
+      },
+      {
+        id: 'force-majeure',
+        title: '13. Force Majeure',
+        content: `**13.1 Force Majeure Events**
+
+Neither party will be liable for failure or delay in performance due to events beyond its reasonable control, including:
+• Natural disasters (earthquakes, floods, hurricanes, fires)
+• Acts of war, terrorism, civil unrest, or riot
+• Government actions, embargoes, or sanctions
+• Pandemics or public health emergencies
+• Internet service provider failures or utility outages
+• Strikes or labor disputes
+• Cyberattacks or DDoS attacks not caused by the claiming party's security failures
+• Supply chain disruptions
+• Telecommunications or network failures
+
+**13.2 Obligations During Force Majeure**
+
+The affected party must:
+• Notify the other party promptly of the force majeure event
+• Use commercially reasonable efforts to mitigate impact and resume performance
+• Provide regular status updates
+• Resume performance as soon as reasonably practicable
+
+**13.3 Termination Rights**
+
+If a force majeure event prevents performance for more than 30 consecutive days:
+• Either party may terminate the Agreement upon written notice
+• You will receive a pro-rata refund of prepaid fees for the period of non-performance
+• No other liability or obligation arises from such termination
+
+**13.4 Service Credits**
+
+Service Credits under the SLA do not apply to Downtime caused by force majeure events.`,
+      },
+      {
+        id: 'export-compliance',
+        title: '14. Export Compliance and Government Use',
+        content: `**14.1 Export Control Laws**
+
+The Services and underlying technology may be subject to export control laws and regulations, including the U.S. Export Administration Regulations and sanctions programs administered by the Office of Foreign Assets Control (OFAC).
+
+You represent and warrant that:
+• You are not located in, under the control of, or a national or resident of any country to which the United States has embargoed goods or services
+• You are not on any U.S. government list of prohibited or restricted parties (e.g., Specially Designated Nationals List, Entity List, Denied Persons List)
+• You will not use the Services in violation of any export control or sanctions laws
+• You will not permit users to access or use the Services in violation of export laws
+
+**14.2 Restricted Countries**
+
+The Services may not be used in or exported to the following countries (subject to change):
+• Cuba, Iran, North Korea, Syria, or the Crimea region
+• Any country subject to comprehensive U.S. sanctions
+• Any country where provision of Services would violate applicable law
+
+**14.3 Compliance Obligations**
+
+You will:
+• Comply with all applicable export control and sanctions laws
+• Obtain any required export licenses or authorizations
+• Not use the Services for development of weapons or nuclear, chemical, or biological programs
+• Immediately notify us if you become subject to sanctions or export restrictions
+
+**14.4 Government End Users**
+
+If you are a U.S. federal, state, or local government entity:
+• The Services are "Commercial Computer Software" and "Commercial Computer Software Documentation" as defined in FAR 12.212 and DFARS 227.7202
+• Your rights are limited to those expressly granted in these Terms
+• Use, duplication, or disclosure is subject to restrictions in accordance with FAR 12.212, DFARS 227.7202, and their successors
+
+**14.5 Government-Specific Terms**
+
+For government customers, additional terms may apply as set forth in an Order Form or separate government amendment.`,
       },
       {
         id: 'warranties-and-disclaimers',
-        title: '9. Warranties and Disclaimers',
+        title: '15. Warranties and Disclaimers',
         content: `THE SERVICES ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
 
 We do not warrant that the Services will be uninterrupted, error-free, or completely secure.`,
       },
       {
         id: 'limitation-of-liability',
-        title: '10. Limitation of Liability',
+        title: '16. Limitation of Liability',
         content: `TO THE MAXIMUM EXTENT PERMITTED BY LAW, PULLSE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.
 
 OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE CLAIM.`,
       },
       {
         id: 'indemnification',
-        title: '11. Indemnification',
-        content: `You agree to indemnify and hold harmless Pullse from any claims, damages, or expenses arising from:
+        title: '17. Indemnification',
+        content: `**17.1 Your Indemnification Obligations**
 
-• Your use of the Services
-• Your violation of these Terms
-• Your violation of any rights of third parties
-• Your Customer Data`,
+You agree to indemnify, defend, and hold harmless Pullse, its affiliates, and their respective officers, directors, employees, and agents from and against any and all third-party claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising from or related to:
+
+• Your use or misuse of the Services
+• Your violation of these Terms or any applicable law
+• Your violation of any rights of third parties, including intellectual property rights
+• Your Customer Data, including any claim that it infringes or misappropriates third-party rights
+• Your breach of any representation or warranty in these Terms
+• Negligence or willful misconduct by you or your Authorized Users
+• Your failure to comply with applicable data protection laws
+
+**17.2 Indemnification Process**
+
+We will:
+• Promptly notify you of any claim subject to indemnification
+• Give you sole control of the defense and settlement (with our consent, not to be unreasonably withheld)
+• Provide reasonable cooperation at your expense
+
+You may not settle any claim that:
+• Admits liability on our behalf
+• Requires us to pay money
+• Imposes obligations on us
+Without our prior written consent.
+
+**17.3 Our Indemnification Obligations**
+
+We will indemnify you from third-party claims that the Services, when used as authorized under these Terms, infringe a U.S. patent, copyright, or trademark.
+
+This indemnification does not apply if the claim arises from:
+• Modification of the Services by anyone other than us
+• Use of the Services in combination with products, data, or services not provided by us
+• Use of a superseded or deprecated version of the Services
+• Your Customer Data or third-party content
+• Beta Features or services provided free of charge
+
+**17.4 Remedies for Infringement**
+
+If we believe the Services may infringe, we may:
+• Obtain rights for you to continue using the Services
+• Replace or modify the Services to make them non-infringing
+• Terminate your access and refund prepaid, unused fees
+
+This section states your sole remedy and our entire liability for infringement claims.`,
+      },
+      {
+        id: 'dispute-resolution',
+        title: '18. Dispute Resolution and Arbitration',
+        content: `**18.1 Informal Resolution**
+
+Before filing a claim, you agree to contact us at legal@pullse.ai to attempt to resolve the dispute informally. We will attempt to resolve the dispute through good faith negotiations for at least 30 days.
+
+**18.2 Binding Arbitration**
+
+If informal resolution fails, you and Pullse agree that any dispute, claim, or controversy arising out of or relating to these Terms or the Services will be resolved by binding arbitration, except as provided in Section 18.5.
+
+**Arbitration Rules:**
+• Arbitration will be conducted by the American Arbitration Association (AAA) under its Commercial Arbitration Rules
+• The arbitration will be held in Wilmington, Delaware or remotely via videoconference
+• The arbitrator may award any relief that a court of competent jurisdiction could award
+• The arbitrator's decision is final and binding
+• Judgment on the arbitration award may be entered in any court having jurisdiction
+
+**18.3 Class Action Waiver**
+
+**YOU AND PULLSE AGREE THAT EACH PARTY MAY BRING CLAIMS AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, CONSOLIDATED, OR REPRESENTATIVE PROCEEDING.**
+
+Unless both parties agree otherwise:
+• The arbitrator may not consolidate multiple parties' claims
+• The arbitrator may not preside over any form of class or representative proceeding
+• The arbitrator may not award class-wide relief
+
+If this class action waiver is found to be unenforceable, the entire arbitration provision will be void.
+
+**18.4 Costs and Fees**
+
+• Each party will bear its own attorneys' fees and costs unless applicable law or the arbitrator decides otherwise
+• AAA filing fees will be split equally unless you qualify for a fee waiver
+• If you prevail on your claim, we will reimburse your portion of filing fees
+
+**18.5 Exceptions to Arbitration**
+
+Either party may bring suit in court for:
+• Injunctive or equitable relief to protect intellectual property rights
+• Claims related to theft, piracy, or unauthorized use of the Services
+• Small claims court actions (up to the jurisdictional limit)
+
+**18.6 30-Day Opt-Out Right**
+
+You may opt out of this arbitration agreement by sending written notice to legal@pullse.ai within 30 days of first accessing or using the Services. The notice must include your name, address, email, and a clear statement that you wish to opt out of arbitration.
+
+**18.7 Governing Law for Arbitration**
+
+The Federal Arbitration Act governs the interpretation and enforcement of this arbitration provision. Any dispute about the applicability or enforceability of this provision will be resolved by a court, not an arbitrator.`,
       },
       {
         id: 'changes-to-terms',
-        title: '12. Changes to Terms',
+        title: '19. Changes to Terms',
         content: `We may modify these Terms at any time. We will provide notice of material changes by email or through the Services. Your continued use of the Services after changes take effect constitutes acceptance of the modified Terms.`,
       },
       {
         id: 'governing-law',
-        title: '13. Governing Law',
-        content: `These Terms are governed by the laws of the State of Delaware, United States, without regard to conflict of law principles. Any disputes shall be resolved in the courts of the State of Delaware.`,
+        title: '20. Governing Law and Venue',
+        content: `**20.1 Governing Law**
+
+These Terms are governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law principles.
+
+The United Nations Convention on Contracts for the International Sale of Goods does not apply to these Terms.
+
+**20.2 Venue**
+
+For any disputes not subject to arbitration (see Section 18), you agree to submit to the personal and exclusive jurisdiction of the state and federal courts located in Wilmington, Delaware.
+
+**20.3 Waiver of Jury Trial**
+
+TO THE EXTENT PERMITTED BY LAW, EACH PARTY WAIVES ANY RIGHT TO TRIAL BY JURY IN ANY PROCEEDING ARISING OUT OF OR RELATED TO THESE TERMS.`,
+      },
+      {
+        id: 'miscellaneous',
+        title: '21. Miscellaneous',
+        content: `**21.1 Entire Agreement**
+
+These Terms, together with any Order Form, DPA, and SLA, constitute the entire agreement between you and Pullse regarding the Services and supersede all prior agreements and understandings.
+
+**21.2 Severability**
+
+If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will continue in full force and effect. Invalid provisions will be modified to the minimum extent necessary to make them valid and enforceable.
+
+**21.3 No Waiver**
+
+Our failure to enforce any provision of these Terms does not waive our right to enforce that provision later. Any waiver must be in writing and signed by an authorized representative of Pullse.
+
+**21.4 Assignment**
+
+You may not assign or transfer these Terms without our prior written consent. We may assign these Terms to any affiliate or in connection with a merger, acquisition, or sale of assets. Any attempted assignment in violation of this section is void.
+
+**21.5 Relationship of Parties**
+
+The parties are independent contractors. These Terms do not create a partnership, franchise, joint venture, agency, or employment relationship.
+
+**21.6 Third-Party Beneficiaries**
+
+These Terms do not confer any third-party beneficiary rights except as expressly stated.
+
+**21.7 Notices**
+
+Notices to you may be sent to your account email address and are deemed received when sent. Notices to us must be sent to legal@pullse.ai and are deemed received when acknowledged.
+
+For Enterprise customers, notices may also be sent to addresses specified in the Order Form.
+
+**21.8 Publicity**
+
+You grant us the right to use your company name and logo as a customer reference in our marketing materials unless you opt out by emailing marketing@pullse.ai.
+
+**21.9 Language**
+
+These Terms are drafted in English. Any translation is provided for convenience only. In the event of conflict, the English version governs.
+
+**21.10 Survival**
+
+Provisions that by their nature should survive termination will survive, including: Definitions, Payment, IP, Confidentiality, Warranties, Liability, Indemnification, Dispute Resolution, Governing Law, and Miscellaneous.
+
+**21.11 Order of Precedence**
+
+In the event of conflict between documents, the following order of precedence applies:
+1. Order Form (for Enterprise customers)
+2. Data Processing Agreement
+3. These Terms of Service
+4. Documentation`,
       },
       {
         id: 'contact',
-        title: '14. Contact Information',
+        title: '22. Contact Information',
         content: `If you have questions about these Terms, please contact us at:
 
 Email: legal@pullse.ai
@@ -1048,23 +1585,83 @@ Help us understand how visitors interact with our website through anonymous usag
       {
         id: 'specific-cookies',
         title: '3. Specific Cookies We Use',
-        content: `**Essential Cookies:**
-• Session cookies: Maintain your logged-in state
-• Security cookies: Prevent cross-site request forgery
-• Load balancing cookies: Distribute traffic efficiently
+        content: `Below is a comprehensive list of cookies we use, organized by category:
 
-**Analytics Cookies (Google Analytics):**
-• _ga: Distinguishes unique users
-• _gid: Distinguishes unique users (24-hour expiration)
-• _gat: Throttles request rate
+**3.1 Essential/Strictly Necessary Cookies**
 
-**Functional Cookies:**
-• preferences: Stores your display preferences
-• language: Remembers your language selection
-• timezone: Stores your timezone setting
+These cookies are required for the website to function and cannot be disabled.
 
-**Third-Party Cookies:**
-We may also use cookies from trusted third-party services like Google Analytics, Stripe (payment processing), and Intercom (customer support).`,
+| Cookie Name | Provider | Purpose | Duration | Type |
+|-------------|----------|---------|----------|------|
+| __session | Pullse | Maintains your logged-in session | Session | HTTP |
+| csrf_token | Pullse | Prevents cross-site request forgery attacks | Session | HTTP |
+| load_balancer | Pullse | Distributes traffic across servers | 1 day | HTTP |
+| auth_token | Pullse | Authenticates API requests | 30 days | HTTP |
+| secure_id | Pullse | Additional security validation | Session | HTTP |
+
+**3.2 Performance/Analytics Cookies**
+
+These cookies help us understand how visitors use our website.
+
+| Cookie Name | Provider | Purpose | Duration | Type |
+|-------------|----------|---------|----------|------|
+| _ga | Google Analytics | Distinguishes unique users | 2 years | HTTP |
+| _ga_* | Google Analytics | Used by Google Analytics to persist session state | 2 years | HTTP |
+| _gid | Google Analytics | Distinguishes unique users (short-term) | 24 hours | HTTP |
+| _gat | Google Analytics | Throttles request rate | 1 minute | HTTP |
+| _gat_gtag_* | Google Analytics | Used to throttle request rate | 1 minute | HTTP |
+| mp_* | Mixpanel | Product analytics and user behavior tracking | 1 year | HTTP |
+| amplitude_id | Amplitude | User identification for product analytics | 10 years | HTTP |
+| amplitude_sessionId | Amplitude | Session tracking for analytics | Session | HTTP |
+
+**3.3 Functional Cookies**
+
+These cookies remember your preferences and choices.
+
+| Cookie Name | Provider | Purpose | Duration | Type |
+|-------------|----------|---------|----------|------|
+| pullse_preferences | Pullse | Stores display and UI preferences | 1 year | HTTP |
+| pullse_language | Pullse | Remembers language selection | 1 year | HTTP |
+| pullse_timezone | Pullse | Stores timezone setting | 1 year | HTTP |
+| pullse_theme | Pullse | Remembers dark/light mode preference | 1 year | HTTP |
+| pullse_dismissed_banners | Pullse | Tracks dismissed notification banners | 90 days | HTTP |
+| intercom-* | Intercom | Powers customer support chat functionality | 1 week | HTTP |
+
+**3.4 Targeting/Advertising Cookies**
+
+These cookies are used to deliver relevant advertisements (with your consent).
+
+| Cookie Name | Provider | Purpose | Duration | Type |
+|-------------|----------|---------|----------|------|
+| _fbp | Facebook | Tracks visits across websites for ad targeting | 3 months | HTTP |
+| _gcl_au | Google Ads | Stores and tracks conversions | 3 months | HTTP |
+| IDE | Google DoubleClick | Registers user behavior for targeted advertising | 1 year | HTTP |
+| test_cookie | Google DoubleClick | Checks if browser accepts cookies | 15 minutes | HTTP |
+| _hjid | Hotjar | Hotjar user identification | 1 year | HTTP |
+| _hjSessionUser_* | Hotjar | Hotjar session identifier | 1 year | HTTP |
+| li_sugr | LinkedIn | LinkedIn browser identification | 3 months | HTTP |
+| bcookie | LinkedIn | LinkedIn browser identification | 1 year | HTTP |
+
+**3.5 Social Media Cookies**
+
+Set by social media platforms when you share content.
+
+| Cookie Name | Provider | Purpose | Duration | Type |
+|-------------|----------|---------|----------|------|
+| _twitter_sess | Twitter | Twitter integration and sharing | Session | HTTP |
+| personalization_id | Twitter | Twitter personalization | 2 years | HTTP |
+| li_at | LinkedIn | LinkedIn authentication | 1 year | HTTP |
+| lidc | LinkedIn | LinkedIn routing | 1 day | HTTP |
+
+**3.6 Third-Party Service Cookies**
+
+| Service | Purpose | Privacy Policy |
+|---------|---------|----------------|
+| Stripe | Payment processing | https://stripe.com/privacy |
+| Google Tag Manager | Tag management | https://policies.google.com/privacy |
+| Cloudflare | CDN and security | https://www.cloudflare.com/privacypolicy/ |
+| Sentry | Error tracking | https://sentry.io/privacy/ |
+| Cal.com | Meeting scheduling | https://cal.com/privacy |`,
       },
       {
         id: 'cookie-duration',
@@ -1318,6 +1915,508 @@ Your continued use after changes indicates acceptance of the updated AUP.`,
 Email: legal@pullse.ai
 Abuse reports: abuse@pullse.ai
 Address: 111B S Governers Ave, STE 25219, Dover, DE 19904, United States`,
+      },
+    ],
+  },
+
+  'data-processing': {
+    slug: 'data-processing',
+    title: 'Data Processing Agreement (DPA)',
+    description: 'Terms governing the processing of personal data under GDPR and other data protection laws',
+    lastUpdated: '2025-01-05',
+    icon: 'shield',
+    sections: [
+      {
+        id: 'introduction',
+        title: '1. Introduction and Scope',
+        content: `**1.1 Purpose**
+
+This Data Processing Agreement ("DPA") forms part of the Terms of Service between you ("Customer," "Data Controller," or "you") and Pullse, Inc. ("Pullse," "Data Processor," "we," or "us") and governs our processing of Personal Data on your behalf.
+
+This DPA is incorporated into and forms part of the Terms of Service. In the event of conflict between this DPA and the Terms of Service, this DPA prevails with respect to Personal Data processing.
+
+**1.2 Applicability**
+
+This DPA applies when:
+• You use our Services to process Personal Data of individuals located in the European Economic Area (EEA), United Kingdom (UK), or Switzerland
+• You are subject to the EU General Data Protection Regulation (GDPR), UK GDPR, or similar data protection laws
+• You act as a Data Controller and we act as your Data Processor
+
+**1.3 Effective Date**
+
+This DPA is effective as of the date you first use our Services to process Personal Data, or the date the Terms of Service become effective, whichever is later.
+
+**1.4 Term**
+
+This DPA remains in effect for the duration of the Services and continues until all Personal Data has been deleted or returned.`,
+      },
+      {
+        id: 'definitions',
+        title: '2. Definitions',
+        content: `For purposes of this DPA:
+
+• **"Data Protection Laws"** means all applicable laws and regulations relating to privacy and data protection, including GDPR, UK GDPR, CCPA/CPRA, PIPEDA, and other applicable laws.
+
+• **"GDPR"** means Regulation (EU) 2016/679 of the European Parliament and of the Council.
+
+• **"UK GDPR"** means the GDPR as incorporated into UK law by the UK Data Protection Act 2018.
+
+• **"Personal Data"** has the meaning set forth in applicable Data Protection Laws and includes any information relating to an identified or identifiable natural person that you submit to, or is collected by, the Services.
+
+• **"Data Subject"** means the individual to whom Personal Data relates.
+
+• **"Controller"** (or "Data Controller") means the entity that determines the purposes and means of processing Personal Data.
+
+• **"Processor"** (or "Data Processor") means the entity that processes Personal Data on behalf of the Controller.
+
+• **"Sub-processor"** means any Processor engaged by Pullse to process Personal Data.
+
+• **"Processing"** means any operation performed on Personal Data, including collection, storage, use, disclosure, and deletion.
+
+• **"Standard Contractual Clauses"** or **"SCCs"** means the standard contractual clauses for the transfer of personal data to processors established in third countries approved by the European Commission.
+
+• **"Customer Data"** means all data, including Personal Data, that you submit to the Services.
+
+• **"Data Breach"** means a breach of security leading to accidental or unlawful destruction, loss, alteration, unauthorized disclosure of, or access to Personal Data.`,
+      },
+      {
+        id: 'data-processing',
+        title: '3. Data Processing Terms',
+        content: `**3.1 Roles and Responsibilities**
+
+• You are the Data Controller for Personal Data processed through the Services
+• Pullse is the Data Processor acting on your behalf and according to your instructions
+• You are solely responsible for ensuring that you have a legal basis to process Personal Data
+• You are responsible for providing required notices to Data Subjects
+• You are responsible for obtaining any necessary consents from Data Subjects
+
+**3.2 Processing Instructions**
+
+• Pullse will process Personal Data only in accordance with your documented instructions
+• Your instructions are to process Personal Data as necessary to provide the Services as described in the Terms of Service and Documentation
+• You may issue additional instructions through the Services interface or by written notice
+• Pullse will inform you if it believes your instructions violate Data Protection Laws
+• If required by law to process Personal Data beyond your instructions, Pullse will inform you unless prohibited by law
+
+**3.3 Scope of Processing**
+
+*Subject Matter:* Processing of Personal Data necessary to provide the Services
+
+*Duration:* The term of the Services plus the data retention period
+
+*Nature and Purpose:*
+• Provision of AI-powered customer support services
+• Storage and management of customer interaction data
+• Analysis and reporting on support operations
+• Communication between you and your customers
+
+*Types of Personal Data:*
+• Contact information (names, email addresses, phone numbers)
+• Customer support conversation content
+• Account information and authentication data
+• Usage and activity logs
+• Any other data you choose to submit to the Services
+
+*Categories of Data Subjects:*
+• Your customers and end users
+• Your employees and agents using the Services
+• Other individuals whose data you process through the Services`,
+      },
+      {
+        id: 'subprocessors',
+        title: '4. Sub-processors',
+        content: `**4.1 Authorization**
+
+You authorize Pullse to engage Sub-processors to process Personal Data on your behalf, subject to the requirements in this section.
+
+**4.2 Current Sub-processors**
+
+Pullse currently engages the following categories of Sub-processors:
+
+| Sub-processor | Service | Location | Purpose |
+|---------------|---------|----------|---------|
+| Amazon Web Services (AWS) | Cloud Infrastructure | United States | Hosting and data storage |
+| Google Cloud Platform | Cloud Infrastructure | United States | Backup and analytics infrastructure |
+| Cloudflare, Inc. | CDN & Security | United States | Content delivery and DDoS protection |
+| Stripe, Inc. | Payment Processing | United States | Payment processing and billing |
+| SendGrid/Twilio | Email Services | United States | Transactional email delivery |
+| Intercom, Inc. | Customer Support | United States | Customer support functionality |
+| Sentry | Error Monitoring | United States | Application error tracking |
+| Datadog | Infrastructure Monitoring | United States | Infrastructure monitoring and logging |
+| Mixpanel | Analytics | United States | Product analytics |
+| OpenAI, L.L.C. | AI Services | United States | AI/ML model processing |
+
+A complete, up-to-date list of Sub-processors is available at: https://pullse.ai/legal/subprocessors
+
+**4.3 Sub-processor Requirements**
+
+Pullse will:
+• Enter into a written agreement with each Sub-processor imposing data protection obligations substantially similar to this DPA
+• Ensure each Sub-processor complies with applicable Data Protection Laws
+• Remain fully liable for the performance of Sub-processors
+
+**4.4 Sub-processor Changes**
+
+• Pullse may add or replace Sub-processors from time to time
+• Pullse will provide at least 30 days advance notice of new Sub-processors via email or dashboard notification
+• You may object to a new Sub-processor on reasonable data protection grounds by notifying us within 30 days
+• If you object, we will work with you to find a resolution
+• If no resolution is found, you may terminate the affected Services and receive a pro-rata refund`,
+      },
+      {
+        id: 'security',
+        title: '5. Security Measures',
+        content: `**5.1 Technical and Organizational Measures**
+
+Pullse implements appropriate technical and organizational measures to protect Personal Data, including:
+
+**Access Controls:**
+• Multi-factor authentication for employee access
+• Role-based access controls (RBAC)
+• Principle of least privilege
+• Regular access reviews and audits
+• Secure authentication protocols
+
+**Encryption:**
+• TLS 1.3 for data in transit
+• AES-256 encryption for data at rest
+• Encrypted database backups
+• Secure key management systems
+
+**Network Security:**
+• Firewalls and network segmentation
+• Intrusion detection and prevention systems
+• DDoS protection
+• Regular vulnerability scanning and penetration testing
+
+**Organizational Measures:**
+• Security awareness training for all employees
+• Background checks for employees with data access
+• Confidentiality agreements
+• Incident response procedures
+• Business continuity and disaster recovery plans
+
+**Application Security:**
+• Secure software development lifecycle
+• Regular security code reviews
+• Dependency vulnerability scanning
+• Timely security patching
+
+**5.2 Security Certifications**
+
+Pullse maintains or is pursuing the following security certifications:
+• SOC 2 Type II (in progress)
+• ISO 27001 (roadmap)
+
+**5.3 Security Updates**
+
+Pullse regularly reviews and updates security measures to account for new threats, vulnerabilities, and industry best practices.
+
+**5.4 Customer Security Obligations**
+
+You are responsible for:
+• Using strong passwords and enabling multi-factor authentication
+• Controlling access to your account
+• Securing your own systems and networks
+• Promptly reporting security incidents to Pullse`,
+      },
+      {
+        id: 'data-subject-rights',
+        title: '6. Data Subject Rights',
+        content: `**6.1 Assisting with Data Subject Requests**
+
+Pullse will assist you in responding to Data Subject requests to exercise their rights under Data Protection Laws, including:
+
+• Right of access (Article 15 GDPR)
+• Right to rectification (Article 16 GDPR)
+• Right to erasure / right to be forgotten (Article 17 GDPR)
+• Right to restriction of processing (Article 18 GDPR)
+• Right to data portability (Article 20 GDPR)
+• Right to object (Article 21 GDPR)
+• Rights related to automated decision-making (Article 22 GDPR)
+
+**6.2 Process for Data Subject Requests**
+
+If Pullse receives a Data Subject request directly:
+• We will promptly forward the request to you
+• You will be responsible for responding to the request
+• We will provide reasonable cooperation and assistance
+
+**6.3 Tools and Assistance**
+
+• The Services include tools to help you respond to Data Subject requests
+• You can export Customer Data at any time through your account
+• You can delete data through the Services interface
+• For additional assistance, contact privacy@pullse.ai
+
+**6.4 Fees**
+
+Pullse will not charge fees for standard Data Subject request assistance. For requests requiring extensive time or resources, we may charge reasonable fees based on administrative costs.`,
+      },
+      {
+        id: 'data-breaches',
+        title: '7. Data Breaches and Incident Response',
+        content: `**7.1 Notification Obligations**
+
+If Pullse becomes aware of a Data Breach affecting your Personal Data, we will:
+
+• Notify you without undue delay and, where feasible, within 72 hours of becoming aware
+• Provide written notice to your designated contact email
+• Include available information about the breach, including:
+  - Nature of the breach
+  - Categories and approximate number of Data Subjects affected
+  - Categories and approximate number of Personal Data records affected
+  - Likely consequences of the breach
+  - Measures taken or proposed to address the breach
+  - Contact point for more information
+
+**7.2 Investigation and Remediation**
+
+Upon discovering a Data Breach, Pullse will:
+• Immediately initiate incident response procedures
+• Contain and remediate the breach
+• Conduct a thorough investigation
+• Preserve evidence for regulatory and legal purposes
+• Implement measures to prevent recurrence
+• Cooperate with regulatory authorities
+
+**7.3 Customer Responsibilities**
+
+You are responsible for:
+• Notifying Data Subjects as required by applicable law
+• Notifying regulatory authorities as required by applicable law
+• Determining whether the breach requires notification based on your risk assessment
+
+**7.4 Documentation**
+
+Pullse maintains records of Data Breaches, including:
+• Facts surrounding the breach
+• Effects of the breach
+• Remedial actions taken
+
+**7.5 No Acknowledgment of Liability**
+
+Breach notification does not constitute an acknowledgment of fault or liability by Pullse.`,
+      },
+      {
+        id: 'audits',
+        title: '8. Audits and Inspections',
+        content: `**8.1 Audit Rights**
+
+Upon reasonable written notice and subject to confidentiality obligations, Pullse will:
+• Make available information necessary to demonstrate compliance with this DPA
+• Allow for and contribute to audits and inspections by you or your authorized auditor
+• Provide evidence of certifications, attestations, and audit reports
+
+**8.2 Audit Process**
+
+• Audit requests must be submitted at least 60 days in advance
+• Audits will be conducted during normal business hours
+• Audits must not unreasonably interfere with Pullse's operations
+• You may conduct audits no more than once per year unless required by regulatory authorities or following a Data Breach
+
+**8.3 Third-Party Audits and Certifications**
+
+As an alternative to conducting your own audit, you may accept:
+• Pullse's SOC 2 Type II report (when available)
+• Pullse's ISO 27001 certification (when available)
+• Other relevant third-party security certifications and audit reports
+
+**8.4 Audit Fees**
+
+• Review of existing audit reports and certifications: No charge
+• First audit per year: No charge for up to 8 hours
+• Additional audits or extended audits: Reasonable fees based on time and resources
+
+**8.5 Confidentiality**
+
+All information obtained during audits is confidential and subject to applicable confidentiality agreements.`,
+      },
+      {
+        id: 'data-transfers',
+        title: '9. International Data Transfers',
+        content: `**9.1 Data Transfer Mechanisms**
+
+Personal Data may be transferred to, stored, and processed in the United States and other countries where Pullse or its Sub-processors maintain facilities.
+
+For transfers from the EEA, UK, or Switzerland to countries not recognized as providing adequate protection, Pullse relies on:
+
+• **Standard Contractual Clauses:** Pullse has executed the European Commission-approved Standard Contractual Clauses (Module 2: Controller to Processor)
+• **UK International Data Transfer Agreement (IDTA):** For UK transfers subject to UK GDPR
+• **Swiss-U.S. and EU-U.S. Data Privacy Framework:** Pullse is self-certifying (in progress)
+• **Supplementary Measures:** Additional technical and organizational safeguards per EDPB recommendations
+
+**9.2 Standard Contractual Clauses**
+
+The Standard Contractual Clauses (June 2021 version) are incorporated into this DPA by reference and can be found at:
+https://pullse.ai/legal/scc
+
+**Completing the SCCs:**
+• **Module:** Module 2 (Controller to Processor)
+• **Docking Clause:** Optional Module 3 available upon request
+• **Governing Law:** Ireland (for EEA customers) or as specified in SCC Clause 17
+• **Courts:** As specified in SCC Clause 18
+• **Annex I (Parties):** Completed based on your account information
+• **Annex II (Security):** As described in Section 5 of this DPA
+• **Annex III (Sub-processors):** As described in Section 4 of this DPA
+
+**9.3 Transfer Impact Assessment**
+
+Pullse has conducted a transfer impact assessment pursuant to the Schrems II decision and believes that:
+• Appropriate safeguards are in place
+• U.S. surveillance laws do not undermine the protection provided by the SCCs
+• Supplementary measures provide an adequate level of protection
+
+**9.4 Data Localization Options**
+
+For Enterprise customers with specific data residency requirements:
+• EU-only data hosting is available
+• Regionally isolated processing can be arranged
+• Contact sales@pullse.ai to discuss data localization options`,
+      },
+      {
+        id: 'data-return-deletion',
+        title: '10. Data Return and Deletion',
+        content: `**10.1 Data Export**
+
+At any time during the term:
+• You may export your Customer Data through the Services interface
+• Exported data is provided in machine-readable format (JSON, CSV)
+• No fees are charged for standard data exports
+• For custom export formats or assistance, contact support@pullse.ai
+
+**10.2 Data Deletion Upon Termination**
+
+Upon termination or expiration of the Services:
+
+**Within 30 Days:**
+• You may request final export of your Customer Data
+• Your data remains accessible in your account
+• No new data processing occurs
+
+**After 30 Days:**
+• Personal Data is permanently deleted from production systems
+• You will receive written confirmation of deletion upon request
+
+**Backup Systems:**
+• Backups containing Personal Data are purged within 90 days
+• Backup purging follows our standard data retention schedule
+
+**10.3 Exceptions to Deletion**
+
+Pullse may retain Personal Data:
+• As required by applicable law (e.g., tax records, transaction data)
+• In backup systems for up to 90 days
+• In anonymized form for analytics and research
+• If subject to legal hold or preservation order
+
+**10.4 Data Deletion Certification**
+
+Upon written request after termination, Pullse will provide written certification of Personal Data deletion.`,
+      },
+      {
+        id: 'liability',
+        title: '11. Liability and Indemnification',
+        content: `**11.1 Allocation of Liability**
+
+Each party's liability under this DPA is subject to the limitation of liability provisions in the Terms of Service.
+
+**11.2 GDPR-Specific Liability**
+
+Under GDPR Article 82:
+• Each party is liable for damages caused by processing that violates GDPR
+• A Processor is liable only if it has not complied with GDPR obligations specifically directed at Processors or has acted outside or contrary to lawful instructions
+• A party is exempt from liability if it proves it is not responsible for the event giving rise to the damage
+
+**11.3 Your Indemnification Obligations**
+
+You will indemnify Pullse against claims arising from:
+• Your violation of Data Protection Laws
+• Your failure to obtain required consents or provide required notices
+• Your instructions that violate Data Protection Laws
+• Your breach of representations in this DPA
+
+**11.4 Our Indemnification Obligations**
+
+Pullse will indemnify you against third-party claims arising from our violation of Data Protection Laws, provided you:
+• Promptly notify us of the claim
+• Give us control of the defense and settlement
+• Provide reasonable cooperation`,
+      },
+      {
+        id: 'term-termination',
+        title: '12. Term and Termination',
+        content: `**12.1 Term**
+
+This DPA takes effect on the Effective Date and continues until the later of:
+• Termination of the Terms of Service
+• Deletion of all Personal Data
+
+**12.2 Effect of Termination**
+
+Upon termination:
+• All data processing ceases except as necessary to return or delete Personal Data
+• Data return and deletion provisions in Section 10 apply
+• Confidentiality obligations survive
+• Liability and indemnification provisions survive
+
+**12.3 Survival**
+
+The following sections survive termination: Definitions, Data Return and Deletion, Liability and Indemnification, and General Provisions.`,
+      },
+      {
+        id: 'general',
+        title: '13. General Provisions',
+        content: `**13.1 Order of Precedence**
+
+In case of conflict:
+1. This DPA
+2. Standard Contractual Clauses (if applicable)
+3. Terms of Service
+4. Other agreements
+
+**13.2 Amendments**
+
+• Pullse may update this DPA to comply with Data Protection Laws or reflect changes in processing practices
+• Material changes will be notified at least 30 days in advance
+• Continued use after changes indicates acceptance
+
+**13.3 Severability**
+
+If any provision is invalid or unenforceable:
+• The remaining provisions continue in full force
+• The parties will negotiate a replacement provision that achieves the intended effect
+
+**13.4 Governing Law**
+
+This DPA is governed by:
+• For EEA/UK customers: Law specified in Standard Contractual Clauses
+• For other customers: Law governing the Terms of Service (Delaware, U.S.)
+
+**13.5 Notices**
+
+Notices under this DPA must be sent to:
+
+**For Pullse:**
+Email: dpo@pullse.ai
+Address: Pullse, Inc., Attention: Data Protection Officer, 111B S Governers Ave, STE 25219, Dover, DE 19904, United States
+
+**For Customer:**
+Email and address on file in your account
+
+**13.6 Language**
+
+This DPA is drafted in English. Any translation is for convenience only. In case of conflict, the English version prevails.
+
+**13.7 Entire Agreement**
+
+This DPA, together with the Terms of Service and applicable Standard Contractual Clauses, constitutes the entire agreement regarding processing of Personal Data.
+
+---
+
+**Effective Date:** January 5, 2025
+**Last Updated:** January 5, 2025
+**Version:** 1.0`,
       },
     ],
   },
