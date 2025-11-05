@@ -268,11 +268,126 @@ If you provide feedback, suggestions, or ideas about Beta Features ("Feedback"):
       {
         id: 'data-and-privacy',
         title: '8. Data and Privacy',
-        content: `Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your personal information. By using the Services, you consent to our data practices as described in the Privacy Policy.
+        content: `**8.1 Privacy Policy**
 
-You retain all rights to your Customer Data. We will not use your Customer Data except to provide and improve the Services.
+Your privacy is important to us. Our Privacy Policy explains how we collect, use, and protect your personal information. By using the Services, you consent to our data practices as described in the Privacy Policy, which is incorporated into these Terms by reference.
 
-For enterprise customers processing Personal Data, our Data Processing Agreement (DPA) applies and is incorporated by reference into these Terms.`,
+**8.2 Customer Data Ownership**
+
+You retain all ownership rights, title, and interest in and to your Customer Data. We do not claim any ownership rights to your Customer Data. You are solely responsible for:
+
+• The accuracy, quality, and legality of your Customer Data
+• The means by which you acquired your Customer Data
+• Your use of Customer Data with the Services
+• Ensuring you have all necessary rights, consents, and permissions to submit Customer Data to the Services
+• Compliance with all applicable data protection laws regarding Customer Data
+
+**8.3 License to Customer Data**
+
+By submitting Customer Data to the Services, you grant Pullse a worldwide, non-exclusive, royalty-free license to use, copy, store, transmit, display, and process your Customer Data solely to:
+
+• Provide, maintain, and improve the Services
+• Generate analytics and insights for your use
+• Troubleshoot technical issues and provide customer support
+• Comply with applicable laws and legal obligations
+• Enforce these Terms and protect our rights
+
+This license terminates when you delete your Customer Data or terminate your account, except we may retain copies as required by law or legitimate business purposes (e.g., backup systems, legal holds).
+
+**8.4 AI Model Training and Improvement**
+
+**8.4.1 Our AI Models**
+
+We own all rights, title, and interest in and to our AI models, machine learning algorithms, training methodologies, and model outputs. This includes:
+
+• Proprietary AI models developed by Pullse
+• Fine-tuned versions of third-party AI models
+• Model architectures, weights, and parameters
+• Training data sets we compile or create
+• AI model outputs, predictions, and recommendations
+
+**8.4.2 Use of Customer Data for AI Training**
+
+BY DEFAULT, WE DO NOT USE YOUR CUSTOMER DATA TO TRAIN OUR AI MODELS OR IMPROVE AI MODEL PERFORMANCE.
+
+However, you may opt-in to allow us to use anonymized, aggregated, or de-identified information derived from your Customer Data to:
+
+• Train and improve AI models
+• Enhance AI accuracy and performance
+• Develop new AI features and capabilities
+• Create industry benchmarks and insights
+
+If you opt-in to AI training:
+• We will only use de-identified data that cannot reasonably identify you or your customers
+• You can opt-out at any time through your account settings
+• Opting out does not affect data already used for training (it cannot be "untrained")
+• Models trained with de-identified data may become available to other customers
+
+**8.4.3 Third-Party AI Providers**
+
+We may use third-party AI services (such as OpenAI, Anthropic, Google, or others) to power certain AI features. When you use AI-powered features:
+
+• Your inputs may be sent to third-party AI providers for processing
+• Third-party AI providers have their own terms of service and privacy policies
+• We contractually prohibit third-party AI providers from using your data to train their models
+• We are not responsible for third-party AI provider data practices beyond our contractual agreements
+• You should review third-party AI provider terms before using AI features
+
+**8.5 Usage Data and Analytics**
+
+We may collect, use, and analyze usage data, technical logs, and service analytics (collectively, "Usage Data") that does not identify you personally. Usage Data includes:
+
+• Feature usage statistics and patterns
+• Performance metrics and system health data
+• Error logs and diagnostic information
+• Aggregated usage trends
+
+We own all Usage Data and may use it to:
+• Operate, maintain, and improve the Services
+• Develop new features and products
+• Create industry reports, benchmarks, and insights
+• For any other business purpose
+
+**8.6 Aggregated and De-Identified Data**
+
+We may create aggregated, anonymized, or de-identified data from Customer Data and Usage Data. Once data is properly de-identified such that it cannot reasonably re-identify you, we may use and disclose it for any purpose, including:
+
+• Product development and improvement
+• Research and analytics
+• Marketing and promotional purposes
+• Sale or licensing to third parties
+• Creation of industry benchmarks
+
+You acknowledge that aggregated and de-identified data is not considered Customer Data and is owned by Pullse.
+
+**8.7 Data Protection Agreement**
+
+For customers who are subject to GDPR, UK GDPR, or other data protection laws requiring a Data Processing Agreement (DPA):
+
+• Our standard DPA is available at pullse.ai/legal/data-processing
+• The DPA is automatically incorporated into these Terms if you process Personal Data using the Services
+• The DPA governs our processing of Personal Data as a processor on your behalf
+• In the event of conflict between these Terms and the DPA, the DPA shall prevail with respect to Personal Data processing
+
+**8.8 Data Security**
+
+We implement commercially reasonable administrative, physical, and technical safeguards designed to protect Customer Data. However, no security measures are perfect or impenetrable. You acknowledge that:
+
+• You are responsible for implementing your own security measures
+• You should not store highly sensitive data (e.g., health records, financial account numbers, government IDs) in the Services without additional encryption
+• We are not liable for unauthorized access resulting from your failure to secure your credentials
+
+**8.9 Data Location and Transfers**
+
+Customer Data may be stored and processed in the United States and other countries where we or our service providers operate. By using the Services, you consent to the transfer of Customer Data outside your country of residence.
+
+For customers subject to GDPR, we rely on Standard Contractual Clauses (SCCs) and other lawful transfer mechanisms as described in our DPA.
+
+**8.10 Your Data Rights**
+
+Depending on your jurisdiction, you may have rights regarding your Customer Data, including rights to access, correct, delete, or export your data. You can exercise these rights through your account settings or by contacting privacy@pullse.ai.
+
+For information about data subject rights and how we handle Personal Data, please see our Privacy Policy and DPA.`,
       },
       {
         id: 'intellectual-property',
@@ -490,16 +605,218 @@ For government customers, additional terms may apply as set forth in an Order Fo
       {
         id: 'warranties-and-disclaimers',
         title: '15. Warranties and Disclaimers',
-        content: `THE SERVICES ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+        content: `**15.1 General Disclaimer**
 
-We do not warrant that the Services will be uninterrupted, error-free, or completely secure.`,
+THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE EXPRESSLY DISCLAIM ALL WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING BUT NOT LIMITED TO:
+
+• IMPLIED WARRANTIES OF MERCHANTABILITY
+• IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE
+• IMPLIED WARRANTIES OF NON-INFRINGEMENT
+• IMPLIED WARRANTIES ARISING FROM COURSE OF DEALING OR COURSE OF PERFORMANCE
+• WARRANTIES REGARDING ACCURACY, RELIABILITY, OR COMPLETENESS OF CONTENT
+• WARRANTIES THAT THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE
+• WARRANTIES THAT DEFECTS WILL BE CORRECTED
+• WARRANTIES REGARDING RESULTS OBTAINED FROM USE OF THE SERVICES
+
+**15.2 AI and Machine Learning Disclaimers**
+
+IMPORTANT: Our Services utilize artificial intelligence and machine learning technologies. YOU ACKNOWLEDGE AND AGREE THAT:
+
+• **No Accuracy Guarantee**: AI-generated content, recommendations, responses, and outputs may contain errors, inaccuracies, or "hallucinations" (false or misleading information presented as fact). We make no warranty regarding the accuracy, completeness, or reliability of any AI-generated content.
+
+• **Verification Required**: You are solely responsible for reviewing, verifying, and validating all AI-generated outputs before relying on them or sharing them with your customers or third parties.
+
+• **Continuous Evolution**: AI models are continuously evolving and learning. Outputs may vary over time for the same inputs, and past performance does not guarantee future results.
+
+• **Third-Party AI**: We may utilize third-party AI providers (such as OpenAI, Anthropic, or others). We are not responsible for the performance, availability, or outputs of third-party AI services.
+
+• **Training Data Limitations**: AI models are trained on historical data and may not reflect current events, recent information, or your specific business context.
+
+**15.3 Prohibited Critical Use Cases**
+
+THE SERVICES, INCLUDING ALL AI FEATURES, ARE NOT DESIGNED, INTENDED, OR CERTIFIED FOR USE IN ANY SITUATION WHERE FAILURE OR ERROR COULD LEAD TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL, ENVIRONMENTAL, OR FINANCIAL DAMAGE.
+
+YOU SPECIFICALLY AGREE NOT TO USE THE SERVICES FOR:
+
+• Medical diagnosis, treatment recommendations, or healthcare decisions
+• Legal advice, legal document preparation, or legal decision-making
+• Financial advice, investment recommendations, or trading decisions
+• Safety-critical systems or emergency response systems
+• Operation of nuclear facilities, aircraft navigation, or life support systems
+• Any application where AI errors could result in harm to persons or property
+• Credit, employment, housing, or other decisions subject to Fair Credit Reporting Act or similar laws
+• Any use case prohibited by applicable law or regulation
+
+If you use the Services for any prohibited purpose, you do so entirely at your own risk and assume all liability.
+
+**15.4 Performance and Availability**
+
+We do not warrant that:
+• The Services will meet your specific requirements or expectations
+• The Services will be available at any particular time or location
+• The Services will be uninterrupted, timely, secure, or error-free
+• Any errors or defects will be corrected
+• The Services will be compatible with all devices, software, or systems
+• Service quality will remain consistent across different usage patterns or volumes
+
+**15.5 Third-Party Services and Content**
+
+We disclaim all warranties related to:
+• Third-party integrations, APIs, or services accessed through our Platform
+• User-generated content or Customer Data
+• Third-party AI models or machine learning services
+• External websites, links, or resources referenced in our Services
+• Open source software components included in the Services
+
+**15.6 Beta Features**
+
+Beta Features, preview features, early access features, or features designated as "experimental" are provided WITHOUT ANY WARRANTY WHATSOEVER and may:
+• Contain bugs, errors, or defects
+• Be discontinued at any time without notice
+• Not be covered by any SLA or support commitments
+• Undergo significant changes before general availability
+• Never be made generally available
+
+**15.7 Data Accuracy and Completeness**
+
+We make no representations or warranties regarding:
+• The accuracy, completeness, or quality of analytics, insights, or reports generated by the Services
+• The accuracy of usage metrics, statistics, or performance data
+• The reliability of any data aggregation, transformation, or processing
+• The timeliness of data synchronization with third-party systems
+
+**15.8 Security**
+
+While we implement industry-standard security measures, we do not warrant that:
+• The Services will be completely secure from unauthorized access
+• Your data will be immune from loss, corruption, unauthorized access, or breach
+• Security vulnerabilities will not be discovered in the Services
+• Our security measures will prevent all possible attacks or intrusions
+
+**15.9 Regulatory Compliance**
+
+We do not warrant that the Services will comply with all laws or regulations applicable to your specific industry, jurisdiction, or use case. You are solely responsible for ensuring your use of the Services complies with all applicable laws, including but not limited to data protection, privacy, consumer protection, and industry-specific regulations.
+
+**15.10 Professional Advice**
+
+THE SERVICES DO NOT CONSTITUTE AND SHOULD NOT BE RELIED UPON AS:
+• Legal, financial, medical, or other professional advice
+• A substitute for consultation with qualified professionals
+• Recommendations specific to your individual circumstances
+
+**15.11 State-Specific Rights**
+
+Some jurisdictions do not allow the exclusion of certain warranties or the limitation of liability for consequential or incidental damages. In such jurisdictions, our liability and the scope of warranties shall be limited to the maximum extent permitted by applicable law.`,
       },
       {
         id: 'limitation-of-liability',
         title: '16. Limitation of Liability',
-        content: `TO THE MAXIMUM EXTENT PERMITTED BY LAW, PULLSE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY.
+        content: `**16.1 Exclusion of Consequential Damages**
 
-OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE CLAIM.`,
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PULLSE, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, SUPPLIERS, OR LICENSORS BE LIABLE FOR ANY:
+
+• INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES
+• PUNITIVE OR AGGRAVATED DAMAGES
+• LOSS OF PROFITS, REVENUE, OR INCOME
+• LOSS OF BUSINESS OPPORTUNITIES OR CONTRACTS
+• LOSS OF ANTICIPATED SAVINGS
+• LOSS OF DATA, INFORMATION, OR CUSTOMER DATA
+• LOSS OF GOODWILL OR REPUTATION
+• COSTS OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES
+• BUSINESS INTERRUPTION OR DOWNTIME
+• LOSS RESULTING FROM AI ERRORS, INACCURACIES, OR "HALLUCINATIONS"
+• DAMAGES ARISING FROM USE OF AI-GENERATED CONTENT OR RECOMMENDATIONS
+• DAMAGES ARISING FROM UNAUTHORIZED ACCESS, DATA BREACHES, OR SECURITY INCIDENTS
+• DAMAGES ARISING FROM SERVICE INTERRUPTIONS, DEGRADATIONS, OR OUTAGES
+• DAMAGES ARISING FROM THIRD-PARTY SERVICES, INTEGRATIONS, OR APIS
+
+THESE LIMITATIONS APPLY WHETHER THE ALLEGED LIABILITY IS BASED ON CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, WARRANTY, OR ANY OTHER LEGAL THEORY, AND WHETHER OR NOT PULLSE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+**16.2 Cap on Direct Damages**
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, PULLSE'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THESE TERMS OR THE USE OF THE SERVICES SHALL NOT EXCEED THE GREATER OF:
+
+(a) THE TOTAL AMOUNT PAID BY YOU TO PULLSE IN THE 12 MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM; OR
+(b) ONE HUNDRED DOLLARS ($100.00)
+
+This limitation applies to all claims collectively, not per incident.
+
+**16.3 AI-Specific Liability Limitations**
+
+In addition to the general limitations above, we shall have no liability for:
+
+• Errors, inaccuracies, or omissions in AI-generated content, responses, or recommendations
+• Customer reliance on AI outputs without independent verification
+• Business decisions made based on AI-generated insights or analytics
+• Customer communication sent to end users containing AI-generated errors
+• Third-party claims arising from AI content you share or distribute
+• Performance variations in AI models over time
+• AI model behavior changes due to updates, retraining, or improvements
+• Unavailability of AI features due to third-party AI provider outages or limitations
+• AI outputs that may be offensive, biased, or inappropriate despite content filtering
+• Copyright, trademark, or other intellectual property claims related to AI-generated content
+
+**16.4 API and Integration Liability**
+
+We shall have no liability for:
+
+• Errors or failures in third-party APIs, integrations, or connected services
+• Data synchronization issues or delays with third-party systems
+• Rate limiting, throttling, or service degradation of third-party APIs
+• Breaking changes in third-party services that affect our integrations
+• Security vulnerabilities in third-party services
+• Costs incurred from third-party service usage through our Platform
+
+**16.5 Force Majeure and Third-Party Dependencies**
+
+We shall not be liable for any failure or delay in performance due to:
+
+• Acts of God, natural disasters, pandemics, or public health emergencies
+• Government actions, laws, regulations, or orders
+• Third-party AI provider outages, limitations, or policy changes (including OpenAI, Anthropic, Google, or others)
+• Third-party infrastructure failures (including AWS, Google Cloud, CDN providers)
+• Internet or telecommunications outages or disruptions
+• Cyber attacks, DDoS attacks, or malicious acts of third parties
+• Labor disputes, strikes, or shortages
+• Supply chain disruptions
+• Any other causes beyond our reasonable control
+
+**16.6 Beta Features and Free Services**
+
+For Beta Features, preview features, free tier services, trial periods, or services provided without charge:
+
+• ALL LIABILITY IS EXCLUDED TO THE MAXIMUM EXTENT PERMITTED BY LAW
+• THESE FEATURES ARE PROVIDED "AS IS" WITHOUT ANY WARRANTY OR SUPPORT COMMITMENT
+• WE HAVE NO OBLIGATION TO MAINTAIN, UPDATE, OR CONTINUE OFFERING THESE FEATURES
+• Any SLA or uptime commitments do not apply to free or beta services
+
+**16.7 Exceptions to Limitations**
+
+The limitations in this Section 16 do NOT apply to:
+
+• Liability that cannot be excluded or limited under applicable law
+• Liability for death or personal injury caused by our gross negligence or willful misconduct
+• Liability for fraud, fraudulent misrepresentation, or willful misconduct
+• Your indemnification obligations under Section 17
+• Your payment obligations for Services purchased
+• Violations of our intellectual property rights
+
+**16.8 Essential Basis of the Bargain**
+
+YOU ACKNOWLEDGE AND AGREE THAT:
+
+• These limitations of liability are essential elements of the agreement between you and Pullse
+• We would not provide the Services without these limitations
+• The pricing of the Services reflects these limitations
+• These limitations shall apply even if any limited remedy fails of its essential purpose
+
+**16.9 State-Specific Limitations**
+
+Some jurisdictions do not permit certain limitations on liability, particularly for death, personal injury, fraud, or gross negligence. In such jurisdictions, our liability is limited to the maximum extent permitted by applicable law. If you are a consumer in the European Union, nothing in these Terms affects your statutory rights that cannot be waived or limited by contract.
+
+**16.10 Claims Must Be Filed Within One Year**
+
+Any claim arising from or relating to these Terms or the Services must be filed within one (1) year after the claim arose or the cause of action accrued; otherwise, such claim or cause of action is permanently barred.`,
       },
       {
         id: 'indemnification',
