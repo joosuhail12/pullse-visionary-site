@@ -481,3 +481,211 @@ This API implementation follows industry best practices:
 ✅ **Production-Ready** - Error handling, security headers
 
 The implementation provides a solid foundation that can scale as your lead volume grows.
+
+---
+
+## POST /api/contact-sales
+
+Submit a contact sales / demo request.
+
+**Request:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@company.com",
+  "company": "Acme Inc",
+  "companySize": "51-200",
+  "industry": "B2B SaaS",
+  "timeline": "Near-term",
+  "phone": "+1 (555) 123-4567",  // Optional
+  "currentSolution": "Zendesk",  // Optional
+  "message": "Looking for a modern support solution"  // Optional
+}
+```
+
+**Required Fields:**
+- `name` (string, 1-200 chars)
+- `email` (valid email, lowercase)
+- `company` (string, 1-200 chars)
+- `companySize` (enum: "1-10", "11-50", "51-200", "201-500", "500+")
+- `industry` (enum: "B2B SaaS", "Ecommerce", "Fintech", "Healthcare", "Other")
+- `timeline` (enum: "Immediate", "Near-term", "Exploring", "Planning")
+
+**Optional Fields:**
+- `phone` (string, max 50 chars)
+- `currentSolution` (string, max 200 chars)
+- `message` (string, max 2000 chars)
+
+**Success Response (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "message": "Demo request submitted successfully!",
+    "submittedAt": "2025-01-05T10:30:00.000Z"
+  },
+  "requestId": "req_1704450600_abc123"
+}
+```
+
+**Error Response Examples:**
+
+**Validation Error (400):**
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid request data",
+    "details": {
+      "companySize": {
+        "_errors": ["Invalid company size"]
+      }
+    }
+  },
+  "requestId": "req_1704450600_xyz789"
+}
+```
+
+**Rate Limit Exceeded (429):**
+```json
+{
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Too many requests. Please try again in a minute."
+  },
+  "requestId": "req_1704450600_def456"
+}
+```
+
+**Duplicate Submission (409):**
+```json
+{
+  "error": {
+    "code": "DUPLICATE_SUBMISSION",
+    "message": "You have already submitted a request recently. Please wait an hour before submitting again.",
+    "details": {
+      "existingRequestId": "123e4567-e89b-12d3-a456-426614174000"
+    }
+  },
+  "requestId": "req_1704450600_ghi789"
+}
+```
+
+### GET /api/contact-sales
+
+Retrieve submitted contact sales requests (Admin only).
+
+**Authentication:**
+```
+Authorization: Bearer {ADMIN_API_KEY}
+```
+
+**Query Parameters:**
+- `page` (optional, default: 1) - Page number
+- `limit` (optional, default: 20, max: 100) - Items per page
+- `status` (optional) - Filter by status (e.g., "pending", "contacted")
+
+**Example Request:**
+```
+GET /api/contact-sales?page=1&limit=20&status=pending
+Authorization: Bearer your_admin_api_key_here
+```
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "data": {
+    "requests": [
+      {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "name": "John Doe",
+        "email": "john@company.com",
+        "company": "Acme Inc",
+        "company_size": "51-200",
+        "industry": "B2B SaaS",
+        "timeline": "Near-term",
+        "phone": "+1 (555) 123-4567",
+        "current_solution": "Zendesk",
+        "message": "Looking for a modern support solution",
+        "status": "pending",
+        "submitted_at": "2025-01-05T10:30:00.000Z",
+        "created_at": "2025-01-05T10:30:00.000Z"
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 20,
+      "total": 45,
+      "totalPages": 3
+    }
+  },
+  "requestId": "req_1704450600_jkl012"
+}
+```
+
+**Rate Limiting:**
+- Window: 1 minute
+- Limit: 5 requests per email (more generous than startup application)
+
+**Duplicate Detection:**
+- Window: 1 hour (less strict than startup application)
+- Optional: Can be disabled if not needed for sales inquiries
+
+**Database Table:** `contact_sales_requests`
+
+**Indexes:**
+- `idx_contact_sales_email` - For duplicate detection
+- `idx_contact_sales_submitted_at` - For time-based queries
+- `idx_contact_sales_status` - For filtering by status
+
+---
+
+## Testing Contact Sales Endpoint
+
+**Test Successful Submission:**
+```bash
+curl -X POST http://localhost:3000/api/contact-sales \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Test User",
+    "email": "test@example.com",
+    "company": "Test Company",
+    "companySize": "11-50",
+    "industry": "B2B SaaS",
+    "timeline": "Immediate"
+  }'
+```
+
+**Test with Optional Fields:**
+```bash
+curl -X POST http://localhost:3000/api/contact-sales \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Test User",
+    "email": "test@example.com",
+    "company": "Test Company",
+    "companySize": "51-200",
+    "industry": "Ecommerce",
+    "timeline": "Near-term",
+    "phone": "+1 555 123 4567",
+    "currentSolution": "Zendesk, Intercom",
+    "message": "Looking for better analytics and AI features"
+  }'
+```
+
+**Test Duplicate Detection:**
+```bash
+# Submit same email twice within 1 hour
+curl -X POST http://localhost:3000/api/contact-sales \
+  -H "Content-Type: application/json" \
+  -d '{ ... same email ... }'
+```
+
+**Test Admin Endpoint:**
+```bash
+curl -X GET "http://localhost:3000/api/contact-sales?page=1&limit=10" \
+  -H "Authorization: Bearer your_admin_api_key_here"
+```
+
