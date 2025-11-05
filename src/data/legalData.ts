@@ -935,33 +935,33 @@ You may withdraw consent at any time by contacting privacy@pullse.ai or using ou
         content: `We share your personal information only in the following circumstances:
 
 **5.1 Service Providers and Vendors**
-We engage trusted third-party companies to perform functions on our behalf:
+We engage trusted third-party companies to perform functions on our behalf in the following categories:
 
 *Infrastructure and Hosting:*
-• Amazon Web Services (AWS) - Cloud hosting and storage
-• Google Cloud Platform - Cloud infrastructure and services
-• Cloudflare - CDN and security services
+• Cloud hosting and data storage providers
+• Content delivery network (CDN) and security services
+• Backup and disaster recovery services
 
 *Payment Processing:*
-• Stripe - Payment processing and billing
-• PayPal - Alternative payment processing
+• Payment gateway and transaction processing services
+• Billing and subscription management platforms
 
 *Communication Services:*
-• SendGrid / Twilio - Transactional emails and SMS
-• Intercom - Customer support and messaging
-• Zoom - Video conferencing
+• Transactional email and SMS delivery providers
+• Customer support and messaging platforms
+• Video conferencing services
 
 *Analytics and Monitoring:*
-• Google Analytics - Website analytics
-• Mixpanel - Product analytics
-• Sentry - Error tracking and monitoring
-• Datadog - Infrastructure monitoring
+• Website and product analytics platforms
+• Application performance and error tracking
+• Infrastructure monitoring and logging services
 
 *Marketing and Sales:*
-• HubSpot - CRM and marketing automation
-• Mailchimp - Email marketing campaigns
-• Google Ads - Advertising platform
-• LinkedIn - B2B advertising
+• Customer relationship management (CRM) platforms
+• Email marketing and automation tools
+• Advertising platforms for customer acquisition
+
+A complete list of our service providers and data processors will be made available at https://pullse.ai/legal/subprocessors as we finalize our production infrastructure.
 
 All service providers are contractually required to maintain confidentiality and security of your data and may only use it to provide services to us.
 
@@ -2029,39 +2029,38 @@ This DPA remains in effect for the duration of the Services and continues until 
 
 You authorize Pullse to engage Sub-processors to process Personal Data on your behalf, subject to the requirements in this section.
 
-**4.2 Current Sub-processors**
+**4.2 Sub-processor Categories**
 
-Pullse currently engages the following categories of Sub-processors:
+Pullse engages Sub-processors to provide the following categories of services:
 
-| Sub-processor | Service | Location | Purpose |
-|---------------|---------|----------|---------|
-| Amazon Web Services (AWS) | Cloud Infrastructure | United States | Hosting and data storage |
-| Google Cloud Platform | Cloud Infrastructure | United States | Backup and analytics infrastructure |
-| Cloudflare, Inc. | CDN & Security | United States | Content delivery and DDoS protection |
-| Stripe, Inc. | Payment Processing | United States | Payment processing and billing |
-| SendGrid/Twilio | Email Services | United States | Transactional email delivery |
-| Intercom, Inc. | Customer Support | United States | Customer support functionality |
-| Sentry | Error Monitoring | United States | Application error tracking |
-| Datadog | Infrastructure Monitoring | United States | Infrastructure monitoring and logging |
-| Mixpanel | Analytics | United States | Product analytics |
-| OpenAI, L.L.C. | AI Services | United States | AI/ML model processing |
+• **Cloud Infrastructure & Hosting** - For secure data storage and application hosting
+• **Payment Processing** - For billing and transaction processing
+• **Communication Services** - For email delivery and customer communications
+• **Analytics & Monitoring** - For service performance and usage analytics
+• **Security Services** - For CDN, DDoS protection, and security monitoring
+• **AI & Machine Learning Services** - For AI-powered features and functionality
 
-A complete, up-to-date list of Sub-processors is available at: https://pullse.ai/legal/subprocessors
+**4.3 Sub-processor List**
 
-**4.3 Sub-processor Requirements**
+A complete, up-to-date list of our Sub-processors including their names, services provided, locations, and purposes will be made available at: https://pullse.ai/legal/subprocessors
+
+This list is currently being finalized as we establish our production infrastructure. We are committed to transparency and will maintain an accurate, current list of all Sub-processors once our service infrastructure is fully deployed.
+
+**4.4 Sub-processor Requirements**
 
 Pullse will:
 • Enter into a written agreement with each Sub-processor imposing data protection obligations substantially similar to this DPA
 • Ensure each Sub-processor complies with applicable Data Protection Laws
+• Conduct due diligence on all Sub-processors before engagement
 • Remain fully liable for the performance of Sub-processors
 
-**4.4 Sub-processor Changes**
+**4.5 Sub-processor Changes**
 
-• Pullse may add or replace Sub-processors from time to time
-• Pullse will provide at least 30 days advance notice of new Sub-processors via email or dashboard notification
-• You may object to a new Sub-processor on reasonable data protection grounds by notifying us within 30 days
-• If you object, we will work with you to find a resolution
-• If no resolution is found, you may terminate the affected Services and receive a pro-rata refund`,
+• Pullse may add or replace Sub-processors from time to time as we build and scale our infrastructure
+• Once our service is in production, we will provide at least 30 days advance notice of new Sub-processors via email or dashboard notification
+• You may object to a new Sub-processor on reasonable data protection grounds by notifying us within 30 days of notification
+• If you object, we will work with you to find a reasonable resolution
+• If no resolution is found, you may terminate the affected Services and receive a pro-rata refund for unused service`,
       },
       {
         id: 'security',
