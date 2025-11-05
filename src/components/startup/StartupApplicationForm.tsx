@@ -39,6 +39,7 @@ const StartupApplicationForm = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [apiError, setApiError] = useState<string>('');
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -84,12 +85,34 @@ const StartupApplicationForm = () => {
     }
 
     setIsSubmitting(true);
+    setApiError('');
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch('/api/startup-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit application');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setApiError(
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred. Please try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -361,6 +384,13 @@ const StartupApplicationForm = () => {
           </div>
         </div>
       </div>
+
+      {/* Error Message */}
+      {apiError && (
+        <div className="glass-strong p-4 rounded-2xl border border-red-200 bg-red-50/50">
+          <p className="text-sm text-red-600 text-center">{apiError}</p>
+        </div>
+      )}
 
       {/* Submit Button */}
       <div className="flex justify-center">
