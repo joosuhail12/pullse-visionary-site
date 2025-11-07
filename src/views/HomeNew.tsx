@@ -342,7 +342,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       {/* Trust & problem framing */}
       <section className="relative bg-background py-24 md:py-28 overflow-hidden">
         {/* Subtle background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/5" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/2 to-background" />
 
         <div className="container relative mx-auto px-4">
           <div className="grid gap-16 lg:grid-cols-[1.3fr,1fr] items-start">
@@ -467,8 +467,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       {/* Platform taxonomy */}
       <section className="relative py-24 md:py-28 overflow-hidden">
         {/* Background effects */}
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.04),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto mb-20 max-w-4xl text-center space-y-6">
@@ -667,8 +667,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
 
       {/* Enhanced ROI Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.04),transparent_70%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -742,8 +742,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       {/* Enhanced Integrations Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-accent-pink/5 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--accent-pink)/0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-accent-pink/3 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--accent-pink)/0.04),transparent_70%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
@@ -815,8 +815,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       {/* Optimized Final CTA - Split Layout */}
       <section className="relative overflow-hidden py-24 md:py-32">
         {/* Enhanced background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/4 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.06),transparent_65%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.04),transparent_70%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-7xl">

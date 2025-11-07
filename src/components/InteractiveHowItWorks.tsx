@@ -82,12 +82,12 @@ const InteractiveHowItWorks = () => {
   const ActiveIcon = active.icon;
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-24 md:py-28 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/20" />
-        <div className={`absolute inset-0 bg-gradient-to-br ${active.bgGradient} transition-all duration-700`} />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/8 to-background" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${active.bgGradient} transition-all duration-700 opacity-60`} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.04),transparent_70%)]" />
       </div>
 
       <div className="container relative mx-auto px-4">

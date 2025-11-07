@@ -9,12 +9,13 @@ import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
 const PlatformOverview = () => {
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
-  return <section id="platform-overview" aria-labelledby="platform-overview-h2" className="py-20 fade-in-scroll relative overflow-hidden">
-      {/* Background accents - enhanced */}
+  return <section id="platform-overview" aria-labelledby="platform-overview-h2" className="py-24 md:py-28 fade-in-scroll relative overflow-hidden">
+      {/* Background accents - subtle */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-accent-teal/2 to-background" />
       <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-accent-teal/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/4 left-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-accent-teal/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-accent-orange/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/4 left-1/2 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
