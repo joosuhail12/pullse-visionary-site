@@ -82,17 +82,6 @@ export interface PolicyFootnote {
   text: string;
 }
 
-export interface Testimonial {
-  quote: string;
-  author: string;
-  role: string;
-  company: string;
-  metrics: {
-    label: string;
-    value: string;
-  }[];
-  image?: string;
-}
 
 export interface TrustSignal {
   icon: LucideIcon;
@@ -517,45 +506,6 @@ export const trialBenefits: string[] = [
   'Onboarding included',
 ];
 
-// ============================================
-// QUANTIFIED TESTIMONIALS
-// ============================================
-
-export const testimonials: Testimonial[] = [
-  {
-    quote: "Pullse reduced our average response time from 4 hours to 12 minutes. The AI Agent handles 70% of our support tickets automatically, and our CSAT score jumped from 82% to 97%.",
-    author: "Sarah Chen",
-    role: "Head of Customer Experience",
-    company: "TechFlow",
-    metrics: [
-      { label: "Response Time", value: "4hr → 12min" },
-      { label: "Auto-resolution", value: "70%" },
-      { label: "CSAT Score", value: "97%" },
-    ],
-  },
-  {
-    quote: "We went from 8 support agents to 3, while handling 3x more conversations. Pullse's AI Copilot makes our team incredibly efficient—they can handle complex issues in minutes instead of hours.",
-    author: "Marcus Rodriguez",
-    role: "VP of Operations",
-    company: "Velocity Commerce",
-    metrics: [
-      { label: "Team Size", value: "8 → 3 agents" },
-      { label: "Volume Handled", value: "3x increase" },
-      { label: "Resolution Time", value: "60% faster" },
-    ],
-  },
-  {
-    quote: "The ROI was clear in week one. We're now resolving 6,000 conversations monthly with AI, saving $42K in support costs. The QA tools caught quality issues we didn't even know existed.",
-    author: "Jennifer Park",
-    role: "Customer Operations Director",
-    company: "BuildRight SaaS",
-    metrics: [
-      { label: "Conversations Resolved", value: "6,000/month" },
-      { label: "Cost Savings", value: "$42K/month" },
-      { label: "Time to Value", value: "1 week" },
-    ],
-  },
-];
 
 // ============================================
 // TRUST SIGNALS
