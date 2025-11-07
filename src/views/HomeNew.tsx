@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, lazy, Suspense } from "react";
+import { useEffect, useRef, lazy, Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -89,6 +89,17 @@ const useCaseTabs = [
       'Escalation paths with approval workflows'
     ],
     gradient: 'from-blue-500/20 to-cyan-500/20',
+    primaryColor: 'rgb(59, 130, 246)', // blue-500
+    accentColor: 'rgb(6, 182, 212)', // cyan-500
+    cssVars: {
+      bg: 'from-blue-500/6 via-cyan-500/3',
+      border: 'border-blue-500/40',
+      text: 'text-blue-500',
+      bgLight: 'bg-blue-500/10',
+      bgHover: 'hover:bg-blue-500/5',
+      borderHover: 'hover:border-blue-500/40',
+      shadow: 'shadow-blue-500/10'
+    },
     stat: { label: 'Automation Rate', value: '68%', description: 'of routine tickets handled by AI' },
   },
   {
@@ -104,6 +115,17 @@ const useCaseTabs = [
       'Product recommendations in brand voice'
     ],
     gradient: 'from-purple-500/20 to-pink-500/20',
+    primaryColor: 'rgb(168, 85, 247)', // purple-500
+    accentColor: 'rgb(236, 72, 153)', // pink-500
+    cssVars: {
+      bg: 'from-purple-500/6 via-pink-500/3',
+      border: 'border-purple-500/40',
+      text: 'text-purple-500',
+      bgLight: 'bg-purple-500/10',
+      bgHover: 'hover:bg-purple-500/5',
+      borderHover: 'hover:border-purple-500/40',
+      shadow: 'shadow-purple-500/10'
+    },
     stat: { label: 'Resolution Time', value: '<30 sec', description: 'average order status lookup' },
   },
   {
@@ -118,7 +140,18 @@ const useCaseTabs = [
       'Secure credential management vault',
       'Compliance-ready documentation export'
     ],
-    gradient: 'from-green-500/20 to-emerald-500/20',
+    gradient: 'from-emerald-500/20 to-teal-500/20',
+    primaryColor: 'rgb(16, 185, 129)', // emerald-500
+    accentColor: 'rgb(20, 184, 166)', // teal-500
+    cssVars: {
+      bg: 'from-emerald-500/6 via-teal-500/3',
+      border: 'border-emerald-500/40',
+      text: 'text-emerald-500',
+      bgLight: 'bg-emerald-500/10',
+      bgHover: 'hover:bg-emerald-500/5',
+      borderHover: 'hover:border-emerald-500/40',
+      shadow: 'shadow-emerald-500/10'
+    },
     stat: { label: 'Audit Coverage', value: '100%', description: 'every action logged & traceable' },
   },
 ];
@@ -210,6 +243,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+  const [activeIndustry, setActiveIndustry] = useState('ops');
+  const activeTab = useCaseTabs.find(tab => tab.value === activeIndustry) || useCaseTabs[0];
 
   useEffect(() => {
     let ctx: { revert: () => void } | null = null;
@@ -515,15 +550,32 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       <InteractiveHowItWorks />
 
       {/* Redesigned Use cases section - Card Grid Layout */}
-      <section className="relative py-24 md:py-32">
-        {/* Enhanced background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent-green/5 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent-green)/0.08),transparent_60%)]" />
+      <section className="relative py-24 md:py-32 transition-colors duration-700">
+        {/* Enhanced background - dynamically colored */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br to-background transition-all duration-700"
+          style={{
+            backgroundImage: `linear-gradient(to bottom right, ${activeTab.primaryColor}0F, transparent)`
+          }}
+        />
+        <div
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{
+            background: `radial-gradient(ellipse at top right, ${activeTab.primaryColor}14, transparent 60%)`
+          }}
+        />
 
         <div className="container relative mx-auto px-4">
           {/* Enhanced header */}
           <div className="mx-auto mb-16 max-w-3xl text-center space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent-green/40 bg-gradient-to-r from-accent-green/20 to-accent-green/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-accent-green shadow-lg">
+            <div
+              className="inline-flex items-center gap-2 rounded-full border px-5 py-2 text-xs font-bold uppercase tracking-wider shadow-lg transition-all duration-500"
+              style={{
+                borderColor: `${activeTab.primaryColor}66`,
+                background: `linear-gradient(to right, ${activeTab.primaryColor}33, ${activeTab.primaryColor}1A)`,
+                color: activeTab.primaryColor
+              }}
+            >
               <BarChart3 className="h-3.5 w-3.5" />
               Industry Solutions
             </div>
@@ -536,15 +588,19 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
           </div>
 
           {/* Horizontal Tab Pills */}
-          <Tabs defaultValue="ops" className="mx-auto w-full max-w-6xl">
+          <Tabs defaultValue="ops" onValueChange={(value) => setActiveIndustry(value)} className="mx-auto w-full max-w-6xl">
             <TabsList className="!h-auto !inline-flex w-full justify-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-2 shadow-lg mb-12 backdrop-blur-sm">
               {useCaseTabs.map((tab) => {
                 const Icon = tab.icon;
+                const isActive = activeIndustry === tab.value;
                 return (
                   <TabsTrigger
                     key={tab.value}
                     value={tab.value}
-                    className="flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all data-[state=active]:bg-accent-green data-[state=active]:text-background data-[state=active]:shadow-lg"
+                    className="flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold transition-all data-[state=active]:text-background data-[state=active]:shadow-lg"
+                    style={isActive ? {
+                      backgroundColor: tab.primaryColor
+                    } : {}}
                   >
                     <Icon className="h-4 w-4" />
                     {tab.label}
@@ -563,15 +619,24 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   className="space-y-8 data-[state=active]:animate-in data-[state=active]:fade-in-50"
                 >
                   {/* Featured card with stat */}
-                  <div className="relative overflow-hidden rounded-[24px] border-l-4 border-accent-green bg-card p-10 shadow-xl transition-all hover:shadow-2xl">
+                  <div
+                    className="relative overflow-hidden rounded-[24px] border-l-4 bg-card p-10 shadow-xl transition-all hover:shadow-2xl"
+                    style={{ borderLeftColor: tab.primaryColor }}
+                  >
                     <div className="grid gap-10 lg:grid-cols-[1fr,1.3fr] items-start">
                       <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${tab.gradient} border border-accent-green/30 shadow-lg`}>
-                            <Icon className="h-8 w-8 text-accent-green" />
+                          <div
+                            className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${tab.gradient} border shadow-lg`}
+                            style={{ borderColor: `${tab.primaryColor}4D` }}
+                          >
+                            <Icon className="h-8 w-8" style={{ color: tab.primaryColor }} />
                           </div>
                           <div>
-                            <div className="text-xs font-bold uppercase tracking-wider text-accent-green mb-1">
+                            <div
+                              className="text-xs font-bold uppercase tracking-wider mb-1"
+                              style={{ color: tab.primaryColor }}
+                            >
                               {tab.label}
                             </div>
                             <h3 className="text-2xl md:text-3xl font-bold text-foreground">
@@ -585,15 +650,26 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                         </p>
 
                         {/* Industry stat callout */}
-                        <div className="rounded-2xl border border-accent-green/30 bg-gradient-to-br from-accent-green/10 to-accent-green/5 p-5">
+                        <div
+                          className="rounded-2xl border p-5"
+                          style={{
+                            borderColor: `${tab.primaryColor}4D`,
+                            background: `linear-gradient(to bottom right, ${tab.primaryColor}1A, ${tab.primaryColor}0D)`
+                          }}
+                        >
                           <div className="flex items-end gap-3 mb-2">
-                            <div className="text-4xl font-bold text-accent-green">{tab.stat.value}</div>
+                            <div className="text-4xl font-bold" style={{ color: tab.primaryColor }}>{tab.stat.value}</div>
                             <div className="pb-1 text-sm font-semibold text-foreground">{tab.stat.label}</div>
                           </div>
                           <div className="text-xs text-muted-foreground">{tab.stat.description}</div>
                         </div>
 
-                        <Button size="lg" className="w-full sm:w-auto bg-accent-green hover:bg-accent-green/90 text-background shadow-lg" asChild>
+                        <Button
+                          size="lg"
+                          className="w-full sm:w-auto text-background shadow-lg hover:opacity-90 transition-opacity"
+                          style={{ backgroundColor: tab.primaryColor }}
+                          asChild
+                        >
                           <Link href="/contact-sales">
                             See it in action
                             <ArrowRight className="ml-2 h-4 w-4" />
@@ -606,10 +682,28 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                         {tab.bullets.map((item) => (
                           <li
                             key={item}
-                            className="flex items-start gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background/80 to-background/60 p-5 backdrop-blur-sm transition-all hover:border-accent-green/40 hover:bg-accent-green/5 hover:shadow-md"
+                            className="flex items-start gap-3 rounded-xl border border-border/50 bg-gradient-to-r from-background/80 to-background/60 p-5 backdrop-blur-sm transition-all hover:shadow-md group"
+                            style={{
+                              '--hover-border': `${tab.primaryColor}66`,
+                              '--hover-bg': `${tab.primaryColor}0D`
+                            } as React.CSSProperties}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.borderColor = `${tab.primaryColor}66`;
+                              e.currentTarget.style.backgroundColor = `${tab.primaryColor}0D`;
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.borderColor = 'hsl(var(--border) / 0.5)';
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                           >
-                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-green/20 border border-accent-green/30 mt-0.5">
-                              <CheckCircle2 className="h-3.5 w-3.5 text-accent-green" />
+                            <div
+                              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border mt-0.5"
+                              style={{
+                                backgroundColor: `${tab.primaryColor}33`,
+                                borderColor: `${tab.primaryColor}4D`
+                              }}
+                            >
+                              <CheckCircle2 className="h-3.5 w-3.5" style={{ color: tab.primaryColor }} />
                             </div>
                             <span className="text-sm font-semibold text-foreground leading-relaxed">
                               {item}
@@ -622,10 +716,24 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
 
                   {/* Three supporting feature cards */}
                   <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                    <div
+                      className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = `${tab.primaryColor}66`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'hsl(var(--border) / 0.6)';
+                      }}
+                    >
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
-                          <Shield className="h-5 w-5 text-accent-green" />
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-lg border transition-all group-hover:scale-110"
+                          style={{
+                            backgroundColor: `${tab.primaryColor}1A`,
+                            borderColor: `${tab.primaryColor}33`
+                          }}
+                        >
+                          <Shield className="h-5 w-5" style={{ color: tab.primaryColor }} />
                         </div>
                         <h4 className="text-sm font-bold text-foreground">Security First</h4>
                       </div>
@@ -634,10 +742,24 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                       </p>
                     </div>
 
-                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                    <div
+                      className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = `${tab.primaryColor}66`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'hsl(var(--border) / 0.6)';
+                      }}
+                    >
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
-                          <Zap className="h-5 w-5 text-accent-green" />
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-lg border transition-all group-hover:scale-110"
+                          style={{
+                            backgroundColor: `${tab.primaryColor}1A`,
+                            borderColor: `${tab.primaryColor}33`
+                          }}
+                        >
+                          <Zap className="h-5 w-5" style={{ color: tab.primaryColor }} />
                         </div>
                         <h4 className="text-sm font-bold text-foreground">Rapid Deployment</h4>
                       </div>
@@ -646,10 +768,24 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                       </p>
                     </div>
 
-                    <div className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent-green/40">
+                    <div
+                      className="group rounded-2xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = `${tab.primaryColor}66`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = 'hsl(var(--border) / 0.6)';
+                      }}
+                    >
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-green/10 border border-accent-green/20 transition-all group-hover:scale-110">
-                          <BarChart3 className="h-5 w-5 text-accent-green" />
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-lg border transition-all group-hover:scale-110"
+                          style={{
+                            backgroundColor: `${tab.primaryColor}1A`,
+                            borderColor: `${tab.primaryColor}33`
+                          }}
+                        >
+                          <BarChart3 className="h-5 w-5" style={{ color: tab.primaryColor }} />
                         </div>
                         <h4 className="text-sm font-bold text-foreground">Measurable Impact</h4>
                       </div>
