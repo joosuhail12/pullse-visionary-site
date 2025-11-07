@@ -102,14 +102,14 @@ const ProductAISuite = () => {
     {
       color: 'hsl(var(--card))',
       title: 'AI Chatbots',
-      description: 'Deploy autonomous bots across web, Slack, Teams, and email. Handle routine questions 24/7 with smart handoff to humans when needed.',
+      description: 'Deploy autonomous agents that answer questions AND take lightweight actions. Process refunds, order lookups, subscription changes—24/7 across every channel. Not just deflection, actual resolution.',
       label: 'Customer-Facing',
       icon: Bot,
     },
     {
       color: 'hsl(var(--card))',
       title: 'AI Copilots',
-      description: 'Give agents instant AI assistance. Suggest answers, retrieve knowledge, draft responses—without ever touching customer conversations.',
+      description: 'On-demand action execution across your entire stack. Process refunds, update accounts, modify subscriptions—right from the conversation. Eliminate context switching and tool sprawl.',
       label: 'Agent-Facing',
       icon: Sparkles,
     },
@@ -368,10 +368,10 @@ const ProductAISuite = () => {
                   <div className="grid md:grid-cols-2 gap-8 mt-6">
                     <div>
                       <h3 className="text-4xl font-black mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                        Autonomous Deflection
+                        Autonomous Resolution
                       </h3>
                       <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                        Handle routine customer inquiries automatically, 24/7 across every channel. Smart escalation to humans when needed.
+                        Answer questions AND execute lightweight actions autonomously. Process refunds, lookups, updates—24/7 across every channel. Resolve with actions, not just deflect with answers.
                       </p>
 
                       <div className="space-y-4">
@@ -428,18 +428,18 @@ const ProductAISuite = () => {
                   <div className="grid md:grid-cols-2 gap-8 mt-6">
                     <div>
                       <h3 className="text-4xl font-black mb-6 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                        Agent Augmentation
+                        Action Execution Engine
                       </h3>
                       <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                        Give agents instant AI assistance for complex inquiries. Never touches customers—pure productivity boost.
+                        Execute actions across your entire stack from one interface. No tool switching, no copy-paste. Agents trigger actions; Copilot executes with proper controls.
                       </p>
 
                       <div className="space-y-4">
                         {[
-                          { label: 'On-Demand Help', detail: 'Triggered by agents, not automated' },
+                          { label: 'Stack-Wide Actions', detail: 'Refunds, updates, cancellations across all systems' },
                           { label: 'Knowledge Retrieval', detail: 'Instant access to all documentation' },
-                          { label: 'Response Drafting', detail: 'AI-written answers in your voice' },
-                          { label: 'Zero Customer Contact', detail: 'Never interacts with end users' }
+                          { label: 'Response Drafting', detail: 'AI-written answers in your brand voice' },
+                          { label: 'Agent-Triggered', detail: 'Full control with audit trails' }
                         ].map((feature, i) => (
                           <div key={i} className="group/feature flex items-start gap-4 p-4 rounded-xl bg-background/50 border border-purple-500/10 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300">
                             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">

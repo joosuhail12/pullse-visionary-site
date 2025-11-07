@@ -160,7 +160,7 @@ export const pricingTiers: PricingTier[] = [
       'All features on (nothing crippled)',
       'Unified inbox (email + live chat)',
       'Workflows with visual builder',
-      'AI Copilot (draft, summarize, translate, rewrite, extract)',
+      'AI Copilot (execute actions, draft, summarize, rewrite, extract)',
       'AI Agent (customer-facing with RAG)',
       'Tools/actions with approvals & audit',
       'Analytics & reporting',
@@ -303,7 +303,7 @@ export const sharedFeatures: string[] = [
   'Unified Inbox (email + live chat)',
   'Smart assignments & collision detection',
   'SLAs and automation rules',
-  'AI Copilot (draft, summarize, rewrite, translate, extract)',
+  'AI Copilot (execute actions across your stack, draft, summarize, rewrite)',
   'AI Agent (customer-facing) with RAG',
   'Copilot tool/actions & on-demand execution',
   'Visual workflows + "describe-to-build" with AI',
@@ -397,7 +397,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: 'What counts as an action?',
         answer:
-          'Any Copilot task (draft, summarize, translate, etc.), any AI Agent message turn, or any tool/API call = 1 credit. Longer conversations or complex work consume multiple actions—no hidden multipliers, just straightforward billing by actual work performed.',
+          'Any Copilot task (action execution, draft, summarize, etc.), any AI Agent message turn, or any tool/API call = 1 credit. Copilot executes actions across your entire stack—refunds, updates, cancellations. Longer conversations or complex work consume multiple actions—no hidden multipliers, just straightforward billing by actual work performed.',
       },
       {
         question: 'Is there a per-resolution price?',
@@ -424,7 +424,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: 'Can Copilot execute actions like refunds or plan changes?',
         answer:
-          'Yes. Copilot can run tools and actions on demand, with built-in approval workflows and full audit trails. Reps maintain control while AI handles the execution, making complex operations faster and error-free.',
+          'Yes. Copilot is built as an on-demand action execution engine. Execute refunds, account updates, subscription changes, and more across your entire stack—right from the conversation. No context switching or tool sprawl. Reps trigger actions; Copilot executes them with approval workflows and full audit trails.',
       },
       {
         question: 'How many profiles can we create?',
@@ -591,12 +591,12 @@ export const descriptiveFeatures: DescriptiveFeature[] = [
   },
   {
     title: "AI Copilot",
-    description: "Your agents get instant reply drafts, summaries, translations, and data extraction. AI does the grunt work so your team focuses on complex problems that actually need human judgment.",
+    description: "On-demand action execution engine for your agents. Execute refunds, updates, and changes across your entire stack from one interface. Plus reply drafts, summaries, and data extraction. Eliminate context switching and tool sprawl.",
     tierAvailability: "both",
   },
   {
     title: "Customer-Facing AI Agent",
-    description: "Handles 60-70% of common questions automatically using your help docs and past conversations. Learns from every interaction and escalates smoothly when it hits its limits.",
+    description: "Resolves 60-70% autonomously by answering questions AND taking lightweight actions—refunds, order lookups, subscription changes. Not just deflection, actual resolution with proper guardrails.",
     tierAvailability: "both",
   },
   {
@@ -859,14 +859,14 @@ export const featureComparison: FeatureComparison[] = [
     features: [
       {
         name: "Agentic Chatbots",
-        description: "Customer-facing AI chatbots with RAG and autonomous reasoning",
+        description: "Customer-facing AI agents that answer questions AND take lightweight actions autonomously",
         standard: "2 chatbots",
         pro: "Unlimited",
         usesCredits: true,
       },
       {
         name: "Agentic Copilots for Agents",
-        description: "AI assistants that execute actions and provide knowledge on-demand",
+        description: "Execute actions across your entire stack—refunds, updates, cancellations—right from the conversation",
         standard: true,
         pro: true,
         usesCredits: true,

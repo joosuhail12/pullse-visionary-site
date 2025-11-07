@@ -85,7 +85,7 @@ const useCaseTabs = [
     bullets: [
       'Smart routing based on intent, not keywords',
       'Automatic CRM syncing and ticket tagging',
-      'AI copilots that draft replies on-policy',
+      'AI copilots that execute actions across your stack',
       'Escalation paths with approval workflows'
     ],
     gradient: 'from-blue-500/20 to-cyan-500/20',
@@ -188,7 +188,7 @@ const taxonomy: CardData[] = [
   },
   {
     title: "AI Chatbots",
-    description: "Deflect known intents with intelligent automated responses.",
+    description: "Answer questions AND take lightweight actions—refunds, lookups, updates—autonomously.",
     label: "AI Agent",
     color: "hsl(var(--background))",
     icon: Bot,
@@ -196,8 +196,8 @@ const taxonomy: CardData[] = [
   },
   {
     title: "AI Copilots",
-    description: "Draft, summarize, translate—AI assistance for your team.",
-    label: "AI Assistant",
+    description: "Execute actions across your stack—refunds, updates, changes—right from the conversation.",
+    label: "Action Engine",
     color: "hsl(var(--background))",
     icon: Sparkles,
     image: aiCopilotScreenshot.src,
@@ -327,7 +327,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
               </h1>
 
               <p ref={descRef} className="max-w-2xl text-lg md:text-xl text-muted-foreground">
-                Pullse unifies channels, workflows, automations, and AI copilots so teams resolve complex intents in minutes. Automate the repetitive, empower agents, and keep every interaction on-brand.
+                Pullse unifies channels, workflows, automations, and action-execution copilots so teams resolve complex intents in minutes. Execute actions across your entire stack without context switching.
               </p>
 
               <div ref={buttonsRef} className="flex flex-col gap-4 sm:flex-row">
