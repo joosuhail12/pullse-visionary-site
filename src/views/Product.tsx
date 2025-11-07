@@ -221,44 +221,50 @@ const Product = () => {
     {
       icon: Building2,
       category: "CRM & Sales",
-      description: "Customer data sync",
+      description: "Pull customer context, update records, create tasks",
       connectors: ["Salesforce", "HubSpot", "Pipedrive"],
       color: "from-blue-500/10 to-blue-500/5",
+      action: "Auto-sync support interactions to customer timelines"
     },
     {
       icon: ShoppingCart,
       category: "E-commerce",
-      description: "Orders & inventory",
+      description: "Check inventory, process refunds, update orders",
       connectors: ["Shopify", "WooCommerce", "BigCommerce"],
       color: "from-purple-500/10 to-purple-500/5",
+      action: "Instantly look up orders and initiate returns"
     },
     {
       icon: CreditCard,
       category: "Payments",
-      description: "Billing & transactions",
+      description: "Process refunds, check subscriptions, update billing",
       connectors: ["Stripe", "PayPal", "Square"],
       color: "from-green-500/10 to-green-500/5",
+      action: "Issue refunds and manage subscriptions in-conversation"
     },
     {
       icon: Headphones,
-      category: "Support Tools",
-      description: "Helpdesk integration",
-      connectors: ["Zendesk", "Intercom", "Freshdesk"],
+      category: "Knowledge Base",
+      description: "Ingest docs, train AI, cite sources automatically",
+      connectors: ["Appo", "Notion", "Markdown files"],
       color: "from-amber-500/10 to-amber-500/5",
+      action: "AI agents cite help articles with source links"
     },
     {
       icon: MessageCircle,
       category: "Communication",
-      description: "Team collaboration",
+      description: "Route to channels, notify teams, create threads",
       connectors: ["Slack", "Microsoft Teams", "Discord"],
       color: "from-rose-500/10 to-rose-500/5",
+      action: "Alert teams instantly when escalation is needed"
     },
     {
       icon: Boxes,
-      category: "Custom",
-      description: "Your systems",
+      category: "Custom APIs",
+      description: "Connect any internal tool or external service",
       connectors: ["REST API", "Webhooks", "GraphQL"],
       color: "from-cyan-500/10 to-cyan-500/5",
+      action: "Build custom actions for your unique workflows"
     },
   ];
 
@@ -598,10 +604,10 @@ const Product = () => {
                 <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Connect with any API in the world
+                Execute actions across your entire business stack
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                100+ native connectors for popular tools, plus the flexibility to integrate with any custom system that has an API
+                100+ native connectors to pull data and trigger actions in real-time. Plus full REST API support for unlimited custom integrations. No middleware, no sync delays.
               </p>
             </div>
 
@@ -640,6 +646,14 @@ const Product = () => {
                             <span className="text-sm font-semibold text-foreground">{connector}</span>
                           </div>
                         ))}
+                      </div>
+
+                      {/* Action Use Case */}
+                      <div className="pt-4 border-t border-border/50">
+                        <div className="flex items-start gap-2">
+                          <Zap className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <p className="text-xs text-muted-foreground leading-relaxed">{category.action}</p>
+                        </div>
                       </div>
                     </div>
                   </div>

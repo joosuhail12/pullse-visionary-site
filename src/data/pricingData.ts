@@ -149,7 +149,7 @@ export const pricingTiers: PricingTier[] = [
   {
     id: 'standard',
     name: 'Standard',
-    tagline: 'The full help desk for growing teams.',
+    tagline: 'The complete support platform for growing teams.',
     monthlyPricePerSeat: 49,
     creditPricing: {
       payAsYouGo: 0.10,

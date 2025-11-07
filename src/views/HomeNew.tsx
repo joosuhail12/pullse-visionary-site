@@ -124,12 +124,12 @@ const useCaseTabs = [
 ];
 
 const connectorHighlights = [
-  { name: 'Shopify', status: 'live', description: 'Orders, inventory, customer data' },
-  { name: 'Stripe', status: 'live', description: 'Payments, refunds, subscriptions' },
-  { name: 'Slack', status: 'live', description: 'Team notifications & approvals' },
-  { name: 'Salesforce', status: 'beta', description: 'CRM sync & case management' },
-  { name: 'Zendesk', status: 'beta', description: 'Ticket import & sync' },
-  { name: 'REST API', status: 'live', description: 'Connect any custom system' },
+  { name: 'Shopify', status: 'live', description: 'Look up orders, process refunds, check inventory in real-time' },
+  { name: 'Stripe', status: 'live', description: 'Issue refunds, manage subscriptions, check payment status' },
+  { name: 'Slack', status: 'live', description: 'Route urgent escalations, request approvals, notify teams' },
+  { name: 'Salesforce', status: 'live', description: 'Pull customer context, update records, create follow-up tasks' },
+  { name: 'HubSpot', status: 'live', description: 'Sync contact data, track interactions, update deal stages' },
+  { name: 'REST API', status: 'live', description: 'Build custom actions for any internal or external system' },
 ];
 
 
@@ -160,7 +160,7 @@ const faqs = [
   {
     question: "Which integrations are available today?",
     answer:
-      "Core email/chat ingestion plus native connectors for Shopify, Stripe, Slack, and REST APIs. Salesforce, Zendesk, and HubSpot are in active development.",
+      "Core email/chat ingestion plus 100+ native connectors including Shopify, Stripe, Slack, Salesforce, HubSpot, and full REST API support for custom integrations.",
   },
   {
     question: "What is the implementation lift?",
@@ -777,10 +777,10 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 Integrations
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Connect with any API in the world
+                Take action across your entire stack
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                100+ native connectors for popular tools, plus the flexibility to integrate with any custom system. No middleware. No sync delays.
+                100+ native connectors to execute actions in real-time—refunds, updates, lookups—right from the conversation. Plus full REST API support for unlimited custom workflows. No middleware, no sync delays.
               </p>
             </div>
 
@@ -829,21 +829,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   </div>
                 );
               })}
-            </div>
-
-            {/* Coming Soon Section */}
-            <div className="mb-10 rounded-2xl border border-border/50 bg-card p-8">
-              <div className="text-center mb-6">
-                <h3 className="text-lg font-bold text-foreground mb-2">Coming Soon</h3>
-                <p className="text-sm text-muted-foreground">In active development for Q2 2025</p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                {['HubSpot', 'Intercom', 'Freshdesk', 'Gorgias', 'Help Scout'].map((name) => (
-                  <div key={name} className="rounded-lg border border-border/50 bg-muted/30 px-4 py-2 text-sm font-semibold text-muted-foreground">
-                    {name}
-                  </div>
-                ))}
-              </div>
             </div>
 
           </div>

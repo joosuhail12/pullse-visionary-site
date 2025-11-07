@@ -1188,9 +1188,9 @@ const ProductAISuite = () => {
 
                           <div className="space-y-5 mb-8">
                             {[
-                              { icon: Code, title: 'Pre-Built Connectors', desc: 'Instant integrations with Stripe, Salesforce, Zendesk, HubSpot, Shopify, and 50+ popular platforms.' },
-                              { icon: Settings, title: 'Custom REST APIs', desc: 'Connect any internal tool or external service with custom API endpoints. Full OpenAPI support.' },
-                              { icon: Play, title: 'Real-Time Actions', desc: 'Process refunds, update orders, create tickets, schedule meetings—all in natural conversation.' },
+                              { icon: Code, title: 'Pre-Built Connectors', desc: '100+ native integrations including Stripe, Salesforce, Slack, HubSpot, Shopify. Pull data and trigger actions in real-time.' },
+                              { icon: Settings, title: 'Custom REST APIs', desc: 'Connect any internal tool or external service with custom API endpoints. Build workflows for your unique systems.' },
+                              { icon: Play, title: 'Real-Time Actions', desc: 'Execute refunds, update subscriptions, create tasks, check inventory—all without leaving the conversation. No copy-paste.' },
                               { icon: Lock, title: 'Permission & Approval Flows', desc: 'Define who can do what. Set up approval workflows for sensitive actions with audit trails.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-500">

@@ -268,14 +268,14 @@ const SolutionsHub = () => {
   ];
 
   const integrations = [
-    { name: "Zendesk", icon: MessageSquare },
-    { name: "Intercom", icon: MessageSquare },
+    { name: "Slack", icon: MessageSquare },
+    { name: "Teams", icon: MessageSquare },
     { name: "Stripe", icon: CreditCard },
     { name: "Shopify", icon: ShoppingCart },
     { name: "Salesforce", icon: Users },
     { name: "Jira", icon: Settings },
     { name: "GitHub", icon: Code },
-    { name: "Slack", icon: MessageSquare },
+    { name: "HubSpot", icon: Users },
   ];
 
   const comparisonData = [
@@ -792,11 +792,11 @@ const SolutionsHub = () => {
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-                Works with your existing stack
+                Execute actions across your entire business stack
               </h2>
 
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Pullse connects to your help desk, CRM, payment processor, and more—no migration required
+                Pull data and trigger actions in real-time across your CRM, payment processor, e-commerce platform, and 100+ business tools. No migration, no middleware, no sync delays.
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
