@@ -539,25 +539,6 @@ const ProductInbox = () => {
                 );
               })}
             </div>
-
-            {/* AI Rewriting Screenshot */}
-            <div className="relative rounded-3xl border border-border/60 bg-gradient-to-br from-card via-card to-card/80 p-3 shadow-2xl fade-in-up">
-              <div className="space-y-4">
-                <div className="text-center py-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">AI Rewriting in Action</h3>
-                  <p className="text-muted-foreground">
-                    Watch AI transform draft messages with one click
-                  </p>
-                </div>
-                <div className="rounded-2xl overflow-hidden border border-border/30">
-                  <Image
-                    src={aiRewritingScreenshot}
-                    alt="AI Rewriting Feature - Transform message tone and style"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
