@@ -73,7 +73,7 @@
 .card__screenshot {
   margin-top: auto;
   flex-shrink: 0;
-  height: 50%;
+  height: 60%;
   border-radius: 12px 12px 0 0;
   background: linear-gradient(135deg, rgba(var(--glow-color), 0.1) 0%, rgba(var(--glow-color), 0.05) 100%);
   border: 1px solid rgba(var(--glow-color), 0.2);
