@@ -13,7 +13,6 @@ import {
   Bot,
   MessageSquare,
   Sparkles,
-  Headphones,
   ShoppingCart,
   Building2,
 } from "lucide-react";
@@ -77,33 +76,7 @@ const problemPoints = [
 
 const useCaseTabs = [
   {
-    value: 'ops',
-    label: 'Support Operations',
-    icon: Headphones,
-    headline: 'Eliminate repetitive triage work',
-    summary: 'Free your team from manual routing, tagging, and CRM updates. AI handles the busy work while agents focus on complex customer needs that require empathy and expertise.',
-    bullets: [
-      'Smart routing based on intent, not keywords',
-      'Automatic CRM syncing and ticket tagging',
-      'AI copilots that execute actions across your stack',
-      'Escalation paths with approval workflows'
-    ],
-    gradient: 'from-blue-500/20 to-cyan-500/20',
-    primaryColor: 'rgb(59, 130, 246)', // blue-500
-    accentColor: 'rgb(6, 182, 212)', // cyan-500
-    cssVars: {
-      bg: 'from-blue-500/6 via-cyan-500/3',
-      border: 'border-blue-500/40',
-      text: 'text-blue-500',
-      bgLight: 'bg-blue-500/10',
-      bgHover: 'hover:bg-blue-500/5',
-      borderHover: 'hover:border-blue-500/40',
-      shadow: 'shadow-blue-500/10'
-    },
-    stat: { label: 'Automation Rate', value: '68%', description: 'of routine tickets handled by AI' },
-  },
-  {
-    value: 'commerce',
+    value: 'ecommerce',
     label: 'E-commerce & Retail',
     icon: ShoppingCart,
     headline: 'Answer order questions instantly',
@@ -126,18 +99,18 @@ const useCaseTabs = [
       borderHover: 'hover:border-green-500/40',
       shadow: 'shadow-green-500/10'
     },
-    stat: { label: 'Resolution Time', value: '<30 sec', description: 'average order status lookup' },
+    stat: { label: 'WISMO Reduction', value: '62%', description: 'fewer order status inquiries' },
   },
   {
     value: 'fintech',
-    label: 'Fintech & SaaS',
-    icon: Building2,
-    headline: 'Automate with compliance built-in',
-    summary: 'Handle account changes, billing disputes, and investigations with automated workflows that include approval gates, audit trails, and role-based permissions by default.',
+    label: 'Fintech',
+    icon: Shield,
+    headline: 'Prevent fraud while staying compliant',
+    summary: 'Handle account changes, billing disputes, and fraud investigations with automated workflows that include approval gates, audit trails, and role-based permissions by default.',
     bullets: [
-      'Account updates with multi-level approvals',
+      'Real-time fraud detection and account freezing',
+      'Automated KYC verification workflows',
       'Dispute resolution with full audit logs',
-      'Secure credential management vault',
       'Compliance-ready documentation export'
     ],
     gradient: 'from-red-500/20 to-orange-500/20',
@@ -152,7 +125,33 @@ const useCaseTabs = [
       borderHover: 'hover:border-red-500/40',
       shadow: 'shadow-red-500/10'
     },
-    stat: { label: 'Audit Coverage', value: '100%', description: 'every action logged & traceable' },
+    stat: { label: 'Fraud Response', value: '<8s', description: 'average fraud detection time' },
+  },
+  {
+    value: 'saas',
+    label: 'SaaS',
+    icon: Building2,
+    headline: 'Turn trial users into paying customers',
+    summary: 'Guide users through onboarding, troubleshoot technical issues, and proactively prevent churn with AI that understands your product and connects to your entire stack.',
+    bullets: [
+      'Onboarding assistance with product guidance',
+      'Technical troubleshooting with Jira integration',
+      'Usage-based proactive outreach',
+      'Trial-to-paid conversion workflows'
+    ],
+    gradient: 'from-blue-500/20 to-cyan-500/20',
+    primaryColor: 'rgb(59, 130, 246)', // blue-500
+    accentColor: 'rgb(6, 182, 212)', // cyan-500
+    cssVars: {
+      bg: 'from-blue-500/6 via-cyan-500/3',
+      border: 'border-blue-500/40',
+      text: 'text-blue-500',
+      bgLight: 'bg-blue-500/10',
+      bgHover: 'hover:bg-blue-500/5',
+      borderHover: 'hover:border-blue-500/40',
+      shadow: 'shadow-blue-500/10'
+    },
+    stat: { label: 'Churn Reduction', value: '28%', description: 'lower customer churn rate' },
   },
 ];
 
@@ -243,7 +242,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const [activeIndustry, setActiveIndustry] = useState('ops');
+  const [activeIndustry, setActiveIndustry] = useState('ecommerce');
   const activeTab = useCaseTabs.find(tab => tab.value === activeIndustry) || useCaseTabs[0];
 
   useEffect(() => {
@@ -588,7 +587,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
           </div>
 
           {/* Horizontal Tab Pills */}
-          <Tabs defaultValue="ops" onValueChange={(value) => setActiveIndustry(value)} className="mx-auto w-full max-w-6xl">
+          <Tabs defaultValue="ecommerce" onValueChange={(value) => setActiveIndustry(value)} className="mx-auto w-full max-w-6xl">
             <TabsList className="!h-auto !inline-flex w-full justify-center gap-3 rounded-2xl border border-border/60 bg-card/90 p-2 shadow-lg mb-12 backdrop-blur-sm">
               {useCaseTabs.map((tab) => {
                 const Icon = tab.icon;
