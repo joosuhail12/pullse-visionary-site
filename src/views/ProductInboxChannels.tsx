@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
+import ResultCard from "@/components/ResultCard";
 import Image from "next/image";
 import {
   Mail,
@@ -266,6 +267,16 @@ const ProductInboxChannels = () => {
       description: 'With AI rewriting and canned responses',
       icon: Zap,
       color: 'from-blue-500 to-cyan-500',
+      visualizationType: 'comparison' as const,
+      animatedValue: 73,
+      contextData: {
+        subtitle: 'Average response time reduction',
+        comparison: {
+          before: { label: 'Manual', value: '60min' },
+          after: { label: 'With AI', value: '16min' },
+        },
+        progressValue: 73,
+      },
     },
     {
       value: '80%',
@@ -273,6 +284,21 @@ const ProductInboxChannels = () => {
       description: 'Tickets handled without human touch',
       icon: Bot,
       color: 'from-purple-500 to-pink-500',
+      visualizationType: 'stacked' as const,
+      animatedValue: 80,
+      contextData: {
+        subtitle: '2.4M tickets per year',
+        stackedData: {
+          primary: 80,
+          secondary: 20,
+          primaryLabel: 'Automated',
+          secondaryLabel: 'Manual',
+        },
+        badge: {
+          text: 'Savings: $2.1M annually',
+          color: 'bg-green-500/10 text-green-500 border border-green-500/20',
+        },
+      },
     },
     {
       value: '4.8',
@@ -280,6 +306,16 @@ const ProductInboxChannels = () => {
       description: 'Average customer satisfaction rating',
       icon: TrendingUp,
       color: 'from-green-500 to-emerald-500',
+      visualizationType: 'stars' as const,
+      animatedValue: 4.8,
+      contextData: {
+        subtitle: 'From 12,847 responses',
+        trend: {
+          value: '0.3',
+          direction: 'up' as const,
+          label: 'vs last quarter',
+        },
+      },
     },
   ];
 
@@ -761,39 +797,37 @@ const ProductInboxChannels = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent" />
 
         <div className="container relative mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="rounded-3xl border border-primary/30 bg-gradient-to-br from-card via-card to-card/80 p-12 lg:p-16 shadow-2xl backdrop-blur-xl fade-in-up">
-              <div className="text-center mb-12 space-y-4">
-                <div className="text-sm font-bold uppercase tracking-widest text-primary">
-                  Customer Results
-                </div>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-                  Real impact, measurable results
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Average outcomes across our customers
-                </p>
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-20 space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span className="text-xs font-semibold tracking-wide text-primary">Customer Results</span>
               </div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+                Real impact, measurable results
+              </h2>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Average outcomes across our customers
+              </p>
+            </div>
 
-              <div className="grid md:grid-cols-3 gap-12">
-                {results.map((result, index) => {
-                  const Icon = result.icon;
-                  return (
-                    <div key={index} className="text-center space-y-4">
-                      <div className="flex justify-center mb-4">
-                        <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${result.color} shadow-lg`}>
-                          <Icon className="h-8 w-8 text-background" />
-                        </div>
-                      </div>
-                      <div className={`text-6xl font-bold bg-gradient-to-br ${result.color} bg-clip-text text-transparent`}>
-                        {result.value}
-                      </div>
-                      <div className="text-xl font-bold text-foreground">{result.label}</div>
-                      <div className="text-sm text-muted-foreground">{result.description}</div>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Result Cards */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {results.map((result, index) => (
+                <ResultCard
+                  key={index}
+                  icon={result.icon}
+                  value={result.value}
+                  label={result.label}
+                  description={result.description}
+                  color={result.color}
+                  visualizationType={result.visualizationType}
+                  animatedValue={result.animatedValue}
+                  contextData={result.contextData}
+                  delay={index * 0.1}
+                />
+              ))}
             </div>
           </div>
         </div>
