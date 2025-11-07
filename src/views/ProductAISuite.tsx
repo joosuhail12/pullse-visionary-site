@@ -102,7 +102,7 @@ const ProductAISuite = () => {
     {
       color: 'hsl(var(--card))',
       title: 'AI Chatbots',
-      description: 'Deploy autonomous bots across web, Slack, WhatsApp, and email. Handle routine questions 24/7 with smart handoff to humans when needed.',
+      description: 'Deploy autonomous bots across web, Slack, Teams, and email. Handle routine questions 24/7 with smart handoff to humans when needed.',
       label: 'Customer-Facing',
       icon: Bot,
     },
@@ -377,7 +377,7 @@ const ProductAISuite = () => {
                       <div className="space-y-4">
                         {[
                           { label: '24/7 Availability', detail: 'Never closes, never sleeps' },
-                          { label: 'Multi-Channel', detail: 'Web, Slack, WhatsApp, Email, Teams' },
+                          { label: 'Multi-Channel', detail: 'Web, Slack, Email, Teams, API webhooks' },
                           { label: 'Smart Handoff', detail: 'Seamless escalation with full context' },
                           { label: 'Action Execution', detail: 'Refunds, updates, data lookups' }
                         ].map((feature, i) => (
@@ -1211,7 +1211,7 @@ const ProductAISuite = () => {
                           <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-purple-600/5 via-transparent to-indigo-600/5 border border-purple-500/20">
                             <div className="flex items-center gap-3 text-sm text-muted-foreground">
                               <Sparkles className="h-5 w-5 text-purple-600" />
-                              <span className="font-medium">Enterprise-grade security with OAuth 2.0, API key encryption, and SOC 2 compliance</span>
+                              <span className="font-medium">Enterprise-grade security with API key encryption, RBAC, and audit logs. SOC 2 Type II in progress</span>
                             </div>
                           </div>
                         </div>
@@ -1235,7 +1235,7 @@ const ProductAISuite = () => {
                               { icon: MessageSquare, title: 'Contextual Memory', desc: 'Remembers conversation history, user preferences, and past interactions for personalized responses.' },
                               { icon: Brain, title: 'Advanced Reasoning', desc: 'Multi-step problem solving, clarifying questions, and complex query understanding with chain-of-thought.' },
                               { icon: TrendingUp, title: 'Continuous Learning', desc: 'Learns from corrections, feedback, and human oversight to improve accuracy without retraining.' },
-                              { icon: Shield, title: 'Enterprise-Grade AI', desc: 'SOC 2 compliant, GDPR ready, with data isolation, audit logs, and role-based access control.' }
+                              { icon: Shield, title: 'Enterprise-Grade AI', desc: 'Data isolation, complete audit logs, and role-based access control. SOC 2 Type II controls in progress.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-500">
                                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1350,8 +1350,8 @@ const ProductAISuite = () => {
                     <div className="text-5xl font-black text-foreground mb-2">
                       <AnimatedCounter end={100} suffix="+" trigger={statsAnimated} />
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Languages Supported</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Multilingual AI with automatic language detection</p>
+                    <h3 className="text-lg font-bold text-foreground mb-2">AI Model Access</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">Support for 100+ LLM models and providers</p>
                   </div>
                 </div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl" />
@@ -1412,11 +1412,11 @@ const ProductAISuite = () => {
               <div className="flex flex-wrap gap-8 justify-center items-center pt-12">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Lock className="h-4 w-4 text-primary" />
-                  <span>SOC 2 Compliant</span>
+                  <span>SOC 2 Type II in progress</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Shield className="h-4 w-4 text-primary" />
-                  <span>GDPR Ready</span>
+                  <span>Enterprise security</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <CheckCircle2 className="h-4 w-4 text-primary" />

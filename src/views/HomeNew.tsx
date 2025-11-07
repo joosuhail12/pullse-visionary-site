@@ -139,16 +139,10 @@ const connectorHighlights = [
 
 const resources = [
   {
-    title: "Founder vision letter",
-    description: "Why we're building Pullse and how the early access cohort works.",
-    href: "/blog/founder-letter",
+    title: "Manifesto",
+    description: "Why we're building Pullse and our vision for AI-powered support.",
+    href: "/blog/the-era-of-tool-sprawl-is-ending-here-s-what-comes-next",
     badge: "Read",
-  },
-  {
-    title: "Early access FAQ",
-    description: "Everything you need to know about partnering with Pullse in 2025.",
-    href: "/contact-sales",
-    badge: "Guide",
   },
 ];
 
@@ -360,7 +354,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
               <div className="absolute -inset-6 bg-primary/20 blur-3xl -z-10" />
               <div className="rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-background/70 via-background/90 to-background/70 p-1 shadow-2xl">
                 <div className="rounded-[2.3rem] overflow-hidden">
-                  <VideoEmbed videoId="nUHaQJU5q5c" title="Pullse product intro" />
+                  <VideoEmbed videoId="NItSkrvcS04" title="Pullse product intro" />
                 </div>
               </div>
             </div>
@@ -783,10 +777,10 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 Integrations
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Native connectors for your entire stack
+                Connect with any API in the world
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Pull live data from CRMs, billing systems, and inventory platforms. No middleware. No sync delays.
+                100+ native connectors for popular tools, plus the flexibility to integrate with any custom system. No middleware. No sync delays.
               </p>
             </div>
 
@@ -852,25 +846,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
               </div>
             </div>
 
-            {/* Enhanced CTA Card */}
-            <div className="rounded-2xl border border-accent-pink/30 bg-gradient-to-br from-accent-pink/10 via-accent-pink/5 to-background p-8 shadow-lg">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="text-center md:text-left flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    Don't see your integration?
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Vote on our roadmap or request custom connectors. We prioritize integrations based on partner needs.
-                  </p>
-                </div>
-                <div className="flex gap-3 shrink-0">
-                  <RouteButton variant="outline" href="/contact-sales" className="shadow-md">
-                    Request integration
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </RouteButton>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -878,8 +853,8 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       {/* Optimized Final CTA - Split Layout */}
       <section className="relative overflow-hidden py-24 md:py-32">
         {/* Enhanced background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/8 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_65%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/4 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.06),transparent_65%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-7xl">
@@ -899,7 +874,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
                       </span>
-                      Limited Spots · 2025
+                      Production Ready
                     </div>
 
                     {/* Impact Stats with attribution */}
@@ -917,7 +892,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                             <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden mb-2">
                               <div className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 rounded-full w-[68%] transition-all duration-1000" />
                             </div>
-                            <div className="text-xs text-muted-foreground">Average across early customers</div>
+                            <div className="text-xs text-muted-foreground">Average automation rate</div>
                           </div>
 
                           <div className="group">
@@ -952,13 +927,13 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
                             <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
                           </div>
-                          <span>GDPR & CCPA compliance ready</span>
+                          <span>Data encryption and audit trails</span>
                         </div>
                         <div className="flex items-center gap-3 text-xs font-semibold text-foreground">
                           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
                             <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
                           </div>
-                          <span>Direct founder access & support</span>
+                          <span>Dedicated implementation support</span>
                         </div>
                       </div>
                     </div>
@@ -971,17 +946,17 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                     {/* Headline */}
                     <div className="space-y-5">
                       <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1]">
-                        Ready to join the early access program?
+                        Transform your customer support with AI automation
                       </h2>
                       <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                        Partner with our founding team to design workflows that match your exact needs. Limited spots available for 2025.
+                        Join growing companies automating 68% of support tickets with our AI-powered platform. From setup to full automation in just 4 weeks.
                       </p>
                     </div>
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
                       <RouteButton size="lg" className="text-base px-8 py-7 shadow-xl shadow-primary/25" href="/contact-sales">
-                        Talk to founders
+                        Book a demo
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </RouteButton>
                     </div>
@@ -991,32 +966,41 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                       <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-6">
                         Your Implementation Journey
                       </div>
-                      <div className="grid sm:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                         <div className="relative">
                           <div className="flex items-center gap-3 mb-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">1</div>
                             <div className="text-xl font-bold text-primary">Week 1</div>
                           </div>
                           <div className="text-sm text-muted-foreground leading-relaxed">
-                            Connect channels & systems
+                            Setup channels and systems
                           </div>
                         </div>
                         <div className="relative">
                           <div className="flex items-center gap-3 mb-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">2</div>
-                            <div className="text-xl font-bold text-primary">Week 2-3</div>
+                            <div className="text-xl font-bold text-primary">Week 2</div>
                           </div>
                           <div className="text-sm text-muted-foreground leading-relaxed">
-                            Design & test automations
+                            Design and test automation
                           </div>
                         </div>
                         <div className="relative">
                           <div className="flex items-center gap-3 mb-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">3</div>
+                            <div className="text-xl font-bold text-primary">Week 3</div>
+                          </div>
+                          <div className="text-sm text-muted-foreground leading-relaxed">
+                            Team training and testing
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 border border-primary/30 text-lg font-bold text-primary">4</div>
                             <div className="text-xl font-bold text-primary">Week 4</div>
                           </div>
                           <div className="text-sm text-muted-foreground leading-relaxed">
-                            Go live & measure impact
+                            Go live
                           </div>
                         </div>
                       </div>
@@ -1024,20 +1008,22 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
 
                     {/* Enhanced Resource Links */}
                     <div className="pt-6">
-                      <div className="grid sm:grid-cols-3 gap-3">
+                      <div className="max-w-sm">
                         {resources.map((resource) => (
                           <Link
                             key={resource.title}
                             href={resource.href}
-                            className="group rounded-xl border border-border/50 bg-muted/30 p-4 transition-all hover:border-primary/40 hover:bg-primary/5 hover:shadow-md"
+                            className="group rounded-xl border border-border/50 bg-muted/30 p-4 transition-all hover:border-primary/40 hover:bg-primary/5 hover:shadow-md flex items-center justify-between"
                           >
-                            <div className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">
-                              {resource.badge}
+                            <div className="flex-1">
+                              <div className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1">
+                                {resource.badge}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-semibold text-foreground leading-tight">{resource.title}</span>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-semibold text-foreground leading-tight">{resource.title}</span>
-                              <ArrowRight className="h-3 w-3 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-                            </div>
+                            <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary shrink-0 ml-3" />
                           </Link>
                         ))}
                       </div>

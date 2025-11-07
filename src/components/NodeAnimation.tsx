@@ -1015,7 +1015,7 @@ const Scene = () => {
     ticketInfo: {
       emoji: "💬",
       text: "Demo request",
-      subtitle: "Product tour",
+      subtitle: "Sales inquiry",
       color: "#10b981",
       priority: "medium" as const
     }

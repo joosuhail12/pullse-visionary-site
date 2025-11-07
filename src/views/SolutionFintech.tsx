@@ -88,7 +88,7 @@ const SolutionFintech = () => {
               </h1>
 
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Built for fintech compliance. SOC 2, PCI-DSS, audit trails—out of the box.
+                Built for fintech compliance. Complete audit trails, encryption, RBAC—out of the box. SOC 2 Type II in progress.
               </p>
 
               {/* CTA */}
@@ -103,7 +103,7 @@ const SolutionFintech = () => {
               <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>SOC 2 Type II</span>
+                  <span>SOC 2 Type II in progress</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -565,7 +565,7 @@ const SolutionFintech = () => {
                   <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-border/40">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
-                      <span>SOC 2 certified</span>
+                      <span>SOC 2 controls in progress</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-primary" />

@@ -51,8 +51,8 @@ export const competitors: Competitor[] = [
       "Better for support-first teams (Intercom is sales/marketing-focused)"
     ],
     pricingNote: "Intercom starts at $39/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
-    whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging and product tours over traditional support.",
-    strengths: ['Strong proactive messaging', 'Product tours', 'SaaS-focused features', 'Conversational AI']
+    whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging over traditional support.",
+    strengths: ['Strong proactive messaging', 'SaaS-focused features', 'Conversational AI']
   },
   {
     id: 'freshdesk',

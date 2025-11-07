@@ -1902,7 +1902,7 @@ Help us understand how visitors interact with our website through anonymous usag
       {
         id: 'specific-cookies',
         title: '3. Specific Cookies We Use',
-        content: `Below is a comprehensive list of cookies we use, organized by category:
+        content: `Below is a comprehensive list of cookies we currently use, organized by category:
 
 **3.1 Essential/Strictly Necessary Cookies**
 
@@ -1910,75 +1910,42 @@ These cookies are required for the website to function and cannot be disabled.
 
 | Cookie Name | Provider | Purpose | Duration | Type |
 |-------------|----------|---------|----------|------|
+| pullse_cookie_consent | Pullse | Stores your cookie preferences | 1 year | HTTP |
+| sb-* | Supabase | Authentication and session management | Varies | HTTP |
 | __session | Pullse | Maintains your logged-in session | Session | HTTP |
-| csrf_token | Pullse | Prevents cross-site request forgery attacks | Session | HTTP |
-| load_balancer | Pullse | Distributes traffic across servers | 1 day | HTTP |
-| auth_token | Pullse | Authenticates API requests | 30 days | HTTP |
-| secure_id | Pullse | Additional security validation | Session | HTTP |
 
-**3.2 Performance/Analytics Cookies**
+**3.2 Functional Cookies**
 
-These cookies help us understand how visitors use our website.
+These cookies remember your preferences and enable enhanced functionality. You can opt out of these cookies.
 
 | Cookie Name | Provider | Purpose | Duration | Type |
 |-------------|----------|---------|----------|------|
-| _ga | Google Analytics | Distinguishes unique users | 2 years | HTTP |
-| _ga_* | Google Analytics | Used by Google Analytics to persist session state | 2 years | HTTP |
-| _gid | Google Analytics | Distinguishes unique users (short-term) | 24 hours | HTTP |
-| _gat | Google Analytics | Throttles request rate | 1 minute | HTTP |
-| _gat_gtag_* | Google Analytics | Used to throttle request rate | 1 minute | HTTP |
-| mp_* | Mixpanel | Product analytics and user behavior tracking | 1 year | HTTP |
-| amplitude_id | Amplitude | User identification for product analytics | 10 years | HTTP |
-| amplitude_sessionId | Amplitude | Session tracking for analytics | Session | HTTP |
-
-**3.3 Functional Cookies**
-
-These cookies remember your preferences and choices.
-
-| Cookie Name | Provider | Purpose | Duration | Type |
-|-------------|----------|---------|----------|------|
+| cal-* | Cal.com | Powers meeting scheduling functionality | Varies | HTTP |
 | pullse_preferences | Pullse | Stores display and UI preferences | 1 year | HTTP |
-| pullse_language | Pullse | Remembers language selection | 1 year | HTTP |
-| pullse_timezone | Pullse | Stores timezone setting | 1 year | HTTP |
-| pullse_theme | Pullse | Remembers dark/light mode preference | 1 year | HTTP |
-| pullse_dismissed_banners | Pullse | Tracks dismissed notification banners | 90 days | HTTP |
-| intercom-* | Intercom | Powers customer support chat functionality | 1 week | HTTP |
+
+**3.3 Performance/Analytics Cookies**
+
+These cookies help us understand how visitors use our website. We will only use these cookies with your explicit consent.
+
+| Status | Description |
+|--------|-------------|
+| **Not Currently Active** | We plan to implement analytics tools (such as Google Analytics or similar) in the future. When implemented, these cookies will only be placed with your explicit consent through our cookie banner. |
 
 **3.4 Targeting/Advertising Cookies**
 
-These cookies are used to deliver relevant advertisements (with your consent).
+| Status | Description |
+|--------|-------------|
+| **Not Currently Active** | We do not currently use any advertising or targeting cookies. If we implement these in the future, we will only do so with your explicit consent. |
 
-| Cookie Name | Provider | Purpose | Duration | Type |
-|-------------|----------|---------|----------|------|
-| _fbp | Facebook | Tracks visits across websites for ad targeting | 3 months | HTTP |
-| _gcl_au | Google Ads | Stores and tracks conversions | 3 months | HTTP |
-| IDE | Google DoubleClick | Registers user behavior for targeted advertising | 1 year | HTTP |
-| test_cookie | Google DoubleClick | Checks if browser accepts cookies | 15 minutes | HTTP |
-| _hjid | Hotjar | Hotjar user identification | 1 year | HTTP |
-| _hjSessionUser_* | Hotjar | Hotjar session identifier | 1 year | HTTP |
-| li_sugr | LinkedIn | LinkedIn browser identification | 3 months | HTTP |
-| bcookie | LinkedIn | LinkedIn browser identification | 1 year | HTTP |
+**3.5 Third-Party Service Cookies**
 
-**3.5 Social Media Cookies**
+The following third-party services may set cookies when you interact with their features:
 
-Set by social media platforms when you share content.
-
-| Cookie Name | Provider | Purpose | Duration | Type |
-|-------------|----------|---------|----------|------|
-| _twitter_sess | Twitter | Twitter integration and sharing | Session | HTTP |
-| personalization_id | Twitter | Twitter personalization | 2 years | HTTP |
-| li_at | LinkedIn | LinkedIn authentication | 1 year | HTTP |
-| lidc | LinkedIn | LinkedIn routing | 1 day | HTTP |
-
-**3.6 Third-Party Service Cookies**
-
-| Service | Purpose | Privacy Policy |
-|---------|---------|----------------|
-| Stripe | Payment processing | https://stripe.com/privacy |
-| Google Tag Manager | Tag management | https://policies.google.com/privacy |
-| Cloudflare | CDN and security | https://www.cloudflare.com/privacypolicy/ |
-| Sentry | Error tracking | https://sentry.io/privacy/ |
-| Cal.com | Meeting scheduling | https://cal.com/privacy |`,
+| Service | Purpose | When Used | Privacy Policy |
+|---------|---------|-----------|----------------|
+| Cal.com | Meeting scheduling | Only when scheduling widget is loaded | https://cal.com/privacy |
+| Supabase | Authentication & data management | When using authenticated features | https://supabase.com/privacy |
+| Sanity | Content management | Only in Studio/admin interface | https://www.sanity.io/legal/privacy |`,
       },
       {
         id: 'cookie-duration',
@@ -1986,18 +1953,28 @@ Set by social media platforms when you share content.
         content: `Cookies may be either:
 
 **Session Cookies:**
-Temporary cookies that are deleted when you close your browser.
+Temporary cookies that are deleted when you close your browser (e.g., __session).
 
 **Persistent Cookies:**
-Cookies that remain on your device for a specified period or until manually deleted. Duration varies:
-• Authentication cookies: 30 days
-• Preference cookies: 1 year
-• Analytics cookies: 2 years`,
+Cookies that remain on your device for a specified period or until manually deleted. Our persistent cookies include:
+• Cookie consent preferences: 1 year
+• Display and UI preferences: 1 year
+• Authentication cookies: Varies by service (Supabase manages authentication)
+• Third-party service cookies: Varies by service provider`,
       },
       {
         id: 'managing-cookies',
         title: '5. Managing Your Cookie Preferences',
         content: `You have several options to manage cookies:
+
+**Cookie Consent Banner:**
+When you first visit our website, you'll see a cookie consent banner. You can:
+• Accept all cookies (essential + functional)
+• Accept only essential cookies
+• Customize your preferences
+
+**Cookie Settings:**
+You can change your cookie preferences at any time by clicking the "Cookie Preferences" link in our website footer.
 
 **Browser Settings:**
 Most browsers allow you to:
@@ -2006,14 +1983,7 @@ Most browsers allow you to:
 • Block third-party cookies
 • Receive notifications before cookies are set
 
-**Cookie Consent Tool:**
-When you first visit our website, you'll see a cookie consent banner. You can manage your preferences at any time through the cookie settings link in our footer.
-
-**Opt-Out Tools:**
-• Google Analytics Opt-out: https://tools.google.com/dlpage/gaoptout
-• Network Advertising Initiative: https://optout.networkadvertising.org
-
-Note: Blocking certain cookies may affect website functionality.`,
+Note: Blocking essential cookies may affect website functionality, such as preventing you from staying logged in or scheduling meetings.`,
       },
       {
         id: 'other-tracking',

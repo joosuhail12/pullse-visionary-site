@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef, MouseEvent } from "react";
+import { useState, useRef, MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   Menu, X, ChevronDown, ArrowRight,
-  Brain, Workflow, Sparkles, Inbox, BookOpen, CheckCircle2, Wand2, Heart,
+  Brain, Workflow, Inbox, BookOpen, CheckCircle2, Wand2,
   BarChart3, Building2, Banknote, ShoppingCart,
-  FileText, Calendar, Video, Activity, Shield, Scale, Users, Phone,
-  Newspaper, Rocket, LayoutGrid, Play
+  Activity, Users, Phone,
+  Newspaper, LayoutGrid
 } from "lucide-react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -19,41 +19,35 @@ import logoText from "@/assets/logo-text-navy.png";
 
 // Navigation structure with icons - mapped to actual pages
 const navigationData = {
-  product: [
+  platform: [
     {
       category: "Overview",
       isOverview: true,
       links: [
-        { href: "/product", label: "Product Overview", description: "Explore all features", icon: LayoutGrid },
+        { href: "/product", label: "Platform Overview", description: "Explore all features", icon: LayoutGrid },
       ],
     },
     {
-      category: "Platform",
+      category: "Core Features",
       links: [
-        { href: "/product/inbox-channels", label: "Inbox & Channels", description: "All channels in one place", icon: Inbox },
-        { href: "/product/workflows-routing", label: "Workflows", description: "Automate customer journeys", icon: Workflow },
-        { href: "/product/appo", label: "Appo", description: "Help center platform", icon: Heart },
-        { href: "/product/analytics", label: "Analytics", description: "Track performance metrics", icon: BarChart3 },
+        { href: "/product/inbox-channels", label: "Inbox & Channels", description: "Unified communication hub", icon: Inbox },
+        { href: "/product/workflows-routing", label: "Workflows & Routing", description: "Intelligent automation", icon: Workflow },
+        { href: "/product/analytics", label: "Analytics & Reporting", description: "Data-driven insights", icon: BarChart3 },
+        { href: "/product/appo", label: "Help Center", description: "Self-service knowledge base", icon: BookOpen },
       ],
     },
     {
-      category: "AI & Automation",
+      category: "AI Capabilities",
       links: [
-        { href: "/product/ai-engine", label: "AI Engine", description: "Autonomous customer support", icon: Brain },
+        { href: "/product/ai-engine", label: "AI Engine", description: "Autonomous support agent", icon: Brain },
         { href: "/product/ai-suite", label: "AI Suite", description: "Complete AI toolkit", icon: Wand2 },
         { href: "/product/auto-qa", label: "Auto QA", description: "Quality assurance automation", icon: CheckCircle2 },
       ],
     },
     {
-      category: "Compare",
+      category: "Explore",
       links: [
-        { href: "/compare", label: "Compare", description: "Pullse vs Competitors", icon: BarChart3 },
-      ],
-    },
-    {
-      category: "Product Tour",
-      links: [
-        { href: "/product-tour", label: "Product Tour", description: "See the platform in action", icon: Play },
+        { href: "/compare", label: "Compare", description: "Pullse vs competitors", icon: Activity },
       ],
     },
   ],
@@ -64,9 +58,22 @@ const navigationData = {
     { href: "/solutions/fintech", label: "Fintech", description: "Secure & compliant", icon: Banknote },
   ],
   resources: [
-    { href: "/blog", label: "Blog", description: "News & insights", icon: Newspaper },
-    { href: "/company", label: "Company", description: "About us", icon: Users },
-    { href: "/legal", label: "Legal", description: "Terms & policies", icon: Scale },
+    {
+      category: "Learn",
+      links: [
+        { href: "/blog", label: "Blog", description: "Latest insights & updates", icon: Newspaper },
+        { href: "/compare", label: "Comparisons", description: "How we compare", icon: Activity },
+      ],
+    },
+  ],
+  company: [
+    {
+      category: "About",
+      links: [
+        { href: "/company", label: "About Pullse", description: "Our story & mission", icon: Users },
+        { href: "/contact-sales", label: "Contact Sales", description: "Get in touch", icon: Phone },
+      ],
+    },
   ],
 };
 
@@ -88,7 +95,6 @@ export function Navigation() {
   const navOpacity = useTransform(smoothProgress, [0, 1], [0.85, 0.90]); // More translucent, slightly increases on scroll
   const blur = useTransform(smoothProgress, [0, 1], [40, 40]); // Match dropdown: backdrop-blur-2xl
   const logoScale = useTransform(smoothProgress, [0, 1], [1, 0.85]);
-  const shadowOpacity = useTransform(smoothProgress, [0, 1], [0.1, 0.1]); // Match dropdown: shadow-purple-500/10
 
   // Magnetic logo effect
   const handleLogoMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -209,16 +215,16 @@ export function Navigation() {
               {/* Desktop Navigation */}
               <NavigationMenu.Root className="hidden lg:flex" suppressHydrationWarning>
                 <NavigationMenu.List className="flex items-center space-x-1">
-                  {/* Product Dropdown */}
+                  {/* Platform Dropdown */}
                   <NavigationMenu.Item className="relative">
                     <NavigationMenu.Trigger className="group flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50/60 transition-all duration-300 relative overflow-hidden">
                       <span className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/15 via-pink-500/10 to-purple-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                      <span className="relative z-10">Product</span>
+                      <span className="relative z-10">Platform</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
                     <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-lg p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
                         {/* Featured Overview Card */}
-                        {navigationData.product[0].isOverview && (
+                        {navigationData.platform[0].isOverview && (
                           <div className="mb-4">
                             <NavigationMenu.Link asChild>
                               <motion.div
@@ -227,7 +233,7 @@ export function Navigation() {
                                 transition={{ duration: 0.3 }}
                               >
                                 <Link
-                                  href={navigationData.product[0].links[0].href}
+                                  href={navigationData.platform[0].links[0].href}
                                   className="group/featured relative flex items-center gap-3 p-3 rounded-xl border border-purple-200/60 hover:border-purple-300 bg-gradient-to-br from-purple-50/50 via-pink-50/30 to-blue-50/30 hover:from-purple-100/60 hover:via-pink-100/40 hover:to-blue-100/40 transition-all duration-300 overflow-hidden"
                                 >
                                   {/* Animated gradient background */}
@@ -256,7 +262,7 @@ export function Navigation() {
                                   <div className="flex-1 relative z-10">
                                     <div className="flex items-center gap-2">
                                       <h3 className="text-sm font-bold text-gray-900 group-hover/featured:text-purple-600 transition-colors">
-                                        {navigationData.product[0].links[0].label}
+                                        {navigationData.platform[0].links[0].label}
                                       </h3>
                                       <motion.div
                                         initial={{ x: 0, opacity: 0 }}
@@ -267,7 +273,7 @@ export function Navigation() {
                                       </motion.div>
                                     </div>
                                     <p className="text-xs text-gray-500 mt-0.5">
-                                      {navigationData.product[0].links[0].description}
+                                      {navigationData.platform[0].links[0].description}
                                     </p>
                                   </div>
                                 </Link>
@@ -280,15 +286,15 @@ export function Navigation() {
                                 <div className="w-full border-t border-purple-100"></div>
                               </div>
                               <div className="relative flex justify-center">
-                                <span className="px-2.5 text-xs font-semibold text-purple-600 bg-white rounded-full">Products</span>
+                                <span className="px-2.5 text-xs font-semibold text-purple-600 bg-white rounded-full">Features</span>
                               </div>
                             </div>
                           </div>
                         )}
 
-                        {/* Product Categories Grid */}
+                        {/* Platform Categories Grid */}
                         <div className="grid grid-cols-2 gap-4">
-                          {navigationData.product.slice(1).map((category, categoryIndex) => (
+                          {navigationData.platform.slice(1).map((category, categoryIndex) => (
                             <div key={category.category}>
                               <h3 className="text-xs font-bold text-purple-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
                                 <span className="w-3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent rounded-full" />
@@ -462,133 +468,110 @@ export function Navigation() {
                       <span className="relative z-10">Resources</span>
                       <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-md p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-                        {/* Featured "All Resources" Item */}
-                        {navigationData.resources[0] && (
-                          <>
-                            <NavigationMenu.Link asChild>
-                              <motion.div
-                                initial={{ opacity: 0, y: -5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.3 }}
-                              >
-                                <Link
-                                  href={navigationData.resources[0].href}
-                                  className="group/featured relative flex items-center gap-2.5 p-3 mb-3 rounded-xl border border-indigo-200/60 hover:border-indigo-300 bg-gradient-to-br from-indigo-50/50 via-purple-50/30 to-blue-50/30 hover:from-indigo-100/60 hover:via-purple-100/40 hover:to-blue-100/40 transition-all duration-300 overflow-hidden"
-                                >
-                                  {/* Hover glow */}
-                                  <span className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-blue-500/5 opacity-0 group-hover/featured:opacity-100 transition-opacity duration-300" />
-
-                                  {/* Icon */}
-                                  <motion.div
-                                    className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 text-white flex-shrink-0"
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                  >
-                                    <LayoutGrid className="w-5 h-5 relative z-10" />
-                                  </motion.div>
-
-                                  {/* Content */}
-                                  <div className="flex-1 relative z-10">
-                                    <div className="text-sm font-bold text-gray-900 group-hover/featured:text-indigo-600 transition-colors">
-                                      {navigationData.resources[0].label}
-                                    </div>
-                                    <div className="text-xs text-gray-500 mt-0.5">
-                                      {navigationData.resources[0].description}
-                                    </div>
-                                  </div>
-
-                                  <ArrowRight className="w-4 h-4 text-indigo-600 opacity-0 group-hover/featured:opacity-100 transition-opacity relative z-10" />
-                                </Link>
-                              </motion.div>
-                            </NavigationMenu.Link>
-
-                            {/* Subtle divider */}
-                            <div className="border-t border-indigo-100/50 mb-4" />
-                          </>
-                        )}
-
-                        {/* Learn Section */}
-                        <div className="mb-4">
-                          <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
-                            <span className="w-3 h-0.5 bg-gradient-to-r from-indigo-600 to-transparent rounded-full" />
-                            Learn
-                          </h3>
-                          <div className="space-y-1 p-2 rounded-lg bg-gradient-to-br from-indigo-50/30 to-purple-50/20">
-                            {[navigationData.resources[1]].map((link, index) => {
-                              if (!link) return null;
-                              const Icon = link.icon;
-                              return (
-                                <NavigationMenu.Link key={link.href} asChild>
-                                  <motion.div
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: (index + 1) * 0.03 }}
-                                  >
-                                    <Link
-                                      href={link.href}
-                                      className="group/item flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/70 transition-all duration-300 relative overflow-hidden"
+                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-xs p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                        {navigationData.resources.map((category, categoryIndex) => (
+                          <div key={category.category} className={categoryIndex > 0 ? "mt-4" : ""}>
+                            <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
+                              <span className="w-3 h-0.5 bg-gradient-to-r from-indigo-600 to-transparent rounded-full" />
+                              {category.category}
+                            </h3>
+                            <div className="space-y-1">
+                              {category.links.map((link, linkIndex) => {
+                                const Icon = link.icon;
+                                return (
+                                  <NavigationMenu.Link key={link.href} asChild>
+                                    <motion.div
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: (categoryIndex * 3 + linkIndex) * 0.03 }}
                                     >
-                                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/8 to-purple-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
-
-                                      <motion.div
-                                        whileHover={{ scale: 1.1, rotate: 5 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                        className="relative z-10"
+                                      <Link
+                                        href={link.href}
+                                        className="group/item flex items-center gap-2.5 px-3 py-2.5 rounded-lg hover:bg-gradient-to-br hover:from-indigo-50 hover:via-purple-50/30 hover:to-indigo-50/50 transition-all duration-300 relative overflow-hidden"
                                       >
-                                        <Icon className="w-4 h-4 text-indigo-600 flex-shrink-0" />
-                                      </motion.div>
-                                      <span className="text-sm font-medium text-gray-900 group-hover/item:text-indigo-600 transition-colors relative z-10">
-                                        {link.label}
-                                      </span>
-                                    </Link>
-                                  </motion.div>
-                                </NavigationMenu.Link>
-                              );
-                            })}
-                          </div>
-                        </div>
+                                        <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/8 to-purple-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
 
-                        {/* Company Section */}
-                        <div>
-                          <h3 className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5 px-1">
-                            <span className="w-3 h-0.5 bg-gradient-to-r from-blue-600 to-transparent rounded-full" />
-                            Company
-                          </h3>
-                          <div className="grid grid-cols-2 gap-2">
-                            {[navigationData.resources[2], navigationData.resources[3], navigationData.resources[4]].map((link, index) => {
-                              if (!link) return null;
-                              const Icon = link.icon;
-                              return (
-                                <NavigationMenu.Link key={link.href} asChild>
-                                  <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: (index + 9) * 0.02 }}
-                                  >
-                                    <Link
-                                      href={link.href}
-                                      className="group/item flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50/70 transition-all duration-300 relative overflow-hidden"
+                                        <motion.div
+                                          className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-100 via-purple-50 to-indigo-50 text-indigo-600 flex-shrink-0"
+                                          whileHover={{ scale: 1.1, rotate: 5 }}
+                                          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        >
+                                          <Icon className="w-4.5 h-4.5 relative z-10" />
+                                        </motion.div>
+
+                                        <div className="flex-1 relative z-10">
+                                          <div className="text-sm font-semibold text-gray-900 group-hover/item:text-indigo-600 transition-colors">
+                                            {link.label}
+                                          </div>
+                                          <div className="text-xs text-gray-500 mt-0.5">
+                                            {link.description}
+                                          </div>
+                                        </div>
+                                      </Link>
+                                    </motion.div>
+                                  </NavigationMenu.Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                    </NavigationMenu.Content>
+                  </NavigationMenu.Item>
+
+                  {/* Company Dropdown */}
+                  <NavigationMenu.Item className="relative">
+                    <NavigationMenu.Trigger className="group flex items-center space-x-1 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-teal-50 hover:to-blue-50/60 transition-all duration-300 relative overflow-hidden">
+                      <span className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-teal-500/15 via-blue-500/10 to-teal-500/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+                      <span className="relative z-10">Company</span>
+                      <ChevronDown className="w-4 h-4 transition-transform duration-300 group-data-[state=open]:rotate-180 relative z-10" />
+                    </NavigationMenu.Trigger>
+                    <NavigationMenu.Content className="absolute top-full left-0 w-max max-w-xs p-5 mt-3 origin-top overflow-hidden rounded-2xl border border-purple-100/50 bg-white/98 backdrop-blur-2xl shadow-2xl shadow-purple-500/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                        {navigationData.company.map((category, categoryIndex) => (
+                          <div key={category.category} className={categoryIndex > 0 ? "mt-4" : ""}>
+                            <h3 className="text-xs font-bold text-teal-600 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
+                              <span className="w-3 h-0.5 bg-gradient-to-r from-teal-600 to-transparent rounded-full" />
+                              {category.category}
+                            </h3>
+                            <div className="space-y-1">
+                              {category.links.map((link, linkIndex) => {
+                                const Icon = link.icon;
+                                return (
+                                  <NavigationMenu.Link key={link.href} asChild>
+                                    <motion.div
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: (categoryIndex * 3 + linkIndex) * 0.03 }}
                                     >
-                                      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/8 to-purple-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
-
-                                      <motion.div
-                                        whileHover={{ scale: 1.15, rotate: 8 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                                        className="relative z-10"
+                                      <Link
+                                        href={link.href}
+                                        className="group/item flex items-center gap-2.5 px-3 py-2.5 rounded-lg hover:bg-gradient-to-br hover:from-teal-50 hover:via-blue-50/30 hover:to-teal-50/50 transition-all duration-300 relative overflow-hidden"
                                       >
-                                        <Icon className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                                      </motion.div>
-                                      <span className="text-xs font-medium text-gray-900 group-hover/item:text-blue-600 transition-colors relative z-10">
-                                        {link.label}
-                                      </span>
-                                    </Link>
-                                  </motion.div>
-                                </NavigationMenu.Link>
-                              );
-                            })}
+                                        <span className="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-teal-500/8 to-blue-500/6 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+
+                                        <motion.div
+                                          className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-teal-100 via-blue-50 to-teal-50 text-teal-600 flex-shrink-0"
+                                          whileHover={{ scale: 1.1, rotate: 5 }}
+                                          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                                        >
+                                          <Icon className="w-4.5 h-4.5 relative z-10" />
+                                        </motion.div>
+
+                                        <div className="flex-1 relative z-10">
+                                          <div className="text-sm font-semibold text-gray-900 group-hover/item:text-teal-600 transition-colors">
+                                            {link.label}
+                                          </div>
+                                          <div className="text-xs text-gray-500 mt-0.5">
+                                            {link.description}
+                                          </div>
+                                        </div>
+                                      </Link>
+                                    </motion.div>
+                                  </NavigationMenu.Link>
+                                );
+                              })}
+                            </div>
                           </div>
-                        </div>
+                        ))}
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
 
@@ -717,19 +700,21 @@ export function Navigation() {
               {/* Mobile Menu Content */}
               <div className="flex-1 overflow-y-auto p-6">
                 <Accordion.Root type="single" collapsible className="space-y-2">
-                  {/* Product Accordion */}
-                  <Accordion.Item value="product" className="border border-gray-100 rounded-lg overflow-hidden">
+                  {/* Platform Accordion */}
+                  <Accordion.Item value="platform" className="border border-gray-100 rounded-lg overflow-hidden">
                     <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
-                      Product
+                      Platform
                       <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                       <div className="px-4 pb-4 pt-2 space-y-4">
-                        {navigationData.product.map((category) => (
+                        {navigationData.platform.map((category) => (
                           <div key={category.category}>
-                            <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-2">
-                              {category.category}
-                            </h3>
+                            {!category.isOverview && (
+                              <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-2">
+                                {category.category}
+                              </h3>
+                            )}
                             <div className="space-y-1">
                               {category.links.map((link) => {
                                 const Icon = link.icon;
@@ -791,21 +776,71 @@ export function Navigation() {
                       <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
-                      <div className="px-4 pb-4 pt-2 grid grid-cols-2 gap-1">
-                        {navigationData.resources.map((link) => {
-                          const Icon = link.icon;
-                          return (
-                            <Link
-                              key={link.href}
-                              href={link.href}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors"
-                            >
-                              <Icon className="w-4 h-4 text-purple-600" />
-                              <span className="text-sm font-medium text-gray-900">{link.label}</span>
-                            </Link>
-                          );
-                        })}
+                      <div className="px-4 pb-4 pt-2 space-y-4">
+                        {navigationData.resources.map((category) => (
+                          <div key={category.category}>
+                            <h3 className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-2">
+                              {category.category}
+                            </h3>
+                            <div className="space-y-1">
+                              {category.links.map((link) => {
+                                const Icon = link.icon;
+                                return (
+                                  <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                                  >
+                                    <Icon className="w-4 h-4 text-purple-600" />
+                                    <div>
+                                      <div className="text-sm font-medium text-gray-900">{link.label}</div>
+                                      <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </Accordion.Content>
+                  </Accordion.Item>
+
+                  {/* Company Accordion */}
+                  <Accordion.Item value="company" className="border border-gray-100 rounded-lg overflow-hidden">
+                    <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
+                      Company
+                      <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                    </Accordion.Trigger>
+                    <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                      <div className="px-4 pb-4 pt-2 space-y-4">
+                        {navigationData.company.map((category) => (
+                          <div key={category.category}>
+                            <h3 className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-2">
+                              {category.category}
+                            </h3>
+                            <div className="space-y-1">
+                              {category.links.map((link) => {
+                                const Icon = link.icon;
+                                return (
+                                  <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors"
+                                  >
+                                    <Icon className="w-4 h-4 text-teal-600" />
+                                    <div>
+                                      <div className="text-sm font-medium text-gray-900">{link.label}</div>
+                                      <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>

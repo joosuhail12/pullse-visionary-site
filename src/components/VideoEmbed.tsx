@@ -33,7 +33,7 @@ const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
       <lite-youtube
         videoid={videoId}
         playlabel={`Play: ${title}`}
-        params="vq=hd1080"
+        params="rel=0&modestbranding=1&hd=1&vq=hd1080"
         style={{ width: "100%", height: "100%" }}
       />
     </div>

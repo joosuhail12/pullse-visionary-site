@@ -36,7 +36,6 @@ import {
   CreditCard,
   LayoutDashboard,
   Boxes,
-  Play,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
@@ -90,11 +89,11 @@ const Product = () => {
       title: "Unified Inbox",
       headline: "Every conversation in one place",
       description:
-        "Centralize email, chat, voice, and API events into a single intelligent workspace. Context-rich threads, smart assignments, and SLA tracking keep your team moving fast.",
+        "Centralize email, chat, and API events into a single intelligent workspace. Context-rich threads, smart assignments, and automated routing keep your team moving fast.",
       features: [
-        { label: "Omnichannel inbox", detail: "Email, chat, voice, webhooks unified" },
+        { label: "Omnichannel inbox", detail: "Email, chat, webhooks unified" },
         { label: "Smart assignments", detail: "Auto-route based on skills & workload" },
-        { label: "SLA management", detail: "Track, alert, and escalate automatically" },
+        { label: "Collision detection", detail: "Prevent duplicate work in real-time" },
         { label: "Collaboration tools", detail: "Internal notes, @mentions, handoffs" },
       ],
       link: "/product/inbox-channels",
@@ -133,7 +132,7 @@ const Product = () => {
         { label: "Intent detection", detail: "Natural language understanding, not keywords" },
         { label: "Live data access", detail: "Connect to Shopify, Stripe, CRMs, custom APIs" },
         { label: "Graceful handoff", detail: "Pass full context to human agents" },
-        { label: "Multi-language", detail: "50+ languages with auto-translation" },
+        { label: "RAG knowledge retrieval", detail: "Cite help articles and past conversations" },
       ],
       link: "/product/ai-suite",
       customPreview: <AIChatbotPreview />,
@@ -147,10 +146,10 @@ const Product = () => {
       title: "Agent Copilots",
       headline: "AI that makes every agent great",
       description:
-        "Real-time AI assistance that drafts on-brand replies, translates conversations, summarizes threads, and suggests next actions. Agents stay in control while AI does the heavy lifting.",
+        "Real-time AI assistance that drafts on-brand replies, summarizes threads, rewrites content, and suggests next actions. Agents stay in control while AI does the heavy lifting.",
       features: [
         { label: "Smart drafting", detail: "Context-aware responses in your tone" },
-        { label: "Instant translation", detail: "Real-time for 50+ language pairs" },
+        { label: "Tone adjustment", detail: "Rewrite formal to casual, technical to simple" },
         { label: "Auto-summarization", detail: "Distill long threads into key points" },
         { label: "Action suggestions", detail: "Next-best-action recommendations" },
       ],
@@ -282,7 +281,7 @@ const Product = () => {
       icon: Lock,
       title: "Enterprise Ready",
       stat: "SOC 2",
-      description: "SOC 2 Type II controls in progress, GDPR/CCPA compliance, SSO, encrypted at rest and in transit. Security that scales with you.",
+      description: "SOC 2 Type II controls in progress, encrypted at rest and in transit, RBAC, and complete audit trails. SSO and enhanced compliance features coming soon.",
       highlight: "Compliance first",
     },
     {
@@ -376,10 +375,6 @@ const Product = () => {
                 <RouteButton size="lg" className="text-base px-8 py-7 shadow-xl shadow-primary/20 group" href="/contact-sales">
                   Get started
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </RouteButton>
-                <RouteButton size="lg" variant="outline" className="text-base px-8 py-7 group" href="/product-tour">
-                  <Play className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                  Watch demo
                 </RouteButton>
               </div>
 
@@ -603,10 +598,10 @@ const Product = () => {
                 <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Connects to everything you use
+                Connect with any API in the world
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Native connectors and APIs that sync in real-time
+                100+ native connectors for popular tools, plus the flexibility to integrate with any custom system that has an API
               </p>
             </div>
 
@@ -652,13 +647,6 @@ const Product = () => {
               })}
             </div>
 
-            {/* CTA */}
-            <div className="text-center">
-              <RouteButton variant="outline" size="lg" href="/contact-sales" className="group">
-                Request integration
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </RouteButton>
-            </div>
           </div>
         </div>
       </section>

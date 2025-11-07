@@ -489,10 +489,10 @@ const ProductAnalytics = () => {
                     </motion.div>
                   </motion.div>
                   <h3 className="text-xl font-black mb-3 group-hover:text-primary transition-colors">
-                    Custom Reports
+                    Pre-built Reports
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Build exactly what leadership needs. Drag, drop, filter, done.
+                    Template library for every stakeholder. Export and share instantly.
                   </p>
                 </div>
               </motion.div>
