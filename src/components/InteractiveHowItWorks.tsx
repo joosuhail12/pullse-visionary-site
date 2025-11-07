@@ -231,7 +231,7 @@ const InteractiveHowItWorks = () => {
                             <div className={`text-4xl font-black bg-gradient-to-r ${active.color} bg-clip-text text-transparent`}>
                               {activeStep === 0 && '<100ms'}
                               {activeStep === 1 && '95%'}
-                              {activeStep === 2 && '68%'}
+                              {activeStep === 2 && '80%'}
                               {activeStep === 3 && '2.5x'}
                               {activeStep === 4 && '60-75%'}
                             </div>

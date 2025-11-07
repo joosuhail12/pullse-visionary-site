@@ -209,14 +209,14 @@ const ProductInbox = () => {
       icon: Bot,
       title: 'AI Auto-Response',
       description: 'Resolve common issues automatically',
-      benefit: '68% automated',
+      benefit: '80% automated',
       details: [
         'Knowledge base powered answers',
         'Handle FAQs without human touch',
         'Escalate complex issues gracefully',
         'Learn from agent responses',
       ],
-      stat: '68% automated',
+      stat: '80% automated',
       color: 'from-green-500 to-emerald-500',
     },
   ];
@@ -306,7 +306,7 @@ const ProductInbox = () => {
       color: 'from-blue-500 to-cyan-500',
     },
     {
-      value: 68,
+      value: 80,
       suffix: '%',
       label: 'Tickets automated',
       description: 'AI handles routine requests',

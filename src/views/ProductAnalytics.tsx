@@ -859,7 +859,7 @@ const ProductAnalytics = () => {
                     </div>
                     <div className="h-12 w-px bg-primary/20" />
                     <div className="text-right">
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">68%</div>
+                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">80%</div>
                       <div className="text-xs text-muted-foreground">Automated</div>
                     </div>
                   </div>

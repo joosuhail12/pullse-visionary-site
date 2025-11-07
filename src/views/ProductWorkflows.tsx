@@ -242,7 +242,7 @@ const ProductWorkflows = () => {
   // Stats
   const stats = [
     {
-      value: 68,
+      value: 80,
       suffix: '%',
       label: 'Average automation rate',
       description: 'With AI-powered workflows',
@@ -399,7 +399,7 @@ const ProductWorkflows = () => {
                       <Zap className="h-6 w-6 text-background" />
                     </div>
                     <div>
-                      <div className="text-2xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">68%</div>
+                      <div className="text-2xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">80%</div>
                       <div className="text-xs text-muted-foreground">Automated</div>
                     </div>
                   </div>

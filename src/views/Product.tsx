@@ -371,7 +371,7 @@ const Product = () => {
                     <TrendingUp className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">68%</div>
+                    <div className="text-2xl font-bold text-foreground">80%</div>
                     <div className="text-xs text-muted-foreground">Avg automation</div>
                   </div>
                 </div>

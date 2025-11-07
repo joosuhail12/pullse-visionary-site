@@ -49,7 +49,7 @@ const loadGSAP = async () => {
 };
 
 const heroStats = [
-  { label: "Handled with AI", value: "68%", caption: "Intent coverage" },
+  { label: "Handled with AI", value: "80%", caption: "Intent coverage" },
   { label: "Response time", value: "-43%", caption: "Avg. reduction" },
   { label: "Time to launch", value: "<14 days", caption: "First automations" },
 ];
@@ -857,7 +857,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                    <span className="text-sm font-semibold text-foreground">Average 68% automation rate across customers</span>
+                    <span className="text-sm font-semibold text-foreground">Average 80% automation rate across customers</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
@@ -983,11 +983,11 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                         <div className="grid gap-6">
                           <div className="group">
                             <div className="flex items-end gap-3 mb-3">
-                              <div className="text-5xl md:text-6xl font-bold text-primary">68%</div>
+                              <div className="text-5xl md:text-6xl font-bold text-primary">80%</div>
                               <div className="pb-2 text-sm font-bold text-foreground">Tickets Automated</div>
                             </div>
                             <div className="h-2.5 bg-muted/50 rounded-full overflow-hidden mb-2">
-                              <div className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 rounded-full w-[68%] transition-all duration-1000" />
+                              <div className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 rounded-full w-[80%] transition-all duration-1000" />
                             </div>
                             <div className="text-xs text-muted-foreground">Average automation rate</div>
                           </div>
@@ -1046,7 +1046,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                         Transform your customer support with AI automation
                       </h2>
                       <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                        Join growing companies automating 68% of support tickets with our AI-powered platform. From setup to full automation in just 4 weeks.
+                        Join growing companies automating 80% of support tickets with our AI-powered platform. From setup to full automation in just 4 weeks.
                       </p>
                     </div>
 

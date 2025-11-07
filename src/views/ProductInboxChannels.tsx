@@ -268,7 +268,7 @@ const ProductInboxChannels = () => {
       color: 'from-blue-500 to-cyan-500',
     },
     {
-      value: '68%',
+      value: '80%',
       label: 'Automation rate',
       description: 'Tickets handled without human touch',
       icon: Bot,
@@ -342,7 +342,7 @@ const ProductInboxChannels = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-2">
                       <div className="text-5xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent tabular-nums">
-                        <AnimatedCounter end={68} suffix="%" trigger={statsAnimated} duration={1800} />
+                        <AnimatedCounter end={80} suffix="%" trigger={statsAnimated} duration={1800} />
                       </div>
                       <div className="text-sm font-semibold text-muted-foreground">automation</div>
                       <div className="text-xs text-muted-foreground/70">Avg rate achieved</div>
