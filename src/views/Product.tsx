@@ -694,54 +694,6 @@ const Product = () => {
         </div>
       </section>
 
-
-      {/* Stats Banner */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent" />
-
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="rounded-3xl border border-primary/30 bg-gradient-to-br from-card via-card to-card/80 p-12 lg:p-16 shadow-2xl backdrop-blur-xl fade-in-up">
-              <div className="text-center mb-12 space-y-4">
-                <div className="text-sm font-bold uppercase tracking-widest text-primary">
-                  Target Outcomes
-                </div>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-                  Built for measurable impact
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Designed to deliver automation at scale
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-12">
-                <div className="text-center space-y-4">
-                  <div className="text-7xl font-bold bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">
-                    68%
-                  </div>
-                  <div className="text-base font-bold text-foreground">Tickets Automated</div>
-                  <div className="text-sm text-muted-foreground">AI handles routine requests end-to-end</div>
-                </div>
-                <div className="text-center space-y-4">
-                  <div className="text-7xl font-bold bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">
-                    60-75%
-                  </div>
-                  <div className="text-base font-bold text-foreground">Cost Reduction</div>
-                  <div className="text-sm text-muted-foreground">Total operational savings achieved</div>
-                </div>
-                <div className="text-center space-y-4">
-                  <div className="text-7xl font-bold bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent">
-                    &lt;6mo
-                  </div>
-                  <div className="text-base font-bold text-foreground">Payback Period</div>
-                  <div className="text-sm text-muted-foreground">Time to positive ROI</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
       <section className="relative py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
