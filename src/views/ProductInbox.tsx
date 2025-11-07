@@ -178,6 +178,20 @@ const ProductInbox = () => {
 
   const aiFeatures = [
     {
+      icon: Sparkles,
+      title: 'AI Rewriting',
+      description: 'Transform any message with one click',
+      benefit: '5x faster replies',
+      details: [
+        'Adjust tone: Formal, casual, friendly, empathetic',
+        'Fix grammar and spelling automatically',
+        'Expand or condense messages',
+        'Maintain brand voice consistency',
+      ],
+      stat: '73% faster',
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
       icon: MessageCircle,
       title: 'AI Summaries',
       description: 'Instant conversation context',
@@ -481,7 +495,7 @@ const ProductInbox = () => {
             </div>
 
             {/* AI Features Grid */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-16">
+            <div className="grid lg:grid-cols-3 gap-8 mb-16">
               {aiFeatures.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
