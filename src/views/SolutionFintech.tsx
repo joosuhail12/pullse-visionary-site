@@ -107,7 +107,7 @@ const SolutionFintech = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>PCI-DSS ready</span>
+                  <span>PCI-DSS controls</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />

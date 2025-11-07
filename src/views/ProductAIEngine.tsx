@@ -612,17 +612,17 @@ const ProductAIEngine = () => {
             <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCheck className="h-4 w-4 text-green-500" />
-                <span className="font-semibold">SOC 2 Type II</span>
+                <span className="font-semibold">SOC 2 Type II in progress</span>
               </div>
               <div className="h-4 w-px bg-border" />
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-primary" />
-                <span className="font-semibold">OWASP Compliant</span>
+                <span className="font-semibold">OWASP Guidelines</span>
               </div>
               <div className="h-4 w-px bg-border" />
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-indigo-500" />
-                <span className="font-semibold">NIST AI RMF</span>
+                <span className="font-semibold">NIST AI RMF Aligned</span>
               </div>
             </div>
           </div>

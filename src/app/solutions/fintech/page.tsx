@@ -3,7 +3,7 @@ import SolutionFintech from "@/views/SolutionFintech";
 
 export const metadata: Metadata = {
   title: "Solutions for Fintech | Pullse",
-  description: "SOC 2, PCI-DSS, GDPR ready out of the box. Transaction context, fraud alerts, and KYC automation built for financial services. Reduce fraud response time by 67%.",
+  description: "Built with compliance controls and audit trails. SOC 2 Type II in progress. Transaction context, fraud alerts, and KYC automation built for financial services. Reduce fraud response time by 67%.",
 };
 
 const FintechSolutionsPage = () => <SolutionFintech />;

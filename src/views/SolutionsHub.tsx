@@ -934,7 +934,7 @@ const SolutionsHub = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-primary" />
-                <span>SOC 2 Type II certified</span>
+                <span>SOC 2 Type II in progress</span>
               </div>
             </div>
           </div>
