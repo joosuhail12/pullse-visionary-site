@@ -561,7 +561,6 @@ const MagicBento = ({
                       <img
                         src={card.image}
                         alt={`${card.title} preview`}
-                        className="w-full h-auto object-contain object-top rounded-lg"
                       />
                     ) : (
                       <div className="card__screenshot-placeholder">
@@ -596,7 +595,6 @@ const MagicBento = ({
                     <img
                       src={card.image}
                       alt={`${card.title} preview`}
-                      className="w-full h-auto object-contain object-top rounded-lg"
                     />
                   ) : (
                     <div className="card__screenshot-placeholder">

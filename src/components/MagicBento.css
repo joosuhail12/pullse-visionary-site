@@ -76,10 +76,18 @@
   background: linear-gradient(135deg, rgba(var(--glow-color), 0.1) 0%, rgba(var(--glow-color), 0.05) 100%);
   border: 1px solid rgba(var(--glow-color), 0.2);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
+
+.card__screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
 }
 
 .card__screenshot-placeholder {
