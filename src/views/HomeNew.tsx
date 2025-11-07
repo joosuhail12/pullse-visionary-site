@@ -146,29 +146,6 @@ const resources = [
   },
 ];
 
-const faqs = [
-  {
-    question: "What do we get as an early design partner?",
-    answer:
-      "Hands-on implementation with the founders, access to new connectors as they ship, and shared dashboards to prove ROI internally.",
-  },
-  {
-    question: "How opinionated is the Pullse AI?",
-    answer:
-      "You control the prompts, tone, and guardrails. Every automation requires explicit approval paths and can be paused instantly.",
-  },
-  {
-    question: "Which integrations are available today?",
-    answer:
-      "Core email/chat ingestion plus 100+ native connectors including Shopify, Stripe, Slack, Salesforce, HubSpot, and full REST API support for custom integrations.",
-  },
-  {
-    question: "What is the implementation lift?",
-    answer:
-      "Expect a 2-4 week sprint: discovery workshop, workflow design, sandbox review, and pilot rollout. Our team joins every working session.",
-  },
-];
-
 const taxonomy: CardData[] = [
   {
     title: "Unified Inbox",
@@ -363,7 +340,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       </section>
 
       {/* Trust & problem framing */}
-      <section className="relative border-y border-border/60 bg-background py-24 md:py-28 overflow-hidden">
+      <section className="relative bg-background py-24 md:py-28 overflow-hidden">
         {/* Subtle background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/5" />
 
@@ -538,10 +515,10 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
       <InteractiveHowItWorks />
 
       {/* Redesigned Use cases section - Card Grid Layout */}
-      <section className="relative py-24 md:py-32 bg-muted/5">
+      <section className="relative py-24 md:py-32">
         {/* Enhanced background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent-green/8 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent-green)/0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-accent-green/5 via-background to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent-green)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           {/* Enhanced header */}
