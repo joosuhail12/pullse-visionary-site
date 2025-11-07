@@ -558,10 +558,10 @@ const MagicBento = ({
                     {card.customComponent ? (
                       <div className="w-full h-full">{card.customComponent}</div>
                     ) : card.image ? (
-                      <img 
-                        src={card.image} 
+                      <img
+                        src={card.image}
                         alt={`${card.title} preview`}
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-auto object-contain object-top rounded-lg"
                       />
                     ) : (
                       <div className="card__screenshot-placeholder">
@@ -593,10 +593,10 @@ const MagicBento = ({
                   {card.customComponent ? (
                     <div className="w-full h-full">{card.customComponent}</div>
                   ) : card.image ? (
-                    <img 
-                      src={card.image} 
+                    <img
+                      src={card.image}
                       alt={`${card.title} preview`}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-auto object-contain object-top rounded-lg"
                     />
                   ) : (
                     <div className="card__screenshot-placeholder">
