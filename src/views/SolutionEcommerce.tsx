@@ -357,66 +357,8 @@ const SolutionEcommerce = () => {
               ))}
             </div>
 
-            {/* Agent Testimonial Strip */}
-            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/5 via-card to-card p-10 mb-20">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_60%)]" />
-
-              <div className="relative text-center space-y-6">
-                <p className="text-2xl md:text-3xl font-bold text-foreground italic leading-relaxed max-w-4xl mx-auto">
-                  "I used to dread peak season. Returns took forever, WISMO tickets buried me. With Pullse, I help 3x more customers and actually enjoy my job again."
-                </p>
-                <div className="space-y-1">
-                  <div className="text-lg font-bold text-primary">Jessica Martinez</div>
-                  <div className="text-sm text-muted-foreground">Senior Support Agent • 4 years in e-commerce CX</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Agent Satisfaction & Manager Perspective */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Agent Satisfaction Metrics */}
-              <div className="relative overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-primary/5 via-card to-card/90 p-10">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
-
-                <div className="relative space-y-8">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-                      What agents say
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Survey of 150+ support agents using Pullse
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    {[
-                      { percentage: 89, label: 'Feel less stressed', icon: Heart },
-                      { percentage: 94, label: 'More efficient at their job', icon: TrendingUp },
-                      { percentage: 78, label: '"Feels like a superpower"', icon: Sparkles },
-                      { percentage: 0, label: 'Quit during peak season', sublabel: 'vs 23% industry avg', icon: Users, highlight: true }
-                    ].map((metric, i) => {
-                      const Icon = metric.icon;
-                      return (
-                        <div key={i} className={`p-5 rounded-xl border ${metric.highlight ? 'border-green-500/40 bg-green-500/5' : 'border-border/40 bg-card/50'}`}>
-                          <div className="flex items-center gap-4 mb-3">
-                            <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${metric.highlight ? 'bg-green-500' : 'bg-primary'} shrink-0`}>
-                              <Icon className="h-5 w-5 text-background" />
-                            </div>
-                            <div>
-                              <div className={`text-3xl font-black ${metric.highlight ? 'text-green-600' : 'text-foreground'}`}>
-                                {metric.percentage}%
-                              </div>
-                              <div className="text-sm text-foreground font-semibold">{metric.label}</div>
-                              {metric.sublabel && <div className="text-xs text-muted-foreground">{metric.sublabel}</div>}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
+            {/* Manager Perspective */}
+            <div className="max-w-4xl mx-auto">
               {/* What Managers Notice */}
               <div className="relative overflow-hidden rounded-3xl border-2 border-border/60 bg-card p-10">
                 <div className="space-y-8">
@@ -465,15 +407,6 @@ const SolutionEcommerce = () => {
                       );
                     })}
 
-                    {/* Manager Quote */}
-                    <div className="pt-6 border-t border-border/40">
-                      <p className="text-base text-foreground italic font-semibold mb-3">
-                        "I can finally take a vacation during Q4."
-                      </p>
-                      <div className="text-sm text-muted-foreground">
-                        — David Park, Head of Customer Support
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -615,13 +548,6 @@ const SolutionEcommerce = () => {
                         <div className="text-xs text-muted-foreground">$5.68 savings per WISMO</div>
                       </div>
                     </div>
-                    <div className="text-center md:text-right">
-                      <div className="text-xs text-muted-foreground mb-1">Customer Testimonial</div>
-                      <p className="text-sm font-semibold text-foreground italic">
-                        "Our agents don't even see WISMO tickets anymore. It's magical."
-                      </p>
-                      <div className="text-xs text-primary">— Sarah M., Support Lead</div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -678,12 +604,6 @@ const SolutionEcommerce = () => {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border/40">
-                    <p className="text-xs text-muted-foreground italic">
-                      "AI sent the correct size overnight in 2 minutes. She cried happy tears at the wedding."
-                    </p>
-                    <div className="text-xs text-primary mt-1">— Emma K., CS Manager</div>
-                  </div>
                 </div>
               </div>
 
@@ -736,12 +656,6 @@ const SolutionEcommerce = () => {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border/40">
-                    <p className="text-xs text-muted-foreground italic">
-                      "Last year we hired 40 temps. This year: same team, zero burnout, better CSAT."
-                    </p>
-                    <div className="text-xs text-primary mt-1">— Mike T., Director of CX</div>
-                  </div>
                 </div>
               </div>
 
@@ -794,12 +708,6 @@ const SolutionEcommerce = () => {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-border/40">
-                    <p className="text-xs text-muted-foreground italic">
-                      "AI gives us instant context. We catch fraud without hurting loyal customers."
-                    </p>
-                    <div className="text-xs text-primary mt-1">— Lisa R., Fraud Prevention</div>
-                  </div>
                 </div>
               </div>
             </div>

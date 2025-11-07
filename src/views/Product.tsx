@@ -299,35 +299,6 @@ const Product = () => {
     },
   ];
 
-  const useCaseExamples = [
-    {
-      icon: ShoppingCart,
-      vertical: "E-commerce",
-      stat: "40 hrs/week",
-      title: "WISMO automation",
-      description: "Automatically resolve 'Where is my order?' with live Shopify data. AI pulls tracking info, explains delays, and proactively updates customers.",
-      result: "Reduced WISMO tickets by 73%",
-      customer: "Mid-market fashion brand",
-    },
-    {
-      icon: Building2,
-      vertical: "SaaS & Fintech",
-      stat: "100%",
-      title: "Compliant account changes",
-      description: "Process account updates, billing disputes, and cancellations with multi-level approval workflows and complete audit trails.",
-      result: "Passed SOC 2 audit with zero findings",
-      customer: "B2B payments platform",
-    },
-    {
-      icon: Headphones,
-      vertical: "Support Operations",
-      stat: "68%",
-      title: "Intent-based routing",
-      description: "Route by what customers actually need, not keyword matching. AI understands intent and connects them to the right specialist instantly.",
-      result: "First contact resolution up 34%",
-      customer: "Enterprise SaaS company",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
@@ -723,76 +694,6 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Use Cases - Modern Cards */}
-      <section className="relative py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <TrendingUp className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Customer Stories</span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Real teams, real results
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                How leading companies use Pullse to scale support
-              </p>
-            </div>
-
-            {/* Grid */}
-            <div className="grid lg:grid-cols-3 gap-8">
-              {useCaseExamples.map((example, index) => {
-                const Icon = example.icon;
-                return (
-                  <div
-                    key={index}
-                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up"
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-
-                    <div className="relative p-8 space-y-6">
-                      {/* Icon & Stat Badge */}
-                      <div className="flex items-start justify-between">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
-                          <Icon className="h-8 w-8 text-primary" />
-                        </div>
-                        <div className="rounded-full bg-primary px-3 py-1">
-                          <span className="text-sm font-bold text-background">{example.stat}</span>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="space-y-4">
-                        <div className="text-xs font-bold uppercase tracking-wider text-primary">
-                          {example.vertical}
-                        </div>
-                        <h3 className="text-2xl font-bold text-foreground">{example.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {example.description}
-                        </p>
-
-                        {/* Result */}
-                        <div className="pt-4 border-t border-border/40 space-y-2">
-                          <div className="flex items-center gap-2 text-sm font-bold text-foreground">
-                            <CheckCircle className="h-4 w-4 text-primary" />
-                            {example.result}
-                          </div>
-                          <div className="text-xs text-muted-foreground italic">
-                            {example.customer}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Stats Banner */}
       <section className="relative py-24 overflow-hidden">
@@ -803,13 +704,13 @@ const Product = () => {
             <div className="rounded-3xl border border-primary/30 bg-gradient-to-br from-card via-card to-card/80 p-12 lg:p-16 shadow-2xl backdrop-blur-xl fade-in-up">
               <div className="text-center mb-12 space-y-4">
                 <div className="text-sm font-bold uppercase tracking-widest text-primary">
-                  Typical Results
+                  Target Outcomes
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-                  Numbers that matter
+                  Built for measurable impact
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  Average outcomes across early customers
+                  Designed to deliver automation at scale
                 </p>
               </div>
 
