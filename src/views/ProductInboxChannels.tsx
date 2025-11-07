@@ -23,7 +23,6 @@ import {
   Keyboard,
   Bell,
   TrendingUp,
-  Type,
   Lightbulb,
   Scale,
   RotateCw,
@@ -60,30 +59,9 @@ const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }:
 const ProductInboxChannels = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeRouting, setActiveRouting] = useState(0);
-  const [activeDemoText, setActiveDemoText] = useState("Your order hasn't shipped yet");
-  const [isRewriting, setIsRewriting] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroStatsRef = useRef<HTMLDivElement>(null);
   const [statsAnimated, setStatsAnimated] = useState(false);
-
-  // AI Rewriting Demo
-  const handleRewrite = () => {
-    if (isRewriting) return;
-    setIsRewriting(true);
-
-    // Simulate rewriting animation
-    setTimeout(() => {
-      setActiveDemoText("Great news! Your order is being carefully prepared and will ship very soon. Thanks for your patience! 😊");
-      setTimeout(() => {
-        setIsRewriting(false);
-      }, 300);
-    }, 1200);
-  };
-
-  const resetDemo = () => {
-    setActiveDemoText("Your order hasn't shipped yet");
-    setIsRewriting(false);
-  };
 
   // Scroll progress indicator
   useEffect(() => {
@@ -172,19 +150,6 @@ const ProductInboxChannels = () => {
   ];
 
   const aiFeatures = [
-    {
-      icon: Type,
-      title: 'AI Rewriting',
-      description: 'Transform draft responses with one click',
-      capabilities: [
-        'Tone adjustment: Formal, casual, friendly, empathetic',
-        'Grammar and spelling fixes automatically applied',
-        'Length control: Expand or condense messages',
-        'Brand voice consistency across all replies',
-      ],
-      color: 'from-purple-500 to-pink-500',
-      demo: 'Rewrite this → Make it friendlier → AI outputs polished reply',
-    },
     {
       icon: FileText,
       title: 'AI Summaries',
@@ -593,77 +558,9 @@ const ProductInboxChannels = () => {
             </div>
 
             {/* AI Feature Cards */}
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* First Card - Interactive AI Rewriting Demo */}
-              <div className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 transition-opacity group-hover:opacity-100" />
-
-                <div className="relative p-8 space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg transition-all group-hover:scale-110">
-                      <Type className="h-8 w-8 text-background" />
-                    </div>
-                    {!isRewriting && activeDemoText !== "Your order hasn't shipped yet" && (
-                      <button
-                        onClick={resetDemo}
-                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Reset
-                      </button>
-                    )}
-                  </div>
-
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-foreground">AI Rewriting</h3>
-                    <p className="text-base text-muted-foreground">Transform draft responses with one click</p>
-                  </div>
-
-                  {/* Interactive Demo */}
-                  <div className="space-y-4 pt-4">
-                    <div className="rounded-xl bg-muted/50 p-4 border border-border/40">
-                      <div className="text-xs font-bold text-muted-foreground mb-2">DRAFT MESSAGE</div>
-                      <p className={`text-sm text-foreground transition-all duration-300 ${isRewriting ? 'opacity-50 blur-sm' : 'opacity-100'}`}>
-                        {activeDemoText}
-                      </p>
-                      {isRewriting && (
-                        <div className="flex items-center gap-2 mt-3">
-                          <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                          <span className="text-xs text-primary font-medium">AI is rewriting...</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <button
-                      onClick={handleRewrite}
-                      disabled={isRewriting || activeDemoText !== "Your order hasn't shipped yet"}
-                      className="w-full group/btn relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-3 text-sm font-bold text-background shadow-lg transition-all hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    >
-                      <span className="relative z-10 flex items-center justify-center gap-2">
-                        <Sparkles className="h-4 w-4" />
-                        {activeDemoText === "Your order hasn't shipped yet" ? 'Make it Friendlier' : 'Try Again'}
-                      </span>
-                    </button>
-                  </div>
-
-                  <div className="space-y-2 pt-4 border-t border-border/40">
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <p className="text-xs text-foreground/70">Tone: Formal → Friendly</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <p className="text-xs text-foreground/70">Auto grammar fixes</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <p className="text-xs text-foreground/70">Brand voice consistency</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Other AI Feature Cards */}
-              {aiFeatures.slice(1).map((feature, index) => {
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* AI Feature Cards */}
+              {aiFeatures.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
                   <div
