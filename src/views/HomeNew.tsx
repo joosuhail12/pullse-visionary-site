@@ -114,17 +114,17 @@ const useCaseTabs = [
       'Loyalty balance and points inquiries',
       'Product recommendations in brand voice'
     ],
-    gradient: 'from-purple-500/20 to-pink-500/20',
-    primaryColor: 'rgb(168, 85, 247)', // purple-500
-    accentColor: 'rgb(236, 72, 153)', // pink-500
+    gradient: 'from-green-500/20 to-emerald-500/20',
+    primaryColor: 'rgb(34, 197, 94)', // green-500
+    accentColor: 'rgb(16, 185, 129)', // emerald-500
     cssVars: {
-      bg: 'from-purple-500/6 via-pink-500/3',
-      border: 'border-purple-500/40',
-      text: 'text-purple-500',
-      bgLight: 'bg-purple-500/10',
-      bgHover: 'hover:bg-purple-500/5',
-      borderHover: 'hover:border-purple-500/40',
-      shadow: 'shadow-purple-500/10'
+      bg: 'from-green-500/6 via-emerald-500/3',
+      border: 'border-green-500/40',
+      text: 'text-green-500',
+      bgLight: 'bg-green-500/10',
+      bgHover: 'hover:bg-green-500/5',
+      borderHover: 'hover:border-green-500/40',
+      shadow: 'shadow-green-500/10'
     },
     stat: { label: 'Resolution Time', value: '<30 sec', description: 'average order status lookup' },
   },
@@ -140,17 +140,17 @@ const useCaseTabs = [
       'Secure credential management vault',
       'Compliance-ready documentation export'
     ],
-    gradient: 'from-emerald-500/20 to-teal-500/20',
-    primaryColor: 'rgb(16, 185, 129)', // emerald-500
-    accentColor: 'rgb(20, 184, 166)', // teal-500
+    gradient: 'from-red-500/20 to-orange-500/20',
+    primaryColor: 'rgb(239, 68, 68)', // red-500
+    accentColor: 'rgb(249, 115, 22)', // orange-500
     cssVars: {
-      bg: 'from-emerald-500/6 via-teal-500/3',
-      border: 'border-emerald-500/40',
-      text: 'text-emerald-500',
-      bgLight: 'bg-emerald-500/10',
-      bgHover: 'hover:bg-emerald-500/5',
-      borderHover: 'hover:border-emerald-500/40',
-      shadow: 'shadow-emerald-500/10'
+      bg: 'from-red-500/6 via-orange-500/3',
+      border: 'border-red-500/40',
+      text: 'text-red-500',
+      bgLight: 'bg-red-500/10',
+      bgHover: 'hover:bg-red-500/5',
+      borderHover: 'hover:border-red-500/40',
+      shadow: 'shadow-red-500/10'
     },
     stat: { label: 'Audit Coverage', value: '100%', description: 'every action logged & traceable' },
   },
