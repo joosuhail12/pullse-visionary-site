@@ -34,6 +34,7 @@
   font-weight: 300;
   overflow: hidden;
   transition: all 0.3s ease;
+  gap: 1em;
 
   --glow-x: 50%;
   --glow-y: 50%;
@@ -66,10 +67,11 @@
   position: relative;
   color: hsl(var(--foreground));
   flex: 1;
+  min-height: 0;
 }
 
 .card__screenshot {
-  margin-top: 1.5em;
+  margin-top: auto;
   flex: 1;
   min-height: 120px;
   border-radius: 12px;
