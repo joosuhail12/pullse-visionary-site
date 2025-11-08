@@ -439,16 +439,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   </div>
                 </div>
               </div>
-
-              {/* Link to security */}
-              <div className="pt-2">
-                <Button variant="link" className="h-auto p-0 text-sm font-semibold text-primary" asChild>
-                  <Link href="/security" className="inline-flex items-center gap-2 group">
-                    View security roadmap & compliance status
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-              </div>
             </div>
 
             {/* Right: Problem points with gradient accents */}
