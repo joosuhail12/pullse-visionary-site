@@ -166,10 +166,10 @@ const ProductAnalytics = () => {
     },
     {
       color: 'hsl(var(--card))',
-      title: 'ROI Dashboard',
-      description: 'Cost per ticket, automation savings, headcount impact. Prove value in dollars, not just percentages.',
-      label: 'Business Impact',
-      icon: DollarSign,
+      title: 'Custom & Scheduled Reports',
+      description: 'Build custom analytics dashboards and schedule automated report delivery to stakeholders. Export data your way.',
+      label: 'Coming Soon',
+      icon: Calendar,
     },
   ];
 
