@@ -469,66 +469,6 @@ const ProductAIEngine = () => {
               </Link>
             </motion.div>
 
-            {/* Enhanced Stats Showcase with glassmorphism */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
-              <motion.div
-                className="group relative p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:border-primary/50 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-primary/30 mb-4">
-                    <Shield className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-2">
-                    <AnimatedCounter value={99.97} decimals={2} suffix="%" />
-                  </div>
-                  <div className="text-sm text-muted-foreground font-semibold">Attack Detection</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="group relative p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:border-purple-500/50 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-purple-600/20 to-indigo-600/20 border border-purple-600/30 mb-4">
-                    <Zap className="h-6 w-6 text-purple-400" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                    <AnimatedCounter value={850} suffix="ms" />
-                  </div>
-                  <div className="text-sm text-muted-foreground font-semibold">Avg Response Time</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="group relative p-6 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:border-indigo-500/50 transition-all duration-500 sm:col-span-2 md:col-span-1"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-indigo-600/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-600/20 to-primary/20 border border-indigo-600/30 mb-4">
-                    <Activity className="h-6 w-6 text-indigo-400" />
-                  </div>
-                  <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-indigo-600 to-primary bg-clip-text text-transparent mb-2">
-                    <AnimatedCounter value={2.4} decimals={1} suffix="M" />
-                  </div>
-                  <div className="text-sm text-muted-foreground font-semibold">Actions/Month</div>
-                </div>
-              </motion.div>
-            </div>
-
             {/* Trust indicators */}
             <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
