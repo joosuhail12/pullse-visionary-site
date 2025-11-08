@@ -83,8 +83,8 @@ const SolutionEcommerce = () => {
       icon: Truck,
       title: 'AI Chatbots',
       subtitle: 'Kill WISMO Tickets',
-      description: '62% of your tickets are "Where\'s my order?" Let AI handle them. Auto-detect order numbers, pull real-time tracking from Shopify + carriers, send personalized updates.',
-      stat: '70%',
+      description: '80% of your tickets are "Where\'s my order?" Let AI handle them. Auto-detect order numbers, pull real-time tracking from Shopify + carriers, send personalized updates.',
+      stat: '80%',
       statLabel: 'WISMO auto-resolved',
       color: 'from-blue-500 to-cyan-500'
     },
@@ -180,7 +180,7 @@ const SolutionEcommerce = () => {
           <div className="max-w-[1400px] mx-auto">
             <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {[
-                { value: 62, suffix: '%', label: 'WISMO tickets', detail: 'eliminated by AI', icon: Truck },
+                { value: 80, suffix: '%', label: 'WISMO tickets', detail: 'eliminated by AI', icon: Truck },
                 { value: 6, suffix: ' min', label: 'Saved per return', detail: 'from 8 min to 2 min', icon: Clock },
                 { value: 30, suffix: 's', label: 'Auto-response', detail: 'avg tracking reply', icon: MessageSquare },
                 { value: 10, suffix: 'x', label: 'Peak capacity', detail: 'Black Friday ready', icon: TrendingUp },

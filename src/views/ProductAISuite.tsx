@@ -773,7 +773,7 @@ const ProductAISuite = () => {
                               <div className="absolute inset-0 bg-primary/30 rounded-full blur-xl" />
                             </div>
                             <div>
-                              <div className="text-5xl font-black bg-gradient-to-r from-primary via-purple-600 to-purple-700 bg-clip-text text-transparent">60% reduction</div>
+                              <div className="text-5xl font-black bg-gradient-to-r from-primary via-purple-600 to-purple-700 bg-clip-text text-transparent">80% reduction</div>
                               <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1">in WISMO tickets</div>
                             </div>
                           </div>

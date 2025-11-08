@@ -99,7 +99,7 @@ const useCaseTabs = [
       borderHover: 'hover:border-green-500/40',
       shadow: 'shadow-green-500/10'
     },
-    stat: { label: 'WISMO Reduction', value: '62%', description: 'fewer order status inquiries' },
+    stat: { label: 'WISMO Reduction', value: '80%', description: 'fewer order status inquiries' },
   },
   {
     value: 'fintech',
