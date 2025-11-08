@@ -544,9 +544,9 @@ const ProductHelpCenters = () => {
 
               <div className="relative">
                 <div className="flex items-center justify-center gap-4 mb-6">
-                  <Image src={appoLogo} alt="Appo" className="h-12 w-12" />
-                  <Link2 className="h-6 w-6 text-[#F28D1B]" />
                   <Image src={pullseLogo} alt="Pullse" className="h-12 w-12" />
+                  <Link2 className="h-6 w-6 text-[#F28D1B]" />
+                  <Image src={appoLogo} alt="Appo" className="h-12 w-12" />
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-4">
