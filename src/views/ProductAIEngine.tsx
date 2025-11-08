@@ -302,20 +302,6 @@ const StickyStepperSection = () => {
         <div className="container mx-auto px-6 relative">
           {/* Section Header - Enhanced */}
           <div className="text-center pt-32 pb-20">
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/30 backdrop-blur-xl mb-8 shadow-lg"
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-              <span className="text-sm font-bold text-primary">Live Pipeline Visualization</span>
-            </motion.div>
-
             <motion.h2
               className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
               initial={{ opacity: 0, y: 20 }}
@@ -338,28 +324,6 @@ const StickyStepperSection = () => {
             >
               From <span className="font-bold text-foreground">threat detection</span> to <span className="font-bold text-foreground">safe execution</span>—watch every action flow through our governed pipeline.
             </motion.p>
-
-            {/* Timeline metrics preview */}
-            <motion.div
-              className="flex flex-wrap items-center justify-center gap-6 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/30 backdrop-blur-sm">
-                <Shield className="h-4 w-4 text-primary" />
-                <span className="text-sm text-muted-foreground">Input & Output Guardrails</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/30 backdrop-blur-sm">
-                <Zap className="h-4 w-4 text-purple-400" />
-                <span className="text-sm text-muted-foreground">Sub-second Processing</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/30 backdrop-blur-sm">
-                <CheckCircle2 className="h-4 w-4 text-green-400" />
-                <span className="text-sm text-muted-foreground">Full Audit Trail</span>
-              </div>
-            </motion.div>
           </div>
 
           {/* Timeline Container */}
@@ -442,22 +406,6 @@ const ProductAIEngine = () => {
 
         <div className="container mx-auto px-6 relative">
           <div className="max-w-6xl mx-auto text-center">
-            {/* Badge with live status */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-indigo-500/10 border border-primary/30 backdrop-blur-xl mb-8 shadow-lg"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-              <span className="text-sm font-bold bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                Processing 2.4M Actions/Month • 99.97% Attack Detection
-              </span>
-            </motion.div>
-
             {/* Enhanced Headline with better value prop */}
             <motion.h1
               className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground mb-8 tracking-tight leading-tight"
@@ -482,30 +430,6 @@ const ProductAIEngine = () => {
               AI that <span className="text-foreground font-bold">takes action</span>, not just suggests it.
               Process refunds, update subscriptions, and resolve issues—with <span className="text-foreground font-bold">full governance</span> and <span className="text-foreground font-bold">zero hallucinations</span>.
             </motion.p>
-
-            {/* Enhanced social proof with customer logos */}
-            <motion.div
-              className="flex flex-col items-center gap-4 mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-card/50 border border-border/50 backdrop-blur-sm">
-                <div className="flex -space-x-3">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-purple-600 border-2 border-background flex items-center justify-center text-xs font-bold text-white"
-                    >
-                      {String.fromCharCode(65 + i)}
-                    </div>
-                  ))}
-                </div>
-                <span className="text-sm text-muted-foreground">
-                  Designed for <span className="font-bold text-foreground">modern support teams</span>
-                </span>
-              </div>
-            </motion.div>
 
             {/* Single Primary CTA */}
             <motion.div
@@ -640,15 +564,6 @@ const ProductAIEngine = () => {
         <div className="container mx-auto px-6 relative">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
-              <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600/10 border border-green-600/30 mb-6"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-              >
-                <TrendingUp className="h-4 w-4 text-green-400" />
-                <span className="text-sm font-bold text-green-400">Proven ROI</span>
-              </motion.div>
               <motion.h2
                 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
@@ -851,12 +766,6 @@ const ProductAIEngine = () => {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
               <div className="relative">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8">
-                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                  <span className="text-sm font-bold text-primary">Get Started Today</span>
-                </div>
-
                 <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
                   Ready to see it{" "}
                   <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
