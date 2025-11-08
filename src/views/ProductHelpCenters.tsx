@@ -130,19 +130,6 @@ const AIAccordion = () => {
           );
         })}
       </div>
-
-      {/* Single Link at Bottom */}
-      <div className="pt-2 border-t border-border/30">
-        <RouteButton
-          variant="ghost"
-          size="sm"
-          href="https://appo.com"
-          className="w-full justify-center text-xs text-[#F28D1B] hover:text-[#FFB633] hover:bg-[#F28D1B]/10"
-        >
-          Learn more about Appo
-          <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-        </RouteButton>
-      </div>
     </div>
   );
 };
@@ -316,19 +303,6 @@ const ProductHelpCenters = () => {
             );
           })}
         </div>
-
-        {/* Single Link at Bottom */}
-        <div className="pt-2 border-t border-border/30">
-          <RouteButton
-            variant="ghost"
-            size="sm"
-            href="https://appo.com"
-            className="w-full justify-center text-xs text-[#F28D1B] hover:text-[#FFB633] hover:bg-[#F28D1B]/10"
-          >
-            Learn more about Appo
-            <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-          </RouteButton>
-        </div>
       </div>
     );
   };
@@ -438,9 +412,9 @@ const ProductHelpCenters = () => {
                   See Appo in action
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
-                <RouteButton size="lg" variant="outline" href="https://appo.com" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white">
-                  Visit Appo.com
-                  <ExternalLink className="ml-2 h-5 w-5" />
+                <RouteButton size="lg" variant="outline" href="/contact-sales" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white">
+                  Contact Sales
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 
@@ -851,9 +825,9 @@ const ProductHelpCenters = () => {
                       Book Appo demo
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </RouteButton>
-                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white" href="https://appo.com">
-                      Visit Appo.com
-                      <ExternalLink className="ml-2 h-5 w-5" />
+                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7 border-[#F28D1B] text-[#F28D1B] hover:bg-[#F28D1B] hover:text-white" href="/contact-sales">
+                      Contact Sales
+                      <ArrowRight className="ml-2 h-5 w-5" />
                     </RouteButton>
                   </div>
                 </div>
