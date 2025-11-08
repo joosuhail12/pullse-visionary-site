@@ -66,18 +66,6 @@ const Company = () => {
             {/* Text Content */}
             <div className="flex flex-col items-center text-center">
               <div className="space-y-10 w-full">
-                {/* Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-sm"
-                >
-                  <Image src={antlerLogo} alt="Antler" width={50} height={20} className="h-3 w-auto" />
-                  <span className="text-xs font-semibold text-primary">Antler-backed</span>
-                  <span className="text-xs text-muted-foreground">• Founded 2024</span>
-                </motion.div>
-
                 {/* Headline */}
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}

@@ -57,16 +57,6 @@ const WorkflowShowcase = ({
       </div>
 
       <div className="relative p-8">
-        {/* Category Badge */}
-        <div className="mb-6">
-          <div className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${categoryColor} px-4 py-1.5 shadow-lg`}>
-            <div className="h-1.5 w-1.5 rounded-full bg-background animate-pulse" />
-            <span className="text-xs font-black text-background uppercase tracking-wider">
-              {category}
-            </span>
-          </div>
-        </div>
-
         {/* Title - More Prominent */}
         <div className="mb-6 pr-32">
           <h4 className="text-2xl font-black text-foreground leading-tight mb-3">

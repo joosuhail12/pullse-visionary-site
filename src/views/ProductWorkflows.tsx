@@ -252,16 +252,6 @@ const CopilotAccordion = () => {
                           {tab.content.example.description}
                         </p>
                       </div>
-
-                      {/* Badge */}
-                      <div className="flex justify-start">
-                        <div className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 border bg-gradient-to-r ${tab.colors.bgActive} ${tab.colors.borderActive}`}>
-                          <Star className={`h-3.5 w-3.5 ${tab.colors.textActive}`} />
-                          <span className={`text-xs font-bold ${tab.colors.textActive}`}>
-                            {tab.content.badge.text}
-                          </span>
-                        </div>
-                      </div>
                     </div>
                   </motion.div>
                 )}

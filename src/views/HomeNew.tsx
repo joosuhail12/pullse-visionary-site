@@ -321,11 +321,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
         <div className="container mx-auto px-4 py-20">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur">
-                <span>Backed by</span>
-                <Image src={antlerLogo} alt="Antler" width={60} height={24} className="h-4 w-auto" />
-              </div>
-
               <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-foreground">
                 <span className="word inline-block">AI</span>{" "}
                 <span className="word inline-block">support</span>{" "}
@@ -382,12 +377,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
           <div className="grid gap-16 lg:grid-cols-[1.3fr,1fr] items-start">
             {/* Left: Trust & Backing */}
             <div className="space-y-8">
-              {/* Enhanced badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-                <Shield className="h-3.5 w-3.5" />
-                Enterprise-Grade Trust
-              </div>
-
               {/* Punchier headline */}
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 One platform. Zero silos. Total control.
@@ -496,12 +485,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
 
         <div className="container relative mx-auto px-4">
           <div className="mx-auto mb-20 max-w-4xl text-center space-y-6">
-            {/* Enhanced badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-              <Zap className="h-3.5 w-3.5" />
-              Complete Platform
-            </div>
-
             {/* Stronger headline */}
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Seven products. One platform. Zero integration headaches.
@@ -557,17 +540,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
         <div className="container relative mx-auto px-4">
           {/* Enhanced header */}
           <div className="mx-auto mb-16 max-w-3xl text-center space-y-6">
-            <div
-              className="inline-flex items-center gap-2 rounded-full border px-5 py-2 text-xs font-bold uppercase tracking-wider shadow-lg transition-all duration-500"
-              style={{
-                borderColor: `${activeTab.primaryColor}66`,
-                background: `linear-gradient(to right, ${activeTab.primaryColor}33, ${activeTab.primaryColor}1A)`,
-                color: activeTab.primaryColor
-              }}
-            >
-              <BarChart3 className="h-3.5 w-3.5" />
-              Industry Solutions
-            </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Purpose-built for your vertical
             </h2>
@@ -799,10 +771,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
           <div className="mx-auto max-w-5xl">
             {/* Header with social proof */}
             <div className="text-center mb-12 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-                <BarChart3 className="h-3.5 w-3.5" />
-                ROI Calculator
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 See your potential savings
               </h2>
@@ -874,10 +842,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
           <div className="mx-auto max-w-5xl">
             {/* Enhanced Header */}
             <div className="text-center mb-16 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-accent-pink/40 bg-gradient-to-r from-accent-pink/20 to-accent-pink/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-accent-pink shadow-lg">
-                <Zap className="h-3.5 w-3.5" />
-                Integrations
-              </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Take action across your entire stack
               </h2>
@@ -955,15 +919,6 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   <div className="absolute -bottom-20 -right-20 h-48 w-48 rounded-full bg-primary/15 blur-3xl" />
 
                   <div className="relative space-y-10">
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/20 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-primary shadow-lg backdrop-blur-sm">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-                      </span>
-                      Production Ready
-                    </div>
-
                     {/* Impact Stats with attribution */}
                     <div className="space-y-8">
                       <div>

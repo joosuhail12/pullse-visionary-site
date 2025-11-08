@@ -130,11 +130,6 @@ const SolutionEcommerce = () => {
           <div className="max-w-[1400px] mx-auto">
             {/* Header Content */}
             <div className="text-center space-y-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <ShoppingCart className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">For E-commerce Teams</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
                 Agents hunt through 6 tabs.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-4">
@@ -213,10 +208,6 @@ const SolutionEcommerce = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">How It Works</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Three ways to handle e-commerce chaos
               </h2>
@@ -274,10 +265,6 @@ const SolutionEcommerce = () => {
           <div className="max-w-[1400px] mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Pullse in Action</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 From stressed agents to instant execution
               </h2>
@@ -721,10 +708,6 @@ const SolutionEcommerce = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI executes across your retail stack
               </h2>
@@ -788,10 +771,6 @@ const SolutionEcommerce = () => {
           <div className="mx-auto max-w-5xl">
             {/* Header */}
             <div className="text-center mb-12 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-                <BarChart3 className="h-3.5 w-3.5" />
-                ROI Calculator
-              </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Calculate your Black Friday savings
               </h2>

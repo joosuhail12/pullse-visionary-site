@@ -206,11 +206,6 @@ const SolutionSaaS = () => {
           <div className="max-w-[1400px] mx-auto">
             {/* Header Content */}
             <div className="text-center space-y-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <Rocket className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">For B2B SaaS Companies</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
                 Your support team is drowning in 10 tools.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-4">
@@ -286,10 +281,6 @@ const SolutionSaaS = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">How It Works</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Three ways to execute actions
               </h2>
@@ -357,10 +348,6 @@ const SolutionSaaS = () => {
           <div className="max-w-[1400px] mx-auto">
             {/* Hero Header */}
             <div className="text-center mb-12 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2.5 shadow-sm">
-                <TrendingUp className="h-4 w-4 text-primary" />
-                <span className="text-sm font-bold tracking-wide text-primary">See The Difference</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] max-w-5xl mx-auto">
                 One angry customer. Two completely different outcomes.
               </h2>
@@ -753,10 +740,6 @@ const SolutionSaaS = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <GitBranch className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Real-World Impact</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 From panic to resolution—in seconds
               </h2>
@@ -849,10 +832,6 @@ const SolutionSaaS = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI executes across your entire stack
               </h2>
@@ -918,10 +897,6 @@ const SolutionSaaS = () => {
           <div className="mx-auto max-w-5xl">
             {/* Header */}
             <div className="text-center mb-12 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-                <BarChart3 className="h-3.5 w-3.5" />
-                ROI Calculator
-              </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 See your savings in 60 seconds
               </h2>

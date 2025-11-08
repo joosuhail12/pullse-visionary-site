@@ -326,11 +326,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">AI-Powered Support Platform</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Support that
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
@@ -388,10 +383,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Activity className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Platform Impact</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                 Results that scale across industries
               </h2>
@@ -434,10 +425,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">How It Works</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 Three AI tools. One platform. Infinite adaptability.
               </h2>
@@ -508,10 +495,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Globe className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Industry Adaptation</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                 Same platform, different superpowers
               </h2>
@@ -564,10 +547,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Target className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Choose Your Solution</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Ready to see it in action?
               </h2>
@@ -650,10 +629,6 @@ const SolutionsHub = () => {
           <div className="mx-auto max-w-5xl">
             {/* Header */}
             <div className="text-center mb-12 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/15 to-primary/10 px-5 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg backdrop-blur-sm">
-                <BarChart3 className="h-3.5 w-3.5" />
-                ROI Calculator
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 Calculate your support savings
               </h2>
@@ -786,11 +761,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Settings className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
-              </div>
-
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
                 Execute actions across your entire business stack
               </h2>
@@ -887,11 +857,6 @@ const SolutionsHub = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-10">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <TrendingUp className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">Get Started Today</span>
-              </div>
-
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Transform your support from cost center to
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2">
