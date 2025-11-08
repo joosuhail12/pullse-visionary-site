@@ -310,11 +310,6 @@ const ProductAutoQA = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <Shield className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">AI-Powered Quality Assurance</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Every conversation.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
@@ -453,10 +448,6 @@ const ProductAutoQA = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <GitBranch className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold tracking-wide text-primary">How It Works</span>
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
                 From Ticket to Coaching
               </h2>
@@ -548,10 +539,6 @@ const ProductAutoQA = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm mb-6">
-                    <Users className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-semibold tracking-wide text-primary">Coaching & Feedback</span>
-                  </div>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
                     QA that feels like
                     <br />

@@ -421,11 +421,6 @@ const ProductHelpCenters = () => {
                 />
               </div>
 
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/30 bg-[#F28D1B]/10 px-5 py-2.5 shadow-sm">
-                <Image src={appoLogo} alt="Appo" className="h-4 w-4" />
-                <span className="text-sm font-semibold tracking-wide text-[#F28D1B] dark:text-[#FFB633]">Powered by Appo</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Help centers that
                 <span className="block bg-gradient-to-r from-[#F28D1B] via-[#FFB633] to-[#FEE3AC] bg-clip-text text-transparent animate-gradient mt-2">
@@ -524,10 +519,6 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-[#F28D1B]" />
-                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Content Creation</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Build content that helps
               </h2>
@@ -561,10 +552,6 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-8 space-y-3 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/40 bg-gradient-to-r from-[#F28D1B]/15 to-[#FFB633]/10 px-4 py-1.5 shadow-lg backdrop-blur-sm">
-                <Image src={appoLogo} alt="Appo" className="h-3.5 w-3.5" />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#F28D1B]">AI-Powered Intelligence</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI that makes content better
               </h2>
@@ -605,10 +592,6 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
-                <Globe className="h-4 w-4 text-[#F28D1B]" />
-                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Multi-Brand</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 One workspace. Unlimited help centers.
               </h2>
@@ -686,10 +669,6 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
-                <Languages className="h-4 w-4 text-[#F28D1B]" />
-                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Global Reach</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Publish globally. Speak locally.
               </h2>
@@ -735,10 +714,6 @@ const ProductHelpCenters = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#F28D1B]/20 bg-[#F28D1B]/5 px-4 py-2">
-                <BarChart3 className="h-4 w-4 text-[#F28D1B]" />
-                <span className="text-xs font-semibold tracking-wide text-[#F28D1B]">Analytics</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Measure what matters
               </h2>

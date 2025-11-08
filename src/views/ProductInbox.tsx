@@ -378,11 +378,6 @@ const ProductInbox = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header Content */}
             <div className="text-center mb-16 space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">AI-Powered Inbox</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 The inbox that makes
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
@@ -515,10 +510,6 @@ const ProductInbox = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">AI Intelligence</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI that actually helps agents
               </h2>
@@ -582,10 +573,6 @@ const ProductInbox = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <LayoutGrid className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Complete Platform</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Everything you need in one inbox
               </h2>
@@ -617,10 +604,6 @@ const ProductInbox = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <BarChart3 className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Analytics</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Measure what matters
               </h2>

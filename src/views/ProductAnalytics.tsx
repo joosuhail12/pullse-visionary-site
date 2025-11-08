@@ -194,22 +194,6 @@ const ProductAnalytics = () => {
 
         <div className="container mx-auto px-6 relative">
           <div className="max-w-6xl mx-auto text-center">
-            {/* Badge with live status */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-xl mb-8 shadow-lg"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-              </span>
-              <span className="text-sm font-bold text-primary">
-                Real-Time Intelligence
-              </span>
-            </motion.div>
-
             {/* Enhanced Headline */}
             <motion.h1
               className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground mb-8 tracking-tight leading-tight"
@@ -571,16 +555,6 @@ const ProductAnalytics = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20">
-              <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-              >
-                <BarChart3 className="h-4 w-4 text-primary" />
-                <span className="text-sm font-bold text-primary">Core Dashboards</span>
-              </motion.div>
-
               <motion.h2
                 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
@@ -878,16 +852,6 @@ const ProductAnalytics = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20">
-              <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-              >
-                <FileText className="h-4 w-4 text-primary" />
-                <span className="text-sm font-bold text-primary">Report Library</span>
-              </motion.div>
-
               <motion.h2
                 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
                 initial={{ opacity: 0, y: 20 }}
