@@ -34,6 +34,9 @@ import {
 import appoLogo from "@/assets/appo/appo-logo.png";
 import appoWordmark from "@/assets/appo/appo-wordmark.png";
 
+// Import Pullse logo
+import pullseLogo from "@/assets/logo-icon-purple.png";
+
 // Animated Counter Component
 const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; duration?: number; trigger?: boolean }) => {
   const [count, setCount] = useState(0);
@@ -543,9 +546,7 @@ const ProductHelpCenters = () => {
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <Image src={appoLogo} alt="Appo" className="h-12 w-12" />
                   <Link2 className="h-6 w-6 text-[#F28D1B]" />
-                  <div className="h-12 w-12 rounded-lg bg-[#F28D1B]/10 border border-[#F28D1B]/20 flex items-center justify-center">
-                    <MessageCircle className="h-6 w-6 text-[#F28D1B]" />
-                  </div>
+                  <Image src={pullseLogo} alt="Pullse" className="h-12 w-12" />
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-4">
