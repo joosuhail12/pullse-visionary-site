@@ -5,7 +5,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
-import ResultCard from "@/components/ResultCard";
 import Image from "next/image";
 import {
   Mail,
@@ -261,62 +260,9 @@ const ProductInboxChannels = () => {
   ];
 
   const results = [
-    {
-      value: '73%',
-      label: 'Faster responses',
-      description: 'With AI rewriting and canned responses',
-      icon: Zap,
-      color: 'from-blue-500 to-cyan-500',
-      visualizationType: 'comparison' as const,
-      animatedValue: 73,
-      contextData: {
-        subtitle: 'Average response time reduction',
-        comparison: {
-          before: { label: 'Manual', value: '60min' },
-          after: { label: 'With AI', value: '16min' },
-        },
-        progressValue: 73,
-      },
-    },
-    {
-      value: '80%',
-      label: 'Automation rate',
-      description: 'Tickets handled without human touch',
-      icon: Bot,
-      color: 'from-purple-500 to-pink-500',
-      visualizationType: 'stacked' as const,
-      animatedValue: 80,
-      contextData: {
-        subtitle: '2.4M tickets per year',
-        stackedData: {
-          primary: 80,
-          secondary: 20,
-          primaryLabel: 'Automated',
-          secondaryLabel: 'Manual',
-        },
-        badge: {
-          text: 'Savings: $2.1M annually',
-          color: 'bg-green-500/10 text-green-500 border border-green-500/20',
-        },
-      },
-    },
-    {
-      value: '4.8',
-      label: 'CSAT score',
-      description: 'Average customer satisfaction rating',
-      icon: TrendingUp,
-      color: 'from-green-500 to-emerald-500',
-      visualizationType: 'stars' as const,
-      animatedValue: 4.8,
-      contextData: {
-        subtitle: 'From 12,847 responses',
-        trend: {
-          value: '0.3',
-          direction: 'up' as const,
-          label: 'vs last quarter',
-        },
-      },
-    },
+    { value: '73%', label: 'Faster responses', description: 'With AI rewriting', icon: Zap, color: 'from-blue-500 to-cyan-500', animatedValue: 73 },
+    { value: '80%', label: 'Automation rate', description: 'Tickets handled automatically', icon: Bot, color: 'from-purple-500 to-pink-500', animatedValue: 80 },
+    { value: '4.8', label: 'CSAT score', description: 'Customer satisfaction', icon: TrendingUp, color: 'from-green-500 to-emerald-500', animatedValue: 4.8 },
   ];
 
   return (
@@ -814,20 +760,48 @@ const ProductInboxChannels = () => {
 
             {/* Result Cards */}
             <div className="grid md:grid-cols-3 gap-8">
-              {results.map((result, index) => (
-                <ResultCard
-                  key={index}
-                  icon={result.icon}
-                  value={result.value}
-                  label={result.label}
-                  description={result.description}
-                  color={result.color}
-                  visualizationType={result.visualizationType}
-                  animatedValue={result.animatedValue}
-                  contextData={result.contextData}
-                  delay={index * 0.1}
-                />
-              ))}
+              {results.map((result, index) => {
+                const Icon = result.icon;
+                const hasDecimal = result.value.includes('.');
+                const numericValue = parseFloat(result.value);
+                const suffix = result.value.replace(/[0-9.]/g, '');
+
+                return (
+                  <div key={index} className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-8 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
+                    {/* Hover gradient overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${result.color} opacity-0 transition-opacity group-hover:opacity-5`} />
+
+                    <div className="relative space-y-4">
+                      {/* Icon */}
+                      <div className={`inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${result.color} shadow-lg`}>
+                        <Icon className="h-7 w-7 text-background" />
+                      </div>
+
+                      {/* Value */}
+                      <div className={`text-6xl font-black bg-gradient-to-r ${result.color} bg-clip-text text-transparent leading-none tabular-nums`}>
+                        <AnimatedCounter
+                          end={numericValue}
+                          suffix={suffix}
+                          trigger={statsAnimated}
+                          duration={1800}
+                        />
+                      </div>
+
+                      {/* Label & Description */}
+                      <div className="space-y-1">
+                        <div className="text-lg font-bold text-foreground">{result.label}</div>
+                        <div className="text-sm text-muted-foreground">{result.description}</div>
+                      </div>
+
+                      {/* Pulse dot */}
+                      <div
+                        className={`absolute top-4 right-4 h-2 w-2 rounded-full bg-gradient-to-r ${result.color} animate-pulse`}
+                        style={{ animationDelay: `${index * 0.2}s` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
