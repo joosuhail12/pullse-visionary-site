@@ -131,20 +131,6 @@ const ProductAnalytics = () => {
     },
     {
       color: 'hsl(var(--card))',
-      title: 'Resolution Breakdown',
-      description: 'Analyze resolution rates by intent, channel, agent, and time period. Understand what works and what does not.',
-      label: 'Deep Dive',
-      icon: Target,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Agent Performance',
-      description: 'Individual scorecards with FCR, handle time, CSAT, and quality scores. Fair, transparent, data-driven coaching.',
-      label: 'Team Metrics',
-      icon: Users,
-    },
-    {
-      color: 'hsl(var(--card))',
       title: 'Customer Satisfaction',
       description: 'Track CSAT, NPS, and sentiment analysis across all interactions. See what drives customer happiness.',
       label: 'CSAT & NPS',
@@ -163,13 +149,6 @@ const ProductAnalytics = () => {
       description: 'First response time, resolution time, SLA compliance. Track speed metrics that matter to customers.',
       label: 'Speed Metrics',
       icon: Clock,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'ROI Dashboard',
-      description: 'Cost per ticket, automation savings, headcount impact. Prove value in dollars, not just percentages.',
-      label: 'Business Impact',
-      icon: DollarSign,
     },
   ];
 
@@ -400,146 +379,6 @@ const ProductAnalytics = () => {
                       ))}
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Value Props Section - Enhanced */}
-      <section className="relative py-24 bg-gradient-to-b from-muted/10 to-transparent overflow-hidden">
-        {/* Animated background orbs */}
-        <motion.div
-          className="absolute top-1/2 left-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.3, 1], x: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <motion.div
-                className="group relative p-8 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:bg-card hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -10, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative">
-                  <motion.div
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-5"
-                    whileHover={{ scale: 1.15, rotate: 8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Activity className="h-7 w-7 text-background" />
-                    </motion.div>
-                  </motion.div>
-                  <h3 className="text-xl font-black mb-3 group-hover:text-primary transition-colors">
-                    Real-Time Dashboards
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Live updates streaming every second. No refresh needed, no stale data.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="group relative p-8 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:bg-card hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ y: -10, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative">
-                  <motion.div
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-5"
-                    whileHover={{ scale: 1.15, rotate: -8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <motion.div
-                      animate={{ rotate: [0, 10, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <Settings className="h-7 w-7 text-background" />
-                    </motion.div>
-                  </motion.div>
-                  <h3 className="text-xl font-black mb-3 group-hover:text-primary transition-colors">
-                    Pre-built Reports
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Template library for every stakeholder. Export and share instantly.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="group relative p-8 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:bg-card hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ y: -10, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative">
-                  <motion.div
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-5"
-                    whileHover={{ scale: 1.15, rotate: 8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <motion.div
-                      animate={{ y: [0, -3, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Users className="h-7 w-7 text-background" />
-                    </motion.div>
-                  </motion.div>
-                  <h3 className="text-xl font-black mb-3 group-hover:text-primary transition-colors">
-                    Team Performance
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Agent-level and team-level metrics. Fair, transparent, actionable.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="group relative p-8 rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl hover:bg-card hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ y: -10, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
-                <div className="relative">
-                  <motion.div
-                    className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-5"
-                    whileHover={{ scale: 1.15, rotate: -8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <motion.div
-                      animate={{ scale: [1, 1.15, 1] }}
-                      transition={{ duration: 2.5, repeat: Infinity }}
-                    >
-                      <DollarSign className="h-7 w-7 text-background" />
-                    </motion.div>
-                  </motion.div>
-                  <h3 className="text-xl font-black mb-3 group-hover:text-primary transition-colors">
-                    ROI Tracking
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Prove value with cost savings data. Dollars, not just percentages.
-                  </p>
                 </div>
               </motion.div>
             </div>
@@ -859,9 +698,9 @@ const ProductAnalytics = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Every report{" "}
+                Specialized analytics{" "}
                 <span className="bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent">
-                  every stakeholder needs
+                  for deeper insights
                 </span>
               </motion.h2>
 
@@ -872,8 +711,7 @@ const ProductAnalytics = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Pre-built templates for executives, managers, agents, and analysts.{" "}
-                <span className="font-bold text-foreground">Customize everything</span> or use as-is.
+                Advanced reporting for volume trends, customer satisfaction, AI performance, and response time metrics.
               </motion.p>
             </div>
 
