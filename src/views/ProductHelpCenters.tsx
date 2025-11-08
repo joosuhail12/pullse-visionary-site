@@ -496,21 +496,8 @@ const ProductHelpCenters = () => {
               </p>
             </div>
 
-            {/* Two Column Layout */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left: Screenshot Placeholder */}
-              <div className="fade-in-up">
-                <div className="relative rounded-3xl border border-border/50 bg-card p-6 shadow-xl">
-                  <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 aspect-video flex items-center justify-center">
-                    <div className="text-center space-y-2 p-6">
-                      <BookOpen className="h-14 w-14 text-[#F28D1B]/40 mx-auto" />
-                      <p className="text-sm text-muted-foreground">Multiple Help Centers Dashboard</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right: Feature Cards */}
+            {/* Feature Cards */}
+            <div className="max-w-3xl mx-auto">
               <div className="space-y-6 fade-in-up">
                 {[
                   {
