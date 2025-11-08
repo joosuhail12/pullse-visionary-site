@@ -239,7 +239,7 @@ const ProductAnalytics = () => {
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     <Play className="h-6 w-6" />
-                    See Live Demo
+                    See it live
                     <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </RouteButton>
@@ -251,7 +251,7 @@ const ProductAnalytics = () => {
                 size="lg"
                 className="px-12 py-8 text-xl font-black"
               >
-                View Pricing
+                View pricing
               </RouteButton>
             </motion.div>
 

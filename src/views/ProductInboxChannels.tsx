@@ -28,6 +28,7 @@ import {
   Scale,
   RotateCw,
   Bot,
+  Play,
 } from "lucide-react";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
@@ -408,12 +409,13 @@ const ProductInboxChannels = () => {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <RouteButton size="lg" href="/contact-sales" className="text-base px-8 py-6 shadow-xl shadow-primary/20">
-                    See the inbox
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                  <RouteButton size="lg" href="/contact-sales" className="text-base px-8 py-6 shadow-xl shadow-primary/20 group">
+                    See it live
+                    <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   </RouteButton>
                   <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-8 py-6">
                     View pricing
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </RouteButton>
                 </div>
               </div>

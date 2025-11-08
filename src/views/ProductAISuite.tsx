@@ -180,13 +180,13 @@ const ProductAISuite = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                <RouteButton href="/book-demo" className="group relative px-8 py-4 bg-gradient-to-r from-primary to-purple-600 text-background font-bold rounded-xl shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all hover:scale-105">
-                  Book a Demo
-                  <ArrowRight className="ml-2 h-5 w-5 inline-block group-hover:translate-x-1 transition-transform" />
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group">
+                  See it live
+                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
-                <RouteButton href="/contact" className="group px-8 py-4 border-2 border-primary/30 bg-card/50 backdrop-blur-sm text-foreground font-bold rounded-xl hover:bg-primary/10 hover:border-primary transition-all">
-                  Talk to Sales
-                  <Play className="ml-2 h-5 w-5 inline-block group-hover:scale-110 transition-transform" />
+                <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-10 py-7">
+                  View pricing
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 

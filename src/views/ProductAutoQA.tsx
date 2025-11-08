@@ -323,7 +323,7 @@ const ProductAutoQA = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group">
-                  See Auto-QA in action
+                  See it live
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
                 <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-10 py-7">
