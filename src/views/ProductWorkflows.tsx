@@ -430,11 +430,6 @@ const ProductWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header Content */}
             <div className="text-center mb-16 space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 shadow-sm">
-                <Workflow className="h-4 w-4 text-primary animate-pulse" />
-                <span className="text-sm font-semibold tracking-wide text-primary">Visual Automation</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Automate support with
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
@@ -565,10 +560,6 @@ const ProductWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Complete Automation</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Everything you need to automate support
               </h2>
@@ -601,10 +592,6 @@ const ProductWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-8 space-y-3 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/15 to-amber-500/10 px-4 py-1.5 shadow-lg backdrop-blur-sm">
-                <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-500">On-Demand Actions</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI Copilot for real-time actions
               </h2>
@@ -648,10 +635,6 @@ const ProductWorkflows = () => {
           <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2">
-                <LinkIcon className="h-4 w-4 text-amber-500" />
-                <span className="text-xs font-semibold tracking-wide text-amber-500">50+ Pre-Built Connectors</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Pre-built connectors or custom APIs
               </h2>
@@ -685,14 +668,6 @@ const ProductWorkflows = () => {
                           {platform}
                         </div>
                       ))}
-                    </div>
-
-                    {/* AI Ready Badge */}
-                    <div className="pt-4 border-t border-border/40">
-                      <div className="inline-flex items-center gap-2 rounded-lg bg-amber-500/10 px-3 py-1.5 border border-amber-500/20">
-                        <Sparkles className="h-3 w-3 text-amber-500" />
-                        <span className="text-xs font-bold text-amber-500">AI Copilot Ready</span>
-                      </div>
                     </div>
                   </div>
                 </div>
