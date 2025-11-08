@@ -482,68 +482,6 @@ const ProductHelpCenters = () => {
         </div>
       </section>
 
-      {/* Multi-Brand & Deployment Section */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                One workspace. Unlimited help centers.
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Perfect for agencies, multi-brand companies, and SaaS platforms
-              </p>
-            </div>
-
-            {/* Feature Cards */}
-            <div className="max-w-3xl mx-auto">
-              <div className="space-y-6 fade-in-up">
-                {[
-                  {
-                    icon: BookOpen,
-                    title: 'Multiple Help Centers',
-                    description: 'Create unlimited public help centers per workspace—one for each brand, product, or region',
-                    color: 'from-[#F28D1B] to-[#FFB633]'
-                  },
-                  {
-                    icon: Palette,
-                    title: 'White-Labeled',
-                    description: 'Your branding, your domain, your design—Appo is completely invisible to customers',
-                    color: 'from-[#FFB633] to-[#FEE3AC]'
-                  },
-                  {
-                    icon: Zap,
-                    title: 'Instant Deployment',
-                    description: 'Launch new help centers in minutes with templates, copy content between centers',
-                    color: 'from-[#FFB633] to-[#503225]'
-                  },
-                ].map((feature, index) => {
-                  const Icon = feature.icon;
-                  return (
-                    <div
-                      key={index}
-                      className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-6 transition-all hover:border-[#F28D1B]/40 hover:shadow-lg hover:-translate-y-1"
-                    >
-                      <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 transition-opacity group-hover:opacity-5`} />
-                      <div className="relative flex items-start gap-4">
-                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${feature.color} shadow-md transition-all group-hover:scale-110`}>
-                          <Icon className="h-6 w-6 text-background" />
-                        </div>
-                        <div className="space-y-1 flex-1">
-                          <h3 className="text-lg font-bold text-foreground group-hover:text-[#F28D1B] transition-colors">{feature.title}</h3>
-                          <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Multilingual Section */}
       <section className="relative py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.08),transparent_60%)]" />
