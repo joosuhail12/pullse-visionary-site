@@ -635,47 +635,61 @@ const ProductInbox = () => {
                 const Icon = stat.icon;
                 const getBadgeColor = (trend: string) => {
                   if (trend === 'up') return 'bg-green-500/10 text-green-500 border-green-500/20';
-                  if (trend === 'down') return 'bg-green-500/10 text-green-500 border-green-500/20'; // down is good for response time
+                  if (trend === 'down') return 'bg-green-500/10 text-green-500 border-green-500/20';
                   return 'bg-primary/10 text-primary border-primary/20';
                 };
 
                 return (
                   <div
                     key={stat.id}
-                    className={`group relative overflow-hidden rounded-3xl border border-border/40
-                      bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl
+                    className={`group relative overflow-hidden rounded-3xl
+                      border border-white/40 shadow-[0_8px_32px_rgba(124,58,237,0.12)] ring-1 ring-black/5
+                      bg-white/70 backdrop-blur-[20px] backdrop-saturate-150
                       ${stat.gridSpan}
                       ${stat.featured ? 'p-12' : 'p-8'}
-                      transition-all duration-500
-                      hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10
-                      hover:-translate-y-3 hover:scale-[1.02]
+                      transition-[transform,box-shadow,border-color] duration-300 ease-out
+                      hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20
+                      hover:-translate-y-2 hover:scale-[1.01]
+                      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
                       fade-in-up`}
                     style={{ transitionDelay: `${index * 100}ms` }}
+                    role="article"
+                    aria-label={`${stat.label}: ${stat.value}${stat.suffix || ''}`}
+                    tabIndex={0}
                   >
-                    {/* Gradient glow on hover */}
-                    <div className={`absolute -inset-1 bg-gradient-to-r ${stat.color} rounded-3xl opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-500`} />
+                    {/* Dual-layer hover glow */}
+                    <div className={`absolute -inset-2 bg-gradient-to-r ${stat.color} rounded-3xl opacity-0 group-hover:opacity-30 blur-3xl transition-all duration-300`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-all duration-300`} />
 
-                    {/* Subtle gradient background */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5`} />
+                    {/* Enhanced gradient background */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-300`} />
+
+                    {/* Radial gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-radial from-white/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Featured card distinction */}
+                    {stat.featured && (
+                      <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-sm" />
+                    )}
 
                     <div className="relative space-y-6">
                       {/* Icon and Badge Row */}
-                      <div className="flex items-start justify-between">
-                        <div className={`inline-flex ${stat.featured ? 'h-20 w-20' : 'h-16 w-16'} items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} shadow-xl`}>
-                          <Icon className={`${stat.featured ? 'h-10 w-10' : 'h-8 w-8'} text-background`} />
+                      <div className="flex items-start justify-between transition-all duration-300 delay-100 group-hover:translate-x-1">
+                        <div className={`inline-flex ${stat.featured ? 'h-20 w-20' : 'h-16 w-16'} items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-2xl`}>
+                          <Icon className={`${stat.featured ? 'h-10 w-10' : 'h-8 w-8'} text-background transition-transform duration-300 group-hover:scale-110`} />
                         </div>
 
                         {/* Percentage Badge */}
-                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${getBadgeColor(stat.badge.trend)}`}>
+                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${getBadgeColor(stat.badge.trend)} transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg`}>
                           {stat.badge.trend === 'up' && <TrendingUp className="h-3.5 w-3.5" />}
                           {stat.badge.trend === 'down' && <TrendingUp className="h-3.5 w-3.5 rotate-180" />}
-                          <span className="text-xs font-bold">{stat.badge.text}</span>
+                          <span className="text-[10px] md:text-xs font-semibold tracking-wide uppercase">{stat.badge.text}</span>
                         </div>
                       </div>
 
                       {/* Value */}
-                      <div className="space-y-2">
-                        <div className={`${stat.featured ? 'text-7xl md:text-8xl' : 'text-5xl md:text-6xl'} font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent leading-none tabular-nums`}>
+                      <div className="space-y-1.5 transition-all duration-300 delay-150 group-hover:translate-x-1">
+                        <div className={`${stat.featured ? 'text-6xl md:text-7xl lg:text-8xl' : 'text-4xl md:text-5xl lg:text-6xl'} font-extrabold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent leading-[0.9] tracking-tighter tabular-nums drop-shadow-sm`}>
                           <AnimatedCounter
                             end={stat.value}
                             suffix={stat.suffix || ''}
@@ -683,8 +697,12 @@ const ProductInbox = () => {
                             duration={2000}
                           />
                         </div>
-                        <div className={`${stat.featured ? 'text-xl' : 'text-base'} font-semibold text-foreground`}>{stat.label}</div>
-                        <div className="text-sm text-muted-foreground">{stat.description}</div>
+                        <div className={`${stat.featured ? 'text-lg md:text-xl' : 'text-sm md:text-base'} font-bold text-foreground/90 tracking-tight leading-tight`}>
+                          {stat.label}
+                        </div>
+                        <div className="text-xs md:text-sm text-muted-foreground/80 leading-relaxed">
+                          {stat.description}
+                        </div>
                       </div>
                     </div>
                   </div>
