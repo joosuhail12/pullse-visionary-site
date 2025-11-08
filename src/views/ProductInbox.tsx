@@ -298,28 +298,61 @@ const ProductInbox = () => {
 
   const stats = [
     {
-      value: 31,
-      suffix: '%',
-      label: 'Higher agent efficiency',
-      description: 'With AI-powered features',
-      icon: TrendingUp,
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
+      id: 'automation-rate',
       value: 80,
       suffix: '%',
-      label: 'Tickets automated',
-      description: 'AI handles routine requests',
+      label: 'Automation rate',
+      description: 'Tickets handled without human touch',
       icon: Bot,
       color: 'from-purple-500 to-pink-500',
+      badge: { text: 'Industry leading', trend: 'neutral' },
+      featured: true,
+      gridSpan: 'lg:col-span-2 lg:row-span-2',
     },
     {
-      value: 100,
-      suffix: 'ms',
-      label: 'Real-time sync',
-      description: 'Across email and chat',
-      icon: Zap,
+      id: 'new-tickets',
+      value: 1247,
+      label: 'New Tickets',
+      description: 'Created this month',
+      icon: Mail,
+      color: 'from-blue-500 to-cyan-500',
+      badge: { text: '+12.5%', trend: 'up' },
+      featured: false,
+      gridSpan: 'lg:col-span-1',
+    },
+    {
+      id: 'tickets-closed',
+      value: 1156,
+      label: 'Tickets Closed',
+      description: 'Resolved this month',
+      icon: CheckCircle2,
       color: 'from-green-500 to-emerald-500',
+      badge: { text: '+8.2%', trend: 'up' },
+      featured: false,
+      gridSpan: 'lg:col-span-1',
+    },
+    {
+      id: 'replies-sent',
+      value: 2843,
+      label: 'Replies Sent',
+      description: 'Total responses',
+      icon: MessageCircle,
+      color: 'from-amber-500 to-orange-500',
+      badge: { text: '+15.7%', trend: 'up' },
+      featured: false,
+      gridSpan: 'lg:col-span-1',
+    },
+    {
+      id: 'first-response',
+      value: 42,
+      suffix: ' min',
+      label: 'Avg First Response',
+      description: 'Time to first reply',
+      icon: Clock,
+      color: 'from-rose-500 to-pink-500',
+      badge: { text: '-18% faster', trend: 'down' },
+      featured: false,
+      gridSpan: 'lg:col-span-1',
     },
   ];
 
@@ -596,45 +629,61 @@ const ProductInbox = () => {
               </p>
             </div>
 
-            {/* Analytics Screenshot */}
-            <div className="mb-16 fade-in-up">
-              <div className="relative rounded-3xl border border-border/60 bg-gradient-to-br from-card via-card to-card/80 p-3 shadow-2xl">
-                <div className="rounded-2xl overflow-hidden border border-border/30">
-                  <Image
-                    src={analyticsScreenshot}
-                    alt="Analytics Dashboard - Team performance metrics"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-              <div className="text-center mt-6 space-y-2">
-                <h3 className="text-xl font-bold text-foreground">Track automation, CSAT, and response times</h3>
-                <p className="text-muted-foreground">See ROI in real-time with executive dashboards and drill-down reports</p>
-              </div>
-            </div>
-
-            {/* Stats Grid */}
-            <div ref={statsRef} className="grid md:grid-cols-3 gap-8">
+            {/* Stats Bento Grid */}
+            <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
+                const getBadgeColor = (trend: string) => {
+                  if (trend === 'up') return 'bg-green-500/10 text-green-500 border-green-500/20';
+                  if (trend === 'down') return 'bg-green-500/10 text-green-500 border-green-500/20'; // down is good for response time
+                  return 'bg-primary/10 text-primary border-primary/20';
+                };
+
                 return (
                   <div
-                    key={index}
-                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up"
+                    key={stat.id}
+                    className={`group relative overflow-hidden rounded-3xl border border-border/40
+                      bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl
+                      ${stat.gridSpan}
+                      ${stat.featured ? 'p-12' : 'p-8'}
+                      transition-all duration-500
+                      hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/10
+                      hover:-translate-y-3 hover:scale-[1.02]
+                      fade-in-up`}
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 transition-opacity group-hover:opacity-10`} />
+                    {/* Gradient glow on hover */}
+                    <div className={`absolute -inset-1 bg-gradient-to-r ${stat.color} rounded-3xl opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-500`} />
+
+                    {/* Subtle gradient background */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5`} />
+
                     <div className="relative space-y-6">
-                      <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} shadow-lg`}>
-                        <Icon className="h-8 w-8 text-background" />
-                      </div>
-                      <div className="space-y-2">
-                        <div className={`text-5xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent tabular-nums`}>
-                          {stat.suffix === 'ms' ? '<' : ''}
-                          <AnimatedCounter end={stat.value} suffix={stat.suffix !== 'ms' ? stat.suffix : ''} trigger={statsAnimated} duration={2000} />
-                          {stat.suffix === 'ms' ? 'ms' : ''}
+                      {/* Icon and Badge Row */}
+                      <div className="flex items-start justify-between">
+                        <div className={`inline-flex ${stat.featured ? 'h-20 w-20' : 'h-16 w-16'} items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} shadow-xl`}>
+                          <Icon className={`${stat.featured ? 'h-10 w-10' : 'h-8 w-8'} text-background`} />
                         </div>
-                        <div className="text-lg font-bold text-foreground">{stat.label}</div>
+
+                        {/* Percentage Badge */}
+                        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 border ${getBadgeColor(stat.badge.trend)}`}>
+                          {stat.badge.trend === 'up' && <TrendingUp className="h-3.5 w-3.5" />}
+                          {stat.badge.trend === 'down' && <TrendingUp className="h-3.5 w-3.5 rotate-180" />}
+                          <span className="text-xs font-bold">{stat.badge.text}</span>
+                        </div>
+                      </div>
+
+                      {/* Value */}
+                      <div className="space-y-2">
+                        <div className={`${stat.featured ? 'text-7xl md:text-8xl' : 'text-5xl md:text-6xl'} font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent leading-none tabular-nums`}>
+                          <AnimatedCounter
+                            end={stat.value}
+                            suffix={stat.suffix || ''}
+                            trigger={statsAnimated}
+                            duration={2000}
+                          />
+                        </div>
+                        <div className={`${stat.featured ? 'text-xl' : 'text-base'} font-semibold text-foreground`}>{stat.label}</div>
                         <div className="text-sm text-muted-foreground">{stat.description}</div>
                       </div>
                     </div>
