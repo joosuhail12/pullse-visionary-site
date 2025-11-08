@@ -131,6 +131,20 @@ const ProductAnalytics = () => {
     },
     {
       color: 'hsl(var(--card))',
+      title: 'Resolution Breakdown',
+      description: 'Analyze resolution rates by intent, channel, agent, and time period. Understand what works and what does not.',
+      label: 'Deep Dive',
+      icon: Target,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'Agent Performance',
+      description: 'Individual scorecards with FCR, handle time, CSAT, and quality scores. Fair, transparent, data-driven coaching.',
+      label: 'Team Metrics',
+      icon: Users,
+    },
+    {
+      color: 'hsl(var(--card))',
       title: 'Customer Satisfaction',
       description: 'Track CSAT, NPS, and sentiment analysis across all interactions. See what drives customer happiness.',
       label: 'CSAT & NPS',
@@ -149,6 +163,13 @@ const ProductAnalytics = () => {
       description: 'First response time, resolution time, SLA compliance. Track speed metrics that matter to customers.',
       label: 'Speed Metrics',
       icon: Clock,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'ROI Dashboard',
+      description: 'Cost per ticket, automation savings, headcount impact. Prove value in dollars, not just percentages.',
+      label: 'Business Impact',
+      icon: DollarSign,
     },
   ];
 
@@ -386,303 +407,6 @@ const ProductAnalytics = () => {
         </div>
       </section>
 
-      {/* Core Dashboards Showcase - 3 Column with Charts */}
-      <section className="relative py-32 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
-
-        <div className="container mx-auto px-6 relative">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20">
-              <motion.h2
-                className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                See the{" "}
-                <span className="bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent">
-                  complete picture
-                </span>
-              </motion.h2>
-
-              <motion.p
-                className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Three essential dashboards that give every stakeholder the metrics they need to{" "}
-                <span className="font-bold text-foreground">make better decisions</span>.
-              </motion.p>
-            </div>
-
-            {/* 3-Column Grid */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Resolution Analytics - Left */}
-              <motion.div
-                className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                whileHover={{ y: -12, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-
-                <div className="relative">
-                  {/* Large Icon */}
-                  <motion.div
-                    className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-8"
-                    whileHover={{ scale: 1.15, rotate: 8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-primary blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
-                    <BarChart3 className="relative h-10 w-10 text-white" />
-                  </motion.div>
-
-                  {/* Title */}
-                  <h3 className="text-3xl font-black text-foreground mb-3 tracking-tight">Resolution Analytics</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    Track Actioned vs. Deflected resolutions by intent. Measure real outcomes, not just information sharing.
-                  </p>
-
-                  {/* Visual Bar Charts */}
-                  <div className="space-y-3 mb-6 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10">
-                    <div className="text-xs font-bold text-primary mb-3">Resolution by Intent</div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-xs mb-1.5">
-                        <span className="text-muted-foreground">Refunds</span>
-                        <span className="font-bold text-foreground">87%</span>
-                      </div>
-                      <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gradient-to-r from-primary to-primary rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "87%" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.2 }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-xs mb-1.5">
-                        <span className="text-muted-foreground">Plan Changes</span>
-                        <span className="font-bold text-foreground">91%</span>
-                      </div>
-                      <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gradient-to-r from-primary to-primary rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "91%" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.4 }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-xs mb-1.5">
-                        <span className="text-muted-foreground">WISMO</span>
-                        <span className="font-bold text-foreground">76%</span>
-                      </div>
-                      <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gradient-to-r from-primary to-primary rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "76%" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.6 }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Large Stats */}
-                  <div className="flex items-center justify-between pt-4 border-t border-primary/20">
-                    <div>
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">82%</div>
-                      <div className="text-xs text-muted-foreground">Avg Rate</div>
-                    </div>
-                    <div className="h-12 w-px bg-primary/20" />
-                    <div className="text-right">
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">2.4M</div>
-                      <div className="text-xs text-muted-foreground">Resolved</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Performance Metrics - Center */}
-              <motion.div
-                className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ y: -12, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-
-                <div className="relative">
-                  {/* Large Icon */}
-                  <motion.div
-                    className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-8"
-                    animate={{
-                      boxShadow: [
-                        "0 0 20px rgba(16,185,129,0.3)",
-                        "0 0 40px rgba(16,185,129,0.5)",
-                        "0 0 20px rgba(16,185,129,0.3)"
-                      ]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-primary blur-xl opacity-60 animate-pulse" />
-                    <TrendingUp className="relative h-10 w-10 text-white" />
-                  </motion.div>
-
-                  {/* Title */}
-                  <h3 className="text-3xl font-black text-foreground mb-3 tracking-tight">Team Performance</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    Agent scorecards with FCR, handle time, CSAT. Fair, transparent, data-driven coaching.
-                  </p>
-
-                  {/* Agent Leaderboard Mini-View */}
-                  <div className="space-y-2 mb-6 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10">
-                    <div className="text-xs font-bold text-primary mb-3">Top Performers</div>
-
-                    {[
-                      { name: 'Sarah M.', score: 96 },
-                      { name: 'Alex K.', score: 94 },
-                      { name: 'Jordan P.', score: 92 }
-                    ].map((agent, i) => (
-                      <div key={i} className="flex items-center gap-2">
-                        <div className="flex-1 flex items-center gap-2">
-                          <div className={cn(
-                            "flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold",
-                            i === 0 ? "bg-amber-500 text-white" : i === 1 ? "bg-gray-400 text-white" : "bg-orange-600 text-white"
-                          )}>
-                            {i + 1}
-                          </div>
-                          <span className="text-xs font-semibold text-foreground">{agent.name}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-16 h-1.5 bg-muted/30 rounded-full overflow-hidden">
-                            <motion.div
-                              className="h-full bg-gradient-to-r from-primary to-primary"
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${agent.score}%` }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
-                            />
-                          </div>
-                          <span className="text-xs font-bold text-primary">{agent.score}</span>
-                        </div>
-                      </div>
-                    ))}
-
-                    <div className="pt-2 mt-2 border-t border-primary/20 flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">Team Avg</span>
-                      <span className="font-bold text-foreground">88</span>
-                    </div>
-                  </div>
-
-                  {/* Large Stats */}
-                  <div className="flex items-center justify-between pt-4 border-t border-primary/20">
-                    <div>
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">43%</div>
-                      <div className="text-xs text-muted-foreground">Faster</div>
-                    </div>
-                    <div className="h-12 w-px bg-primary/20" />
-                    <div className="text-right">
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">91%</div>
-                      <div className="text-xs text-muted-foreground">FCR</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Business Intelligence - Right */}
-              <motion.div
-                className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-sm p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ y: -12, scale: 1.03 }}
-              >
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary/10 to-primary/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-
-                <div className="relative">
-                  {/* Large Icon */}
-                  <motion.div
-                    className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary shadow-2xl mb-8"
-                    whileHover={{ scale: 1.15, rotate: -8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-primary blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
-                    <DollarSign className="relative h-10 w-10 text-white" />
-                  </motion.div>
-
-                  {/* Title */}
-                  <h3 className="text-3xl font-black text-foreground mb-3 tracking-tight">Business Impact</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    ROI, cost savings, automation rates. Prove value in dollars, not just percentages.
-                  </p>
-
-                  {/* Cost Savings Chart */}
-                  <div className="space-y-4 mb-6 p-4 rounded-xl bg-gradient-to-br from-primary/5 to-primary/5 border border-primary/10">
-                    <div className="text-xs font-bold text-primary mb-3">Cost Comparison</div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-xs mb-2">
-                        <span className="text-muted-foreground">Manual Support</span>
-                        <span className="font-bold text-red-500">$4.2M</span>
-                      </div>
-                      <div className="h-8 bg-red-500/20 rounded-lg flex items-center px-2">
-                        <span className="text-xs font-bold text-red-500">Manual</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-xs mb-2">
-                        <span className="text-muted-foreground">With Automation</span>
-                        <span className="font-bold text-primary">$1.8M</span>
-                      </div>
-                      <div className="h-8 bg-primary/20 rounded-lg flex items-center px-2" style={{ width: '43%' }}>
-                        <span className="text-xs font-bold text-primary">AI</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 mt-3 border-t border-primary/20 flex items-center justify-between">
-                      <span className="text-xs font-bold text-primary">Annual Savings</span>
-                      <span className="text-lg font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">$2.4M</span>
-                    </div>
-                  </div>
-
-                  {/* Large Stats */}
-                  <div className="flex items-center justify-between pt-4 border-t border-primary/20">
-                    <div>
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">$2.4M</div>
-                      <div className="text-xs text-muted-foreground">Saved</div>
-                    </div>
-                    <div className="h-12 w-px bg-primary/20" />
-                    <div className="text-right">
-                      <div className="text-3xl font-black bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent mb-1">80%</div>
-                      <div className="text-xs text-muted-foreground">Automated</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Report Types Bento Grid */}
       <section className="relative py-32 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
@@ -698,9 +422,9 @@ const ProductAnalytics = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Specialized analytics{" "}
+                Every report{" "}
                 <span className="bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent">
-                  for deeper insights
+                  every stakeholder needs
                 </span>
               </motion.h2>
 
@@ -711,7 +435,7 @@ const ProductAnalytics = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Advanced reporting for volume trends, customer satisfaction, AI performance, and response time metrics.
+                Pre-built analytics for volume trends, resolution rates, team performance, customer satisfaction, AI metrics, response times, and ROI tracking.
               </motion.p>
             </div>
 
