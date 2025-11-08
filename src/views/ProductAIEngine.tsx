@@ -502,12 +502,9 @@ const ProductAIEngine = () => {
                   ))}
                 </div>
                 <span className="text-sm text-muted-foreground">
-                  Trusted by <span className="font-bold text-foreground">500+ support teams</span>
+                  Designed for <span className="font-bold text-foreground">modern support teams</span>
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground italic">
-                "Reduced our average handle time by 43% in the first month" — <span className="font-semibold text-foreground">VP of Customer Success, Series B SaaS</span>
-              </p>
             </motion.div>
 
             {/* Single Primary CTA */}

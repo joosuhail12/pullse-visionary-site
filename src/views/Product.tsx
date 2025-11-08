@@ -92,7 +92,7 @@ const Product = () => {
         "Centralize email, chat, and API events into a single intelligent workspace. Context-rich threads, smart assignments, and automated routing keep your team moving fast.",
       features: [
         { label: "Omnichannel inbox", detail: "Email, chat, webhooks unified" },
-        { label: "Smart assignments", detail: "Auto-route based on skills & workload" },
+        { label: "Smart assignments", detail: "Auto-route based on workload or round robin" },
         { label: "Collision detection", detail: "Prevent duplicate work in real-time" },
         { label: "Collaboration tools", detail: "Internal notes, @mentions, handoffs" },
       ],

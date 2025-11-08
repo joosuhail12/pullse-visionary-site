@@ -324,7 +324,7 @@ const Compare = () => {
                   Ready to See Pullse in Action?
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Join hundreds of teams who've already made the switch
+                  Built for teams ready to make the switch
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
@@ -30,6 +31,12 @@ import {
   Sparkles,
   Code,
   Database,
+  Package,
+  Lock,
+  FileText,
+  AlertTriangle,
+  Lightbulb,
+  ChevronDown,
 } from "lucide-react";
 
 // Import screenshots
@@ -63,152 +70,283 @@ const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }:
   return <>{count}{suffix}</>;
 };
 
+// Copilot Accordion Component (moved outside to prevent re-renders)
+const CopilotAccordion = () => {
+  const [activeTab, setActiveTab] = useState<number | null>(null);
+
+  const tabs = [
+    {
+      icon: Code,
+      title: 'Universal Integration',
+      content: {
+        headline: '50+ pre-built connectors for popular platforms. Or register any REST/GraphQL API—AI figures out how to use it on the fly.',
+        features: [
+          { icon: CheckCircle2, text: 'Pre-built connectors for Stripe, Shopify, Salesforce, and more' },
+          { icon: Zap, text: 'AI creates custom integrations dynamically for any other API' },
+          { icon: Shield, text: 'On-demand actions when agents need them—no business logic required' }
+        ],
+        badge: { text: '50+ Integrations' },
+        example: {
+          title: 'Example Use Case',
+          description: 'Agent asks "Process refund for order #1234." AI calls your Stripe connector, executes the refund, and confirms back—or figures out your custom API on the fly if no connector exists.'
+        }
+      },
+      colors: {
+        gradient: 'from-blue-500 to-cyan-500',
+        borderActive: 'border-blue-500/50',
+        bgActive: 'from-blue-500/15 via-blue-500/10 to-cyan-500/5',
+        shadowActive: 'shadow-blue-500/20',
+        textActive: 'text-blue-500',
+        bgExpanded: 'from-blue-500/5 via-blue-500/3 to-transparent',
+        borderExpanded: 'border-blue-500/20',
+        iconGlow: 'shadow-[0_0_20px_rgba(59,130,246,0.5)]'
+      }
+    },
+    {
+      icon: Zap,
+      title: 'On-Demand Actions',
+      content: {
+        headline: 'Agents ask AI to take actions across any platform—instantly, without leaving the conversation.',
+        features: [
+          { icon: RotateCw, text: 'Process refunds, cancel subscriptions, issue credits' },
+          { icon: Database, text: 'Update CRM, check inventory, pull order history' },
+          { icon: Play, text: 'AI figures out what API calls to make in real-time' }
+        ],
+        badge: { text: 'On-Demand' },
+        example: {
+          title: 'Example Use Case',
+          description: 'Agent types "Issue $50 credit to this customer." AI calls your billing API, creates the credit, and confirms back—all in seconds.'
+        }
+      },
+      colors: {
+        gradient: 'from-amber-500 to-orange-500',
+        borderActive: 'border-amber-500/50',
+        bgActive: 'from-amber-500/15 via-amber-500/10 to-orange-500/5',
+        shadowActive: 'shadow-amber-500/20',
+        textActive: 'text-amber-500',
+        bgExpanded: 'from-amber-500/5 via-amber-500/3 to-transparent',
+        borderExpanded: 'border-amber-500/20',
+        iconGlow: 'shadow-[0_0_20px_rgba(245,158,11,0.5)]'
+      }
+    },
+    {
+      icon: Shield,
+      title: 'Control & Security',
+      content: {
+        headline: 'AI suggests, agent approves. Multi-level approval workflows for sensitive operations.',
+        features: [
+          { icon: Lock, text: 'Role-based action permissions' },
+          { icon: FileText, text: 'Full audit trail of every action' },
+          { icon: AlertTriangle, text: 'Multi-step approval for high-risk actions' }
+        ],
+        badge: { text: 'Enterprise Security' },
+        example: {
+          title: 'Example Use Case',
+          description: 'Refunds over $500 require manager approval—AI suggests, agent requests, manager approves in Slack.'
+        }
+      },
+      colors: {
+        gradient: 'from-purple-500 to-pink-500',
+        borderActive: 'border-purple-500/50',
+        bgActive: 'from-purple-500/15 via-purple-500/10 to-pink-500/5',
+        shadowActive: 'shadow-purple-500/20',
+        textActive: 'text-purple-500',
+        bgExpanded: 'from-purple-500/5 via-purple-500/3 to-transparent',
+        borderExpanded: 'border-purple-500/20',
+        iconGlow: 'shadow-[0_0_20px_rgba(168,85,247,0.5)]'
+      }
+    }
+  ];
+
+  return (
+    <div className="space-y-3">
+      <div className="space-y-2">
+        {tabs.map((tab, index) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === index;
+
+          return (
+            <div key={index} className="group">
+              <motion.button
+                onClick={() => setActiveTab(activeTab === index ? null : index)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className={`w-full text-left rounded-xl border transition-all ${
+                  isActive
+                    ? `${tab.colors.borderActive} bg-gradient-to-r ${tab.colors.bgActive} shadow-lg ${tab.colors.shadowActive}`
+                    : 'border-border/40 bg-card/80 hover:border-primary/30 hover:bg-card'
+                }`}
+              >
+                <div className="flex items-center gap-4 p-4">
+                  <motion.div
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tab.colors.gradient} shadow-lg ${isActive ? tab.colors.iconGlow : ''}`}
+                    whileHover={{ rotate: 8, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Icon className="h-6 w-6 text-background" />
+                  </motion.div>
+                  <div className="flex-1">
+                    <h3 className={`text-base font-bold transition-colors ${isActive ? tab.colors.textActive : 'text-foreground'}`}>
+                      {tab.title}
+                    </h3>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: isActive ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    className={isActive ? tab.colors.textActive : 'text-muted-foreground'}
+                  >
+                    <ChevronDown className="h-5 w-5" />
+                  </motion.div>
+                </div>
+              </motion.button>
+
+              <AnimatePresence mode="wait">
+                {isActive && (
+                  <motion.div
+                    key={`accordion-${index}`}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    className={`mt-3 rounded-2xl border backdrop-blur-xl overflow-hidden bg-gradient-to-br ${tab.colors.bgExpanded} ${tab.colors.borderExpanded}`}
+                  >
+                    <div className="p-6 space-y-6">
+                      {/* Headline */}
+                      <div className="flex items-start gap-3">
+                        <Sparkles className={`h-5 w-5 mt-0.5 shrink-0 ${tab.colors.textActive}`} />
+                        <p className="text-sm text-foreground font-medium leading-relaxed">
+                          {tab.content.headline}
+                        </p>
+                      </div>
+
+                      {/* Key Features */}
+                      <div className="space-y-3">
+                        {tab.content.features.map((feature, idx) => {
+                          const FeatureIcon = feature.icon;
+                          return (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-3 text-sm group/feature"
+                            >
+                              <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.colors.gradient} shadow-lg group-hover/feature:scale-110 transition-transform duration-200`}>
+                                <FeatureIcon className="h-4 w-4 text-background" />
+                              </div>
+                              <span className="text-muted-foreground group-hover/feature:text-foreground transition-colors duration-200">
+                                {feature.text}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Example Use Case */}
+                      <div className={`rounded-xl border p-4 space-y-2 bg-gradient-to-br ${tab.colors.bgActive} ${tab.colors.borderActive}`}>
+                        <div className="flex items-center gap-2">
+                          <Lightbulb className={`h-4 w-4 ${tab.colors.textActive}`} />
+                          <span className={`text-xs font-bold uppercase tracking-wider ${tab.colors.textActive}`}>
+                            {tab.content.example.title}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          {tab.content.example.description}
+                        </p>
+                      </div>
+
+                      {/* Badge */}
+                      <div className="flex justify-start">
+                        <div className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 border bg-gradient-to-r ${tab.colors.bgActive} ${tab.colors.borderActive}`}>
+                          <Star className={`h-3.5 w-3.5 ${tab.colors.textActive}`} />
+                          <span className={`text-xs font-bold ${tab.colors.textActive}`}>
+                            {tab.content.badge.text}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Enhanced Bottom CTA */}
+      <div className="pt-4 border-t border-border/30">
+        <RouteButton
+          variant="ghost"
+          size="sm"
+          href="/product/ai-suite"
+          className={`w-full justify-between group hover:bg-gradient-to-r ${activeTab !== null ? tabs[activeTab].colors.bgActive : 'hover:bg-muted'}`}
+        >
+          <span className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4" />
+            <span className="text-sm">Learn more about AI Copilot</span>
+          </span>
+          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+        </RouteButton>
+      </div>
+    </div>
+  );
+};
+
 const ProductWorkflows = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [statsAnimated, setStatsAnimated] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   // Bento Grid Card Data
   const bentoCards: CardData[] = [
     {
       color: 'hsl(var(--card))',
-      title: 'Build Complex Flows Visually',
-      description: 'Design sophisticated automation with an intuitive drag-and-drop interface. Add triggers, conditions, actions, and delays—no coding required.',
-      label: 'Drag & Drop',
-      icon: Workflow,
-      image: workflowScreenshot.src,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Intelligent Ticket Routing',
-      description: 'Auto-route tickets by agent skills, workload, round-robin, or custom rules. 100% automated assignment with approval gates.',
-      label: 'Auto-Assignment',
-      icon: GitBranch,
+      title: 'Never Manually Assign Tickets Again',
+      description: 'Every ticket gets routed automatically—to the right agent, at the right time, based on workload, expertise, or any criteria you choose. No more playing traffic controller.',
+      label: 'Zero Manual Work',
+      icon: Target,
       image: routingConfigScreenshot.src,
     },
     {
       color: 'hsl(var(--card))',
-      title: 'If-Then Workflows',
-      description: 'Branch workflows based on ticket properties, customer data, button clicks, or time conditions.',
-      label: 'Smart Logic',
-      icon: Target,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Messages, Buttons & Forms',
-      description: 'Send interactive messages with action buttons. Collect customer data through forms. Set reply expectations.',
-      label: 'Interactive',
+      title: 'Handle Common Requests Without Lifting a Finger',
+      description: 'Refund requests, order status, password resets—send interactive messages with buttons and forms. Customers get instant answers, you get time back.',
+      label: 'Auto-Responses That Work',
       icon: MessageSquare,
     },
     {
       color: 'hsl(var(--card))',
-      title: '50+ Pre-Built Workflows',
-      description: 'Start with proven templates for e-commerce, SaaS, fintech, support ops. Copy, customize, and deploy in minutes.',
-      label: 'Templates',
-      icon: LayoutGrid,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Notify & Tag',
-      description: 'Auto-tag tickets for organization. Send Slack/email alerts to agents. Track team performance.',
-      label: 'Collaboration',
-      icon: Bell,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Build Once, Use Everywhere',
-      description: 'Create workflow libraries. Call nested workflows from any flow. Update once, deploy everywhere.',
-      label: 'Modular',
+      title: 'Set It Once, Forget It Forever',
+      description: 'Weekly reports, SLA reminders, follow-up sequences—build it once, runs automatically forever. Stop doing the same thing every Monday morning.',
+      label: 'Recurring Automation',
       icon: RotateCw,
+      image: workflowScreenshot.src,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'Make Complex Decisions Automatically',
+      description: 'VIP customer? Escalate. Refund under $50? Auto-approve. Order not shipped? Different workflow. Your judgment, automated.',
+      label: 'Smart Branching',
+      icon: GitBranch,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'Stop Searching for Information',
+      description: 'Pull order history from Shopify, payment info from Stripe, subscription data from your billing system—all automatically attached to the ticket.',
+      label: 'Context Auto-Loaded',
+      icon: Database,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'Build Automation Without Writing Code',
+      description: 'Drag-and-drop interface makes it easy to create sophisticated workflows. Add triggers, conditions, actions, and delays—no technical skills required.',
+      label: 'Visual Builder',
+      icon: Workflow,
+    },
+    {
+      color: 'hsl(var(--card))',
+      title: 'Build Once, Deploy Everywhere',
+      description: 'Create workflow building blocks you can reuse across every automation. Update one block, it updates everywhere. Like code libraries, but no coding.',
+      label: 'Reusable Blocks',
+      icon: Package,
     },
   ];
-
-  // Copilot Accordion Component
-  const CopilotAccordion = () => {
-    const [activeTab, setActiveTab] = useState(0);
-
-    const tabs = [
-      {
-        icon: Code,
-        title: 'Universal Integration',
-        content: 'Connect to any REST API—from Stripe and Salesforce to custom internal systems. No code required, just configure and deploy.',
-        color: 'from-blue-500 to-cyan-500'
-      },
-      {
-        icon: Zap,
-        title: 'Real-Time Actions',
-        content: 'Agents take actions instantly without leaving the conversation. Process refunds, update CRM records, or trigger workflows—all in one place.',
-        color: 'from-amber-500 to-orange-500'
-      },
-      {
-        icon: Shield,
-        title: 'Control & Security',
-        content: 'AI suggests, agent approves. Multi-level approval workflows for sensitive operations. Full audit trail of every action taken.',
-        color: 'from-purple-500 to-pink-500'
-      }
-    ];
-
-    return (
-      <div className="space-y-3">
-        <div className="space-y-2">
-          {tabs.map((tab, index) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === index;
-
-            return (
-              <div key={index} className="group">
-                <button
-                  onClick={() => setActiveTab(index)}
-                  className={`w-full text-left rounded-xl border transition-all ${
-                    isActive
-                      ? 'border-amber-500/50 bg-gradient-to-r from-amber-500/15 to-amber-500/5 shadow-lg'
-                      : 'border-border/40 bg-card/80 hover:border-amber-500/30 hover:bg-card'
-                  }`}
-                >
-                  <div className="flex items-center gap-3 p-4">
-                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.color} shadow-lg transition-all ${isActive ? 'scale-110' : 'group-hover:scale-105'}`}>
-                      <Icon className="h-5 w-5 text-background" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-amber-500' : 'text-foreground group-hover:text-amber-500'}`}>
-                        {tab.title}
-                      </h3>
-                    </div>
-                    <div className={`text-amber-500 transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-                </button>
-
-                {isActive && (
-                  <div className="mt-2 rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent backdrop-blur-sm p-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {tab.content}
-                    </p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Single Link at Bottom */}
-        <div className="pt-2 border-t border-border/30">
-          <RouteButton
-            variant="ghost"
-            size="sm"
-            href="/product/ai-suite"
-            className="w-full justify-center text-xs text-amber-500 hover:text-amber-400 hover:bg-amber-500/10"
-          >
-            Learn more about AI Copilot
-            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-          </RouteButton>
-        </div>
-      </div>
-    );
-  };
 
   // AI Copilot Connectors
   const copilotConnectors = [
@@ -239,34 +377,6 @@ const ProductWorkflows = () => {
     },
   ];
 
-  // Stats
-  const stats = [
-    {
-      value: 80,
-      suffix: '%',
-      label: 'Average automation rate',
-      description: 'With AI-powered workflows',
-      icon: TrendingUp,
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      value: 3,
-      suffix: 'x',
-      label: 'Faster resolution',
-      description: 'vs manual routing',
-      icon: Zap,
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      value: 50,
-      suffix: '+',
-      label: 'Pre-built templates',
-      description: 'Ready to deploy',
-      icon: LayoutGrid,
-      color: 'from-green-500 to-emerald-500',
-    },
-  ];
-
   // Scroll progress indicator
   useEffect(() => {
     const handleScroll = () => {
@@ -286,11 +396,6 @@ const ProductWorkflows = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-
-            // Trigger stats animation
-            if (entry.target === statsRef.current && !statsAnimated) {
-              setStatsAnimated(true);
-            }
           }
         });
       },
@@ -300,12 +405,8 @@ const ProductWorkflows = () => {
     const elements = document.querySelectorAll('.fade-in-up');
     elements.forEach((el) => observer.observe(el));
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
     return () => observer.disconnect();
-  }, [statsAnimated]);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -369,7 +470,7 @@ const ProductWorkflows = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                  <span>4.8/5 on G2</span>
+                  <span>Built for teams that demand excellence</span>
                 </div>
               </div>
             </div>
@@ -541,7 +642,7 @@ const ProductWorkflows = () => {
         </div>
       </section>
 
-      {/* Pre-Built AI Copilot Connectors Section */}
+      {/* AI Copilot Integrations Section */}
       <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
@@ -549,13 +650,13 @@ const ProductWorkflows = () => {
             <div className="text-center mb-20 space-y-6 fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2">
                 <LinkIcon className="h-4 w-4 text-amber-500" />
-                <span className="text-xs font-semibold tracking-wide text-amber-500">Pre-Built Connectors</span>
+                <span className="text-xs font-semibold tracking-wide text-amber-500">50+ Pre-Built Connectors</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Connect Copilot to your tools
+                Pre-built connectors or custom APIs
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Pre-configured integrations for common platforms—or connect to any custom API
+                Use our 50+ pre-built connectors for popular platforms—or register any REST/GraphQL API and AI figures it out dynamically
               </p>
             </div>
 
@@ -596,55 +697,6 @@ const ProductWorkflows = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Analytics & Results Section */}
-      <section className="relative py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <BarChart3 className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Performance</span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Track what matters
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Real-time dashboards showing workflow execution rates, success metrics, and ROI tracking
-              </p>
-            </div>
-
-            {/* Stats Grid */}
-            <div ref={statsRef} className="grid md:grid-cols-3 gap-8">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div
-                    key={index}
-                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2 fade-in-up"
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 transition-opacity group-hover:opacity-10`} />
-                    <div className="relative space-y-6">
-                      <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.color} shadow-lg`}>
-                        <Icon className="h-8 w-8 text-background" />
-                      </div>
-                      <div className="space-y-2">
-                        <div className={`text-5xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent tabular-nums`}>
-                          <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} duration={2000} />
-                        </div>
-                        <div className="text-lg font-bold text-foreground">{stat.label}</div>
-                        <div className="text-sm text-muted-foreground">{stat.description}</div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </div>

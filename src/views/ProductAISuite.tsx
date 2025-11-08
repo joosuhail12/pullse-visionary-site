@@ -202,7 +202,7 @@ const ProductAISuite = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                  <span>4.8/5 on G2</span>
+                  <span>Built for teams that demand excellence</span>
                 </div>
               </div>
             </div>
@@ -1420,7 +1420,7 @@ const ProductAISuite = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>50+ Enterprise Customers</span>
+                  <span>Enterprise-ready platform</span>
                 </div>
               </div>
             </div>

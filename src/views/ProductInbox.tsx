@@ -258,7 +258,7 @@ const ProductInbox = () => {
     {
       icon: GitBranch,
       title: 'Smart Assignment',
-      description: 'Auto-route by workload, skills, or round robin',
+      description: 'Auto-route by workload or round robin',
       benefit: 'Fair distribution',
     },
     {
@@ -418,7 +418,7 @@ const ProductInbox = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                  <span>4.8/5 on G2</span>
+                  <span>Built for teams that demand excellence</span>
                 </div>
               </div>
             </div>

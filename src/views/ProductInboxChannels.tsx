@@ -802,13 +802,13 @@ const ProductInboxChannels = () => {
             <div className="text-center mb-20 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
                 <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Customer Results</span>
+                <span className="text-xs font-semibold tracking-wide text-primary">Expected Results</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Real impact, measurable results
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Average outcomes across our customers
+                Target outcomes for your team
               </p>
             </div>
 

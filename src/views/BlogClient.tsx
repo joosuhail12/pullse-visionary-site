@@ -480,7 +480,7 @@ const NewsletterCTA = () => {
               Get weekly insights
             </h3>
             <p className="text-base leading-relaxed text-white/90 md:text-lg">
-              Join thousands of support leaders getting curated articles and AI tactics.
+              Get curated articles and AI tactics delivered to your inbox.
             </p>
           </div>
 

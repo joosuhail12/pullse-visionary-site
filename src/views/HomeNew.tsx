@@ -807,7 +807,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 See your potential savings
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Real customer data shows 60-75% cost reduction with Pullse. Calculate your team's potential impact.
+                Industry benchmarks show 60-75% cost reduction potential with AI automation. Calculate your team's potential impact.
               </p>
             </div>
 
@@ -847,7 +847,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                    <span className="text-sm font-semibold text-foreground">Average 80% automation rate across customers</span>
+                    <span className="text-sm font-semibold text-foreground">Target 80% automation rate for your team</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
@@ -968,7 +968,7 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                     <div className="space-y-8">
                       <div>
                         <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground mb-5">
-                          Typical Customer Results
+                          Expected Results
                         </div>
                         <div className="grid gap-6">
                           <div className="group">

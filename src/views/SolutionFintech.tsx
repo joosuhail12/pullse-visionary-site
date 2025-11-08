@@ -300,7 +300,7 @@ const SolutionFintech = () => {
                 <span className="text-xs font-semibold tracking-wide text-primary">How It Works</span>
               </div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                See how fintech teams use Pullse
+                Built for fintech teams
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Real workflows that balance speed with compliance
