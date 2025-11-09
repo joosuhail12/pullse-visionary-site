@@ -70,176 +70,88 @@ const StickyStepperSection = () => {
       number: "01",
       title: "Stop threats before they start",
       subtitle: "Input Guardrails",
-      description: "Before AI sees anything, we scan for jailbreaks, prompt injections, and policy violations. OWASP-aligned security ensures malicious prompts never reach your engine.",
-      why: "Prompt injection is the #1 LLM vulnerability. Pre-generation defenses are non-negotiable.",
+      description: "Scan for jailbreaks, prompt injections, and policy violations before AI sees anything.",
       metric: "99.97%",
       metricLabel: "Attack Detection Rate",
       icon: Shield,
       gradient: "from-red-600 to-orange-600",
-      console: `{
-  "step": "input_guardrail",
-  "status": "blocked",
-  "reason": "prompt_injection_detected",
-  "rule": "external_instructions",
-  "threat_level": "critical",
-  "action": "request_rejected"
-}`,
-      source: "OWASP Top 10"
     },
     {
       id: 1,
       number: "02",
       title: "Know exactly what they want",
       subtitle: "Intent Classification",
-      description: "We map every message to your support intents—refund, plan change, WISMO, login help—with confidence scores, fallbacks, and escalation paths built in.",
-      why: "The right workflow starts with knowing the real intent. No guessing, no mistakes.",
+      description: "Map every message to support intents with confidence scores and escalation paths.",
       metric: "94%",
       metricLabel: "Intent Accuracy",
       icon: Target,
       gradient: "from-primary to-purple-600",
-      console: `{
-  "step": "classify_intent",
-  "intent": "refund_request",
-  "confidence": 0.94,
-  "sub_intent": "order_quality_issue",
-  "fallback": "human_review_queue",
-  "priority": "high"
-}`,
-      source: "Proprietary ML"
     },
     {
       id: 2,
       number: "03",
       title: "Pull the right data, nothing more",
       subtitle: "Context Retrieval",
-      description: "We fetch only what's needed—order history, entitlements, policies, past conversations. The model gets facts, not fantasies. Zero hallucinations.",
-      why: "RAG (Retrieval-Augmented Generation) keeps answers grounded in reality. Industry standard for accuracy.",
+      description: "Fetch only what's needed—order history, policies, past conversations. Facts, not fantasies.",
       metric: "8ms",
       metricLabel: "Retrieval Latency",
       icon: Database,
       gradient: "from-blue-600 to-cyan-600",
-      console: `{
-  "step": "retrieve_context",
-  "order_id": "ORD-4931",
-  "customer_tier": "premium",
-  "policy": "REF-30",
-  "sources": ["orders_db", "policy_docs", "conversation_history"],
-  "facts_retrieved": 7
-}`,
-      source: "MDPI Research"
     },
     {
       id: 3,
       number: "04",
       title: "Smart plans, zero guesswork",
       subtitle: "Orchestration Engine",
-      description: "The AI builds a safe action plan—verify eligibility → calculate refund → execute → notify customer. Multi-step workflows with approval gates exactly where you want them.",
-      why: "Function calling is powerful. Ungoverned function calling is dangerous. We enforce guardrails at every step.",
+      description: "Build safe action plans with approval gates exactly where you want them.",
       metric: "12ms",
       metricLabel: "Planning Time",
       icon: GitBranch,
       gradient: "from-purple-600 to-indigo-600",
-      console: `{
-  "step": "orchestrate",
-  "plan": [
-    {"action": "verify_eligibility", "approved": true},
-    {"action": "calculate_refund", "amount": 49.99},
-    {"action": "execute_refund", "approval": "required"},
-    {"action": "notify_customer", "channel": "email"}
-  ],
-  "approval_required": true
-}`,
-      source: "OpenAI Best Practices"
     },
     {
       id: 4,
       number: "05",
       title: "Execute with confidence",
       subtitle: "Safe Action Execution",
-      description: "Actions run through least-privilege connectors. Every execution writes an Action Receipt—who did what, when, and why. Complete traceability, zero ambiguity.",
-      why: "Tool execution without scoping and logging is a security nightmare. We make it bulletproof.",
+      description: "Run actions through least-privilege connectors with complete traceability.",
       metric: "100%",
       metricLabel: "Actions Logged",
       icon: Zap,
       gradient: "from-green-600 to-emerald-600",
-      console: `{
-  "step": "execute_action",
-  "connector": "stripe_refunds",
-  "operation": "create_refund",
-  "amount": 49.99,
-  "receipt_id": "AR-2025-001",
-  "status": "success",
-  "duration_ms": 342,
-  "audit_trail": "complete"
-}`,
-      source: "OpenAI + NIST"
     },
     {
       id: 5,
       number: "06",
       title: "Catch mistakes before they happen",
       subtitle: "Quality Assurance",
-      description: "We verify the action did what we expected and the answer matches the facts. Low confidence? Automatic escalation. Policy violation? Blocked instantly.",
-      why: "Continuous evaluation across the AI lifecycle isn't optional—it's required for production AI.",
+      description: "Verify actions match expectations. Low confidence gets escalated, violations blocked.",
       metric: "0.96",
       metricLabel: "QA Score",
       icon: CheckCircle2,
       gradient: "from-indigo-600 to-primary",
-      console: `{
-  "step": "evaluate_quality",
-  "facts_verified": 5,
-  "confidence": 0.96,
-  "qa_metrics": {
-    "accuracy": 0.98,
-    "tone": 0.94,
-    "policy_compliance": 1.0,
-    "hallucination_check": "passed"
-  }
-}`,
-      source: "NIST AI RMF"
     },
     {
       id: 6,
       number: "07",
       title: "Final safety net",
       subtitle: "Output Guardrails",
-      description: "Before anything reaches the customer, we run output checks—PII redaction, policy compliance, data leakage patterns. Unsafe content gets blocked or rewritten with full logging.",
-      why: "Defense-in-depth. Input AND output filtering. Because one layer is never enough.",
+      description: "Run output checks for PII redaction, policy compliance, and data leakage patterns.",
       metric: "Zero",
       metricLabel: "PII Leaks (Ever)",
       icon: Lock,
       gradient: "from-orange-600 to-red-600",
-      console: `{
-  "step": "output_guardrail",
-  "status": "passed",
-  "pii_redacted": true,
-  "policy_violations": 0,
-  "data_leakage_check": "clean",
-  "safe_to_send": true,
-  "redactions": ["ssn", "credit_card"]
-}`,
-      source: "OWASP + SOC 2"
     },
     {
       id: 7,
       number: "08",
       title: "Instant, accurate responses",
       subtitle: "Response Generation",
-      description: "Customers get clear, human-sounding answers. Agents get context, the full action plan, and the Action Receipt. Everyone knows exactly what happened and why.",
-      why: "Transparency builds trust. Auditability ensures compliance. Both are built into every response.",
+      description: "Deliver clear answers with full context and Action Receipts for complete transparency.",
       metric: "847ms",
       metricLabel: "End-to-End Time",
       icon: MessageSquare,
       gradient: "from-primary to-purple-600",
-      console: `{
-  "step": "generate_response",
-  "message": "Your refund of $49.99 has been processed and will appear in 5-7 business days.",
-  "receipt_attached": true,
-  "total_duration_ms": 847,
-  "steps_completed": 8,
-  "approval_status": "auto_approved"
-}`,
-      source: "Full Pipeline"
     }
   ];
 

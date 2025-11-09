@@ -16,9 +16,6 @@ interface TimelineStepProps {
     metricLabel: string;
     icon: LucideIcon;
     gradient: string;
-    source: string;
-    console?: string;
-    why?: string;
   };
   isActive: boolean;
   isPast: boolean;
@@ -42,10 +39,10 @@ export default function TimelineStep({ step, isActive, isPast, isLeft }: Timelin
           'flex',
           isLeft ? 'justify-end' : 'justify-start lg:order-3'
         )}
-        initial={{ x: isLeft ? -100 : 100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
+        initial={{ x: isLeft ? -150 : 150, opacity: 0, rotate: isLeft ? -8 : 8 }}
+        whileInView={{ x: 0, opacity: 1, rotate: 0 }}
         viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
       >
         {isLeft ? (
           // Content card on left
@@ -104,10 +101,10 @@ export default function TimelineStep({ step, isActive, isPast, isLeft }: Timelin
           'flex',
           isLeft ? 'justify-start lg:order-3' : 'justify-end'
         )}
-        initial={{ x: isLeft ? 100 : -100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
+        initial={{ x: isLeft ? 150 : -150, opacity: 0, rotate: isLeft ? 8 : -8 }}
+        whileInView={{ x: 0, opacity: 1, rotate: 0 }}
         viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+        transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1], delay: 0.1 }}
       >
         {isLeft ? (
           // Visual on right
@@ -140,15 +137,24 @@ function ContentCard({
   return (
     <motion.div
       className={cn(
-        'relative bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl border rounded-2xl p-8 transition-all duration-500 overflow-hidden',
+        'relative bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-xl border rounded-2xl p-8 transition-all duration-500 overflow-hidden cursor-pointer',
         isActive && 'border-primary/50 shadow-2xl shadow-primary/10',
         isPast && 'border-border/50 opacity-70',
         !isActive && !isPast && 'border-border/30 opacity-50'
       )}
       animate={{
-        scale: isActive ? 1.02 : 1,
+        scale: isActive ? 1.05 : 1,
       }}
-      transition={{ duration: 0.5 }}
+      whileHover={{
+        scale: 1.03,
+        rotateY: 5,
+        rotateX: 5,
+      }}
+      whileTap={{
+        scale: 0.98,
+      }}
+      transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
+      style={{ transformStyle: 'preserve-3d' }}
     >
       {/* Glassmorphism glow effect */}
       {isActive && (
@@ -213,41 +219,9 @@ function ContentCard({
         </p>
 
         {/* Description */}
-        <p className="text-muted-foreground leading-relaxed mb-6 text-base">
+        <p className="text-muted-foreground leading-relaxed text-base">
           {step.description}
         </p>
-
-        {/* Why This Matters - Expandable */}
-        {step.why && (
-          <motion.div
-            className="mb-6 p-5 rounded-xl bg-muted/30 border border-border/50"
-            initial={{ opacity: 0.7 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex items-start gap-3">
-              <div className={cn(
-                'flex h-8 w-8 items-center justify-center rounded-lg flex-shrink-0',
-                `bg-gradient-to-br ${gradientClass}`
-              )}>
-                <span className="text-white text-xs font-bold">?</span>
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground text-sm mb-2">Why This Matters</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.why}</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Source Badge */}
-        <div className="mt-6 flex items-center gap-2">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-xs text-muted-foreground font-mono px-3 py-1 rounded-full bg-muted/30 border border-border/30">
-            {step.source}
-          </span>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-        </div>
       </div>
     </motion.div>
   );
@@ -275,10 +249,10 @@ function VisualElement({
         'relative w-80 h-80 flex items-center justify-center transition-all duration-500',
         isActive && 'scale-105'
       )}>
-        {/* Outer ring */}
+        {/* Animated ring */}
         <motion.div
           className={cn(
-            'absolute inset-0 rounded-full border-2 opacity-20',
+            'absolute inset-0 rounded-full border-2 opacity-30',
             `border-gradient-to-r ${step.gradient}`
           )}
           style={{
@@ -286,21 +260,10 @@ function VisualElement({
           }}
           animate={{
             rotate: isActive ? 360 : 0,
-            scale: isActive ? [1, 1.05, 1] : 1,
+            scale: isActive ? [1, 1.1, 1] : 1,
+            opacity: isActive ? [0.3, 0.5, 0.3] : 0.2,
           }}
-          transition={{ rotate: { duration: 20, repeat: Infinity, ease: 'linear' }, scale: { duration: 3, repeat: Infinity } }}
-        />
-
-        {/* Middle ring */}
-        <motion.div
-          className={cn(
-            'absolute inset-8 rounded-full border opacity-10',
-            `border-gradient-to-r ${step.gradient}`
-          )}
-          animate={{
-            rotate: isActive ? -360 : 0,
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+          transition={{ rotate: { duration: 20, repeat: Infinity, ease: 'linear' }, scale: { duration: 3, repeat: Infinity }, opacity: { duration: 2, repeat: Infinity } }}
         />
 
         {/* Background glow - Multi-layer */}
@@ -324,11 +287,13 @@ function VisualElement({
             isActive ? 'border-white/20 bg-opacity-10' : 'border-white/10 bg-opacity-5'
           )}
           animate={{
-            y: isActive ? [0, -15, 0] : 0,
-            rotateY: isActive ? [0, 10, 0] : 0,
+            y: isActive ? [0, -20, 0] : 0,
+            rotateY: isActive ? [0, 15, 0] : 0,
+            scale: isActive ? [1, 1.05, 1] : 1,
           }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          whileHover={{ scale: 1.1, rotateZ: 5 }}
+          whileHover={{ scale: 1.15, rotateZ: 10, y: -10 }}
+          style={{ transformStyle: 'preserve-3d' }}
         >
           {/* Icon glow */}
           <motion.div
@@ -348,26 +313,28 @@ function VisualElement({
         {/* Floating particles */}
         {isActive && (
           <>
-            {[...Array(6)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <motion.div
                 key={i}
                 className={cn(
-                  'absolute w-2 h-2 rounded-full',
+                  'absolute w-2.5 h-2.5 rounded-full',
                   `bg-gradient-to-br ${step.gradient}`
                 )}
                 style={{
-                  left: `${50 + 35 * Math.cos((i * Math.PI * 2) / 6)}%`,
-                  top: `${50 + 35 * Math.sin((i * Math.PI * 2) / 6)}%`,
+                  left: `${50 + 38 * Math.cos((i * Math.PI * 2) / 8)}%`,
+                  top: `${50 + 38 * Math.sin((i * Math.PI * 2) / 8)}%`,
                 }}
                 animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [0.5, 1, 0.5],
+                  y: [0, -30, 0],
+                  x: [0, Math.random() * 10 - 5, 0],
+                  opacity: [0.4, 1, 0.4],
+                  scale: [0.6, 1.2, 0.6],
                 }}
                 transition={{
-                  duration: 2 + i * 0.2,
+                  duration: 2.5 + i * 0.15,
                   repeat: Infinity,
-                  delay: i * 0.3,
+                  delay: i * 0.2,
+                  ease: 'easeInOut',
                 }}
               />
             ))}
@@ -377,11 +344,11 @@ function VisualElement({
         {/* Metric counter overlay - Enhanced */}
         {isActive && (
           <motion.div
-            className="absolute -bottom-4 -right-4 bg-gradient-to-br from-background/95 via-card/95 to-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-5 py-4 shadow-2xl"
-            initial={{ scale: 0, opacity: 0, rotate: -10 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
-            transition={{ delay: 0.5, duration: 0.5, type: 'spring' }}
-            whileHover={{ scale: 1.05, rotate: 2 }}
+            className="absolute -bottom-4 -right-4 bg-gradient-to-br from-background/95 via-card/95 to-background/95 backdrop-blur-xl border border-primary/50 rounded-2xl px-5 py-4 shadow-2xl shadow-primary/20"
+            initial={{ scale: 0, opacity: 0, rotate: -15, y: 20 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 15 }}
+            whileHover={{ scale: 1.1, rotate: 3, y: -5 }}
           >
             <div className="flex items-center gap-3">
               <div className={cn(
