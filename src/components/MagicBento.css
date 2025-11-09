@@ -237,6 +237,11 @@
     grid-column: 4 / 7;
     grid-row: 5 / 7;
   }
+
+  /* Page-specific override for /ai-suite page - make Auto QA card span full width */
+  .ai-suite-bento .card:nth-child(6) {
+    grid-column: 1 / 7;
+  }
 }
 
 @media (min-width: 1400px) {

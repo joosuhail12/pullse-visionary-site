@@ -272,7 +272,7 @@ const ProductAISuite = () => {
               </p>
             </div>
 
-            <div className="max-w-6xl mx-auto mb-16">
+            <div className="max-w-6xl mx-auto mb-16 ai-suite-bento">
               <MagicBento cardData={aiToolsCards} />
             </div>
 
