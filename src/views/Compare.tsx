@@ -854,7 +854,12 @@ const Compare = () => {
 
           {/* Pricing Calculator Section */}
           <div className="max-w-7xl mx-auto mb-20">
-            <div className="glass-strong p-10 rounded-3xl">
+            <GlowCard
+              className="glass-strong p-10 rounded-3xl"
+              glowColor="132, 0, 255"
+              glowIntensity={0.5}
+              hoverElevation={true}
+            >
               <div className="grid lg:grid-cols-12 gap-6 items-start">
                 {/* Left: Controls Column */}
                 <div className="lg:col-span-5 space-y-5">
@@ -938,13 +943,46 @@ const Compare = () => {
                       <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-2xl p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                            <motion.div
+                              className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg"
+                              whileHover={{ rotate: 360, scale: 1.1 }}
+                              transition={{ duration: 0.6 }}
+                            >
                               <Users className="h-5 w-5 text-white" />
-                            </div>
+                            </motion.div>
                             <label className="text-xs uppercase tracking-wider text-gray-500 font-bold">Support Agents</label>
                           </div>
-                          <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{agents}</div>
+                          <motion.div
+                            key={agents}
+                            initial={{ scale: 1.3, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                            className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent"
+                          >
+                            <AnimatedCounter value={agents} duration={0.8} />
+                          </motion.div>
                         </div>
+
+                        {/* Preset Buttons */}
+                        <div className="flex gap-2 mb-4">
+                          {[5, 10, 25, 50, 100].map((preset) => (
+                            <motion.button
+                              key={preset}
+                              type="button"
+                              onClick={() => setAgents(preset)}
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              whileTap={{ scale: 0.95 }}
+                              className={`flex-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                                agents === preset
+                                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md'
+                                  : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                              }`}
+                            >
+                              {preset}
+                            </motion.button>
+                          ))}
+                        </div>
+
                         <Slider
                           value={[agents]}
                           onValueChange={(value) => setAgents(value[0])}
@@ -966,13 +1004,46 @@ const Compare = () => {
                       <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-2xl p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                            <motion.div
+                              className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
+                              whileHover={{ rotate: 360, scale: 1.1 }}
+                              transition={{ duration: 0.6 }}
+                            >
                               <MessageSquare className="h-5 w-5 text-white" />
-                            </div>
+                            </motion.div>
                             <label className="text-xs uppercase tracking-wider text-gray-500 font-bold">Monthly Conversations</label>
                           </div>
-                          <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{conversations.toLocaleString()}</div>
+                          <motion.div
+                            key={conversations}
+                            initial={{ scale: 1.3, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                            className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                          >
+                            <AnimatedCounter value={conversations} duration={0.8} />
+                          </motion.div>
                         </div>
+
+                        {/* Preset Buttons */}
+                        <div className="grid grid-cols-5 gap-2 mb-4">
+                          {[1000, 5000, 10000, 25000, 50000].map((preset) => (
+                            <motion.button
+                              key={preset}
+                              type="button"
+                              onClick={() => setConversations(preset)}
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              whileTap={{ scale: 0.95 }}
+                              className={`px-2 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                                conversations === preset
+                                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
+                                  : 'bg-purple-50 text-purple-600 hover:bg-purple-100'
+                              }`}
+                            >
+                              {preset >= 1000 ? `${preset / 1000}k` : preset}
+                            </motion.button>
+                          ))}
+                        </div>
+
                         <Slider
                           value={[conversations]}
                           onValueChange={(value) => setConversations(value[0])}
@@ -1227,37 +1298,81 @@ const Compare = () => {
                       transition={{ duration: 0.5, delay: 0.3 }}
                       className="relative"
                     >
-                      <div className={`absolute inset-0 rounded-2xl blur-xl ${
-                        pricingComparison.monthlySavings > 0
-                          ? 'bg-gradient-to-r from-green-500/30 to-emerald-600/30'
-                          : 'bg-gradient-to-r from-gray-500/30 to-gray-600/30'
-                      }`} />
-                      <div className={`relative rounded-2xl p-6 text-white text-center overflow-hidden shadow-xl ${
-                        pricingComparison.monthlySavings > 0
-                          ? 'bg-gradient-to-br from-green-500 via-emerald-600 to-teal-600'
-                          : 'bg-gradient-to-br from-gray-500 via-gray-600 to-gray-700'
-                      }`}>
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+                      <motion.div
+                        className={`absolute inset-0 rounded-2xl blur-xl ${
+                          pricingComparison.monthlySavings > 0
+                            ? 'bg-gradient-to-r from-green-500/30 to-emerald-600/30'
+                            : 'bg-gradient-to-r from-gray-500/30 to-gray-600/30'
+                        }`}
+                        animate={{
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+                      <motion.div
+                        className={`relative rounded-2xl p-6 text-white text-center overflow-hidden shadow-xl ${
+                          pricingComparison.monthlySavings > 0
+                            ? 'bg-gradient-to-br from-green-500 via-emerald-600 to-teal-600'
+                            : 'bg-gradient-to-br from-gray-500 via-gray-600 to-gray-700'
+                        }`}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        {/* Animated Background Blobs */}
+                        <motion.div
+                          className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"
+                          animate={{
+                            x: [0, 20, 0],
+                            y: [0, -10, 0],
+                            scale: [1, 1.2, 1],
+                          }}
+                          transition={{ duration: 6, repeat: Infinity }}
+                        />
+                        <motion.div
+                          className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"
+                          animate={{
+                            x: [0, -20, 0],
+                            y: [0, 10, 0],
+                            scale: [1, 1.3, 1],
+                          }}
+                          transition={{ duration: 8, repeat: Infinity }}
+                        />
 
                         <div className="relative z-10">
-                          <p className="text-xs font-bold uppercase tracking-wider opacity-90 mb-3">
+                          <motion.p
+                            className="text-xs font-bold uppercase tracking-wider opacity-90 mb-3"
+                            animate={{
+                              scale: [1, 1.05, 1],
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
                             {pricingComparison.monthlySavings > 0 ? '🎉 Your Savings' : 'Cost Difference'}
-                          </p>
-                          <p className="text-5xl font-black mb-2">
-                            ${Math.abs(Math.round(pricingComparison.monthlySavings)).toLocaleString()}
-                          </p>
+                          </motion.p>
+                          <motion.div
+                            key={pricingComparison.monthlySavings}
+                            initial={{ scale: 1.3, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                            className="text-5xl font-black mb-2"
+                          >
+                            $<AnimatedCounter value={Math.abs(Math.round(pricingComparison.monthlySavings))} duration={1} />
+                          </motion.div>
                           <p className="text-xs font-semibold opacity-90 mb-1">per month</p>
-                          <p className="text-2xl font-black opacity-90">
-                            ${Math.abs(Math.round(pricingComparison.annualSavings)).toLocaleString()}/year
-                          </p>
+                          <motion.div
+                            key={pricingComparison.annualSavings}
+                            initial={{ scale: 1.2, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
+                            className="text-2xl font-black opacity-90"
+                          >
+                            $<AnimatedCounter value={Math.abs(Math.round(pricingComparison.annualSavings))} duration={1.2} />/year
+                          </motion.div>
                         </div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   </div>
                 )}
               </div>
-            </div>
+            </GlowCard>
           </div>
 
           {/* FAQ Section */}
