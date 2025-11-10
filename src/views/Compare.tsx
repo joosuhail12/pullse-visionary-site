@@ -150,32 +150,41 @@ const Compare = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="pt-32 pb-20 relative overflow-hidden">
+      <div className="pt-32 pb-24 relative overflow-hidden">
         {/* Animated Gradient Blobs */}
         <motion.div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+          className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -50, 0],
-            y: [0, 40, 0],
+            x: [0, 100, 0],
+            y: [0, -50, 0],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/15 to-blue-500/15 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -80, 0],
+            y: [0, 60, 0],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-pink-500/15 to-purple-500/15 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.25, 1],
+            x: [0, -60, 0],
+            y: [0, -40, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-5xl mx-auto text-center mb-16"
+            className="max-w-6xl mx-auto text-center mb-16"
           >
             {/* Enhanced Badge with Shimmer */}
             <motion.div
@@ -183,94 +192,260 @@ const Compare = () => {
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-200/50 mb-6 relative overflow-hidden group cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 border-2 border-purple-200/50 mb-8 relative overflow-hidden group cursor-pointer shadow-lg"
             >
               {/* Shimmer Effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                 animate={{
-                  x: ['-100%', '100%'],
+                  x: ['-200%', '200%'],
                 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               />
-              <Sparkles className="w-4 h-4 text-purple-600 relative z-10" />
-              <span className="text-sm font-medium text-purple-600 relative z-10">
-                Platform Comparison
+              <motion.div
+                animate={{
+                  rotate: [0, 360],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Sparkles className="w-5 h-5 text-purple-600 relative z-10" />
+              </motion.div>
+              <span className="text-sm font-bold text-purple-600 relative z-10 uppercase tracking-wide">
+                AI That Actually Works
               </span>
             </motion.div>
 
-            {/* Enhanced Title with Animated Gradient */}
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Choose the Right Platform{' '}
-              <motion.span
-                className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent inline-block"
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                style={{
-                  backgroundSize: '200% 200%',
-                }}
-              >
-                for Your Team
-              </motion.span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Pullse doesn't just answer questions—our AI <strong className="text-purple-600">takes action</strong>.
-              Process refunds, look up orders, update accounts. Compare platforms that do vs those that just talk.
-            </p>
-
-            {/* Enhanced Stats with GlowCard */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.2 + index * 0.1,
-                    type: "spring",
-                    stiffness: 100
+            {/* Dramatic Split Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-8"
+            >
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+                <span className="block mb-2">Stop Overpaying for</span>
+                <motion.span
+                  className="block bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent"
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    backgroundSize: '200% 200%',
                   }}
                 >
-                  <GlowCard
-                    className={`glass-strong p-6 rounded-2xl ${
-                      stat.highlight
-                        ? 'ring-2 ring-purple-500/50'
-                        : ''
-                    }`}
-                    glowColor={stat.highlight ? "132, 0, 255" : "148, 163, 184"}
-                    glowIntensity={stat.highlight ? 0.6 : 0.3}
-                    hoverElevation={true}
-                  >
-                    <div
-                      className={`text-3xl md:text-4xl font-bold mb-2 ${
-                        stat.highlight
-                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent'
-                          : ''
+                  Customer Support
+                </motion.span>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto font-medium"
+              >
+                Most platforms charge per seat + hidden fees for basic features.{' '}
+                <span className="text-purple-600 font-bold">Pullse includes everything</span> at a fraction of the cost.
+              </motion.p>
+            </motion.div>
+
+            {/* Split Comparison Visual */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto"
+            >
+              {/* Competitor Side */}
+              <GlowCard
+                className="glass-strong p-8 rounded-3xl border-2 border-gray-300 relative overflow-hidden"
+                glowColor="156, 163, 175"
+                glowIntensity={0.3}
+                hoverElevation={true}
+              >
+                <motion.div
+                  className="absolute top-4 right-4 px-3 py-1 rounded-full bg-red-100 border border-red-300"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <span className="text-xs font-bold text-red-600">❌ Hidden Costs</span>
+                </motion.div>
+
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center">
+                    <Building2 className="w-6 h-6 text-gray-600" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold text-gray-900">Others</h3>
+                    <p className="text-xs text-gray-500">Zendesk, Intercom, etc.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mb-6">
+                  {[
+                    { label: 'Base Price', value: '$89-149/seat', color: 'gray' },
+                    { label: '+ AI Add-on', value: '+$50/seat', color: 'orange' },
+                    { label: '+ Per-use fees', value: '+$0.50-2.99 each', color: 'orange' },
+                    { label: '+ Auto QA', value: '+$0.03 each', color: 'orange' },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + idx * 0.1 }}
+                      className={`flex justify-between items-center p-3 rounded-lg border ${
+                        item.color === 'orange'
+                          ? 'bg-orange-50 border-orange-200'
+                          : 'bg-gray-50 border-gray-200'
                       }`}
                     >
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </GlowCard>
-                </motion.div>
-              ))}
-            </div>
+                      <span className={`text-sm font-semibold ${
+                        item.color === 'orange' ? 'text-orange-700' : 'text-gray-700'
+                      }`}>
+                        {item.label}
+                      </span>
+                      <span className={`text-sm font-bold ${
+                        item.color === 'orange' ? 'text-orange-900' : 'text-gray-900'
+                      }`}>
+                        {item.value}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
 
-            {/* Enhanced CTAs with Magnetic Hover */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="pt-4 border-t-2 border-gray-300">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-bold text-gray-600 uppercase">Total</span>
+                    <span className="text-3xl font-black text-gray-900">$200+/seat</span>
+                  </div>
+                </div>
+              </GlowCard>
+
+              {/* Pullse Side */}
+              <GlowCard
+                className="glass-strong p-8 rounded-3xl border-2 border-purple-500 relative overflow-hidden"
+                glowColor="132, 0, 255"
+                glowIntensity={0.7}
+                hoverElevation={true}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"
+                  animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+
+                <motion.div
+                  className="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-100 border border-green-300"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    boxShadow: [
+                      '0 0 0 0 rgba(34, 197, 94, 0)',
+                      '0 0 0 8px rgba(34, 197, 94, 0.2)',
+                      '0 0 0 0 rgba(34, 197, 94, 0)'
+                    ]
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <span className="text-xs font-bold text-green-600">✓ All Included</span>
+                </motion.div>
+
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-lg"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Pullse</h3>
+                    <p className="text-xs text-purple-600 font-semibold">Simple, Transparent</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mb-6 relative z-10">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="flex justify-between items-center p-3 rounded-lg bg-purple-50 border border-purple-200"
+                  >
+                    <span className="text-sm font-semibold text-purple-700">Base Price</span>
+                    <span className="text-sm font-bold text-purple-900">$39/seat</span>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.9 }}
+                    className="p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200"
+                  >
+                    <p className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-3">✨ Everything Included:</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {['AI Agent', 'AI Copilot', 'Auto QA', 'Analytics', 'Help Center', 'All Features'].map((feature, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 1 + idx * 0.05 }}
+                          className="flex items-center gap-1"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />
+                          <span className="text-xs font-medium text-purple-700">{feature}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+
+                <div className="pt-4 border-t-2 border-purple-300 relative z-10">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-bold text-purple-600 uppercase">Total</span>
+                    <div className="text-right">
+                      <motion.div
+                        initial={{ scale: 1.3, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 1.2, type: 'spring' }}
+                        className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                      >
+                        $39/seat
+                      </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.4 }}
+                        className="text-xs font-bold text-green-600"
+                      >
+                        Save 80%+ vs others
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+              </GlowCard>
+            </motion.div>
+
+            {/* Enhanced CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" asChild className="relative group">
+                <Button size="lg" asChild className="relative group h-14 px-8 text-base">
                   <Link href="/contact-sales">
-                    <span className="relative z-10">Book a Demo</span>
+                    <span className="relative z-10 font-bold">See Your Exact Savings</span>
                     <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-md opacity-0 group-hover:opacity-100 blur-xl transition-opacity"
+                      className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 blur-xl"
                       animate={{
                         scale: [1, 1.1, 1],
                       }}
@@ -283,14 +458,50 @@ const Compare = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outline" asChild className="h-14 px-8 text-base border-2">
                   <Link href="#comparison-table">
-                    See Full Comparison
+                    <span className="font-bold">Compare All Features</span>
                     <ChevronDown className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               </motion.div>
-            </div>
+            </motion.div>
+
+            {/* Trust Indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.7 }}
+              className="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-muted-foreground"
+            >
+              {[
+                { icon: CheckCircle2, text: '14-day free trial' },
+                { icon: CheckCircle2, text: 'No credit card required' },
+                { icon: CheckCircle2, text: 'Cancel anytime' },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="flex items-center gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.8 + idx * 0.1 }}
+                >
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: idx * 0.3
+                    }}
+                  >
+                    <item.icon className="w-4 h-4 text-green-500" />
+                  </motion.div>
+                  <span className="font-medium">{item.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Competitor Selector */}
