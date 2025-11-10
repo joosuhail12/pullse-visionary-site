@@ -281,81 +281,39 @@ const Compare = () => {
       </div>
 
       {/* Page Content */}
-      <div className="container mx-auto px-4 relative z-10 -mt-16">
-        {/* Competitor Selector */}
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Unified Comparison Section */}
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-4xl mx-auto mb-20"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-5xl mx-auto mb-20"
+        >
+          <GlowCard
+            className="glass-strong p-10 rounded-3xl relative overflow-hidden"
+            glowColor="132, 0, 255"
+            glowIntensity={0.6}
+            hoverElevation={true}
+            tilt3D={currentCompetitor ? true : false}
           >
-            <GlowCard
-              className="glass-strong p-8 rounded-3xl"
-              glowColor="132, 0, 255"
-              glowIntensity={0.4}
-              hoverElevation={false}
-            >
-              <h3 className="text-lg font-semibold mb-4 text-center">
-                Compare Pullse with:
-              </h3>
-              <div className="flex flex-wrap gap-3 justify-center relative">
-                {competitors.map((competitor) => (
-                  <motion.button
-                    key={competitor.id}
-                    type="button"
-                    onClick={() => setSelectedCompetitor(competitor.id)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="relative px-6 py-3 rounded-full font-medium transition-all duration-300 overflow-hidden"
-                  >
-                    {/* Animated Background for Active State */}
-                    {selectedCompetitor === competitor.id && (
-                      <motion.div
-                        layoutId="activeCompetitorTab"
-                        className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 shadow-lg shadow-purple-500/30"
-                        transition={{
-                          type: 'spring',
-                          stiffness: 300,
-                          damping: 30
-                        }}
-                      />
-                    )}
-                    {/* Button Content */}
-                    <span className={`relative z-10 ${
-                      selectedCompetitor === competitor.id
-                        ? 'text-white'
-                        : 'text-gray-700'
-                    }`}>
-                      {competitor.name}
-                    </span>
-                    {/* Hover Background for Inactive State */}
-                    {selectedCompetitor !== competitor.id && (
-                      <div className="absolute inset-0 bg-white/50 hover:bg-white/80 transition-colors rounded-full" />
-                    )}
-                  </motion.button>
-                ))}
-              </div>
-            </GlowCard>
-          </motion.div>
+            {/* Animated gradient mesh background */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-500/20 via-transparent to-pink-500/20" />
+              <motion.div
+                className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl"
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, -30, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
 
-          {/* Detailed Competitor Comparison Card */}
-          {currentCompetitor && (
-            <motion.div
-              key={selectedCompetitor}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-              className="max-w-5xl mx-auto mb-20"
-            >
-              <GlowCard
-                className="glass-strong p-10 rounded-3xl relative overflow-hidden"
-                glowColor="132, 0, 255"
-                glowIntensity={0.6}
-                hoverElevation={true}
-                tilt3D={true}
-              >
-                {/* Animated Background Blobs */}
+            {/* Animated Background Blobs (visible when competitor selected) */}
+            {currentCompetitor && (
+              <>
                 <motion.div
                   className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
                   animate={{
@@ -374,8 +332,111 @@ const Compare = () => {
                   }}
                   transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
                 />
+              </>
+            )}
 
-                <div className="text-center mb-8 relative z-10">
+            {/* Competitor Selector - Always at top */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-8 relative z-10"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+                Compare Pullse with:
+              </h3>
+              <motion.div
+                className="w-24 h-1 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-6"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              />
+
+              <div className="flex flex-wrap gap-4 justify-center">
+                {competitors.map((competitor, index) => (
+                  <motion.button
+                    key={competitor.id}
+                    type="button"
+                    onClick={() => setSelectedCompetitor(competitor.id)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                    whileHover={{
+                      scale: 1.05,
+                      y: -4
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative px-8 py-4 rounded-2xl font-semibold transition-all duration-300 overflow-hidden shadow-lg"
+                  >
+                    {/* Animated Background for Active State */}
+                    {selectedCompetitor === competitor.id && (
+                      <>
+                        <motion.div
+                          layoutId="activeCompetitorTab"
+                          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600"
+                          transition={{
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 30
+                          }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600"
+                          animate={{
+                            opacity: [0.5, 1, 0.5],
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <motion.div
+                          className="absolute inset-0"
+                          style={{
+                            boxShadow: '0 0 30px rgba(132, 0, 255, 0.6), 0 0 60px rgba(236, 72, 153, 0.4)',
+                          }}
+                        />
+                      </>
+                    )}
+                    {/* Button Content */}
+                    <span className={`relative z-10 text-base ${
+                      selectedCompetitor === competitor.id
+                        ? 'text-white'
+                        : 'text-gray-800'
+                    }`}>
+                      {competitor.name}
+                    </span>
+                    {/* Hover Background for Inactive State */}
+                    {selectedCompetitor !== competitor.id && (
+                      <motion.div
+                        className="absolute inset-0 bg-white/60 backdrop-blur-sm rounded-2xl border border-purple-200/50"
+                        whileHover={{
+                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                          borderColor: 'rgba(168, 85, 247, 0.4)',
+                        }}
+                      />
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Divider (only shows when competitor selected) */}
+            {currentCompetitor && (
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-8 relative z-10"
+              />
+            )}
+
+            {/* Detailed Comparison Content */}
+            {currentCompetitor && (
+              <motion.div
+                key={selectedCompetitor}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                className="relative z-10"
+              >
+                <div className="text-center mb-8">
                   {/* Title with animated gradient */}
                   <motion.h2
                     className="text-3xl md:text-4xl font-bold mb-3 relative inline-block"
@@ -413,72 +474,140 @@ const Compare = () => {
                   </motion.p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-8 relative z-10">
-                  {/* Pullse Column */}
+                {/* VS Badge */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <motion.div
-                    className="space-y-4"
+                    className="relative"
+                    animate={{
+                      y: [0, -10, 0],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <motion.div
+                      className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-4 border-white"
+                      animate={{
+                        boxShadow: [
+                          '0 0 0 0 rgba(132, 0, 255, 0.7)',
+                          '0 0 0 20px rgba(132, 0, 255, 0)',
+                          '0 0 0 0 rgba(132, 0, 255, 0)'
+                        ],
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <span className="text-2xl font-black text-white">VS</span>
+                    </motion.div>
+                  </motion.div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-0 mb-8 relative z-10">
+                  {/* Pullse Column with gradient background */}
+                  <motion.div
+                    className="relative p-8 rounded-l-2xl overflow-hidden"
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
                   >
-                    <div className="flex items-center gap-3 mb-6">
-                      <motion.div
-                        className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"
-                        animate={{
-                          scale: [1, 1.3, 1],
-                          boxShadow: [
-                            '0 0 0 0 rgba(132, 0, 255, 0)',
-                            '0 0 0 8px rgba(132, 0, 255, 0.2)',
-                            '0 0 0 0 rgba(132, 0, 255, 0)'
-                          ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
-                      <h3 className="text-xl font-bold">Why Choose Pullse</h3>
-                    </div>
-                    {currentCompetitor.whySwitch.map((reason, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6 + index * 0.1 }}
-                        whileHover={{ x: 5, backgroundColor: 'rgba(132, 0, 255, 0.05)' }}
-                        className="flex gap-3 p-3 rounded-lg transition-all group cursor-pointer"
-                      >
+                    {/* Purple gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 via-pink-500/10 to-transparent" />
+                    <motion.div
+                      className="absolute top-0 right-0 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl"
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    />
+
+                    <div className="relative space-y-4">
+                      <div className="flex items-center gap-3 mb-6">
                         <motion.div
+                          className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg"
                           animate={{
-                            scale: [1, 1.2, 1],
+                            boxShadow: [
+                              '0 0 0 0 rgba(132, 0, 255, 0.7)',
+                              '0 0 0 12px rgba(132, 0, 255, 0)',
+                              '0 0 0 0 rgba(132, 0, 255, 0)'
+                            ]
                           }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: index * 0.2
-                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
                         >
-                          <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5 group-hover:text-purple-600 transition-colors" />
+                          <Check className="w-5 h-5 text-white" />
                         </motion.div>
-                        <p className="text-sm group-hover:text-purple-600 transition-colors">{reason}</p>
-                      </motion.div>
-                    ))}
+                        <div>
+                          <h3 className="text-xl font-bold">Why Choose Pullse</h3>
+                          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-semibold">
+                            AI-Native
+                          </span>
+                        </div>
+                      </div>
+                      {currentCompetitor.whySwitch.map((reason, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.6 + index * 0.1 }}
+                          whileHover={{
+                            x: 8,
+                            scale: 1.02,
+                          }}
+                          className="flex gap-4 p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-purple-100/50 shadow-sm group cursor-pointer hover:shadow-lg hover:border-purple-300 transition-all"
+                        >
+                          <motion.div
+                            className="w-6 h-6 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-md"
+                            whileHover={{
+                              rotate: [0, -10, 10, -10, 0],
+                              scale: 1.1,
+                            }}
+                          >
+                            <Check className="w-4 h-4 text-white" />
+                          </motion.div>
+                          <p className="text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors leading-relaxed">{reason}</p>
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
 
-                  {/* Competitor Column */}
+                  {/* Vertical Gradient Divider */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-transparent via-purple-400 to-transparent opacity-30" />
+
+                  {/* Competitor Column with different gradient */}
                   <motion.div
-                    className="space-y-4"
+                    className="relative p-8 rounded-r-2xl overflow-hidden"
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
                   >
-                    <div className="flex items-center gap-3 mb-6">
-                      <motion.div
-                        className="w-3 h-3 rounded-full bg-gray-400"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
-                      <h3 className="text-xl font-bold">{currentCompetitor.name} Strengths</h3>
-                    </div>
+                    {/* Gray/Blue gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-bl from-gray-200/40 via-blue-100/30 to-transparent" />
+                    <motion.div
+                      className="absolute bottom-0 left-0 w-48 h-48 bg-blue-300/15 rounded-full blur-3xl"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.2, 0.4, 0.2],
+                      }}
+                      transition={{ duration: 5, repeat: Infinity }}
+                    />
+
+                    <div className="relative space-y-4">
+                      <div className="flex items-center gap-3 mb-6">
+                        <motion.div
+                          className="w-10 h-10 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center shadow-lg"
+                          animate={{
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        </motion.div>
+                        <div>
+                          <h3 className="text-xl font-bold">{currentCompetitor.name} Strengths</h3>
+                          <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full font-semibold">
+                            Established
+                          </span>
+                        </div>
+                      </div>
 
                     {currentCompetitor.strengths && (
                       <motion.div
@@ -540,6 +669,7 @@ const Compare = () => {
                         </>
                       )}
                     </motion.div>
+                    </div>
                   </motion.div>
                 </div>
 
@@ -569,11 +699,12 @@ const Compare = () => {
                     </Button>
                   </motion.div>
                 </motion.div>
-              </GlowCard>
-            </motion.div>
-          )}
+              </motion.div>
+            )}
+          </GlowCard>
+        </motion.div>
 
-          {/* AI That Executes Section */}
+        {/* AI That Executes Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
