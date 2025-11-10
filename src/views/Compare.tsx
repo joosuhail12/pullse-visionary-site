@@ -145,12 +145,12 @@ const Compare = () => {
   const pricingComparison = calculateCompetitivePricing();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen scroll-smooth">
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
       {/* Hero Section */}
-      <div className="h-screen relative overflow-hidden flex items-center justify-center pt-20">
+      <div className="min-h-screen relative flex items-center justify-center pt-20 pb-32">
         {/* Animated Gradient Blobs */}
         <motion.div
           className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
@@ -275,15 +275,19 @@ const Compare = () => {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Gradient Fade Transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       </div>
 
       {/* Page Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 -mt-16">
         {/* Competitor Selector */}
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="max-w-4xl mx-auto mb-20"
           >
             <GlowCard
@@ -570,11 +574,18 @@ const Compare = () => {
           )}
 
           {/* AI That Executes Section */}
-          <div className="max-w-5xl mx-auto mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-5xl mx-auto mb-20"
+          >
             <div className="text-center mb-12">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6 relative overflow-hidden group cursor-pointer"
               >
@@ -594,7 +605,9 @@ const Compare = () => {
 
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
                 className="text-4xl font-bold mb-4"
               >
                 AI That <motion.span
@@ -785,20 +798,40 @@ const Compare = () => {
                 </GlowCard>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Comparison Table */}
-          <div id="comparison-table" className="max-w-7xl mx-auto mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            id="comparison-table"
+            className="max-w-7xl mx-auto mb-20"
+          >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Feature Comparison</h2>
-              <p className="text-lg text-muted-foreground">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl font-bold mb-4"
+              >
+                Feature Comparison
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground"
+              >
                 See how Pullse stacks up across all key features
-              </p>
+              </motion.p>
             </div>
             <div className="glass-strong p-8 rounded-3xl">
               <ComparisonTable />
             </div>
-          </div>
+          </motion.div>
 
           {/* Category Deep Dives - Will add sections */}
 
