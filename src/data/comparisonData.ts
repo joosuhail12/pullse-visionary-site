@@ -28,12 +28,12 @@ export const competitors: Competitor[] = [
     tagline: 'Enterprise support platform',
     bestFor: 'Large enterprises with complex workflows needing 1000+ integrations',
     whySwitch: [
-      "All AI features included in base plan - Zendesk charges $50/agent/month extra for AI add-ons",
+      "All AI features included in base plan - Zendesk charges $75/agent/month extra for Advanced AI & QA add-ons",
       "Faster setup (2-5 days vs 2-8 weeks) - Get your team productive immediately",
       "Transparent pricing - No hidden costs or surprise add-on fees",
       "Modern, intuitive interface built for today's teams"
     ],
-    pricingNote: "Zendesk Suite Professional starts at $115/agent/month, plus $50/agent/month for AI add-ons, plus pay-per-resolution fees. Total cost for AI-powered support: $165+/agent/month.",
+    pricingNote: "Zendesk Suite Professional starts at $115/agent/month, plus $75/agent/month for Advanced AI & QA add-ons, plus $1.50 per AI resolution. Base platform with AI: $190/agent/month + variable resolution fees.",
     whenToChoose: "Choose Zendesk if you need 1000+ integrations, have enterprise-level compliance requirements, or already use their ecosystem extensively.",
     strengths: ['1700+ integrations', 'Mature enterprise features', 'Established brand', 'Advanced reporting']
   },
@@ -49,7 +49,7 @@ export const competitors: Competitor[] = [
       "All features included - No variable pricing surprises",
       "Better for support-first teams (Intercom is sales/marketing-focused)"
     ],
-    pricingNote: "Intercom starts at $39/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
+    pricingNote: "Intercom Advanced plan (with Copilot + Fin AI) starts at $132/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
     whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging over traditional support.",
     strengths: ['Strong proactive messaging', 'SaaS-focused features', 'Conversational AI']
   },
@@ -65,7 +65,7 @@ export const competitors: Competitor[] = [
       "Better knowledge base AI and search capabilities",
       "No tier limitations - All features available to all customers"
     ],
-    pricingNote: "Freshdesk AI features require Pro plan at $47/agent/month, plus Freddy AI Copilot ($29/agent/month) or Freddy AI Agent ($100/1000 sessions). Real AI cost: $76+/agent/month.",
+    pricingNote: "Freshdesk AI features require Omni Enterprise plan at $104/agent/month, plus Freddy AI Copilot ($29/agent/month), Freddy AI Agent ($89/1000 sessions), and Connector Tasks ($79/5000 tasks). Real AI cost: $133+/agent/month + variable session and task costs.",
     whenToChoose: "Choose Freshdesk if you're a very small team (2-5 agents) wanting a free plan, or need basic ticketing without AI.",
     strengths: ['Free plan available', '300+ integrations', 'Lower entry price', 'Good for basic ticketing']
   },
@@ -81,7 +81,7 @@ export const competitors: Competitor[] = [
       "Faster setup and easier configuration",
       "Better pricing flexibility for growing teams"
     ],
-    pricingNote: "Dixa starts at $49/seat/month with a 7-seat minimum ($343/month minimum), ranging up to $169/seat/month ($1,183/month minimum for 7 agents).",
+    pricingNote: "Dixa Prime Plan starts at $179/seat/month base, plus $97/seat/month in required add-ons (AI Copilot $39, QA $29, Advanced Insights $29), with a 7-seat minimum. Total: $276/seat/month ($1,932/month minimum for 7 agents) + $0.40 per AI conversation + $0.05 per conversation for Auto QA.",
     whenToChoose: "Choose Dixa if you have 7+ agents and voice support is your primary channel with high call volume.",
     strengths: ['Strong voice support', 'Unified agent desktop', 'Conversation routing', '55% automation with Mim AI']
   },
@@ -93,19 +93,19 @@ export const comparisonFeatures: ComparisonFeature[] = [
     category: 'AI & Automation',
     feature: 'Agentic AI Chatbots',
     pullse: true,
-    zendesk: 'Add-on $50/mo',
+    zendesk: 'Add-on $75/mo',
     intercom: '$0.99/resolution',
-    freshdesk: 'Add-on required',
+    freshdesk: '$89/1k sessions',
     dixa: 'Mim AI included',
   },
   {
     category: 'AI & Automation',
     feature: 'AI Copilot for Agents',
     pullse: true,
-    zendesk: 'Add-on $50/mo',
+    zendesk: 'Add-on $75/mo',
     intercom: 'Limited free',
     freshdesk: 'Add-on $29/mo',
-    dixa: 'Included',
+    dixa: 'Add-on $39/mo',
   },
   {
     category: 'AI & Automation',
@@ -270,7 +270,7 @@ export const faqs = [
   },
   {
     question: 'How does your pricing actually compare for a team of 10 agents?',
-    answer: 'For 10 agents with AI features: Pullse offers transparent pricing (contact sales), Zendesk costs ~$1,650/month ($165/agent with AI add-on), Intercom varies widely ($390+ base plus per-resolution fees), Freshdesk requires ~$760/month ($76/agent with AI add-ons), and Dixa starts at $490/month minimum (7 seats required).',
+    answer: 'For 10 agents with AI features: Zendesk costs ~$1,900/month base ($190/agent) plus $1.50 per AI resolution, Intercom costs $1,320/month ($132/agent) plus $0.99 per resolution, Freshdesk costs ~$1,330/month ($133/agent) plus variable session and task costs, and Dixa requires 7-seat minimum at $276/seat ($1,932/month) plus per-conversation fees. Pullse offers transparent Pro pricing at $79/seat + usage-based credits.',
   },
   {
     question: 'Can I keep my existing integrations?',
@@ -333,38 +333,38 @@ export const pricingComparisons: PricingComparison[] = [
     aiAddOn: 0,
     perResolutionFee: 0, // Usage-based included
     minimumSeats: 1,
-    notes: 'Single tier pricing with usage-based AI actions',
+    notes: 'Pro plan at $79/seat with usage-based AI credits',
   },
   {
     platform: 'Zendesk',
-    basePrice: 115,
-    aiAddOn: 50,
-    perResolutionFee: 0, // Plus pay-per-resolution
+    basePrice: 190, // $115 base + $75 AI & QA
+    aiAddOn: 0,
+    perResolutionFee: 1.50,
     minimumSeats: 1,
-    notes: 'Suite Professional + Advanced AI add-on',
+    notes: 'Suite Professional + Advanced AI & QA add-on + $1.50 per resolution',
   },
   {
     platform: 'Intercom',
-    basePrice: 85, // Advanced plan
+    basePrice: 132, // Advanced plan with Copilot + Fin AI
     aiAddOn: 0,
     perResolutionFee: 0.99,
     minimumSeats: 1,
-    notes: 'Advanced plan + $0.99 per AI resolution',
+    notes: 'Advanced plan with Copilot + Fin AI + $0.99 per AI resolution',
   },
   {
     platform: 'Freshdesk',
-    basePrice: 47,
+    basePrice: 104, // Omni Enterprise
     aiAddOn: 29,
     perResolutionFee: 0,
     minimumSeats: 1,
-    notes: 'Pro plan + Freddy AI Copilot add-on',
+    notes: 'Omni Enterprise + Freddy AI Copilot + variable session/task costs',
   },
   {
     platform: 'Dixa',
-    basePrice: 109, // Growth plan
+    basePrice: 276, // $179 base + $97 add-ons (AI Copilot $39, QA $29, Advanced Insights $29)
     aiAddOn: 0,
     perResolutionFee: 0,
     minimumSeats: 7,
-    notes: 'Growth plan with 7-seat minimum',
+    notes: 'Prime plan with required add-ons, 7-seat minimum + per-conversation fees',
   },
 ];
