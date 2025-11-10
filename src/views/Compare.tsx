@@ -184,79 +184,39 @@ const Compare = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-6xl mx-auto text-center mb-16"
+            className="max-w-4xl mx-auto text-center mb-16 space-y-12"
           >
-            {/* Enhanced Badge with Shimmer */}
+            {/* Simplified Headline with Statement + Subtext */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 border-2 border-purple-200/50 mb-8 relative overflow-hidden group cursor-pointer shadow-lg"
-            >
-              {/* Shimmer Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                animate={{
-                  x: ['-200%', '200%'],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                animate={{
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Sparkles className="w-5 h-5 text-purple-600 relative z-10" />
-              </motion.div>
-              <span className="text-sm font-bold text-purple-600 relative z-10 uppercase tracking-wide">
-                The Next Generation of Customer Support
-              </span>
-            </motion.div>
-
-            {/* Dramatic Split Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-8"
+              transition={{ delay: 0.1 }}
+              className="space-y-6"
             >
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                <span className="block mb-2">Customer Support</span>
-                <span className="block mb-2">Hasn't Changed in 15 Years.</span>
-                <motion.span
-                  className="block bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent"
-                  animate={{
-                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                  }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                  style={{
-                    backgroundSize: '200% 200%',
-                  }}
-                >
-                  Until Now.
-                </motion.span>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tight text-black dark:text-white">
+                The First AI-Native Customer Support Platform
               </h1>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto font-medium"
-              >
-                While others bolt AI onto decade-old platforms,{' '}
-                <span className="text-purple-600 font-bold">Pullse is built AI-native from the ground up</span>.
-                The difference isn't incremental—it's generational.
-              </motion.p>
+              <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 font-medium">
+                Built for 2024, not retrofitted from 2010
+              </p>
             </motion.div>
+
+            {/* Concise Subheadline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            >
+              Pullse executes actions, not just answers. Built AI-native from day one.
+            </motion.p>
 
             {/* Enhanced CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <motion.div
@@ -294,36 +254,23 @@ const Compare = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-muted-foreground"
+              transition={{ delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
             >
               {[
                 { icon: '⚡', text: 'Live in 10 minutes' },
                 { icon: '🧠', text: 'Learns from day one' },
                 { icon: '🔄', text: 'No migration headaches' },
               ].map((item, idx) => (
-                <motion.div
+                <div
                   key={idx}
                   className="flex items-center gap-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.9 + idx * 0.1 }}
                 >
-                  <motion.span
-                    className="text-lg"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: idx * 0.3
-                    }}
-                  >
+                  <span className="text-lg">
                     {item.icon}
-                  </motion.span>
+                  </span>
                   <span className="font-medium">{item.text}</span>
-                </motion.div>
+                </div>
               ))}
             </motion.div>
           </motion.div>
