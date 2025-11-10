@@ -150,7 +150,7 @@ const Compare = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="pt-32 pb-24 relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden flex items-center">
         {/* Animated Gradient Blobs */}
         <motion.div
           className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
@@ -180,11 +180,11 @@ const Compare = () => {
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto text-center mb-16 space-y-12"
+            className="max-w-4xl mx-auto text-center space-y-12"
           >
             {/* Simplified Headline with Statement + Subtext */}
             <motion.div
