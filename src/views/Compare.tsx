@@ -274,9 +274,13 @@ const Compare = () => {
               ))}
             </motion.div>
           </motion.div>
+        </div>
+      </div>
 
-          {/* Competitor Selector */}
-          <motion.div
+      {/* Page Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Competitor Selector */}
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -1517,7 +1521,6 @@ const Compare = () => {
             </GlowCard>
           </motion.div>
         </div>
-      </div>
 
       <Footer />
     </div>
