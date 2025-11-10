@@ -219,15 +219,6 @@ const ProductAutoQA = () => {
     },
   ];
 
-  // Quality Parameters Data
-  const qualityParameters = [
-    { icon: MessageCircle, name: 'Tone & Empathy', description: 'Warm, understanding, customer-first language' },
-    { icon: Clock, name: 'Response Time', description: 'Speed of replies and overall resolution time' },
-    { icon: CheckCircle2, name: 'Resolution Quality', description: 'Did the issue get fully resolved?' },
-    { icon: Sparkles, name: 'Communication Clarity', description: 'Clear, concise, easy-to-understand responses' },
-    { icon: Brain, name: 'Knowledge Accuracy', description: 'Correct information and best practices' },
-  ];
-
   // Process Steps
   const processSteps = [
     {
@@ -484,45 +475,6 @@ const ProductAutoQA = () => {
                     {index < processSteps.length - 1 && (
                       <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary/50 to-transparent" />
                     )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quality Parameters Showcase */}
-      <section className="relative py-20">
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                Customizable Quality Parameters
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Define what quality means for your team. AI evaluates conversations across all dimensions you care about.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {qualityParameters.map((param, index) => {
-                const Icon = param.icon;
-                return (
-                  <div key={index} className="group p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-purple-600 shadow-lg group-hover:scale-110 transition-transform">
-                        <Icon className="h-6 w-6 text-background" />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
-                          {param.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {param.description}
-                        </p>
-                      </div>
-                    </div>
                   </div>
                 );
               })}
