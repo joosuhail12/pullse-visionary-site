@@ -169,8 +169,8 @@ const Compare = () => {
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              An honest comparison of Pullse vs leading customer support platforms.
-              All data verified from official sources.
+              Pullse doesn't just answer questions—our AI <strong className="text-purple-600">takes action</strong>.
+              Process refunds, look up orders, update accounts. Compare platforms that do vs those that just talk.
             </p>
 
             {/* Quick Stats */}
@@ -747,6 +747,152 @@ const Compare = () => {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* AI That Executes Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6"
+              >
+                <Zap className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-green-600">
+                  Action-Taking AI
+                </span>
+              </motion.div>
+
+              <h2 className="text-4xl font-bold mb-4">
+                AI That <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Executes</span>, Not Just Answers
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Most support AI just deflects questions or suggests responses.
+                Pullse's agentic AI actually completes tasks across your entire stack.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Pullse: Action-Taking */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="glass-strong p-8 rounded-2xl border-2 border-green-500/30"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
+                    <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Process refunds across Stripe/PayPal</p>
+                      <p className="text-sm text-muted-foreground">AI executes the refund, not just tells you how</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Look up orders in Shopify/WooCommerce</p>
+                      <p className="text-sm text-muted-foreground">Real-time data pulled and displayed automatically</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Update customer records in Salesforce/HubSpot</p>
+                      <p className="text-sm text-muted-foreground">Copilot executes CRM updates with one click</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Cancel/modify subscriptions</p>
+                      <p className="text-sm text-muted-foreground">Direct integration with billing systems</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Custom actions with approval workflows</p>
+                      <p className="text-sm text-muted-foreground">Build any action, control with smart approvals</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Competitors: Answer-Only */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="glass-strong p-8 rounded-2xl border-2 border-gray-300"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
+                    <p className="text-sm text-muted-foreground">Answer or suggest only</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Chatbot deflects to help articles</p>
+                      <p className="text-sm text-muted-foreground">Customer still needs agent for actual help</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Copilot suggests reply text</p>
+                      <p className="text-sm text-muted-foreground">Agent must manually execute actions in other systems</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Limited to answering questions</p>
+                      <p className="text-sm text-muted-foreground">Can't process refunds, look up orders, or modify accounts</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">No cross-system execution</p>
+                      <p className="text-sm text-muted-foreground">Agent switches between 5+ tools manually</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Basic workflows only</p>
+                      <p className="text-sm text-muted-foreground">Can't build custom automated actions</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
 

@@ -28,10 +28,10 @@ export const competitors: Competitor[] = [
     tagline: 'Enterprise support platform',
     bestFor: 'Large enterprises with complex workflows needing 1000+ integrations',
     whySwitch: [
+      "AI that executes actions (refunds, order lookups) - not just deflects with answers",
       "All AI features included in base plan - Zendesk charges $75/agent/month extra for Advanced AI & QA add-ons",
       "Faster setup (2-5 days vs 2-8 weeks) - Get your team productive immediately",
-      "Transparent pricing - No hidden costs or surprise add-on fees",
-      "Modern, intuitive interface built for today's teams"
+      "Transparent pricing - No hidden costs or surprise add-on fees"
     ],
     pricingNote: "Zendesk Suite Professional starts at $115/agent/month, plus $75/agent/month for Advanced AI & QA add-ons, plus $1.50 per AI resolution. Base platform with AI: $190/agent/month + variable resolution fees.",
     whenToChoose: "Choose Zendesk if you need 1000+ integrations, have enterprise-level compliance requirements, or already use their ecosystem extensively.",
@@ -45,9 +45,9 @@ export const competitors: Competitor[] = [
     bestFor: 'SaaS companies focused on proactive messaging and growth',
     whySwitch: [
       "Predictable costs - Intercom's $0.99/resolution can spiral with high volume",
+      "True agentic chatbots that complete tasks across your entire stack, not just messaging-focused deflection",
       "Comprehensive omnichannel support beyond just messaging",
-      "All features included - No variable pricing surprises",
-      "Better for support-first teams (Intercom is sales/marketing-focused)"
+      "All features included - No variable pricing surprises"
     ],
     pricingNote: "Intercom Advanced plan (with Copilot + Fin AI) starts at $132/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
     whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging over traditional support.",
@@ -60,10 +60,10 @@ export const competitors: Competitor[] = [
     tagline: 'Cloud-based helpdesk',
     bestFor: 'Small to medium businesses wanting affordable entry-level support',
     whySwitch: [
-      "AI included in base plan - Freshdesk requires Pro plan ($47+) plus expensive AI add-ons",
+      "AI copilot that executes actions across systems - not just suggestions agents must complete manually",
+      "AI included in base plan - Freshdesk requires Omni Enterprise plus expensive AI add-ons",
       "More powerful automation out of the box",
-      "Better knowledge base AI and search capabilities",
-      "No tier limitations - All features available to all customers"
+      "Better knowledge base AI and search capabilities"
     ],
     pricingNote: "Freshdesk AI features require Omni Enterprise plan at $104/agent/month, plus Freddy AI Copilot ($29/agent/month), Freddy AI Agent ($89/1000 sessions), and Connector Tasks ($79/5000 tasks). Real AI cost: $133+/agent/month + variable session and task costs.",
     whenToChoose: "Choose Freshdesk if you're a very small team (2-5 agents) wanting a free plan, or need basic ticketing without AI.",
@@ -76,10 +76,10 @@ export const competitors: Competitor[] = [
     tagline: 'Conversation platform',
     bestFor: 'Companies with 7+ agents needing voice-first support',
     whySwitch: [
-      "No minimum seat requirement - Dixa requires 7 seats minimum ($343-1,183/month)",
+      "No minimum seat requirement - Dixa requires 7 seats minimum ($1,932/month)",
+      "AI agents that take action beyond answering - process refunds, update orders, look up data across integrated systems",
       "More comprehensive AI suite (agent, copilot, and Auto-QA)",
-      "Faster setup and easier configuration",
-      "Better pricing flexibility for growing teams"
+      "Faster setup and easier configuration"
     ],
     pricingNote: "Dixa Prime Plan starts at $179/seat/month base, plus $97/seat/month in required add-ons (AI Copilot $39, QA $29, Advanced Insights $29), with a 7-seat minimum. Total: $276/seat/month ($1,932/month minimum for 7 agents) + $0.40 per AI conversation + $0.05 per conversation for Auto QA.",
     whenToChoose: "Choose Dixa if you have 7+ agents and voice support is your primary channel with high call volume.",
@@ -91,21 +91,21 @@ export const comparisonFeatures: ComparisonFeature[] = [
   // AI & Automation
   {
     category: 'AI & Automation',
-    feature: 'Agentic AI Chatbots',
-    pullse: true,
-    zendesk: 'Add-on $75/mo',
-    intercom: '$0.99/resolution',
-    freshdesk: '$89/1k sessions',
-    dixa: 'Mim AI included',
+    feature: 'Agentic AI Chatbots (Execute Actions)',
+    pullse: 'Full execution',
+    zendesk: 'Answer-only',
+    intercom: 'Deflection-focused',
+    freshdesk: 'Basic responses',
+    dixa: 'Limited actions',
   },
   {
     category: 'AI & Automation',
-    feature: 'AI Copilot for Agents',
-    pullse: true,
-    zendesk: 'Add-on $75/mo',
-    intercom: 'Limited free',
-    freshdesk: 'Add-on $29/mo',
-    dixa: 'Add-on $39/mo',
+    feature: 'AI Copilot for Agents (One-Click Execution)',
+    pullse: 'Full execution',
+    zendesk: 'Suggestions only',
+    intercom: 'Reply drafting',
+    freshdesk: 'Reply assistance',
+    dixa: 'Reply drafting',
   },
   {
     category: 'AI & Automation',
@@ -128,9 +128,18 @@ export const comparisonFeatures: ComparisonFeature[] = [
   {
     category: 'AI & Automation',
     feature: 'Actions/Tools with Approvals',
-    pullse: true,
-    zendesk: 'Limited',
-    intercom: 'Limited',
+    pullse: 'Unlimited + custom',
+    zendesk: 'Limited pre-built',
+    intercom: 'Basic webhooks',
+    freshdesk: 'Basic workflows',
+    dixa: 'Limited triggers',
+  },
+  {
+    category: 'AI & Automation',
+    feature: 'Cross-System Action Execution',
+    pullse: 'Full stack',
+    zendesk: 'Single system',
+    intercom: false,
     freshdesk: 'Basic',
     dixa: 'Limited',
   },
@@ -287,6 +296,14 @@ export const faqs = [
   {
     question: 'What if Pullse is missing a feature I need?',
     answer: 'We\'re honest about our capabilities. Currently, we support email + live chat (with voice/phone and social messaging coming soon). We have all core AI features (agentic chatbots, copilot, Auto-QA suite), but we have fewer integrations than Zendesk (100+ vs 1700+). If you need a specific feature, contact us - we prioritize our roadmap based on customer needs and might already have it in development.',
+  },
+  {
+    question: 'What makes Pullse\'s AI "agentic" compared to other chatbots?',
+    answer: 'Most AI chatbots just answer questions or deflect to help articles. Pullse\'s agentic AI actually executes actions across your integrated systems - process Stripe refunds, look up Shopify orders, update Salesforce records, modify subscriptions. Our AI Copilot doesn\'t just suggest what to do; it does it for your agents with one-click execution and smart approval workflows for safety.',
+  },
+  {
+    question: 'Can your AI really process refunds and modify orders, or just answer questions?',
+    answer: 'Yes, Pullse AI actually executes actions. When a customer asks for a refund, our AI can process it through Stripe/PayPal directly (with approval workflows if needed). When they ask about an order, it looks it up in real-time from Shopify/WooCommerce and can modify it. This is different from competitors whose AI just answers questions or deflects to help articles while agents still do the actual work manually.',
   },
 ];
 
