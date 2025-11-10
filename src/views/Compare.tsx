@@ -281,7 +281,7 @@ const Compare = () => {
       </div>
 
       {/* Page Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 pt-20">
         {/* Unified Comparison Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -423,7 +423,7 @@ const Compare = () => {
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-6 relative z-10"
+                className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-4 relative z-10"
               />
             )}
 
@@ -436,10 +436,10 @@ const Compare = () => {
                 transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 className="relative z-10"
               >
-                <div className="text-center mb-6">
+                <div className="text-center mb-4">
                   {/* Title with animated gradient */}
                   <motion.h2
-                    className="text-2xl md:text-3xl font-bold mb-2 relative inline-block"
+                    className="text-xl md:text-2xl font-bold mb-1.5 relative inline-block"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
@@ -457,7 +457,7 @@ const Compare = () => {
                     </span>
                   </motion.h2>
                   <motion.p
-                    className="text-base text-muted-foreground mb-1.5"
+                    className="text-sm text-muted-foreground mb-1"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
@@ -479,30 +479,30 @@ const Compare = () => {
                   <motion.div
                     className="relative"
                     animate={{
-                      y: [0, -8, 0],
+                      y: [0, -6, 0],
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <motion.div
-                      className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-3 border-white"
+                      className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-2 border-white"
                       animate={{
                         boxShadow: [
                           '0 0 0 0 rgba(132, 0, 255, 0.7)',
-                          '0 0 0 16px rgba(132, 0, 255, 0)',
+                          '0 0 0 14px rgba(132, 0, 255, 0)',
                           '0 0 0 0 rgba(132, 0, 255, 0)'
                         ],
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      <span className="text-xl font-black text-white">VS</span>
+                      <span className="text-lg font-black text-white">VS</span>
                     </motion.div>
                   </motion.div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-0 mb-6 relative z-10">
+                <div className="grid md:grid-cols-2 gap-0 mb-4 relative z-10">
                   {/* Pullse Column with gradient background */}
                   <motion.div
-                    className="relative p-6 rounded-l-2xl overflow-hidden"
+                    className="relative p-4 md:p-5 rounded-l-2xl overflow-hidden"
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
@@ -572,7 +572,7 @@ const Compare = () => {
 
                   {/* Competitor Column with different gradient */}
                   <motion.div
-                    className="relative p-6 rounded-r-2xl overflow-hidden"
+                    className="relative p-4 md:p-5 rounded-r-2xl overflow-hidden"
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
@@ -674,7 +674,7 @@ const Compare = () => {
                 </div>
 
                 <motion.div
-                  className="pt-4 border-t border-gray-200 text-center relative z-10"
+                  className="pt-3 border-t border-gray-200 text-center relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
@@ -683,7 +683,7 @@ const Compare = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button size="lg" asChild className="relative group overflow-hidden">
+                    <Button size="default" asChild className="relative group overflow-hidden">
                       <Link href="/contact-sales">
                         <span className="relative z-10">Compare Pricing for Your Team</span>
                         <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
