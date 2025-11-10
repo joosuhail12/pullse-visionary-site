@@ -1144,10 +1144,10 @@ const ProductAISuite = () => {
 
                           <div className="space-y-5 mb-8">
                             {[
-                              { icon: FileText, title: '4 Ways to Add Content', desc: 'Snippets for quick FAQs, files (PDFs/docs), URLs for web scraping, or Appo help center articles. All formats supported.' },
-                              { icon: RefreshCw, title: 'Auto-Indexes & Chunks', desc: 'We automatically process, index, and chunk your content. No manual work required.' },
-                              { icon: Layers, title: 'Always Up-to-Date', desc: 'Zero maintenance. Content stays fresh and synced automatically across all deployments.' },
-                              { icon: CheckCircle2, title: 'Single Source of Truth', desc: 'One knowledge base powers chatbots, copilots, help centers, and search—no duplication needed.' }
+                              { icon: FileText, title: 'Add Content Your Way', desc: 'Drop in quick snippets, upload files, paste URLs, or sync from Appo. We handle the rest.' },
+                              { icon: RefreshCw, title: 'Instantly Ready to Use', desc: 'Your content is automatically organized and ready for AI to use. No setup, no waiting.' },
+                              { icon: Layers, title: 'Stays Fresh Automatically', desc: 'Update once, and it works everywhere. Your chatbots and copilots always have the latest info.' },
+                              { icon: CheckCircle2, title: 'Works Across All Tools', desc: 'Power your AI chatbots and copilots from one place. No need to update content in multiple locations.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500">
                                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1167,7 +1167,7 @@ const ProductAISuite = () => {
                           <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-primary/5 via-transparent to-purple-600/5 border border-primary/20">
                             <div className="flex items-center gap-3 text-sm text-muted-foreground">
                               <Sparkles className="h-5 w-5 text-primary" />
-                              <span className="font-medium">Auto-indexes and chunks content • Always up-to-date, zero maintenance • Works across all deployments</span>
+                              <span className="font-medium">Set it and forget it • No maintenance needed • Works everywhere your AI does</span>
                             </div>
                           </div>
                         </div>
