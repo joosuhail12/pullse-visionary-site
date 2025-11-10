@@ -19,6 +19,10 @@ import {
   Building2,
   AlertCircle,
   CheckCircle2,
+  Database,
+  UserCircle,
+  RefreshCw,
+  GraduationCap,
 } from 'lucide-react';
 import Link from 'next/link';
 import { competitors, comparisonFeatures, faqCategories, migrationFeatures, stats } from '@/data/comparisonData';
@@ -946,40 +950,75 @@ const Compare = () => {
           {/* Category Deep Dives - Will add sections */}
 
           {/* Migration Support Section */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">
-                Migration in 2-5 Days
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-5xl mx-auto mb-16"
+          >
+            <div className="text-center mb-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 mb-4"
+              >
+                <RefreshCw className="w-4 h-4 text-blue-600" />
+                <span className="text-sm font-medium text-blue-600">
+                  Migration Support
+                </span>
+              </motion.div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                Seamless Migration with Expert Support
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Dedicated support, automated data import, and parallel running for zero disruption
+              <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+                Our team guides you through every step with hands-on support and careful planning
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {migrationFeatures.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-strong p-6 rounded-2xl"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-6 h-6 text-white" />
+            <div className="grid md:grid-cols-2 gap-4">
+              {migrationFeatures.map((feature, index) => {
+                const iconMap = {
+                  database: Database,
+                  user: UserCircle,
+                  refresh: RefreshCw,
+                  graduation: GraduationCap,
+                };
+                const IconComponent = iconMap[feature.icon as keyof typeof iconMap] || Database;
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    className="glass-strong p-5 rounded-2xl relative overflow-hidden group cursor-default"
+                  >
+                    {/* Gradient hover effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <div className="flex items-start gap-4 relative z-10">
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0 shadow-lg"
+                      >
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </motion.div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-bold mb-1.5 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Pricing Calculator Section */}
           <div className="max-w-7xl mx-auto mb-20">

@@ -381,20 +381,24 @@ export const faqCategories: FAQCategory[] = [
 
 export const migrationFeatures = [
   {
-    title: 'Automated Data Migration',
-    description: 'Import all historical tickets, contacts, and knowledge base articles with our automated tools',
+    title: 'Hands-On Data Migration',
+    description: 'Our team carefully migrates your tickets, contacts, and knowledge base with attention to detail and accuracy',
+    icon: 'database',
   },
   {
     title: 'Dedicated Migration Specialist',
-    description: 'Personal support from our team throughout the 2-5 day transition process',
+    description: 'Personal support from our team throughout the entire transition process, from planning to go-live',
+    icon: 'user',
   },
   {
     title: 'Parallel Running Period',
-    description: 'Run both platforms simultaneously during migration to ensure zero data loss or downtime',
+    description: 'Run both platforms simultaneously during migration to ensure zero data loss or service disruption',
+    icon: 'refresh',
   },
   {
-    title: 'Team Training Included',
-    description: 'Comprehensive onboarding sessions to get your entire team productive quickly',
+    title: 'Team Training & Onboarding',
+    description: 'Comprehensive training sessions to get your entire team confident and productive from day one',
+    icon: 'graduation',
   },
 ];
 
