@@ -1252,13 +1252,6 @@ const ProductAISuite = () => {
                             ))}
                           </div>
 
-                          <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-indigo-600/5 via-transparent to-primary/5 border border-indigo-500/20 mb-8">
-                            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                              <Sparkles className="h-5 w-5 text-indigo-600" />
-                              <span className="font-medium">Powered by GPT-4, Claude, and custom models—choose what works best for you</span>
-                            </div>
-                          </div>
-
                           <div className="pt-6 border-t border-border/50">
                             <Link href="/product/ai-engine">
                               <RouteButton
