@@ -1138,16 +1138,16 @@ const ProductAISuite = () => {
                             </div>
                             <div>
                               <h3 className="text-4xl font-black text-foreground mb-3 tracking-tight">Content Center</h3>
-                              <p className="text-lg text-muted-foreground leading-relaxed">Your unified knowledge base that powers every AI tool. Upload once, use everywhere.</p>
+                              <p className="text-lg text-muted-foreground leading-relaxed">Add content 4 ways—snippets, files, URLs, or Appo articles. The AI Engine retrieves exactly what it needs.</p>
                             </div>
                           </div>
 
                           <div className="space-y-5 mb-8">
                             {[
-                              { icon: FileText, title: 'Universal Import', desc: 'Sync from Notion, Confluence, Google Docs, SharePoint, or upload directly. All formats supported.' },
-                              { icon: RefreshCw, title: 'Smart Versioning', desc: 'Track changes, schedule updates, and roll back content with full version history and change logs.' },
-                              { icon: Layers, title: 'Train Once, Deploy Everywhere', desc: 'Single knowledge base powers chatbots, copilots, help centers, and search—no duplication needed.' },
-                              { icon: CheckCircle2, title: 'Auto-Freshness Detection', desc: 'AI monitors your content health, flags outdated info, and suggests updates automatically.' }
+                              { icon: FileText, title: 'Snippets', desc: 'Quick FAQs and knowledge articles. Perfect for common questions and instant answers.' },
+                              { icon: RefreshCw, title: 'Files', desc: 'PDFs, docs, and documents. Upload directly and we\'ll auto-index and chunk the content.' },
+                              { icon: Layers, title: 'URLs', desc: 'Web scraping from any public URL. Keep content synced automatically.' },
+                              { icon: CheckCircle2, title: 'Appo', desc: 'Help center articles. Connect your Appo knowledge base for seamless access.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500">
                                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1167,7 +1167,7 @@ const ProductAISuite = () => {
                           <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-primary/5 via-transparent to-purple-600/5 border border-primary/20">
                             <div className="flex items-center gap-3 text-sm text-muted-foreground">
                               <Sparkles className="h-5 w-5 text-primary" />
-                              <span className="font-medium">Works with: PDF, DOCX, Markdown, HTML, TXT, CSV, and more</span>
+                              <span className="font-medium">Auto-indexes and chunks content • Always up-to-date, zero maintenance • Works across all deployments</span>
                             </div>
                           </div>
                         </div>
@@ -1182,16 +1182,16 @@ const ProductAISuite = () => {
                             </div>
                             <div>
                               <h3 className="text-4xl font-black text-foreground mb-3 tracking-tight">Action Center</h3>
-                              <p className="text-lg text-muted-foreground leading-relaxed">Connect your AI to any tool or API. Let it take actions, not just answer questions.</p>
+                              <p className="text-lg text-muted-foreground leading-relaxed">Connect tools once—the AI Engine executes real actions. Secure, governed, and fully audited.</p>
                             </div>
                           </div>
 
                           <div className="space-y-5 mb-8">
                             {[
-                              { icon: Code, title: 'Pre-Built Connectors', desc: '100+ native integrations including Stripe, Salesforce, Slack, HubSpot, Shopify. Pull data and trigger actions in real-time.' },
-                              { icon: Settings, title: 'Custom REST APIs', desc: 'Connect any internal tool or external service with custom API endpoints. Build workflows for your unique systems.' },
-                              { icon: Play, title: 'Real-Time Actions', desc: 'Execute refunds, update subscriptions, create tasks, check inventory—all without leaving the conversation. No copy-paste.' },
-                              { icon: Lock, title: 'Permission & Approval Flows', desc: 'Define who can do what. Set up approval workflows for sensitive actions with audit trails.' }
+                              { icon: Code, title: 'Connectors', desc: '50+ integrations including Stripe, Salesforce, Slack, HubSpot, Shopify. Pull data and trigger actions.' },
+                              { icon: Settings, title: 'Custom APIs', desc: 'Any REST API. Connect internal tools or external services with custom endpoints.' },
+                              { icon: Play, title: 'Approvals', desc: 'Gated actions with multi-level approval workflows. Define who can do what with full control.' },
+                              { icon: Lock, title: 'Audit Log', desc: 'Full tracking of every action. Complete audit trail with who, what, when, and why for compliance.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-500">
                                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -1211,7 +1211,7 @@ const ProductAISuite = () => {
                           <div className="mt-8 p-6 rounded-[20px] bg-gradient-to-br from-purple-600/5 via-transparent to-indigo-600/5 border border-purple-500/20">
                             <div className="flex items-center gap-3 text-sm text-muted-foreground">
                               <Sparkles className="h-5 w-5 text-purple-600" />
-                              <span className="font-medium">Enterprise-grade security with API key encryption, RBAC, and audit logs. SOC 2 Type II in progress</span>
+                              <span className="font-medium">Refunds, updates, workflows, tickets • Multi-level approval workflows • Complete audit trail & governance</span>
                             </div>
                           </div>
                         </div>
