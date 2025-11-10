@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
@@ -30,33 +31,8 @@ import {
   Brain,
   LineChart,
   Play,
+  ExternalLink,
 } from "lucide-react";
-
-// Animated Counter Component
-const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; duration?: number; trigger?: boolean }) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (!trigger || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = Date.now();
-    const animate = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [trigger, hasStarted, end, duration]);
-
-  return <>{count}{suffix}</>;
-};
 
 // Coaching Features Accordion Component
 const CoachingAccordion = () => {
@@ -130,8 +106,6 @@ const CoachingAccordion = () => {
 
 const ProductAutoQA = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [statsAnimated, setStatsAnimated] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   // Scroll Progress
   useEffect(() => {
@@ -145,26 +119,6 @@ const ProductAutoQA = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Animate stats on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !statsAnimated) {
-            setStatsAnimated(true);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [statsAnimated]);
 
   // Bento Grid Card Data
   const bentoCards: CardData[] = [
@@ -248,34 +202,6 @@ const ProductAutoQA = () => {
       description: 'Rep can accept scores or dispute with context. Supervisors review, adjust if needed, and schedule coaching sessions. Growth tracked over time.',
       icon: Users,
       color: 'from-blue-600 to-primary',
-    },
-  ];
-
-  // Analytics Stats
-  const stats = [
-    {
-      value: 100,
-      suffix: '%',
-      label: 'Coverage',
-      description: "Every conversation QA'd",
-      icon: Shield,
-      color: 'from-primary to-purple-600',
-    },
-    {
-      value: 90,
-      suffix: '%',
-      label: 'Faster',
-      description: 'Than manual QA',
-      icon: Zap,
-      color: 'from-purple-600 to-indigo-600',
-    },
-    {
-      value: 0,
-      suffix: 's',
-      label: 'Post-Closure',
-      description: 'Instant feedback',
-      icon: Clock,
-      color: 'from-indigo-600 to-primary',
     },
   ];
 
@@ -521,76 +447,90 @@ const ProductAutoQA = () => {
         </div>
       </section>
 
-      {/* Analytics & Stats Section */}
-      <section ref={statsRef} className="relative py-20">
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-                Real-Time Quality Intelligence
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Instant feedback, complete coverage, exponentially faster than manual QA.
-              </p>
-            </div>
+      {/* Final CTA Section - Ultra Modern */}
+      <section className="relative py-40 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className="group relative p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 text-center">
-                    <div className={`inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-6 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-8 w-8 text-background" />
-                    </div>
-
-                    <div className="text-5xl font-bold mb-2 bg-gradient-to-br from-primary to-purple-600 bg-clip-text text-transparent">
-                      <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} />
-                    </div>
-
-                    <div className="text-xl font-bold mb-1">
-                      {stat.label}
-                    </div>
-
-                    <div className="text-sm text-muted-foreground">
-                      {stat.description}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+        {/* Animated background gradients */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
-      </section>
 
-      {/* Final CTA Section */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 to-background">
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Stop sampling. Start seeing everything.
-            </h2>
+        <div className="container mx-auto px-6 relative">
+          <div className="max-w-5xl mx-auto">
+            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-16 shadow-2xl text-center overflow-hidden">
+              {/* Background glow */}
+              <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Traditional QA teams sample 5-10% of tickets. Auto-QA evaluates 100%—with surgical feedback, trend tracking, and built-in fairness. See how it works.
-            </p>
+              <div className="relative">
+                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+                  Stop sampling.{" "}
+                  <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                    Start seeing everything.
+                  </span>
+                </h2>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <RouteButton
-                size="lg"
-                href="/contact-sales"
-                className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group"
-              >
-                Get started
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </RouteButton>
-              <RouteButton
-                variant="outline"
-                size="lg"
-                href="/pricing"
-                className="text-base px-10 py-7"
-              >
-                View pricing
-              </RouteButton>
+                <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                  Traditional QA teams sample 5-10% of tickets. Auto-QA evaluates <span className="font-bold text-foreground">100%</span>—with surgical feedback, trend tracking, and built-in fairness.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <RouteButton
+                      href="/contact-sales"
+                      variant="default"
+                      size="lg"
+                      className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-12 py-6 text-lg font-black"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+                      <span className="relative z-10 flex items-center gap-3">
+                        Get Started
+                        <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+                      </span>
+                    </RouteButton>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <RouteButton
+                      href="/pricing"
+                      variant="outline"
+                      size="lg"
+                      className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-12 py-6 text-lg font-black"
+                    >
+                      <span className="flex items-center gap-3">
+                        View Pricing
+                        <ExternalLink className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                      </span>
+                    </RouteButton>
+                  </motion.div>
+                </div>
+
+                {/* Social proof */}
+                <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-bold text-muted-foreground">14-day trial</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-bold text-muted-foreground">No credit card required</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-bold text-muted-foreground">5-minute setup</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
