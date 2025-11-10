@@ -1144,10 +1144,10 @@ const ProductAISuite = () => {
 
                           <div className="space-y-5 mb-8">
                             {[
-                              { icon: FileText, title: 'Snippets', desc: 'Quick FAQs and knowledge articles. Perfect for common questions and instant answers.' },
-                              { icon: RefreshCw, title: 'Files', desc: 'PDFs, docs, and documents. Upload directly and we\'ll auto-index and chunk the content.' },
-                              { icon: Layers, title: 'URLs', desc: 'Web scraping from any public URL. Keep content synced automatically.' },
-                              { icon: CheckCircle2, title: 'Appo', desc: 'Help center articles. Connect your Appo knowledge base for seamless access.' }
+                              { icon: FileText, title: '4 Ways to Add Content', desc: 'Snippets for quick FAQs, files (PDFs/docs), URLs for web scraping, or Appo help center articles. All formats supported.' },
+                              { icon: RefreshCw, title: 'Auto-Indexes & Chunks', desc: 'We automatically process, index, and chunk your content. No manual work required.' },
+                              { icon: Layers, title: 'Always Up-to-Date', desc: 'Zero maintenance. Content stays fresh and synced automatically across all deployments.' },
+                              { icon: CheckCircle2, title: 'Single Source of Truth', desc: 'One knowledge base powers chatbots, copilots, help centers, and search—no duplication needed.' }
                             ].map((feature, i) => (
                               <div key={i} className="group relative p-6 rounded-[20px] border border-border/40 bg-gradient-to-br from-card via-background/50 to-card hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500">
                                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
