@@ -106,9 +106,6 @@ const ComparisonTable = () => {
               <th className="p-4 text-center text-gray-600 font-semibold min-w-[120px]">
                 Dixa
               </th>
-              <th className="p-4 text-center text-gray-600 font-semibold min-w-[120px]">
-                Gladly
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -128,7 +125,6 @@ const ComparisonTable = () => {
                 <td className="p-4">{renderValue(feature.intercom)}</td>
                 <td className="p-4">{renderValue(feature.freshdesk)}</td>
                 <td className="p-4">{renderValue(feature.dixa)}</td>
-                <td className="p-4">{renderValue(feature.gladly)}</td>
               </motion.tr>
             ))}
           </tbody>
@@ -174,10 +170,6 @@ const ComparisonTable = () => {
                 <div className="flex items-center justify-between p-2 bg-gray-50 rounded-lg text-sm">
                   <span className="text-gray-600">Dixa</span>
                   {renderValue(feature.dixa)}
-                </div>
-                <div className="flex items-center justify-between p-2 bg-gray-50 rounded-lg text-sm">
-                  <span className="text-gray-600">Gladly</span>
-                  {renderValue(feature.gladly)}
                 </div>
               </div>
             </div>
