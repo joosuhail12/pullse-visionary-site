@@ -713,27 +713,6 @@ const Compare = () => {
             className="max-w-5xl mx-auto mb-20"
           >
             <div className="text-center mb-12">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6 relative overflow-hidden group cursor-pointer"
-              >
-                {/* Shimmer Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-green-300/20 to-transparent"
-                  animate={{
-                    x: ['-100%', '100%'],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
-                <Zap className="w-4 h-4 text-green-600 relative z-10" />
-                <span className="text-sm font-medium text-green-600 relative z-10">
-                  Action-Taking AI
-                </span>
-              </motion.div>
-
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
