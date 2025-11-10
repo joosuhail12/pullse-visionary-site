@@ -353,28 +353,97 @@ const Compare = () => {
           {currentCompetitor && (
             <motion.div
               key={selectedCompetitor}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20 }}
               className="max-w-5xl mx-auto mb-20"
             >
-              <div className="glass-strong p-10 rounded-3xl">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-3">
-                    Pullse vs {currentCompetitor.name}
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-2">
+              <GlowCard
+                className="glass-strong p-10 rounded-3xl relative overflow-hidden"
+                glowColor="132, 0, 255"
+                glowIntensity={0.6}
+                hoverElevation={true}
+                tilt3D={true}
+              >
+                {/* Animated Background Blobs */}
+                <motion.div
+                  className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    x: [0, 30, 0],
+                    y: [0, -20, 0],
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    x: [0, -30, 0],
+                    y: [0, 20, 0],
+                  }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                <div className="text-center mb-8 relative z-10">
+                  {/* Title with animated gradient */}
+                  <motion.h2
+                    className="text-3xl md:text-4xl font-bold mb-3 relative inline-block"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <span className="relative">
+                      Pullse vs {currentCompetitor.name}
+                      {/* Shimmer effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        animate={{
+                          x: ['-200%', '200%'],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      />
+                    </span>
+                  </motion.h2>
+                  <motion.p
+                    className="text-lg text-muted-foreground mb-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
                     {currentCompetitor.tagline}
-                  </p>
-                  <p className="text-sm text-purple-600 font-medium">
+                  </motion.p>
+                  <motion.p
+                    className="text-sm text-purple-600 font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
                     Best for: {currentCompetitor.bestFor}
-                  </p>
+                  </motion.p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="grid md:grid-cols-2 gap-8 mb-8 relative z-10">
                   {/* Pullse Column */}
-                  <div className="space-y-4">
+                  <motion.div
+                    className="space-y-4"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5, type: 'spring' }}
+                  >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"></div>
+                      <motion.div
+                        className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          boxShadow: [
+                            '0 0 0 0 rgba(132, 0, 255, 0)',
+                            '0 0 0 8px rgba(132, 0, 255, 0.2)',
+                            '0 0 0 0 rgba(132, 0, 255, 0)'
+                          ]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
                       <h3 className="text-xl font-bold">Why Choose Pullse</h3>
                     </div>
                     {currentCompetitor.whySwitch.map((reason, index) => (
@@ -382,37 +451,88 @@ const Compare = () => {
                         key={index}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex gap-3"
+                        transition={{ delay: 0.6 + index * 0.1 }}
+                        whileHover={{ x: 5, backgroundColor: 'rgba(132, 0, 255, 0.05)' }}
+                        className="flex gap-3 p-3 rounded-lg transition-all group cursor-pointer"
                       >
-                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm">{reason}</p>
+                        <motion.div
+                          animate={{
+                            scale: [1, 1.2, 1],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.2
+                          }}
+                        >
+                          <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5 group-hover:text-purple-600 transition-colors" />
+                        </motion.div>
+                        <p className="text-sm group-hover:text-purple-600 transition-colors">{reason}</p>
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
 
                   {/* Competitor Column */}
-                  <div className="space-y-4">
+                  <motion.div
+                    className="space-y-4"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5, type: 'spring' }}
+                  >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-3 h-3 rounded-full bg-gray-400"></div>
+                      <motion.div
+                        className="w-3 h-3 rounded-full bg-gray-400"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
                       <h3 className="text-xl font-bold">{currentCompetitor.name} Strengths</h3>
                     </div>
 
                     {currentCompetitor.strengths && (
-                      <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 mb-4">
+                      <motion.div
+                        className="p-4 bg-blue-50 rounded-xl border border-blue-200 mb-4 relative overflow-hidden"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
                         <p className="text-xs text-blue-600 font-semibold mb-2 uppercase">Where {currentCompetitor.name} Excels</p>
                         <ul className="space-y-2">
                           {currentCompetitor.strengths.map((strength, idx) => (
-                            <li key={idx} className="flex items-center gap-2 text-sm text-blue-900">
-                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                            <motion.li
+                              key={idx}
+                              className="flex items-center gap-2 text-sm text-blue-900"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.8 + idx * 0.1 }}
+                            >
+                              <motion.div
+                                className="w-1.5 h-1.5 rounded-full bg-blue-500"
+                                animate={{
+                                  scale: [1, 1.5, 1],
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  delay: idx * 0.3
+                                }}
+                              />
                               {strength}
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     )}
 
-                    <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                    <motion.div
+                      className="p-6 bg-gray-50 rounded-xl border border-gray-200"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 }}
+                      whileHover={{ scale: 1.02 }}
+                    >
                       <p className="text-sm text-gray-600 mb-4">
                         <strong>Pricing Reality:</strong>
                       </p>
@@ -429,19 +549,37 @@ const Compare = () => {
                           </p>
                         </>
                       )}
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
 
-                <div className="pt-6 border-t border-gray-200 text-center">
-                  <Button size="lg" asChild>
-                    <Link href="/contact-sales">
-                      Compare Pricing for Your Team
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+                <motion.div
+                  className="pt-6 border-t border-gray-200 text-center relative z-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button size="lg" asChild className="relative group overflow-hidden">
+                      <Link href="/contact-sales">
+                        <span className="relative z-10">Compare Pricing for Your Team</span>
+                        <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                        {/* Pulsing glow effect */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-md opacity-0 group-hover:opacity-100 blur-xl"
+                          animate={{
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              </GlowCard>
             </motion.div>
           )}
 
@@ -451,142 +589,214 @@ const Compare = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6"
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6 relative overflow-hidden group cursor-pointer"
               >
-                <Zap className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-600">
+                {/* Shimmer Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-green-300/20 to-transparent"
+                  animate={{
+                    x: ['-100%', '100%'],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+                <Zap className="w-4 h-4 text-green-600 relative z-10" />
+                <span className="text-sm font-medium text-green-600 relative z-10">
                   Action-Taking AI
                 </span>
               </motion.div>
 
-              <h2 className="text-4xl font-bold mb-4">
-                AI That <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Executes</span>, Not Just Answers
-              </h2>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-4xl font-bold mb-4"
+              >
+                AI That <motion.span
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent inline-block"
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    backgroundSize: '200% 200%',
+                  }}
+                >Executes</motion.span>, Not Just Answers
+              </motion.h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Most support AI just deflects questions or suggests responses.
                 Pullse's agentic AI actually completes tasks across your entire stack.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Pullse: Action-Taking */}
+            <div className="grid md:grid-cols-2 gap-8 relative">
+              {/* VS Indicator */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="glass-strong p-8 rounded-2xl border-2 border-green-500/30"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
-                    <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Process refunds across Stripe/PayPal</p>
-                      <p className="text-sm text-muted-foreground">AI executes the refund, not just tells you how</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Look up orders in Shopify/WooCommerce</p>
-                      <p className="text-sm text-muted-foreground">Real-time data pulled and displayed automatically</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Update customer records in Salesforce/HubSpot</p>
-                      <p className="text-sm text-muted-foreground">Copilot executes CRM updates with one click</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Cancel/modify subscriptions</p>
-                      <p className="text-sm text-muted-foreground">Direct integration with billing systems</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Custom actions with approval workflows</p>
-                      <p className="text-sm text-muted-foreground">Build any action, control with smart approvals</p>
-                    </div>
+                <div className="relative">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-green-500/30 to-gray-400/30 rounded-full blur-xl"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-green-600 to-gray-600 flex items-center justify-center shadow-xl border-2 border-white">
+                    <span className="text-lg font-black text-white">VS</span>
                   </div>
                 </div>
               </motion.div>
 
+              {/* Pullse: Action-Taking */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, type: 'spring' }}
+              >
+                <GlowCard
+                  className="glass-strong p-8 rounded-2xl border-2 border-green-500/30 relative overflow-hidden h-full"
+                  glowColor="34, 197, 94"
+                  glowIntensity={0.6}
+                  hoverElevation={true}
+                >
+                  {/* Animated Background Gradient */}
+                  <motion.div
+                    className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full blur-2xl"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      x: [0, 20, 0],
+                      y: [0, -10, 0],
+                    }}
+                    transition={{ duration: 10, repeat: Infinity }}
+                  />
+
+                  {/* Floating Badge */}
+                  <motion.div
+                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-600 text-white text-xs font-bold shadow-lg"
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    ✓ Executes
+                  </motion.div>
+
+                  <div className="flex items-center gap-3 mb-6 relative z-10">
+                    <motion.div
+                      className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Check className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <div>
+                      <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
+                      <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 relative z-10">
+                    {[
+                      { title: 'Process refunds across Stripe/PayPal', desc: 'AI executes the refund, not just tells you how' },
+                      { title: 'Look up orders in Shopify/WooCommerce', desc: 'Real-time data pulled and displayed automatically' },
+                      { title: 'Update customer records in Salesforce/HubSpot', desc: 'Copilot executes CRM updates with one click' },
+                      { title: 'Cancel/modify subscriptions', desc: 'Direct integration with billing systems' },
+                      { title: 'Custom actions with approval workflows', desc: 'Build any action, control with smart approvals' },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ x: 5 }}
+                        className="flex gap-3 items-start p-3 rounded-lg hover:bg-green-50/50 transition-colors group"
+                      >
+                        <motion.div
+                          animate={{
+                            scale: [1, 1.2, 1],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: index * 0.2
+                          }}
+                        >
+                          <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        </motion.div>
+                        <div>
+                          <p className="font-medium text-gray-900 group-hover:text-green-600 transition-colors">{item.title}</p>
+                          <p className="text-sm text-muted-foreground">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </GlowCard>
+              </motion.div>
+
               {/* Competitors: Answer-Only */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="glass-strong p-8 rounded-2xl border-2 border-gray-300"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, type: 'spring' }}
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
-                    <p className="text-sm text-muted-foreground">Answer or suggest only</p>
-                  </div>
-                </div>
+                <GlowCard
+                  className="glass-strong p-8 rounded-2xl border-2 border-gray-300 relative overflow-hidden h-full"
+                  glowColor="156, 163, 175"
+                  glowIntensity={0.3}
+                  hoverElevation={true}
+                >
+                  {/* Floating Badge */}
+                  <motion.div
+                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gray-400 text-white text-xs font-bold shadow-lg"
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    ✗ Answer Only
+                  </motion.div>
 
-                <div className="space-y-4">
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
+                      <MessageSquare className="w-6 h-6 text-white" />
+                    </div>
                     <div>
-                      <p className="font-medium text-gray-700">Chatbot deflects to help articles</p>
-                      <p className="text-sm text-muted-foreground">Customer still needs agent for actual help</p>
+                      <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
+                      <p className="text-sm text-muted-foreground">Answer or suggest only</p>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Copilot suggests reply text</p>
-                      <p className="text-sm text-muted-foreground">Agent must manually execute actions in other systems</p>
-                    </div>
+                  <div className="space-y-4">
+                    {[
+                      { title: 'Chatbot deflects to help articles', desc: 'Customer still needs agent for actual help' },
+                      { title: 'Copilot suggests reply text', desc: 'Agent must manually execute actions in other systems' },
+                      { title: 'Limited to answering questions', desc: "Can't process refunds, look up orders, or modify accounts" },
+                      { title: 'No cross-system execution', desc: 'Agent switches between 5+ tools manually' },
+                      { title: 'Basic workflows only', desc: "Can't build custom automated actions" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex gap-3 items-start p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-medium text-gray-700">{item.title}</p>
+                          <p className="text-sm text-muted-foreground">{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Limited to answering questions</p>
-                      <p className="text-sm text-muted-foreground">Can't process refunds, look up orders, or modify accounts</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">No cross-system execution</p>
-                      <p className="text-sm text-muted-foreground">Agent switches between 5+ tools manually</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Basic workflows only</p>
-                      <p className="text-sm text-muted-foreground">Can't build custom automated actions</p>
-                    </div>
-                  </div>
-                </div>
+                </GlowCard>
               </motion.div>
             </div>
           </div>
