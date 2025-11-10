@@ -150,7 +150,7 @@ const Compare = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="h-screen relative overflow-hidden flex items-center justify-center">
+      <div className="h-screen relative overflow-hidden flex items-center justify-center pt-20">
         {/* Animated Gradient Blobs */}
         <motion.div
           className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
