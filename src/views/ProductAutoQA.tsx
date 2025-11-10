@@ -224,7 +224,6 @@ const ProductAutoQA = () => {
     { icon: MessageCircle, name: 'Tone & Empathy', description: 'Warm, understanding, customer-first language' },
     { icon: Clock, name: 'Response Time', description: 'Speed of replies and overall resolution time' },
     { icon: CheckCircle2, name: 'Resolution Quality', description: 'Did the issue get fully resolved?' },
-    { icon: FileText, name: 'Policy Compliance', description: 'Following company guidelines and procedures' },
     { icon: Sparkles, name: 'Communication Clarity', description: 'Clear, concise, easy-to-understand responses' },
     { icon: Brain, name: 'Knowledge Accuracy', description: 'Correct information and best practices' },
   ];
