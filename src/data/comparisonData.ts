@@ -92,7 +92,7 @@ export const comparisonFeatures: ComparisonFeature[] = [
   // AI & Automation
   {
     category: 'AI & Automation',
-    feature: 'Autonomous AI Agent',
+    feature: 'Agentic AI Chatbots',
     pullse: true,
     zendesk: 'Add-on $50/mo',
     intercom: '$0.99/resolution',
@@ -110,8 +110,8 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'AI & Automation',
-    feature: 'Automatic QA Monitoring',
-    pullse: true,
+    feature: 'Auto-QA Suite',
+    pullse: 'Pro plan',
     zendesk: 'Manual/Limited',
     intercom: false,
     freshdesk: false,
@@ -119,27 +119,27 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'AI & Automation',
-    feature: 'AI-Powered Knowledge Base',
+    feature: 'Help Center (Appo)',
     pullse: true,
-    zendesk: 'Add-on required',
+    zendesk: 'Included',
     intercom: true,
-    freshdesk: 'Pro plan+',
+    freshdesk: 'Included',
     dixa: true,
   },
   {
     category: 'AI & Automation',
-    feature: 'Smart Intent Detection',
+    feature: 'Actions/Tools with Approvals',
     pullse: true,
-    zendesk: 'Add-on required',
-    intercom: true,
+    zendesk: 'Limited',
+    intercom: 'Limited',
     freshdesk: 'Basic',
-    dixa: true,
+    dixa: 'Limited',
   },
 
   // Platform & Core Features
   {
     category: 'Platform',
-    feature: 'Omnichannel Inbox',
+    feature: 'Email + Live Chat',
     pullse: true,
     zendesk: true,
     intercom: 'Messaging-focused',
@@ -157,7 +157,7 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'Platform',
-    feature: 'Advanced Analytics',
+    feature: 'Analytics & Reporting',
     pullse: true,
     zendesk: 'Add-on for advanced',
     intercom: 'Limited',
@@ -175,10 +175,10 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
   {
     category: 'Platform',
-    feature: 'Mobile App',
-    pullse: true,
+    feature: 'Voice/Phone Support',
+    pullse: 'Coming soon',
     zendesk: true,
-    intercom: true,
+    intercom: false,
     freshdesk: true,
     dixa: true,
   },
@@ -287,7 +287,7 @@ export const faqs = [
   },
   {
     question: 'What if Pullse is missing a feature I need?',
-    answer: 'We\'re honest about our capabilities. While we have all core AI features (autonomous agent, copilot, Auto-QA), we have fewer integrations than Zendesk (100+ vs 1700+). If you need a specific feature, contact us - we prioritize our roadmap based on customer needs and might already have it in development.',
+    answer: 'We\'re honest about our capabilities. Currently, we support email + live chat (with voice/phone and social messaging coming soon). We have all core AI features (agentic chatbots, copilot, Auto-QA suite), but we have fewer integrations than Zendesk (100+ vs 1700+). If you need a specific feature, contact us - we prioritize our roadmap based on customer needs and might already have it in development.',
   },
 ];
 
@@ -312,9 +312,9 @@ export const migrationFeatures = [
 
 export const stats = [
   { label: 'Typical Setup Time', value: '2-5 Days', highlight: true },
-  { label: 'All Features Included', value: 'No Add-ons', highlight: true },
+  { label: 'Pricing Model', value: 'All-Inclusive', highlight: true },
   { label: 'Integrations', value: '100+', highlight: false },
-  { label: 'AI Features Standard', value: '3 Core', highlight: true },
+  { label: 'AI Features', value: 'Chatbot+Copilot+QA', highlight: true },
 ];
 
 // Cost comparison data for calculator
