@@ -212,7 +212,7 @@ const Compare = () => {
                 <Sparkles className="w-5 h-5 text-purple-600 relative z-10" />
               </motion.div>
               <span className="text-sm font-bold text-purple-600 relative z-10 uppercase tracking-wide">
-                AI That Actually Works
+                The Next Generation of Customer Support
               </span>
             </motion.div>
 
@@ -224,7 +224,8 @@ const Compare = () => {
               className="mb-8"
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                <span className="block mb-2">Stop Overpaying for</span>
+                <span className="block mb-2">Customer Support</span>
+                <span className="block mb-2">Hasn't Changed in 15 Years.</span>
                 <motion.span
                   className="block bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent"
                   animate={{
@@ -235,7 +236,7 @@ const Compare = () => {
                     backgroundSize: '200% 200%',
                   }}
                 >
-                  Customer Support
+                  Until Now.
                 </motion.span>
               </h1>
 
@@ -245,186 +246,186 @@ const Compare = () => {
                 transition={{ delay: 0.4 }}
                 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto font-medium"
               >
-                Most platforms charge per seat + hidden fees for basic features.{' '}
-                <span className="text-purple-600 font-bold">Pullse includes everything</span> at a fraction of the cost.
+                While others bolt AI onto decade-old platforms,{' '}
+                <span className="text-purple-600 font-bold">Pullse is built AI-native from the ground up</span>.
+                The difference isn't incremental—it's generational.
               </motion.p>
             </motion.div>
 
-            {/* Split Comparison Visual */}
+            {/* Legacy Era vs AI Era Comparison */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="grid md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto"
+              className="grid md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto"
             >
-              {/* Competitor Side */}
+              {/* Legacy Era Card */}
               <GlowCard
-                className="glass-strong p-8 rounded-3xl border-2 border-gray-300 relative overflow-hidden"
+                className="glass-strong p-8 rounded-3xl border-2 border-gray-400 relative overflow-hidden"
                 glowColor="156, 163, 175"
-                glowIntensity={0.3}
-                hoverElevation={true}
+                glowIntensity={0.2}
+                hoverElevation={false}
               >
+                {/* Desaturation overlay */}
+                <div className="absolute inset-0 bg-gray-500/5 pointer-events-none" />
+
                 <motion.div
-                  className="absolute top-4 right-4 px-3 py-1 rounded-full bg-red-100 border border-red-300"
+                  className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gray-200 border border-gray-400"
                   animate={{
-                    scale: [1, 1.05, 1],
+                    opacity: [0.7, 1, 0.7],
                   }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  transition={{ duration: 3, repeat: Infinity }}
                 >
-                  <span className="text-xs font-bold text-red-600">❌ Hidden Costs</span>
+                  <span className="text-xs font-bold text-gray-600">2010-2024</span>
                 </motion.div>
 
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gray-200 flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-gray-600" />
-                  </div>
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <motion.div
+                    className="w-14 h-14 rounded-xl bg-gray-300 flex items-center justify-center border-2 border-gray-400"
+                    animate={{
+                      rotate: [0, 0, 0],
+                    }}
+                  >
+                    <Building2 className="w-7 h-7 text-gray-600" />
+                  </motion.div>
                   <div className="text-left">
-                    <h3 className="text-lg font-bold text-gray-900">Others</h3>
-                    <p className="text-xs text-gray-500">Zendesk, Intercom, etc.</p>
+                    <h3 className="text-xl font-bold text-gray-900">The Legacy Era</h3>
+                    <p className="text-xs text-gray-600 font-semibold">Zendesk, Intercom, Freshdesk</p>
                   </div>
                 </div>
 
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 mb-4 relative z-10">
                   {[
-                    { label: 'Base Price', value: '$89-149/seat', color: 'gray' },
-                    { label: '+ AI Add-on', value: '+$50/seat', color: 'orange' },
-                    { label: '+ Per-use fees', value: '+$0.50-2.99 each', color: 'orange' },
-                    { label: '+ Auto QA', value: '+$0.03 each', color: 'orange' },
+                    { text: 'AI as an add-on', icon: '❌' },
+                    { text: 'Manual workflows only', icon: '❌' },
+                    { text: 'Answer questions, can\'t act', icon: '❌' },
+                    { text: 'Built for chat, retrofitted for AI', icon: '❌' },
+                    { text: 'Pay per add-on feature', icon: '❌' },
                   ].map((item, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.8 + idx * 0.1 }}
-                      className={`flex justify-between items-center p-3 rounded-lg border ${
-                        item.color === 'orange'
-                          ? 'bg-orange-50 border-orange-200'
-                          : 'bg-gray-50 border-gray-200'
-                      }`}
+                      className="flex items-start gap-3 p-3 rounded-lg bg-gray-100 border border-gray-300"
                     >
-                      <span className={`text-sm font-semibold ${
-                        item.color === 'orange' ? 'text-orange-700' : 'text-gray-700'
-                      }`}>
-                        {item.label}
-                      </span>
-                      <span className={`text-sm font-bold ${
-                        item.color === 'orange' ? 'text-orange-900' : 'text-gray-900'
-                      }`}>
-                        {item.value}
+                      <span className="text-lg flex-shrink-0">{item.icon}</span>
+                      <span className="text-sm font-semibold text-gray-700 line-through decoration-2">
+                        {item.text}
                       </span>
                     </motion.div>
                   ))}
                 </div>
 
-                <div className="pt-4 border-t-2 border-gray-300">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-bold text-gray-600 uppercase">Total</span>
-                    <span className="text-3xl font-black text-gray-900">$200+/seat</span>
-                  </div>
+                <div className="pt-4 border-t-2 border-gray-400 relative z-10">
+                  <p className="text-xs text-gray-600 font-bold uppercase tracking-wide text-center">
+                    Last updated ~2010
+                  </p>
                 </div>
               </GlowCard>
 
-              {/* Pullse Side */}
+              {/* AI Era Card */}
               <GlowCard
                 className="glass-strong p-8 rounded-3xl border-2 border-purple-500 relative overflow-hidden"
                 glowColor="132, 0, 255"
-                glowIntensity={0.7}
+                glowIntensity={0.8}
                 hoverElevation={true}
               >
+                {/* Animated gradient background */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"
+                  className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-purple-500/10"
                   animate={{
-                    opacity: [0.3, 0.5, 0.3],
+                    opacity: [0.3, 0.6, 0.3],
                   }}
-                  transition={{ duration: 3, repeat: Infinity }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+
+                {/* Flowing particles effect */}
+                <motion.div
+                  className="absolute top-0 right-0 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl"
+                  animate={{
+                    x: [0, 20, 0],
+                    y: [0, -30, 0],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{ duration: 5, repeat: Infinity }}
                 />
 
                 <motion.div
-                  className="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-100 border border-green-300"
+                  className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 border-2 border-green-400 shadow-lg"
                   animate={{
                     scale: [1, 1.05, 1],
                     boxShadow: [
                       '0 0 0 0 rgba(34, 197, 94, 0)',
-                      '0 0 0 8px rgba(34, 197, 94, 0.2)',
+                      '0 0 0 10px rgba(34, 197, 94, 0.2)',
                       '0 0 0 0 rgba(34, 197, 94, 0)'
                     ]
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <span className="text-xs font-bold text-green-600">✓ All Included</span>
+                  <span className="text-xs font-bold text-white">2024 →</span>
                 </motion.div>
 
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <motion.div
-                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-lg"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-xl border-2 border-purple-400"
+                    animate={{
+                      scale: [1, 1.05, 1],
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    whileHover={{ rotate: 360, scale: 1.15 }}
                   >
-                    <Sparkles className="w-6 h-6 text-white" />
+                    <Sparkles className="w-7 h-7 text-white" />
                   </motion.div>
                   <div className="text-left">
-                    <h3 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Pullse</h3>
-                    <p className="text-xs text-purple-600 font-semibold">Simple, Transparent</p>
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      The AI Era
+                    </h3>
+                    <p className="text-xs text-purple-600 font-bold">Built AI-Native</p>
                   </div>
                 </div>
 
-                <div className="space-y-3 mb-6 relative z-10">
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="flex justify-between items-center p-3 rounded-lg bg-purple-50 border border-purple-200"
-                  >
-                    <span className="text-sm font-semibold text-purple-700">Base Price</span>
-                    <span className="text-sm font-bold text-purple-900">$39/seat</span>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.9 }}
-                    className="p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200"
-                  >
-                    <p className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-3">✨ Everything Included:</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {['AI Agent', 'AI Copilot', 'Auto QA', 'Analytics', 'Help Center', 'All Features'].map((feature, idx) => (
-                        <motion.div
-                          key={idx}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 1 + idx * 0.05 }}
-                          className="flex items-center gap-1"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />
-                          <span className="text-xs font-medium text-purple-700">{feature}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
+                <div className="space-y-3 mb-4 relative z-10">
+                  {[
+                    { text: 'AI-native architecture', icon: '✓', delay: 0 },
+                    { text: 'Executes actions automatically', icon: '✓', delay: 0.1 },
+                    { text: 'Learns & adapts in real-time', icon: '✓', delay: 0.2 },
+                    { text: 'Built for AI from day one', icon: '✓', delay: 0.3 },
+                    { text: 'Everything included', icon: '✓', delay: 0.4 },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + item.delay }}
+                      whileHover={{ x: 5, backgroundColor: 'rgba(132, 0, 255, 0.1)' }}
+                      className="flex items-start gap-3 p-3 rounded-lg bg-purple-50 border-2 border-purple-200 transition-all cursor-pointer group"
+                    >
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          delay: idx * 0.2
+                        }}
+                        className="flex-shrink-0"
+                      >
+                        <CheckCircle2 className="w-5 h-5 text-green-500 group-hover:text-purple-600 transition-colors" />
+                      </motion.div>
+                      <span className="text-sm font-bold text-purple-900 group-hover:text-purple-600 transition-colors">
+                        {item.text}
+                      </span>
+                    </motion.div>
+                  ))}
                 </div>
 
                 <div className="pt-4 border-t-2 border-purple-300 relative z-10">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-bold text-purple-600 uppercase">Total</span>
-                    <div className="text-right">
-                      <motion.div
-                        initial={{ scale: 1.3, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 1.2, type: 'spring' }}
-                        className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
-                      >
-                        $39/seat
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.4 }}
-                        className="text-xs font-bold text-green-600"
-                      >
-                        Save 80%+ vs others
-                      </motion.div>
-                    </div>
-                  </div>
+                  <p className="text-xs text-purple-600 font-bold uppercase tracking-wide text-center">
+                    The Future, Today
+                  </p>
                 </div>
               </GlowCard>
             </motion.div>
@@ -442,7 +443,7 @@ const Compare = () => {
               >
                 <Button size="lg" asChild className="relative group h-14 px-8 text-base">
                   <Link href="/contact-sales">
-                    <span className="relative z-10 font-bold">See Your Exact Savings</span>
+                    <span className="relative z-10 font-bold">Experience AI-Native Support</span>
                     <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 blur-xl"
@@ -460,14 +461,14 @@ const Compare = () => {
               >
                 <Button size="lg" variant="outline" asChild className="h-14 px-8 text-base border-2">
                   <Link href="#comparison-table">
-                    <span className="font-bold">Compare All Features</span>
+                    <span className="font-bold">See the Difference</span>
                     <ChevronDown className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               </motion.div>
             </motion.div>
 
-            {/* Trust Indicators */}
+            {/* Trust Indicators - Innovation Focused */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -475,9 +476,9 @@ const Compare = () => {
               className="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-muted-foreground"
             >
               {[
-                { icon: CheckCircle2, text: '14-day free trial' },
-                { icon: CheckCircle2, text: 'No credit card required' },
-                { icon: CheckCircle2, text: 'Cancel anytime' },
+                { icon: '⚡', text: 'Live in 10 minutes' },
+                { icon: '🧠', text: 'Learns from day one' },
+                { icon: '🔄', text: 'No migration headaches' },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -486,7 +487,8 @@ const Compare = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.8 + idx * 0.1 }}
                 >
-                  <motion.div
+                  <motion.span
+                    className="text-lg"
                     animate={{
                       scale: [1, 1.2, 1],
                     }}
@@ -496,8 +498,8 @@ const Compare = () => {
                       delay: idx * 0.3
                     }}
                   >
-                    <item.icon className="w-4 h-4 text-green-500" />
-                  </motion.div>
+                    {item.icon}
+                  </motion.span>
                   <span className="font-medium">{item.text}</span>
                 </motion.div>
               ))}
