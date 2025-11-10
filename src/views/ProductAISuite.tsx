@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
@@ -1277,47 +1278,89 @@ const ProductAISuite = () => {
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="relative py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_50%)]" />
+        {/* Final CTA - Ultra Modern */}
+        <section className="relative py-40 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
+
+          {/* Animated background gradients */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          </div>
 
           <div className="container mx-auto px-6 relative">
-            <div className="text-center max-w-4xl mx-auto space-y-8">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight">
-                Ready to deploy AI that
-                <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient">
-                  actually works?
-                </span>
-              </h2>
+            <div className="max-w-5xl mx-auto">
+              <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-16 shadow-2xl text-center overflow-hidden">
+                {/* Background glow */}
+                <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Book a personalized demo and see how the AI Suite can transform your support operations—from deflection to acceleration, QA to insights.
-              </p>
+                <div className="relative">
+                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+                    Ready to deploy AI that{" "}
+                    <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                      actually works?
+                    </span>
+                  </h2>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                <RouteButton href="/book-demo" className="group relative px-10 py-5 bg-gradient-to-r from-primary to-purple-600 text-background font-bold rounded-xl shadow-2xl hover:shadow-3xl hover:shadow-primary/25 transition-all hover:scale-105 text-lg">
-                  Book a Demo
-                  <ArrowRight className="ml-2 h-6 w-6 inline-block group-hover:translate-x-1 transition-transform" />
-                </RouteButton>
-                <RouteButton href="/contact" className="group px-10 py-5 border-2 border-primary/30 bg-card/50 backdrop-blur-sm text-foreground font-bold rounded-xl hover:bg-primary/10 hover:border-primary transition-all text-lg">
-                  Talk to Sales
-                </RouteButton>
-              </div>
+                  <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Book a personalized demo and see how the AI Suite can <span className="font-bold text-foreground">transform your support operations</span>—from deflection to acceleration, QA to insights.
+                  </p>
 
-              {/* Trust Signals */}
-              <div className="flex flex-wrap gap-8 justify-center items-center pt-12">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Lock className="h-4 w-4 text-primary" />
-                  <span>SOC 2 Type II in progress</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Shield className="h-4 w-4 text-primary" />
-                  <span>Enterprise security</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Enterprise-ready platform</span>
+                  <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <RouteButton
+                        href="/contact-sales"
+                        variant="default"
+                        size="lg"
+                        className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-12 py-6 text-lg font-black"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+                        <span className="relative z-10 flex items-center gap-3">
+                          Book a Demo
+                          <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+                        </span>
+                      </RouteButton>
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <RouteButton
+                        href="/pricing"
+                        variant="outline"
+                        size="lg"
+                        className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-12 py-6 text-lg font-black"
+                      >
+                        <span className="flex items-center gap-3">
+                          View Pricing
+                          <ExternalLink className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                        </span>
+                      </RouteButton>
+                    </motion.div>
+                  </div>
+
+                  {/* Social proof */}
+                  <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      <span className="text-sm font-bold text-muted-foreground">14-day trial</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      <span className="text-sm font-bold text-muted-foreground">No credit card required</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      <span className="text-sm font-bold text-muted-foreground">5-minute setup</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
