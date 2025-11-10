@@ -23,6 +23,8 @@ import {
   UserCircle,
   RefreshCw,
   GraduationCap,
+  Smile,
+  Settings,
 } from 'lucide-react';
 import Link from 'next/link';
 import { competitors, comparisonFeatures, faqCategories, migrationFeatures, stats } from '@/data/comparisonData';
@@ -949,7 +951,7 @@ const Compare = () => {
 
           {/* Category Deep Dives - Will add sections */}
 
-          {/* Migration Support Section */}
+          {/* Ease of Use Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -962,30 +964,30 @@ const Compare = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 mb-4"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-4"
               >
-                <RefreshCw className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-medium text-blue-600">
-                  Migration Support
+                <Zap className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-green-600">
+                  Easy to Use
                 </span>
               </motion.div>
               <h2 className="text-3xl md:text-4xl font-bold mb-3">
-                Seamless Migration with Expert Support
+                Simple Setup, Powerful Results
               </h2>
               <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-                Our team guides you through every step with hands-on support and careful planning
+                Get started in minutes with an intuitive platform anyone can use
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               {migrationFeatures.map((feature, index) => {
                 const iconMap = {
-                  database: Database,
-                  user: UserCircle,
-                  refresh: RefreshCw,
-                  graduation: GraduationCap,
+                  zap: Zap,
+                  smile: Smile,
+                  users: Users,
+                  settings: Settings,
                 };
-                const IconComponent = iconMap[feature.icon as keyof typeof iconMap] || Database;
+                const IconComponent = iconMap[feature.icon as keyof typeof iconMap] || Zap;
 
                 return (
                   <motion.div
@@ -998,17 +1000,17 @@ const Compare = () => {
                     className="glass-strong p-5 rounded-2xl relative overflow-hidden group cursor-default"
                   >
                     {/* Gradient hover effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     <div className="flex items-start gap-4 relative z-10">
                       <motion.div
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0 shadow-lg"
+                        className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-lg"
                       >
                         <IconComponent className="w-6 h-6 text-white" />
                       </motion.div>
                       <div className="flex-1">
-                        <h3 className="text-base font-bold mb-1.5 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
+                        <h3 className="text-base font-bold mb-1.5 group-hover:text-green-600 transition-colors">{feature.title}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           {feature.description}
                         </p>

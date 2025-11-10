@@ -381,24 +381,24 @@ export const faqCategories: FAQCategory[] = [
 
 export const migrationFeatures = [
   {
-    title: 'Hands-On Data Migration',
-    description: 'Our team carefully migrates your tickets, contacts, and knowledge base with attention to detail and accuracy',
-    icon: 'database',
+    title: 'Live in 10 Minutes',
+    description: 'Connect your email, customize your branding, and start handling tickets. No lengthy implementation or complex setup required',
+    icon: 'zap',
   },
   {
-    title: 'Dedicated Migration Specialist',
-    description: 'Personal support from our team throughout the entire transition process, from planning to go-live',
-    icon: 'user',
+    title: 'Zero Learning Curve',
+    description: 'Intuitive interface your team will understand instantly. If you can use email, you can use Pullse',
+    icon: 'smile',
   },
   {
-    title: 'Parallel Running Period',
-    description: 'Run both platforms simultaneously during migration to ensure zero data loss or service disruption',
-    icon: 'refresh',
+    title: 'No Technical Expertise Required',
+    description: 'Built for support teams, not engineers. No coding, no complex configurations, no IT department needed',
+    icon: 'users',
   },
   {
-    title: 'Team Training & Onboarding',
-    description: 'Comprehensive training sessions to get your entire team confident and productive from day one',
-    icon: 'graduation',
+    title: 'Smart Defaults That Just Work',
+    description: 'Pre-configured workflows, AI responses, and automations work out of the box. Customize later if you want',
+    icon: 'settings',
   },
 ];
 
