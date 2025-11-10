@@ -21,7 +21,13 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Link from 'next/link';
-import { competitors, comparisonFeatures, faqs, migrationFeatures, stats } from '@/data/comparisonData';
+import { competitors, comparisonFeatures, faqCategories, migrationFeatures, stats } from '@/data/comparisonData';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { competitorPricingDetails, pullsePricingForComparison } from '@/data/pricingData';
 import ComparisonTable from '@/components/compare/ComparisonTable';
 import { Slider } from '@/components/ui/slider';
@@ -341,6 +347,203 @@ const Compare = () => {
               </div>
             </motion.div>
           )}
+
+          {/* AI That Executes Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6"
+              >
+                <Zap className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-green-600">
+                  Action-Taking AI
+                </span>
+              </motion.div>
+
+              <h2 className="text-4xl font-bold mb-4">
+                AI That <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Executes</span>, Not Just Answers
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Most support AI just deflects questions or suggests responses.
+                Pullse's agentic AI actually completes tasks across your entire stack.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Pullse: Action-Taking */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="glass-strong p-8 rounded-2xl border-2 border-green-500/30"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
+                    <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Process refunds across Stripe/PayPal</p>
+                      <p className="text-sm text-muted-foreground">AI executes the refund, not just tells you how</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Look up orders in Shopify/WooCommerce</p>
+                      <p className="text-sm text-muted-foreground">Real-time data pulled and displayed automatically</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Update customer records in Salesforce/HubSpot</p>
+                      <p className="text-sm text-muted-foreground">Copilot executes CRM updates with one click</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Cancel/modify subscriptions</p>
+                      <p className="text-sm text-muted-foreground">Direct integration with billing systems</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-900">Custom actions with approval workflows</p>
+                      <p className="text-sm text-muted-foreground">Build any action, control with smart approvals</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Competitors: Answer-Only */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="glass-strong p-8 rounded-2xl border-2 border-gray-300"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
+                    <p className="text-sm text-muted-foreground">Answer or suggest only</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Chatbot deflects to help articles</p>
+                      <p className="text-sm text-muted-foreground">Customer still needs agent for actual help</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Copilot suggests reply text</p>
+                      <p className="text-sm text-muted-foreground">Agent must manually execute actions in other systems</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Limited to answering questions</p>
+                      <p className="text-sm text-muted-foreground">Can't process refunds, look up orders, or modify accounts</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">No cross-system execution</p>
+                      <p className="text-sm text-muted-foreground">Agent switches between 5+ tools manually</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 items-start">
+                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium text-gray-700">Basic workflows only</p>
+                      <p className="text-sm text-muted-foreground">Can't build custom automated actions</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Comparison Table */}
+          <div id="comparison-table" className="max-w-7xl mx-auto mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Feature Comparison</h2>
+              <p className="text-lg text-muted-foreground">
+                See how Pullse stacks up across all key features
+              </p>
+            </div>
+            <div className="glass-strong p-8 rounded-3xl">
+              <ComparisonTable />
+            </div>
+          </div>
+
+          {/* Category Deep Dives - Will add sections */}
+
+          {/* Migration Support Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">
+                Migration in 2-5 Days
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Dedicated support, automated data import, and parallel running for zero disruption
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {migrationFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass-strong p-6 rounded-2xl"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
           {/* Pricing Calculator Section */}
           <div className="max-w-7xl mx-auto mb-20">
@@ -750,205 +953,8 @@ const Compare = () => {
             </div>
           </div>
 
-          {/* AI That Executes Section */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <div className="text-center mb-12">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-6"
-              >
-                <Zap className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-600">
-                  Action-Taking AI
-                </span>
-              </motion.div>
-
-              <h2 className="text-4xl font-bold mb-4">
-                AI That <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Executes</span>, Not Just Answers
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Most support AI just deflects questions or suggests responses.
-                Pullse's agentic AI actually completes tasks across your entire stack.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Pullse: Action-Taking */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="glass-strong p-8 rounded-2xl border-2 border-green-500/30"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-                    <Check className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
-                    <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Process refunds across Stripe/PayPal</p>
-                      <p className="text-sm text-muted-foreground">AI executes the refund, not just tells you how</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Look up orders in Shopify/WooCommerce</p>
-                      <p className="text-sm text-muted-foreground">Real-time data pulled and displayed automatically</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Update customer records in Salesforce/HubSpot</p>
-                      <p className="text-sm text-muted-foreground">Copilot executes CRM updates with one click</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Cancel/modify subscriptions</p>
-                      <p className="text-sm text-muted-foreground">Direct integration with billing systems</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-900">Custom actions with approval workflows</p>
-                      <p className="text-sm text-muted-foreground">Build any action, control with smart approvals</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Competitors: Answer-Only */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="glass-strong p-8 rounded-2xl border-2 border-gray-300"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
-                    <p className="text-sm text-muted-foreground">Answer or suggest only</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Chatbot deflects to help articles</p>
-                      <p className="text-sm text-muted-foreground">Customer still needs agent for actual help</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Copilot suggests reply text</p>
-                      <p className="text-sm text-muted-foreground">Agent must manually execute actions in other systems</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Limited to answering questions</p>
-                      <p className="text-sm text-muted-foreground">Can't process refunds, look up orders, or modify accounts</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">No cross-system execution</p>
-                      <p className="text-sm text-muted-foreground">Agent switches between 5+ tools manually</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 items-start">
-                    <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-gray-700">Basic workflows only</p>
-                      <p className="text-sm text-muted-foreground">Can't build custom automated actions</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Comparison Table */}
-          <div id="comparison-table" className="max-w-7xl mx-auto mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Feature Comparison</h2>
-              <p className="text-lg text-muted-foreground">
-                See how Pullse stacks up across all key features
-              </p>
-            </div>
-            <div className="glass-strong p-8 rounded-3xl">
-              <ComparisonTable />
-            </div>
-          </div>
-
-          {/* Category Deep Dives - Will add sections */}
-
-          {/* Migration Support Section */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">
-                Migration in 2-5 Days
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Dedicated support, automated data import, and parallel running for zero disruption
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {migrationFeatures.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-strong p-6 rounded-2xl"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
           {/* FAQ Section */}
-          <div className="max-w-4xl mx-auto mb-20">
+          <div className="max-w-6xl mx-auto mb-20">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4">
                 Frequently Asked Questions
@@ -958,17 +964,37 @@ const Compare = () => {
               </p>
             </div>
 
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
+            <div className="grid md:grid-cols-2 gap-6">
+              {faqCategories.map((categoryGroup, catIndex) => (
                 <motion.div
-                  key={index}
+                  key={categoryGroup.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="glass-strong p-6 rounded-2xl"
+                  transition={{ delay: catIndex * 0.1 }}
+                  className="space-y-4"
                 >
-                  <h3 className="text-lg font-semibold mb-3">{faq.question}</h3>
-                  <p className="text-muted-foreground">{faq.answer}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                    <span>{categoryGroup.icon}</span>
+                    {categoryGroup.category}
+                  </h3>
+
+                  {categoryGroup.questions.map((faq, index) => (
+                    <Accordion key={index} type="single" collapsible>
+                      <AccordionItem
+                        value={`item-${index}`}
+                        className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-2xl px-6 shadow-sm hover:shadow-md transition-shadow"
+                      >
+                        <AccordionTrigger className="text-left hover:no-underline py-5">
+                          <span className="text-base font-semibold text-gray-900 pr-4">
+                            {faq.question}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-gray-700 text-sm leading-relaxed pb-5">
+                          {faq.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ))}
                 </motion.div>
               ))}
             </div>

@@ -268,6 +268,18 @@ export const comparisonFeatures: ComparisonFeature[] = [
   },
 ];
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface FAQCategory {
+  id: string;
+  category: string;
+  icon: string;
+  questions: FAQ[];
+}
+
 export const faqs = [
   {
     question: 'How long does it actually take to switch from [Competitor] to Pullse?',
@@ -304,6 +316,66 @@ export const faqs = [
   {
     question: 'Can your AI really process refunds and modify orders, or just answer questions?',
     answer: 'Yes, Pullse AI actually executes actions. When a customer asks for a refund, our AI can process it through Stripe/PayPal directly (with approval workflows if needed). When they ask about an order, it looks it up in real-time from Shopify/WooCommerce and can modify it. This is different from competitors whose AI just answers questions or deflects to help articles while agents still do the actual work manually.',
+  },
+];
+
+export const faqCategories: FAQCategory[] = [
+  {
+    id: 'switching-migration',
+    category: 'Switching & Migration',
+    icon: '🚀',
+    questions: [
+      {
+        question: 'How long does it actually take to switch from [Competitor] to Pullse?',
+        answer: 'Most teams are fully operational within 2-5 business days. We provide dedicated migration assistance, automated data import for tickets and contacts, and hands-on onboarding. The exact timeline depends on your data volume and customization needs, but we aim to minimize disruption with parallel running during transition.',
+      },
+      {
+        question: 'Can I keep my existing integrations?',
+        answer: 'Pullse integrates with 100+ popular tools including major CRMs (Salesforce, HubSpot), e-commerce platforms (Shopify, WooCommerce), and communication channels (Slack, email, SMS, social). We provide migration assistance to ensure your critical integrations transfer smoothly. If you have a specific integration requirement, our team can help evaluate compatibility.',
+      },
+      {
+        question: 'What happens to my historical data and conversations?',
+        answer: 'We migrate all your historical tickets, customer data, and knowledge base content. During the 2-5 day implementation, we run both systems in parallel so you maintain access to all historical conversations. Your team never loses context, and customers experience no disruption.',
+      },
+      {
+        question: 'Is there really a free trial?',
+        answer: 'Yes, we offer a trial period to experience the platform. Contact our sales team to discuss trial options that make sense for your team size and requirements.',
+      },
+    ],
+  },
+  {
+    id: 'pricing-costs',
+    category: 'Pricing & Costs',
+    icon: '💰',
+    questions: [
+      {
+        question: 'What are the hidden costs I should know about?',
+        answer: 'With Pullse, there are no hidden costs. Our pricing is per user/month plus usage-based AI actions. Unlike competitors, we don\'t charge extra for AI features, advanced analytics, or workflows. Implementation assistance and migration support are included. The only variable cost is AI usage, which scales with the value you receive.',
+      },
+      {
+        question: 'How does your pricing actually compare for a team of 10 agents?',
+        answer: 'For 10 agents with AI features: Zendesk costs ~$1,900/month base ($190/agent) plus $1.50 per AI resolution, Intercom costs $1,320/month ($132/agent) plus $0.99 per resolution, Freshdesk costs ~$1,330/month ($133/agent) plus variable session and task costs, and Dixa requires 7-seat minimum at $276/seat ($1,932/month) plus per-conversation fees. Pullse offers transparent Pro pricing at $79/seat + usage-based credits.',
+      },
+    ],
+  },
+  {
+    id: 'features-capabilities',
+    category: 'Features & Capabilities',
+    icon: '⚡',
+    questions: [
+      {
+        question: 'What if Pullse is missing a feature I need?',
+        answer: 'We\'re honest about our capabilities. Currently, we support email + live chat (with voice/phone and social messaging coming soon). We have all core AI features (agentic chatbots, copilot, Auto-QA suite), but we have fewer integrations than Zendesk (100+ vs 1700+). If you need a specific feature, contact us - we prioritize our roadmap based on customer needs and might already have it in development.',
+      },
+      {
+        question: 'What makes Pullse\'s AI "agentic" compared to other chatbots?',
+        answer: 'Most AI chatbots just answer questions or deflect to help articles. Pullse\'s agentic AI actually executes actions across your integrated systems - process Stripe refunds, look up Shopify orders, update Salesforce records, modify subscriptions. Our AI Copilot doesn\'t just suggest what to do; it does it for your agents with one-click execution and smart approval workflows for safety.',
+      },
+      {
+        question: 'Can your AI really process refunds and modify orders, or just answer questions?',
+        answer: 'Yes, Pullse AI actually executes actions. When a customer asks for a refund, our AI can process it through Stripe/PayPal directly (with approval workflows if needed). When they ask about an order, it looks it up in real-time from Shopify/WooCommerce and can modify it. This is different from competitors whose AI just answers questions or deflects to help articles while agents still do the actual work manually.',
+      },
+    ],
   },
 ];
 
