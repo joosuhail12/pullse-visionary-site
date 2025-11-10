@@ -252,189 +252,11 @@ const Compare = () => {
               </motion.p>
             </motion.div>
 
-            {/* Legacy Era vs AI Era Comparison */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="grid md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto"
-            >
-              {/* Legacy Era Card */}
-              <GlowCard
-                className="glass-strong p-8 rounded-3xl border-2 border-gray-400 relative overflow-hidden"
-                glowColor="156, 163, 175"
-                glowIntensity={0.2}
-                hoverElevation={false}
-              >
-                {/* Desaturation overlay */}
-                <div className="absolute inset-0 bg-gray-500/5 pointer-events-none" />
-
-                <motion.div
-                  className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gray-200 border border-gray-400"
-                  animate={{
-                    opacity: [0.7, 1, 0.7],
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <span className="text-xs font-bold text-gray-600">2010-2024</span>
-                </motion.div>
-
-                <div className="flex items-center gap-3 mb-6 relative z-10">
-                  <motion.div
-                    className="w-14 h-14 rounded-xl bg-gray-300 flex items-center justify-center border-2 border-gray-400"
-                    animate={{
-                      rotate: [0, 0, 0],
-                    }}
-                  >
-                    <Building2 className="w-7 h-7 text-gray-600" />
-                  </motion.div>
-                  <div className="text-left">
-                    <h3 className="text-xl font-bold text-gray-900">The Legacy Era</h3>
-                    <p className="text-xs text-gray-600 font-semibold">Zendesk, Intercom, Freshdesk</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-4 relative z-10">
-                  {[
-                    { text: 'AI as an add-on', icon: '❌' },
-                    { text: 'Manual workflows only', icon: '❌' },
-                    { text: 'Answer questions, can\'t act', icon: '❌' },
-                    { text: 'Built for chat, retrofitted for AI', icon: '❌' },
-                    { text: 'Pay per add-on feature', icon: '❌' },
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + idx * 0.1 }}
-                      className="flex items-start gap-3 p-3 rounded-lg bg-gray-100 border border-gray-300"
-                    >
-                      <span className="text-lg flex-shrink-0">{item.icon}</span>
-                      <span className="text-sm font-semibold text-gray-700 line-through decoration-2">
-                        {item.text}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="pt-4 border-t-2 border-gray-400 relative z-10">
-                  <p className="text-xs text-gray-600 font-bold uppercase tracking-wide text-center">
-                    Last updated ~2010
-                  </p>
-                </div>
-              </GlowCard>
-
-              {/* AI Era Card */}
-              <GlowCard
-                className="glass-strong p-8 rounded-3xl border-2 border-purple-500 relative overflow-hidden"
-                glowColor="132, 0, 255"
-                glowIntensity={0.8}
-                hoverElevation={true}
-              >
-                {/* Animated gradient background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-purple-500/10"
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                />
-
-                {/* Flowing particles effect */}
-                <motion.div
-                  className="absolute top-0 right-0 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl"
-                  animate={{
-                    x: [0, 20, 0],
-                    y: [0, -30, 0],
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{ duration: 5, repeat: Infinity }}
-                />
-
-                <motion.div
-                  className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 border-2 border-green-400 shadow-lg"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    boxShadow: [
-                      '0 0 0 0 rgba(34, 197, 94, 0)',
-                      '0 0 0 10px rgba(34, 197, 94, 0.2)',
-                      '0 0 0 0 rgba(34, 197, 94, 0)'
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <span className="text-xs font-bold text-white">2024 →</span>
-                </motion.div>
-
-                <div className="flex items-center gap-3 mb-6 relative z-10">
-                  <motion.div
-                    className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-xl border-2 border-purple-400"
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      rotate: [0, 5, -5, 0],
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    whileHover={{ rotate: 360, scale: 1.15 }}
-                  >
-                    <Sparkles className="w-7 h-7 text-white" />
-                  </motion.div>
-                  <div className="text-left">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      The AI Era
-                    </h3>
-                    <p className="text-xs text-purple-600 font-bold">Built AI-Native</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-4 relative z-10">
-                  {[
-                    { text: 'AI-native architecture', icon: '✓', delay: 0 },
-                    { text: 'Executes actions automatically', icon: '✓', delay: 0.1 },
-                    { text: 'Learns & adapts in real-time', icon: '✓', delay: 0.2 },
-                    { text: 'Built for AI from day one', icon: '✓', delay: 0.3 },
-                    { text: 'Everything included', icon: '✓', delay: 0.4 },
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + item.delay }}
-                      whileHover={{ x: 5, backgroundColor: 'rgba(132, 0, 255, 0.1)' }}
-                      className="flex items-start gap-3 p-3 rounded-lg bg-purple-50 border-2 border-purple-200 transition-all cursor-pointer group"
-                    >
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.2, 1],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: idx * 0.2
-                        }}
-                        className="flex-shrink-0"
-                      >
-                        <CheckCircle2 className="w-5 h-5 text-green-500 group-hover:text-purple-600 transition-colors" />
-                      </motion.div>
-                      <span className="text-sm font-bold text-purple-900 group-hover:text-purple-600 transition-colors">
-                        {item.text}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="pt-4 border-t-2 border-purple-300 relative z-10">
-                  <p className="text-xs text-purple-600 font-bold uppercase tracking-wide text-center">
-                    The Future, Today
-                  </p>
-                </div>
-              </GlowCard>
-            </motion.div>
-
             {/* Enhanced CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5 }}
+              transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <motion.div
@@ -472,7 +294,7 @@ const Compare = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.7 }}
+              transition={{ delay: 0.8 }}
               className="flex flex-wrap items-center justify-center gap-6 mt-12 text-sm text-muted-foreground"
             >
               {[
@@ -485,7 +307,7 @@ const Compare = () => {
                   className="flex items-center gap-2"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.8 + idx * 0.1 }}
+                  transition={{ delay: 0.9 + idx * 0.1 }}
                 >
                   <motion.span
                     className="text-lg"
