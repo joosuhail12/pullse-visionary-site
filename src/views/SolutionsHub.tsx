@@ -109,9 +109,9 @@ const SolutionsHub = () => {
   }, [statsAnimated]);
 
   const crossIndustryStats = [
-    { value: 70, suffix: "%", label: "automation rate" },
+    { value: 80, suffix: "%+", label: "automation rate" },
     { value: 8, suffix: "s", label: "avg response time" },
-    { value: 45, suffix: "%", label: "cost reduction" },
+    { value: 60, suffix: "%", label: "cost reduction" },
     { value: 24, suffix: "/7", label: "availability" },
   ];
 
