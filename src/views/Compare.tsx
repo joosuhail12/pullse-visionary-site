@@ -299,21 +299,21 @@ const Compare = () => {
           <GlowCard
             className="glass-strong p-6 md:p-8 rounded-3xl relative overflow-hidden"
             glowColor="132, 0, 255"
-            glowIntensity={0.6}
+            glowIntensity={0.4}
             hoverElevation={true}
-            tilt3D={currentCompetitor ? true : false}
+            tilt3D={false}
           >
             {/* Animated gradient mesh background */}
-            <div className="absolute inset-0 opacity-30">
+            <div className="absolute inset-0 opacity-20">
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-500/20 via-transparent to-pink-500/20" />
               <motion.div
                 className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl"
                 animate={{
-                  x: [0, 50, 0],
-                  y: [0, -30, 0],
-                  scale: [1, 1.2, 1],
+                  x: [0, 30, 0],
+                  y: [0, -15, 0],
+                  scale: [1, 1.1, 1],
                 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
 
@@ -323,20 +323,20 @@ const Compare = () => {
                 <motion.div
                   className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
                   animate={{
-                    scale: [1, 1.2, 1],
-                    x: [0, 30, 0],
-                    y: [0, -20, 0],
+                    scale: [1, 1.1, 1],
+                    x: [0, 20, 0],
+                    y: [0, -10, 0],
                   }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
                   className="absolute bottom-0 right-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"
                   animate={{
-                    scale: [1, 1.3, 1],
-                    x: [0, -30, 0],
-                    y: [0, 20, 0],
+                    scale: [1, 1.15, 1],
+                    x: [0, -20, 0],
+                    y: [0, 10, 0],
                   }}
-                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
                 />
               </>
             )}
@@ -483,25 +483,17 @@ const Compare = () => {
                 {/* VS Badge */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <motion.div
-                    className="relative"
+                    className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-2 border-white"
                     animate={{
-                      y: [0, -6, 0],
+                      boxShadow: [
+                        '0 0 0 0 rgba(132, 0, 255, 0.4)',
+                        '0 0 0 8px rgba(132, 0, 255, 0)',
+                        '0 0 0 0 rgba(132, 0, 255, 0)'
+                      ],
                     }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <motion.div
-                      className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-2 border-white"
-                      animate={{
-                        boxShadow: [
-                          '0 0 0 0 rgba(132, 0, 255, 0.7)',
-                          '0 0 0 14px rgba(132, 0, 255, 0)',
-                          '0 0 0 0 rgba(132, 0, 255, 0)'
-                        ],
-                      }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <span className="text-lg font-black text-white">VS</span>
-                    </motion.div>
+                    <span className="text-lg font-black text-white">VS</span>
                   </motion.div>
                 </div>
 
@@ -553,20 +545,13 @@ const Compare = () => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.6 + index * 0.1 }}
                           whileHover={{
-                            x: 8,
-                            scale: 1.02,
+                            x: 2,
                           }}
-                          className="flex gap-3 p-3 rounded-xl bg-white/50 backdrop-blur-sm border border-purple-100/50 shadow-sm group cursor-pointer hover:shadow-lg hover:border-purple-300 transition-all"
+                          className="flex gap-3 p-3 rounded-xl bg-white/50 backdrop-blur-sm border border-purple-100/50 shadow-sm group cursor-pointer hover:shadow-md hover:border-purple-300 transition-all"
                         >
-                          <motion.div
-                            className="w-5 h-5 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-md"
-                            whileHover={{
-                              rotate: [0, -10, 10, -10, 0],
-                              scale: 1.1,
-                            }}
-                          >
+                          <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-md">
                             <Check className="w-3.5 h-3.5 text-white" />
-                          </motion.div>
+                          </div>
                           <p className="text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors leading-relaxed">{reason}</p>
                         </motion.div>
                       ))}
@@ -621,7 +606,6 @@ const Compare = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
-                        whileHover={{ scale: 1.02 }}
                       >
                         <p className="text-[10px] text-blue-600 font-semibold mb-1.5 uppercase">Where {currentCompetitor.name} Excels</p>
                         <ul className="space-y-1.5">
@@ -633,17 +617,7 @@ const Compare = () => {
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.8 + idx * 0.1 }}
                             >
-                              <motion.div
-                                className="w-1.5 h-1.5 rounded-full bg-blue-500"
-                                animate={{
-                                  scale: [1, 1.5, 1],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                  delay: idx * 0.3
-                                }}
-                              />
+                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                               {strength}
                             </motion.li>
                           ))}
@@ -656,7 +630,6 @@ const Compare = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.9 }}
-                      whileHover={{ scale: 1.02 }}
                     >
                       <p className="text-xs text-gray-600 mb-2">
                         <strong>Pricing Reality:</strong>
