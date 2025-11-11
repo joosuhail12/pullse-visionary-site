@@ -667,61 +667,6 @@ const SolutionsHub = () => {
         </div>
       </section>
 
-      {/* Not Sure Section - Updated */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
-
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative overflow-hidden rounded-3xl border-2 border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-12 shadow-2xl">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.15),transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.15),transparent_50%)]" />
-
-              <div className="relative text-center space-y-8">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 shadow-lg">
-                  <HelpCircle className="h-8 w-8 text-primary" />
-                </div>
-
-                <div className="space-y-4">
-                  <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-                    Not sure which solution is right for you?
-                  </h2>
-                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                    Let's talk. We'll show you how Pullse adapts to your specific workflows, team size, and goals.
-                  </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <RouteButton
-                    size="lg"
-                    className="text-base px-10 py-6 shadow-xl shadow-primary/20"
-                    href="/contact-sales"
-                  >
-                    Talk to our solutions team
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </RouteButton>
-                </div>
-
-                <div className="flex items-center justify-center gap-6 pt-6 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Free consultation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>Custom demo</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>No commitment</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA - Improved */}
       <section className="relative py-40 overflow-hidden">
         {/* Animated gradient orbs background */}
