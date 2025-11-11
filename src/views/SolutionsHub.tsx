@@ -170,51 +170,6 @@ const SolutionsHub = () => {
     },
   ];
 
-  const industryAdaptations = [
-    {
-      industry: "B2B SaaS",
-      icon: Briefcase,
-      color: "text-blue-600",
-      bgColor: "bg-blue-500/10",
-      borderColor: "border-blue-500/30",
-      description: "Technical support that understands your product complexity",
-      roi: "Reduce churn by 28% with faster technical resolutions",
-      examples: [
-        { tool: "Chatbot", action: "Triggers GitHub issue creation for bugs", impact: "→ Eliminates 10+ messages between support and engineering" },
-        { tool: "Copilot", action: "Surfaces API docs during integration help", impact: "→ Cut integration support time from 2 hours to 15 minutes" },
-        { tool: "Auto-QA", action: "Flags missed upsell opportunities", impact: "→ Capture $50K+ in expansion revenue per quarter" },
-      ],
-    },
-    {
-      industry: "E-commerce",
-      icon: ShoppingCart,
-      color: "text-green-600",
-      bgColor: "bg-green-500/10",
-      borderColor: "border-green-500/30",
-      description: "Handle peak season volume without scaling your team",
-      roi: "Reduce WISMO tickets by 62% during Black Friday",
-      examples: [
-        { tool: "Chatbot", action: "Auto-processes returns via Shopify", impact: "→ Process 500+ returns daily vs. 50 manually" },
-        { tool: "Copilot", action: "Suggests product recommendations", impact: "→ Increase average order value by 18%" },
-        { tool: "Auto-QA", action: "Monitors holiday season performance", impact: "→ Catch issues before they become viral complaints" },
-      ],
-    },
-    {
-      industry: "Fintech",
-      icon: Shield,
-      color: "text-red-600",
-      bgColor: "bg-red-500/10",
-      borderColor: "border-red-500/30",
-      description: "Compliance-first support that protects your customers and your license",
-      roi: "Respond to fraud in <8 seconds vs. 2+ min industry average",
-      examples: [
-        { tool: "Chatbot", action: "Freezes accounts on fraud detection", impact: "→ Prevent $100K+ in fraud losses annually" },
-        { tool: "Copilot", action: "Guides through KYC verification", impact: "→ Complete verifications 5x faster with zero compliance risk" },
-        { tool: "Auto-QA", action: "Ensures regulatory compliance", impact: "→ Pass audits without dedicated compliance reviews" },
-      ],
-    },
-  ];
-
   const industrySolutions = [
     {
       icon: Briefcase,
@@ -557,66 +512,6 @@ const SolutionsHub = () => {
                             <div className="text-xs font-medium opacity-90">{pillar.roiText}</div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industry Adaptation Comparison */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/5 to-background" />
-
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-                AI that understands your industry—not just support
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Our platform automatically adapts to your tools, workflows, and business rules. No custom development required.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {industryAdaptations.map((industry, index) => {
-                const Icon = industry.icon;
-                return (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden rounded-3xl border-2 ${industry.borderColor} bg-card p-8 transition-all hover:shadow-xl`}
-                  >
-                    <div className={`absolute inset-0 ${industry.bgColor} opacity-30`} />
-
-                    <div className="relative space-y-6">
-                      <div className="flex items-start gap-4">
-                        <div className={`h-16 w-16 rounded-2xl ${industry.bgColor} border ${industry.borderColor} flex items-center justify-center shadow-lg shrink-0`}>
-                          <Icon className={`h-8 w-8 ${industry.color}`} />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-foreground mb-2">{industry.industry}</h3>
-                          <p className="text-base text-muted-foreground mb-3">{industry.description}</p>
-                          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                            <TrendingUp className="w-4 h-4 text-primary" />
-                            <span className="text-sm font-semibold text-primary">{industry.roi}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-3 gap-4">
-                        {industry.examples.map((example, i) => (
-                          <div key={i} className="p-5 rounded-xl bg-background/50 border border-border/40 hover:border-primary/40 transition-colors group">
-                            <div className={`text-xs font-bold uppercase tracking-wider ${industry.color} mb-2`}>
-                              {example.tool}
-                            </div>
-                            <p className="text-sm text-foreground font-medium mb-2">{example.action}</p>
-                            <p className="text-xs text-muted-foreground leading-relaxed">{example.impact}</p>
-                          </div>
-                        ))}
                       </div>
                     </div>
                   </div>
