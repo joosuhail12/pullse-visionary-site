@@ -320,7 +320,7 @@ const SolutionsHub = () => {
       </div>
 
       {/* Hero Section - Platform Value Proposition */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background/80 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -340,7 +340,7 @@ const SolutionsHub = () => {
           </Suspense>
         </div>
 
-        <div className="container relative mx-auto px-4">
+        <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-8">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
