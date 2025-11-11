@@ -933,17 +933,6 @@ const Compare = () => {
             className="max-w-5xl mx-auto mb-16"
           >
             <div className="text-center mb-8">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-200/50 mb-4"
-              >
-                <Zap className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-600">
-                  Easy to Use
-                </span>
-              </motion.div>
               <h2 className="text-3xl md:text-4xl font-bold mb-3">
                 Simple Setup, Powerful Results
               </h2>
