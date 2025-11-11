@@ -130,10 +130,8 @@ const SolutionsHub = () => {
       borderColor: "border-blue-500/30",
       textColor: "text-blue-600",
       features: [
-        "Execute Stripe refunds in 8 seconds vs. 5 min manually → save 12 hours/week",
-        "Create Jira tickets with full context → eliminate 20+ back-and-forth messages",
-        "Update account settings across systems → reduce errors from 15% to <1%",
-        "Send Slack alerts to right teams → cut escalation time from 2 hours to 30 seconds",
+        "Process refunds and account updates in seconds with automatic integrations",
+        "Create detailed tickets and alerts across all your tools",
       ],
     },
     {
@@ -149,10 +147,8 @@ const SolutionsHub = () => {
       borderColor: "border-purple-500/30",
       textColor: "text-purple-600",
       features: [
-        "AI-suggested responses in real-time → reduce typing time by 80%",
-        "Auto-summarize long conversations → save 5 min per handoff",
-        "Surface relevant help articles instantly → eliminate 15 min of manual searching",
-        "Detect sentiment and escalation triggers → prevent 90% of negative reviews",
+        "Get instant answers with context from Zendesk, Stripe, and Salesforce",
+        "Auto-generate responses with links and order details in one click",
       ],
     },
     {
@@ -168,10 +164,8 @@ const SolutionsHub = () => {
       borderColor: "border-green-500/30",
       textColor: "text-green-600",
       features: [
-        "Score every conversation automatically → eliminate 5-10% sample bias",
-        "Identify training opportunities → improve CSAT by 25% in 30 days",
-        "Track compliance violations → prevent $50K+ fines from missed regulations",
-        "Generate coaching insights → reduce manager time on QA by 90%",
+        "Catch issues before customers do with real-time quality monitoring",
+        "Get actionable coaching insights from every customer interaction",
       ],
     },
   ];
@@ -546,7 +540,7 @@ const SolutionsHub = () => {
                             <div className={`mt-0.5 h-4 w-4 rounded-full ${pillar.bgColor} border ${pillar.borderColor} flex items-center justify-center shrink-0`}>
                               <CheckCircle2 className={`h-2.5 w-2.5 ${pillar.textColor}`} />
                             </div>
-                            <p className="text-xs text-foreground/80 leading-relaxed">{feature}</p>
+                            <p className="text-sm text-foreground/80 leading-relaxed">{feature}</p>
                           </div>
                         ))}
                       </div>
