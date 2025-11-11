@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef, Suspense } from "react";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
@@ -484,12 +485,12 @@ const SolutionsHub = () => {
       </section>
 
       {/* The 3 Pillars - Expanded */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20 space-y-6">
+            <div className="text-center mb-12 space-y-5">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 From overwhelmed agents to automated excellence
               </h2>
@@ -509,7 +510,7 @@ const SolutionsHub = () => {
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-6">
               {pillars.map((pillar, index) => {
                 const Icon = pillar.icon;
                 return (
@@ -519,7 +520,7 @@ const SolutionsHub = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-5`} />
 
-                    <div className="relative p-10 space-y-8">
+                    <div className="relative p-8 space-y-6">
                       {/* Header */}
                       <div className="space-y-4">
                         <div className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
@@ -633,12 +634,12 @@ const SolutionsHub = () => {
       </section>
 
       {/* Choose Your Industry - Solution Cards */}
-      <section id="solutions" className="relative py-32 overflow-hidden">
+      <section id="solutions" className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20 space-y-6">
+            <div className="text-center mb-12 space-y-5">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Choose your industry to see exact ROI
               </h2>
@@ -657,7 +658,7 @@ const SolutionsHub = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${solution.gradient} opacity-50`} />
 
-                    <div className="relative p-8 space-y-8">
+                    <div className="relative p-6 space-y-6">
                       {/* Header */}
                       <div className="space-y-4">
                         <div className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl ${solution.bgColor} border-2 ${solution.borderColor} shadow-lg`}>
@@ -727,11 +728,11 @@ const SolutionsHub = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section id="roi-calculator" className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section id="roi-calculator" className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
-            <div className="text-center mb-12 space-y-6">
+            <div className="text-center mb-8 space-y-5">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 See your exact savings in 60 seconds
               </h2>
@@ -755,7 +756,7 @@ const SolutionsHub = () => {
             </div>
 
             {/* Calculator Card */}
-            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-10 md:p-12 shadow-2xl backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-8 md:p-10 shadow-2xl backdrop-blur-sm">
               <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
               <div className="relative">
                 <RoiCalculator />
@@ -766,12 +767,12 @@ const SolutionsHub = () => {
       </section>
 
       {/* Quick Comparison Table */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
+            <div className="text-center mb-12 space-y-4">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
                 Still deciding? Compare solutions
               </h2>
@@ -967,87 +968,88 @@ const SolutionsHub = () => {
       </section>
 
       {/* Final CTA - Improved */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_60%)]" />
+      <section className="relative py-40 overflow-hidden">
+        {/* Animated gradient orbs background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
 
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-10">
-            <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Start automating 80% of tickets
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2">
-                  in 14 days or less
-                </span>
-              </h2>
+        <div className="container mx-auto px-6 relative">
+          <div className="max-w-5xl mx-auto">
+            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-12 lg:p-16 shadow-2xl text-center overflow-hidden">
 
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Setup takes 1 hour. ROI starts immediately. No credit card required for your 14-day trial.
-              </p>
-              <div className="flex flex-wrap justify-center gap-6 pt-2">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">1 hour</div>
-                  <div className="text-sm text-muted-foreground">Setup time</div>
-                </div>
-                <div className="h-12 w-px bg-border"></div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">14 days</div>
-                  <div className="text-sm text-muted-foreground">To see ROI</div>
-                </div>
-                <div className="h-12 w-px bg-border"></div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">$0</div>
-                  <div className="text-sm text-muted-foreground">To get started</div>
-                </div>
-              </div>
-            </div>
+              {/* Inner glow effect */}
+              <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <RouteButton
-                size="lg"
-                className="text-base px-10 py-6 shadow-xl shadow-primary/20"
-                href="/contact-sales"
-              >
-                Start free trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </RouteButton>
-              <RouteButton
-                size="lg"
-                variant="outline"
-                className="text-base px-10 py-6"
-                href="#roi-calculator"
-              >
-                Calculate savings
-                <TrendingUp className="ml-2 h-5 w-5" />
-              </RouteButton>
-            </div>
+              <div className="relative space-y-8">
+                <div className="space-y-6">
+                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-tight">
+                    Start automating 80% of tickets
+                    <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent mt-3">
+                      in 14 days or less
+                    </span>
+                  </h2>
 
-            <div className="grid sm:grid-cols-3 gap-6 pt-8 max-w-3xl mx-auto">
-              <div className="flex flex-col items-center text-center gap-2">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <Zap className="h-6 w-6 text-primary" />
+                  <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                    Setup takes 1 hour. ROI starts immediately. No credit card required for your 14-day trial.
+                  </p>
+
+                  <div className="flex flex-wrap justify-center gap-6 pt-2">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary">1 hour</div>
+                      <div className="text-sm text-muted-foreground">Setup time</div>
+                    </div>
+                    <div className="h-12 w-px bg-border"></div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary">14 days</div>
+                      <div className="text-sm text-muted-foreground">To see ROI</div>
+                    </div>
+                    <div className="h-12 w-px bg-border"></div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary">$0</div>
+                      <div className="text-sm text-muted-foreground">To get started</div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">1-hour setup</div>
-                  <div className="text-xs text-muted-foreground">Live today, not next quarter</div>
+
+                <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
+                  <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.98 }}>
+                    <RouteButton
+                      size="lg"
+                      className="text-base px-10 py-6 shadow-xl shadow-primary/20"
+                      href="/contact-sales"
+                    >
+                      Start free trial
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </RouteButton>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.98 }}>
+                    <RouteButton
+                      size="lg"
+                      variant="outline"
+                      className="text-base px-10 py-6"
+                      href="#roi-calculator"
+                    >
+                      Calculate savings
+                      <TrendingUp className="ml-2 h-5 w-5" />
+                    </RouteButton>
+                  </motion.div>
                 </div>
-              </div>
-              <div className="flex flex-col items-center text-center gap-2">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <Shield className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">No credit card</div>
-                  <div className="text-xs text-muted-foreground">Full 14-day trial included</div>
-                </div>
-              </div>
-              <div className="flex flex-col items-center text-center gap-2">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">Setup help included</div>
-                  <div className="text-xs text-muted-foreground">We'll get you to 80% automation</div>
+
+                <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>1-hour setup • Live today, not next quarter</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>No credit card • Full 14-day trial included</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>Setup help included • We'll get you to 80% automation</span>
+                  </div>
                 </div>
               </div>
             </div>
