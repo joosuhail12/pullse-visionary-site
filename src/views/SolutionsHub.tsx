@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+import LiquidEther from "@/components/LiquidEther";
 import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
 import {
@@ -320,8 +321,24 @@ const SolutionsHub = () => {
 
       {/* Hero Section - Platform Value Proposition */}
       <section className="relative pt-32 pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background/80 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
+
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-40">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
