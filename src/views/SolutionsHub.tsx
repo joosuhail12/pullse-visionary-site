@@ -485,32 +485,32 @@ const SolutionsHub = () => {
       </section>
 
       {/* The 3 Pillars - Expanded */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12 space-y-5">
+            <div className="text-center mb-8 space-y-4">
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 From overwhelmed agents to automated excellence
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
                 Three AI tools working together to eliminate busywork, accelerate resolutions, and maintain quality at scale
               </p>
-              <div className="flex flex-wrap justify-center gap-4 pt-4">
-                <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <div className="flex flex-wrap justify-center gap-3 pt-2">
+                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
                   <span className="text-sm font-semibold text-primary">Save 15+ hours per agent weekly</span>
                 </div>
-                <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
                   <span className="text-sm font-semibold text-primary">Reduce resolution time by 75%</span>
                 </div>
-                <div className="px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
                   <span className="text-sm font-semibold text-primary">Zero quality compromise</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-5">
               {pillars.map((pillar, index) => {
                 const Icon = pillar.icon;
                 return (
@@ -520,39 +520,39 @@ const SolutionsHub = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-5`} />
 
-                    <div className="relative p-8 space-y-6">
+                    <div className="relative p-6 space-y-4">
                       {/* Header */}
-                      <div className="space-y-4">
-                        <div className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
-                          <Icon className="h-10 w-10 text-background" />
+                      <div className="space-y-3">
+                        <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
+                          <Icon className="h-8 w-8 text-background" />
                         </div>
                         <div>
-                          <div className={`text-xs font-bold uppercase tracking-wider ${pillar.textColor} mb-2`}>
+                          <div className={`text-xs font-bold uppercase tracking-wider ${pillar.textColor} mb-1.5`}>
                             {pillar.subtitle}
                           </div>
-                          <h3 className="text-3xl font-bold text-foreground">{pillar.title}</h3>
+                          <h3 className="text-2xl font-bold text-foreground">{pillar.title}</h3>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-base text-muted-foreground leading-relaxed">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         {pillar.description}
                       </p>
 
                       {/* Features */}
-                      <div className="space-y-3">
+                      <div className="space-y-2">
                         {pillar.features.map((feature, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className={`mt-1 h-5 w-5 rounded-full ${pillar.bgColor} border ${pillar.borderColor} flex items-center justify-center shrink-0`}>
-                              <CheckCircle2 className={`h-3 w-3 ${pillar.textColor}`} />
+                          <div key={i} className="flex items-start gap-2.5">
+                            <div className={`mt-0.5 h-4 w-4 rounded-full ${pillar.bgColor} border ${pillar.borderColor} flex items-center justify-center shrink-0`}>
+                              <CheckCircle2 className={`h-2.5 w-2.5 ${pillar.textColor}`} />
                             </div>
-                            <p className="text-sm text-foreground/80">{feature}</p>
+                            <p className="text-xs text-foreground/80 leading-relaxed">{feature}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Stat */}
-                      <div className={`p-6 rounded-2xl bg-gradient-to-br ${pillar.color} text-background space-y-3`}>
+                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${pillar.color} text-background space-y-2`}>
                         <div>
                           <div className="text-5xl font-black mb-2">{pillar.stat}</div>
                           <div className="text-sm font-semibold opacity-90">{pillar.statLabel}</div>
