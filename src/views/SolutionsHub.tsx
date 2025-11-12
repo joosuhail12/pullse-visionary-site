@@ -259,7 +259,7 @@ const SolutionsHub = () => {
       </div>
 
       {/* Hero Section - Platform Value Proposition */}
-      <section className="relative py-24 lg:py-32 flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background/80 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -293,7 +293,7 @@ const SolutionsHub = () => {
                 Industry-specific AI that takes action for your agents—from Stripe refunds to Shopify returns to fraud alerts. Resolve critical issues in 8 seconds, not 8 minutes. Your team finally has room to breathe.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+              <div className="pt-6">
                 <RouteButton
                   size="lg"
                   className="text-base px-10 py-6 shadow-xl shadow-primary/20 group"
@@ -301,15 +301,6 @@ const SolutionsHub = () => {
                 >
                   Book a demo
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                </RouteButton>
-                <RouteButton
-                  size="lg"
-                  variant="outline"
-                  className="text-base px-10 py-6"
-                  href="/contact-sales"
-                >
-                  Talk to sales
-                  <ArrowRight className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 
