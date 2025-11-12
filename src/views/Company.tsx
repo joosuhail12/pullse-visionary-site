@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -11,6 +12,7 @@ import TeamCard from '@/components/company/TeamCard';
 import JourneySection from '@/components/company/JourneySection';
 import GlassCard from '@/components/company/GlassCard';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
+import LiquidEther from '@/components/LiquidEther';
 import {
   antler,
   cta,
@@ -30,6 +32,22 @@ const Company = () => {
           SECTION 1: HERO - Founder-Led
       ======================================== */}
       <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-muted/20 via-background to-muted/10">
+        {/* Liquid Ether Background */}
+        <div className="absolute inset-0 -z-10 opacity-30">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#7C3AED", "#8B5CF6", "#A78BFA"]}
+              mouseForce={20}
+              cursorSize={100}
+              isViscous={false}
+              resolution={0.6}
+              autoDemo
+              autoSpeed={0.3}
+              autoIntensity={1.5}
+            />
+          </Suspense>
+        </div>
+
         {/* Layered Gradient Orbs with Different Animations */}
         <motion.div
           animate={{
