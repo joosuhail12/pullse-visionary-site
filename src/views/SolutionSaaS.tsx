@@ -220,7 +220,7 @@ const SolutionSaaS = () => {
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
                 <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-6 shadow-xl shadow-primary/20 group">
-                  Watch 2-minute demo
+                  Book a demo
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
                 <RouteButton
@@ -229,8 +229,8 @@ const SolutionSaaS = () => {
                   className="text-base px-10 py-6"
                   href="/contact-sales"
                 >
-                  Calculate SaaS ROI
-                  <TrendingUp className="ml-2 h-5 w-5" />
+                  Talk to sales
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 
