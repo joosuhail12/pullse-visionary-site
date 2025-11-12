@@ -396,9 +396,9 @@ const SolutionSaaS = () => {
             </div>
 
             {/* Split-Screen Comparison */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-16">
+            <div className="grid lg:grid-cols-2 gap-12 mb-16">
               {/* Traditional Side - Chaos */}
-              <div className="relative rounded-3xl border-2 border-destructive/40 bg-gradient-to-br from-destructive/10 via-destructive/5 to-transparent pt-12 px-8 pb-8 overflow-hidden">
+              <div className="relative rounded-3xl border-[3px] border-destructive/50 bg-gradient-to-br from-destructive/10 via-destructive/5 to-transparent pt-12 px-8 pb-8 overflow-hidden shadow-xl">
                 {/* Stress Badge */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-destructive text-background text-xs font-bold uppercase tracking-wider z-10">
                   The Old Way
@@ -417,7 +417,7 @@ const SolutionSaaS = () => {
                   </div>
 
                 {/* Visual Metaphor - Stacked Tool Windows */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-5 mb-8">
                   {[
                     { tool: 'Helpdesk', action: 'Open ticket, read message, copy customer ID...', progress: raceProgress > 0, delay: 0 },
                     { tool: 'Stripe Dashboard', action: 'Search customer, find transaction, verify amount...', progress: raceProgress > 25, delay: 100 },
@@ -436,13 +436,13 @@ const SolutionSaaS = () => {
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <div className="h-2 w-2 rounded-full bg-destructive/60" />
-                          <span className="text-xs font-bold text-foreground">{window.tool}</span>
+                          <span className="text-sm font-bold text-foreground">{window.tool}</span>
                         </div>
                         {window.progress && (
-                          <Loader2 className="h-3.5 w-3.5 text-destructive/60 animate-spin" />
+                          <Loader2 className="h-4 w-4 text-destructive/60 animate-spin" />
                         )}
                       </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{window.action}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{window.action}</p>
                     </div>
                   ))}
                 </div>
@@ -450,7 +450,7 @@ const SolutionSaaS = () => {
                 {/* Agent Stress Indicator */}
                 <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-5 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-destructive">Agent Status</span>
+                    <span className="text-lg font-bold text-destructive">Agent Status</span>
                     <div className="flex items-center gap-2">
                       <div className="h-2 w-2 rounded-full bg-destructive animate-pulse" />
                       <span className="text-xs font-bold text-destructive">Stressed</span>
@@ -474,7 +474,7 @@ const SolutionSaaS = () => {
 
                   {raceProgress >= 100 && (
                     <div className="pt-3 border-t border-destructive/20 animate-in fade-in duration-500">
-                      <p className="text-xs text-destructive font-semibold">
+                      <p className="text-sm text-destructive font-semibold">
                         ✗ 3 minutes 40 seconds wasted • Customer still angry
                       </p>
                     </div>
@@ -500,7 +500,7 @@ const SolutionSaaS = () => {
               </div>
 
               {/* Pullse Side - Calm */}
-              <div className="relative rounded-3xl border-2 border-primary bg-gradient-to-br from-primary/10 via-primary/5 to-transparent pt-12 px-8 pb-8 overflow-hidden">
+              <div className="relative rounded-3xl border-2 border-primary/60 bg-gradient-to-br from-primary/10 via-purple-500/5 to-transparent pt-12 px-8 pb-8 overflow-hidden shadow-xl">
                 {/* Success Badge */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-purple-600 text-background text-xs font-bold uppercase tracking-wider shadow-lg z-10">
                   The Pullse Way
@@ -526,12 +526,12 @@ const SolutionSaaS = () => {
                     <div className="relative">
                       <div className="flex items-center gap-2 mb-3">
                         <Sparkles className="h-4 w-4 text-primary" />
-                        <span className="text-xs font-bold text-primary">Agent Command</span>
+                        <span className="text-sm font-bold text-primary">Agent Command</span>
                       </div>
                       <p className="text-base font-semibold text-foreground mb-2">
                         "Issue $250 refund and email confirmation"
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-sm text-muted-foreground">
                         That's it. AI figures out the rest.
                       </p>
                     </div>
@@ -563,17 +563,17 @@ const SolutionSaaS = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between mb-1">
-                            <span className={`text-sm font-bold ${action.progress ? 'text-foreground' : 'text-muted-foreground'}`}>
+                            <span className={`text-base font-bold ${action.progress ? 'text-foreground' : 'text-muted-foreground'}`}>
                               {action.step}
                             </span>
                             {action.progress && (
-                              <span className="text-xs font-bold text-primary">{action.time}</span>
+                              <span className="text-sm font-bold text-green-600">{action.time}</span>
                             )}
                           </div>
-                          <p className="text-xs text-muted-foreground">{action.detail}</p>
+                          <p className="text-sm text-muted-foreground">{action.detail}</p>
                         </div>
                         {action.progress && (
-                          <CheckCircle2 className="h-5 w-5 text-primary shrink-0 animate-in zoom-in duration-300" />
+                          <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 animate-in zoom-in duration-300" />
                         )}
                       </div>
                     );
@@ -583,7 +583,7 @@ const SolutionSaaS = () => {
                 {/* Agent Status - Calm */}
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-5 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-primary">Agent Status</span>
+                    <span className="text-lg font-bold text-primary">Agent Status</span>
                     <div className="flex items-center gap-2">
                       <div className="h-2 w-2 rounded-full bg-green-500" />
                       <span className="text-xs font-bold text-green-600">Relaxed</span>
@@ -607,7 +607,7 @@ const SolutionSaaS = () => {
 
                   {raceProgress >= 3.6 && (
                     <div className="pt-3 border-t border-primary/20 animate-in fade-in duration-500">
-                      <p className="text-xs text-primary font-semibold">
+                      <p className="text-sm text-green-600 font-semibold">
                         ✓ Done in 8 seconds • Customer satisfied • On to next ticket
                       </p>
                     </div>
@@ -634,8 +634,8 @@ const SolutionSaaS = () => {
             </div>
 
             {/* Business Impact Summary */}
-            <div className="max-w-5xl mx-auto mb-12">
-              <div className="relative rounded-3xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 via-card to-card/90 p-8 md:p-12 overflow-hidden">
+            <div className="max-w-5xl mx-auto mb-16">
+              <div className="relative rounded-3xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 via-card to-card/90 p-8 md:p-12 overflow-hidden shadow-xl">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
                 <div className="relative">
