@@ -563,7 +563,7 @@ const SolutionSaaS = () => {
                       {[
                         { icon: Brain, action: 'AI analyzing request', detail: 'Intent: refund + notify', progress: raceProgress > 0, time: '0.5s' },
                         { icon: Zap, action: 'Executing Stripe API', detail: '$250 processed', progress: raceProgress > 0.9, time: '2s' },
-                        { icon: CheckCircle2, action: 'Updating systems', detail: 'Zendesk + Email auto-updated', progress: raceProgress > 2, time: '4s' },
+                        { icon: CheckCircle2, action: 'Updating systems', detail: 'Ticket + Email auto-updated', progress: raceProgress > 2, time: '4s' },
                         { icon: UserCheck, action: 'Customer notified', detail: 'Confirmation sent', progress: raceProgress > 3, time: '8s' },
                       ].map((action, idx) => {
                         const Icon = action.icon;
