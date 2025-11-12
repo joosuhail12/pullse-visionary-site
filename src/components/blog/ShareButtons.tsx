@@ -20,9 +20,9 @@ export default function ShareButtons({ title, url, className = '' }: ShareButton
   };
 
   const shareOnLinkedIn = () => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+    const linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
       url
-    )}`;
+    )}&title=${encodeURIComponent(title)}`;
     window.open(linkedInUrl, '_blank', 'noopener,noreferrer');
   };
 

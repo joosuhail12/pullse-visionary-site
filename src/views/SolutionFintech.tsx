@@ -27,6 +27,7 @@ import {
   SearchCheck,
   ShieldCheck,
   Eye,
+  Wallet,
   FileCheck,
   Bell,
   UserCheck,
@@ -76,14 +77,14 @@ const SolutionFintech = () => {
             {/* Header Content */}
             <div className="text-center space-y-8">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
-                A fraudster can drain $15K in 8 minutes. Your team takes 30.
+                Risk alerts hit. Your team scrambles for 30 minutes.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3">
-                  Stop fraud in under 8 seconds.
+                  Pullse responds in 8 seconds.
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Compliance-first AI that detects fraud, verifies KYC, and prevents chargebacks—with complete audit trails, SOC 2 controls, and encryption built in. Fast enough to stop fraud. Secure enough to pass any audit.
+                AI that instantly responds to fraud alerts, chargebacks, and disputes across your entire stack. No scrambling between tools. No 30-minute investigations. Just instant, orchestrated responses.
               </p>
 
               {/* CTA */}
@@ -123,7 +124,7 @@ const SolutionFintech = () => {
           <div className="max-w-7xl mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { icon: Clock, value: 67, suffix: '%', label: 'Faster fraud response', color: 'text-red-500' },
+                { icon: Clock, value: 67, suffix: '%', label: 'Faster risk response', color: 'text-red-500' },
                 { icon: CreditCard, value: 92, suffix: '%', label: 'Payment recovery rate', color: 'text-blue-500' },
                 { icon: DollarSign, value: 87, suffix: 'K', prefix: '$', label: 'Chargebacks prevented', color: 'text-green-500' },
                 { icon: UserCheck, value: 45, suffix: '%', label: 'Faster KYC verification', color: 'text-purple-500' },
@@ -188,7 +189,7 @@ const SolutionFintech = () => {
                       <MessageSquare className="h-8 w-8 text-background" />
                     </div>
                     <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-bold uppercase">
-                      Stop Fraud Fast
+                      Orchestrate Risk Workflows
                     </div>
                   </div>
 
@@ -196,7 +197,7 @@ const SolutionFintech = () => {
                   <div className="space-y-3">
                     <h3 className="text-2xl font-bold text-foreground">AI Chatbots</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                      24/7 automated support that understands fraud alerts, payment failures, and KYC requirements. Escalates high-risk cases instantly.
+                      24/7 automated support that orchestrates responses to fraud alerts, payment failures, and KYC requirements across your risk tools. Escalates high-risk cases instantly.
                     </p>
                   </div>
 
@@ -205,7 +206,7 @@ const SolutionFintech = () => {
                     <div className="text-5xl font-black bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent mb-2">
                       &lt; 8s
                     </div>
-                    <div className="text-sm text-foreground/80">fraud response time</div>
+                    <div className="text-sm text-foreground/80">risk response time</div>
                   </div>
                 </div>
               </div>
@@ -297,61 +298,28 @@ const SolutionFintech = () => {
             {/* Workflow Examples */}
             <div className="grid lg:grid-cols-2 gap-8 mb-12">
               <WorkflowShowcase
-                title="Fraud Alert Response"
-                scenario="Risk engine flags suspicious $15K transfer from new customer account"
-                steps={[
-                  {
-                    icon: AlertTriangle,
-                    label: 'Instant Detection',
-                    description: 'Fraud signal from Sift triggers high-priority alert. Auto-creates ticket flagged for fraud team.',
-                  },
-                  {
-                    icon: SearchCheck,
-                    label: 'Context Enrichment',
-                    description: 'System pulls: KYC verification status, previous transactions, account age, linked accounts.',
-                  },
-                  {
-                    icon: Eye,
-                    label: 'Specialist Review',
-                    description: 'Fraud specialist sees full context. Transaction on hold. Customer contacted via secure channel.',
-                  },
-                  {
-                    icon: FileCheck,
-                    label: 'Documented Resolution',
-                    description: 'Verification requested. ID documents uploaded. Transaction approved. Full audit trail logged.',
-                  },
-                ]}
-                outcome={{
-                  value: '< 12 min',
-                  metric: 'Avg Response Time',
-                  description: 'Fraud cases reviewed and actioned in minutes, preventing $2.3M in losses annually',
-                }}
-                gradient="from-red-500/10 to-orange-500/10"
-              />
-
-              <WorkflowShowcase
                 title="Failed Payment Investigation"
                 scenario="Customer reports failed card transaction, needs immediate resolution"
                 steps={[
                   {
                     icon: CreditCard,
                     label: 'Payment Context',
-                    description: 'Agent sees Stripe data: decline reason (insufficient funds), previous successful transactions, card type.',
+                    description: 'Payment history and card data pulled from Stripe.',
                   },
                   {
                     icon: MessageSquare,
                     label: 'Secure Communication',
-                    description: 'Agent explains issue without exposing sensitive data. Suggests alternative payment method.',
+                    description: 'Issue identified. Customer contacted with solution.',
                   },
                   {
                     icon: Activity,
                     label: 'Real-time Retry',
-                    description: 'Customer updates payment method. Agent monitors Stripe webhook for confirmation.',
+                    description: 'Payment updated. Transaction retried successfully.',
                   },
                   {
                     icon: CheckCircle2,
                     label: 'Automated Follow-up',
-                    description: 'Payment succeeds. System auto-closes ticket, logs transaction ID, sends confirmation email.',
+                    description: 'Transaction succeeds. Ticket closed automatically.',
                   },
                 ]}
                 outcome={{
@@ -363,28 +331,61 @@ const SolutionFintech = () => {
               />
 
               <WorkflowShowcase
+                title="Disputed Transaction"
+                scenario="Customer disputes $500 charge, threatens chargeback"
+                steps={[
+                  {
+                    icon: AlertTriangle,
+                    label: 'Dispute Intake',
+                    description: 'Dispute received. Transaction data auto-pulled from Stripe.',
+                  },
+                  {
+                    icon: Database,
+                    label: 'Evidence Collection',
+                    description: 'Agent sees full timeline and transaction history.',
+                  },
+                  {
+                    icon: MessageSquare,
+                    label: 'Customer Discussion',
+                    description: 'Evidence reviewed. Customer recalls legitimate purchase.',
+                  },
+                  {
+                    icon: Ban,
+                    label: 'Case Closure',
+                    description: 'Chargeback prevented. Case documented and archived.',
+                  },
+                ]}
+                outcome={{
+                  value: '$87K',
+                  metric: 'Chargebacks Prevented',
+                  description: 'Better context and faster response prevent costly chargebacks and maintain processor relationships',
+                }}
+                gradient="from-purple-500/10 to-pink-500/10"
+              />
+
+              <WorkflowShowcase
                 title="KYC Document Verification"
                 scenario="New high-value customer needs expedited account verification"
                 steps={[
                   {
                     icon: UserCheck,
                     label: 'Document Request',
-                    description: 'Compliance team requests ID + proof of address. Secure upload link sent via encrypted channel.',
+                    description: 'ID and proof of address requested. Secure upload link sent.',
                   },
                   {
                     icon: FileCheck,
                     label: 'Document Review',
-                    description: 'Documents uploaded. Agent reviews with Alloy integration showing verification status and risk score.',
+                    description: 'Documents uploaded. Alloy shows verification status and risk score.',
                   },
                   {
                     icon: Shield,
                     label: 'Risk Assessment',
-                    description: 'System checks: sanctions lists, PEP databases, adverse media. Green flag on all checks.',
+                    description: 'Sanctions, PEP, and adverse media checked. All clear.',
                   },
                   {
                     icon: CheckCircle2,
                     label: 'Approval & Logging',
-                    description: 'Account verified. Customer notified. Full verification trail saved for audit compliance.',
+                    description: 'Account verified. Customer notified. Audit trail saved.',
                   },
                 ]}
                 outcome={{
@@ -396,36 +397,36 @@ const SolutionFintech = () => {
               />
 
               <WorkflowShowcase
-                title="Disputed Transaction"
-                scenario="Customer disputes $500 charge, threatens chargeback"
+                title="Risk Alert Orchestration"
+                scenario="Sift flags high-risk transaction requiring immediate review"
                 steps={[
                   {
                     icon: AlertTriangle,
-                    label: 'Dispute Intake',
-                    description: 'Customer submits dispute. System pulls transaction details from Stripe: date, merchant, receipt.',
+                    label: 'Alert Reception',
+                    description: 'Fraud alert received from Sift. Transaction flagged high-risk.',
                   },
                   {
                     icon: Database,
-                    label: 'Evidence Collection',
-                    description: 'Agent accesses: purchase confirmation, IP address, device ID, delivery confirmation if applicable.',
+                    label: 'Context Gathering',
+                    description: 'Account history, transaction patterns, and user data pulled.',
                   },
                   {
-                    icon: MessageSquare,
-                    label: 'Customer Discussion',
-                    description: 'Agent reviews evidence with customer. Transaction legitimate - customer recalls purchase.',
+                    icon: Shield,
+                    label: 'Multi-tool Check',
+                    description: 'Additional verification run across fraud prevention tools.',
                   },
                   {
-                    icon: Ban,
-                    label: 'Case Closure',
-                    description: 'Dispute withdrawn. Chargeback prevented. Case documented with full evidence for future reference.',
+                    icon: CheckCircle2,
+                    label: 'Action Taken',
+                    description: 'Transaction blocked or approved. Customer notified. Case logged.',
                   },
                 ]}
                 outcome={{
-                  value: '$87K',
-                  metric: 'Chargebacks Prevented',
-                  description: 'Better context and faster response prevent costly chargebacks and maintain processor relationships',
+                  value: '<8s',
+                  metric: 'Risk Response',
+                  description: 'Instant orchestration across fraud tools prevents losses while maintaining customer experience',
                 }}
-                gradient="from-purple-500/10 to-pink-500/10"
+                gradient="from-red-500/10 to-orange-500/10"
               />
             </div>
           </div>
@@ -442,7 +443,7 @@ const SolutionFintech = () => {
                 Calculate your fintech support ROI
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                See how much Pullse could save in prevented fraud, faster KYC, and reduced chargebacks
+                See how much Pullse could save with orchestrated risk workflows, faster KYC, and reduced chargebacks
               </p>
             </div>
 
@@ -469,16 +470,18 @@ const SolutionFintech = () => {
                 Connect your fintech stack
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Native integrations with payment, banking, and fraud detection platforms
+                Native integrations with payment, banking, and risk management platforms
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: CreditCard, name: 'Stripe', description: 'Payment processing & disputes', benefit: 'See transaction history inline' },
-                { icon: DollarSign, name: 'Plaid', description: 'Bank account linking & verification', benefit: 'Verify accounts instantly' },
-                { icon: AlertTriangle, name: 'Sift', description: 'Fraud detection & prevention', benefit: 'Auto-flag high-risk cases' },
-                { icon: SearchCheck, name: 'Alloy', description: 'Identity verification & KYC', benefit: 'Streamline verification' },
+                { icon: CreditCard, name: 'Stripe', description: 'Payment processing & disputes', benefit: 'See transaction history inline', gradient: 'from-blue-500/10 to-cyan-500/10' },
+                { icon: DollarSign, name: 'Plaid', description: 'Bank account linking & verification', benefit: 'Verify accounts instantly', gradient: 'from-green-500/10 to-emerald-500/10' },
+                { icon: AlertTriangle, name: 'Sift', description: 'Fraud signals & risk scoring', benefit: 'Act on fraud alerts instantly', gradient: 'from-red-500/10 to-orange-500/10' },
+                { icon: SearchCheck, name: 'Alloy', description: 'Identity verification & KYC', benefit: 'Streamline verification', gradient: 'from-purple-500/10 to-pink-500/10' },
+                { icon: Wallet, name: 'Dwolla', description: 'ACH payment processing', benefit: 'Automate ACH transfers instantly', gradient: 'from-indigo-500/10 to-blue-500/10' },
+                { icon: CreditCard, name: 'Marqeta', description: 'Modern card issuing', benefit: 'Issue virtual cards instantly', gradient: 'from-orange-500/10 to-amber-500/10' },
               ].map((integration, index) => {
                 const Icon = integration.icon;
                 return (
@@ -486,10 +489,14 @@ const SolutionFintech = () => {
                     key={index}
                     className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/40 hover:shadow-xl hover:-translate-y-1"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${integration.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
                     <div className="relative space-y-4">
                       <div className="flex items-start justify-between">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 shrink-0">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:rotate-6 shrink-0">
                           <Icon className="h-6 w-6 text-primary" />
                         </div>
                         <div className="px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase">
@@ -499,15 +506,28 @@ const SolutionFintech = () => {
                       <div>
                         <h3 className="text-base font-bold text-foreground mb-1">{integration.name}</h3>
                         <p className="text-xs text-muted-foreground mb-3">{integration.description}</p>
-                        <div className="flex items-center gap-2 text-xs font-semibold text-primary">
-                          <CheckCircle2 className="h-3.5 w-3.5" />
+                        <div className="flex items-center gap-2 text-xs font-semibold text-primary group-hover:scale-105 transition-transform duration-300 origin-left">
+                          <CheckCircle2 className="h-3.5 w-3.5 group-hover:scale-110 transition-transform duration-300" />
                           {integration.benefit}
                         </div>
                       </div>
                     </div>
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 );
               })}
+            </div>
+
+            {/* Extensibility Badge */}
+            <div className="flex items-center justify-center pt-8">
+              <div className="flex items-center gap-2 px-6 py-3 rounded-full border border-primary/20 bg-primary/5">
+                <Shield className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold text-foreground">
+                  30+ native fintech integrations
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -534,10 +554,12 @@ const SolutionFintech = () => {
                     </p>
                   </div>
 
-                  <div className="flex justify-center">
-                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-primary/20" href="/contact-sales">
-                      Book a demo
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <RouteButton size="lg" className="text-base px-10 py-6 shadow-xl shadow-primary/20" href="/pricing">
+                      Pricing
+                    </RouteButton>
+                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-6 border border-border/40 hover:border-primary/40" href="/contact-sales">
+                      Contact Sales
                     </RouteButton>
                   </div>
 

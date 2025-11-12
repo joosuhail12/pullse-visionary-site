@@ -15,6 +15,9 @@ import {
   User,
   ArrowUp,
   X,
+  CheckCircle2,
+  Zap,
+  CreditCard,
 } from "lucide-react";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity/client";
@@ -253,14 +256,6 @@ const FeaturedBlogSection = ({ featuredPosts }: FeaturedBlogSectionProps) => {
       <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-accent-pink/15 blur-3xl" />
 
       <div className="relative container mx-auto px-4">
-        {/* Badge */}
-        <div className="mb-10 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-gradient-to-r from-primary/20 to-accent-pink/15 px-5 py-2 text-xs font-bold uppercase tracking-[0.15em] text-primary shadow-lg backdrop-blur-xl">
-            <Sparkles className="h-3.5 w-3.5" />
-            Featured Articles
-          </div>
-        </div>
-
         {/* 50/50 Split Hero */}
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           {/* Left: Large Featured Post */}
@@ -594,33 +589,74 @@ const SearchBarSection = ({ searchQuery, onSearchChange }: SearchBarSectionProps
 };
 
 const CallToAction = () => (
-  <section className="border-t border-border/60 bg-background py-24 md:py-32">
-    <div className="container mx-auto px-4">
-      <div className="mx-auto max-w-4xl text-center space-y-8">
-        <h2 className="text-4xl font-bold text-foreground md:text-5xl">
-          Ready to transform your support?
-        </h2>
-        <p className="text-lg text-muted-foreground md:text-xl leading-relaxed">
-          See how Pullse automates repetitive tickets so your team can focus on
-          high-impact conversations.
-        </p>
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <RouteButton
-            size="lg"
-            className="px-10 py-4 text-base shadow-lg shadow-primary/20"
-            href="/contact-sales"
-          >
-            Schedule a demo
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </RouteButton>
-          <RouteButton
-            size="lg"
-            variant="outline"
-            className="px-10 py-4 text-base"
-            href="/pricing"
-          >
-            View pricing
-          </RouteButton>
+  <section className="relative py-24 md:py-32 overflow-hidden">
+    {/* Background gradient */}
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
+
+    <div className="container relative mx-auto px-4">
+      <div className="max-w-5xl mx-auto">
+        <div className="relative overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-card via-card to-card/90 shadow-2xl">
+          {/* Gradient overlays for depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
+
+          <div className="relative p-12 lg:p-16 z-10">
+            <div className="text-center space-y-10">
+              <div className="space-y-6">
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                  Ready to transform your support?
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  See how Pullse automates repetitive tickets so your team can focus on
+                  high-impact conversations.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <RouteButton
+                  size="lg"
+                  className="text-base px-10 py-6 shadow-xl shadow-primary/20"
+                  href="/contact-sales"
+                >
+                  Schedule a demo
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </RouteButton>
+                <RouteButton
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-10 py-6 border border-border/40 hover:border-primary/40"
+                  href="/pricing"
+                >
+                  View pricing
+                </RouteButton>
+              </div>
+
+              {/* Trust signals */}
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-12 border-t border-border/40">
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                  </div>
+                  <span>14-day free trial</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+                    <CreditCard className="h-5 w-5 text-primary" />
+                  </div>
+                  <span>No credit card required</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+                    <Zap className="h-5 w-5 text-primary" />
+                  </div>
+                  <span>Setup in minutes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom accent line */}
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
         </div>
       </div>
     </div>

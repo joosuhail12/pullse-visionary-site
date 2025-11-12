@@ -216,15 +216,15 @@ const SolutionsHub = () => {
       icon: Shield,
       title: "Fintech",
       category: "Financial Services",
-      headline: "Stop fraud in seconds while maintaining compliance",
-      subheadline: "SOC 2 compliant support that freezes fraud, verifies KYC, and passes every audit automatically",
+      headline: "Respond to financial risks instantly—fraud alerts, chargebacks, disputes",
+      subheadline: "SOC 2 compliant support that orchestrates risk workflows, verifies KYC, and passes every audit automatically",
       painPoints: [
-        "Fraud cases taking 2+ minutes = $100K+ annual losses?",
+        "Risk alerts taking 2+ minutes to action = $100K+ annual losses?",
         "Failing SOC 2 audits due to inconsistent support?",
         "Payment failures driving 15%+ customer churn?",
       ],
-      stat: { value: "<8s", label: "average fraud response time" },
-      roi: "Prevent $500K+ in fraud losses annually",
+      stat: { value: "<8s", label: "average risk response time" },
+      roi: "Prevent $500K+ in losses with orchestrated risk workflows",
       link: "/solutions/fintech",
       gradient: "from-red-500/10 to-orange-500/10",
       borderColor: "border-red-500/20",
@@ -702,26 +702,24 @@ const SolutionsHub = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                   <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.98 }}>
                     <RouteButton
                       size="lg"
                       className="text-base px-10 py-6 shadow-xl shadow-primary/20"
-                      href="/contact-sales"
+                      href="/pricing"
                     >
-                      Start free trial
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      Pricing
                     </RouteButton>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.98 }}>
                     <RouteButton
                       size="lg"
                       variant="outline"
-                      className="text-base px-10 py-6"
-                      href="#roi-calculator"
+                      className="text-base px-10 py-6 border border-border/40 hover:border-primary/40"
+                      href="/contact-sales"
                     >
-                      Calculate savings
-                      <TrendingUp className="ml-2 h-5 w-5" />
+                      Contact Sales
                     </RouteButton>
                   </motion.div>
                 </div>

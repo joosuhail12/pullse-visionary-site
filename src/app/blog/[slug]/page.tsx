@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogDetail from "@/views/BlogDetail";
-import { client } from "@/lib/sanity/client";
+import { client, urlFor } from "@/lib/sanity/client";
 import { postBySlugQuery } from "@/lib/sanity/queries";
 import type { BlogPost } from "@/types/blog";
 
@@ -24,21 +24,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       };
     }
 
+    // Generate featured image URL if available
+    const featuredImageUrl = post.featuredImage
+      ? urlFor(post.featuredImage).width(1200).height(630).url()
+      : undefined;
+
+    // Generate canonical URL for social sharing
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pullse.ai';
+    const canonicalUrl = `${baseUrl}/blog/${slug}`;
+
     return {
+      metadataBase: new URL(baseUrl),
       title: `${post.title} | Pullse Blog`,
       description: post.excerpt,
+      alternates: {
+        canonical: `/blog/${slug}`,
+      },
       openGraph: {
+        url: canonicalUrl,
         title: post.title,
         description: post.excerpt,
         type: "article",
         publishedTime: post.publishedAt,
         authors: post.author ? [post.author.name] : undefined,
         tags: post.tags,
+        images: featuredImageUrl ? [{ url: featuredImageUrl, width: 1200, height: 630 }] : undefined,
       },
       twitter: {
         card: "summary_large_image",
         title: post.title,
         description: post.excerpt,
+        images: featuredImageUrl ? [featuredImageUrl] : undefined,
       },
     };
   } catch (error) {

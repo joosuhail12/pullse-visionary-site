@@ -38,27 +38,9 @@ const WorkflowShowcase = ({
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-40`} />
       <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
 
-      {/* Floating Outcome Badge - Top Right */}
-      <div className="absolute top-6 right-6 z-10">
-        <div className={`rounded-2xl border-2 border-primary bg-gradient-to-br ${gradient} backdrop-blur-md p-4 shadow-xl`}>
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="h-4 w-4 text-primary" />
-            <span className="text-xs font-bold text-primary uppercase tracking-wider">
-              {outcome.metric}
-            </span>
-          </div>
-          <div className="text-4xl font-black text-primary mb-1">
-            {outcome.value}
-          </div>
-          <div className="text-[10px] text-muted-foreground font-semibold">
-            vs 220s traditional
-          </div>
-        </div>
-      </div>
-
       <div className="relative p-8">
         {/* Title - More Prominent */}
-        <div className="mb-6 pr-32">
+        <div className="mb-6">
           <h4 className="text-2xl font-black text-foreground leading-tight mb-3">
             {title}
           </h4>
@@ -102,12 +84,27 @@ const WorkflowShowcase = ({
           })}
         </div>
 
-        {/* Bottom Summary */}
-        <div className="flex items-center justify-between pt-6 border-t border-border/40">
-          <p className="text-xs text-muted-foreground max-w-md">
-            {outcome.description}
-          </p>
-          <ArrowRight className="h-5 w-5 text-primary opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+        {/* Bottom Summary with Stats */}
+        <div className="flex items-center justify-between gap-6 pt-6 border-t border-border/40">
+          <div className="flex-1">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              {outcome.description}
+            </p>
+          </div>
+          <div className="rounded-xl border-2 border-primary bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-md p-4 text-center min-w-[140px] shadow-lg">
+            <div className="flex items-center justify-center gap-1.5 mb-1">
+              <Clock className="h-3.5 w-3.5 text-primary" />
+              <span className="text-[10px] font-bold text-primary uppercase tracking-wider">
+                {outcome.metric}
+              </span>
+            </div>
+            <div className="text-3xl font-black text-primary leading-none mb-1">
+              {outcome.value}
+            </div>
+            <div className="text-[9px] text-muted-foreground font-semibold">
+              vs 220s traditional
+            </div>
+          </div>
         </div>
       </div>
 

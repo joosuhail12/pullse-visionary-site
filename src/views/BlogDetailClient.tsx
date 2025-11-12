@@ -166,65 +166,101 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
       {/* Content Section - Overlapping Card Style */}
       <section className="relative -mt-12 md:-mt-16 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-white rounded-t-3xl md:rounded-t-[2rem] shadow-2xl shadow-black/10 pt-10 pb-8 md:pt-12 md:pb-10 px-6 md:px-12 border-t-4 border-primary/10">
-            {/* Breadcrumb */}
-            <nav className="mb-4 flex items-center gap-2 text-xs text-gray-600">
-              <Link
-                href="/"
-                className="transition-colors hover:text-gray-900"
-              >
-                <Home className="h-3.5 w-3.5" />
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <Link
-                href="/blog"
-                className="transition-colors hover:text-gray-900"
-              >
-                Blog
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="text-gray-900">{post.category.title}</span>
-            </nav>
+          <div className="relative isolate max-w-4xl mx-auto overflow-hidden bg-white rounded-t-3xl md:rounded-t-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1),0_10px_30px_-10px_rgba(0,0,0,0.05)] ring-1 ring-black/5 pt-10 pb-10 md:pt-12 md:pb-12 px-8 md:px-10 lg:px-12">
+            {/* Decorative blur circles */}
+            <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-accent-pink/8 blur-3xl" />
+            <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-primary/8 blur-3xl" />
 
-            {/* Title */}
-            <h1 className="mb-4 text-3xl font-semibold leading-snug text-gray-900 md:text-4xl lg:text-5xl">
-              {post.title}
-            </h1>
+            {/* Glassmorphism overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-transparent pointer-events-none" />
 
-            {/* Excerpt */}
-            <p className="mb-6 text-lg leading-relaxed text-gray-700 md:text-xl">
-              {post.excerpt}
-            </p>
+            {/* Gradient top border */}
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary/50 via-accent-pink to-primary/50 blur-sm" />
 
-            {/* Author & Meta */}
-            <div className="flex flex-wrap items-center gap-4 border-t border-gray-100 py-5 text-sm text-gray-600">
+            {/* Content */}
+            <div className="relative">
+              {/* Breadcrumb */}
+              <nav className="mb-4 flex items-center gap-2 text-xs text-muted-foreground">
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-foreground"
+                >
+                  <Home className="h-3.5 w-3.5" />
+                </Link>
+                <ChevronRight className="h-3.5 w-3.5" />
+                <Link
+                  href="/blog"
+                  className="transition-colors hover:text-foreground"
+                >
+                  Blog
+                </Link>
+                <ChevronRight className="h-3.5 w-3.5" />
+                <span className="text-foreground">{post.category.title}</span>
+              </nav>
+
+              {/* Title */}
+              <h1 className="mb-8 text-3xl font-black leading-[1.2] text-foreground md:text-4xl lg:text-5xl xl:text-6xl">
+                {post.title}
+              </h1>
+
+              {/* Excerpt */}
+              <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl lg:text-2xl">
+                {post.excerpt}
+              </p>
+
+              {/* Author & Meta - Glassmorphic Card */}
               {post.author && (
-                <div className="flex items-center gap-3">
-                  {hasImageAsset(post.author.avatar) ? (
-                    <Image
-                      src={urlFor(post.author.avatar!).width(48).height(48).url()}
-                      alt={post.author.name}
-                      width={48}
-                      height={48}
-                      className="rounded-full ring-2 ring-gray-200"
-                    />
-                  ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 ring-2 ring-gray-200">
-                      <User className="h-5 w-5 text-gray-500" />
+                <div className="relative isolate mt-10 overflow-hidden rounded-2xl border border-primary/10 bg-gradient-to-br from-primary/5 via-accent-pink/3 to-transparent p-6 backdrop-blur-sm">
+                  {/* Decorative blur */}
+                  <div className="absolute -right-16 -bottom-16 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+
+                  <div className="relative flex items-center gap-4">
+                    {/* Avatar */}
+                    <div className="relative flex-shrink-0">
+                      {hasImageAsset(post.author.avatar) ? (
+                        <div className="relative">
+                          <Image
+                            src={urlFor(post.author.avatar!).width(64).height(64).url()}
+                            alt={post.author.name}
+                            width={64}
+                            height={64}
+                            className="rounded-full object-cover ring-4 ring-white shadow-xl shadow-primary/20"
+                          />
+                          {/* Glow effect */}
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-accent-pink/20 blur-md -z-10" />
+                        </div>
+                      ) : (
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-accent-pink/10 ring-4 ring-white shadow-xl shadow-primary/20">
+                          <User className="h-7 w-7 text-primary" />
+                        </div>
+                      )}
                     </div>
-                  )}
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">{post.author.name}</p>
-                    {post.author.jobTitle && (
-                      <p className="text-xs text-gray-600">{post.author.jobTitle}</p>
-                    )}
+
+                    {/* Author Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-wider text-primary/70 mb-1">
+                        Written by
+                      </p>
+                      <p className="text-lg font-bold text-foreground truncate">
+                        {post.author.name}
+                      </p>
+                      {post.author.jobTitle && (
+                        <p className="text-sm text-muted-foreground truncate">
+                          {post.author.jobTitle}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Date */}
+                    <div className="flex-shrink-0 text-right">
+                      <time className="text-sm font-medium text-foreground/70">
+                        {format(new Date(post.publishedAt), 'MMM d, yyyy')}
+                      </time>
+                    </div>
                   </div>
                 </div>
               )}
-
-              <div className="flex items-center text-xs text-gray-600">
-                <time>{format(new Date(post.publishedAt), 'MMM d, yyyy')}</time>
-              </div>
             </div>
           </div>
         </div>

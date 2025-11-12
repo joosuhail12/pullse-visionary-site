@@ -105,10 +105,10 @@ const useCaseTabs = [
     value: 'fintech',
     label: 'Fintech',
     icon: Shield,
-    headline: 'Prevent fraud while staying compliant',
-    summary: 'Handle account changes, billing disputes, and fraud investigations with automated workflows that include approval gates, audit trails, and role-based permissions by default.',
+    headline: 'Respond to financial risks instantly',
+    summary: 'Handle account changes, billing disputes, and fraud alerts with orchestrated workflows that include approval gates, audit trails, and role-based permissions by default.',
     bullets: [
-      'Real-time fraud detection and account freezing',
+      'Real-time fraud alert orchestration',
       'Automated KYC verification workflows',
       'Dispute resolution with full audit logs',
       'Compliance-ready documentation export'
@@ -125,7 +125,7 @@ const useCaseTabs = [
       borderHover: 'hover:border-red-500/40',
       shadow: 'shadow-red-500/10'
     },
-    stat: { label: 'Fraud Response', value: '<8s', description: 'average fraud detection time' },
+    stat: { label: 'Risk Response', value: '<8s', description: 'average risk response time' },
   },
   {
     value: 'saas',

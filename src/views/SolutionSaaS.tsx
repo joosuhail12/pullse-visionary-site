@@ -975,14 +975,12 @@ const SolutionSaaS = () => {
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                    <RouteButton size="lg" className="text-base lg:text-lg px-10 py-7 shadow-2xl shadow-primary/30 group hover:shadow-primary/40 hover:scale-105 transition-all animate-pulse-slow" href="/contact-sales">
-                      Watch 2-minute demo
-                      <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <RouteButton size="lg" className="text-base px-10 py-6 shadow-xl shadow-primary/20" href="/pricing">
+                      Pricing
                     </RouteButton>
-                    <RouteButton size="lg" variant="ghost" className="text-base px-10 py-7 border border-border/40 hover:border-primary/40" href="/pricing">
-                      View pricing
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-6 border border-border/40 hover:border-primary/40" href="/contact-sales">
+                      Contact Sales
                     </RouteButton>
                   </div>
 
