@@ -964,14 +964,6 @@ const SolutionSaaS = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-              {/* Urgency Badge */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                <div className="flex items-center gap-2 rounded-full border border-primary bg-gradient-to-r from-primary via-primary to-primary/90 px-5 py-2 shadow-lg">
-                  <Sparkles className="h-4 w-4 text-background" />
-                  <span className="text-xs font-bold text-background uppercase tracking-wider">Early Access Available</span>
-                </div>
-              </div>
-
               <div className="relative p-12 lg:p-16 z-10">
                 <div className="text-center space-y-10">
                   <div className="space-y-6">
@@ -983,35 +975,35 @@ const SolutionSaaS = () => {
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-primary/20 group" href="/contact-sales">
+                  <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                    <RouteButton size="lg" className="text-base lg:text-lg px-10 py-7 shadow-2xl shadow-primary/30 group hover:shadow-primary/40 hover:scale-105 transition-all animate-pulse-slow" href="/contact-sales">
                       Watch 2-minute demo
                       <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                     </RouteButton>
-                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7" href="/pricing">
+                    <RouteButton size="lg" variant="ghost" className="text-base px-10 py-7 border border-border/40 hover:border-primary/40" href="/pricing">
                       View pricing
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </RouteButton>
                   </div>
 
                   {/* Enhanced Trust Badges */}
-                  <div className="pt-8 border-t border-border/40 space-y-6">
+                  <div className="pt-12 border-t border-border/40 space-y-6">
                     <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
                       <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
-                          <CheckCircle2 className="h-4 w-4 text-primary" />
+                          <CheckCircle2 className="h-5 w-5 text-primary" />
                         </div>
                         <span>Live in 2 weeks</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
-                          <Shield className="h-4 w-4 text-primary" />
+                          <Shield className="h-5 w-5 text-primary" />
                         </div>
                         <span>SOC 2 controls in progress</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
-                          <Zap className="h-4 w-4 text-primary" />
+                          <Zap className="h-5 w-5 text-primary" />
                         </div>
                         <span>50+ integrations</span>
                       </div>
@@ -1019,8 +1011,8 @@ const SolutionSaaS = () => {
 
                     {/* Social Proof */}
                     <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                      <Sparkles className="h-4 w-4 text-primary" />
-                      <span>Built for modern support teams</span>
+                      <Users className="h-4 w-4 text-primary" />
+                      <span>Join 100+ support teams automating with Pullse</span>
                     </div>
                   </div>
                 </div>
