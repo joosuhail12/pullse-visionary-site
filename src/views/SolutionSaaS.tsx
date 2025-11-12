@@ -399,11 +399,6 @@ const SolutionSaaS = () => {
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
               {/* Traditional Side - Chaos */}
               <div className="relative rounded-3xl border-[3px] border-destructive/50 bg-gradient-to-br from-destructive/10 via-destructive/5 to-transparent pt-12 px-8 pb-8 overflow-hidden shadow-xl">
-                {/* Stress Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-destructive text-background text-xs font-bold uppercase tracking-wider z-10">
-                  The Old Way
-                </div>
-
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-8 pb-8 border-b border-destructive/20">
@@ -515,11 +510,6 @@ const SolutionSaaS = () => {
 
               {/* Pullse Side - Calm */}
               <div className="relative rounded-3xl border-2 border-primary/60 bg-gradient-to-br from-primary/10 via-purple-500/5 to-transparent pt-12 px-8 pb-8 overflow-hidden shadow-xl">
-                {/* Success Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-purple-600 text-background text-xs font-bold uppercase tracking-wider shadow-lg z-10">
-                  The Pullse Way
-                </div>
-
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-8 pb-8 border-b border-primary/20">
