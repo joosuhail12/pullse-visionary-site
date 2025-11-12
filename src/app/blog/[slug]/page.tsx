@@ -5,11 +5,26 @@ import { client, urlFor } from "@/lib/sanity/client";
 import { postBySlugQuery } from "@/lib/sanity/queries";
 import type { BlogPost } from "@/types/blog";
 
-// Force dynamic rendering to avoid build-time data fetching issues
-export const dynamic = 'force-dynamic';
-
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+// Generate static params for better crawler support
+export async function generateStaticParams() {
+  try {
+    const posts = await client.fetch<Array<{ slug: string }>>(
+      `*[_type == "post" && defined(slug.current)][0...100] {
+        "slug": slug.current
+      }`
+    );
+
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
