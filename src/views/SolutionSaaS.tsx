@@ -411,38 +411,52 @@ const SolutionSaaS = () => {
                       <AlertTriangle className="h-7 w-7 text-destructive" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-black text-destructive">Traditional Tools</h3>
-                      <p className="text-sm text-muted-foreground">10+ tool switches • Manual work</p>
+                      <h3 className="text-2xl font-black text-destructive">Traditional Workflow</h3>
+                      <p className="text-sm text-muted-foreground">Multiple browser tabs • Constant switching</p>
                     </div>
                   </div>
 
-                {/* Visual Metaphor - Stacked Tool Windows */}
-                <div className="space-y-5 mb-8">
+                {/* Browser Windows - Tool Chaos */}
+                <div className="space-y-4 mb-8">
                   {[
-                    { tool: 'Helpdesk', action: 'Open ticket, read message, copy customer ID...', progress: raceProgress > 0, delay: 0 },
-                    { tool: 'Stripe Dashboard', action: 'Search customer, find transaction, verify amount...', progress: raceProgress > 25, delay: 100 },
-                    { tool: 'Gmail', action: 'Draft email, copy details, paste confirmation...', progress: raceProgress > 50, delay: 200 },
-                    { tool: 'Helpdesk (again)', action: 'Update ticket, add notes, change status...', progress: raceProgress > 75, delay: 300 },
+                    { tool: 'Zendesk Support', icon: '🎫', action: 'Open ticket, read message, copy customer ID...', progress: raceProgress > 0, delay: 0, color: 'bg-red-500' },
+                    { tool: 'Stripe Dashboard', icon: '💳', action: 'Search customer, find transaction, verify amount...', progress: raceProgress > 25, delay: 100, color: 'bg-blue-500' },
+                    { tool: 'Gmail', icon: '✉️', action: 'Draft email, copy details, paste confirmation...', progress: raceProgress > 50, delay: 200, color: 'bg-green-500' },
+                    { tool: 'Zendesk Support', icon: '🎫', action: 'Update ticket, add notes, change status...', progress: raceProgress > 75, delay: 300, color: 'bg-red-500' },
                   ].map((window, idx) => (
                     <div
                       key={idx}
-                      className={`relative rounded-lg border bg-card/50 backdrop-blur-sm p-5 transition-all duration-500 ${
+                      className={`relative rounded-lg border transition-all duration-500 overflow-hidden ${
                         window.progress
-                          ? 'border-destructive/60 bg-destructive/5 translate-x-2 shadow-lg'
-                          : 'border-border/40 opacity-40 blur-[1px]'
+                          ? 'border-destructive/60 shadow-lg scale-[1.02] z-10'
+                          : 'border-border/30 opacity-30'
                       }`}
                       style={{ transitionDelay: `${window.delay}ms` }}
                     >
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-full bg-destructive/60" />
-                          <span className="text-sm font-bold text-foreground">{window.tool}</span>
+                      {/* Browser Chrome */}
+                      <div className={`flex items-center gap-2 px-3 py-2 border-b ${
+                        window.progress ? 'bg-card border-destructive/30 animate-pulse' : 'bg-muted/50 border-border/20'
+                      }`}>
+                        <div className="flex gap-1.5">
+                          <div className="h-2 w-2 rounded-full bg-destructive/40" />
+                          <div className="h-2 w-2 rounded-full bg-orange-500/40" />
+                          <div className="h-2 w-2 rounded-full bg-green-500/40" />
                         </div>
-                        {window.progress && (
-                          <Loader2 className="h-4 w-4 text-destructive/60 animate-spin" />
-                        )}
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-xs">{window.icon}</span>
+                          <span className="text-xs font-medium text-foreground/70 truncate">{window.tool}</span>
+                          {window.progress && (
+                            <div className="ml-auto flex items-center gap-1">
+                              <Loader2 className="h-3 w-3 text-destructive animate-spin" />
+                              <span className={`h-1.5 w-1.5 rounded-full ${window.color} animate-pulse`} />
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{window.action}</p>
+                      {/* Window Content */}
+                      <div className={`p-4 ${window.progress ? 'bg-destructive/5' : 'bg-card/50'}`}>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{window.action}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -484,12 +498,12 @@ const SolutionSaaS = () => {
                 {/* Bottom Impact */}
                 <div className="mt-8 pt-8 border-t border-destructive/20 space-y-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Tools opened</span>
-                    <span className="font-bold text-destructive">4-6 different tabs</span>
+                    <span className="text-muted-foreground">Browser tabs open</span>
+                    <span className="font-bold text-destructive">4-6 windows active</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Error risk</span>
-                    <span className="font-bold text-destructive">15% (copy-paste errors)</span>
+                    <span className="text-muted-foreground">Context switches</span>
+                    <span className="font-bold text-destructive">15+ tab changes</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Customer outcome</span>
@@ -513,71 +527,89 @@ const SolutionSaaS = () => {
                       <Zap className="h-7 w-7 text-background" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-black text-primary">Pullse AI Execution</h3>
-                      <p className="text-sm text-primary/80">One command • Instant action</p>
+                      <h3 className="text-2xl font-black text-primary">Pullse Unified Dashboard</h3>
+                      <p className="text-sm text-primary/80">Single interface • All tools connected</p>
                     </div>
                   </div>
 
-                {/* Visual Metaphor - Single Command Interface */}
-                <div className="space-y-5 mb-8">
-                  {/* Command Input */}
-                  <div className="relative rounded-xl border-2 border-primary/40 bg-gradient-to-br from-primary/10 to-transparent p-5 overflow-hidden">
+                {/* Unified Dashboard Interface */}
+                <div className="space-y-4 mb-8">
+                  {/* Dashboard Header - Command Input */}
+                  <div className="relative rounded-lg border-2 border-primary/40 bg-gradient-to-br from-primary/10 to-transparent overflow-hidden">
                     <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(var(--primary-rgb),0.05)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" />
-                    <div className="relative">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Sparkles className="h-4 w-4 text-primary" />
-                        <span className="text-sm font-bold text-primary">Agent Command</span>
+
+                    {/* Dashboard Chrome */}
+                    <div className="flex items-center gap-2 px-3 py-2 border-b border-primary/20 bg-primary/5">
+                      <div className="flex gap-1.5">
+                        <div className="h-2 w-2 rounded-full bg-green-500" />
+                        <div className="h-2 w-2 rounded-full bg-green-500/40" />
+                        <div className="h-2 w-2 rounded-full bg-green-500/40" />
                       </div>
-                      <p className="text-base font-semibold text-foreground mb-2">
+                      <div className="flex items-center gap-2 flex-1">
+                        <Zap className="h-3 w-3 text-primary" />
+                        <span className="text-xs font-medium text-primary">Pullse AI Dashboard</span>
+                        <div className="ml-auto flex items-center gap-1.5 bg-green-600/10 px-2 py-0.5 rounded-full">
+                          <div className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
+                          <span className="text-xs font-semibold text-green-600">Live</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Command Input */}
+                    <div className="relative p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-bold text-primary uppercase tracking-wide">AI Command</span>
+                      </div>
+                      <p className="text-base font-semibold text-foreground">
                         "Issue $250 refund and email confirmation"
                       </p>
-                      <p className="text-sm text-muted-foreground">
-                        That's it. AI figures out the rest.
-                      </p>
                     </div>
                   </div>
 
-                  {/* AI Execution Steps - Fast reveal */}
-                  {[
-                    { icon: Brain, step: 'AI analyzes request', detail: 'Understands intent: refund + notify', progress: raceProgress > 0, time: '0.5s' },
-                    { icon: Zap, step: 'Executes via Stripe API', detail: '$250 credit processed instantly', progress: raceProgress > 0.9, time: '2s' },
-                    { icon: CheckCircle2, step: 'Updates all systems', detail: 'Helpdesk ticket + email sent automatically', progress: raceProgress > 2, time: '4s' },
-                    { icon: UserCheck, step: 'Customer notified', detail: 'Confirmation email delivered', progress: raceProgress > 3, time: '8s' },
-                  ].map((action, idx) => {
-                    const Icon = action.icon;
-                    return (
-                      <div
-                        key={idx}
-                        className={`flex items-start gap-3 p-5 rounded-lg border transition-all duration-500 ${
-                          action.progress
-                            ? 'border-primary/40 bg-primary/5 shadow-sm'
-                            : 'border-border/30 bg-muted/20 opacity-30'
-                        }`}
-                      >
-                        <div className={`flex h-8 w-8 items-center justify-center rounded-lg shrink-0 transition-all duration-500 ${
-                          action.progress
-                            ? 'bg-gradient-to-br from-primary to-purple-600 shadow-md'
-                            : 'bg-muted'
-                        }`}>
-                          <Icon className={`h-4 w-4 ${action.progress ? 'text-background' : 'text-muted-foreground'}`} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className={`text-base font-bold ${action.progress ? 'text-foreground' : 'text-muted-foreground'}`}>
-                              {action.step}
-                            </span>
+                  {/* Dashboard Activity Feed - Unified View */}
+                  <div className="relative rounded-lg border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent overflow-hidden">
+                    <div className="p-4 space-y-3">
+                      {[
+                        { icon: Brain, action: 'AI analyzing request', detail: 'Intent: refund + notify', progress: raceProgress > 0, time: '0.5s' },
+                        { icon: Zap, action: 'Executing Stripe API', detail: '$250 processed', progress: raceProgress > 0.9, time: '2s' },
+                        { icon: CheckCircle2, action: 'Updating systems', detail: 'Zendesk + Email auto-updated', progress: raceProgress > 2, time: '4s' },
+                        { icon: UserCheck, action: 'Customer notified', detail: 'Confirmation sent', progress: raceProgress > 3, time: '8s' },
+                      ].map((action, idx) => {
+                        const Icon = action.icon;
+                        return (
+                          <div
+                            key={idx}
+                            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-500 ${
+                              action.progress
+                                ? 'bg-primary/10 border border-primary/30'
+                                : 'bg-muted/20 opacity-30'
+                            }`}
+                          >
+                            <div className={`flex h-8 w-8 items-center justify-center rounded-lg shrink-0 transition-all duration-500 ${
+                              action.progress
+                                ? 'bg-gradient-to-br from-primary to-purple-600 shadow-md'
+                                : 'bg-muted'
+                            }`}>
+                              <Icon className={`h-4 w-4 ${action.progress ? 'text-background' : 'text-muted-foreground'}`} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className={`text-sm font-semibold ${action.progress ? 'text-foreground' : 'text-muted-foreground'}`}>
+                                {action.action}
+                              </p>
+                              <p className="text-xs text-muted-foreground">{action.detail}</p>
+                            </div>
                             {action.progress && (
-                              <span className="text-sm font-bold text-green-600">{action.time}</span>
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span className="text-xs font-bold text-green-600 tabular-nums">{action.time}</span>
+                                <CheckCircle2 className="h-5 w-5 text-green-600 animate-in zoom-in duration-300" />
+                              </div>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground">{action.detail}</p>
-                        </div>
-                        {action.progress && (
-                          <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 animate-in zoom-in duration-300" />
-                        )}
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Agent Status - Calm */}
@@ -617,12 +649,12 @@ const SolutionSaaS = () => {
                 {/* Bottom Impact */}
                 <div className="mt-8 pt-8 border-t border-primary/20 space-y-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Tools opened</span>
-                    <span className="font-bold text-primary">1 unified platform</span>
+                    <span className="text-muted-foreground">Dashboard tabs</span>
+                    <span className="font-bold text-primary">1 unified interface</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Error risk</span>
-                    <span className="font-bold text-primary">{'<'}1% (API-driven)</span>
+                    <span className="text-muted-foreground">Context switches</span>
+                    <span className="font-bold text-primary">0 tab changes</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Customer outcome</span>
