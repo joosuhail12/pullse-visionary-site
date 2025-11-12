@@ -596,7 +596,7 @@ const Company = () => {
                     <path fillRule="evenodd" d="M10 3a1 1 0 011 1v10.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clipRule="evenodd" />
                   </svg>
                   <div className="h-px w-4 bg-primary/30" />
-                  <div className="w-2 h-2 rounded-full bg-primary/40 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  <div className="w-2 h-2 rounded-full bg-primary/40 animate-pulse" />
                   <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/30" />
                 </div>
               </motion.div>
@@ -740,7 +740,7 @@ const Company = () => {
             >
               {/* Enhanced Animated Gradient Orbs */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary/30 to-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-600/30 to-cyan-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-600/30 to-cyan-600/30 rounded-full blur-3xl animate-pulse"></div>
 
               <div className="space-y-10 relative z-10">
                 {/* Larger Icon with Enhanced Shadow */}
