@@ -76,14 +76,14 @@ const SolutionFintech = () => {
             {/* Header Content */}
             <div className="text-center mb-16 space-y-8">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
-                Fraud waits 30 minutes.
+                A fraudster can drain $15K in 8 minutes. Your team takes 30.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
-                  Pullse acts in 8 seconds.
+                  Stop fraud in under 8 seconds.
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                Built for fintech compliance. Complete audit trails, encryption, RBAC—out of the box. SOC 2 Type II in progress.
+                Compliance-first AI that detects fraud, verifies KYC, and prevents chargebacks—with complete audit trails, SOC 2 controls, and encryption built in. Fast enough to stop fraud. Secure enough to pass any audit.
               </p>
 
               {/* CTA */}

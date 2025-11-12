@@ -131,14 +131,14 @@ const SolutionEcommerce = () => {
             {/* Header Content */}
             <div className="text-center space-y-10">
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
-                Agents hunt through 6 tabs.
+                Black Friday is coming. Your team is already burned out.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-4">
-                  Pullse executes in 8 seconds.
+                  Handle 10x the volume. Zero temp hires.
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
-                Agents ask, Pullse executes. Returns, refunds, labels—all handled instantly.
+                AI that auto-resolves 80% of WISMO tickets, processes returns in 2 minutes, and handles peak season spikes—so your team survives the rush without breaking. Same agents. 10x capacity.
               </p>
 
               {/* Single CTA */}

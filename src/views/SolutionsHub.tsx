@@ -282,17 +282,14 @@ const SolutionsHub = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 space-y-10">
               <h1 className="text-[2.75rem] leading-[1.1] sm:text-6xl sm:leading-[1.1] lg:text-7xl lg:leading-[1.05] xl:text-[5.5rem] xl:leading-[1.05] font-black text-foreground tracking-[-0.02em] max-w-5xl mx-auto">
-                Automate 80% of support.
+                Your support team is stretched to breaking.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3 lg:mt-4">
-                  Cut costs by 60%.
+                  Handle 3x the volume. Same headcount.
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-[1.6] sm:leading-[1.65] max-w-3xl mx-auto font-normal">
-                Industry-specific AI that understands your workflows—whether you're running SaaS, E-commerce, or Fintech.
-                <span className="block mt-4 text-foreground font-semibold text-xl sm:text-2xl lg:text-[1.65rem] leading-[1.5]">
-                  Resolve tickets in 8 seconds. Reclaim 15+ agent hours per week. Start saving in 14 days.
-                </span>
+                Industry-specific AI that takes action for your agents—from Stripe refunds to Shopify returns to fraud alerts. Resolve critical issues in 8 seconds, not 8 minutes. Your team finally has room to breathe.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">

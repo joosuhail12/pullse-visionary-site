@@ -207,14 +207,14 @@ const SolutionSaaS = () => {
             {/* Header Content */}
             <div className="text-center space-y-10">
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
-                Your support team is drowning in 10 tools.
+                Your agents are switching between 10 tabs for one refund.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-4">
-                  Just ask. Pullse executes.
+                  Type one sentence. Pullse handles the rest.
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
-                Your agents ask our AI copilot to take action. Pullse figures out the execution—Stripe refunds, Jira tickets, Shopify orders—instantly, across your entire stack.
+                AI that connects your entire stack—Stripe, Jira, Salesforce, Slack—so your agents ask in plain English and Pullse executes instantly. No more tool-hopping. No more context-switching. Just fast, accurate resolutions.
               </p>
 
               {/* Single CTA */}
