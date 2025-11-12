@@ -5,6 +5,9 @@ import { client, urlFor } from "@/lib/sanity/client";
 import { postBySlugQuery } from "@/lib/sanity/queries";
 import type { BlogPost } from "@/types/blog";
 
+// Revalidate every hour for ISR fallback
+export const revalidate = 3600;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
