@@ -104,41 +104,92 @@ const Company = () => {
                   After years managing support teams drowning in 10+ disconnected tools, we're building one AI-native platform that actually works together.
                 </motion.p>
 
-                {/* Stat Cards */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
-                  className="flex flex-wrap gap-6 justify-center"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                      <Users className="h-6 w-6 text-primary" />
+                {/* Stat Cards - Enhanced */}
+                <div className="flex flex-wrap gap-6 justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+                    className="group relative"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl bg-white/60 backdrop-blur-xl border border-white/60 shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500 p-6 min-w-[200px]">
+                      {/* Gradient overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                      <div className="relative flex items-center gap-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 border border-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                          <Users className="h-7 w-7 text-primary" />
+                        </div>
+                        <div>
+                          <div className="text-3xl font-black text-foreground group-hover:text-primary transition-colors duration-300">5+ years</div>
+                          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Support experience</div>
+                        </div>
+                      </div>
+
+                      {/* Bottom accent */}
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary/0 via-primary/60 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">5+ years</div>
-                      <div className="text-xs text-muted-foreground">Support experience</div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
+                    className="group relative"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl bg-white/60 backdrop-blur-xl border border-white/60 shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-500 p-6 min-w-[200px]">
+                      {/* Gradient overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                      <div className="relative flex items-center gap-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/20 to-primary/20 border border-purple-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                          <Layers className="h-7 w-7 text-purple-600" />
+                        </div>
+                        <div>
+                          <div className="text-3xl font-black text-foreground group-hover:text-purple-600 transition-colors duration-300">7 in 1</div>
+                          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Products unified</div>
+                        </div>
+                      </div>
+
+                      {/* Bottom accent */}
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/60 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                      <Layers className="h-6 w-6 text-primary" />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5, ease: 'easeOut' }}
+                    className="group relative"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl bg-white/60 backdrop-blur-xl border border-white/60 shadow-lg hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 transition-all duration-500 p-6 min-w-[200px]">
+                      {/* Gradient overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                      <div className="relative flex items-center gap-4">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500/20 to-pink-500/20 border border-orange-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                          <Calendar className="h-7 w-7 text-orange-600" />
+                        </div>
+                        <div>
+                          <div className="text-3xl font-black text-foreground group-hover:text-orange-600 transition-colors duration-300">Q4 2025</div>
+                          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Launch timeline</div>
+                        </div>
+                      </div>
+
+                      {/* Bottom accent */}
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-orange-500/0 via-orange-500/60 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">7 in 1</div>
-                      <div className="text-xs text-muted-foreground">Products unified</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                      <Calendar className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">Q4 2025</div>
-                      <div className="text-xs text-muted-foreground">Launch timeline</div>
-                    </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </div>
 
                 {/* Divider */}
                 <motion.div
