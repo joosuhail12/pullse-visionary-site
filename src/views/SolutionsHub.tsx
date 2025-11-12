@@ -306,7 +306,7 @@ const SolutionsHub = () => {
                   size="lg"
                   variant="outline"
                   className="text-base px-10 py-6"
-                  href="#roi-calculator"
+                  href="/contact-sales"
                 >
                   Calculate ROI
                   <TrendingUp className="ml-2 h-5 w-5" />

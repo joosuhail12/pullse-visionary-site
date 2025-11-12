@@ -96,7 +96,7 @@ const SolutionFintech = () => {
                   size="lg"
                   variant="outline"
                   className="text-base px-10 py-6"
-                  href="#compliance"
+                  href="/contact-sales"
                 >
                   See compliance details
                   <Shield className="ml-2 h-5 w-5" />
