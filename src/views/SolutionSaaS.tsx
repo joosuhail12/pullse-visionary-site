@@ -870,7 +870,7 @@ const SolutionSaaS = () => {
                 { icon: Zap, name: 'Slack', description: 'Send alerts, notify teams, escalate issues', benefit: 'Alert right people instantly', gradient: 'from-purple-500/10 to-pink-500/10' },
                 { icon: Users, name: 'Salesforce', description: 'Create opportunities, update leads, log activities', benefit: 'Handoff to sales seamlessly', gradient: 'from-cyan-500/10 to-teal-500/10' },
                 { icon: BarChart3, name: 'Segment', description: 'Track events, trigger workflows, update attributes', benefit: 'Load customer context', gradient: 'from-green-500/10 to-emerald-500/10' },
-                { icon: MessageSquare, name: 'Shopify', description: 'Update orders, modify inventory, process returns', benefit: 'Execute e-commerce actions', gradient: 'from-emerald-500/10 to-green-500/10' },
+                { icon: GitBranch, name: 'GitHub', description: 'Create issues, update PRs, link commits', benefit: 'Connect bugs to code instantly', gradient: 'from-slate-500/10 to-gray-500/10' },
               ].map((integration, index) => {
                 const Icon = integration.icon;
                 return (
@@ -908,6 +908,20 @@ const SolutionSaaS = () => {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Extensibility Indicator */}
+            <div className="text-center mt-10">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-primary/20 bg-primary/5">
+                <GitBranch className="h-5 w-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">
+                  50+ native integrations
+                </span>
+                <span className="text-muted-foreground">•</span>
+                <span className="text-sm text-muted-foreground">
+                  Connect any tool via API or webhooks
+                </span>
+              </div>
             </div>
           </div>
         </div>
