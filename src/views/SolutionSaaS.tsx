@@ -1011,8 +1011,8 @@ const SolutionSaaS = () => {
 
                     {/* Social Proof */}
                     <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                      <Users className="h-4 w-4 text-primary" />
-                      <span>Join 100+ support teams automating with Pullse</span>
+                      <Sparkles className="h-4 w-4 text-primary" />
+                      <span>Purpose-built for modern support teams</span>
                     </div>
                   </div>
                 </div>
