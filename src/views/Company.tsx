@@ -22,14 +22,14 @@ import antlerLogo from '@/assets/antler-logo.png';
 
 const Company = () => {
   return (
-    <div className="min-h-screen bg-white relative">
+    <div className="min-h-screen bg-background relative">
       <PageLiquidBackground opacity={0.25} />
       <Navigation />
 
       {/* ========================================
           SECTION 1: HERO - Founder-Led
       ======================================== */}
-      <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-muted/20 via-background to-muted/10">
         {/* Layered Gradient Orbs with Different Animations */}
         <motion.div
           animate={{
@@ -149,7 +149,7 @@ const Company = () => {
       {/* ========================================
           SECTION 2: FOUNDER MANIFESTO - Modern Bento Grid
       ======================================== */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-b from-white via-gray-50/30 to-white">
+      <section className="relative py-24 overflow-hidden bg-gradient-to-b from-background via-muted/5 to-background">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
