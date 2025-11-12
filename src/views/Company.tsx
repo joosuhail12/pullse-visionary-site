@@ -1,6 +1,5 @@
 'use client';
 
-import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -11,7 +10,7 @@ import Image from 'next/image';
 import TeamCard from '@/components/company/TeamCard';
 import JourneySection from '@/components/company/JourneySection';
 import GlassCard from '@/components/company/GlassCard';
-import LiquidEther from '@/components/LiquidEther';
+import PageLiquidBackground from '@/components/PageLiquidBackground';
 import {
   antler,
   cta,
@@ -24,40 +23,58 @@ import antlerLogo from '@/assets/antler-logo.png';
 const Company = () => {
   return (
     <div className="min-h-screen bg-white relative">
+      <PageLiquidBackground opacity={0.25} />
       <Navigation />
 
       {/* ========================================
           SECTION 1: HERO - Founder-Led
       ======================================== */}
       <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        {/* Liquid Ether Background */}
-        <div className="absolute inset-0 -z-10 opacity-25">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#7C3AED", "#8B5CF6", "#A78BFA"]}
-              mouseForce={20}
-              cursorSize={100}
-              isViscous={false}
-              resolution={0.6}
-              autoDemo
-              autoSpeed={0.3}
-              autoIntensity={1.5}
-            />
-          </Suspense>
-        </div>
-
-        {/* Subtle Gradient Orbs */}
+        {/* Layered Gradient Orbs with Different Animations */}
         <motion.div
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.15, 0.25, 0.15],
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
           }}
           transition={{
-            duration: 12,
+            duration: 18,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-primary/20 to-purple-600/20 blur-[100px] pointer-events-none -z-10"
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/25 to-purple-600/25 blur-[120px] pointer-events-none -z-10"
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.1, 0.25, 0.1],
+            x: [0, -40, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 0.5,
+          }}
+          className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-500/20 to-primary/20 blur-[100px] pointer-events-none -z-10"
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.08, 0.2, 0.08],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-primary/15 via-purple-600/15 to-primary/15 blur-[140px] pointer-events-none -z-10"
         />
 
         {/* Content Container */}
