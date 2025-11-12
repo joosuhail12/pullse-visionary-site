@@ -122,17 +122,17 @@ const SolutionEcommerce = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative py-24 lg:py-32 flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
         <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-[1400px] mx-auto">
             {/* Header Content */}
-            <div className="text-center space-y-10">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
+            <div className="text-center space-y-8">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
                 Black Friday is coming. Your team is already burned out.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-4">
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-3">
                   Handle 10x the volume. Zero temp hires.
                 </span>
               </h1>
@@ -141,11 +141,20 @@ const SolutionEcommerce = () => {
                 AI that auto-resolves 80% of WISMO tickets, processes returns in 2 minutes, and handles peak season spikes—so your team survives the rush without breaking. Same agents. 10x capacity.
               </p>
 
-              {/* Single CTA */}
-              <div className="pt-4">
-                <RouteButton size="lg" href="/contact-sales" className="text-lg px-12 py-8 shadow-2xl shadow-primary/30 group">
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-6 shadow-xl shadow-primary/20 group">
                   Watch 2-minute demo
-                  <Play className="ml-2 h-6 w-6 group-hover:scale-110 transition-transform" />
+                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                </RouteButton>
+                <RouteButton
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-10 py-6"
+                  href="#roi-calculator"
+                >
+                  See Black Friday savings
+                  <TrendingUp className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 

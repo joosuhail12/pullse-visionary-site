@@ -67,17 +67,17 @@ const SolutionFintech = () => {
       </div>
 
       {/* Hero Section - Industry Context */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative py-24 lg:py-32 flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
         <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-7xl mx-auto">
             {/* Header Content */}
-            <div className="text-center mb-16 space-y-8">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
+            <div className="text-center space-y-8">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 A fraudster can drain $15K in 8 minutes. Your team takes 30.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3">
                   Stop fraud in under 8 seconds.
                 </span>
               </h1>
@@ -86,16 +86,25 @@ const SolutionFintech = () => {
                 Compliance-first AI that detects fraud, verifies KYC, and prevents chargebacks—with complete audit trails, SOC 2 controls, and encryption built in. Fast enough to stop fraud. Secure enough to pass any audit.
               </p>
 
-              {/* CTA */}
-              <div className="flex justify-center">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group">
-                  See compliance features
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-6 shadow-xl shadow-primary/20 group">
+                  Watch 2-minute demo
                   <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                </RouteButton>
+                <RouteButton
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-10 py-6"
+                  href="#compliance"
+                >
+                  See compliance details
+                  <Shield className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 
               {/* Trust Signals */}
-              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
                   <span>SOC 2 Type II in progress</span>

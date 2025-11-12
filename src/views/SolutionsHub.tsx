@@ -33,6 +33,7 @@ import {
   Package,
   Settings,
   Lock,
+  Play,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -258,7 +259,7 @@ const SolutionsHub = () => {
       </div>
 
       {/* Hero Section - Platform Value Proposition */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative py-24 lg:py-32 flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background/80 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -280,10 +281,10 @@ const SolutionsHub = () => {
 
         <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-10">
-              <h1 className="text-[2.75rem] leading-[1.1] sm:text-6xl sm:leading-[1.1] lg:text-7xl lg:leading-[1.05] xl:text-[5.5rem] xl:leading-[1.05] font-black text-foreground tracking-[-0.02em] max-w-5xl mx-auto">
+            <div className="text-center space-y-8">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Your support team is stretched to breaking.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3 lg:mt-4">
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3">
                   Handle 3x the volume. Same headcount.
                 </span>
               </h1>
@@ -292,23 +293,23 @@ const SolutionsHub = () => {
                 Industry-specific AI that takes action for your agents—from Stripe refunds to Shopify returns to fraud alerts. Resolve critical issues in 8 seconds, not 8 minutes. Your team finally has room to breathe.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
                 <RouteButton
                   size="lg"
-                  className="text-base px-10 py-6 shadow-xl shadow-primary/20"
-                  href="#roi-calculator"
+                  className="text-base px-10 py-6 shadow-xl shadow-primary/20 group"
+                  href="/contact-sales"
                 >
-                  Calculate your ROI
-                  <TrendingUp className="ml-2 h-5 w-5" />
+                  Watch 2-minute demo
+                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
                 <RouteButton
                   size="lg"
                   variant="outline"
                   className="text-base px-10 py-6"
-                  href="#solutions"
+                  href="#roi-calculator"
                 >
-                  See your industry
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  Calculate ROI
+                  <TrendingUp className="ml-2 h-5 w-5" />
                 </RouteButton>
               </div>
 
