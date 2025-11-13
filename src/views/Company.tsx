@@ -24,7 +24,7 @@ import antlerLogo from '@/assets/antler-logo.png';
 
 const Company = () => {
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen">
       <PageLiquidBackground opacity={0.25} />
       <Navigation />
 
