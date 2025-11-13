@@ -401,6 +401,9 @@ const FeaturedPostSmall = ({ post }: FeaturedPostProps) => {
           <h3 className="line-clamp-2 text-base font-bold leading-snug text-foreground transition-colors duration-300 group-hover:text-primary">
             {post.title}
           </h3>
+          <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+            {post.excerpt}
+          </p>
         </div>
         {post.author && (
           <p className="mt-2 text-xs font-semibold text-muted-foreground">
