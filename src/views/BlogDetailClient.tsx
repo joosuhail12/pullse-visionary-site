@@ -146,7 +146,7 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
           )}
 
           {/* Category Badge - Premium glassmorphism */}
-          <div className="absolute left-6 top-6 md:left-8 md:top-8 z-10">
+          <div className="absolute left-6 bottom-6 md:left-8 md:bottom-8 z-10">
             <div className={`group inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-bold uppercase tracking-wider ${categoryStyle.text} shadow-2xl shadow-black/20 backdrop-blur-xl border border-white/60 ring-1 ring-black/5 transition-all duration-300 hover:scale-105 hover:shadow-3xl`}>
               <Tag className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
               {post.category.title}
