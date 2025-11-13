@@ -83,10 +83,8 @@ const components: PortableTextComponents = {
       </p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="my-8 border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent py-4 pl-6 pr-4 italic backdrop-blur-sm">
-        <div className="text-xl leading-relaxed text-foreground/90">
-          {children}
-        </div>
+      <blockquote className="my-8 border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent py-4 pl-6 pr-4 italic backdrop-blur-sm [&>p]:text-xl [&>p]:leading-relaxed [&>p]:text-foreground/90 [&>p]:mb-0">
+        {children}
       </blockquote>
     ),
   },
