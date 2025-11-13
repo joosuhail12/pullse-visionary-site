@@ -314,11 +314,6 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
                 <AuthorBioCard author={post.author} />
               </div>
             )}
-
-            {/* Newsletter CTA */}
-            <div className="mt-16">
-              <NewsletterCTA />
-            </div>
           </article>
 
           {/* Right: Table of Contents (Desktop & Mobile Drawer) */}
@@ -367,7 +362,7 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
 }
 
 // Compact Newsletter CTA for article end
-const NewsletterCTA = () => (
+export const NewsletterCTA = () => (
   <div className="group relative isolate overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-primary via-primary/95 to-accent-pink shadow-2xl shadow-primary/25 backdrop-blur-xl transition-all duration-500 hover:shadow-3xl hover:shadow-primary/35">
     {/* Decorative blur circles */}
     <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent-pink/40 blur-3xl" />
