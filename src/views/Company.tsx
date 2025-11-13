@@ -32,27 +32,33 @@ const Company = () => {
           SECTION 1: HERO - Founder-Led
       ======================================== */}
       <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-muted/20 via-background to-muted/10">
+        {/* Gradient Base Layer */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background -z-20" />
+
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
+
         {/* Liquid Ether Background */}
-        <div className="absolute inset-0 -z-10 opacity-30">
+        <div className="absolute inset-0 -z-10 opacity-55">
           <Suspense fallback={<div className="w-full h-full" />}>
             <LiquidEther
-              colors={["#7C3AED", "#8B5CF6", "#A78BFA"]}
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
               mouseForce={20}
-              cursorSize={100}
+              cursorSize={110}
               isViscous={false}
-              resolution={0.6}
+              resolution={0.55}
               autoDemo
-              autoSpeed={0.3}
-              autoIntensity={1.5}
+              autoSpeed={0.35}
+              autoIntensity={1.6}
             />
           </Suspense>
         </div>
 
-        {/* Layered Gradient Orbs with Different Animations */}
+        {/* Layered Gradient Orbs with Different Animations - Subtle */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.15, 0.3, 0.15],
+            opacity: [0.06, 0.12, 0.06],
             x: [0, 30, 0],
             y: [0, -20, 0],
           }}
@@ -61,13 +67,13 @@ const Company = () => {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/25 to-purple-600/25 blur-[120px] pointer-events-none -z-10"
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-purple-600/10 blur-[120px] pointer-events-none -z-10"
         />
 
         <motion.div
           animate={{
             scale: [1, 1.15, 1],
-            opacity: [0.1, 0.25, 0.1],
+            opacity: [0.04, 0.10, 0.04],
             x: [0, -40, 0],
             y: [0, 30, 0],
           }}
@@ -77,13 +83,13 @@ const Company = () => {
             ease: 'easeInOut',
             delay: 0.5,
           }}
-          className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-500/20 to-primary/20 blur-[100px] pointer-events-none -z-10"
+          className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-500/8 to-primary/8 blur-[100px] pointer-events-none -z-10"
         />
 
         <motion.div
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.08, 0.2, 0.08],
+            opacity: [0.03, 0.08, 0.03],
             rotate: [0, 90, 0],
           }}
           transition={{
@@ -92,7 +98,7 @@ const Company = () => {
             ease: 'easeInOut',
             delay: 1,
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-primary/15 via-purple-600/15 to-primary/15 blur-[140px] pointer-events-none -z-10"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-primary/6 via-purple-600/6 to-primary/6 blur-[140px] pointer-events-none -z-10"
         />
 
         {/* Content Container */}
