@@ -31,7 +31,7 @@ const Company = () => {
       {/* ========================================
           SECTION 1: HERO - Founder-Led
       ======================================== */}
-      <section className="relative overflow-hidden pt-32 pb-20 min-h-screen bg-gradient-to-br from-muted/20 via-background to-muted/10">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
         {/* Gradient Base Layer */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background -z-20" />
 
@@ -54,55 +54,7 @@ const Company = () => {
           </Suspense>
         </div>
 
-        {/* Layered Gradient Orbs with Different Animations - Subtle */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.06, 0.12, 0.06],
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-purple-600/10 blur-[120px] pointer-events-none -z-10"
-        />
-
-        <motion.div
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.04, 0.10, 0.04],
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 0.5,
-          }}
-          className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-purple-500/8 to-primary/8 blur-[100px] pointer-events-none -z-10"
-        />
-
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.03, 0.08, 0.03],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-primary/6 via-purple-600/6 to-primary/6 blur-[140px] pointer-events-none -z-10"
-        />
-
-        {/* Content Container */}
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 py-20">
           <div className="max-w-5xl mx-auto">
             {/* Text Content */}
             <div className="flex flex-col items-center text-center">
