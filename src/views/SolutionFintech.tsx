@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
 import WorkflowShowcase from "@/components/WorkflowShowcase";
 import RoiCalculator from "@/components/RoiCalculator";
@@ -56,7 +58,7 @@ const SolutionFintech = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -68,7 +70,23 @@ const SolutionFintech = () => {
       </div>
 
       {/* Hero Section - Industry Context */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 overflow-hidden">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -117,7 +135,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* Animated Stats Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-14 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/5 to-background" />
 
         <div className="container relative mx-auto px-4">
@@ -162,7 +180,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* 3 Pillars Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
@@ -280,7 +298,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* How Pullse Helps - Workflow Showcases */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
@@ -434,7 +452,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
@@ -460,7 +478,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* Integrations Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/5 to-background" />
 
         <div className="container relative mx-auto px-4">
@@ -534,7 +552,7 @@ const SolutionFintech = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">

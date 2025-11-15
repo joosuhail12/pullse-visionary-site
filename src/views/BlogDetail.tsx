@@ -1,4 +1,5 @@
-import BlogDetailClient, { NewsletterCTA } from './BlogDetailClient';
+import BlogDetailClient from './BlogDetailClient';
+import NewsletterCTA from '@/components/NewsletterCTA';
 import { client } from '@/lib/sanity/client';
 import { postsByCategoryQuery } from '@/lib/sanity/queries';
 import type { BlogPost, BlogPostCard } from '@/types/blog';
@@ -31,13 +32,13 @@ const BlogDetail = async ({ post, slug }: BlogDetailProps) => {
 
   return (
     <>
-      <PageLiquidBackground opacity={0.08} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
       <BlogDetailClient post={post} relatedPosts={relatedPosts} canonicalUrl={canonicalUrl} />
 
       {/* Newsletter CTA before Footer */}
       <div className="container mx-auto px-4 py-16">
-        <NewsletterCTA />
+        <NewsletterCTA variant="standard" source="blog-detail" />
       </div>
 
       <Footer />

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -322,7 +324,7 @@ const ProductInboxChannels = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -334,34 +336,50 @@ const ProductInboxChannels = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-32 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.1),transparent_50%)]" />
 
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
               {/* Left: Content */}
-              <div className="space-y-10">
-                <div className="space-y-6">
-                  <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground leading-[1.1] tracking-tight">
+              <div className="space-y-6 md:space-y-10">
+                <div className="space-y-4 md:space-y-6">
+                  <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-foreground leading-[1.1] tracking-tight">
                     Every conversation,
                     <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient">
                       one workspace
                     </span>
                   </h1>
 
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
                     Email and live chat unified in a single intelligent inbox. AI-powered rewriting, smart routing, and collaboration tools that keep your team moving fast.
                   </p>
                 </div>
 
                 {/* Stats */}
-                <div ref={heroStatsRef} className="grid grid-cols-2 gap-6">
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
+                <div ref={heroStatsRef} className="grid grid-cols-2 gap-3 md:gap-6">
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-2">
-                      <div className="text-5xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent tabular-nums">
+                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent tabular-nums">
                         <AnimatedCounter end={2} trigger={statsAnimated} duration={1500} />
                       </div>
                       <div className="text-sm font-semibold text-muted-foreground">channels</div>
@@ -370,10 +388,10 @@ const ProductInboxChannels = () => {
                     <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-primary animate-pulse" />
                   </div>
 
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-2">
-                      <div className="text-5xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent tabular-nums">
+                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent tabular-nums">
                         <AnimatedCounter end={80} suffix="%" trigger={statsAnimated} duration={1800} />
                       </div>
                       <div className="text-sm font-semibold text-muted-foreground">automation</div>
@@ -382,10 +400,10 @@ const ProductInboxChannels = () => {
                     <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
                   </div>
 
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-2">
-                      <div className="text-5xl font-black bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent tabular-nums">
+                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent tabular-nums">
                         &lt;<AnimatedCounter end={100} trigger={statsAnimated} duration={1600} />ms
                       </div>
                       <div className="text-sm font-semibold text-muted-foreground">latency</div>
@@ -394,10 +412,10 @@ const ProductInboxChannels = () => {
                     <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-green-500 animate-pulse" style={{ animationDelay: '0.4s' }} />
                   </div>
 
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
                     <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     <div className="relative space-y-2">
-                      <div className="text-5xl font-black bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent tabular-nums">
+                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent tabular-nums">
                         <AnimatedCounter end={3} trigger={statsAnimated} duration={1400} />
                       </div>
                       <div className="text-sm font-semibold text-muted-foreground">routing methods</div>
@@ -408,14 +426,14 @@ const ProductInboxChannels = () => {
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <RouteButton size="lg" href="/contact-sales" className="text-base px-8 py-6 shadow-xl shadow-primary/20 group">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                  <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6 shadow-xl shadow-primary/20 group">
                     See it live
-                    <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                    <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
                   </RouteButton>
-                  <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-8 py-6">
+                  <RouteButton size="lg" variant="outline" href="/pricing" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6">
                     View pricing
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </RouteButton>
                 </div>
               </div>
@@ -426,7 +444,7 @@ const ProductInboxChannels = () => {
                 <div className="absolute -inset-8 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl" />
 
                 {/* Main card */}
-                <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-3 shadow-2xl backdrop-blur-xl">
+                <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 md:p-3 shadow-2xl backdrop-blur-xl">
                   <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
                     <Image
                       src={inboxScreenshot}
@@ -439,28 +457,28 @@ const ProductInboxChannels = () => {
 
                 {/* Floating badges */}
                 <div className="absolute -left-6 top-1/4 hidden lg:block">
-                  <div className="rounded-2xl border border-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '0s' }}>
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                        <Zap className="h-5 w-5 text-primary" />
+                  <div className="rounded-2xl border border-border/60 bg-card/95 p-3 md:p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '0s' }}>
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-primary/10">
+                        <Zap className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-foreground">AI-powered</div>
-                        <div className="text-xs text-muted-foreground">Smart features</div>
+                        <div className="text-xs md:text-sm font-bold text-foreground">AI-powered</div>
+                        <div className="text-[10px] md:text-xs text-muted-foreground">Smart features</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="absolute -right-6 bottom-1/4 hidden lg:block">
-                  <div className="rounded-2xl border border-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10">
-                        <CheckCircle2 className="h-5 w-5 text-green-500" />
+                  <div className="rounded-2xl border border-border/60 bg-card/95 p-3 md:p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-green-500/10">
+                        <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-500" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-foreground">Real-time</div>
-                        <div className="text-xs text-muted-foreground">Instant sync</div>
+                        <div className="text-xs md:text-sm font-bold text-foreground">Real-time</div>
+                        <div className="text-[10px] md:text-xs text-muted-foreground">Instant sync</div>
                       </div>
                     </div>
                   </div>
@@ -472,59 +490,59 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* Supported Channels */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-transparent to-muted/10" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Two channels, infinite possibilities
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Email and live chat, unified in one workspace
               </p>
             </div>
 
             {/* Channel Cards */}
-            <div className="space-y-24">
+            <div className="space-y-12 md:space-y-16 lg:space-y-24">
               {channels.map((channel, index) => {
                 const Icon = channel.icon;
                 const isEven = index % 2 === 0;
 
                 return (
                   <div key={channel.id} className="relative fade-in-up" style={{ transitionDelay: `${index * 100}ms` }}>
-                    <div className={`grid lg:grid-cols-2 gap-16 items-center ${!isEven ? 'lg:direction-rtl' : ''}`}>
+                    <div className={`grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center ${!isEven ? 'lg:direction-rtl' : ''}`}>
                       {/* Content */}
-                      <div className={`space-y-8 ${!isEven ? 'lg:direction-ltr' : ''}`}>
-                        <div className="space-y-4">
-                          <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${channel.color} shadow-lg`}>
-                            <Icon className="h-8 w-8 text-background" />
+                      <div className={`space-y-5 md:space-y-6 lg:space-y-8 ${!isEven ? 'lg:direction-ltr' : ''}`}>
+                        <div className="space-y-3 md:space-y-4">
+                          <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${channel.color} shadow-lg`}>
+                            <Icon className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-background" />
                           </div>
                           <div>
-                            <div className="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+                            <div className="text-xs md:text-sm font-bold uppercase tracking-widest text-primary mb-2">
                               {channel.title}
                             </div>
-                            <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
+                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2 md:mb-3">
                               {channel.headline}
                             </h3>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
+                            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                               {channel.description}
                             </p>
                           </div>
                         </div>
 
                         {/* Features */}
-                        <div className="space-y-4">
+                        <div className="space-y-3 md:space-y-4">
                           {channel.features.map((feature, fIndex) => (
-                            <div key={fIndex} className="flex items-start gap-4">
-                              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-primary/10 mt-1">
-                                <CheckCircle2 className="h-4 w-4 text-primary" />
+                            <div key={fIndex} className="flex items-start gap-3 md:gap-4">
+                              <div className="flex h-5 w-5 md:h-6 md:w-6 shrink-0 items-center justify-center rounded-lg bg-primary/10 mt-0.5 md:mt-1">
+                                <CheckCircle2 className="h-3 w-3 md:h-4 md:w-4 text-primary" />
                               </div>
                               <div>
-                                <div className="text-base font-bold text-foreground">{feature.label}</div>
-                                <div className="text-sm text-muted-foreground">{feature.detail}</div>
+                                <div className="text-sm md:text-base font-bold text-foreground">{feature.label}</div>
+                                <div className="text-xs md:text-sm text-muted-foreground">{feature.detail}</div>
                               </div>
                             </div>
                           ))}
@@ -537,21 +555,21 @@ const ProductInboxChannels = () => {
                           <div className={`absolute inset-0 bg-gradient-to-br ${channel.bgGradient}`} />
                           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:48px_48px]" />
 
-                          <div className="relative p-12 lg:p-16">
-                            <div className="space-y-8">
+                          <div className="relative p-8 md:p-10 lg:p-12 xl:p-16">
+                            <div className="space-y-6 md:space-y-8">
                               {/* Large Icon */}
                               <div className="flex items-center justify-center">
-                                <div className={`flex h-32 w-32 items-center justify-center rounded-3xl bg-gradient-to-br ${channel.color} shadow-2xl`}>
-                                  <Icon className="h-16 w-16 text-background" />
+                                <div className={`flex h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 items-center justify-center rounded-3xl bg-gradient-to-br ${channel.color} shadow-2xl`}>
+                                  <Icon className="h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 text-background" />
                                 </div>
                               </div>
 
                               {/* Stat */}
                               <div className="text-center space-y-2">
-                                <div className={`text-6xl font-black bg-gradient-to-r ${channel.color} bg-clip-text text-transparent`}>
+                                <div className={`text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r ${channel.color} bg-clip-text text-transparent`}>
                                   {channel.stats.value}
                                 </div>
-                                <div className="text-lg text-foreground/80">
+                                <div className="text-base md:text-lg text-foreground/80">
                                   {channel.stats.label}
                                 </div>
                               </div>
@@ -569,21 +587,21 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* AI Features */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 AI that makes agents superhuman
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Built-in tools that rewrite, summarize, and suggest
               </p>
             </div>
 
             {/* AI Feature Cards */}
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-5 md:gap-6 lg:gap-8">
               {/* AI Feature Cards */}
               {aiFeatures.map((feature, index) => {
                 const Icon = feature.icon;
@@ -595,30 +613,30 @@ const ProductInboxChannels = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 transition-opacity group-hover:opacity-5`} />
 
-                    <div className="relative p-8 space-y-6">
-                      <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg transition-all group-hover:scale-110`}>
-                        <Icon className="h-8 w-8 text-background" />
+                    <div className="relative p-5 md:p-6 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6">
+                      <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg transition-all group-hover:scale-110`}>
+                        <Icon className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-background" />
                       </div>
 
-                      <div className="space-y-3">
-                        <h3 className="text-2xl font-bold text-foreground">{feature.title}</h3>
-                        <p className="text-base text-muted-foreground">{feature.description}</p>
+                      <div className="space-y-2 md:space-y-3">
+                        <h3 className="text-xl md:text-2xl font-bold text-foreground">{feature.title}</h3>
+                        <p className="text-sm md:text-base text-muted-foreground">{feature.description}</p>
                       </div>
 
-                      <div className="space-y-3 pt-4 border-t border-border/40">
+                      <div className="space-y-2 md:space-y-3 pt-3 md:pt-4 border-t border-border/40">
                         {feature.capabilities.map((capability, cIndex) => (
-                          <div key={cIndex} className="flex items-start gap-3">
-                            <div className="h-1.5 w-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                            <p className="text-sm text-foreground/80 leading-relaxed">
+                          <div key={cIndex} className="flex items-start gap-2 md:gap-3">
+                            <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 md:mt-2 shrink-0" />
+                            <p className="text-xs md:text-sm text-foreground/80 leading-relaxed">
                               {capability}
                             </p>
                           </div>
                         ))}
                       </div>
 
-                      <div className="pt-4">
-                        <div className="rounded-xl bg-muted/30 p-4 border border-border/30">
-                          <p className="text-xs font-mono text-muted-foreground">
+                      <div className="pt-3 md:pt-4">
+                        <div className="rounded-xl bg-muted/30 p-3 md:p-4 border border-border/30">
+                          <p className="text-[10px] md:text-xs font-mono text-muted-foreground">
                             {feature.demo}
                           </p>
                         </div>
@@ -633,23 +651,23 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* Routing Mechanisms */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/10 to-transparent" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Three ways to route conversations
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Choose the assignment method that fits your team
               </p>
             </div>
 
             {/* Routing Cards */}
-            <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-8 md:mb-10 lg:mb-12">
               {routingMethods.map((method, index) => {
                 const Icon = method.icon;
                 const isActive = activeRouting === index;
@@ -667,42 +685,42 @@ const ProductInboxChannels = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 transition-opacity ${isActive ? 'opacity-10' : 'group-hover:opacity-5'}`} />
 
-                    <div className="relative p-8 space-y-6">
+                    <div className="relative p-5 md:p-6 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6">
                       {/* Icon */}
-                      <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300 ${
+                      <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-2xl transition-all duration-300 ${
                         isActive
                           ? `bg-gradient-to-br ${method.color} shadow-lg`
                           : 'bg-primary/10 group-hover:bg-primary/15'
                       }`}>
-                        <Icon className={`h-8 w-8 ${isActive ? 'text-background' : 'text-primary'}`} />
+                        <Icon className={`h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 ${isActive ? 'text-background' : 'text-primary'}`} />
                       </div>
 
                       {/* Content */}
-                      <div className="space-y-3">
-                        <h3 className={`text-2xl font-bold transition-colors ${isActive ? 'text-foreground' : 'text-foreground/80'}`}>
+                      <div className="space-y-2 md:space-y-3">
+                        <h3 className={`text-xl md:text-2xl font-bold transition-colors ${isActive ? 'text-foreground' : 'text-foreground/80'}`}>
                           {method.title}
                         </h3>
-                        <p className="text-base text-muted-foreground leading-relaxed">
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                           {method.description}
                         </p>
                       </div>
 
                       {/* Details */}
-                      <div className="space-y-2">
+                      <div className="space-y-1.5 md:space-y-2">
                         {method.details.map((detail, dIndex) => (
-                          <div key={dIndex} className="flex items-start gap-3">
-                            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <p className="text-sm text-foreground/80">{detail}</p>
+                          <div key={dIndex} className="flex items-start gap-2 md:gap-3">
+                            <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary mt-0.5 shrink-0" />
+                            <p className="text-xs md:text-sm text-foreground/80">{detail}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Use case */}
-                      <div className="pt-4 border-t border-border/40">
-                        <div className="text-xs font-bold uppercase tracking-wider text-primary mb-1">
+                      <div className="pt-3 md:pt-4 border-t border-border/40">
+                        <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-primary mb-1">
                           Best For
                         </div>
-                        <div className="text-sm font-semibold text-foreground">
+                        <div className="text-xs md:text-sm font-semibold text-foreground">
                           {method.useCase}
                         </div>
                       </div>
@@ -721,47 +739,47 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* Productivity Features */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Built for speed and collaboration
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Everything your team needs to work faster together
               </p>
             </div>
 
             {/* Bento Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
               {productivityFeatures.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
                   <div
                     key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-8 transition-all hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5 md:p-6 lg:p-8 transition-all hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
                     style={{ transitionDelay: `${index * 50}ms` }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                    <div className="relative space-y-4">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/15">
-                        <Icon className="h-7 w-7 text-primary" />
+                    <div className="relative space-y-3 md:space-y-4">
+                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/15">
+                        <Icon className="h-6 w-6 md:h-7 md:w-7 text-primary" />
                       </div>
 
-                      <div className="space-y-2">
-                        <h3 className="text-lg font-bold text-foreground">{feature.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                      <div className="space-y-1.5 md:space-y-2">
+                        <h3 className="text-base md:text-lg font-bold text-foreground">{feature.title}</h3>
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
 
-                      <div className="pt-2">
-                        <div className="inline-flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1.5 border border-primary/20">
-                          <Zap className="h-3.5 w-3.5 text-primary" />
-                          <span className="text-xs font-bold text-primary">{feature.benefit}</span>
+                      <div className="pt-1 md:pt-2">
+                        <div className="inline-flex items-center gap-1.5 md:gap-2 rounded-lg bg-primary/10 px-2.5 py-1.5 md:px-3 border border-primary/20">
+                          <Zap className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary" />
+                          <span className="text-[10px] md:text-xs font-bold text-primary">{feature.benefit}</span>
                         </div>
                       </div>
                     </div>
@@ -774,23 +792,23 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* Results */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Real impact, measurable results
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Target outcomes for your team
               </p>
             </div>
 
             {/* Result Cards */}
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
               {results.map((result, index) => (
                 <ResultCard
                   key={index}
@@ -811,7 +829,7 @@ const ProductInboxChannels = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
         <div className="container relative mx-auto px-4">
@@ -820,38 +838,38 @@ const ProductInboxChannels = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-              <div className="relative p-12 lg:p-16">
-                <div className="text-center space-y-10">
-                  <div className="space-y-6">
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+              <div className="relative p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16">
+                <div className="text-center space-y-6 md:space-y-8 lg:space-y-10">
+                  <div className="space-y-4 md:space-y-5 lg:space-y-6">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                       See the inbox in action
                     </h2>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                       Book a demo with our team. We'll show you how Pullse unifies your channels and supercharges your agents.
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <RouteButton size="lg" className="text-base px-10 py-7 shadow-xl shadow-primary/20" href="/contact-sales">
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+                    <RouteButton size="lg" className="text-sm md:text-base px-8 py-5 md:px-10 md:py-7 shadow-xl shadow-primary/20" href="/contact-sales">
                       Book a demo
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                     </RouteButton>
-                    <RouteButton size="lg" variant="outline" className="text-base px-10 py-7" href="/pricing">
+                    <RouteButton size="lg" variant="outline" className="text-sm md:text-base px-8 py-5 md:px-10 md:py-7" href="/pricing">
                       View pricing
                     </RouteButton>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-border/40">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 gap-y-3 md:gap-y-4 pt-6 md:pt-8 border-t border-border/40">
+                    <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary shrink-0" />
                       <span>2-4 week implementation</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary shrink-0" />
                       <span>Founder-led onboarding</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary shrink-0" />
                       <span>No credit card required</span>
                     </div>
                   </div>

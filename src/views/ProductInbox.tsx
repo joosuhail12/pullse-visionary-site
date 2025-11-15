@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -358,7 +360,7 @@ const ProductInbox = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -370,9 +372,25 @@ const ProductInbox = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-32 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
+
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">

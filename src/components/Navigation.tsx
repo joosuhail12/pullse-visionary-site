@@ -14,6 +14,7 @@ import {
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Accordion from "@radix-ui/react-accordion";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import logoIcon from "@/assets/logo-icon-purple.png";
 import logoText from "@/assets/logo-text-navy.png";
 
@@ -612,7 +613,7 @@ export function Navigation() {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative"
+                  className="relative hidden lg:block"
                 >
                   {/* Enhanced ambient pulsing glow with multiple colors */}
                   <motion.div
@@ -669,7 +670,7 @@ export function Navigation() {
                   onClick={() => setMobileMenuOpen(true)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+                  className="lg:hidden p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-700 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
                   aria-label="Open menu"
                 >
                   <Menu className="w-6 h-6" />
@@ -685,6 +686,9 @@ export function Navigation() {
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
           <Dialog.Content className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white/95 backdrop-blur-2xl shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right data-[state=closed]:duration-300 data-[state=open]:duration-500">
+            <VisuallyHidden.Root>
+              <Dialog.Title>Mobile Navigation Menu</Dialog.Title>
+            </VisuallyHidden.Root>
             <div className="flex flex-col h-full">
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-100">
@@ -692,7 +696,7 @@ export function Navigation() {
                   <Image src={logoIcon} alt="Pullse" width={32} height={32} className="w-8 h-8" />
                   <Image src={logoText} alt="Pullse" width={100} height={24} className="h-6 w-auto" />
                 </div>
-                <Dialog.Close className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                <Dialog.Close className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
                   <X className="w-6 h-6" />
                 </Dialog.Close>
               </div>
@@ -723,9 +727,9 @@ export function Navigation() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-purple-50 transition-colors min-h-[44px]"
                                   >
-                                    <Icon className="w-4 h-4 text-purple-600" />
+                                    <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-purple-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
                                       <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
@@ -790,9 +794,9 @@ export function Navigation() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors"
+                                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-purple-50 transition-colors min-h-[44px]"
                                   >
-                                    <Icon className="w-4 h-4 text-purple-600" />
+                                    <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-purple-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
                                       <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
@@ -828,9 +832,9 @@ export function Navigation() {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors"
+                                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-teal-50 transition-colors min-h-[44px]"
                                   >
-                                    <Icon className="w-4 h-4 text-teal-600" />
+                                    <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-teal-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
                                       <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
@@ -850,9 +854,9 @@ export function Navigation() {
                 <Link
                   href="/pricing"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 mt-2 px-4 py-3 rounded-lg border border-gray-100 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-2 mt-2 px-4 py-3 rounded-lg border border-gray-100 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors min-h-[44px]"
                 >
-                  <BarChart3 className="w-4 h-4 text-purple-600" />
+                  <BarChart3 className="w-5 h-5 sm:w-4 sm:h-4 text-purple-600 shrink-0" />
                   Pricing
                 </Link>
               </div>
@@ -864,14 +868,14 @@ export function Navigation() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full px-4 py-3 rounded-full text-center text-sm font-medium text-gray-700 border border-gray-200 hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-center w-full px-4 py-3 rounded-full text-center text-sm font-medium text-gray-700 border border-gray-200 hover:bg-gray-50 transition-colors min-h-[44px]"
                 >
                   Login
                 </Link>
                 <Link
                   href="/contact-sales"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full px-4 py-3 rounded-full text-center text-sm font-semibold text-white shadow-lg transition-all relative overflow-hidden"
+                  className="flex items-center justify-center w-full px-4 py-3 rounded-full text-center text-sm font-semibold text-white shadow-lg transition-all relative overflow-hidden min-h-[44px]"
                   style={{
                     background: "linear-gradient(135deg, rgb(139, 92, 246) 0%, rgb(236, 72, 153) 50%, rgb(59, 130, 246) 100%)",
                     boxShadow: "0 8px 24px rgba(139, 92, 246, 0.3), 0 4px 12px rgba(236, 72, 153, 0.25)",

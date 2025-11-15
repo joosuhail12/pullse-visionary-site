@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
-import LiquidEther from "@/components/LiquidEther";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
 import {
@@ -247,7 +248,7 @@ const SolutionsHub = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -259,12 +260,12 @@ const SolutionsHub = () => {
       </div>
 
       {/* Hero Section - Platform Value Proposition */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-16 md:pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background/80 to-background/90" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
         {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-40">
+        <div className="absolute inset-0 -z-10 opacity-55 hidden md:block">
           <Suspense fallback={<div className="w-full h-full" />}>
             <LiquidEther
               colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
@@ -281,55 +282,55 @@ const SolutionsHub = () => {
 
         <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center space-y-8">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
+            <div className="text-center space-y-6 md:space-y-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Your support team is stretched to breaking.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3">
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2 md:mt-3">
                   Handle 3x the volume. Same headcount.
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground/90 leading-[1.6] sm:leading-[1.65] max-w-3xl mx-auto font-normal">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground/90 leading-[1.6] sm:leading-[1.65] max-w-3xl mx-auto font-normal">
                 Industry-specific AI that takes action for your agents—from Stripe refunds to Shopify returns to fraud alerts. Resolve critical issues in 8 seconds, not 8 minutes. Your team finally has room to breathe.
               </p>
 
-              <div className="pt-6">
+              <div className="pt-4 md:pt-6">
                 <RouteButton
                   size="lg"
-                  className="text-base px-10 py-6 shadow-xl shadow-primary/20 group"
+                  className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 shadow-xl shadow-primary/20 group"
                   href="/contact-sales"
                 >
                   Book a demo
-                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 pt-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
-                    <Zap className="h-5 w-5 text-primary" />
+              <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-4 md:gap-y-6 pt-4 md:pt-6">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
+                    <Zap className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                   </div>
                   <div className="text-left">
-                    <div className="text-sm font-bold text-foreground tracking-tight">Setup in 1 hour</div>
-                    <div className="text-xs text-muted-foreground/80 leading-relaxed">Start automating today</div>
+                    <div className="text-xs md:text-sm font-bold text-foreground tracking-tight">Setup in 1 hour</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground/80 leading-relaxed">Start automating today</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
-                    <Shield className="h-5 w-5 text-primary" />
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
+                    <Shield className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                   </div>
                   <div className="text-left">
-                    <div className="text-sm font-bold text-foreground tracking-tight">14-day free trial</div>
-                    <div className="text-xs text-muted-foreground/80 leading-relaxed">No credit card needed</div>
+                    <div className="text-xs md:text-sm font-bold text-foreground tracking-tight">14-day free trial</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground/80 leading-relaxed">No credit card needed</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
-                    <TrendingUp className="h-5 w-5 text-primary" />
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-full bg-primary/10 ring-1 ring-primary/20">
+                    <TrendingUp className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                   </div>
                   <div className="text-left">
-                    <div className="text-sm font-bold text-foreground tracking-tight">ROI in 14 days</div>
-                    <div className="text-xs text-muted-foreground/80 leading-relaxed">See savings immediately</div>
+                    <div className="text-xs md:text-sm font-bold text-foreground tracking-tight">ROI in 14 days</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground/80 leading-relaxed">See savings immediately</div>
                   </div>
                 </div>
               </div>
@@ -339,29 +340,29 @@ const SolutionsHub = () => {
       </section>
 
       {/* Cross-Industry Stats Section */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+            <div className="text-center mb-12 md:mb-14 lg:mb-16 space-y-3 md:space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
                 Performance that beats industry standards
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 See how Pullse compares to traditional support platforms—real metrics that translate to immediate cost savings
               </p>
             </div>
 
-            <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
               {crossIndustryStats.map((stat, index) => (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-8 text-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
+                  className="relative overflow-hidden rounded-xl md:rounded-2xl border border-border/60 bg-card p-5 md:p-6 lg:p-8 text-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
-                  <div className="relative space-y-3">
-                    <div className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                  <div className="relative space-y-2 md:space-y-3">
+                    <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                       <AnimatedCounter
                         end={stat.value}
                         suffix={stat.suffix}
@@ -369,25 +370,25 @@ const SolutionsHub = () => {
                         duration={2000}
                       />
                     </div>
-                    <div className="text-sm font-semibold text-foreground uppercase tracking-wide">
+                    <div className="text-xs md:text-sm font-semibold text-foreground uppercase tracking-wide">
                       {stat.label}
                     </div>
-                    <div className="text-xs text-muted-foreground leading-relaxed pt-2 border-t border-border/40">
+                    <div className="text-[10px] md:text-xs text-muted-foreground leading-relaxed pt-1.5 md:pt-2 border-t border-border/40">
                       {index === 0 && "vs. 30% industry average—handle 4x more tickets with same team"}
                       {index === 1 && "vs. 2-3 min average—resolve issues before customers get frustrated"}
                       {index === 2 && "vs. traditional setup—save $50K+ annually on support operations"}
                       {index === 3 && "Always-on support without hiring night shifts or weekend staff"}
                     </div>
                   </div>
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <TrendingUp className="w-5 h-5 text-primary" />
+                  <div className="absolute top-2 md:top-3 right-2 md:right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 text-center">
-              <p className="text-sm text-muted-foreground">
+            <div className="mt-8 md:mt-10 lg:mt-12 text-center">
+              <p className="text-xs md:text-sm text-muted-foreground">
                 Based on industry benchmarks from Gartner, Forrester, and internal analysis across 100+ support teams
               </p>
             </div>
@@ -396,82 +397,82 @@ const SolutionsHub = () => {
       </section>
 
       {/* The 3 Pillars - Expanded */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-12 md:py-14 lg:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-8 space-y-4">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
+            <div className="text-center mb-6 md:mb-7 lg:mb-8 space-y-3 md:space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 From overwhelmed agents to automated excellence
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
                 Three AI tools working together to eliminate busywork, accelerate resolutions, and maintain quality at scale
               </p>
-              <div className="flex flex-wrap justify-center gap-3 pt-2">
-                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                  <span className="text-sm font-semibold text-primary">Save 15+ hours per agent weekly</span>
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3 pt-1 md:pt-2">
+                <div className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-primary/10 border border-primary/20">
+                  <span className="text-xs md:text-sm font-semibold text-primary">Save 15+ hours per agent weekly</span>
                 </div>
-                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                  <span className="text-sm font-semibold text-primary">Reduce resolution time by 75%</span>
+                <div className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-primary/10 border border-primary/20">
+                  <span className="text-xs md:text-sm font-semibold text-primary">Reduce resolution time by 75%</span>
                 </div>
-                <div className="px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                  <span className="text-sm font-semibold text-primary">Zero quality compromise</span>
+                <div className="px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-primary/10 border border-primary/20">
+                  <span className="text-xs md:text-sm font-semibold text-primary">Zero quality compromise</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-5">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-5">
               {pillars.map((pillar, index) => {
                 const Icon = pillar.icon;
                 return (
                   <div
                     key={index}
-                    className={`group relative overflow-hidden rounded-3xl border-2 ${pillar.borderColor} bg-card transition-all hover:shadow-2xl hover:-translate-y-2`}
+                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 ${pillar.borderColor} bg-card transition-all hover:shadow-2xl hover:-translate-y-2`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-5`} />
 
-                    <div className="relative p-6 space-y-4">
+                    <div className="relative p-4 md:p-5 lg:p-6 space-y-3 md:space-y-4">
                       {/* Header */}
-                      <div className="space-y-3">
-                        <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
-                          <Icon className="h-8 w-8 text-background" />
+                      <div className="space-y-2 md:space-y-3">
+                        <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
+                          <Icon className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-background" />
                         </div>
                         <div>
-                          <div className={`text-xs font-bold uppercase tracking-wider ${pillar.textColor} mb-1.5`}>
+                          <div className={`text-[10px] md:text-xs font-bold uppercase tracking-wider ${pillar.textColor} mb-1 md:mb-1.5`}>
                             {pillar.subtitle}
                           </div>
-                          <h3 className="text-2xl font-bold text-foreground">{pillar.title}</h3>
+                          <h3 className="text-xl md:text-2xl font-bold text-foreground">{pillar.title}</h3>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                         {pillar.description}
                       </p>
 
                       {/* Features */}
-                      <div className="space-y-2">
+                      <div className="space-y-1.5 md:space-y-2">
                         {pillar.features.map((feature, i) => (
-                          <div key={i} className="flex items-start gap-2.5">
-                            <div className={`mt-0.5 h-4 w-4 rounded-full ${pillar.bgColor} border ${pillar.borderColor} flex items-center justify-center shrink-0`}>
-                              <CheckCircle2 className={`h-2.5 w-2.5 ${pillar.textColor}`} />
+                          <div key={i} className="flex items-start gap-2 md:gap-2.5">
+                            <div className={`mt-0.5 h-3.5 w-3.5 md:h-4 md:w-4 rounded-full ${pillar.bgColor} border ${pillar.borderColor} flex items-center justify-center shrink-0`}>
+                              <CheckCircle2 className={`h-2 w-2 md:h-2.5 md:w-2.5 ${pillar.textColor}`} />
                             </div>
-                            <p className="text-sm text-foreground/80 leading-relaxed">{feature}</p>
+                            <p className="text-xs md:text-sm text-foreground/80 leading-relaxed">{feature}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Stat */}
-                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${pillar.color} text-background space-y-2`}>
+                      <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl bg-gradient-to-br ${pillar.color} text-background space-y-1.5 md:space-y-2`}>
                         <div>
-                          <div className="text-5xl font-black mb-2">{pillar.stat}</div>
-                          <div className="text-sm font-semibold opacity-90">{pillar.statLabel}</div>
+                          <div className="text-4xl md:text-5xl font-black mb-1.5 md:mb-2">{pillar.stat}</div>
+                          <div className="text-xs md:text-sm font-semibold opacity-90">{pillar.statLabel}</div>
                         </div>
-                        <div className="pt-3 border-t border-background/20">
-                          <div className="flex items-center gap-2">
-                            <TrendingUp className="w-4 h-4 opacity-90" />
-                            <div className="text-xs font-medium opacity-90">{pillar.roiText}</div>
+                        <div className="pt-2 md:pt-3 border-t border-background/20">
+                          <div className="flex items-center gap-1.5 md:gap-2">
+                            <TrendingUp className="w-3.5 h-3.5 md:w-4 md:h-4 opacity-90" />
+                            <div className="text-[10px] md:text-xs font-medium opacity-90">{pillar.roiText}</div>
                           </div>
                         </div>
                       </div>
@@ -485,88 +486,88 @@ const SolutionsHub = () => {
       </section>
 
       {/* Choose Your Industry - Solution Cards */}
-      <section id="solutions" className="relative py-20 overflow-hidden">
+      <section id="solutions" className="relative py-14 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12 space-y-5">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-10 md:mb-12 space-y-4 md:space-y-5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Choose your industry to see exact ROI
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Each solution is pre-configured for your industry's workflows, challenges, and compliance requirements
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
               {industrySolutions.map((solution, index) => {
                 const Icon = solution.icon;
                 return (
                   <div
                     key={index}
-                    className={`group relative overflow-hidden rounded-3xl border-2 ${solution.borderColor} bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2`}
+                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 ${solution.borderColor} bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${solution.gradient} opacity-50`} />
 
-                    <div className="relative p-6 space-y-6">
+                    <div className="relative p-4 md:p-5 lg:p-6 space-y-3 md:space-y-4 lg:space-y-5">
                       {/* Header */}
-                      <div className="space-y-4">
-                        <div className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl ${solution.bgColor} border-2 ${solution.borderColor} shadow-lg`}>
-                          <Icon className={`h-10 w-10 ${solution.textColor}`} />
+                      <div className="space-y-3 md:space-y-4">
+                        <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 xl:h-20 xl:w-20 items-center justify-center rounded-xl md:rounded-2xl ${solution.bgColor} border-2 ${solution.borderColor} shadow-lg`}>
+                          <Icon className={`h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 xl:h-10 xl:w-10 ${solution.textColor}`} />
                         </div>
                         <div>
-                          <div className={`text-xs font-bold uppercase tracking-wider ${solution.textColor} mb-2`}>
+                          <div className={`text-[10px] md:text-xs font-bold uppercase tracking-wider ${solution.textColor} mb-1.5 md:mb-2`}>
                             {solution.category}
                           </div>
-                          <h3 className="text-3xl font-bold text-foreground">{solution.title}</h3>
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">{solution.title}</h3>
                         </div>
                       </div>
 
                       {/* Headline & Subheadline */}
-                      <div className="space-y-3">
-                        <p className="text-xl font-bold text-foreground leading-tight">
+                      <div className="space-y-1.5 md:space-y-2 lg:space-y-3">
+                        <p className="text-base md:text-lg lg:text-xl font-bold text-foreground leading-tight">
                           {solution.headline}
                         </p>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                           {solution.subheadline}
                         </p>
                       </div>
 
                       {/* Pain Points as Questions */}
-                      <div className="space-y-3">
+                      <div className="space-y-1.5 md:space-y-2 lg:space-y-3">
                         {solution.painPoints.map((point, i) => (
-                          <div key={i} className="flex items-start gap-3">
-                            <div className={`mt-1 h-5 w-5 rounded-full ${solution.bgColor} border ${solution.borderColor} flex items-center justify-center shrink-0`}>
-                              <HelpCircle className={`h-3 w-3 ${solution.textColor}`} />
+                          <div key={i} className="flex items-start gap-2 md:gap-3">
+                            <div className={`mt-0.5 md:mt-1 h-4 w-4 md:h-5 md:w-5 rounded-full ${solution.bgColor} border ${solution.borderColor} flex items-center justify-center shrink-0`}>
+                              <HelpCircle className={`h-2.5 w-2.5 md:h-3 md:w-3 ${solution.textColor}`} />
                             </div>
-                            <p className="text-sm text-muted-foreground">{point}</p>
+                            <p className="text-xs md:text-sm text-muted-foreground">{point}</p>
                           </div>
                         ))}
                       </div>
 
                       {/* Key Stat & ROI */}
-                      <div className="space-y-3">
-                        <div className={`p-6 rounded-2xl bg-gradient-to-br ${solution.gradient} border-2 ${solution.borderColor}`}>
-                          <div className={`text-5xl font-black ${solution.textColor} mb-2`}>
+                      <div className="space-y-2 md:space-y-3">
+                        <div className={`p-3 md:p-4 lg:p-5 xl:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br ${solution.gradient} border-2 ${solution.borderColor}`}>
+                          <div className={`text-3xl md:text-4xl lg:text-5xl font-black ${solution.textColor} mb-1.5 md:mb-2`}>
                             {solution.stat.value}
                           </div>
-                          <div className="text-sm font-semibold text-foreground/80">{solution.stat.label}</div>
+                          <div className="text-xs md:text-sm font-semibold text-foreground/80">{solution.stat.label}</div>
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20">
-                          <TrendingUp className="w-4 h-4 text-primary shrink-0" />
-                          <p className="text-sm font-semibold text-primary">{solution.roi}</p>
+                        <div className="flex items-center gap-1.5 md:gap-2 px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl bg-primary/10 border border-primary/20">
+                          <TrendingUp className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary shrink-0" />
+                          <p className="text-xs md:text-sm font-semibold text-primary">{solution.roi}</p>
                         </div>
                       </div>
 
                       {/* CTA Button */}
                       <Link
                         href={solution.link}
-                        className={`block w-full py-4 px-6 rounded-xl bg-gradient-to-r ${solution.ctaGradient} text-background font-bold text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all`}
+                        className={`block w-full py-2.5 px-4 md:py-3 md:px-5 lg:py-4 lg:px-6 rounded-lg md:rounded-xl bg-gradient-to-r ${solution.ctaGradient} text-background font-bold text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm md:text-base`}
                       >
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center justify-center gap-1.5 md:gap-2">
                           <span>Explore {solution.title} Solution</span>
-                          <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </Link>
                     </div>
@@ -579,35 +580,35 @@ const SolutionsHub = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section id="roi-calculator" className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section id="roi-calculator" className="relative py-14 md:py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
-            <div className="text-center mb-8 space-y-5">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+            <div className="text-center mb-6 md:mb-8 space-y-4 md:space-y-5">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                 See your exact savings in 60 seconds
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Calculate how much you'll save by automating 80% of tickets vs. hiring more agents or paying per-resolution fees
               </p>
-              <div className="flex flex-wrap justify-center gap-6 pt-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 pt-2 md:pt-4">
+                <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
                   <span>Compare vs. Intercom, Zendesk, Freshdesk</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
                   <span>See monthly & annual savings</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
                   <span>No email required</span>
                 </div>
               </div>
             </div>
 
             {/* Calculator Card */}
-            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-8 md:p-10 shadow-2xl backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-2xl md:rounded-[24px] lg:rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-5 md:p-8 lg:p-10 shadow-2xl backdrop-blur-sm">
               <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
               <div className="relative">
                 <RoiCalculator />
@@ -617,38 +618,38 @@ const SolutionsHub = () => {
         </div>
       </section>
       {/* Integrations Showcase */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-14 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/5 to-background" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center space-y-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            <div className="text-center space-y-6 md:space-y-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                 Execute actions across your entire business stack
               </h2>
 
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Pull data and trigger actions in real-time across your CRM, payment processor, e-commerce platform, and 100+ business tools. No migration, no middleware, no sync delays.
               </p>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-5 lg:gap-6 pt-6 md:pt-8">
                 {integrations.map((integration, index) => {
                   const Icon = integration.icon;
                   return (
                     <div
                       key={index}
-                      className="flex flex-col items-center gap-3 p-6 rounded-2xl border border-border/40 bg-card hover:border-primary/30 hover:shadow-lg transition-all"
+                      className="flex flex-col items-center gap-2 md:gap-3 p-4 md:p-5 lg:p-6 rounded-xl md:rounded-2xl border border-border/40 bg-card hover:border-primary/30 hover:shadow-lg transition-all"
                     >
-                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-primary" />
+                      <div className="h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 flex items-center justify-center">
+                        <Icon className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                       </div>
-                      <span className="text-sm font-semibold text-foreground">{integration.name}</span>
+                      <span className="text-xs md:text-sm font-semibold text-foreground">{integration.name}</span>
                     </div>
                   );
                 })}
               </div>
 
-              <p className="text-sm text-muted-foreground pt-4">
+              <p className="text-xs md:text-sm text-muted-foreground pt-3 md:pt-4">
                 And 50+ more integrations through API and webhooks
               </p>
             </div>
@@ -657,56 +658,56 @@ const SolutionsHub = () => {
       </section>
 
       {/* Final CTA - Improved */}
-      <section className="relative py-40 overflow-hidden">
+      <section className="relative py-20 md:py-28 lg:py-40 overflow-hidden">
         {/* Animated gradient orbs background */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 md:px-6 relative">
           <div className="max-w-5xl mx-auto">
-            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-12 lg:p-16 shadow-2xl text-center overflow-hidden">
+            <div className="relative rounded-2xl md:rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-6 md:p-10 lg:p-12 xl:p-16 shadow-2xl text-center overflow-hidden">
 
               {/* Inner glow effect */}
-              <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
+              <div className="absolute -inset-px rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
 
-              <div className="relative space-y-8">
-                <div className="space-y-6">
-                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-tight">
+              <div className="relative space-y-6 md:space-y-8">
+                <div className="space-y-4 md:space-y-6">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground leading-tight">
                     Start automating 80% of tickets
-                    <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent mt-3">
+                    <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent mt-2 md:mt-3">
                       in 14 days or less
                     </span>
                   </h2>
 
-                  <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                     Setup takes 1 hour. ROI starts immediately. No credit card required for your 14-day trial.
                   </p>
 
-                  <div className="flex flex-wrap justify-center gap-6 pt-2">
+                  <div className="flex flex-wrap justify-center gap-4 md:gap-6 pt-1 md:pt-2">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary">1 hour</div>
-                      <div className="text-sm text-muted-foreground">Setup time</div>
+                      <div className="text-2xl md:text-3xl font-bold text-primary">1 hour</div>
+                      <div className="text-xs md:text-sm text-muted-foreground">Setup time</div>
                     </div>
-                    <div className="h-12 w-px bg-border"></div>
+                    <div className="h-10 md:h-12 w-px bg-border"></div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary">14 days</div>
-                      <div className="text-sm text-muted-foreground">To see ROI</div>
+                      <div className="text-2xl md:text-3xl font-bold text-primary">14 days</div>
+                      <div className="text-xs md:text-sm text-muted-foreground">To see ROI</div>
                     </div>
-                    <div className="h-12 w-px bg-border"></div>
+                    <div className="h-10 md:h-12 w-px bg-border"></div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary">$0</div>
-                      <div className="text-sm text-muted-foreground">To get started</div>
+                      <div className="text-2xl md:text-3xl font-bold text-primary">$0</div>
+                      <div className="text-xs md:text-sm text-muted-foreground">To get started</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
                   <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.98 }}>
                     <RouteButton
                       size="lg"
-                      className="text-base px-10 py-6 shadow-xl shadow-primary/20"
+                      className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 shadow-xl shadow-primary/20"
                       href="/pricing"
                     >
                       Pricing
@@ -716,7 +717,7 @@ const SolutionsHub = () => {
                     <RouteButton
                       size="lg"
                       variant="outline"
-                      className="text-base px-10 py-6 border border-border/40 hover:border-primary/40"
+                      className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 border border-border/40 hover:border-primary/40"
                       href="/contact-sales"
                     >
                       Contact Sales
@@ -724,17 +725,17 @@ const SolutionsHub = () => {
                   </motion.div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 pt-6 md:pt-8 border-t border-border/30">
+                  <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
                     <span>1-hour setup • Live today, not next quarter</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
                     <span>No credit card • Full 14-day trial included</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
                     <span>Setup help included • We'll get you to 80% automation</span>
                   </div>
                 </div>

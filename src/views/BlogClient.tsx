@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
+import NewsletterCTA from "@/components/NewsletterCTA";
 import {
   Clock,
   ArrowRight,
@@ -125,7 +128,7 @@ const BlogClient = ({ categories, featuredPosts, posts }: BlogClientProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageLiquidBackground opacity={0.12} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Featured Blog Section - only show if there are featured posts */}
@@ -135,7 +138,7 @@ const BlogClient = ({ categories, featuredPosts, posts }: BlogClientProps) => {
 
       {/* Newsletter CTA Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
-        <NewsletterCTA />
+        <NewsletterCTA variant="standard" source="blog-listing" />
       </section>
 
       {/* Search Bar Section - only show if there are posts */}
@@ -246,14 +249,26 @@ const FeaturedBlogSection = ({ featuredPosts }: FeaturedBlogSectionProps) => {
 
   return (
     <section className="relative isolate overflow-hidden py-20 md:py-28">
+      {/* Hero Liquid Ether Effect */}
+      <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+        <Suspense fallback={<div className="w-full h-full" />}>
+          <LiquidEther
+            colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+            mouseForce={20}
+            cursorSize={110}
+            isViscous={false}
+            resolution={0.55}
+            autoDemo
+            autoSpeed={0.35}
+            autoIntensity={1.6}
+          />
+        </Suspense>
+      </div>
+
       {/* Glassmorphism background with gradients */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent-pink/5 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--accent-pink)/0.1),transparent_50%)]" />
-
-      {/* Decorative blur elements */}
-      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-      <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-accent-pink/15 blur-3xl" />
 
       <div className="relative container mx-auto px-4">
         {/* 50/50 Split Hero */}
@@ -412,114 +427,6 @@ const FeaturedPostSmall = ({ post }: FeaturedPostProps) => {
         )}
       </div>
     </Link>
-  );
-};
-
-const NewsletterCTA = () => {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!email) {
-      setStatus('error');
-      setMessage('Please enter your email address');
-      return;
-    }
-
-    setStatus('loading');
-    setMessage('');
-
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'blog' }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus('success');
-        setMessage(data.message || 'Successfully subscribed!');
-        setEmail('');
-      } else {
-        setStatus('error');
-        setMessage(data.error || 'Failed to subscribe. Please try again.');
-      }
-    } catch (error) {
-      setStatus('error');
-      setMessage('Network error. Please check your connection and try again.');
-    }
-  };
-
-  return (
-    <div className="group relative isolate overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-primary via-primary/95 to-accent-pink shadow-2xl shadow-primary/25 backdrop-blur-xl transition-all duration-500 hover:shadow-3xl hover:shadow-primary/35">
-      {/* Compact decorative blur circles */}
-      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent-pink/40 blur-3xl" />
-      <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary/50 blur-3xl" />
-      <div className="absolute right-1/4 top-1/3 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-
-      {/* Glassmorphism overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-
-      {/* Content - Side by side layout on desktop */}
-      <div className="relative p-8 md:p-10">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-          {/* Left: Heading and description */}
-          <div className="flex-1 space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider shadow-lg backdrop-blur-xl">
-              <Sparkles className="h-3.5 w-3.5" />
-              Newsletter
-            </div>
-            <h3 className="text-3xl font-bold leading-tight text-white md:text-4xl">
-              Get weekly insights
-            </h3>
-            <p className="text-base leading-relaxed text-white/90 md:text-lg">
-              Get curated articles and AI tactics delivered to your inbox.
-            </p>
-          </div>
-
-          {/* Right: Form */}
-          <div className="flex-shrink-0 lg:w-[440px]">
-            {status === 'success' ? (
-              <div className="rounded-xl border border-white/40 bg-white/20 p-4 text-center backdrop-blur-xl">
-                <p className="text-base font-semibold text-white">{message}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    disabled={status === 'loading'}
-                    className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50 disabled:cursor-not-allowed md:text-base"
-                  />
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="group/btn flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-primary shadow-xl transition-all hover:bg-white/95 hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 md:text-base"
-                  >
-                    {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
-                </div>
-                {status === 'error' && (
-                  <p className="mt-3 text-sm text-red-200">{message}</p>
-                )}
-                {status === 'idle' && (
-                  <p className="mt-3 text-xs text-white/70">No spam. Unsubscribe anytime.</p>
-                )}
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };
 

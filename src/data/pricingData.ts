@@ -16,6 +16,7 @@ export interface PricingTier {
   };
   popular?: boolean;
   features: string[];
+  keyFeatures: string[]; // Curated short list for pricing cards
   limits: {
     actionsPerMonth?: number;
     gracePeriod?: string;
@@ -157,6 +158,11 @@ export const pricingTiers: PricingTier[] = [
       'SSO and RBAC',
       'Integrations & API access',
     ],
+    keyFeatures: [
+      'All features unlocked (nothing crippled)',
+      'Unified inbox (email + live chat)',
+      'AI Copilot + AI Agent included',
+    ],
     limits: {
       agentProfiles: 2,
       copilotProfiles: 1,
@@ -177,7 +183,7 @@ export const pricingTiers: PricingTier[] = [
   {
     id: 'pro',
     name: 'Pro',
-    tagline: 'Unlimited scale, multi-brand, and advanced QA.',
+    tagline: 'Everything in Standard, plus advanced QA and unlimited scale.',
     monthlyPricePerSeat: 79,
     creditPricing: {
       payAsYouGo: 0.10,
@@ -186,7 +192,6 @@ export const pricingTiers: PricingTier[] = [
     popular: true,
     features: [
       'Everything in Standard',
-      'No action ceiling (unlimited throughput)',
       'Unlimited AI Agent profiles',
       'Unlimited Copilot profiles',
       'Unlimited Appo Help Centers (multi-brand/locales)',
@@ -194,6 +199,11 @@ export const pricingTiers: PricingTier[] = [
       'AI-generated coaching & feedback workflows',
       'Supervisor review, overrides & calibration',
       'QA analytics (trends, topics, coaching impact)',
+    ],
+    keyFeatures: [
+      'Everything in Standard',
+      'Unlimited AI profiles & help centers',
+      'Auto-QA suite with coaching',
     ],
     limits: {
       agentProfiles: 'unlimited',
@@ -597,7 +607,7 @@ export const addOns: AddOn[] = [
       "Direct Slack access to engineering",
       "<15 min response time (business hours)",
       "Monthly strategy call",
-      "Early access to beta features",
+      "Priority access to new features",
     ],
   },
   {

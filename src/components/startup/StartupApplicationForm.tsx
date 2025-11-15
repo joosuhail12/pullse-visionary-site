@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Check, Loader2, Send } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Check, Loader2, Send, ArrowRight, ArrowLeft } from 'lucide-react';
 
 interface FormData {
   companyName: string;
@@ -18,11 +20,12 @@ interface FormData {
   useCase: string;
 }
 
-interface FormErrors {
+interface StepErrors {
   [key: string]: string;
 }
 
 const StartupApplicationForm = () => {
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     companyName: '',
     website: '',
@@ -36,51 +39,82 @@ const StartupApplicationForm = () => {
     useCase: '',
   });
 
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<StepErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [apiError, setApiError] = useState<string>('');
 
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
+  const totalSteps = 3;
 
-    // Required fields
-    if (!formData.companyName.trim()) {
-      newErrors.companyName = 'Company name is required';
-    }
-    if (!formData.website.trim()) {
-      newErrors.website = 'Website is required';
-    } else if (!/^https?:\/\/.+/.test(formData.website)) {
-      newErrors.website = 'Please enter a valid URL (include http:// or https://)';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-    if (!formData.foundingDate) {
-      newErrors.foundingDate = 'Founding date is required';
-    }
-    if (!formData.annualRevenue) {
-      newErrors.annualRevenue = 'Annual revenue is required';
-    }
-    if (!formData.totalFunding) {
-      newErrors.totalFunding = 'Total funding is required';
-    }
-    if (!formData.seatsNeeded.trim()) {
-      newErrors.seatsNeeded = 'Number of seats is required';
-    } else if (parseInt(formData.seatsNeeded) < 1 || parseInt(formData.seatsNeeded) > 15) {
-      newErrors.seatsNeeded = 'Seats must be between 1 and 15';
-    }
+  // Memoized validation function
+  const validateStep = useCallback((step: number, data: FormData): StepErrors => {
+    const newErrors: StepErrors = {};
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    if (step === 1) {
+      if (!data.companyName.trim()) newErrors.companyName = 'Company name is required';
+      if (!data.website.trim()) {
+        newErrors.website = 'Website is required';
+      } else if (!/^https?:\/\/.+/.test(data.website)) {
+        newErrors.website = 'Please enter a valid URL (include http:// or https://)';
+      }
+      if (!data.email.trim()) {
+        newErrors.email = 'Email is required';
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+        newErrors.email = 'Please enter a valid email address';
+      }
+      if (!data.foundingDate) newErrors.foundingDate = 'Founding date is required';
+    } else if (step === 2) {
+      if (!data.annualRevenue) newErrors.annualRevenue = 'Annual revenue is required';
+      if (!data.totalFunding) newErrors.totalFunding = 'Total funding is required';
+      if (!data.seatsNeeded.trim()) {
+        newErrors.seatsNeeded = 'Number of seats is required';
+      } else if (parseInt(data.seatsNeeded) < 1 || parseInt(data.seatsNeeded) > 15) {
+        newErrors.seatsNeeded = 'Seats must be between 1 and 15';
+      }
+    }
+    // Step 3 fields are optional
 
-  const handleSubmit = async (e: React.FormEvent) => {
+    return newErrors;
+  }, []);
+
+  // Memoized handlers
+  const nextStep = useCallback(() => {
+    const stepErrors = validateStep(currentStep, formData);
+    setErrors(stepErrors);
+
+    if (Object.keys(stepErrors).length === 0) {
+      setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+    }
+  }, [currentStep, formData, validateStep]);
+
+  const prevStep = useCallback(() => {
+    setCurrentStep(prev => Math.max(prev - 1, 1));
+    setErrors({});
+  }, []);
+
+  const handleChange = useCallback((
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Clear error for this field if it exists
+    setErrors(prev => {
+      if (prev[name]) {
+        const { [name]: _, ...rest } = prev;
+        return rest;
+      }
+      return prev;
+    });
+  }, []);
+
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm()) {
+    const stepErrors = validateStep(currentStep, formData);
+    setErrors(stepErrors);
+
+    if (Object.keys(stepErrors).length > 0) {
       return;
     }
 
@@ -99,11 +133,9 @@ const StartupApplicationForm = () => {
       const result = await response.json();
 
       if (!response.ok) {
-        // Handle API error response with error codes
         const errorMessage = result.error?.message || 'Failed to submit application';
         const errorCode = result.error?.code;
 
-        // Provide user-friendly messages for specific error codes
         if (errorCode === 'DUPLICATE_SUBMISSION') {
           throw new Error('You have already submitted an application. Please check your email or wait 24 hours before submitting again.');
         } else if (errorCode === 'RATE_LIMIT_EXCEEDED') {
@@ -115,7 +147,6 @@ const StartupApplicationForm = () => {
         }
       }
 
-      // Success - API returns: { success: true, data: { id, message, submittedAt } }
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
@@ -127,307 +158,294 @@ const StartupApplicationForm = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [currentStep, formData, validateStep]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
+  // Memoized step component
+  const StepContent = useMemo(() => {
+    const stepConfigs = [
+      {
+        title: "Tell us about your company",
+        subtitle: "Basic information to get started with your startup program application.",
+        fields: [
+          { name: "companyName", label: "Company Name", type: "text", placeholder: "Acme Inc.", required: true },
+          { name: "website", label: "Website", type: "url", placeholder: "https://acme.com", required: true },
+          { name: "email", label: "Work Email", type: "email", placeholder: "founder@acme.com", required: true },
+          { name: "foundingDate", label: "Founding Date", type: "date", placeholder: "", required: true },
+        ]
+      },
+      {
+        title: "Verify your eligibility",
+        subtitle: "Confirm you meet the startup program requirements to qualify for discounts.",
+        fields: [
+          {
+            name: "annualRevenue",
+            label: "Annual Recurring Revenue (ARR)",
+            type: "select",
+            required: true,
+            options: [
+              { value: "", label: "Select revenue range" },
+              { value: "<500k", label: "Less than $500k" },
+              { value: "500k-1m", label: "$500k - $1M" },
+              { value: "1m-2m", label: "$1M - $2M" },
+              { value: ">2m", label: "Greater than $2M" },
+            ]
+          },
+          {
+            name: "totalFunding",
+            label: "Total Funding Raised",
+            type: "select",
+            required: true,
+            options: [
+              { value: "", label: "Select funding range" },
+              { value: "<1m", label: "Less than $1M" },
+              { value: "1m-3m", label: "$1M - $3M" },
+              { value: "3m-5m", label: "$3M - $5M" },
+              { value: ">5m", label: "Greater than $5M" },
+            ]
+          },
+          { name: "seatsNeeded", label: "Number of Seats Needed", type: "number", placeholder: "5", required: true, min: "1", max: "15" },
+          {
+            name: "customerStatus",
+            label: "Current Customer Status",
+            type: "select",
+            required: true,
+            options: [
+              { value: "new", label: "New customer" },
+              { value: "trial", label: "Existing trial user" },
+            ]
+          },
+        ]
+      },
+      {
+        title: "Help us understand your needs",
+        subtitle: "Optional details to help us provide better support and tailor your onboarding.",
+        fields: [
+          { name: "currentTools", label: "Current Support Tools", type: "textarea", placeholder: "e.g., Zendesk, Intercom, custom solution", required: false },
+          { name: "useCase", label: "Primary Use Case", type: "textarea", placeholder: "Tell us about your support needs and how you plan to use Pullse", required: false },
+        ]
+      }
+    ];
 
+    const config = stepConfigs[currentStep - 1];
+
+    return (
+      <motion.div
+        key={currentStep}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.3 }}
+        className="space-y-4 md:space-y-5 lg:space-y-6"
+      >
+        <div className="glass p-4 md:p-5 lg:p-6 rounded-xl md:rounded-2xl border-2 border-primary/10">
+          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent leading-snug pb-1 mb-2">
+            {config.title}
+          </h3>
+          <p className="text-gray-600 text-xs md:text-sm">{config.subtitle}</p>
+        </div>
+
+        <div className="space-y-4 md:space-y-5">
+          {config.fields.map((field) => (
+            <div key={field.name}>
+              <label className="text-xs md:text-sm font-bold text-gray-800 mb-2 md:mb-2.5 block flex items-center gap-2">
+                {field.required && <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />}
+                {!field.required && <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />}
+                {field.label} {field.required && <span className="text-red-500">*</span>}
+                {!field.required && <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>}
+              </label>
+
+              {field.type === 'select' ? (
+                <select
+                  name={field.name}
+                  value={formData[field.name as keyof FormData]}
+                  onChange={handleChange}
+                  className={`glass-elevated w-full px-4 md:px-5 h-12 md:h-14 rounded-lg md:rounded-xl text-sm md:text-base font-medium focus:outline-none transition-all duration-300 hover:shadow-lg ${
+                    errors[field.name]
+                      ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                      : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
+                  }`}
+                >
+                  {field.options?.map(opt => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+              ) : field.type === 'textarea' ? (
+                <Textarea
+                  name={field.name}
+                  value={formData[field.name as keyof FormData]}
+                  onChange={handleChange}
+                  placeholder={field.placeholder}
+                  className="glass-elevated min-h-28 md:min-h-36 text-sm md:text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg resize-none"
+                />
+              ) : (
+                <Input
+                  type={field.type}
+                  name={field.name}
+                  value={formData[field.name as keyof FormData]}
+                  onChange={handleChange}
+                  placeholder={field.placeholder}
+                  max={field.type === 'date' ? new Date().toISOString().split('T')[0] : undefined}
+                  min={field.min}
+                  className={`glass-elevated h-12 md:h-14 text-sm md:text-base transition-all duration-300 hover:shadow-lg ${
+                    errors[field.name]
+                      ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                      : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
+                  }`}
+                />
+              )}
+
+              {errors[field.name] && (
+                <p className="mt-2 text-sm text-red-600 font-medium flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-red-600" />
+                  {errors[field.name]}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    );
+  }, [currentStep, formData, errors, handleChange]);
+
+  // Success state
   if (isSubmitted) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-2xl mx-auto text-center py-16"
+        transition={{ type: "spring", duration: 0.7, bounce: 0.3 }}
+        className="glass-gradient p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl lg:rounded-[2rem] text-center shadow-2xl border-2 border-primary/20"
       >
-        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6">
-          <Check className="w-10 h-10 text-white" />
+        <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl md:rounded-3xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-5 md:mb-6 shadow-lg shadow-green-500/30">
+          <Check className="w-10 h-10 md:w-12 md:h-12 text-white" strokeWidth={3} />
         </div>
-        <h3 className="text-3xl font-bold text-gray-900 mb-4">
+
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent leading-snug pb-1 mb-3 md:mb-4">
           Application Submitted!
-        </h3>
-        <p className="text-lg text-gray-600 mb-8">
+        </h2>
+        <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 font-medium">
           Thank you for applying to the Pullse Startup Program. Our team will review your application and get back to you within 2 business days.
         </p>
-        <Button
-          onClick={() => window.location.href = '/pricing'}
-          variant="outline"
-          size="lg"
-        >
-          Return to Pricing
-        </Button>
+
+        <div className="flex gap-3 md:gap-4 justify-center flex-wrap">
+          <Button
+            onClick={() => window.location.href = '/pricing'}
+            variant="outline"
+            size="lg"
+            className="min-w-[140px] md:min-w-[160px]"
+          >
+            View Pricing
+          </Button>
+          <Button
+            onClick={() => window.location.reload()}
+            variant="outline"
+            size="lg"
+            className="min-w-[140px] md:min-w-[160px]"
+          >
+            Submit Another
+          </Button>
+        </div>
       </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-8">
-      {/* Company Information */}
-      <div className="glass-strong p-8 rounded-3xl space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">Company Information</h3>
+    <div className="glass-gradient p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl lg:rounded-[2rem] shadow-2xl border-2 border-primary/20 relative overflow-hidden">
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 md:w-64 md:h-64 bg-gradient-to-tr from-pink-500/10 to-primary/10 rounded-full blur-3xl -z-10" />
 
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 mb-2">
-              Company Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="companyName"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.companyName ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
-              placeholder="Acme Inc."
-            />
-            {errors.companyName && (
-              <p className="mt-1 text-sm text-red-500">{errors.companyName}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="website" className="block text-sm font-semibold text-gray-700 mb-2">
-              Website <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="url"
-              id="website"
-              name="website"
-              value={formData.website}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.website ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
-              placeholder="https://acme.com"
-            />
-            {errors.website && (
-              <p className="mt-1 text-sm text-red-500">{errors.website}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-              Work Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
-              placeholder="founder@acme.com"
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="foundingDate" className="block text-sm font-semibold text-gray-700 mb-2">
-              Founding Date <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="date"
-              id="foundingDate"
-              name="foundingDate"
-              value={formData.foundingDate}
-              onChange={handleChange}
-              max={new Date().toISOString().split('T')[0]}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.foundingDate ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
-            />
-            {errors.foundingDate && (
-              <p className="mt-1 text-sm text-red-500">{errors.foundingDate}</p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Eligibility Verification */}
-      <div className="glass-strong p-8 rounded-3xl space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">Eligibility Verification</h3>
-
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="annualRevenue" className="block text-sm font-semibold text-gray-700 mb-2">
-              Annual Recurring Revenue (ARR) <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="annualRevenue"
-              name="annualRevenue"
-              value={formData.annualRevenue}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.annualRevenue ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all bg-white`}
-            >
-              <option value="">Select revenue range</option>
-              <option value="<500k">Less than $500k</option>
-              <option value="500k-1m">$500k - $1M</option>
-              <option value="1m-2m">$1M - $2M</option>
-              <option value=">2m">Greater than $2M</option>
-            </select>
-            {errors.annualRevenue && (
-              <p className="mt-1 text-sm text-red-500">{errors.annualRevenue}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="totalFunding" className="block text-sm font-semibold text-gray-700 mb-2">
-              Total Funding Raised <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="totalFunding"
-              name="totalFunding"
-              value={formData.totalFunding}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.totalFunding ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all bg-white`}
-            >
-              <option value="">Select funding range</option>
-              <option value="<1m">Less than $1M</option>
-              <option value="1m-3m">$1M - $3M</option>
-              <option value="3m-5m">$3M - $5M</option>
-              <option value=">5m">Greater than $5M</option>
-            </select>
-            {errors.totalFunding && (
-              <p className="mt-1 text-sm text-red-500">{errors.totalFunding}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="seatsNeeded" className="block text-sm font-semibold text-gray-700 mb-2">
-              Number of Seats Needed <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              id="seatsNeeded"
-              name="seatsNeeded"
-              value={formData.seatsNeeded}
-              onChange={handleChange}
-              min="1"
-              max="15"
-              className={`w-full px-4 py-3 rounded-xl border ${
-                errors.seatsNeeded ? 'border-red-500' : 'border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all`}
-              placeholder="5"
-            />
-            <p className="mt-1 text-xs text-gray-500">Maximum 15 seats under startup discount</p>
-            {errors.seatsNeeded && (
-              <p className="mt-1 text-sm text-red-500">{errors.seatsNeeded}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="customerStatus" className="block text-sm font-semibold text-gray-700 mb-2">
-              Current Customer Status <span className="text-red-500">*</span>
-            </label>
-            <div className="space-y-3">
-              <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-300 cursor-pointer hover:bg-gray-50 transition-colors">
-                <input
-                  type="radio"
-                  name="customerStatus"
-                  value="new"
-                  checked={formData.customerStatus === 'new'}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-primary"
-                />
-                <span className="text-sm font-medium text-gray-700">New customer</span>
-              </label>
-              <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-300 cursor-pointer hover:bg-gray-50 transition-colors">
-                <input
-                  type="radio"
-                  name="customerStatus"
-                  value="trial"
-                  checked={formData.customerStatus === 'trial'}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-primary"
-                />
-                <span className="text-sm font-medium text-gray-700">Existing trial user</span>
-              </label>
+      {/* Progress Indicator */}
+      <div className="mb-8 md:mb-10">
+        <div className="flex justify-between items-center mb-2 md:mb-3">
+          {[1, 2, 3].map((step) => (
+            <div key={step} className="flex-1 text-center">
+              <span className={`text-xs md:text-sm font-semibold transition-all duration-300 ${
+                currentStep === step ? 'text-primary' : currentStep > step ? 'text-green-600' : 'text-gray-400'
+              }`}>
+                Step {step}
+              </span>
             </div>
-          </div>
+          ))}
         </div>
-      </div>
 
-      {/* Additional Context (Optional) */}
-      <div className="glass-strong p-8 rounded-3xl space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">Additional Context (Optional)</h3>
-
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="currentTools" className="block text-sm font-semibold text-gray-700 mb-2">
-              Current Support Tools
-            </label>
-            <textarea
-              id="currentTools"
-              name="currentTools"
-              value={formData.currentTools}
-              onChange={handleChange}
-              rows={3}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-              placeholder="e.g., Zendesk, Intercom, custom solution"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="useCase" className="block text-sm font-semibold text-gray-700 mb-2">
-              Primary Use Case
-            </label>
-            <textarea
-              id="useCase"
-              name="useCase"
-              value={formData.useCase}
-              onChange={handleChange}
-              rows={4}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-              placeholder="Tell us about your support needs and how you plan to use Pullse"
+        <div className="relative">
+          <div className="h-2.5 md:h-3 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full overflow-hidden shadow-inner">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary via-purple-600 to-pink-500"
+              initial={false}
+              animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             />
           </div>
         </div>
       </div>
 
-      {/* Error Message */}
-      {apiError && (
-        <div className="glass-strong p-4 rounded-2xl border border-red-200 bg-red-50/50">
-          <p className="text-sm text-red-600 text-center">{apiError}</p>
-        </div>
-      )}
+      <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+        <AnimatePresence mode="wait">
+          {StepContent}
+        </AnimatePresence>
 
-      {/* Submit Button */}
-      <div className="flex justify-center">
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          size="lg"
-          className="px-12 py-6 text-lg bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              Submitting...
-            </>
-          ) : (
-            <>
-              <Send className="w-5 h-5 mr-2" />
-              Submit Application
-            </>
+        {/* Error Message */}
+        {apiError && (
+          <div className="glass-elevated p-4 md:p-5 rounded-xl md:rounded-2xl border-2 border-red-300 bg-red-50/50 shadow-lg">
+            <p className="text-xs md:text-sm text-red-700 text-center font-semibold">{apiError}</p>
+          </div>
+        )}
+
+        {/* Navigation Buttons */}
+        <div className="flex gap-3 md:gap-4 pt-5 md:pt-6">
+          {currentStep > 1 && (
+            <Button
+              type="button"
+              onClick={prevStep}
+              variant="outline"
+              size="lg"
+              className="flex-1 h-14 md:h-16 text-sm md:text-base font-bold glass-elevated border-2 border-gray-300 hover:border-gray-400 hover:shadow-xl transition-all duration-300"
+              disabled={isSubmitting}
+            >
+              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 mr-2" strokeWidth={2.5} />
+              Back
+            </Button>
           )}
-        </Button>
-      </div>
-    </form>
+
+          {currentStep < totalSteps ? (
+            <Button
+              type="button"
+              onClick={nextStep}
+              size="lg"
+              className="flex-1 h-14 md:h-16 text-sm md:text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+            >
+              Next Step
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" strokeWidth={2.5} />
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              size="lg"
+              className="flex-1 h-14 md:h-16 text-sm md:text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 md:w-5 md:h-5 mr-2 animate-spin" strokeWidth={2.5} />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 md:w-5 md:h-5 mr-2" strokeWidth={2.5} />
+                  Submit Application
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+
+        <p className="text-xs text-center text-gray-500 pt-2 font-medium">
+          By submitting this form, you agree to our Terms and Privacy Policy.
+        </p>
+      </form>
+    </div>
   );
 };
 

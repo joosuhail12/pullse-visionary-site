@@ -1,8 +1,13 @@
+'use client';
+
+import { lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import { ShoppingCart, Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 
 const Solutions = () => {
   const solutions = [
@@ -24,10 +29,27 @@ const Solutions = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      <div className="pt-32 pb-20">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 pb-12 md:pb-20 overflow-hidden">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <h1 className="text-5xl font-bold mb-6">Solutions</h1>
@@ -64,7 +86,7 @@ const Solutions = () => {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       <Footer />
     </div>

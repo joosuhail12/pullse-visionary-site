@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -207,7 +209,7 @@ const ProductAutoQA = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -219,36 +221,52 @@ const ProductAutoQA = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-24 md:pb-18 lg:pt-32 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-8">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-4 md:space-y-6 lg:space-y-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Every conversation.
                 <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-2">
                   Every rep. Every time.
                 </span>
               </h1>
 
-              <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 Stop sampling 5% of conversations. AI automatically evaluates every ticket the moment it closes—identifying exact moments for improvement, suggesting better language, and tracking trends over time. Turn quality assurance into continuous coaching.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-7 shadow-2xl shadow-primary/30 group">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center">
+                <RouteButton size="lg" href="/contact-sales" className="text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-7 shadow-2xl shadow-primary/30 group">
                   See it live
-                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
-                <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-10 py-7">
+                <RouteButton size="lg" variant="outline" href="/pricing" className="text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-7">
                   View pricing
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                 </RouteButton>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-x-6 lg:gap-x-8 md:gap-y-4 pt-6 md:pt-7 lg:pt-8 text-xs md:text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary" />
                   <span>100% of tickets analyzed</span>
@@ -265,12 +283,12 @@ const ProductAutoQA = () => {
             </div>
 
             <div className="relative max-w-6xl mx-auto">
-              <div className="absolute -inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
-              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
+              <div className="absolute -inset-6 md:-inset-9 lg:-inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-1.5 sm:p-2 md:p-3 shadow-2xl backdrop-blur-xl">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl aspect-video flex items-center justify-center">
-                  <div className="text-center space-y-2 p-8">
-                    <Shield className="h-16 w-16 text-primary/40 mx-auto" />
-                    <p className="text-sm text-muted-foreground">Auto-QA Scorecard Interface</p>
+                  <div className="text-center space-y-2 p-4 md:p-6 lg:p-8">
+                    <Shield className="h-10 w-10 md:h-12 md:w-12 lg:h-16 lg:w-16 text-primary/40 mx-auto" />
+                    <p className="text-xs md:text-sm text-muted-foreground">Auto-QA Scorecard Interface</p>
                   </div>
                 </div>
               </div>
@@ -280,51 +298,51 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Quick Value Props Section */}
-      <section className="relative py-20 bg-gradient-to-b from-muted/10 to-transparent">
+      <section className="relative py-10 md:py-16 lg:py-20 bg-gradient-to-b from-muted/10 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
-                  <Shield className="h-6 w-6 text-background" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
+              <div className="group relative p-4 md:p-5 lg:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-3 md:mb-3.5 lg:mb-4 group-hover:scale-110 transition-transform">
+                  <Shield className="h-5 w-5 md:h-5.5 md:w-5.5 lg:h-6 lg:w-6 text-background" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-base md:text-lg font-bold mb-1.5 md:mb-2 group-hover:text-primary transition-colors">
                   No More Sampling
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                   QA every single conversation, not just 5%. Zero blind spots.
                 </p>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
-                  <Target className="h-6 w-6 text-background" />
+              <div className="group relative p-4 md:p-5 lg:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-3 md:mb-3.5 lg:mb-4 group-hover:scale-110 transition-transform">
+                  <Target className="h-5 w-5 md:h-5.5 md:w-5.5 lg:h-6 lg:w-6 text-background" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-base md:text-lg font-bold mb-1.5 md:mb-2 group-hover:text-primary transition-colors">
                   Surgical Precision
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                   AI identifies exact message where rep could improve—with suggested phrasing.
                 </p>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="h-6 w-6 text-background" />
+              <div className="group relative p-4 md:p-5 lg:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-3 md:mb-3.5 lg:mb-4 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="h-5 w-5 md:h-5.5 md:w-5.5 lg:h-6 lg:w-6 text-background" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-base md:text-lg font-bold mb-1.5 md:mb-2 group-hover:text-primary transition-colors">
                   See the Trajectory
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                   Every scorecard shows trend lines. Is empathy improving? Response time getting faster?
                 </p>
               </div>
-              <div className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform">
-                  <Users className="h-6 w-6 text-background" />
+              <div className="group relative p-4 md:p-5 lg:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <div className="flex h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg mb-3 md:mb-3.5 lg:mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-5 w-5 md:h-5.5 md:w-5.5 lg:h-6 lg:w-6 text-background" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-base md:text-lg font-bold mb-1.5 md:mb-2 group-hover:text-primary transition-colors">
                   Built-In Fairness
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                   Reps can dispute any score. Supervisors review, adjust, and provide context.
                 </p>
               </div>
@@ -334,14 +352,14 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Bento Grid - Core Features */}
-      <section className="relative py-20">
+      <section className="relative py-10 md:py-16 lg:py-20">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-3 md:space-y-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
                 Beyond Traditional QA
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Manual QA teams sample 5-10% of conversations. Auto-QA analyzes 100%—evaluating every ticket against your quality standards the moment it closes, with zero extra headcount.
               </p>
             </div>
@@ -360,38 +378,38 @@ const ProductAutoQA = () => {
       </section>
 
       {/* How It Works - Process Flow */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-background via-muted/10 to-background">
+      <section className="relative py-10 md:py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-background via-muted/10 to-background">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-3 md:space-y-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
                 From Ticket to Coaching
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Automatic QA that turns every conversation into a learning opportunity.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6 max-w-7xl mx-auto">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 return (
                   <div key={index} className="group relative">
-                    <div className="relative h-full p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                      <div className="space-y-4">
-                        <div className={`inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-lg`}>
-                          <Icon className="h-7 w-7 text-background" />
+                    <div className="relative h-full p-4 md:p-5 lg:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                      <div className="space-y-3 md:space-y-3.5 lg:space-y-4">
+                        <div className={`inline-flex h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-lg`}>
+                          <Icon className="h-5.5 w-5.5 md:h-6 md:w-6 lg:h-7 lg:w-7 text-background" />
                         </div>
 
-                        <div className="text-6xl font-bold text-muted-foreground/20 group-hover:text-primary/20 transition-colors">
+                        <div className="text-5xl md:text-5xl lg:text-6xl font-bold text-muted-foreground/20 group-hover:text-primary/20 transition-colors">
                           {step.number}
                         </div>
 
-                        <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                        <h3 className="text-lg md:text-xl font-bold group-hover:text-primary transition-colors">
                           {step.title}
                         </h3>
 
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                           {step.description}
                         </p>
                       </div>
@@ -410,29 +428,29 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Coaching & Feedback Section */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-background to-background">
+      <section className="relative py-10 md:py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-muted/10 via-background to-background">
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
+            <div className="grid lg:grid-cols-2 gap-6 md:gap-9 lg:gap-12 items-center">
+              <div className="space-y-4 md:space-y-6 lg:space-y-8">
                 <div>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4">
                     QA that feels like
                     <br />
                     coaching, not critique
                   </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                     Traditional QA feels punitive—random spot checks, subjective scores, no recourse. Auto-QA is different. Every score is explainable. Every rep can dispute. Every trend line shows progress. It's QA designed for growth, not gotchas.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-primary/5 border border-primary/20">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-purple-600 shadow-lg">
-                    <ThumbsUp className="h-5 w-5 text-background" />
+                <div className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-primary/5 border border-primary/20">
+                  <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-purple-600 shadow-lg">
+                    <ThumbsUp className="h-4.5 w-4.5 md:h-5 md:w-5 text-background" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-1">Reps Have a Voice</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs md:text-sm font-medium mb-1">Reps Have a Voice</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">
                       Disagree with a score? Click dispute, add context, and request supervisor review. Fair, transparent, and built into every scorecard.
                     </p>
                   </div>
@@ -448,35 +466,35 @@ const ProductAutoQA = () => {
       </section>
 
       {/* Final CTA Section - Ultra Modern */}
-      <section className="relative py-40 overflow-hidden">
+      <section className="relative py-16 md:py-28 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
 
         {/* Animated background gradients */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 md:px-6 relative">
           <div className="max-w-5xl mx-auto">
-            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-16 shadow-2xl text-center overflow-hidden">
+            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-6 md:p-12 lg:p-16 shadow-2xl text-center overflow-hidden">
               {/* Background glow */}
               <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
               <div className="relative">
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-5 md:mb-7 lg:mb-8 leading-tight">
                   Stop sampling.{" "}
                   <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                     Start seeing everything.
                   </span>
                 </h2>
 
-                <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 md:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
                   Traditional QA teams sample 5-10% of tickets. Auto-QA evaluates <span className="font-bold text-foreground">100%</span>—with surgical feedback, trend tracking, and built-in fairness.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                <div className="flex flex-col sm:flex-row gap-4 md:gap-5 lg:gap-6 justify-center mb-8 md:mb-10 lg:mb-12">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -4 }}
                     whileTap={{ scale: 0.98 }}
@@ -486,12 +504,12 @@ const ProductAutoQA = () => {
                       href="/contact-sales"
                       variant="default"
                       size="lg"
-                      className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-12 py-6 text-lg font-black"
+                      className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 text-base md:text-lg font-black"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-                      <span className="relative z-10 flex items-center gap-3">
+                      <span className="relative z-10 flex items-center gap-2 md:gap-3">
                         Get Started
-                        <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+                        <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-2 transition-transform duration-300" />
                       </span>
                     </RouteButton>
                   </motion.div>
@@ -505,29 +523,29 @@ const ProductAutoQA = () => {
                       href="/pricing"
                       variant="outline"
                       size="lg"
-                      className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-12 py-6 text-lg font-black"
+                      className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 text-base md:text-lg font-black"
                     >
-                      <span className="flex items-center gap-3">
+                      <span className="flex items-center gap-2 md:gap-3">
                         View Pricing
-                        <ExternalLink className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                        <ExternalLink className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform duration-300" />
                       </span>
                     </RouteButton>
                   </motion.div>
                 </div>
 
                 {/* Social proof */}
-                <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 pt-6 md:pt-7 lg:pt-8 border-t border-border/30">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">14-day trial</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">14-day trial</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">No credit card required</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">No credit card required</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">5-minute setup</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">5-minute setup</span>
                   </div>
                 </div>
               </div>

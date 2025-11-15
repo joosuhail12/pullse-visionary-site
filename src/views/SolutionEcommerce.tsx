@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
 import {
@@ -113,7 +115,7 @@ const SolutionEcommerce = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -125,7 +127,23 @@ const SolutionEcommerce = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 overflow-hidden">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -173,7 +191,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-b from-muted/10 to-transparent">
+      <section className="relative py-14 md:py-20 lg:py-28 bg-gradient-to-b from-muted/10 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-[1400px] mx-auto">
             <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -206,7 +224,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* 3 Pillars Section */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -261,7 +279,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* Core E-commerce Workflows Section */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* WISMO Featured Workflow - 62% of all tickets */}
@@ -560,7 +578,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* Integrations Section */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -635,7 +653,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
@@ -662,7 +680,7 @@ const SolutionEcommerce = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">

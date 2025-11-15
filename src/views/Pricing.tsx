@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
+
+const LiquidEther = lazy(() => import('@/components/LiquidEther'));
 import { Button } from '@/components/ui/button';
 import {
   Accordion,
@@ -21,6 +23,7 @@ import {
   Sparkles,
   Zap,
   ArrowRight,
+  ArrowDown,
   Target,
   Shield,
   Clock,
@@ -192,84 +195,80 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* ========================================
           SECTION 1: HERO
       ======================================== */}
-      <section className="pt-32 pb-16">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center justify-center pt-16 md:pt-20">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-semibold text-primary">
-                Simple, transparent pricing
-              </span>
-            </div>
-
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold"
+            >
               <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
-                Simple per-seat pricing
+                Your entire support stack.
                 <br />
-                + pay-as-you-go AI usage
+                One platform. One price.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
-              All features unlocked from day one. Base platform fee + credit-based AI usage.{' '}
-              <span className="font-semibold text-primary">Contact sales</span> for personalized trial setup.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+            >
+              Most teams pay $100K+ yearly for 10+ disconnected tools that don't talk to each other. Pullse gives you everything—tickets, chat, AI agents, QA, analytics—in one unified platform for a fraction of the cost.
+            </motion.p>
 
-            {/* Trust signals inline */}
-            <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
-              {trialBenefits.map((benefit, idx) => (
-                <div
-                  key={idx}
-                  className="inline-flex items-center gap-2 text-sm text-gray-700"
-                >
-                  <Check className="h-4 w-4 text-primary" />
-                  <span className="font-medium">{benefit}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <Button
                 size="lg"
-                className="text-lg px-10 py-6 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-lg hover:shadow-xl"
+                className="text-base md:text-lg px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-lg hover:shadow-xl"
                 asChild
               >
                 <Link href="/contact-sales">
                   Contact Sales
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                 </Link>
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-10 py-6 border-2"
-                asChild
-              >
-                <Link href="/contact-sales">Schedule demo</Link>
-              </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ========================================
           SECTION 2: PRICING TIERS
       ======================================== */}
-      <section className="pb-20">
+      <section className="pb-8 md:pb-10 lg:pb-12">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 xl:gap-12">
               {pricingTiers.map((tier, index) => {
                 const isExpanded = expandedTier === tier.id;
                 const isPro = tier.id === 'pro';
@@ -285,19 +284,9 @@ const Pricing = () => {
                       isPro ? 'md:scale-105 z-10' : ''
                     }`}
                   >
-                    {/* Popular Badge */}
-                    {tier.popular && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white text-sm font-bold shadow-lg">
-                          <Star className="h-4 w-4 fill-current" />
-                          Most Popular
-                        </div>
-                      </div>
-                    )}
-
                     {/* Card */}
                     <div
-                      className={`relative h-full p-8 md:p-10 rounded-3xl bg-white/80 backdrop-blur-xl border-2 transition-all duration-500 ${
+                      className={`relative h-full p-4 sm:p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-white/80 backdrop-blur-xl border-2 transition-all duration-500 ${
                         isPro
                           ? 'border-primary shadow-2xl shadow-primary/20'
                           : 'border-white/60 shadow-xl hover:shadow-2xl'
@@ -305,26 +294,26 @@ const Pricing = () => {
                     >
                       {/* Gradient Accent */}
                       {isPro && (
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-purple-500/5 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/5 via-purple-500/5 to-transparent pointer-events-none" />
                       )}
 
                       <div className="relative z-10">
                         {/* Tier Name */}
-                        <div className="mb-6">
-                          <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                        <div className="mb-3 md:mb-4">
+                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1.5 md:mb-2">
                             {tier.name}
                           </h3>
-                          <p className="text-base text-gray-600">
+                          <p className="text-xs md:text-sm text-gray-600">
                             {tier.tagline}
                           </p>
                         </div>
 
                         {/* Price */}
-                        <div className="mb-8">
+                        <div className="mb-6">
                           {/* Base Platform Price */}
-                          <div className="mb-4">
+                          <div className="mb-3">
                             <div className="flex items-baseline gap-2 mb-2">
-                              <span className="text-5xl md:text-6xl font-bold text-gray-900">
+                              <span className="text-4xl md:text-5xl font-bold text-gray-900">
                                 ${tier.monthlyPricePerSeat}
                               </span>
                               <span className="text-xl text-gray-600">
@@ -337,11 +326,11 @@ const Pricing = () => {
                           </div>
 
                           {/* AI Usage Pricing */}
-                          <div className="p-4 rounded-xl bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20">
-                            <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-3">
+                          <div className="p-3 rounded-xl bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20">
+                            <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">
                               + AI Usage Credits
                             </p>
-                            <div className="space-y-2">
+                            <div className="space-y-1.5">
                               <div className="flex items-center justify-between text-sm">
                                 <span className="text-gray-600">Pay-as-you-go:</span>
                                 <span className="font-bold text-gray-900">${tier.creditPricing.payAsYouGo.toFixed(2)}/credit</span>
@@ -355,14 +344,14 @@ const Pricing = () => {
                         </div>
 
                         {/* Included Credits */}
-                        <div className="mb-8 p-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200">
-                          <div className="flex items-center gap-2 mb-3">
+                        <div className="mb-6 p-3 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200">
+                          <div className="flex items-center gap-2 mb-2">
                             <Sparkles className="h-5 w-5 text-green-600" />
                             <p className="text-sm font-bold text-green-800 uppercase tracking-wider">
                               Included Monthly Credits
                             </p>
                           </div>
-                          <div className="space-y-2">
+                          <div className="space-y-1.5">
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-green-700">Chatbot credits:</span>
                               <span className="text-lg font-bold text-green-900">{tier.id === 'pro' ? '100' : '50'}</span>
@@ -372,7 +361,7 @@ const Pricing = () => {
                               <span className="text-lg font-bold text-green-900">{tier.id === 'pro' ? '50' : '20'}/seat</span>
                             </div>
                           </div>
-                          <div className="mt-3 pt-3 border-t border-green-300">
+                          <div className="mt-2 pt-2 border-t border-green-300">
                             <p className="text-xs text-green-700">
                               Example with 5 seats: <span className="font-bold">{tier.id === 'pro' ? '350' : '150'} credits/month</span>
                             </p>
@@ -380,12 +369,12 @@ const Pricing = () => {
                         </div>
 
                         {/* Key Features */}
-                        <div className="mb-8">
-                          <p className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+                        <div className="mb-6">
+                          <p className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
                             Key Features
                           </p>
-                          <ul className="space-y-3">
-                            {tier.features.slice(0, 5).map((feature, idx) => (
+                          <ul className="space-y-2 mb-3">
+                            {tier.keyFeatures.map((feature, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                                 <span className="text-sm text-gray-700">
@@ -394,51 +383,13 @@ const Pricing = () => {
                               </li>
                             ))}
                           </ul>
-
-                          {/* Expandable Features */}
-                          {tier.features.length > 5 && (
-                            <>
-                              <AnimatePresence>
-                                {isExpanded && (
-                                  <motion.ul
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="space-y-3 mt-3 overflow-hidden"
-                                  >
-                                    {tier.features.slice(5).map((feature, idx) => (
-                                      <li key={idx} className="flex items-start gap-3">
-                                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-gray-700">
-                                          {feature}
-                                        </span>
-                                      </li>
-                                    ))}
-                                  </motion.ul>
-                                )}
-                              </AnimatePresence>
-
-                              <button
-                                onClick={() =>
-                                  setExpandedTier(isExpanded ? null : tier.id)
-                                }
-                                className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mt-4"
-                              >
-                                {isExpanded ? (
-                                  <>
-                                    Show less
-                                    <ChevronUp className="h-4 w-4" />
-                                  </>
-                                ) : (
-                                  <>
-                                    Show all features ({tier.features.length})
-                                    <ChevronDown className="h-4 w-4" />
-                                  </>
-                                )}
-                              </button>
-                            </>
-                          )}
+                          <a
+                            href="#feature-comparison"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                          >
+                            View full feature comparison
+                            <ArrowDown className="h-4 w-4" />
+                          </a>
                         </div>
 
                         {/* CTA Button */}
@@ -459,7 +410,7 @@ const Pricing = () => {
                         </Button>
 
                         {/* Footnote */}
-                        <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+                        <p className="text-xs text-gray-500 mt-3 leading-relaxed">
                           {tier.footnote}
                         </p>
                       </div>
@@ -475,7 +426,7 @@ const Pricing = () => {
       {/* ========================================
           SECTION 4: FEATURE COMPARISON TABLE
       ======================================== */}
-      <section className="py-32 bg-gradient-to-b from-gray-50/50 via-white to-gray-50/50">
+      <section id="feature-comparison" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50/50 via-white to-gray-50/50">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Section Header */}
@@ -483,22 +434,16 @@ const Pricing = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-20"
+              className="text-center mb-12 md:mb-16 lg:mb-20"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                  Feature Comparison
-                </span>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-primary bg-clip-text text-transparent">
                   Every feature,
                   <br />
                   side by side
                 </span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Transparent pricing with no hidden features. See exactly what you get with each plan.
               </p>
             </motion.div>
@@ -540,31 +485,30 @@ const Pricing = () => {
                       {/* Collapsible Category Header */}
                       <button
                         onClick={() => toggleCategory(category.id)}
-                        className="w-full px-8 py-5 bg-gradient-to-r from-gray-50/80 to-white hover:from-gray-100/80 hover:to-gray-50/50 transition-all duration-300 group"
+                        className="w-full px-8 py-6 bg-gradient-to-r from-gray-50/50 to-white hover:from-gray-50 hover:to-white border-b border-gray-100 transition-all duration-300 group"
                       >
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-200 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
-                              {category.icon}
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <div className="text-left">
+                                <h3 className="font-bold text-gray-900 text-lg mb-1">
+                                  {category.category}
+                                </h3>
+                                <p className="text-sm text-gray-600 font-normal">
+                                  {category.categoryDescription}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-3 ml-4">
+                                <span className="text-xs font-medium text-gray-500 bg-white px-2.5 py-1 rounded-full border border-gray-200">
+                                  {category.features.length} features
+                                </span>
+                                {isExpanded ? (
+                                  <ChevronUp className="h-5 w-5 text-gray-500 transition-transform duration-300" />
+                                ) : (
+                                  <ChevronDown className="h-5 w-5 text-gray-500 transition-transform duration-300" />
+                                )}
+                              </div>
                             </div>
-                            <div className="text-left">
-                              <h3 className="font-bold text-gray-900 text-base mb-1">
-                                {category.category}
-                              </h3>
-                              <p className="text-sm text-gray-600 font-normal">
-                                {category.categoryDescription}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                              {category.features.length}
-                            </span>
-                            {isExpanded ? (
-                              <ChevronUp className="h-5 w-5 text-gray-600 transition-transform duration-300" />
-                            ) : (
-                              <ChevronDown className="h-5 w-5 text-gray-600 transition-transform duration-300" />
-                            )}
                           </div>
                         </div>
                       </button>
@@ -673,7 +617,7 @@ const Pricing = () => {
             </motion.div>
 
             {/* Mobile Card View */}
-            <div className="md:hidden space-y-6">
+            <div className="md:hidden space-y-4 md:space-y-6">
               {featureComparison.map((category, categoryIdx) => {
                 const isExpanded = isCategoryExpanded(category.id);
 
@@ -684,32 +628,32 @@ const Pricing = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: categoryIdx * 0.1 }}
-                    className="rounded-2xl bg-white border border-gray-200 shadow-lg overflow-hidden"
+                    className="rounded-xl md:rounded-2xl bg-white border border-gray-200 shadow-lg overflow-hidden"
                   >
                     {/* Collapsible Category Header */}
                     <button
                       onClick={() => toggleCategory(category.id)}
-                      className="w-full px-6 py-5 bg-gradient-to-r from-gray-50/80 to-white border-b border-gray-200 group"
+                      className="w-full px-4 py-4 md:px-5 md:py-5 bg-gradient-to-r from-gray-50/50 to-white hover:from-gray-50 hover:to-white border-b border-gray-200 transition-all duration-300 group"
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-white shadow-sm border border-gray-200 flex items-center justify-center text-xl group-active:scale-95 transition-transform">
-                            {category.icon}
-                          </div>
-                          <div className="text-left">
-                            <h3 className="font-bold text-gray-900 text-sm mb-0.5">
-                              {category.category}
-                            </h3>
-                            <p className="text-xs text-gray-500">
-                              {category.features.length} features
-                            </p>
-                          </div>
+                        <div className="flex-1 text-left">
+                          <h3 className="font-bold text-gray-900 text-sm md:text-base mb-1">
+                            {category.category}
+                          </h3>
+                          <p className="text-[10px] md:text-xs text-gray-600">
+                            {category.categoryDescription}
+                          </p>
                         </div>
-                        {isExpanded ? (
-                          <ChevronUp className="h-5 w-5 text-gray-600 flex-shrink-0 transition-transform" />
-                        ) : (
-                          <ChevronDown className="h-5 w-5 text-gray-600 flex-shrink-0 transition-transform" />
-                        )}
+                        <div className="flex items-center gap-2 md:gap-2.5 ml-3">
+                          <span className="text-[10px] md:text-xs font-medium text-gray-500 bg-white px-1.5 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-200">
+                            {category.features.length}
+                          </span>
+                          {isExpanded ? (
+                            <ChevronUp className="h-4 w-4 md:h-5 md:w-5 text-gray-500 flex-shrink-0 transition-transform" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 md:h-5 md:w-5 text-gray-500 flex-shrink-0 transition-transform" />
+                          )}
+                        </div>
                       </div>
                     </button>
 
@@ -723,11 +667,11 @@ const Pricing = () => {
                           transition={{ duration: 0.3 }}
                           className="overflow-hidden"
                         >
-                          <div className="p-5 space-y-5 bg-gray-50/30">
+                          <div className="p-4 md:p-5 space-y-4 md:space-y-5 bg-gray-50/30">
                             {category.features.map((feature, featureIdx) => (
                               <div
                                 key={featureIdx}
-                                className={`space-y-3 p-4 rounded-xl bg-white border border-gray-200 ${
+                                className={`space-y-3 p-3 md:p-4 rounded-lg md:rounded-xl bg-white border border-gray-200 ${
                                   feature.proOnly ? 'shadow-sm border-purple-200 bg-gradient-to-br from-purple-50/40 to-white' : 'shadow-sm'
                                 }`}
                               >
@@ -828,7 +772,7 @@ const Pricing = () => {
       {/* ========================================
           SECTION 5: COMPETITIVE PRICING CALCULATOR - COMPACT
       ======================================== */}
-      <section className="relative min-h-screen h-screen overflow-hidden flex items-center">
+      <section className="relative hidden lg:block lg:min-h-screen lg:h-screen overflow-hidden items-center">
         {/* Ethereal Background */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/30 to-white" />
@@ -842,7 +786,7 @@ const Pricing = () => {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/20 to-purple-600/20 blur-[120px]"
+            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-br from-primary/20 to-purple-600/20 blur-[120px]"
           />
           <motion.div
             animate={{
@@ -855,16 +799,16 @@ const Pricing = () => {
               ease: 'easeInOut',
               delay: 2,
             }}
-            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 blur-[120px]"
+            className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 blur-[120px]"
           />
         </div>
 
         <div className="container mx-auto px-4 relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
             {/* Compact Grid Layout */}
-            <div className="grid lg:grid-cols-12 gap-6 items-start">
+            <div className="grid lg:grid-cols-12 gap-4 md:gap-6 items-start">
               {/* Left: Controls Column */}
-              <div className="lg:col-span-5 space-y-5">
+              <div className="lg:col-span-5 space-y-4 md:space-y-5">
                 {/* Header */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -877,19 +821,19 @@ const Pricing = () => {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 mb-4"
+                    className="inline-flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 mb-3 md:mb-4"
                   >
-                    <Sparkles className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-xs font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent uppercase tracking-wider">
+                    <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary" />
+                    <span className="text-[10px] md:text-xs font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent uppercase tracking-wider">
                       Pricing Calculator
                     </span>
                   </motion.div>
-                  <h2 className="text-4xl md:text-5xl font-bold mb-2 tracking-tight leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 tracking-tight leading-tight">
                     <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
                       Compare the real cost
                     </span>
                   </h2>
-                  <p className="text-sm text-gray-600 font-medium">
+                  <p className="text-xs md:text-sm text-gray-600 font-medium">
                     See how much you save with Pullse's transparent pricing
                   </p>
                 </motion.div>
@@ -901,20 +845,20 @@ const Pricing = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                  <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-3 block">
+                  <label className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2 md:mb-3 block">
                     Compare with
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-2xl blur-lg" />
-                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-2xl p-2.5 shadow-xl">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-xl md:rounded-2xl blur-lg" />
+                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-xl md:rounded-2xl p-2 md:p-2.5 shadow-xl">
+                      <div className="flex flex-wrap gap-1.5 md:gap-2">
                         {competitorPricingDetails.map((comp) => (
                           <motion.button
                             key={comp.id}
                             onClick={() => setSelectedCompetitor(comp.id)}
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
-                            className={`relative px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 overflow-hidden ${
+                            className={`relative px-3 py-2 md:px-4 md:py-2.5 rounded-lg md:rounded-xl text-xs md:text-sm font-bold transition-all duration-300 overflow-hidden ${
                               selectedCompetitor === comp.id
                                 ? 'text-white shadow-lg'
                                 : 'text-gray-700 hover:bg-white/70'
@@ -941,20 +885,20 @@ const Pricing = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="space-y-4"
+                  className="space-y-3 md:space-y-4"
                 >
                   {/* Agents Slider */}
                   <div className="relative group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500" />
-                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-2xl p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
-                            <Users className="h-5 w-5 text-white" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl md:rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500" />
+                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-xl md:rounded-2xl p-4 md:p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
+                      <div className="flex items-center justify-between mb-3 md:mb-4">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className="w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                            <Users className="h-4 w-4 md:h-5 md:w-5 text-white" />
                           </div>
-                          <label className="text-xs uppercase tracking-wider text-gray-500 font-bold">Support Agents</label>
+                          <label className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500 font-bold">Support Agents</label>
                         </div>
-                        <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{agents}</div>
+                        <div className="text-2xl md:text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{agents}</div>
                       </div>
                       <Slider
                         value={[agents]}
@@ -964,25 +908,25 @@ const Pricing = () => {
                         step={1}
                         className="w-full"
                       />
-                      <div className="flex justify-between mt-2">
-                        <span className="text-xs text-gray-500">1</span>
-                        <span className="text-xs text-gray-500">100</span>
+                      <div className="flex justify-between mt-1.5 md:mt-2">
+                        <span className="text-[10px] md:text-xs text-gray-500">1</span>
+                        <span className="text-[10px] md:text-xs text-gray-500">100</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Conversations Slider */}
                   <div className="relative group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500" />
-                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-2xl p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                            <MessageSquare className="h-5 w-5 text-white" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl md:rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500" />
+                    <div className="relative bg-white/80 backdrop-blur-xl border-2 border-white/60 rounded-xl md:rounded-2xl p-4 md:p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
+                      <div className="flex items-center justify-between mb-3 md:mb-4">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className="w-9 h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-lg md:rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                            <MessageSquare className="h-4 w-4 md:h-5 md:w-5 text-white" />
                           </div>
-                          <label className="text-xs uppercase tracking-wider text-gray-500 font-bold">Monthly Conversations</label>
+                          <label className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500 font-bold">Monthly Conversations</label>
                         </div>
-                        <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{conversations.toLocaleString()}</div>
+                        <div className="text-2xl md:text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{conversations.toLocaleString()}</div>
                       </div>
                       <Slider
                         value={[conversations]}
@@ -992,9 +936,9 @@ const Pricing = () => {
                         step={100}
                         className="w-full"
                       />
-                      <div className="flex justify-between mt-2">
-                        <span className="text-xs text-gray-500">1</span>
-                        <span className="text-xs text-gray-500">100k</span>
+                      <div className="flex justify-between mt-1.5 md:mt-2">
+                        <span className="text-[10px] md:text-xs text-gray-500">1</span>
+                        <span className="text-[10px] md:text-xs text-gray-500">100k</span>
                       </div>
                     </div>
                   </div>
@@ -1003,7 +947,7 @@ const Pricing = () => {
 
               {/* Right: Comparison Results Column */}
               {pricingComparison && (
-                <div className="lg:col-span-7 flex flex-col justify-center space-y-5">
+                <div className="lg:col-span-7 flex flex-col justify-center space-y-4 md:space-y-5">
                   {/* Minimum Seats Warning - Compact */}
                   {pricingComparison.minimumSeatsWarning && (
                     <motion.div
@@ -1013,13 +957,13 @@ const Pricing = () => {
                       transition={{ duration: 0.5 }}
                       className="relative"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-2xl blur-lg" />
-                      <div className="relative bg-white/80 backdrop-blur-xl border-2 border-orange-500/50 rounded-2xl p-4 shadow-lg">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center shadow-lg flex-shrink-0">
-                            <AlertCircle className="h-5 w-5 text-white" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl md:rounded-2xl blur-lg" />
+                      <div className="relative bg-white/80 backdrop-blur-xl border-2 border-orange-500/50 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-lg">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center shadow-lg flex-shrink-0">
+                            <AlertCircle className="h-4 w-4 md:h-5 md:w-5 text-white" />
                           </div>
-                          <p className="text-sm font-bold text-gray-900">
+                          <p className="text-xs md:text-sm font-bold text-gray-900">
                             {pricingComparison.minimumSeatsWarning}
                           </p>
                         </div>
@@ -1028,7 +972,7 @@ const Pricing = () => {
                   )}
 
                   {/* Side-by-Side Comparison with VS */}
-                  <div className="relative grid grid-cols-[1fr_auto_1fr] gap-4 items-center">
+                  <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch md:items-center">
                     {/* Competitor Card - Enhanced */}
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
@@ -1037,42 +981,42 @@ const Pricing = () => {
                       transition={{ duration: 0.5, delay: 0.1 }}
                       className="relative group"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-300/20 to-gray-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                      <div className="relative bg-white/80 backdrop-blur-xl border-2 border-gray-200 rounded-2xl p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center shadow-sm">
-                            <Building2 className="h-4 w-4 text-gray-600" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-300/20 to-gray-400/20 rounded-xl md:rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                      <div className="relative bg-white/80 backdrop-blur-xl border-2 border-gray-200 rounded-xl md:rounded-2xl p-4 md:p-5 hover:bg-white/90 transition-all duration-300 shadow-lg">
+                        <div className="flex items-center gap-2 mb-3 md:mb-4">
+                          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-gray-100 flex items-center justify-center shadow-sm">
+                            <Building2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-gray-600" />
                           </div>
-                          <h3 className="text-base font-bold text-gray-900">{pricingComparison.competitor.name}</h3>
+                          <h3 className="text-sm md:text-base font-bold text-gray-900">{pricingComparison.competitor.name}</h3>
                         </div>
-                        <div className="mb-4 pb-4 border-b border-gray-200">
-                          <div className="text-4xl font-black text-gray-900 mb-1">
+                        <div className="mb-3 md:mb-4 pb-3 md:pb-4 border-b border-gray-200">
+                          <div className="text-3xl md:text-4xl font-black text-gray-900 mb-1">
                             ${Math.round(pricingComparison.competitorCost).toLocaleString()}
                           </div>
-                          <p className="text-xs text-gray-600 font-semibold">per month</p>
+                          <p className="text-[10px] md:text-xs text-gray-600 font-semibold">per month</p>
                         </div>
 
                         {/* Complete Cost Breakdown */}
-                        <div className="space-y-2 text-xs max-h-[180px] overflow-y-auto pr-1 custom-scrollbar">
+                        <div className="space-y-2 text-xs max-h-[160px] md:max-h-[180px] overflow-y-auto pr-1 custom-scrollbar">
                           {/* Base Seats */}
-                          <div className="flex justify-between items-start p-2 rounded-lg bg-gray-50">
+                          <div className="flex justify-between items-start p-1.5 md:p-2 rounded-md md:rounded-lg bg-gray-50">
                             <div className="flex-1">
-                              <span className="text-gray-600 font-medium block">Base Seats</span>
-                              <span className="text-[10px] text-gray-500">{pricingComparison.effectiveSeats} seats × ${pricingComparison.competitor.baseCostPerSeat}/seat</span>
+                              <span className="text-gray-600 font-medium block text-[10px] md:text-xs">Base Seats</span>
+                              <span className="text-[9px] md:text-[10px] text-gray-500">{pricingComparison.effectiveSeats} seats × ${pricingComparison.competitor.baseCostPerSeat}/seat</span>
                             </div>
-                            <span className="font-bold text-gray-900 ml-2">${Math.round(pricingComparison.baseSeatCost).toLocaleString()}</span>
+                            <span className="font-bold text-gray-900 ml-2 text-[10px] md:text-xs">${Math.round(pricingComparison.baseSeatCost).toLocaleString()}</span>
                           </div>
 
                           {/* Add-Ons */}
                           {pricingComparison.competitor.addOns && pricingComparison.competitor.addOns.length > 0 && (
                             <>
                               {pricingComparison.competitor.addOns.map((addon, idx) => (
-                                <div key={idx} className="flex justify-between items-start p-2 rounded-lg bg-orange-50 border border-orange-200">
+                                <div key={idx} className="flex justify-between items-start p-1.5 md:p-2 rounded-md md:rounded-lg bg-orange-50 border border-orange-200">
                                   <div className="flex-1">
-                                    <span className="text-orange-700 font-medium block">{addon.name}</span>
-                                    <span className="text-[10px] text-orange-600">{pricingComparison.effectiveSeats} seats × ${addon.costPerSeat}/seat</span>
+                                    <span className="text-orange-700 font-medium block text-[10px] md:text-xs">{addon.name}</span>
+                                    <span className="text-[9px] md:text-[10px] text-orange-600">{pricingComparison.effectiveSeats} seats × ${addon.costPerSeat}/seat</span>
                                   </div>
-                                  <span className="font-bold text-orange-900 ml-2">${Math.round(pricingComparison.effectiveSeats * addon.costPerSeat).toLocaleString()}</span>
+                                  <span className="font-bold text-orange-900 ml-2 text-[10px] md:text-xs">${Math.round(pricingComparison.effectiveSeats * addon.costPerSeat).toLocaleString()}</span>
                                 </div>
                               ))}
                             </>
@@ -1080,10 +1024,10 @@ const Pricing = () => {
 
                           {/* Per-Resolution Costs */}
                           {pricingComparison.competitor.perResolutionCost && (
-                            <div className="flex justify-between items-start p-2 rounded-lg bg-blue-50 border border-blue-200">
+                            <div className="flex justify-between items-start p-1.5 md:p-2 rounded-md md:rounded-lg bg-blue-50 border border-blue-200">
                               <div className="flex-1">
-                                <span className="text-blue-700 font-medium block">AI Resolutions</span>
-                                <span className="text-[10px] text-blue-600">{pricingComparison.aiConversations.toLocaleString()} resolutions × ${pricingComparison.competitor.perResolutionCost}</span>
+                                <span className="text-blue-700 font-medium block text-[10px] md:text-xs">AI Resolutions</span>
+                                <span className="text-[9px] md:text-[10px] text-blue-600">{pricingComparison.aiConversations.toLocaleString()} resolutions × ${pricingComparison.competitor.perResolutionCost}</span>
                               </div>
                               <span className="font-bold text-blue-900 ml-2">${Math.round(pricingComparison.perResolutionCostTotal).toLocaleString()}</span>
                             </div>
@@ -1393,10 +1337,10 @@ const Pricing = () => {
       {/* ========================================
           SECTION 6: TRUST SIGNALS
       ======================================== */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-transparent">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-6 md:gap-8">
               {trustSignals.map((signal, index) => (
                 <motion.div
                   key={index}
@@ -1406,13 +1350,13 @@ const Pricing = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 mb-4">
-                    <signal.icon className="w-8 h-8 text-primary" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 mb-3 md:mb-4">
+                    <signal.icon className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1.5 md:mb-2">
                     {signal.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
                     {signal.description}
                   </p>
                 </motion.div>
@@ -1425,7 +1369,7 @@ const Pricing = () => {
       {/* ========================================
           SECTION 8: STARTUP PROGRAM TRIGGER
       ======================================== */}
-      <section className="py-16">
+      <section className="py-10 md:py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <motion.div
@@ -1437,26 +1381,26 @@ const Pricing = () => {
               className="relative group"
             >
               <Link href="/apply/startup" className="block">
-                <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl border-2 border-orange-500/30 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div className="relative p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl border-2 border-orange-500/30 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   {/* Background gradient accent */}
                   <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                  <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-5 lg:gap-6">
                     {/* Left: Badge + Content */}
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <Sparkles className="w-6 h-6 text-white" />
+                    <div className="flex items-center gap-3 md:gap-4 flex-1">
+                      <div className="w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <Sparkles className="w-5 h-5 md:w-5.5 md:h-5.5 lg:w-6 lg:h-6 text-white" />
                       </div>
                       <div className="text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 mb-2">
-                          <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">
+                        <div className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-orange-500/10 border border-orange-500/20 mb-1.5 md:mb-2">
+                          <span className="text-[10px] md:text-xs font-bold text-orange-600 uppercase tracking-wider">
                             FOR STARTUPS
                           </span>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-0.5 md:mb-1">
                           50% off for 12 months
                         </h3>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-xs md:text-sm text-gray-600">
                           Early-stage companies ≤$2M ARR • Up to 15 seats
                         </p>
                       </div>
@@ -1464,9 +1408,9 @@ const Pricing = () => {
 
                     {/* Right: CTA */}
                     <div className="flex-shrink-0">
-                      <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold shadow-lg group-hover:shadow-xl transition-all">
+                      <div className="inline-flex items-center gap-1.5 md:gap-2 px-4 py-2.5 md:px-5 md:py-3 lg:px-6 lg:py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold shadow-lg group-hover:shadow-xl transition-all text-sm md:text-base">
                         <span>Learn More & Apply</span>
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
                   </div>
@@ -1480,27 +1424,27 @@ const Pricing = () => {
       {/* ========================================
           SECTION 9: FAQ
       ======================================== */}
-      <section className="py-24">
+      <section className="py-16 md:py-20 lg:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-12 md:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
                 <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
                   Frequently asked questions
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-base md:text-lg text-muted-foreground">
                 Everything you need to know about pricing
               </p>
             </motion.div>
 
             {/* FAQ Categories */}
-            <div className="space-y-12">
+            <div className="space-y-8 md:space-y-10 lg:space-y-12">
               {faqCategories.map((category, categoryIndex) => (
                 <motion.div
                   key={category.id}
@@ -1510,13 +1454,13 @@ const Pricing = () => {
                   transition={{ delay: categoryIndex * 0.1 }}
                 >
                   {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-3xl">{category.icon}</span>
-                    <h3 className="text-2xl font-bold text-gray-900">{category.category}</h3>
+                  <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+                    <span className="text-2xl md:text-3xl">{category.icon}</span>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">{category.category}</h3>
                   </div>
 
                   {/* Two-column grid of FAQs */}
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-3 md:gap-4">
                     {category.questions.map((faq, faqIndex) => (
                       <Accordion
                         key={faqIndex}
@@ -1525,14 +1469,14 @@ const Pricing = () => {
                       >
                         <AccordionItem
                           value="item-1"
-                          className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-2xl px-6 shadow-sm hover:shadow-md transition-shadow"
+                          className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-xl md:rounded-2xl px-4 md:px-5 lg:px-6 shadow-sm hover:shadow-md transition-shadow"
                         >
-                          <AccordionTrigger className="text-left hover:no-underline py-5">
-                            <span className="font-semibold text-base text-gray-900 pr-4">
+                          <AccordionTrigger className="text-left hover:no-underline py-4 md:py-5">
+                            <span className="font-semibold text-sm md:text-base text-gray-900 pr-4">
                               {faq.question}
                             </span>
                           </AccordionTrigger>
-                          <AccordionContent className="text-gray-700 text-sm leading-relaxed pb-5">
+                          <AccordionContent className="text-gray-700 text-xs md:text-sm leading-relaxed pb-4 md:pb-5">
                             {faq.answer}
                           </AccordionContent>
                         </AccordionItem>
@@ -1544,15 +1488,15 @@ const Pricing = () => {
             </div>
 
             {/* Policy Footnotes */}
-            <div className="mt-16 p-6 rounded-2xl bg-gray-50 border border-gray-200">
-              <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="mt-12 md:mt-14 lg:mt-16 p-4 md:p-5 lg:p-6 rounded-xl md:rounded-2xl bg-gray-50 border border-gray-200">
+              <p className="text-[10px] md:text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3 md:mb-4">
                 Important Notes
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 md:space-y-2">
                 {policyFootnotes.map((note, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <AlertCircle className="h-4 w-4 text-gray-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-xs text-gray-600">{note.text}</span>
+                  <li key={idx} className="flex items-start gap-1.5 md:gap-2">
+                    <AlertCircle className="h-3 w-3 md:h-4 md:w-4 text-gray-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-[10px] md:text-xs text-gray-600">{note.text}</span>
                   </li>
                 ))}
               </ul>
@@ -1564,19 +1508,19 @@ const Pricing = () => {
       {/* ========================================
           SECTION 10: FINAL CTA
       ======================================== */}
-      <section className="py-16 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10">
+      <section className="py-10 md:py-12 lg:py-16 bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
               {/* Left: Reassurance */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 md:gap-3 lg:gap-4">
                 {trialBenefits.map((benefit, idx) => (
                   <div
                     key={idx}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-white/60 shadow-sm"
+                    className="inline-flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/80 backdrop-blur-sm border border-white/60 shadow-sm"
                   >
-                    <Check className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-gray-700">
+                    <Check className="h-3 w-3 md:h-4 md:w-4 text-primary" />
+                    <span className="text-xs md:text-sm font-medium text-gray-700">
                       {benefit}
                     </span>
                   </div>
@@ -1584,18 +1528,18 @@ const Pricing = () => {
               </div>
 
               {/* Right: CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-lg hover:shadow-xl"
+                  className="bg-gradient-to-r from-primary via-purple-500 to-purple-600 hover:from-primary/90 hover:via-purple-500/90 hover:to-purple-600/90 shadow-lg hover:shadow-xl text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
                   asChild
                 >
                   <Link href="/contact-sales">
                     Contact Sales
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2" asChild>
+                <Button size="lg" variant="outline" className="border-2 text-sm md:text-base px-6 py-3 md:px-8 md:py-4" asChild>
                   <Link href="/contact-sales">Schedule demo</Link>
                 </Button>
               </div>

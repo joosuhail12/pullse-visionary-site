@@ -17,6 +17,8 @@ import {
   Workflow,
   Search,
   Telescope,
+  Scale,
+  User,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -131,8 +133,8 @@ export const visionManifesto = {
     headline: "Build the Future With Us",
     message: "We're just getting started. Join us as an early partner and help shape the future of AI-native business software. Be part of the movement to replace fragmented tools with intelligent, unified platforms.",
     cta: {
-      text: "Join Early Access",
-      link: "/contact-sales",
+      text: "See Pricing",
+      link: "/pricing",
     },
   },
 };
@@ -199,62 +201,51 @@ export const timeline: Milestone[] = [
 
 // Merged approach: combining values + why support first into unified principles
 // Story structure: Foundation (Row 1) → Execution (Row 2)
-export const ourApproach = {
-  title: "How We Build Different",
-  subtitle: "The foundation and execution that drives everything we do",
-  principles: [
-    // ============ FOUNDATION ROW ============
-    {
-      icon: Brain,
-      title: "AI-Native by Design",
-      description:
-        "Legacy tools add AI features. We designed from scratch so AI understands your entire business—every conversation, ticket, and customer interaction feeds one intelligent brain that gets smarter with each data point.",
-      inPractice: "Your support AI learns from sales conversations, product updates, and team discussions. When a customer asks about a feature, the AI already knows what sales promised and what product shipped. Context never gets lost.",
-      size: "large" as const, // Deprecated but kept for backwards compatibility
-    },
+export const whatWeBelieve = {
+  title: "What We Believe",
+  subtitle: "The principles that guide how we work with everyone",
+  beliefs: [
     {
       icon: Eye,
-      title: "Radically Transparent",
+      title: "Radical Clarity",
       description:
-        "We publish our pricing, roadmap, and decision-making in the open. No hidden fees, no enterprise-only features that should be standard, no data lock-in. You own your data, you see our plans, you know exactly what you're paying for.",
-      inPractice: "Our pricing page shows every feature at every tier. Our public roadmap shows what we're building next. Export your data anytime with one click—no hoops, no retention policies, no questions asked.",
-      size: "large" as const,
+        "We believe transparency builds trust, which is why every feature, every price, every decision must be explained clearly and honestly. You own your data completely, and we deal straight with everyone: customers, partners, and vendors alike.",
+    },
+    {
+      icon: Telescope,
+      title: "Think Big Picture",
+      description:
+        "We don't optimize for today's fragmented stack—we reimagine what entire business functions should look like when AI is foundational, not an add-on. Support is our first proof point, but the vision extends further: unified platforms that make tool sprawl obsolete by building for the system, not just solving one workflow.",
+    },
+    {
+      icon: Rocket,
+      title: "Build for the Future",
+      description:
+        "The best software isn't constrained by legacy architectures or yesterday's assumptions. We design for how teams will work in 2030, not 2015—with AI aggregation, agentic workflows, and future-first architecture that builds on the right foundations today.",
     },
     {
       icon: Heart,
-      title: "End User Obsessed",
+      title: "Empathy for Everyone",
       description:
-        "Support agents don't have time for complicated interfaces or mandatory training sessions. We design for the person answering tickets at 11pm, not the executive signing the contract. If it's not genuinely simple, we don't ship it.",
-      inPractice: "New agents go live in under 10 minutes. No week-long onboarding, no certification courses, no admin setup maze. The AI guides them through their first tickets, and advanced features appear only when they're ready.",
-      size: "small" as const,
+        "Great software creates value for everyone it touches: the people using it, the customers they serve, and the businesses that depend on both. When we build with genuine empathy for the entire chain, support agents get better tools, customers get faster answers, teams work happier, and companies grow stronger.",
     },
-    // ============ EXECUTION ROW ============
     {
       icon: Zap,
-      title: "Ship Fast, Learn Faster",
+      title: "We Move Fast",
       description:
-        "We built our first working prototype in 3 months. We launch features weekly, not quarterly. Every Friday, something new ships. The teams using broken tools today can't wait 18 months for our perfect vision—they need better software now.",
-      inPractice: "Weekly releases every Friday at 2pm PST. Public changelog shows exactly what shipped. Beta features available immediately for teams who want to test early. If something breaks, we fix it that day, not next sprint.",
-      size: "small" as const,
+        "Speed isn't reckless—it's respectful. Teams struggling with broken tools deserve solutions now, not perfectly polished products years from now, which is why we ship fast, learn faster, and iterate constantly.",
     },
     {
-      icon: Target,
-      title: "Start Where AI Delivers Most",
+      icon: Shield,
+      title: "Own the Outcome",
       description:
-        "Support has clear inputs (customer questions), measurable outputs (resolution time, CSAT), and structured workflows. This makes it perfect for AI to deliver immediate, quantifiable value. We prove the platform here, then expand to other functions.",
-      inPractice: "Day one: Your AI handles password resets, shipping questions, basic troubleshooting—the repetitive 40% of tickets. Week two: It's learning your product specifics. Month one: It's resolving 60% of tickets autonomously while your team focuses on complex cases.",
-      size: "small" as const,
-    },
-    {
-      icon: Users,
-      title: "Built for Growing Teams",
-      description:
-        "A 5-person startup and a 500-person company both need great support, but they can't both afford enterprise software. We price for small teams and scale without forcing upgrades. The same powerful features, the same intelligent platform, regardless of size.",
-      inPractice: "Start at $29/agent/month with full AI capabilities—not a limited 'starter' version. Add agents anytime without contracts or tier changes. Scale from 3 agents to 30 without losing features or migrating plans. Pay for what you use, nothing more.",
-      size: "small" as const,
+        "We're accountable for the results our customers achieve, not just the software we ship. When something breaks we fix it, when a customer struggles we help them succeed—because their wins are our wins, and their problems are our problems.",
     },
   ],
 };
+
+// Legacy export for backwards compatibility
+export const ourApproach = whatWeBelieve;
 
 // Legacy export for backwards compatibility (if needed elsewhere)
 export const values: Value[] = [
@@ -324,23 +315,23 @@ export const team: TeamMember[] = [
 ];
 
 export const antler = {
-  logo: "/antler-logo.svg", // You'll need to add Antler's logo
+  logo: "/antler-logo.png",
   description:
     "Proud to be part of Antler's global ecosystem of founders building category-defining companies.",
-  website: "https://www.antler.co",
+  website: "https://www.antler.co/portfolio",
 };
 
 export const cta = {
-  headline: "Replace Your Support Stack with One Intelligent Platform",
+  headline: "One Platform. Your Entire Support Stack.",
   description:
-    "Launching Q4 2025. We're accepting a limited number of early access partners who want to be first to experience truly AI-native support software. No more tool chaos. No more data silos. Just intelligent, connected support that actually understands your business.",
+    "Replace 10+ disconnected tools with one intelligent system. No data silos. No context switching. Just support software that actually works together.",
   primaryCTA: {
-    text: "Request Early Access",
-    link: "/contact-sales",
+    text: "View Pricing",
+    link: "/pricing",
   },
   secondaryCTA: {
-    text: "Follow Our Journey",
-    link: "https://twitter.com/pullse",
+    text: "Contact Sales",
+    link: "/contact-sales",
   },
 };
 

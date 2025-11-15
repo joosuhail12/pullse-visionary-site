@@ -21,7 +21,7 @@ export default function Legal() {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.4} />
+      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
       <div className="relative pt-24 pb-16">

@@ -248,7 +248,7 @@ const ContactSales = () => {
           <p className="text-gray-600 text-sm">{config.subtitle}</p>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {config.fields.map((field, index) => (
             <div key={field.name}>
               <label className="text-sm font-bold text-gray-800 mb-2.5 block flex items-center gap-2">
@@ -279,7 +279,7 @@ const ContactSales = () => {
                   value={formData[field.name as keyof FormData]}
                   onChange={handleChange}
                   placeholder={field.placeholder}
-                  className="glass-elevated min-h-36 text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg resize-none"
+                  className="glass-elevated min-h-28 sm:min-h-36 text-base border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40 transition-all duration-300 hover:shadow-lg resize-none"
                 />
               ) : (
                 <Input
@@ -313,36 +313,36 @@ const ContactSales = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen">
-        <PageLiquidBackground opacity={0.4} />
+        <PageLiquidBackground opacity={0.3} />
         <Navigation />
 
-        <div className="pt-32 pb-20">
+        <div className="pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ type: "spring", duration: 0.7, bounce: 0.3 }}
-                className="glass-gradient p-10 rounded-[2rem] text-center shadow-2xl border-2 border-primary/20"
+                className="glass-gradient p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-[2rem] text-center shadow-2xl border-2 border-primary/20"
               >
-                <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/30">
-                  <Check className="w-12 h-12 text-white" strokeWidth={3} />
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-lg shadow-green-500/30">
+                  <Check className="w-10 h-10 sm:w-12 sm:h-12 text-white" strokeWidth={3} />
                 </div>
 
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-4">
+                <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4">
                   Demo Request Received!
                 </h2>
-                <p className="text-xl text-gray-600 mb-8 font-medium">
+                <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 font-medium">
                   Thank you, {formData.name}! We've received your demo request and our team will contact you within 24 hours.
                 </p>
 
                 {/* Cal.com Integration Section */}
-                <div className="mt-16 pt-8 border-t border-gray-200">
+                <div className="mt-10 pt-6 sm:mt-16 sm:pt-8 border-t border-gray-200">
                   <div className="max-w-3xl mx-auto">
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
                       Book a time
                     </h3>
-                    <p className="text-gray-600 mb-8">
+                    <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">
                       Schedule a meeting with our team
                     </p>
 
@@ -354,12 +354,12 @@ const ContactSales = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-4 justify-center flex-wrap mt-12">
+                  <div className="flex gap-3 sm:gap-4 justify-center flex-wrap mt-8 sm:mt-12">
                     <Button
                       onClick={() => window.location.href = '/pricing'}
                       variant="outline"
                       size="lg"
-                      className="min-w-[160px]"
+                      className="min-w-[140px] sm:min-w-[160px] h-11 sm:h-12 text-sm sm:text-base"
                     >
                       View Pricing
                     </Button>
@@ -367,7 +367,7 @@ const ContactSales = () => {
                       onClick={() => window.location.href = '/'}
                       variant="outline"
                       size="lg"
-                      className="min-w-[160px]"
+                      className="min-w-[140px] sm:min-w-[160px] h-11 sm:h-12 text-sm sm:text-base"
                     >
                       Back to Home
                     </Button>
@@ -385,68 +385,68 @@ const ContactSales = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.4} />
+      <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      <div className="pt-32 pb-20">
+      <div className="pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-start">
               {/* Left Column - Info */}
               <div className="lg:sticky lg:top-32">
-                <h1 className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-5 lg:mb-6 bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent leading-tight">
                   Book a Demo
                 </h1>
-                <p className="text-2xl text-gray-600 mb-10 font-medium leading-relaxed">
+                <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-9 lg:mb-10 font-medium leading-relaxed">
                   See Pullse in action and discover how we can transform your customer support operations.
                 </p>
 
-                <div className="space-y-5 mb-10">
+                <div className="space-y-3 sm:space-y-4 lg:space-y-5 mb-8 sm:mb-9 lg:mb-10">
                   {benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-4 group">
-                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
-                        <Check className="h-6 w-6 text-primary" strokeWidth={2.5} />
+                    <div key={index} className="flex items-start gap-3 md:gap-4 group">
+                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-pink-500/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
+                        <Check className="h-5 w-5 sm:h-6 sm:w-6 text-primary" strokeWidth={2.5} />
                       </div>
-                      <p className="text-lg pt-2 text-gray-700 font-medium">{benefit}</p>
+                      <p className="text-base sm:text-lg pt-1.5 sm:pt-2 text-gray-700 font-medium">{benefit}</p>
                     </div>
                   ))}
                 </div>
 
-                <div className="glass-gradient p-7 rounded-3xl space-y-5 border-2 border-primary/10 shadow-xl">
-                  <div className="flex items-center gap-4 group cursor-pointer">
-                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
-                      <Mail className="h-6 w-6 text-primary" strokeWidth={2} />
+                <div className="glass-gradient p-5 sm:p-7 rounded-2xl sm:rounded-3xl space-y-4 sm:space-y-5 border-2 border-primary/10 shadow-xl">
+                  <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
+                      <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" strokeWidth={2} />
                     </div>
                     <div>
-                      <p className="font-bold text-gray-900 text-lg">Email Us</p>
-                      <p className="text-base text-primary font-medium">sales@pullse.com</p>
+                      <p className="font-bold text-gray-900 text-base sm:text-lg">Email Us</p>
+                      <p className="text-sm sm:text-base text-primary font-medium">sales@pullse.com</p>
                     </div>
                   </div>
                   <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-                  <div className="flex items-center gap-4 group cursor-pointer">
-                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
-                      <MessageSquare className="h-6 w-6 text-green-600" strokeWidth={2} />
+                  <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
+                      <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" strokeWidth={2} />
                     </div>
                     <div>
-                      <p className="font-bold text-gray-900 text-lg">Live Chat</p>
-                      <p className="text-base text-gray-600 font-medium">Available 9am-6pm EST</p>
+                      <p className="font-bold text-gray-900 text-base sm:text-lg">Live Chat</p>
+                      <p className="text-sm sm:text-base text-gray-600 font-medium">Available 9am-6pm EST</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Right Column - Multi-Step Form */}
-              <div className="glass-gradient p-10 rounded-[2rem] shadow-2xl border-2 border-primary/20 relative overflow-hidden">
+              <div className="glass-gradient p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-[2rem] shadow-2xl border-2 border-primary/20 relative overflow-hidden">
                 {/* Decorative gradient orbs */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl -z-10" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-500/10 to-primary/10 rounded-full blur-3xl -z-10" />
 
                 {/* Progress Indicator */}
-                <div className="mb-10">
-                  <div className="flex justify-between items-center mb-3">
+                <div className="mb-6 sm:mb-8 lg:mb-10">
+                  <div className="flex justify-between items-center mb-2 sm:mb-3">
                     {[1, 2, 3].map((step) => (
                       <div key={step} className="flex-1 text-center">
-                        <span className={`text-sm font-semibold transition-all duration-300 ${
+                        <span className={`text-xs sm:text-sm font-semibold transition-all duration-300 ${
                           currentStep === step ? 'text-primary' : currentStep > step ? 'text-green-600' : 'text-gray-400'
                         }`}>
                           Step {step}
@@ -456,7 +456,7 @@ const ContactSales = () => {
                   </div>
 
                   <div className="relative">
-                    <div className="h-3 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full overflow-hidden shadow-inner">
+                    <div className="h-2.5 sm:h-3 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full overflow-hidden shadow-inner">
                       <motion.div
                         className="h-full bg-gradient-to-r from-primary via-purple-600 to-pink-500"
                         initial={false}
@@ -467,7 +467,7 @@ const ContactSales = () => {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 lg:space-y-8">
                   <AnimatePresence mode="wait">
                     {StepContent}
                   </AnimatePresence>
@@ -480,17 +480,17 @@ const ContactSales = () => {
                   )}
 
                   {/* Navigation Buttons */}
-                  <div className="flex gap-4 pt-6">
+                  <div className="flex gap-3 sm:gap-4 pt-4 sm:pt-6">
                     {currentStep > 1 && (
                       <Button
                         type="button"
                         onClick={prevStep}
                         variant="outline"
                         size="lg"
-                        className="flex-1 h-16 text-base font-bold glass-elevated border-2 border-gray-300 hover:border-gray-400 hover:shadow-xl transition-all duration-300"
+                        className="flex-1 h-14 sm:h-16 text-sm sm:text-base font-bold glass-elevated border-2 border-gray-300 hover:border-gray-400 hover:shadow-xl transition-all duration-300"
                         disabled={isSubmitting}
                       >
-                        <ArrowLeft className="w-5 h-5 mr-2" strokeWidth={2.5} />
+                        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" strokeWidth={2.5} />
                         Back
                       </Button>
                     )}
@@ -500,26 +500,26 @@ const ContactSales = () => {
                         type="button"
                         onClick={nextStep}
                         size="lg"
-                        className="flex-1 h-16 text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+                        className="flex-1 h-14 sm:h-16 text-sm sm:text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
                       >
                         Next Step
-                        <ArrowRight className="w-5 h-5 ml-2" strokeWidth={2.5} />
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" strokeWidth={2.5} />
                       </Button>
                     ) : (
                       <Button
                         type="submit"
                         size="lg"
-                        className="flex-1 h-16 text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+                        className="flex-1 h-14 sm:h-16 text-sm sm:text-base font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-500 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-500/90 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
                           <>
-                            <Loader2 className="w-6 h-6 mr-2 animate-spin" strokeWidth={2.5} />
+                            <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-spin" strokeWidth={2.5} />
                             Submitting...
                           </>
                         ) : (
                           <>
-                            <Send className="w-5 h-5 mr-2" strokeWidth={2.5} />
+                            <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" strokeWidth={2.5} />
                             Book Demo
                           </>
                         )}

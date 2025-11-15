@@ -9,6 +9,8 @@ import { getSupabaseServer } from '@/lib/supabase-server';
 const NewsletterSchema = z.object({
   email: z.string().email('Invalid email address').toLowerCase(),
   source: z.string().max(50, 'Source too long').optional().default('blog'),
+  firstName: z.string().max(100, 'First name too long').trim().optional(),
+  lastName: z.string().max(100, 'Last name too long').trim().optional(),
 });
 
 type NewsletterInput = z.infer<typeof NewsletterSchema>;
@@ -21,6 +23,8 @@ interface NewsletterSubscriber {
   id?: string;
   email: string;
   source: string;
+  first_name?: string;
+  last_name?: string;
   subscribed_at?: string;
   is_active?: boolean;
 }
@@ -73,7 +77,7 @@ export async function POST(request: NextRequest) {
     // Check if email already exists
     const { data: existing, error: checkError } = await supabase
       .from('newsletter_subscribers')
-      .select('email, is_active')
+      .select('email, is_active, first_name, last_name')
       .eq('email', validatedData.email)
       .single();
 
@@ -87,6 +91,41 @@ export async function POST(request: NextRequest) {
 
     // If email exists and is active
     if (existing && existing.is_active) {
+      // Check if user is providing new name data
+      const hasNewData = validatedData.firstName || validatedData.lastName;
+
+      if (hasNewData) {
+        // Build update object with only provided fields
+        const updateData: Partial<NewsletterSubscriber> = {};
+
+        if (validatedData.firstName) updateData.first_name = validatedData.firstName;
+        if (validatedData.lastName) updateData.last_name = validatedData.lastName;
+
+        // Update the existing record with new name fields
+        const { error: updateError } = await supabase
+          .from('newsletter_subscribers')
+          .update(updateData)
+          .eq('email', validatedData.email);
+
+        if (updateError) {
+          console.error('Error updating subscriber:', updateError);
+          return NextResponse.json(
+            { error: 'Failed to update subscription details' },
+            { status: 500 }
+          );
+        }
+
+        return NextResponse.json(
+          {
+            message: 'Your subscription details have been updated!',
+            updated: true,
+            success: true
+          },
+          { status: 200 }
+        );
+      }
+
+      // No new data provided, just return already subscribed
       return NextResponse.json(
         {
           message: 'You are already subscribed to our newsletter!',
@@ -98,13 +137,20 @@ export async function POST(request: NextRequest) {
 
     // If email exists but was unsubscribed, reactivate it
     if (existing && !existing.is_active) {
+      const updateData: Partial<NewsletterSubscriber> = {
+        is_active: true,
+        subscribed_at: new Date().toISOString(),
+        source: validatedData.source,
+      };
+
+      if (validatedData.firstName) updateData.first_name = validatedData.firstName;
+      if (validatedData.lastName) updateData.last_name = validatedData.lastName;
+
       const { error: updateError } = await supabase
         .from('newsletter_subscribers')
         .update({
-          is_active: true,
-          subscribed_at: new Date().toISOString(),
+          ...updateData,
           unsubscribed_at: null,
-          source: validatedData.source,
         })
         .eq('email', validatedData.email);
 
@@ -130,6 +176,9 @@ export async function POST(request: NextRequest) {
       email: validatedData.email,
       source: validatedData.source,
     };
+
+    if (validatedData.firstName) subscriberData.first_name = validatedData.firstName;
+    if (validatedData.lastName) subscriberData.last_name = validatedData.lastName;
 
     const { error: insertError } = await supabase
       .from('newsletter_subscribers')

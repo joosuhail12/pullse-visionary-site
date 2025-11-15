@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
+
+const LiquidEther = lazy(() => import('@/components/LiquidEther'));
 import { Button } from '@/components/ui/button';
 import {
   ArrowRight,
@@ -152,58 +154,45 @@ const Compare = () => {
 
   return (
     <div className="min-h-screen scroll-smooth">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Hero Section */}
-      <div className="min-h-screen relative flex items-center justify-center pt-20 pb-32">
-        {/* Animated Gradient Blobs */}
-        <motion.div
-          className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/15 to-blue-500/15 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-          }}
-          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-pink-500/15 to-purple-500/15 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.25, 1],
-            x: [0, -60, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
+      <div className="min-h-[60vh] md:min-h-[80vh] lg:min-h-screen relative flex items-center justify-center pt-12 pb-20 md:pt-16 md:pb-28 lg:pt-20 lg:pb-32">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
 
         <div className="container mx-auto px-4 relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto text-center space-y-12"
+            className="max-w-4xl mx-auto text-center space-y-8 md:space-y-10 lg:space-y-12"
           >
             {/* Simplified Headline with Statement + Subtext */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="space-y-6"
+              className="space-y-4 md:space-y-5 lg:space-y-6"
             >
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tight text-black dark:text-white">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-black dark:text-white">
                 The First AI-Native Customer Support Platform
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 font-medium">
+              <p className="text-base md:text-lg lg:text-xl text-gray-500 dark:text-gray-400 font-medium">
                 Built for 2024, not retrofitted from 2010
               </p>
             </motion.div>
@@ -213,7 +202,7 @@ const Compare = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             >
               Pullse executes actions, not just answers. Built AI-native from day one.
             </motion.p>
@@ -223,16 +212,16 @@ const Compare = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" asChild className="relative group h-14 px-8 text-base">
+                <Button size="lg" asChild className="relative group h-12 md:h-14 px-6 md:px-8 text-sm md:text-base">
                   <Link href="/contact-sales">
                     <span className="relative z-10 font-bold">Experience AI-Native Support</span>
-                    <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 blur-xl"
                       animate={{
@@ -247,10 +236,10 @@ const Compare = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" variant="outline" asChild className="h-14 px-8 text-base border-2">
+                <Button size="lg" variant="outline" asChild className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base border-2">
                   <Link href="#comparison-table">
                     <span className="font-bold">See the Difference</span>
-                    <ChevronDown className="ml-2 h-5 w-5" />
+                    <ChevronDown className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </Link>
                 </Button>
               </motion.div>
@@ -261,7 +250,7 @@ const Compare = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
+              className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground"
             >
               {[
                 { icon: '⚡', text: 'Live in 10 minutes' },
@@ -272,7 +261,7 @@ const Compare = () => {
                   key={idx}
                   className="flex items-center gap-2"
                 >
-                  <span className="text-lg">
+                  <span className="text-base md:text-lg">
                     {item.icon}
                   </span>
                   <span className="font-medium">{item.text}</span>
@@ -283,7 +272,7 @@ const Compare = () => {
         </div>
 
         {/* Gradient Fade Transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       </div>
 
       {/* Page Content */}
@@ -294,10 +283,10 @@ const Compare = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-5xl mx-auto mb-16"
+          className="max-w-5xl mx-auto mb-12 md:mb-14 lg:mb-16"
         >
           <GlowCard
-            className="glass-strong p-6 md:p-8 rounded-3xl relative overflow-hidden"
+            className="glass-strong p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden"
             glowColor="132, 0, 255"
             glowIntensity={0.4}
             hoverElevation={true}
@@ -345,19 +334,19 @@ const Compare = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-6 relative z-10"
+              className="text-center mb-5 md:mb-6 relative z-10"
             >
-              <h3 className="text-xl md:text-2xl font-bold mb-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
                 Compare Pullse with:
               </h3>
               <motion.div
-                className="w-20 h-0.5 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-4"
+                className="w-16 md:w-20 h-0.5 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mb-3 md:mb-4"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               />
 
-              <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
                 {competitors.map((competitor, index) => (
                   <motion.button
                     key={competitor.id}
@@ -371,7 +360,7 @@ const Compare = () => {
                       y: -4
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 overflow-hidden shadow-lg"
+                    className="relative px-4 py-2 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg md:rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 overflow-hidden shadow-md md:shadow-lg"
                   >
                     {/* Animated Background for Active State */}
                     {selectedCompetitor === competitor.id && (
@@ -401,7 +390,7 @@ const Compare = () => {
                       </>
                     )}
                     {/* Button Content */}
-                    <span className={`relative z-10 text-base ${
+                    <span className={`relative z-10 text-sm md:text-base ${
                       selectedCompetitor === competitor.id
                         ? 'text-white'
                         : 'text-gray-800'
@@ -429,7 +418,7 @@ const Compare = () => {
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-4 relative z-10"
+                className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-3 md:mb-4 relative z-10"
               />
             )}
 
@@ -442,10 +431,10 @@ const Compare = () => {
                 transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 className="relative z-10"
               >
-                <div className="text-center mb-4">
+                <div className="text-center mb-3 md:mb-4">
                   {/* Title with animated gradient */}
                   <motion.h2
-                    className="text-xl md:text-2xl font-bold mb-1.5 relative inline-block"
+                    className="text-lg md:text-xl lg:text-2xl font-bold mb-1 md:mb-1.5 relative inline-block"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
@@ -463,7 +452,7 @@ const Compare = () => {
                     </span>
                   </motion.h2>
                   <motion.p
-                    className="text-sm text-muted-foreground mb-1"
+                    className="text-xs md:text-sm text-muted-foreground mb-1"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
@@ -471,7 +460,7 @@ const Compare = () => {
                     {currentCompetitor.tagline}
                   </motion.p>
                   <motion.p
-                    className="text-xs text-purple-600 font-medium"
+                    className="text-[10px] md:text-xs text-purple-600 font-medium"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
@@ -483,7 +472,7 @@ const Compare = () => {
                 {/* VS Badge */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                   <motion.div
-                    className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-2xl border-2 border-white"
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-600 flex items-center justify-center shadow-xl md:shadow-2xl border-2 border-white"
                     animate={{
                       boxShadow: [
                         '0 0 0 0 rgba(132, 0, 255, 0.4)',
@@ -493,14 +482,14 @@ const Compare = () => {
                     }}
                     transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <span className="text-lg font-black text-white">VS</span>
+                    <span className="text-base md:text-lg font-black text-white">VS</span>
                   </motion.div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-0 mb-4 relative z-10">
+                <div className="grid md:grid-cols-2 gap-0 mb-3 md:mb-4 relative z-10">
                   {/* Pullse Column with gradient background */}
                   <motion.div
-                    className="relative p-4 md:p-5 rounded-l-2xl overflow-hidden"
+                    className="relative p-3 md:p-4 lg:p-5 rounded-l-xl md:rounded-l-2xl overflow-hidden"
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
@@ -508,7 +497,7 @@ const Compare = () => {
                     {/* Purple gradient background */}
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 via-pink-500/10 to-transparent" />
                     <motion.div
-                      className="absolute top-0 right-0 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl"
+                      className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 bg-purple-400/20 rounded-full blur-3xl"
                       animate={{
                         scale: [1, 1.3, 1],
                         opacity: [0.3, 0.6, 0.3],
@@ -516,10 +505,10 @@ const Compare = () => {
                       transition={{ duration: 4, repeat: Infinity }}
                     />
 
-                    <div className="relative space-y-3">
-                      <div className="flex items-center gap-2.5 mb-4">
+                    <div className="relative space-y-2 md:space-y-2.5 lg:space-y-3">
+                      <div className="flex items-center gap-2 md:gap-2.5 mb-3 md:mb-4">
                         <motion.div
-                          className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg"
+                          className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-md md:shadow-lg"
                           animate={{
                             boxShadow: [
                               '0 0 0 0 rgba(132, 0, 255, 0.7)',
@@ -529,11 +518,11 @@ const Compare = () => {
                           }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          <Check className="w-4 h-4 text-white" />
+                          <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                         </motion.div>
                         <div>
-                          <h3 className="text-lg font-bold">Why Choose Pullse</h3>
-                          <span className="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-semibold">
+                          <h3 className="text-base md:text-lg font-bold">Why Choose Pullse</h3>
+                          <span className="text-[9px] md:text-[10px] bg-purple-100 text-purple-700 px-1.5 md:px-2 py-0.5 rounded-full font-semibold">
                             AI-Native
                           </span>
                         </div>
@@ -547,12 +536,12 @@ const Compare = () => {
                           whileHover={{
                             x: 2,
                           }}
-                          className="flex gap-3 p-3 rounded-xl bg-white/50 backdrop-blur-sm border border-purple-100/50 shadow-sm group cursor-pointer hover:shadow-md hover:border-purple-300 transition-all"
+                          className="flex gap-2 md:gap-2.5 lg:gap-3 p-2 md:p-2.5 lg:p-3 rounded-lg md:rounded-xl bg-white/50 backdrop-blur-sm border border-purple-100/50 shadow-sm group cursor-pointer hover:shadow-md hover:border-purple-300 transition-all"
                         >
-                          <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-md">
-                            <Check className="w-3.5 h-3.5 text-white" />
+                          <div className="w-4 h-4 md:w-5 md:h-5 rounded-md md:rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-sm md:shadow-md">
+                            <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-white" />
                           </div>
-                          <p className="text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors leading-relaxed">{reason}</p>
+                          <p className="text-xs md:text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors leading-relaxed">{reason}</p>
                         </motion.div>
                       ))}
                     </div>
@@ -563,7 +552,7 @@ const Compare = () => {
 
                   {/* Competitor Column with different gradient */}
                   <motion.div
-                    className="relative p-4 md:p-5 rounded-r-2xl overflow-hidden"
+                    className="relative p-3 md:p-4 lg:p-5 rounded-r-xl md:rounded-r-2xl overflow-hidden"
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, type: 'spring' }}
@@ -571,7 +560,7 @@ const Compare = () => {
                     {/* Gray/Blue gradient background */}
                     <div className="absolute inset-0 bg-gradient-to-bl from-gray-200/40 via-blue-100/30 to-transparent" />
                     <motion.div
-                      className="absolute bottom-0 left-0 w-48 h-48 bg-blue-300/15 rounded-full blur-3xl"
+                      className="absolute bottom-0 left-0 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 bg-blue-300/15 rounded-full blur-3xl"
                       animate={{
                         scale: [1, 1.2, 1],
                         opacity: [0.2, 0.4, 0.2],
@@ -579,22 +568,22 @@ const Compare = () => {
                       transition={{ duration: 5, repeat: Infinity }}
                     />
 
-                    <div className="relative space-y-3">
-                      <div className="flex items-center gap-2.5 mb-4">
+                    <div className="relative space-y-2 md:space-y-2.5 lg:space-y-3">
+                      <div className="flex items-center gap-2 md:gap-2.5 mb-3 md:mb-4">
                         <motion.div
-                          className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center shadow-lg"
+                          className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center shadow-md md:shadow-lg"
                           animate={{
                             scale: [1, 1.1, 1],
                           }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
-                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                           </svg>
                         </motion.div>
                         <div>
-                          <h3 className="text-lg font-bold">{currentCompetitor.name} Strengths</h3>
-                          <span className="text-[10px] bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full font-semibold">
+                          <h3 className="text-base md:text-lg font-bold">{currentCompetitor.name} Strengths</h3>
+                          <span className="text-[9px] md:text-[10px] bg-gray-200 text-gray-700 px-1.5 md:px-2 py-0.5 rounded-full font-semibold">
                             Established
                           </span>
                         </div>
@@ -602,22 +591,22 @@ const Compare = () => {
 
                     {currentCompetitor.strengths && (
                       <motion.div
-                        className="p-3 bg-blue-50 rounded-xl border border-blue-200 mb-3 relative overflow-hidden"
+                        className="p-2 md:p-2.5 lg:p-3 bg-blue-50 rounded-lg md:rounded-xl border border-blue-200 mb-2 md:mb-2.5 lg:mb-3 relative overflow-hidden"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
                       >
-                        <p className="text-[10px] text-blue-600 font-semibold mb-1.5 uppercase">Where {currentCompetitor.name} Excels</p>
-                        <ul className="space-y-1.5">
+                        <p className="text-[9px] md:text-[10px] text-blue-600 font-semibold mb-1 md:mb-1.5 uppercase">Where {currentCompetitor.name} Excels</p>
+                        <ul className="space-y-1 md:space-y-1.5">
                           {currentCompetitor.strengths.map((strength, idx) => (
                             <motion.li
                               key={idx}
-                              className="flex items-center gap-2 text-sm text-blue-900"
+                              className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-blue-900"
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.8 + idx * 0.1 }}
                             >
-                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                              <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
                               {strength}
                             </motion.li>
                           ))}
@@ -626,23 +615,23 @@ const Compare = () => {
                     )}
 
                     <motion.div
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-200"
+                      className="p-2.5 md:p-3 lg:p-4 bg-gray-50 rounded-lg md:rounded-xl border border-gray-200"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.9 }}
                     >
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-[10px] md:text-xs text-gray-600 mb-1.5 md:mb-2">
                         <strong>Pricing Reality:</strong>
                       </p>
-                      <p className="text-sm text-gray-700 mb-3">
+                      <p className="text-xs md:text-sm text-gray-700 mb-2 md:mb-3">
                         {currentCompetitor.pricingNote}
                       </p>
                       {currentCompetitor.whenToChoose && (
                         <>
-                          <p className="text-xs text-gray-600 mb-1.5">
+                          <p className="text-[10px] md:text-xs text-gray-600 mb-1 md:mb-1.5">
                             <strong>When to Choose {currentCompetitor.name}:</strong>
                           </p>
-                          <p className="text-sm text-gray-700">
+                          <p className="text-xs md:text-sm text-gray-700">
                             {currentCompetitor.whenToChoose}
                           </p>
                         </>
@@ -653,7 +642,7 @@ const Compare = () => {
                 </div>
 
                 <motion.div
-                  className="pt-3 border-t border-gray-200 text-center relative z-10"
+                  className="pt-2.5 md:pt-3 border-t border-gray-200 text-center relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
@@ -662,10 +651,10 @@ const Compare = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button size="default" asChild className="relative group overflow-hidden">
+                    <Button size="default" asChild className="relative group overflow-hidden h-10 md:h-11 px-4 md:px-5 text-sm md:text-base">
                       <Link href="/contact-sales">
                         <span className="relative z-10">Compare Pricing for Your Team</span>
-                        <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                         {/* Pulsing glow effect */}
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-md opacity-0 group-hover:opacity-100 blur-xl"
@@ -689,15 +678,15 @@ const Compare = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-5xl mx-auto mb-20"
+            className="max-w-5xl mx-auto mb-14 md:mb-16 lg:mb-20"
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 md:mb-10 lg:mb-12">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl font-bold mb-4"
+                className="text-3xl md:text-4xl font-bold mb-3 md:mb-4"
               >
                 AI That <motion.span
                   className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent inline-block"
@@ -710,13 +699,13 @@ const Compare = () => {
                   }}
                 >Executes</motion.span>, Not Just Answers
               </motion.h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
                 Most support AI just deflects questions or suggests responses.
                 Pullse's agentic AI actually completes tasks across your entire stack.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 relative">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative">
               {/* VS Indicator */}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
@@ -732,8 +721,8 @@ const Compare = () => {
                     }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-green-600 to-gray-600 flex items-center justify-center shadow-xl border-2 border-white">
-                    <span className="text-lg font-black text-white">VS</span>
+                  <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-green-600 to-gray-600 flex items-center justify-center shadow-lg md:shadow-xl border-2 border-white">
+                    <span className="text-base md:text-lg font-black text-white">VS</span>
                   </div>
                 </div>
               </motion.div>
@@ -746,14 +735,14 @@ const Compare = () => {
                 transition={{ duration: 0.6, type: 'spring' }}
               >
                 <GlowCard
-                  className="glass-strong p-8 rounded-2xl border-2 border-green-500/30 relative overflow-hidden h-full"
+                  className="glass-strong p-5 md:p-6 lg:p-8 rounded-xl md:rounded-2xl border-2 border-green-500/30 relative overflow-hidden h-full"
                   glowColor="34, 197, 94"
                   glowIntensity={0.6}
                   hoverElevation={true}
                 >
                   {/* Animated Background Gradient */}
                   <motion.div
-                    className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full blur-2xl"
+                    className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-green-500/10 rounded-full blur-2xl"
                     animate={{
                       scale: [1, 1.3, 1],
                       x: [0, 20, 0],
@@ -764,7 +753,7 @@ const Compare = () => {
 
                   {/* Floating Badge */}
                   <motion.div
-                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-600 text-white text-xs font-bold shadow-lg"
+                    className="absolute top-3 right-3 md:top-4 md:right-4 px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-green-600 text-white text-[10px] md:text-xs font-bold shadow-md md:shadow-lg"
                     animate={{
                       y: [0, -5, 0],
                     }}
@@ -773,21 +762,21 @@ const Compare = () => {
                     ✓ Executes
                   </motion.div>
 
-                  <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <div className="flex items-center gap-2.5 md:gap-3 mb-5 md:mb-6 relative z-10">
                     <motion.div
-                      className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <Check className="w-6 h-6 text-white" />
+                      <Check className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </motion.div>
                     <div>
-                      <h3 className="text-xl font-bold text-green-600">Pullse AI</h3>
-                      <p className="text-sm text-muted-foreground">Executes actions autonomously</p>
+                      <h3 className="text-lg md:text-xl font-bold text-green-600">Pullse AI</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground">Executes actions autonomously</p>
                     </div>
                   </div>
 
-                  <div className="space-y-4 relative z-10">
+                  <div className="space-y-3 md:space-y-4 relative z-10">
                     {[
                       { title: 'Process refunds across Stripe/PayPal', desc: 'AI executes the refund, not just tells you how' },
                       { title: 'Look up orders in Shopify/WooCommerce', desc: 'Real-time data pulled and displayed automatically' },
@@ -802,7 +791,7 @@ const Compare = () => {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
                         whileHover={{ x: 5 }}
-                        className="flex gap-3 items-start p-3 rounded-lg hover:bg-green-50/50 transition-colors group"
+                        className="flex gap-2 md:gap-2.5 lg:gap-3 items-start p-2 md:p-2.5 lg:p-3 rounded-md md:rounded-lg hover:bg-green-50/50 transition-colors group"
                       >
                         <motion.div
                           animate={{
@@ -814,11 +803,11 @@ const Compare = () => {
                             delay: index * 0.2
                           }}
                         >
-                          <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 flex-shrink-0 mt-0.5" />
                         </motion.div>
                         <div>
-                          <p className="font-medium text-gray-900 group-hover:text-green-600 transition-colors">{item.title}</p>
-                          <p className="text-sm text-muted-foreground">{item.desc}</p>
+                          <p className="text-sm md:text-base font-medium text-gray-900 group-hover:text-green-600 transition-colors">{item.title}</p>
+                          <p className="text-xs md:text-sm text-muted-foreground">{item.desc}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -834,14 +823,14 @@ const Compare = () => {
                 transition={{ duration: 0.6, type: 'spring' }}
               >
                 <GlowCard
-                  className="glass-strong p-8 rounded-2xl border-2 border-gray-300 relative overflow-hidden h-full"
+                  className="glass-strong p-5 md:p-6 lg:p-8 rounded-xl md:rounded-2xl border-2 border-gray-300 relative overflow-hidden h-full"
                   glowColor="156, 163, 175"
                   glowIntensity={0.3}
                   hoverElevation={true}
                 >
                   {/* Floating Badge */}
                   <motion.div
-                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gray-400 text-white text-xs font-bold shadow-lg"
+                    className="absolute top-3 right-3 md:top-4 md:right-4 px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-gray-400 text-white text-[10px] md:text-xs font-bold shadow-md md:shadow-lg"
                     animate={{
                       y: [0, -5, 0],
                     }}
@@ -850,17 +839,17 @@ const Compare = () => {
                     ✗ Answer Only
                   </motion.div>
 
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center">
-                      <MessageSquare className="w-6 h-6 text-white" />
+                  <div className="flex items-center gap-2.5 md:gap-3 mb-5 md:mb-6">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gray-400 flex items-center justify-center">
+                      <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-700">Most Competitors</h3>
-                      <p className="text-sm text-muted-foreground">Answer or suggest only</p>
+                      <h3 className="text-lg md:text-xl font-bold text-gray-700">Most Competitors</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground">Answer or suggest only</p>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     {[
                       { title: 'Chatbot deflects to help articles', desc: 'Customer still needs agent for actual help' },
                       { title: 'Copilot suggests reply text', desc: 'Agent must manually execute actions in other systems' },
@@ -874,12 +863,12 @@ const Compare = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex gap-3 items-start p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex gap-2 md:gap-2.5 lg:gap-3 items-start p-2 md:p-2.5 lg:p-3 rounded-md md:rounded-lg hover:bg-gray-50 transition-colors"
                       >
-                        <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                        <X className="w-4 h-4 md:w-5 md:h-5 text-gray-400 flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-medium text-gray-700">{item.title}</p>
-                          <p className="text-sm text-muted-foreground">{item.desc}</p>
+                          <p className="text-sm md:text-base font-medium text-gray-700">{item.title}</p>
+                          <p className="text-xs md:text-sm text-muted-foreground">{item.desc}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -896,14 +885,14 @@ const Compare = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             id="comparison-table"
-            className="max-w-7xl mx-auto mb-20"
+            className="max-w-7xl mx-auto mb-14 md:mb-16 lg:mb-20"
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 md:mb-10 lg:mb-12">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-4xl font-bold mb-4"
+                className="text-3xl md:text-4xl font-bold mb-3 md:mb-4"
               >
                 Feature Comparison
               </motion.h2>
@@ -912,12 +901,12 @@ const Compare = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-lg text-muted-foreground"
+                className="text-base md:text-lg text-muted-foreground"
               >
                 See how Pullse stacks up across all key features
               </motion.p>
             </div>
-            <div className="glass-strong p-8 rounded-3xl">
+            <div className="glass-strong p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl">
               <ComparisonTable />
             </div>
           </motion.div>
@@ -930,18 +919,18 @@ const Compare = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-5xl mx-auto mb-16"
+            className="max-w-5xl mx-auto mb-12 md:mb-14 lg:mb-16"
           >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            <div className="text-center mb-6 md:mb-7 lg:mb-8">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3">
                 Simple Setup, Powerful Results
               </h2>
-              <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
                 Get started in minutes with an intuitive platform anyone can use
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-3 md:gap-4">
               {migrationFeatures.map((feature, index) => {
                 const iconMap = {
                   zap: Zap,
@@ -959,21 +948,21 @@ const Compare = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                    className="glass-strong p-5 rounded-2xl relative overflow-hidden group cursor-default"
+                    className="glass-strong p-4 md:p-5 rounded-xl md:rounded-2xl relative overflow-hidden group cursor-default"
                   >
                     {/* Gradient hover effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <div className="flex items-start gap-4 relative z-10">
+                    <div className="flex items-start gap-3 md:gap-4 relative z-10">
                       <motion.div
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-lg"
+                        className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-md md:shadow-lg"
                       >
-                        <IconComponent className="w-6 h-6 text-white" />
+                        <IconComponent className="w-5 h-5 md:w-6 md:h-6 text-white" />
                       </motion.div>
                       <div className="flex-1">
-                        <h3 className="text-base font-bold mb-1.5 group-hover:text-green-600 transition-colors">{feature.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <h3 className="text-sm md:text-base font-bold mb-1 md:mb-1.5 group-hover:text-green-600 transition-colors">{feature.title}</h3>
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
@@ -985,16 +974,16 @@ const Compare = () => {
           </motion.div>
 
           {/* Pricing Calculator Section */}
-          <div className="max-w-7xl mx-auto mb-20">
+          <div className="max-w-7xl mx-auto mb-14 md:mb-16 lg:mb-20">
             <GlowCard
-              className="glass-strong p-10 rounded-3xl"
+              className="glass-strong p-5 md:p-7 lg:p-10 rounded-2xl md:rounded-3xl"
               glowColor="132, 0, 255"
               glowIntensity={0.5}
               hoverElevation={true}
             >
-              <div className="grid lg:grid-cols-12 gap-6 items-start">
+              <div className="grid lg:grid-cols-12 gap-5 md:gap-6 items-start">
                 {/* Left: Controls Column */}
-                <div className="lg:col-span-5 space-y-5">
+                <div className="lg:col-span-5 space-y-4 md:space-y-5">
                   {/* Header */}
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -1012,7 +1001,7 @@ const Compare = () => {
                         Pricing Calculator
                       </span>
                     </motion.div>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-2 tracking-tight leading-tight">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 tracking-tight leading-tight">
                       <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
                         Compare the real cost
                       </span>
@@ -1508,26 +1497,26 @@ const Compare = () => {
           </div>
 
           {/* FAQ Section */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">
+          <div className="max-w-6xl mx-auto mb-14 md:mb-16 lg:mb-20">
+            <div className="text-center mb-8 md:mb-10 lg:mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">
                 Frequently Asked Questions
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-base md:text-lg text-muted-foreground">
                 Everything you need to know about switching to Pullse
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-5 md:gap-6">
               {faqCategories.map((categoryGroup, catIndex) => (
                 <motion.div
                   key={categoryGroup.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: catIndex * 0.1 }}
-                  className="space-y-4"
+                  className="space-y-3 md:space-y-4"
                 >
-                  <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <h3 className="text-base md:text-lg font-semibold text-gray-900 flex items-center gap-2">
                     <span>{categoryGroup.icon}</span>
                     {categoryGroup.category}
                   </h3>
@@ -1536,14 +1525,14 @@ const Compare = () => {
                     <Accordion key={index} type="single" collapsible>
                       <AccordionItem
                         value={`item-${index}`}
-                        className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-2xl px-6 shadow-sm hover:shadow-md transition-shadow"
+                        className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-xl md:rounded-2xl px-4 md:px-6 shadow-sm hover:shadow-md transition-shadow"
                       >
-                        <AccordionTrigger className="text-left hover:no-underline py-5">
-                          <span className="text-base font-semibold text-gray-900 pr-4">
+                        <AccordionTrigger className="text-left hover:no-underline py-4 md:py-5">
+                          <span className="text-sm md:text-base font-semibold text-gray-900 pr-3 md:pr-4">
                             {faq.question}
                           </span>
                         </AccordionTrigger>
-                        <AccordionContent className="text-gray-700 text-sm leading-relaxed pb-5">
+                        <AccordionContent className="text-gray-700 text-xs md:text-sm leading-relaxed pb-4 md:pb-5">
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -1561,14 +1550,14 @@ const Compare = () => {
             className="max-w-4xl mx-auto"
           >
             <GlowCard
-              className="glass-strong p-12 rounded-3xl text-center relative overflow-hidden"
+              className="glass-strong p-6 md:p-8 lg:p-12 rounded-2xl md:rounded-3xl text-center relative overflow-hidden"
               glowColor="132, 0, 255"
               glowIntensity={0.7}
               hoverElevation={true}
             >
               {/* Animated Mesh Gradient Background */}
               <motion.div
-                className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
+                className="absolute top-0 right-0 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 bg-purple-500/20 rounded-full blur-3xl"
                 animate={{
                   scale: [1, 1.2, 1],
                   x: [0, 30, 0],
@@ -1577,7 +1566,7 @@ const Compare = () => {
                 transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl"
+                className="absolute bottom-0 left-0 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 bg-pink-500/20 rounded-full blur-3xl"
                 animate={{
                   scale: [1, 1.3, 1],
                   x: [0, -30, 0],
@@ -1586,7 +1575,7 @@ const Compare = () => {
                 transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+                className="absolute top-1/2 left-1/2 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 bg-blue-500/15 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
                 animate={{
                   scale: [1, 1.1, 1],
                   rotate: [0, 180, 360],
@@ -1596,7 +1585,7 @@ const Compare = () => {
 
               <div className="relative z-10">
                 <motion.h2
-                  className="text-3xl md:text-4xl font-bold mb-4"
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4"
                   animate={{
                     scale: [1, 1.02, 1],
                   }}
@@ -1604,19 +1593,19 @@ const Compare = () => {
                 >
                   Ready to See Pullse in Action?
                 </motion.h2>
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-7 lg:mb-8">
                   Built for teams ready to make the switch
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button size="lg" asChild className="relative group">
+                    <Button size="lg" asChild className="relative group h-11 md:h-12 px-5 md:px-6 text-sm md:text-base">
                       <Link href="/contact-sales">
                         <span className="relative z-10">Book a Demo</span>
-                        <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-md opacity-0 group-hover:opacity-100 blur-lg transition-opacity"
                           animate={{
@@ -1631,18 +1620,18 @@ const Compare = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button size="lg" variant="outline" asChild>
+                    <Button size="lg" variant="outline" asChild className="h-11 md:h-12 px-5 md:px-6 text-sm md:text-base">
                       <Link href="/pricing">View Pricing</Link>
                     </Button>
                   </motion.div>
                 </div>
 
                 {/* Enhanced Trust badges with Sequential Animation */}
-                <div className="mt-8 flex flex-wrap gap-4 justify-center text-sm text-muted-foreground">
+                <div className="mt-6 md:mt-7 lg:mt-8 flex flex-wrap gap-3 md:gap-4 justify-center text-xs md:text-sm text-muted-foreground">
                   {['14-day free trial', 'No credit card required', 'Cancel anytime'].map((text, index) => (
                     <motion.div
                       key={text}
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-1.5 md:gap-2"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
@@ -1657,7 +1646,7 @@ const Compare = () => {
                           delay: index * 0.3
                         }}
                       >
-                        <Check className="w-4 h-4 text-green-500" />
+                        <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-500" />
                       </motion.div>
                       <span>{text}</span>
                     </motion.div>

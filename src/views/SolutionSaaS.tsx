@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
 import WorkflowShowcase from "@/components/WorkflowShowcase";
 import RoiCalculator from "@/components/RoiCalculator";
@@ -186,7 +188,7 @@ const SolutionSaaS = () => {
 
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
@@ -198,41 +200,57 @@ const SolutionSaaS = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-16 md:pt-20">
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
         <div className="container relative mx-auto px-4 w-full">
           <div className="max-w-[1400px] mx-auto">
             {/* Header Content */}
-            <div className="text-center space-y-8">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
+            <div className="text-center space-y-6 md:space-y-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
                 Your agents are switching between 10 tabs for one refund.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-3">
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2 md:mt-3">
                   Type one sentence. Pullse handles the rest.
                 </span>
               </h1>
 
-              <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
                 AI that connects your entire stack—Stripe, Jira, Salesforce, Slack—so your agents ask in plain English and Pullse executes instantly. No more tool-hopping. No more context-switching. Just fast, accurate resolutions.
               </p>
 
               {/* CTA */}
-              <div className="pt-6">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-6 shadow-xl shadow-primary/20 group">
+              <div className="pt-4 md:pt-6">
+                <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 shadow-xl shadow-primary/20 group">
                   Book a demo
-                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
                 </RouteButton>
               </div>
 
               {/* Trust Signals */}
-              <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 pt-6 text-base text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
+              <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-3 md:gap-y-4 pt-4 md:pt-6 text-sm md:text-base text-muted-foreground">
+                <div className="flex items-center gap-1.5 md:gap-2">
+                  <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
                   <span>Live in 2 weeks</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                <div className="flex items-center gap-1.5 md:gap-2">
+                  <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
                   <span>No credit card</span>
                 </div>
               </div>
@@ -243,10 +261,10 @@ const SolutionSaaS = () => {
 
 
       {/* Stats Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-b from-muted/10 to-transparent">
+      <section className="relative py-14 md:py-20 lg:py-28 bg-gradient-to-b from-muted/10 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-[1400px] mx-auto">
-            <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
               {[
                 { value: 100, suffix: 'ms', label: 'Response time', detail: 'sub-100ms latency', icon: Zap },
                 { value: 8, suffix: 's', label: 'Avg execution', detail: 'from ask to done', icon: Clock },
@@ -259,14 +277,14 @@ const SolutionSaaS = () => {
                     key={i}
                     className="group relative text-center"
                   >
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-7 w-7 text-primary" />
+                    <div className="inline-flex h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-lg md:rounded-xl bg-primary/10 border border-primary/20 mb-4 md:mb-5 lg:mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-5 w-5 md:h-6 md:w-6 lg:h-7 lg:w-7 text-primary" />
                     </div>
-                    <div className="text-5xl md:text-6xl font-black text-foreground mb-3">
+                    <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-2 md:mb-3">
                       <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} />
                     </div>
-                    <div className="text-sm font-bold text-foreground mb-1">{stat.label}</div>
-                    <div className="text-xs text-muted-foreground">{stat.detail}</div>
+                    <div className="text-xs md:text-sm font-bold text-foreground mb-0.5 md:mb-1">{stat.label}</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground">{stat.detail}</div>
                   </div>
                 );
               })}
@@ -276,58 +294,58 @@ const SolutionSaaS = () => {
       </section>
 
       {/* 3 Pillars Section */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Three ways to execute actions
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Autonomous execution, agent-assisted actions, and quality assurance—all working together
               </p>
             </div>
 
             {/* Pillar Cards */}
-            <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-8 md:mb-10 lg:mb-12">
               {pillars.map((pillar, index) => {
                 const Icon = pillar.icon;
                 return (
-                  <div key={index} className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
+                  <div key={index} className="group relative overflow-hidden rounded-2xl md:rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
                     <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-0 transition-opacity group-hover:opacity-5`} />
 
-                    <div className="relative p-8 space-y-6">
+                    <div className="relative p-5 md:p-6 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6">
                       {/* Icon & Badge */}
                       <div className="flex items-start justify-between">
-                        <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg transition-all group-hover:scale-110`}>
-                          <Icon className="h-8 w-8 text-background" />
+                        <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg transition-all group-hover:scale-110`}>
+                          <Icon className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-background" />
                         </div>
-                        <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase">
+                        <div className="px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-bold uppercase">
                           {pillar.subtitle}
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className="space-y-3">
-                        <h3 className="text-2xl font-bold text-foreground">{pillar.title}</h3>
-                        <p className="text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
+                      <div className="space-y-2 md:space-y-3">
+                        <h3 className="text-xl md:text-2xl font-bold text-foreground">{pillar.title}</h3>
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
                       </div>
 
                       {/* Stat */}
-                      <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-                        <div className={`text-5xl font-black bg-gradient-to-r ${pillar.color} bg-clip-text text-transparent mb-2`}>
+                      <div className="p-4 md:p-5 lg:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+                        <div className={`text-4xl md:text-5xl font-black bg-gradient-to-r ${pillar.color} bg-clip-text text-transparent mb-1.5 md:mb-2`}>
                           {pillar.stat}
                         </div>
-                        <div className="text-sm text-foreground/80">{pillar.statLabel}</div>
+                        <div className="text-xs md:text-sm text-foreground/80">{pillar.statLabel}</div>
                       </div>
 
                       {/* Features */}
-                      <div className="space-y-3 pt-4 border-t border-border/40">
+                      <div className="space-y-2 md:space-y-3 pt-3 md:pt-4 border-t border-border/40">
                         {pillar.features.map((feature, fIndex) => (
-                          <div key={fIndex} className="flex items-start gap-3">
-                            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <p className="text-sm text-foreground/80">{feature}</p>
+                          <div key={fIndex} className="flex items-start gap-2 md:gap-3">
+                            <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary mt-0.5 shrink-0" />
+                            <p className="text-xs md:text-sm text-foreground/80">{feature}</p>
                           </div>
                         ))}
                       </div>
@@ -341,7 +359,7 @@ const SolutionSaaS = () => {
       </section>
 
       {/* Visual Workflow Race */}
-      <section ref={raceRef} className="relative py-24 md:py-32 overflow-hidden">
+      <section ref={raceRef} className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-transparent to-muted/10" />
 
         <div className="container relative mx-auto px-4">
@@ -757,7 +775,7 @@ const SolutionSaaS = () => {
       </section>
 
       {/* Real SaaS Workflows Section */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -849,7 +867,7 @@ const SolutionSaaS = () => {
       </section>
 
       {/* Integrations Section */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
@@ -928,15 +946,15 @@ const SolutionSaaS = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
-            <div className="text-center mb-12 space-y-6">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <div className="text-center mb-8 md:mb-10 lg:mb-12 space-y-4 md:space-y-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight">
                 See your savings in 60 seconds
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Calculate exactly how much Pullse saves your team with 70% automation and 20x faster execution
               </p>
             </div>
@@ -955,7 +973,7 @@ const SolutionSaaS = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-24 md:py-32">
+      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">

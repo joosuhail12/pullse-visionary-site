@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -302,7 +304,7 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
-      <PageLiquidBackground opacity={0.2} />
+      <PageLiquidBackground opacity={0.35} />
 
       {/* Scroll Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
@@ -315,7 +317,7 @@ const Product = () => {
       <Navigation />
 
       {/* Modern Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 sm:pt-24 md:pt-40 pb-12 sm:pb-16 md:pb-32 overflow-hidden">
         {/* Enhanced gradient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
@@ -323,10 +325,26 @@ const Product = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
 
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         <div className="container relative mx-auto px-4">
           <div className="grid lg:grid-cols-[1.1fr,1fr] gap-16 items-center max-w-7xl mx-auto">
             {/* Left: Content */}
-            <div className="space-y-10">
+            <div className="space-y-6 md:space-y-10">
               {/* Badge */}
               <div className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-sm">
                 <div className="flex h-2 w-2">
@@ -338,11 +356,11 @@ const Product = () => {
 
               {/* Headline */}
               <div className="space-y-6">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] tracking-tight">
                   Support platform
                   <span className="block text-primary">built for AI</span>
                 </h1>
-                <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
+                <p className="text-base sm:text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
                   The only platform where inbox, workflows, AI agents, and analytics work as one. Built for teams who need control, not chaos.
                 </p>
               </div>
@@ -356,31 +374,31 @@ const Product = () => {
               </div>
 
               {/* Trust metrics */}
-              <div className="flex flex-wrap gap-8 pt-4">
+              <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 pt-2 md:pt-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <Database className="h-6 w-6 text-primary" />
+                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                    <Database className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">7 in 1</div>
+                    <div className="text-xl md:text-2xl font-bold text-foreground">7 in 1</div>
                     <div className="text-xs text-muted-foreground">Products unified</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <TrendingUp className="h-6 w-6 text-primary" />
+                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                    <TrendingUp className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">80%</div>
+                    <div className="text-xl md:text-2xl font-bold text-foreground">80%</div>
                     <div className="text-xs text-muted-foreground">Avg automation</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <Zap className="h-6 w-6 text-primary" />
+                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                    <Zap className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-foreground">2-4 wk</div>
+                    <div className="text-xl md:text-2xl font-bold text-foreground">2-4 wk</div>
                     <div className="text-xs text-muted-foreground">To production</div>
                   </div>
                 </div>
@@ -441,18 +459,18 @@ const Product = () => {
       <InteractiveHowItWorks />
 
       {/* Core Products - Modern Showcase */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-transparent to-muted/10" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-24 space-y-6 fade-in-up">
+            <div className="text-center mb-12 md:mb-16 lg:mb-24 space-y-4 md:space-y-6 fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
                 <Sparkles className="h-4 w-4 text-primary" />
                 <span className="text-xs font-semibold tracking-wide text-primary">Core Products</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
                 Seven products that feel like one
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -461,7 +479,7 @@ const Product = () => {
             </div>
 
             {/* Products Grid - Alternating */}
-            <div className="space-y-32">
+            <div className="space-y-16 md:space-y-24 lg:space-y-32">
               {coreProducts.map((product, index) => {
                 const Icon = product.icon;
                 const isEven = index % 2 === 0;
@@ -470,11 +488,11 @@ const Product = () => {
                   <div key={product.id} className="relative fade-in-up" style={{ transitionDelay: `${index * 100}ms` }}>
                     <div className={`grid lg:grid-cols-2 gap-16 items-center ${!isEven ? "lg:direction-rtl" : ""}`}>
                       {/* Content Side */}
-                      <div className={`space-y-8 ${!isEven ? "lg:direction-ltr lg:text-right" : ""}`}>
+                      <div className={`space-y-4 md:space-y-6 lg:space-y-8 ${!isEven ? "lg:direction-ltr lg:text-right" : ""}`}>
                         {/* Badge & Icon */}
                         <div className={`flex items-center gap-4 ${!isEven ? "lg:flex-row-reverse lg:justify-end" : ""}`}>
-                          <div className={`flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${product.gradient} border border-${product.accentColor}-500/30 shadow-xl`}>
-                            <Icon className={`h-10 w-10 text-${product.accentColor}-500`} />
+                          <div className={`flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${product.gradient} border border-${product.accentColor}-500/30 shadow-xl`}>
+                            <Icon className={`h-8 w-8 md:h-10 md:w-10 text-${product.accentColor}-500`} />
                           </div>
                           <div className="text-xs font-bold uppercase tracking-wider text-primary">
                             {product.badge}
@@ -483,10 +501,10 @@ const Product = () => {
 
                         {/* Text Content */}
                         <div className="space-y-4">
-                          <h3 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                          <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground leading-tight">
                             {product.title}
                           </h3>
-                          <p className="text-xl font-semibold text-foreground/70">
+                          <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground/70">
                             {product.headline}
                           </p>
                           <p className="text-base text-muted-foreground leading-relaxed max-w-xl">
@@ -495,11 +513,11 @@ const Product = () => {
                         </div>
 
                         {/* Enhanced Features List */}
-                        <div className="space-y-4">
+                        <div className="space-y-2 md:space-y-3 lg:space-y-4">
                           {product.features.map((feature, fIndex) => (
                             <div
                               key={fIndex}
-                              className={`group flex items-start gap-4 rounded-xl border border-border/40 bg-background/60 p-4 transition-all hover:border-primary/40 hover:bg-primary/5 ${!isEven ? "lg:flex-row-reverse lg:text-right" : ""}`}
+                              className={`group flex items-start gap-2 md:gap-3 lg:gap-4 rounded-xl border border-border/40 bg-background/60 p-3 md:p-4 transition-all hover:border-primary/40 hover:bg-primary/5 ${!isEven ? "lg:flex-row-reverse lg:text-right" : ""}`}
                             >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 shrink-0 transition-all group-hover:scale-110 group-hover:bg-primary/20">
                                 <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -563,18 +581,18 @@ const Product = () => {
       </section>
 
       {/* Integration Ecosystem - Modern Grid */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/10 to-transparent" />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
                 <Globe className="h-4 w-4 text-primary" />
                 <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Execute actions across your entire business stack
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -583,7 +601,7 @@ const Product = () => {
             </div>
 
             {/* Category Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-12">
               {integrationCategories.map((category, index) => {
                 const Icon = category.icon;
                 return (
@@ -594,11 +612,11 @@ const Product = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 transition-opacity group-hover:opacity-100`} />
 
-                    <div className="relative p-8 space-y-6">
+                    <div className="relative p-4 md:p-6 lg:p-8 space-y-4 md:space-y-6">
                       {/* Icon & Header */}
                       <div className="flex items-center gap-4">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/20">
-                          <Icon className="h-7 w-7 text-primary" />
+                        <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/20">
+                          <Icon className="h-6 w-6 md:h-7 md:w-7 text-primary" />
                         </div>
                         <div>
                           <h3 className="text-base font-bold text-foreground">{category.category}</h3>
@@ -611,7 +629,7 @@ const Product = () => {
                         {category.connectors.map((connector, cIndex) => (
                           <div
                             key={cIndex}
-                            className="flex items-center gap-3 rounded-lg border border-border/40 bg-background/60 p-3 transition-all hover:border-primary/30 hover:bg-primary/5"
+                            className="flex items-center gap-3 rounded-lg border border-border/40 bg-background/60 p-2 md:p-3 transition-all hover:border-primary/30 hover:bg-primary/5"
                           >
                             <div className="h-2 w-2 rounded-full bg-primary" />
                             <span className="text-sm font-semibold text-foreground">{connector}</span>
@@ -637,16 +655,16 @@ const Product = () => {
       </section>
 
       {/* Why Pullse - Modern Differentiators */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-20 space-y-6 fade-in-up">
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
                 <Shield className="h-4 w-4 text-primary" />
                 <span className="text-xs font-semibold tracking-wide text-primary">Why Pullse</span>
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Built different by design
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -666,13 +684,13 @@ const Product = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                    <div className="relative p-10 space-y-6">
+                    <div className="relative p-6 md:p-8 lg:p-10 space-y-4 md:space-y-5 lg:space-y-6">
                       {/* Icon & Stat */}
                       <div className="flex items-center justify-between">
-                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/20">
-                          <Icon className="h-8 w-8 text-primary" />
+                        <div className="flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/20">
+                          <Icon className="h-7 w-7 md:h-8 md:w-8 text-primary" />
                         </div>
-                        <div className="text-4xl font-bold text-primary">{item.stat}</div>
+                        <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">{item.stat}</div>
                       </div>
 
                       {/* Content */}
@@ -695,7 +713,7 @@ const Product = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
         <div className="container relative mx-auto px-4">
@@ -704,11 +722,11 @@ const Product = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-              <div className="relative p-12 lg:p-16">
-                <div className="text-center space-y-10">
+              <div className="relative p-6 sm:p-8 md:p-10 lg:p-16">
+                <div className="text-center space-y-6 md:space-y-8 lg:space-y-10">
                   {/* Headline */}
                   <div className="space-y-6">
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                    <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground leading-tight">
                       Ready to transform support?
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

@@ -1,7 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MessageCircle, Workflow, Bot, Sparkles, BarChart3, ArrowRight, Zap } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from '@/components/ui/carousel';
 
 const steps = [
   {
@@ -78,8 +84,38 @@ const steps = [
 
 const InteractiveHowItWorks = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
   const active = steps[activeStep];
   const ActiveIcon = active.icon;
+
+  // Sync carousel with activeStep
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    carouselApi.on('select', () => {
+      setActiveStep(carouselApi.selectedScrollSnap());
+    });
+  }, [carouselApi]);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    if (!carouselApi || isUserInteracting) return;
+
+    const interval = setInterval(() => {
+      const currentIndex = carouselApi.selectedScrollSnap();
+      const nextIndex = (currentIndex + 1) % steps.length;
+      carouselApi.scrollTo(nextIndex);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [carouselApi, isUserInteracting]);
+
+  // Pause auto-advance on user interaction, resume after 3 seconds
+  const handleUserInteraction = useCallback(() => {
+    setIsUserInteracting(true);
+    setTimeout(() => setIsUserInteracting(false), 3000);
+  }, []);
 
   return (
     <section className="relative py-24 md:py-28 overflow-hidden">
@@ -102,9 +138,8 @@ const InteractiveHowItWorks = () => {
             </p>
           </div>
 
-          {/* Main Layout */}
-          <div className="grid lg:grid-cols-5 gap-6 mb-12">
-            {/* Step Pills */}
+          {/* Desktop: Grid of Step Pills */}
+          <div className="hidden lg:grid lg:grid-cols-5 gap-6 mb-12">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = activeStep === index;
@@ -152,6 +187,78 @@ const InteractiveHowItWorks = () => {
             })}
           </div>
 
+          {/* Mobile/Tablet: Carousel */}
+          <div className="lg:hidden mb-12">
+            <Carousel
+              setApi={setCarouselApi}
+              opts={{
+                align: 'start',
+                loop: true,
+              }}
+              className="w-full"
+              onMouseDown={handleUserInteraction}
+              onTouchStart={handleUserInteraction}
+            >
+              <CarouselContent className="-ml-4">
+                {steps.map((step, index) => {
+                  const Icon = step.icon;
+                  const isActive = activeStep === index;
+
+                  return (
+                    <CarouselItem key={step.number} className="pl-4 basis-[85%] sm:basis-[70%] md:basis-[60%]">
+                      <div
+                        className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+                          isActive
+                            ? 'border-primary/40 bg-card shadow-xl'
+                            : 'border-border/40 bg-card/60'
+                        }`}
+                      >
+                        {/* Gradient Overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 transition-opacity duration-300 ${isActive ? 'opacity-10' : ''}`} />
+
+                        <div className="relative p-4 sm:p-5">
+                          <div className="flex items-center gap-3 sm:gap-4">
+                            {/* Icon */}
+                            <div className={`flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
+                              isActive
+                                ? `bg-gradient-to-br ${step.color} shadow-lg`
+                                : 'bg-primary/10'
+                            }`}>
+                              <Icon className={`h-6 w-6 sm:h-7 sm:w-7 ${isActive ? 'text-background' : 'text-primary'}`} />
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 space-y-1">
+                              {/* Number */}
+                              <div className={`text-xs font-bold tracking-wider ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                                {step.number}
+                              </div>
+
+                              {/* Title */}
+                              <h3 className={`text-lg sm:text-xl font-bold transition-colors ${isActive ? 'text-foreground' : 'text-foreground/70'}`}>
+                                {step.title}
+                              </h3>
+
+                              {/* Description */}
+                              <p className={`text-xs sm:text-sm ${isActive ? 'text-muted-foreground' : 'text-muted-foreground/70'}`}>
+                                {step.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Active Indicator */}
+                          {isActive && (
+                            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${step.color}`} />
+                          )}
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+            </Carousel>
+          </div>
+
           {/* Active Step Details Card */}
           <div className="relative">
             {/* Decorative Elements */}
@@ -164,40 +271,40 @@ const InteractiveHowItWorks = () => {
               {/* Grid Pattern Overlay */}
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
-              <div className="relative p-12 lg:p-16">
+              <div className="relative p-6 md:p-10 lg:p-16">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   {/* Left: Details */}
-                  <div className="space-y-8">
+                  <div className="space-y-4 md:space-y-6 lg:space-y-8">
                     {/* Icon & Title */}
                     <div className="space-y-4">
-                      <div className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${active.color} shadow-xl`}>
-                        <ActiveIcon className="h-10 w-10 text-background" />
+                      <div className={`inline-flex h-14 w-14 lg:h-20 lg:w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${active.color} shadow-xl`}>
+                        <ActiveIcon className="h-7 w-7 lg:h-10 lg:w-10 text-background" />
                       </div>
                       <div>
                         <div className="text-sm font-bold uppercase tracking-widest text-primary mb-2">
                           Step {active.number}
                         </div>
-                        <h3 className="text-4xl lg:text-5xl font-bold text-foreground mb-3">
+                        <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold text-foreground mb-3">
                           {active.title}
                         </h3>
-                        <p className="text-xl text-muted-foreground">
+                        <p className="text-sm md:text-base lg:text-xl text-muted-foreground">
                           {active.description}
                         </p>
                       </div>
                     </div>
 
                     {/* Details List */}
-                    <div className="space-y-4">
+                    <div className="space-y-2 md:space-y-3 lg:space-y-4">
                       {active.details.map((detail, index) => (
                         <div
                           key={index}
-                          className="flex items-start gap-4 group"
+                          className="flex items-start gap-2 md:gap-3 lg:gap-4 group"
                           style={{ animationDelay: `${index * 100}ms` }}
                         >
-                          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-primary/10 mt-0.5">
+                          <div className="flex h-5 w-5 md:h-6 md:w-6 shrink-0 items-center justify-center rounded-lg bg-primary/10 mt-0.5">
                             <ArrowRight className="h-3.5 w-3.5 text-primary" />
                           </div>
-                          <p className="text-base text-foreground/90 leading-relaxed">
+                          <p className="text-sm md:text-base text-foreground/90 leading-normal md:leading-relaxed">
                             {detail}
                           </p>
                         </div>
@@ -209,22 +316,22 @@ const InteractiveHowItWorks = () => {
                   <div className="relative">
                     {/* Large Number Watermark */}
                     <div className="relative">
-                      <div className={`absolute inset-0 flex items-center justify-center opacity-10`}>
+                      <div className={`hidden lg:flex absolute inset-0 items-center justify-center opacity-10`}>
                         <div className={`text-[280px] font-black bg-gradient-to-br ${active.color} bg-clip-text text-transparent leading-none`}>
                           {activeStep + 1}
                         </div>
                       </div>
 
                       {/* Floating Stats */}
-                      <div className="relative space-y-6 py-12">
-                        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/90 p-6 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                      <div className="relative space-y-6 py-4 md:py-8 lg:py-12">
+                        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/90 p-4 md:p-5 lg:p-6 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
                           <div className={`absolute inset-0 bg-gradient-to-br ${active.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
                           <div className="relative space-y-2">
                             <div className="flex items-center justify-between">
                               <div className="text-sm font-bold text-muted-foreground">Performance</div>
                               <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${active.color}`} />
                             </div>
-                            <div className={`text-4xl font-black bg-gradient-to-r ${active.color} bg-clip-text text-transparent`}>
+                            <div className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${active.color} bg-clip-text text-transparent`}>
                               {activeStep === 0 && '<100ms'}
                               {activeStep === 1 && '95%'}
                               {activeStep === 2 && '80%'}
@@ -241,14 +348,14 @@ const InteractiveHowItWorks = () => {
                           </div>
                         </div>
 
-                        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/90 p-6 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                        <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/90 p-4 md:p-5 lg:p-6 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
                           <div className={`absolute inset-0 bg-gradient-to-br ${active.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
                           <div className="relative space-y-2">
                             <div className="flex items-center justify-between">
                               <div className="text-sm font-bold text-muted-foreground">Impact</div>
                               <Sparkles className="h-4 w-4 text-primary" />
                             </div>
-                            <div className="text-lg font-bold text-foreground">
+                            <div className="text-base md:text-lg font-bold text-foreground">
                               {activeStep === 0 && 'Every channel, one workspace'}
                               {activeStep === 1 && 'Right ticket, right agent, right time'}
                               {activeStep === 2 && 'From 1,000 to 100 tickets overnight'}
@@ -265,12 +372,32 @@ const InteractiveHowItWorks = () => {
             </div>
           </div>
 
-          {/* Navigation Dots */}
-          <div className="flex items-center justify-center gap-3 mt-12">
+          {/* Navigation Dots - Desktop */}
+          <div className="hidden lg:flex items-center justify-center gap-3 mt-12">
             {steps.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveStep(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeStep === index
+                    ? 'w-12 bg-primary'
+                    : 'w-2 bg-border hover:bg-primary/40'
+                }`}
+                aria-label={`Go to step ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Navigation Dots - Mobile/Tablet (Carousel) */}
+          <div className="flex lg:hidden items-center justify-center gap-3 mt-12">
+            {steps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveStep(index);
+                  carouselApi?.scrollTo(index);
+                  handleUserInteraction();
+                }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   activeStep === index
                     ? 'w-12 bg-primary'

@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState, useRef, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense, lazy } from "react";
 import dynamic from "next/dynamic";
 import Navigation from "@/components/Navigation";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -198,11 +200,11 @@ const StickyStepperSection = () => {
         isVisible={isInView}
       />
 
-      <section id="stepper" className="relative bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden pt-24">
+      <section id="stepper" className="relative bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden pt-12 md:pt-18 lg:pt-24">
         {/* Enhanced background */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--primary-rgb),0.08),transparent_60%)]" />
         <motion.div
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"
+          className="absolute top-1/4 right-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-purple-600/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -211,11 +213,11 @@ const StickyStepperSection = () => {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 md:px-6 relative">
           {/* Section Header - Enhanced */}
-          <div className="text-center pt-32 pb-20">
+          <div className="text-center pt-16 pb-10 md:pt-24 md:pb-16 lg:pt-32 lg:pb-20">
             <motion.h2
-              className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -228,7 +230,7 @@ const StickyStepperSection = () => {
             </motion.h2>
 
             <motion.p
-              className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-6"
+              className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-5 md:mb-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -287,20 +289,36 @@ const ProductAIEngine = () => {
         <MorphingBackground scrollOffset={scrollOffset} />
       </Suspense>
 
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Hero Section - Reimagined 2025 */}
-      <section className="relative pt-40 pb-32 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
         {/* Enhanced gradient mesh background */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(var(--primary-rgb),0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
 
+        {/* Hero Liquid Ether Effect */}
+        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
+          <Suspense fallback={<div className="w-full h-full" />}>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={0.55}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+
         {/* Animated gradient orbs */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-primary/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -308,7 +326,7 @@ const ProductAIEngine = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-purple-600/20 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -316,11 +334,11 @@ const ProductAIEngine = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 md:px-6 relative">
           <div className="max-w-6xl mx-auto text-center">
             {/* Enhanced Headline with better value prop */}
             <motion.h1
-              className="text-6xl sm:text-7xl lg:text-8xl font-black text-foreground mb-8 tracking-tight leading-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 tracking-tight leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -334,7 +352,7 @@ const ProductAIEngine = () => {
 
             {/* Enhanced Subheadline with clearer benefits */}
             <motion.p
-              className="text-2xl text-muted-foreground max-w-4xl mx-auto mb-6 leading-relaxed"
+              className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-5 md:mb-6 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -345,7 +363,7 @@ const ProductAIEngine = () => {
 
             {/* Single Primary CTA */}
             <motion.div
-              className="flex flex-col items-center gap-4 mb-16"
+              className="flex flex-col items-center gap-3 md:gap-4 mb-10 md:mb-14 lg:mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -359,30 +377,30 @@ const ProductAIEngine = () => {
                   href="/contact-sales"
                   variant="default"
                   size="lg"
-                  className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-12 py-8 text-xl font-black"
+                  className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-8 py-5 md:px-10 md:py-6 lg:px-12 lg:py-8 text-base sm:text-lg md:text-xl font-black"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-                  <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10 flex items-center gap-2 md:gap-3">
                     <motion.div
                       animate={{ rotate: [0, 360] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                     >
-                      <Sparkles className="h-6 w-6" />
+                      <Sparkles className="h-5 w-5 md:h-6 md:w-6" />
                     </motion.div>
                     See Live Demo
-                    <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
+                    <ArrowRight className="h-5 w-5 md:h-6 md:w-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </RouteButton>
               </motion.div>
 
               {/* Secondary link */}
-              <Link href="#stepper" className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4">
+              <Link href="#stepper" className="text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4">
                 or scroll to explore the 8-step pipeline
               </Link>
             </motion.div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 text-xs md:text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <CheckCheck className="h-4 w-4 text-green-500" />
                 <span className="font-semibold">SOC 2 Type II in progress</span>
@@ -412,35 +430,35 @@ const ProductAIEngine = () => {
       <DeploymentComparison />
 
       {/* Final CTA - Ultra Modern */}
-      <section className="relative py-40 overflow-hidden">
+      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
 
         {/* Animated background gradients */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-4 md:px-6 relative">
           <div className="max-w-5xl mx-auto">
-            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-16 shadow-2xl text-center overflow-hidden">
+            <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-8 md:p-12 lg:p-16 shadow-2xl text-center overflow-hidden">
               {/* Background glow */}
               <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
               <div className="relative">
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 leading-tight">
                   Ready to see it{" "}
                   <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                     in action?
                   </span>
                 </h2>
 
-                <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 md:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
                   Book a technical walkthrough and see how Pullse handles <span className="font-bold text-foreground">your specific use cases</span> with governed AI.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                <div className="flex flex-col sm:flex-row gap-4 md:gap-5 lg:gap-6 justify-center mb-8 md:mb-10 lg:mb-12">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -4 }}
                     whileTap={{ scale: 0.98 }}
@@ -450,12 +468,12 @@ const ProductAIEngine = () => {
                       href="/contact-sales"
                       variant="default"
                       size="lg"
-                      className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-12 py-6 text-lg font-black"
+                      className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-indigo-600 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 text-base sm:text-lg font-black"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-                      <span className="relative z-10 flex items-center gap-3">
+                      <span className="relative z-10 flex items-center gap-2 md:gap-3">
                         Book a Demo
-                        <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+                        <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-2 transition-transform duration-300" />
                       </span>
                     </RouteButton>
                   </motion.div>
@@ -469,29 +487,29 @@ const ProductAIEngine = () => {
                       href="/product/ai-suite"
                       variant="outline"
                       size="lg"
-                      className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-12 py-6 text-lg font-black"
+                      className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-8 py-4 md:px-10 md:py-5 lg:px-12 lg:py-6 text-base sm:text-lg font-black"
                     >
-                      <span className="flex items-center gap-3">
+                      <span className="flex items-center gap-2 md:gap-3">
                         Explore AI Suite
-                        <ExternalLink className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                        <ExternalLink className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform duration-300" />
                       </span>
                     </RouteButton>
                   </motion.div>
                 </div>
 
                 {/* Social proof */}
-                <div className="flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-border/30">
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8 pt-6 md:pt-7 lg:pt-8 border-t border-border/30">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">14-day trial</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">14-day trial</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">No credit card required</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">No credit card required</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-bold text-muted-foreground">5-minute setup</span>
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+                    <span className="text-xs md:text-sm font-bold text-muted-foreground">5-minute setup</span>
                   </div>
                 </div>
               </div>
