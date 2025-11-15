@@ -13,11 +13,13 @@
  * - Conversion tracking
  * - Error tracking
  * - Debug mode for development
+ * - PostHog parallel tracking for enhanced analytics
  *
  * @see https://developers.google.com/tag-platform/gtagjs/reference
  */
 
 import { CookieCategory } from '@/contexts/CookieConsentContext';
+import { trackPostHogEvent, setPostHogUserProperties } from './posthog';
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -266,14 +268,19 @@ export const trackPageView = (params?: {
 
 /**
  * Track a custom event
+ * Sends to both GA4 and PostHog for parallel tracking
  */
 export const trackEvent = (eventName: string, eventParams?: Record<string, any>): void => {
   if (!hasAnalyticsConsent()) return;
 
+  // Send to GA4
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', eventName, eventParams);
     logDebug(eventName, eventParams);
   }
+
+  // Send to PostHog
+  trackPostHogEvent(eventName, eventParams);
 };
 
 /**
@@ -283,14 +290,19 @@ export const trackEventGA4 = trackEvent;
 
 /**
  * Set user properties
+ * Sends to both GA4 and PostHog for parallel tracking
  */
 export const setUserProperties = (properties: UserProperties): void => {
   if (!hasAnalyticsConsent()) return;
 
+  // Set in GA4
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('set', 'user_properties', properties);
     logDebug('user_properties_set', properties);
   }
+
+  // Set in PostHog
+  setPostHogUserProperties(properties);
 };
 
 // ============================================================================
