@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import Providers from "./providers";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 import "@/components/MagicBento.css";
 
@@ -16,6 +17,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <body className={inter.className} suppressHydrationWarning>
       <Providers>{children}</Providers>
+      <Analytics />
     </body>
   </html>
 );

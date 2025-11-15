@@ -59,9 +59,9 @@ export const initializeGoogleAnalytics = (measurementId: string): void => {
   document.head.appendChild(script);
 
   // Initialize gtag
-  window.dataLayer = window.dataLayer || [];
+  (window as any).dataLayer = (window as any).dataLayer || [];
   function gtag(...args: any[]) {
-    window.dataLayer.push(args);
+    (window as any).dataLayer.push(args);
   }
   gtag('js', new Date());
   gtag('config', measurementId, {
@@ -83,8 +83,8 @@ export const trackPageView = (url: string, title?: string): void => {
   if (!hasAnalyticsConsent()) return;
 
   // GA4 pageview
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'page_view', {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'page_view', {
       page_path: url,
       page_title: title,
     });
@@ -104,8 +104,8 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
   if (!hasAnalyticsConsent()) return;
 
   // GA4 custom event
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, eventParams);
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, eventParams);
   }
 
   // Add other analytics services here
@@ -119,9 +119,9 @@ export const disableAnalytics = (): void => {
   if (typeof window === 'undefined') return;
 
   // Disable GA4
-  if (window.gtag) {
+  if ((window as any).gtag) {
     // Set all GA properties to not track
-    window['ga-disable-all'] = true;
+    (window as any)['ga-disable-all'] = true;
   }
 
   // Clear any analytics cookies
@@ -155,18 +155,39 @@ export const initializeAnalytics = (config?: {
   }
 };
 
-// Type declarations for global window object
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag?: (...args: any[]) => void;
+/**
+ * Track events using Google Analytics 4 via @next/third-parties
+ * This is a convenience wrapper that checks consent before sending events
+ *
+ * Usage:
+ * import { trackEventGA4 } from '@/lib/analytics';
+ * trackEventGA4('button_click', { button_name: 'signup' });
+ *
+ * @param eventName - The name of the event to track
+ * @param eventParams - Optional parameters for the event
+ */
+export const trackEventGA4 = (eventName: string, eventParams?: Record<string, any>): void => {
+  if (!hasAnalyticsConsent()) {
+    return;
   }
-}
+
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  // Use gtag from window (loaded by @next/third-parties GoogleAnalytics component)
+  if ((window as any).gtag) {
+    (window as any).gtag('event', eventName, eventParams);
+  } else if (process.env.NODE_ENV === 'development') {
+    console.warn('Google Analytics not loaded - ensure Analytics component is mounted and consent granted');
+  }
+};
 
 export default {
   hasAnalyticsConsent,
   initializeAnalytics,
   trackPageView,
   trackEvent,
+  trackEventGA4,
   disableAnalytics,
 };
