@@ -1,7 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import {
+  trackFormView,
+  trackFormStart,
+  trackFormSubmit,
+  trackFormComplete,
+  trackFormError,
+  trackNewsletterSignup,
+} from '@/lib/analytics';
+import { trackValidationError } from '@/lib/errorTracking';
 
 interface NewsletterCTAProps {
   variant?: 'compact' | 'standard';
@@ -15,6 +24,33 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  // Tracking state
+  const hasTrackedStart = useRef(false);
+  const formStartTime = useRef<number | null>(null);
+  const formId = `newsletter-${variant}-${source}`;
+  const formName = `Newsletter Signup (${variant})`;
+
+  // Track form view on mount
+  useEffect(() => {
+    trackFormView({
+      form_id: formId,
+      form_name: formName,
+      form_destination: '/api/newsletter',
+    });
+  }, [formId, formName]);
+
+  // Track form start on first interaction
+  const handleFormStart = () => {
+    if (!hasTrackedStart.current) {
+      trackFormStart({
+        form_id: formId,
+        form_name: formName,
+      });
+      formStartTime.current = Date.now();
+      hasTrackedStart.current = true;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -23,9 +59,37 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
 
     // Basic validation
     if (!email.trim()) {
-      setMessage({ type: 'error', text: 'Please enter your email address' });
+      const errorMessage = 'Please enter your email address';
+      setMessage({ type: 'error', text: errorMessage });
+
+      // Track validation error
+      trackValidationError({
+        form_name: formName,
+        field_name: 'email',
+        error_message: errorMessage,
+      });
+
+      trackFormError({
+        form_id: formId,
+        form_name: formName,
+        field_name: 'email',
+        error_message: errorMessage,
+      });
+
       return;
     }
+
+    // Calculate time to submit
+    const timeToSubmit = formStartTime.current
+      ? Date.now() - formStartTime.current
+      : undefined;
+
+    // Track form submission attempt
+    trackFormSubmit({
+      form_id: formId,
+      form_name: formName,
+      time_to_submit: timeToSubmit,
+    });
 
     setIsLoading(true);
 
@@ -49,15 +113,37 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
         throw new Error(data.error || 'Failed to subscribe');
       }
 
-      // Success
+      // Success - Track conversion
       setMessage({ type: 'success', text: data.message || 'Successfully subscribed!' });
+
+      trackFormComplete({
+        form_id: formId,
+        form_name: formName,
+        form_destination: '/api/newsletter',
+        time_to_submit: timeToSubmit,
+      });
+
+      trackNewsletterSignup({ source });
+
+      // Reset form
       setFirstName('');
       setLastName('');
       setEmail('');
+      hasTrackedStart.current = false;
+      formStartTime.current = null;
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred. Please try again.';
       setMessage({
         type: 'error',
-        text: error instanceof Error ? error.message : 'An error occurred. Please try again.',
+        text: errorMessage,
+      });
+
+      // Track error
+      trackFormError({
+        form_id: formId,
+        form_name: formName,
+        field_name: 'submission',
+        error_message: errorMessage,
       });
     } finally {
       setIsLoading(false);
@@ -74,6 +160,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onFocus={handleFormStart}
             disabled={isLoading}
             required
             className="flex-1 rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50"
@@ -142,6 +229,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
                   placeholder="First name (optional)"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  onFocus={handleFormStart}
                   disabled={isLoading}
                   className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
                 />
@@ -150,6 +238,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
                   placeholder="Last name (optional)"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  onFocus={handleFormStart}
                   disabled={isLoading}
                   className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
                 />
@@ -162,6 +251,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
                   placeholder="Enter your email*"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onFocus={handleFormStart}
                   disabled={isLoading}
                   required
                   className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"

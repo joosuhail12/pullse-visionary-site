@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 import { isEEARegion } from '@/lib/regionDetection';
+import { initPerformanceTracking } from '@/lib/performanceTracking';
+import { initErrorTracking } from '@/lib/errorTracking';
+import { initUTMTracking } from '@/lib/utmTracking';
+import { setUserProperties } from '@/lib/analytics';
 
 /**
  * Google Analytics 4 Consent Manager
@@ -163,8 +167,42 @@ const Analytics = () => {
       }
     };
 
-    // Wait for gtag to load, then apply initial consent
-    waitForGtag(applyInitialConsent);
+    // Initialize additional tracking features (always initialize, consent is checked internally)
+    initErrorTracking();
+    const utmParams = initUTMTracking();
+
+    // Wait for gtag to load, then apply initial consent and initialize tracking
+    waitForGtag(() => {
+      applyInitialConsent();
+
+      // Check consent for conditional tracking
+      const consent = checkConsent();
+      const consentGranted = consent.analytics_storage === 'granted';
+
+      // Initialize performance tracking (Core Web Vitals) if consent granted
+      if (consentGranted) {
+        initPerformanceTracking();
+
+        // Set initial user properties
+        if (typeof window !== 'undefined') {
+          const userProperties: Record<string, string> = {
+            user_type: document.cookie.includes('_ga') ? 'returning' : 'new',
+            device_category: /Mobile|Android|iPhone/i.test(navigator.userAgent)
+              ? 'mobile'
+              : /Tablet|iPad/i.test(navigator.userAgent)
+              ? 'tablet'
+              : 'desktop',
+          };
+
+          // Get traffic source from UTM parameters
+          if (utmParams?.utm_source) {
+            userProperties.traffic_source = utmParams.utm_source;
+          }
+
+          setUserProperties(userProperties);
+        }
+      }
+    });
 
     /**
      * Handle consent changes
