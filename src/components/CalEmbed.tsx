@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { trackEvent, trackBookAppointment } from '@/lib/analytics';
 
 interface CalEmbedProps {
   calLink: string;
@@ -13,6 +14,7 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
   const [error, setError] = useState<string | null>(null);
   const embedRef = useRef<HTMLDivElement>(null);
   const initializedRef = useRef(false);
+  const hasTrackedLoad = useRef(false);
 
   useEffect(() => {
     if (initializedRef.current || !embedRef.current) return;
@@ -75,6 +77,38 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
         w.Cal('ui', {
           styles: { branding: { brandColor: '#000000' } },
           hideEventTypeDetails: false,
+        });
+
+        // Listen for Cal.com events
+        w.Cal('on', {
+          action: '__iframeReady',
+          callback: () => {
+            console.log('Cal.com iframe ready');
+
+            // Track calendar widget load
+            if (!hasTrackedLoad.current) {
+              trackEvent('calendar_load', {
+                calendar_link: calLink,
+                calendar_provider: 'cal.com',
+              });
+              hasTrackedLoad.current = true;
+            }
+          },
+        });
+
+        // Track booking completion
+        w.Cal('on', {
+          action: 'bookingSuccessful',
+          callback: (e: any) => {
+            console.log('Booking successful:', e);
+
+            trackBookAppointment({
+              booking_type: e?.data?.eventType?.title || 'Demo',
+              booking_date: e?.data?.date,
+              calendar_provider: 'cal.com',
+              value: 200, // High-value conversion
+            } as any);
+          },
         });
 
         console.log('Cal.com inline embed configured');

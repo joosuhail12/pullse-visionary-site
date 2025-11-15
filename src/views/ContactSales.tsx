@@ -8,8 +8,18 @@ import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowL
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  trackFormView,
+  trackFormStart,
+  trackFormStep,
+  trackFormSubmit,
+  trackFormComplete,
+  trackFormError,
+  trackGenerateLead,
+} from "@/lib/analytics";
+import { trackValidationError } from "@/lib/errorTracking";
 
 interface FormData {
   name: string;
@@ -48,6 +58,47 @@ const ContactSales = () => {
 
   const totalSteps = 3;
 
+  // Tracking state
+  const hasTrackedStart = useRef(false);
+  const formStartTime = useRef<number | null>(null);
+  const formId = 'contact-sales-form';
+  const formName = 'Contact Sales (Demo Request)';
+
+  const stepNames = ['Contact Info', 'Company Details', 'Project Details'];
+
+  // Track form view on mount
+  useEffect(() => {
+    trackFormView({
+      form_id: formId,
+      form_name: formName,
+      form_destination: '/api/contact-sales',
+    });
+  }, []);
+
+  // Track step progression
+  useEffect(() => {
+    if (currentStep > 1) {
+      trackFormStep({
+        form_id: formId,
+        form_name: formName,
+        form_step: currentStep,
+        form_step_name: stepNames[currentStep - 1],
+      });
+    }
+  }, [currentStep]);
+
+  // Track form start on first interaction
+  const handleFormStart = useCallback(() => {
+    if (!hasTrackedStart.current) {
+      trackFormStart({
+        form_id: formId,
+        form_name: formName,
+      });
+      formStartTime.current = Date.now();
+      hasTrackedStart.current = true;
+    }
+  }, []);
+
   // Memoized validation function
   const validateStep = useCallback((step: number, data: FormData): StepErrors => {
     const newErrors: StepErrors = {};
@@ -75,7 +126,23 @@ const ContactSales = () => {
     const stepErrors = validateStep(currentStep, formData);
     setErrors(stepErrors);
 
-    if (Object.keys(stepErrors).length === 0) {
+    // Track validation errors
+    if (Object.keys(stepErrors).length > 0) {
+      Object.entries(stepErrors).forEach(([fieldName, errorMessage]) => {
+        trackValidationError({
+          form_name: formName,
+          field_name: fieldName,
+          error_message: errorMessage,
+        });
+
+        trackFormError({
+          form_id: formId,
+          form_name: formName,
+          field_name: fieldName,
+          error_message: errorMessage,
+        });
+      });
+    } else {
       setCurrentStep(prev => Math.min(prev + 1, totalSteps));
     }
   }, [currentStep, formData, validateStep]);
@@ -89,6 +156,10 @@ const ContactSales = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+
+    // Track form start on first interaction
+    handleFormStart();
+
     setFormData(prev => ({ ...prev, [name]: value }));
 
     // Clear error for this field if it exists
@@ -99,7 +170,7 @@ const ContactSales = () => {
       }
       return prev;
     });
-  }, []);
+  }, [handleFormStart]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,8 +179,29 @@ const ContactSales = () => {
     setErrors(stepErrors);
 
     if (Object.keys(stepErrors).length > 0) {
+      // Track validation errors on final submit
+      Object.entries(stepErrors).forEach(([fieldName, errorMessage]) => {
+        trackFormError({
+          form_id: formId,
+          form_name: formName,
+          field_name: fieldName,
+          error_message: errorMessage,
+        });
+      });
       return;
     }
+
+    // Calculate time to submit
+    const timeToSubmit = formStartTime.current
+      ? Date.now() - formStartTime.current
+      : undefined;
+
+    // Track form submission attempt
+    trackFormSubmit({
+      form_id: formId,
+      form_name: formName,
+      time_to_submit: timeToSubmit,
+    });
 
     setIsSubmitting(true);
     setApiError('');
@@ -140,14 +232,38 @@ const ContactSales = () => {
         }
       }
 
+      // Success - Track conversion
+      trackFormComplete({
+        form_id: formId,
+        form_name: formName,
+        form_destination: '/api/contact-sales',
+        time_to_submit: timeToSubmit,
+      });
+
+      trackGenerateLead({
+        value: 100, // Estimated lead value
+        currency: 'USD',
+        company_size: formData.companySize,
+        industry: formData.industry,
+        timeline: formData.timeline,
+      } as any);
+
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
-      setApiError(
-        error instanceof Error
-          ? error.message
-          : 'An unexpected error occurred. Please try again.'
-      );
+      const errorMessage = error instanceof Error
+        ? error.message
+        : 'An unexpected error occurred. Please try again.';
+
+      setApiError(errorMessage);
+
+      // Track error
+      trackFormError({
+        form_id: formId,
+        form_name: formName,
+        field_name: 'submission',
+        error_message: errorMessage,
+      });
     } finally {
       setIsSubmitting(false);
     }

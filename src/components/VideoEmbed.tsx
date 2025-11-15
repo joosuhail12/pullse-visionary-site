@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useRef } from "react";
+import { trackVideoView, trackVideoStart } from "@/lib/analytics";
 
 interface VideoEmbedProps {
   videoId: string;
@@ -10,8 +11,22 @@ interface VideoEmbedProps {
 
 const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const hasTrackedView = useRef(false);
+  const hasTrackedStart = useRef(false);
 
   useEffect(() => {
+    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+    // Track video view on mount
+    if (!hasTrackedView.current) {
+      trackVideoView({
+        video_url: videoUrl,
+        video_title: title,
+        video_provider: 'youtube',
+      });
+      hasTrackedView.current = true;
+    }
+
     // Dynamically import lite-youtube-embed
     import("lite-youtube-embed").then(() => {
       // Library loaded
@@ -23,10 +38,31 @@ const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
     link.href = "https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.2.0/src/lite-yt-embed.css";
     document.head.appendChild(link);
 
+    // Track video start when user clicks play
+    const handleVideoStart = () => {
+      if (!hasTrackedStart.current) {
+        trackVideoStart({
+          video_url: videoUrl,
+          video_title: title,
+          video_provider: 'youtube',
+        });
+        hasTrackedStart.current = true;
+      }
+    };
+
+    // Add click listener to track play
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('click', handleVideoStart, { once: true });
+    }
+
     return () => {
       document.head.removeChild(link);
+      if (container) {
+        container.removeEventListener('click', handleVideoStart);
+      }
     };
-  }, []);
+  }, [videoId, title]);
 
   return (
     <div ref={containerRef} className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl glow-subtle">
