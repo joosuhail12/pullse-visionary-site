@@ -50,6 +50,7 @@ const initPostHog = (): void => {
   // Initialize PostHog
   posthog.init(apiKey, {
     api_host: apiHost,
+    defaults: '2025-05-24', // Required: API configuration version
     person_profiles: 'identified_only', // Only create profiles for identified users
     capture_pageview: true, // Auto-capture page views
     capture_pageleave: true, // Track when users leave pages
