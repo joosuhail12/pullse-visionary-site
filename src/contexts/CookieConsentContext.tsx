@@ -94,6 +94,11 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setHasSetPreferences(true);
     setShowBanner(false);
     setShowPreferences(false);
+
+    // Notify Analytics component of consent change
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
+    }
   };
 
   const acceptAll = () => {
@@ -107,6 +112,11 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setHasSetPreferences(true);
     setShowBanner(false);
     setShowPreferences(false);
+
+    // Notify Analytics component of consent change
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
+    }
   };
 
   const acceptEssentialOnly = () => {
@@ -120,6 +130,11 @@ export const CookieConsentProvider: React.FC<{ children: ReactNode }> = ({ child
     setHasSetPreferences(true);
     setShowBanner(false);
     setShowPreferences(false);
+
+    // Notify Analytics component of consent change
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
+    }
   };
 
   const hideBanner = () => {

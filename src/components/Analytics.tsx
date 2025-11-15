@@ -85,6 +85,25 @@ const Analytics = () => {
 
   useEffect(() => {
     /**
+     * Wait for gtag to be available before calling consent updates
+     * Retries up to 20 times (1 second total) to ensure gtag is loaded
+     */
+    const waitForGtag = (callback: () => void, maxAttempts = 20) => {
+      let attempts = 0;
+      const check = () => {
+        if ((window as any).gtag) {
+          callback();
+        } else if (attempts < maxAttempts) {
+          attempts++;
+          setTimeout(check, 50); // Check every 50ms
+        } else if (process.env.NODE_ENV === 'development') {
+          console.error('[Analytics] gtag failed to load after 1 second');
+        }
+      };
+      check();
+    };
+
+    /**
      * Apply initial consent update with region-specific settings
      * This runs once on mount to apply EEA region if applicable
      */
@@ -108,11 +127,13 @@ const Analytics = () => {
         if (process.env.NODE_ENV === 'development') {
           console.log('[Analytics] Initial consent applied:', { isEEA, consent });
         }
+      } else if (process.env.NODE_ENV === 'development') {
+        console.warn('[Analytics] gtag not available for initial consent update');
       }
     };
 
-    // Apply initial consent on mount
-    applyInitialConsent();
+    // Wait for gtag to load, then apply initial consent
+    waitForGtag(applyInitialConsent);
 
     /**
      * Handle consent changes
@@ -127,8 +148,10 @@ const Analytics = () => {
 
         // Log consent update in development
         if (process.env.NODE_ENV === 'development') {
-          console.log('[Analytics] Consent updated:', newConsent);
+          console.log('[Analytics] Consent updated via event:', newConsent);
         }
+      } else if (process.env.NODE_ENV === 'development') {
+        console.error('[Analytics] gtag not available - consent update failed');
       }
     };
 
