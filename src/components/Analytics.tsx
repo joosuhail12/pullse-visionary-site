@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import { isEEARegion } from '@/lib/regionDetection';
 
 /**
- * Google Analytics 4 with Consent Mode v2 Implementation
+ * Google Tag Manager with Consent Mode v2 Implementation
  *
  * Implements proper consent workflow per Google's requirements:
- * 1. Sets default consent state to 'denied' BEFORE GA4 loads
+ * 1. Sets default consent state to 'denied' BEFORE GTM loads
  * 2. Applies region-specific defaults (stricter for EEA)
- * 3. Updates consent when user interacts with banner
- * 4. Enables advanced features (url_passthrough, ads_data_redaction)
+ * 3. Loads GTM container with all configured tags
+ * 4. Updates consent when user interacts with banner
+ * 5. Enables advanced features (url_passthrough, ads_data_redaction)
  *
  * Consent Mode v2 Parameters:
  * - analytics_storage: Analytics cookies/data collection
@@ -23,6 +24,7 @@ import { isEEARegion } from '@/lib/regionDetection';
  * from CookieConsentContext for simplified UX.
  *
  * @see https://developers.google.com/tag-platform/security/guides/consent
+ * @see https://developers.google.com/tag-platform/tag-manager/web
  */
 
 interface ConsentState {
@@ -33,16 +35,24 @@ interface ConsentState {
 }
 
 const Analytics = () => {
-  const [consentState, setConsentState] = useState<ConsentState | null>(null);
   const [isEEA, setIsEEA] = useState<boolean>(false);
 
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   /**
    * Check current consent state from localStorage
    * Maps 'analytics' consent to all 4 Consent Mode v2 parameters
    */
   const checkConsent = (): ConsentState => {
+    if (typeof window === 'undefined') {
+      return {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      };
+    }
+
     try {
       const consent = localStorage.getItem('pullse_cookie_consent');
       if (!consent) {
@@ -81,17 +91,12 @@ const Analytics = () => {
     // Detect region on client
     setIsEEA(isEEARegion());
 
-    // Initialize consent state
-    const initialConsent = checkConsent();
-    setConsentState(initialConsent);
-
     /**
      * Handle consent changes
      * Called when user updates preferences in cookie banner
      */
     const handleConsentChange = () => {
       const newConsent = checkConsent();
-      setConsentState(newConsent);
 
       // Update consent mode if gtag is available
       if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -116,24 +121,22 @@ const Analytics = () => {
     };
   }, []);
 
-  // Don't render if GA ID not configured
-  if (!gaId) {
+  // Don't render if GTM ID not configured
+  if (!gtmId) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn('[Analytics] NEXT_PUBLIC_GA_MEASUREMENT_ID not configured - Analytics disabled');
+      console.warn('[Analytics] NEXT_PUBLIC_GTM_ID not configured - GTM disabled');
     }
     return null;
   }
 
-  // Don't render until consent state is determined (avoid hydration mismatch)
-  if (consentState === null) {
-    return null;
-  }
+  // Get initial consent state (will be 'denied' if not set)
+  const initialConsent = checkConsent();
 
   return (
     <>
       {/*
         Step 1: Initialize dataLayer and set default consent
-        This MUST run BEFORE the GA4 script loads
+        This MUST run BEFORE GTM loads
       */}
       <Script
         id="google-consent-mode-init"
@@ -145,10 +148,10 @@ const Analytics = () => {
 
             // Set default consent state based on region and user preferences
             gtag('consent', 'default', {
-              'analytics_storage': '${consentState.analytics_storage}',
-              'ad_storage': '${consentState.ad_storage}',
-              'ad_user_data': '${consentState.ad_user_data}',
-              'ad_personalization': '${consentState.ad_personalization}',
+              'analytics_storage': '${initialConsent.analytics_storage}',
+              'ad_storage': '${initialConsent.ad_storage}',
+              'ad_user_data': '${initialConsent.ad_user_data}',
+              'ad_personalization': '${initialConsent.ad_personalization}',
               'wait_for_update': 500,
               ${isEEA ? `'region': ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','UK']` : ''}
             });
@@ -157,39 +160,27 @@ const Analytics = () => {
             gtag('set', 'ads_data_redaction', true);
             gtag('set', 'url_passthrough', true);
 
-            gtag('js', new Date());
-
-            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] Consent Mode v2 initialized', { isEEA: ${isEEA}, consent: ${JSON.stringify(consentState)} });` : ''}
+            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] Consent Mode v2 initialized', { isEEA: ${isEEA}, consent: ${JSON.stringify(initialConsent)} });` : ''}
           `,
         }}
       />
 
       {/*
-        Step 2: Load Google Analytics gtag.js script
-        Loads after consent defaults are set
+        Step 2: Load Google Tag Manager
+        GTM container loads after consent defaults are set
       */}
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-        strategy="afterInteractive"
-      />
-
-      {/*
-        Step 3: Configure GA4 measurement
-        Sets GA4-specific configuration options
-      */}
-      <Script
-        id="google-analytics-config"
+        id="google-tag-manager"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            gtag('config', '${gaId}', {
-              'anonymize_ip': true,
-              'cookie_flags': 'SameSite=None;Secure',
-              'allow_google_signals': ${consentState.ad_personalization === 'granted'},
-              'allow_ad_personalization_signals': ${consentState.ad_personalization === 'granted'}
-            });
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${gtmId}');
 
-            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] GA4 configured with ID: ${gaId}');` : ''}
+            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] GTM loaded with ID: ${gtmId}');` : ''}
           `,
         }}
       />
