@@ -81,7 +81,7 @@ Purpose-built for SaaS companies managing technical support, API documentation, 
 - **Salesforce**: Account data, opportunity stage, contact info
 - **HubSpot**: Deal pipeline, contact properties
 - **Segment**: User events, feature usage
-- **Mixpanel**: Product analytics, cohort analysis
+- **Google Analytics**: Product analytics, user behavior tracking
 
 ## Metrics & ROI
 

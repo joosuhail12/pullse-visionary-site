@@ -1091,7 +1091,7 @@ Pullse, Inc. acts as the data controller for personal information collected thro
 *Cookies and Tracking Technologies:*
 • Session cookies for authentication and security
 • Persistent cookies for preferences and personalization
-• Analytics cookies (Google Analytics, Mixpanel)
+• Analytics cookies (Google Analytics)
 • Marketing and advertising cookies (with consent)
 • Web beacons and pixel tags
 • Local storage and session storage data

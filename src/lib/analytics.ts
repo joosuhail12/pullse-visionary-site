@@ -73,26 +73,6 @@ export const initializeGoogleAnalytics = (measurementId: string): void => {
 };
 
 /**
- * Initialize Mixpanel
- * Only call this after confirming consent
- *
- * @param token - Your Mixpanel project token
- */
-export const initializeMixpanel = (token: string): void => {
-  if (analyticsInitialized || !hasAnalyticsConsent()) {
-    return;
-  }
-
-  if (typeof window === 'undefined') return;
-
-  // Mixpanel initialization code would go here
-  // Example structure (actual implementation depends on Mixpanel SDK)
-  console.log('Mixpanel would be initialized with token:', token);
-
-  analyticsInitialized = true;
-};
-
-/**
  * Track a page view
  * Automatically checks for consent before tracking
  *
@@ -110,7 +90,7 @@ export const trackPageView = (url: string, title?: string): void => {
     });
   }
 
-  // Add other analytics services here (Mixpanel, etc.)
+  // Add other analytics services here if needed
 };
 
 /**
@@ -160,12 +140,10 @@ export const disableAnalytics = (): void => {
  * Configuration object should contain your analytics IDs:
  * {
  *   googleAnalytics: 'G-XXXXXXXXXX',
- *   mixpanel: 'your-token',
  * }
  */
 export const initializeAnalytics = (config?: {
   googleAnalytics?: string;
-  mixpanel?: string;
 }): void => {
   if (!hasAnalyticsConsent()) {
     disableAnalytics();
@@ -174,10 +152,6 @@ export const initializeAnalytics = (config?: {
 
   if (config?.googleAnalytics) {
     initializeGoogleAnalytics(config.googleAnalytics);
-  }
-
-  if (config?.mixpanel) {
-    initializeMixpanel(config.mixpanel);
   }
 };
 
