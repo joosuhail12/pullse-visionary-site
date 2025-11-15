@@ -4,6 +4,8 @@ import Script from "next/script";
 import type { ReactNode } from "react";
 import Providers from "./providers";
 import Analytics from "@/components/Analytics";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "@/components/MagicBento.css";
 
@@ -56,6 +58,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
     <body className={inter.className} suppressHydrationWarning>
       <Providers>{children}</Providers>
       <Analytics />
+      <SpeedInsights />
+      <VercelAnalytics />
     </body>
   </html>
 );
