@@ -13,28 +13,13 @@ export const metadata: Metadata = {
   description: "Unify all customer conversations, automate with AI, and deliver exceptional support experiences at scale with Pullse.",
 };
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
-
-  return (
-    <html lang="en">
-      <body className={inter.className} suppressHydrationWarning>
-        {/* Google Tag Manager (noscript) - Required immediately after <body> */}
-        {gtmId && (
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
-        <Providers>{children}</Providers>
-        <Analytics />
-      </body>
-    </html>
-  );
-};
+const RootLayout = ({ children }: { children: ReactNode }) => (
+  <html lang="en">
+    <body className={inter.className} suppressHydrationWarning>
+      <Providers>{children}</Providers>
+      <Analytics />
+    </body>
+  </html>
+);
 
 export default RootLayout;

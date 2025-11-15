@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 import { isEEARegion } from '@/lib/regionDetection';
 
 /**
- * Google Tag Manager with Consent Mode v2 Implementation
+ * Google Analytics 4 with Consent Mode v2 Implementation
  *
  * Implements proper consent workflow per Google's requirements:
- * 1. Sets default consent state to 'denied' BEFORE GTM loads
+ * 1. Sets default consent state to 'denied' BEFORE GA4 loads
  * 2. Applies region-specific defaults (stricter for EEA)
- * 3. Loads GTM container with all configured tags
+ * 3. Loads GA4 gtag.js directly (no GTM)
  * 4. Updates consent when user interacts with banner
  * 5. Enables advanced features (url_passthrough, ads_data_redaction)
  *
@@ -24,7 +24,7 @@ import { isEEARegion } from '@/lib/regionDetection';
  * from CookieConsentContext for simplified UX.
  *
  * @see https://developers.google.com/tag-platform/security/guides/consent
- * @see https://developers.google.com/tag-platform/tag-manager/web
+ * @see https://developers.google.com/analytics/devguides/collection/ga4
  */
 
 interface ConsentState {
@@ -37,7 +37,7 @@ interface ConsentState {
 const Analytics = () => {
   const [isEEA, setIsEEA] = useState<boolean>(false);
 
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   /**
    * Check current consent state from localStorage
@@ -121,10 +121,10 @@ const Analytics = () => {
     };
   }, []);
 
-  // Don't render if GTM ID not configured
-  if (!gtmId) {
+  // Don't render if GA ID not configured
+  if (!gaId) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn('[Analytics] NEXT_PUBLIC_GTM_ID not configured - GTM disabled');
+      console.warn('[Analytics] NEXT_PUBLIC_GA_MEASUREMENT_ID not configured - Analytics disabled');
     }
     return null;
   }
@@ -136,7 +136,7 @@ const Analytics = () => {
     <>
       {/*
         Step 1: Initialize dataLayer and set default consent
-        This MUST run BEFORE GTM loads
+        This MUST run BEFORE GA4 loads
       */}
       <Script
         id="google-consent-mode-init"
@@ -160,27 +160,39 @@ const Analytics = () => {
             gtag('set', 'ads_data_redaction', true);
             gtag('set', 'url_passthrough', true);
 
+            gtag('js', new Date());
+
             ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] Consent Mode v2 initialized', { isEEA: ${isEEA}, consent: ${JSON.stringify(initialConsent)} });` : ''}
           `,
         }}
       />
 
       {/*
-        Step 2: Load Google Tag Manager
-        GTM container loads after consent defaults are set
+        Step 2: Load Google Analytics gtag.js script
+        Loads after consent defaults are set
       */}
       <Script
-        id="google-tag-manager"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        strategy="beforeInteractive"
+      />
+
+      {/*
+        Step 3: Configure GA4 measurement
+        Sets GA4-specific configuration options
+      */}
+      <Script
+        id="google-analytics-config"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${gtmId}');
+            gtag('config', '${gaId}', {
+              'anonymize_ip': true,
+              'cookie_flags': 'SameSite=None;Secure',
+              'allow_google_signals': ${initialConsent.ad_personalization === 'granted'},
+              'allow_ad_personalization_signals': ${initialConsent.ad_personalization === 'granted'}
+            });
 
-            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] GTM loaded with ID: ${gtmId}');` : ''}
+            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] GA4 configured with ID: ${gaId}');` : ''}
           `,
         }}
       />
