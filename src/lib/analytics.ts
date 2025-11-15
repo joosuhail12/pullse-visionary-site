@@ -156,7 +156,80 @@ export const initializeAnalytics = (config?: {
 };
 
 /**
- * Track events using Google Analytics 4 via @next/third-parties
+ * Get current consent state in Consent Mode v2 format
+ *
+ * @returns Object with consent state for all 4 Consent Mode v2 parameters
+ */
+export const getConsentModeState = (): {
+  analytics_storage: 'granted' | 'denied';
+  ad_storage: 'granted' | 'denied';
+  ad_user_data: 'granted' | 'denied';
+  ad_personalization: 'granted' | 'denied';
+} => {
+  if (typeof window === 'undefined') {
+    return {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    };
+  }
+
+  try {
+    const consent = localStorage.getItem('pullse_cookie_consent');
+    if (!consent) {
+      return {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      };
+    }
+
+    const parsed = JSON.parse(consent);
+
+    // Map analytics consent to ALL Google consent types (simplified approach)
+    const analyticsConsent = parsed.analytics ? 'granted' : 'denied';
+
+    return {
+      analytics_storage: analyticsConsent,
+      ad_storage: analyticsConsent,
+      ad_user_data: analyticsConsent,
+      ad_personalization: analyticsConsent,
+    };
+  } catch {
+    return {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    };
+  }
+};
+
+/**
+ * Update consent mode
+ * Call this when user changes consent preferences
+ *
+ * @param consent - Consent state object with all 4 parameters
+ */
+export const updateConsentMode = (consent: {
+  analytics_storage: 'granted' | 'denied';
+  ad_storage: 'granted' | 'denied';
+  ad_user_data: 'granted' | 'denied';
+  ad_personalization: 'granted' | 'denied';
+}): void => {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('consent', 'update', consent);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Analytics] Consent mode updated:', consent);
+    }
+  }
+};
+
+/**
+ * Track events using Google Analytics 4 with Consent Mode v2
  * This is a convenience wrapper that checks consent before sending events
  *
  * Usage:
@@ -175,16 +248,18 @@ export const trackEventGA4 = (eventName: string, eventParams?: Record<string, an
     return;
   }
 
-  // Use gtag from window (loaded by @next/third-parties GoogleAnalytics component)
+  // Use gtag from window (loaded by custom Analytics component)
   if ((window as any).gtag) {
     (window as any).gtag('event', eventName, eventParams);
   } else if (process.env.NODE_ENV === 'development') {
-    console.warn('Google Analytics not loaded - ensure Analytics component is mounted and consent granted');
+    console.warn('[Analytics] GA4 not loaded - ensure Analytics component is mounted and consent granted');
   }
 };
 
 export default {
   hasAnalyticsConsent,
+  getConsentModeState,
+  updateConsentMode,
   initializeAnalytics,
   trackPageView,
   trackEvent,
