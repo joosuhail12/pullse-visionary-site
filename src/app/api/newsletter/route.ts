@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
 
 // =======================
 // Schema Validation (Zod)
@@ -115,6 +116,18 @@ export async function POST(request: NextRequest) {
           );
         }
 
+        // Track update
+        await trackServerEvent(
+          validatedData.email,
+          'newsletter_updated_server',
+          {
+            source: validatedData.source,
+            has_first_name: !!validatedData.firstName,
+            has_last_name: !!validatedData.lastName,
+          }
+        );
+        await flushServerEvents();
+
         return NextResponse.json(
           {
             message: 'Your subscription details have been updated!',
@@ -162,6 +175,27 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      // Track reactivation
+      await trackServerEvent(
+        validatedData.email,
+        'newsletter_reactivated_server',
+        {
+          source: validatedData.source,
+          has_first_name: !!validatedData.firstName,
+          has_last_name: !!validatedData.lastName,
+        }
+      );
+      await trackServerEvent(
+        validatedData.email,
+        'newsletter_signup',
+        {
+          source: validatedData.source,
+          reactivation: true,
+          value: 10,
+        }
+      );
+      await flushServerEvents();
+
       return NextResponse.json(
         {
           message: 'Welcome back! Your subscription has been reactivated.',
@@ -186,11 +220,48 @@ export async function POST(request: NextRequest) {
 
     if (insertError) {
       console.error('Error inserting subscriber:', insertError);
+
+      // Track failed subscription
+      await trackServerEvent(
+        validatedData.email,
+        'newsletter_subscribe_failed',
+        {
+          source: validatedData.source,
+          error_code: 'DATABASE_ERROR',
+        }
+      );
+      await flushServerEvents();
+
       return NextResponse.json(
         { error: 'Failed to subscribe. Please try again.' },
         { status: 500 }
       );
     }
+
+    // Track successful new subscription
+    await trackServerEvent(
+      validatedData.email,
+      'newsletter_subscribed_server',
+      {
+        source: validatedData.source,
+        has_first_name: !!validatedData.firstName,
+        has_last_name: !!validatedData.lastName,
+        new_subscriber: true,
+      }
+    );
+
+    // Track as conversion event
+    await trackServerEvent(
+      validatedData.email,
+      'newsletter_signup',
+      {
+        source: validatedData.source,
+        new_subscriber: true,
+        value: 10,
+      }
+    );
+
+    await flushServerEvents();
 
     // Success response
     return NextResponse.json(

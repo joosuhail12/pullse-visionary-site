@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer, type StartupApplication } from '@/lib/supabase-server';
+import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
 
 // =======================
 // Schema Validation (Zod)
@@ -249,6 +250,23 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Supabase insert error:', error);
+
+      // Track failed submission
+      await trackServerEvent(
+        validatedData.email,
+        'application_submit_failed',
+        {
+          application_type: 'startup',
+          error_code: 'DATABASE_ERROR',
+          company_name: validatedData.companyName,
+          annual_revenue: validatedData.annualRevenue,
+          total_funding: validatedData.totalFunding,
+          seats_needed: validatedData.seatsNeeded,
+          request_id: requestId,
+        }
+      );
+      await flushServerEvents();
+
       return createErrorResponse(
         'DATABASE_ERROR',
         'Failed to submit application. Please try again.',
@@ -258,7 +276,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 8. Success response
+    // 8. Track successful application submission
+    await trackServerEvent(
+      validatedData.email,
+      'application_submitted_server',
+      {
+        application_type: 'startup',
+        application_id: data.id,
+        company_name: validatedData.companyName,
+        annual_revenue: validatedData.annualRevenue,
+        total_funding: validatedData.totalFunding,
+        seats_needed: validatedData.seatsNeeded,
+        customer_status: validatedData.customerStatus,
+        has_current_tools: !!validatedData.currentTools,
+        has_use_case: !!validatedData.useCase,
+        request_id: requestId,
+        value: 150, // Startup application value
+      }
+    );
+
+    // Track as conversion event
+    await trackServerEvent(
+      validatedData.email,
+      'submit_application',
+      {
+        application_type: 'startup',
+        company_name: validatedData.companyName,
+        annual_revenue: validatedData.annualRevenue,
+        total_funding: validatedData.totalFunding,
+        seats_needed: validatedData.seatsNeeded,
+        application_id: data.id,
+        value: 150,
+      }
+    );
+
+    // Flush events before returning
+    await flushServerEvents();
+
+    // 9. Success response
     return createSuccessResponse(
       {
         id: data.id,

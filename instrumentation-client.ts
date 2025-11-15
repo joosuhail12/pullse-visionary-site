@@ -16,6 +16,75 @@
 import posthog from 'posthog-js';
 
 /**
+ * Generate a unique anonymous user ID
+ */
+const generateAnonymousId = (): string => {
+  return `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+};
+
+/**
+ * Get or create user ID for tracking
+ */
+const getUserId = (): string => {
+  if (typeof window === 'undefined') return '';
+
+  try {
+    // Check for existing user ID
+    let userId = localStorage.getItem('pullse_user_id');
+
+    if (!userId) {
+      // Generate new anonymous ID
+      userId = generateAnonymousId();
+      localStorage.setItem('pullse_user_id', userId);
+    }
+
+    return userId;
+  } catch (error) {
+    console.error('[PostHog] Error getting user ID:', error);
+    return generateAnonymousId();
+  }
+};
+
+/**
+ * Get UTM parameters from URL
+ */
+const getUTMParams = (): Record<string, string> => {
+  if (typeof window === 'undefined') return {};
+
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const utmParams: Record<string, string> = {};
+
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((param) => {
+      const value = params.get(param);
+      if (value) {
+        utmParams[param] = value;
+      }
+    });
+
+    return utmParams;
+  } catch (error) {
+    return {};
+  }
+};
+
+/**
+ * Get visit count for current user
+ */
+const getVisitCount = (): number => {
+  if (typeof window === 'undefined') return 1;
+
+  try {
+    const count = parseInt(localStorage.getItem('pullse_visit_count') || '0', 10);
+    const newCount = count + 1;
+    localStorage.setItem('pullse_visit_count', newCount.toString());
+    return newCount;
+  } catch (error) {
+    return 1;
+  }
+};
+
+/**
  * Check if analytics consent has been granted
  */
 const hasAnalyticsConsent = (): boolean => {
@@ -55,11 +124,52 @@ const initPostHog = (): void => {
     capture_pageview: true, // Auto-capture page views
     capture_pageleave: true, // Track when users leave pages
     autocapture: true, // Enable automatic event tracking
-    disable_session_recording: true, // Disable session recording by default for privacy
+
+    // Session Recording Configuration
+    session_recording: {
+      maskAllInputs: true, // Mask all input fields by default
+      maskTextSelector: '[data-private], .private', // Mask elements with data-private attribute
+      recordCrossOriginIframes: false, // Don't record cross-origin iframes
+    },
+
+    // Privacy Controls
+    mask_all_text: false, // Don't mask all text (we want to see content)
+    mask_all_element_attributes: false, // Don't mask attributes
+
+    // Performance
+    capture_performance: true, // Capture performance metrics
+
     loaded: (ph) => {
       if (process.env.NODE_ENV === 'development') {
-        console.log('[PostHog] Initialized successfully');
+        console.log('[PostHog] Initialized successfully with session recordings');
         ph.debug(); // Enable debug mode in development
+      }
+
+      // Identify user for cross-session tracking
+      const userId = getUserId();
+      if (userId) {
+        ph.identify(userId);
+
+        // Set user properties
+        const utmParams = getUTMParams();
+        const visitCount = getVisitCount();
+        const referrer = document.referrer || 'direct';
+        const landingPage = window.location.pathname;
+
+        ph.setPersonProperties({
+          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          browser: navigator.userAgent,
+          visit_count: visitCount,
+          referrer,
+          landing_page: visitCount === 1 ? landingPage : undefined,
+          first_visit: visitCount === 1,
+          ...utmParams,
+        });
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[PostHog] User identified:', userId);
+          console.log('[PostHog] User properties set:', { visitCount, utmParams, referrer });
+        }
       }
 
       // Send installation verification event
@@ -68,6 +178,7 @@ const initPostHog = (): void => {
         timestamp: new Date().toISOString(),
         source: 'instrumentation-client',
         consent_granted: hasAnalyticsConsent(),
+        session_recording_enabled: true,
       });
 
       if (process.env.NODE_ENV === 'development') {

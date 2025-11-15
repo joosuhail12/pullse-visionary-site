@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
 
 // =======================
 // Schema Validation (Zod)
@@ -265,6 +266,24 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('Supabase insert error:', error);
+
+      // Track failed submission
+      await trackServerEvent(
+        validatedData.email,
+        'form_submit_failed',
+        {
+          form_id: 'contact-sales',
+          error_code: 'DATABASE_ERROR',
+          error_message: 'Failed to submit request',
+          company: validatedData.company,
+          company_size: validatedData.companySize,
+          industry: validatedData.industry,
+          timeline: validatedData.timeline,
+          request_id: requestId,
+        }
+      );
+      await flushServerEvents();
+
       return createErrorResponse(
         'DATABASE_ERROR',
         'Failed to submit request. Please try again.',
@@ -274,7 +293,45 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 8. Success response
+    // 8. Track successful form submission (server-side)
+    await trackServerEvent(
+      validatedData.email,
+      'form_submit_success_server',
+      {
+        form_id: 'contact-sales',
+        submission_id: data.id,
+        company: validatedData.company,
+        company_size: validatedData.companySize,
+        industry: validatedData.industry,
+        timeline: validatedData.timeline,
+        has_phone: !!validatedData.phone,
+        has_current_solution: !!validatedData.currentSolution,
+        has_message: !!validatedData.message,
+        request_id: requestId,
+        value: 100, // Demo request value for conversion tracking
+      }
+    );
+
+    // Track as a conversion event
+    await trackServerEvent(
+      validatedData.email,
+      'generate_lead',
+      {
+        lead_type: 'demo_request',
+        source: 'contact_sales_form',
+        company: validatedData.company,
+        company_size: validatedData.companySize,
+        industry: validatedData.industry,
+        timeline: validatedData.timeline,
+        submission_id: data.id,
+        value: 100,
+      }
+    );
+
+    // Flush events before returning
+    await flushServerEvents();
+
+    // 9. Success response
     return createSuccessResponse(
       {
         id: data.id,
