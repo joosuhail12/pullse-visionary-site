@@ -60,6 +60,18 @@ const initPostHog = (): void => {
         console.log('[PostHog] Initialized successfully');
         ph.debug(); // Enable debug mode in development
       }
+
+      // Send installation verification event
+      ph.capture('posthog_installation_verified', {
+        environment: process.env.NODE_ENV || 'production',
+        timestamp: new Date().toISOString(),
+        source: 'instrumentation-client',
+        consent_granted: hasAnalyticsConsent(),
+      });
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[PostHog] Installation verification event sent');
+      }
     },
   });
 
