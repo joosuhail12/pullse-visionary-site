@@ -27,32 +27,25 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
             id="google-consent-mode-init"
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-
-                // Set default consent state to 'denied' (privacy-first approach)
-                // Client-side Analytics component will update to 'granted' if user accepts
-                gtag('consent', 'default', {
-                  'analytics_storage': 'denied',
-                  'ad_storage': 'denied',
-                  'ad_user_data': 'denied',
-                  'ad_personalization': 'denied',
-                  'wait_for_update': 500
-                });
-
-                // Enable advanced consent mode features
-                gtag('set', 'ads_data_redaction', true);
-                gtag('set', 'url_passthrough', true);
-
-                gtag('js', new Date());
-              `,
+              __html:
+                "window.dataLayer = window.dataLayer || [];" +
+                "function gtag(){dataLayer.push(arguments);}" +
+                "gtag('consent', 'default', {" +
+                  "'analytics_storage': 'denied'," +
+                  "'ad_storage': 'denied'," +
+                  "'ad_user_data': 'denied'," +
+                  "'ad_personalization': 'denied'," +
+                  "'wait_for_update': 500" +
+                "});" +
+                "gtag('set', 'ads_data_redaction', true);" +
+                "gtag('set', 'url_passthrough', true);" +
+                "gtag('js', new Date());"
             }}
           />
 
           {/* Step 2: Load Google Analytics gtag.js script */}
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            src={"https://www.googletagmanager.com/gtag/js?id=" + gaId}
             strategy="beforeInteractive"
           />
 
@@ -61,12 +54,11 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
             id="google-analytics-config"
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
-              __html: `
-                gtag('config', '${gaId}', {
-                  'anonymize_ip': true,
-                  'cookie_flags': 'SameSite=None;Secure'
-                });
-              `,
+              __html:
+                "gtag('config', '" + gaId + "', {" +
+                  "'anonymize_ip': true," +
+                  "'cookie_flags': 'SameSite=None;Secure'" +
+                "});"
             }}
           />
         </>
