@@ -1,18 +1,19 @@
 'use client';
 
-import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { isEEARegion } from '@/lib/regionDetection';
 
 /**
- * Google Analytics 4 with Consent Mode v2 Implementation
+ * Google Analytics 4 Consent Manager
  *
- * Implements proper consent workflow per Google's requirements:
- * 1. Sets default consent state to 'denied' BEFORE GA4 loads
- * 2. Applies region-specific defaults (stricter for EEA)
- * 3. Loads GA4 gtag.js directly (no GTM)
- * 4. Updates consent when user interacts with banner
- * 5. Enables advanced features (url_passthrough, ads_data_redaction)
+ * This component handles client-side consent updates for GA4 with Consent Mode v2.
+ * The actual GA4 scripts are loaded in layout.tsx <head> for Google Tag Assistant detection.
+ *
+ * Responsibilities:
+ * 1. Listens for consent changes from cookie banner
+ * 2. Updates Google Consent Mode when user accepts/denies cookies
+ * 3. Applies region-specific consent settings (EEA detection)
+ * 4. Logs consent updates in development mode
  *
  * Consent Mode v2 Parameters:
  * - analytics_storage: Analytics cookies/data collection
@@ -24,7 +25,6 @@ import { isEEARegion } from '@/lib/regionDetection';
  * from CookieConsentContext for simplified UX.
  *
  * @see https://developers.google.com/tag-platform/security/guides/consent
- * @see https://developers.google.com/analytics/devguides/collection/ga4
  */
 
 interface ConsentState {
@@ -35,10 +35,6 @@ interface ConsentState {
 }
 
 const Analytics = () => {
-  const [isEEA, setIsEEA] = useState<boolean>(false);
-
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   /**
    * Check current consent state from localStorage
    * Maps 'analytics' consent to all 4 Consent Mode v2 parameters
@@ -88,8 +84,35 @@ const Analytics = () => {
   };
 
   useEffect(() => {
-    // Detect region on client
-    setIsEEA(isEEARegion());
+    /**
+     * Apply initial consent update with region-specific settings
+     * This runs once on mount to apply EEA region if applicable
+     */
+    const applyInitialConsent = () => {
+      const isEEA = isEEARegion();
+      const consent = checkConsent();
+
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        const consentUpdate: any = {
+          ...consent,
+          wait_for_update: 500,
+        };
+
+        // Apply EEA region if detected
+        if (isEEA) {
+          consentUpdate.region = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','UK'];
+        }
+
+        (window as any).gtag('consent', 'update', consentUpdate);
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[Analytics] Initial consent applied:', { isEEA, consent });
+        }
+      }
+    };
+
+    // Apply initial consent on mount
+    applyInitialConsent();
 
     /**
      * Handle consent changes
@@ -121,83 +144,8 @@ const Analytics = () => {
     };
   }, []);
 
-  // Don't render if GA ID not configured
-  if (!gaId) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('[Analytics] NEXT_PUBLIC_GA_MEASUREMENT_ID not configured - Analytics disabled');
-    }
-    return null;
-  }
-
-  // Get initial consent state (will be 'denied' if not set)
-  const initialConsent = checkConsent();
-
-  return (
-    <>
-      {/*
-        Step 1: Initialize dataLayer and set default consent
-        This MUST run BEFORE GA4 loads
-      */}
-      <Script
-        id="google-consent-mode-init"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-
-            // Set default consent state based on region and user preferences
-            gtag('consent', 'default', {
-              'analytics_storage': '${initialConsent.analytics_storage}',
-              'ad_storage': '${initialConsent.ad_storage}',
-              'ad_user_data': '${initialConsent.ad_user_data}',
-              'ad_personalization': '${initialConsent.ad_personalization}',
-              'wait_for_update': 500,
-              ${isEEA ? `'region': ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','UK']` : ''}
-            });
-
-            // Enable advanced consent mode features
-            gtag('set', 'ads_data_redaction', true);
-            gtag('set', 'url_passthrough', true);
-
-            gtag('js', new Date());
-
-            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] Consent Mode v2 initialized', { isEEA: ${isEEA}, consent: ${JSON.stringify(initialConsent)} });` : ''}
-          `,
-        }}
-      />
-
-      {/*
-        Step 2: Load Google Analytics gtag.js script
-        Loads after consent defaults are set
-      */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-        strategy="beforeInteractive"
-      />
-
-      {/*
-        Step 3: Configure GA4 measurement
-        Sets GA4-specific configuration options
-      */}
-      <Script
-        id="google-analytics-config"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            gtag('config', '${gaId}', {
-              'anonymize_ip': true,
-              'cookie_flags': 'SameSite=None;Secure',
-              'allow_google_signals': ${initialConsent.ad_personalization === 'granted'},
-              'allow_ad_personalization_signals': ${initialConsent.ad_personalization === 'granted'}
-            });
-
-            ${process.env.NODE_ENV === 'development' ? `console.log('[Analytics] GA4 configured with ID: ${gaId}');` : ''}
-          `,
-        }}
-      />
-    </>
-  );
+  // This component doesn't render anything - it only handles consent updates
+  return null;
 };
 
 export default Analytics;
