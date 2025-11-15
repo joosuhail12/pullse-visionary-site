@@ -35,6 +35,8 @@ interface ConsentState {
 }
 
 const Analytics = () => {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   /**
    * Check current consent state from localStorage
    * Maps 'analytics' consent to all 4 Consent Mode v2 parameters
@@ -83,6 +85,29 @@ const Analytics = () => {
     }
   };
 
+  /**
+   * Call gtag('config') to initialize GA4 tracking
+   * MUST be called AFTER consent is granted for hits to be sent
+   */
+  const applyConfig = (consentGranted: boolean) => {
+    if (!gaId || typeof window === 'undefined') return;
+
+    if ((window as any).gtag) {
+      (window as any).gtag('config', gaId, {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure',
+        'allow_google_signals': consentGranted,
+        'allow_ad_personalization_signals': consentGranted
+      });
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Analytics] GA4 config applied:', { gaId, consentGranted });
+      }
+    } else if (process.env.NODE_ENV === 'development') {
+      console.warn('[Analytics] gtag not available for config');
+    }
+  };
+
   useEffect(() => {
     /**
      * Wait for gtag to be available before calling consent updates
@@ -110,6 +135,7 @@ const Analytics = () => {
     const applyInitialConsent = () => {
       const isEEA = isEEARegion();
       const consent = checkConsent();
+      const consentGranted = consent.analytics_storage === 'granted';
 
       if (typeof window !== 'undefined' && (window as any).gtag) {
         const consentUpdate: any = {
@@ -124,8 +150,13 @@ const Analytics = () => {
 
         (window as any).gtag('consent', 'update', consentUpdate);
 
+        // If consent is already granted, call config immediately
+        if (consentGranted) {
+          applyConfig(true);
+        }
+
         if (process.env.NODE_ENV === 'development') {
-          console.log('[Analytics] Initial consent applied:', { isEEA, consent });
+          console.log('[Analytics] Initial consent applied:', { isEEA, consent, consentGranted });
         }
       } else if (process.env.NODE_ENV === 'development') {
         console.warn('[Analytics] gtag not available for initial consent update');
@@ -141,14 +172,20 @@ const Analytics = () => {
      */
     const handleConsentChange = () => {
       const newConsent = checkConsent();
+      const consentGranted = newConsent.analytics_storage === 'granted';
 
       // Update consent mode if gtag is available
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('consent', 'update', newConsent);
 
+        // Call config when consent is granted to start sending hits
+        if (consentGranted) {
+          applyConfig(true);
+        }
+
         // Log consent update in development
         if (process.env.NODE_ENV === 'development') {
-          console.log('[Analytics] Consent updated via event:', newConsent);
+          console.log('[Analytics] Consent updated via event:', { newConsent, consentGranted });
         }
       } else if (process.env.NODE_ENV === 'development') {
         console.error('[Analytics] gtag not available - consent update failed');

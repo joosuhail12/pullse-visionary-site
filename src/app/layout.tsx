@@ -49,18 +49,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
             strategy="beforeInteractive"
           />
 
-          {/* Step 3: Configure GA4 measurement */}
-          <Script
-            id="google-analytics-config"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html:
-                "gtag('config', '" + gaId + "', {" +
-                  "'anonymize_ip': true," +
-                  "'cookie_flags': 'SameSite=None;Secure'" +
-                "});"
-            }}
-          />
+          {/* Step 3: Config is called by Analytics component AFTER consent is granted */}
         </>
       )}
     </head>
