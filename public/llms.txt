@@ -1,0 +1,40 @@
+# Pullse - AI-Native Customer Support Platform
+
+> Pullse is an AI-native customer support platform that replaces your entire stack—Zendesk, Intercom, Freshdesk, plus 10+ fragmented tools—with one unified system. Built on LLM technology with multi-turn conversation handling, autonomous AI agents with configurable guardrails, team copilots with action execution capabilities, automated quality assurance scoring, and self-service help centers. Transparent pricing: Standard $49/seat/month, Pro $79/seat/month, plus pay-per-use credits at $0.08-0.10 each. Launching Q4 2025.
+
+Pullse consolidates ticketing, live chat, AI chatbots, knowledge bases, QA automation, and analytics into a single AI-native platform. Unlike legacy tools retrofitted with AI features, Pullse is architected from the ground up for LLM-powered support operations, handling complex multi-turn conversations, dynamic context switching, and intelligent action execution.
+
+## Product Overview
+
+- [Platform Overview](https://www.pullse.ai/product.md): Complete platform capabilities and unified inbox
+- [AI Engine - Autonomous Support Agent](https://www.pullse.ai/product/ai-engine.md): Customer-facing AI agents with guardrails and action execution
+- [AI Suite - Complete AI Toolkit](https://www.pullse.ai/product/ai-suite.md): Copilot profiles, knowledge management, and AI writing tools
+- [Auto-QA - Quality Assurance Automation](https://www.pullse.ai/product/auto-qa.md): Automated conversation scoring with AI feedback (Pro plan only)
+- [Inbox & Channels - Unified Communication](https://www.pullse.ai/product/inbox-channels.md): Email, live chat, voice, social in one interface
+- [Workflows & Routing - Intelligent Automation](https://www.pullse.ai/product/workflows-routing.md): Visual workflow builder with AI-powered routing
+- [Analytics & Reporting - Data-Driven Insights](https://www.pullse.ai/product/analytics.md): Pre-built dashboards, deflection tracking, ROI metrics
+- [Appo - Help Centers & Knowledge Base](https://www.pullse.ai/product/appo.md): Self-service knowledge base platform (1 on Standard, unlimited on Pro)
+
+## Solutions by Industry
+
+- [Solutions Hub](https://www.pullse.ai/solutions.md): Overview of all industry solutions and use cases
+- [B2B SaaS Solution](https://www.pullse.ai/solutions/b2b-saas.md): For SaaS companies with technical support needs and product usage tracking
+- [E-commerce Solution](https://www.pullse.ai/solutions/ecommerce.md): For retail/e-commerce with WISMO automation and returns processing
+- [Fintech Solution](https://www.pullse.ai/solutions/fintech.md): For financial services with compliance tracking and fraud alert handling
+
+## Pricing & Plans
+
+- [Pricing](https://www.pullse.ai/pricing.md): Complete pricing breakdown, feature comparison, and credit system details
+- [Compare to Competitors](https://www.pullse.ai/compare.md): Head-to-head comparison vs Zendesk, Intercom, Freshdesk, and Dixa
+
+## For Startups
+
+- [Startup Program - 50% Off for 12 Months](https://www.pullse.ai/apply/startup.md): Eligibility criteria and application process for early-stage companies
+
+## Company & Resources
+
+- [Company Page - Mission, Team, Values](https://www.pullse.ai/company.md): Company story, founding team, and vision for AI-native software
+
+## Optional
+
+- [Legal - Terms & Privacy](https://www.pullse.ai/legal): Terms of service, privacy policy, and compliance information
