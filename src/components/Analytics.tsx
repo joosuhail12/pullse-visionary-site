@@ -140,7 +140,7 @@ const Analytics = () => {
       */}
       <Script
         id="google-consent-mode-init"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -171,7 +171,7 @@ const Analytics = () => {
       */}
       <Script
         id="google-tag-manager"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
