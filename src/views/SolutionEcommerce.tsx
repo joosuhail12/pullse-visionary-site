@@ -1,282 +1,39 @@
-'use client';
-
-import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
+import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
+import SolutionEcommerceHeroSection from "@/components/solutions/SolutionEcommerceHeroSection";
+import SolutionEcommerceStatsSection from "@/components/solutions/SolutionEcommerceStatsSection";
+import SolutionEcommercePillarsSection from "@/components/solutions/SolutionEcommercePillarsSection";
+import SolutionEcommerceIntegrationsSection from "@/components/solutions/SolutionEcommerceIntegrationsSection";
 import {
   Sparkles,
   CheckCircle2,
-  ShoppingCart,
-  Truck,
-  RotateCw,
   Zap,
-  TrendingUp,
-  Clock,
-  MessageSquare,
-  Users,
-  Shield,
-  CreditCard,
-  RefreshCw,
   AlertTriangle,
   DollarSign,
-  Play,
-  BarChart3,
-  Heart,
+  Clock,
+  MessageSquare,
+  TrendingUp,
+  Shield,
   ArrowRight,
-  Mail,
-  Package,
 } from "lucide-react";
 
-// Animated Counter Component
-const AnimatedCounter = ({ end, suffix = '', prefix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; prefix?: string; duration?: number; trigger?: boolean }) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (!trigger || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = Date.now();
-    const animate = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [trigger, hasStarted, end, duration]);
-
-  return <>{prefix}{count}{suffix}</>;
-};
-
 const SolutionEcommerce = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [statsAnimated, setStatsAnimated] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  // Scroll progress indicator
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-
-      // Stats animation trigger
-      if (statsRef.current && !statsAnimated) {
-        const rect = statsRef.current.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-          setStatsAnimated(true);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [statsAnimated]);
-
-  const pillars = [
-    {
-      icon: Truck,
-      title: 'AI Chatbots',
-      subtitle: 'Kill WISMO Tickets',
-      description: '80% of your tickets are "Where\'s my order?" Let AI handle them. Auto-detect order numbers, pull real-time tracking from Shopify + carriers, send personalized updates.',
-      stat: '80%',
-      statLabel: 'WISMO auto-resolved',
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: RotateCw,
-      title: 'AI Copilots',
-      subtitle: 'One-Command Returns',
-      description: 'Returns take 6 minutes across Shopify → ShipStation → Stripe. Agent types "process return + send label"—AI executes all 4 steps in 2 minutes.',
-      stat: '2 min',
-      statLabel: 'from request to label sent',
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Auto-QA',
-      subtitle: 'Survive Black Friday',
-      description: 'Peak season = 5x volume spike. AI handles the surge, routes complex issues, maintains quality. No temp hires needed.',
-      stat: '92%',
-      statLabel: 'CSAT during peak season',
-      color: 'from-green-500 to-emerald-500'
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
-        <div
-          className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <ScrollProgressIndicator />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 overflow-hidden">
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+      <SolutionEcommerceHeroSection />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
+      <SolutionEcommerceStatsSection />
 
-        <div className="container relative mx-auto px-4 w-full">
-          <div className="max-w-[1400px] mx-auto">
-            {/* Header Content */}
-            <div className="text-center space-y-8">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
-                Seasonal spikes crush your team. Every single time.
-                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-3">
-                  Handle 10x the volume. Zero temp hires.
-                </span>
-              </h1>
-
-              <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
-                AI that auto-resolves 80% of WISMO tickets, processes returns in 2 minutes, and handles every spike—holiday rushes, flash sales, product launches. Your team survives without breaking. Same agents. 10x capacity.
-              </p>
-
-              {/* CTA */}
-              <div className="pt-6">
-                <RouteButton size="lg" href="/contact-sales" className="text-base px-10 py-6 shadow-xl shadow-primary/20 group">
-                  Book a demo
-                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                </RouteButton>
-              </div>
-
-              {/* Trust Signals */}
-              <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 pt-6 text-base text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  <span>Live in 2 weeks</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  <span>No credit card</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  <span>Shopify native</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="relative py-14 md:py-20 lg:py-28 bg-gradient-to-b from-muted/10 to-transparent">
-        <div className="container mx-auto px-4">
-          <div className="max-w-[1400px] mx-auto">
-            <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {[
-                { value: 80, suffix: '%', label: 'WISMO tickets', detail: 'eliminated by AI', icon: Truck },
-                { value: 6, suffix: ' min', label: 'Saved per return', detail: 'from 8 min to 2 min', icon: Clock },
-                { value: 30, suffix: 's', label: 'Auto-response', detail: 'avg tracking reply', icon: MessageSquare },
-                { value: 10, suffix: 'x', label: 'Peak capacity', detail: 'Black Friday ready', icon: TrendingUp },
-              ].map((stat, i) => {
-                const Icon = stat.icon;
-                return (
-                  <div
-                    key={i}
-                    className="group relative text-center"
-                  >
-                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-7 w-7 text-primary" />
-                    </div>
-                    <div className="text-5xl md:text-6xl font-black text-foreground mb-3">
-                      <AnimatedCounter end={stat.value} suffix={stat.suffix} trigger={statsAnimated} />
-                    </div>
-                    <div className="text-sm font-bold text-foreground mb-1">{stat.label}</div>
-                    <div className="text-xs text-muted-foreground">{stat.detail}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3 Pillars Section */}
-      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
-        <div className="container relative mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20 space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Three ways to handle e-commerce chaos
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                WISMO automation, instant returns, and peak season scalability—all working together
-              </p>
-            </div>
-
-            {/* Pillar Cards */}
-            <div className="grid lg:grid-cols-3 gap-8 mb-12">
-              {pillars.map((pillar, index) => {
-                const Icon = pillar.icon;
-                return (
-                  <div key={index} className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${pillar.color} opacity-0 transition-opacity group-hover:opacity-5`} />
-
-                    <div className="relative p-8 space-y-6">
-                      {/* Icon & Badge */}
-                      <div className="flex items-start justify-between">
-                        <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg transition-all group-hover:scale-110`}>
-                          <Icon className="h-8 w-8 text-background" />
-                        </div>
-                        <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase">
-                          {pillar.subtitle}
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="space-y-3">
-                        <h3 className="text-2xl font-bold text-foreground">{pillar.title}</h3>
-                        <p className="text-base text-muted-foreground leading-relaxed">{pillar.description}</p>
-                      </div>
-
-                      {/* Stat */}
-                      <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-                        <div className={`text-5xl font-black bg-gradient-to-r ${pillar.color} bg-clip-text text-transparent mb-2`}>
-                          {pillar.stat}
-                        </div>
-                        <div className="text-sm text-foreground/80">{pillar.statLabel}</div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+      <SolutionEcommercePillarsSection />
 
       {/* Core E-commerce Workflows Section */}
       <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
@@ -577,80 +334,7 @@ const SolutionEcommerce = () => {
         </div>
       </section>
 
-      {/* Integrations Section */}
-      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-20 space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                AI executes across your retail stack
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Agents ask, Pullse executes. Our AI figures out how to take action across all your e-commerce tools—instantly.
-              </p>
-            </div>
-
-            {/* Integrations Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { icon: ShoppingCart, name: 'Shopify', description: 'Real-time order sync, inventory, customer profiles', benefit: 'Execute order actions instantly', gradient: 'from-green-500/10 to-emerald-500/10' },
-                { icon: CreditCard, name: 'Stripe', description: 'Instant refunds, payment history, subscription updates', benefit: 'Process refunds in seconds', gradient: 'from-blue-500/10 to-cyan-500/10' },
-                { icon: Truck, name: 'ShipStation', description: 'Auto label generation, carrier tracking, batch processing', benefit: 'Generate return labels instantly', gradient: 'from-purple-500/10 to-pink-500/10' },
-                { icon: RefreshCw, name: 'Returnly', description: 'Return portal, prepaid labels, warehouse integration', benefit: 'Automate return workflows', gradient: 'from-cyan-500/10 to-teal-500/10' },
-                { icon: Mail, name: 'Klaviyo', description: 'Email marketing & automation', benefit: 'Trigger campaigns from support data', gradient: 'from-pink-500/10 to-rose-500/10' },
-                { icon: Package, name: 'AfterShip', description: 'Post-purchase tracking & notifications', benefit: 'Auto-update customers on delivery', gradient: 'from-indigo-500/10 to-purple-500/10' },
-              ].map((integration, index) => {
-                const Icon = integration.icon;
-                return (
-                  <div
-                    key={index}
-                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2"
-                  >
-                    {/* Gradient background on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${integration.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
-
-                    {/* Shimmer effect on hover */}
-                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-                    <div className="relative space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shrink-0 group-hover:shadow-lg">
-                          <Icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform duration-300" />
-                        </div>
-                        <div className="px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase group-hover:bg-primary group-hover:text-background transition-all duration-300">
-                          Live
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{integration.name}</h3>
-                        <p className="text-xs text-muted-foreground mb-3">{integration.description}</p>
-                        <div className="flex items-center gap-2 text-xs font-semibold text-primary group-hover:scale-105 transition-transform duration-300 origin-left">
-                          <CheckCircle2 className="h-3.5 w-3.5 group-hover:scale-110 transition-transform duration-300" />
-                          <span>{integration.benefit}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom accent line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Extensibility Badge */}
-            <div className="flex items-center justify-center pt-8">
-              <div className="flex items-center gap-2 px-6 py-3 rounded-full border border-primary/20 bg-primary/5">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-foreground">
-                  40+ native e-commerce integrations
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SolutionEcommerceIntegrationsSection />
 
       {/* ROI Calculator Section */}
       <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
