@@ -43,7 +43,7 @@ export default function ArticleStructuredData({ post, url }: ArticleStructuredDa
       name: 'Pullse',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://pullse.ai/logo.png',
+        url: 'https://www.pullse.ai/logo.png',
       },
     },
     mainEntityOfPage: {

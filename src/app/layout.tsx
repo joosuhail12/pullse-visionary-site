@@ -6,6 +6,7 @@ import Providers from "./providers";
 import Analytics from "@/components/Analytics";
 import ScrollTracker from "@/components/analytics/ScrollTracker";
 import EngagementTracker from "@/components/analytics/EngagementTracker";
+import OrganizationSchema from "@/components/structured-data/OrganizationSchema";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -14,8 +15,12 @@ import "@/components/MagicBento.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.pullse.ai"
+  ),
   title: "Pullse - AI-Powered Customer Support Platform",
-  description: "Unify all customer conversations, automate with AI, and deliver exceptional support experiences at scale with Pullse.",
+  description:
+    "Unify all customer conversations, automate with AI, and deliver exceptional support experiences at scale with Pullse.",
 };
 
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -58,6 +63,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       )}
     </head>
     <body className={inter.className} suppressHydrationWarning>
+      <OrganizationSchema />
       <Providers>{children}</Providers>
       <Analytics />
       <ScrollTracker />
