@@ -3,6 +3,7 @@
 import { useEffect, useRef, lazy, Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { prefersReducedMotion, getLiquidEtherResolution, getDeviceType } from "@/lib/deviceDetection";
 import {
   ArrowRight,
   CheckCircle2,
@@ -254,6 +255,21 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
   const [activeIndustry, setActiveIndustry] = useState('ecommerce');
   const activeTab = useCaseTabs.find(tab => tab.value === activeIndustry) || useCaseTabs[0];
 
+  // Device and performance detection
+  const [shouldShowLiquidEther, setShouldShowLiquidEther] = useState(false);
+  const [liquidEtherResolution, setLiquidEtherResolution] = useState(0.55);
+
+  // Detect device capabilities and motion preferences on client-side
+  useEffect(() => {
+    const hasReducedMotion = prefersReducedMotion();
+    const { isDesktop } = getDeviceType();
+    const adaptiveResolution = getLiquidEtherResolution();
+
+    // Only show on desktop without reduced motion preference
+    setShouldShowLiquidEther(isDesktop && !hasReducedMotion);
+    setLiquidEtherResolution(adaptiveResolution);
+  }, []);
+
   useEffect(() => {
     let ctx: { revert: () => void } | null = null;
     let isMounted = true;
@@ -312,21 +328,25 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background -z-20" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
 
-        {/* LiquidEther - hidden on mobile for performance */}
-        <div className="absolute inset-0 -z-10 opacity-55 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        {/* LiquidEther - Conditionally rendered on desktop without reduced motion */}
+        {shouldShowLiquidEther && (
+          <div className="absolute inset-0 -z-10 opacity-55">
+            <Suspense fallback={
+              <div className="w-full h-full bg-gradient-to-br from-[#FF00C8]/8 via-[#A805FF]/4 to-[#D3A9EA]/8 animate-pulse" />
+            }>
+              <LiquidEther
+                colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+                mouseForce={20}
+                cursorSize={110}
+                isViscous={false}
+                resolution={liquidEtherResolution}
+                autoDemo
+                autoSpeed={0.35}
+                autoIntensity={1.6}
+              />
+            </Suspense>
+          </div>
+        )}
 
         <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20">
           <div className="grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2 items-center">
@@ -524,7 +544,19 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
             </div>
           </div>
 
-          <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
+          <Suspense fallback={
+            <div className="min-h-[400px] bg-gradient-to-b from-background via-primary/3 to-background rounded-2xl border border-border/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 p-4">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-32 rounded-xl bg-gradient-to-br from-muted/50 to-muted/30 animate-pulse"
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  />
+                ))}
+              </div>
+            </div>
+          }>
             <MagicBento cardData={taxonomy} />
           </Suspense>
         </div>

@@ -3,6 +3,7 @@
 
 import { useEffect, useRef } from "react";
 import { trackVideoView, trackVideoStart } from "@/lib/analytics";
+import "lite-youtube-embed/src/lite-yt-embed.css";
 
 interface VideoEmbedProps {
   videoId: string;
@@ -32,12 +33,6 @@ const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
       // Library loaded
     });
 
-    // Add CSS for lite-youtube
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.2.0/src/lite-yt-embed.css";
-    document.head.appendChild(link);
-
     // Track video start when user clicks play
     const handleVideoStart = () => {
       if (!hasTrackedStart.current) {
@@ -57,7 +52,6 @@ const VideoEmbed = ({ videoId, title }: VideoEmbedProps) => {
     }
 
     return () => {
-      document.head.removeChild(link);
       if (container) {
         container.removeEventListener('click', handleVideoStart);
       }
