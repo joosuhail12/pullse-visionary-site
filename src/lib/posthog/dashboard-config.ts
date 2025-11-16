@@ -148,10 +148,6 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
         where: ["event = 'long_task'"],
         orderBy: ['avg(properties.task_duration) DESC'],
         limit: 20,
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
       },
     },
 
@@ -295,10 +291,6 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
         where: ["event = 'api_performance'", "properties.api_success = 'false'"],
         orderBy: ['count() DESC'],
         limit: 50,
-        dateRange: {
-          date_from: '-24h',
-          date_to: null,
-        },
       },
     },
 

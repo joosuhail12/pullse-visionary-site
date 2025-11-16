@@ -56,7 +56,7 @@ export class PostHogAPIClient {
         const errorData = await response.json();
         errorMessage = JSON.stringify(errorData, null, 2);
       } catch {
-        errorMessage = await response.text();
+        errorMessage = response.statusText || `HTTP ${response.status}`;
       }
 
       throw new Error(
@@ -64,7 +64,14 @@ export class PostHogAPIClient {
       );
     }
 
-    return response.json();
+    // Check if response has content
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      return response.json();
+    }
+
+    // For DELETE requests or empty responses
+    return {} as T;
   }
 
   /**
