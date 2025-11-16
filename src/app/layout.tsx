@@ -28,6 +28,12 @@ const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <head>
+      {/* Performance: Preconnect to external domains for faster resource loading */}
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+      <link rel="preconnect" href="https://www.youtube.com" />
+      <link rel="preconnect" href="https://cdn.sanity.io" />
+
       {/* Google Analytics 4 with Consent Mode v2 - Scripts in head for detection */}
       {gaId && (
         <>

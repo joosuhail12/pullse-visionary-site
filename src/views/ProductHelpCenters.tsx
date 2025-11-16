@@ -339,6 +339,7 @@ const ProductHelpCenters = () => {
                   src={appoWordmark}
                   alt="Appo"
                   className="h-8 md:h-9 lg:h-10 w-auto"
+                  priority
                 />
               </div>
 

@@ -30,10 +30,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
 import PlatformOverview from "@/components/PlatformOverview";
-import MagicBento, { CardData } from "@/components/MagicBento";
+import type { CardData } from "@/components/MagicBento";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import InteractiveHowItWorks from "@/components/InteractiveHowItWorks";
 import RoiCalculator from "@/components/RoiCalculator";
+
+const MagicBento = lazy(() => import("@/components/MagicBento"));
 import antlerLogo from "@/assets/antler-logo.png";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
@@ -522,7 +524,9 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
             </div>
           </div>
 
-          <MagicBento cardData={taxonomy} />
+          <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>}>
+            <MagicBento cardData={taxonomy} />
+          </Suspense>
         </div>
       </section>
 
