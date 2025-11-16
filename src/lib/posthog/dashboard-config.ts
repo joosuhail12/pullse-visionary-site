@@ -283,9 +283,9 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
       query: {
         kind: 'EventsQuery',
         select: [
-          'properties.api_endpoint as tracked_endpoint',
-          'properties.api_method as tracked_method',
-          'properties.api_status as tracked_status_code',
+          'properties.api_endpoint as target',
+          'properties.api_method as verb',
+          'properties.api_status as code',
           'count() as failures',
         ],
         where: ["event = 'api_performance'", "properties.api_success = 'false'"],
