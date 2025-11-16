@@ -4,6 +4,7 @@ import Script from "next/script";
 import type { ReactNode } from "react";
 import Providers from "./providers";
 import Analytics from "@/components/Analytics";
+import RouteChangeTracker from "@/components/RouteChangeTracker";
 import ScrollTracker from "@/components/analytics/ScrollTracker";
 import EngagementTracker from "@/components/analytics/EngagementTracker";
 import OrganizationSchema from "@/components/structured-data/OrganizationSchema";
@@ -72,6 +73,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
       <OrganizationSchema />
       <Providers>{children}</Providers>
       <Analytics />
+      <RouteChangeTracker />
       <ScrollTracker />
       <EngagementTracker />
       <SpeedInsights />
