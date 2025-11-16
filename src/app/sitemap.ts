@@ -118,6 +118,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/product/appo`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     // Legal
     {
       url: `${baseUrl}/legal`,
@@ -203,6 +209,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Continue with static routes even if blog posts fail
   }
 
-  // Combine static routes and blog posts
-  return [...staticRoutes, ...blogPosts];
+  // Combine static routes, markdown routes, and blog posts
+  return [...staticRoutes, ...markdownRoutes, ...blogPosts];
 }
