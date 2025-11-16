@@ -4,7 +4,8 @@
  * Monitors and reports real user performance metrics to Google Analytics 4.
  * Tracks the following Core Web Vitals metrics:
  * - LCP (Largest Contentful Paint)
- * - FID (First Input Delay) / INP (Interaction to Next Paint)
+ * - FCP (First Contentful Paint)
+ * - INP (Interaction to Next Paint)
  * - CLS (Cumulative Layout Shift)
  * - TTFB (Time to First Byte)
  *
@@ -62,13 +63,16 @@ export const initPerformanceTracking = async (): Promise<void> => {
 
   try {
     // Dynamically import web-vitals to reduce initial bundle size
-    const { onCLS, onLCP, onTTFB, onINP } = await import('web-vitals');
+    const { onCLS, onLCP, onFCP, onTTFB, onINP } = await import('web-vitals');
 
     // Track Cumulative Layout Shift
     onCLS(sendToAnalytics, { reportAllChanges: false });
 
     // Track Largest Contentful Paint
     onLCP(sendToAnalytics, { reportAllChanges: false });
+
+    // Track First Contentful Paint
+    onFCP(sendToAnalytics, { reportAllChanges: false });
 
     // Track Time to First Byte
     onTTFB(sendToAnalytics, { reportAllChanges: false });
@@ -82,6 +86,192 @@ export const initPerformanceTracking = async (): Promise<void> => {
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {
       console.error('[Performance] Failed to initialize web-vitals:', error);
+    }
+  }
+};
+
+/**
+ * Initialize Long Task Observer to track blocking JavaScript
+ *
+ * Long tasks are JavaScript executions that take >50ms, blocking the main thread
+ * and degrading user experience. Tracking these helps identify performance bottlenecks.
+ */
+export const initLongTaskObserver = (): void => {
+  if (typeof window === 'undefined' || !hasAnalyticsConsent()) {
+    return;
+  }
+
+  try {
+    // Check if PerformanceObserver and longtask are supported
+    if (!('PerformanceObserver' in window)) {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[Performance] PerformanceObserver not supported');
+      }
+      return;
+    }
+
+    // Create observer for long tasks
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        // Long tasks are any tasks >50ms
+        trackEvent('long_task', {
+          task_duration: Math.round(entry.duration),
+          task_name: entry.name || 'unknown',
+          task_start_time: Math.round(entry.startTime),
+          page_path: window.location.pathname,
+          // Attribution helps identify which script caused the long task
+          attribution: (entry as any).attribution
+            ? (entry as any).attribution.map((a: any) => a.containerType || a.containerName).join(', ')
+            : 'unknown',
+        });
+
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(
+            `[Performance] Long task detected: ${Math.round(entry.duration)}ms at ${Math.round(entry.startTime)}ms`
+          );
+        }
+      }
+    });
+
+    // Start observing long tasks
+    observer.observe({ entryTypes: ['longtask'] });
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Performance] Long Task Observer initialized');
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[Performance] Failed to initialize Long Task Observer:', error);
+    }
+  }
+};
+
+/**
+ * Measure Time to Interactive (TTI)
+ *
+ * TTI is when the page becomes fully interactive:
+ * - The page has displayed useful content (FCP)
+ * - Event handlers are registered for most visible page elements
+ * - The page responds to user interactions within 50ms
+ *
+ * This simplified implementation measures TTI as:
+ * FCP + first 5-second quiet window (no long tasks)
+ */
+export const measureTTI = (): void => {
+  if (typeof window === 'undefined' || !hasAnalyticsConsent()) {
+    return;
+  }
+
+  try {
+    let fcpTime = 0;
+    let lastLongTaskEnd = 0;
+    let quietWindowStart = 0;
+    const QUIET_WINDOW_DURATION = 5000; // 5 seconds of quiet
+    let ttiReported = false;
+
+    // Get FCP (First Contentful Paint)
+    const fcpObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.name === 'first-contentful-paint') {
+          fcpTime = entry.startTime;
+          fcpObserver.disconnect();
+        }
+      }
+    });
+
+    fcpObserver.observe({ entryTypes: ['paint'] });
+
+    // Track long tasks to find quiet window
+    const longTaskObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        const taskEnd = entry.startTime + entry.duration;
+        lastLongTaskEnd = Math.max(lastLongTaskEnd, taskEnd);
+        quietWindowStart = 0; // Reset quiet window when long task occurs
+      }
+    });
+
+    try {
+      longTaskObserver.observe({ entryTypes: ['longtask'] });
+    } catch {
+      // Longtask not supported, fallback to load event
+    }
+
+    // Check for TTI after page load
+    const checkTTI = () => {
+      if (ttiReported) return;
+
+      const now = performance.now();
+      const timeSinceLastLongTask = now - lastLongTaskEnd;
+
+      // If we haven't seen a long task yet, use FCP as baseline
+      if (lastLongTaskEnd === 0 && fcpTime > 0) {
+        lastLongTaskEnd = fcpTime;
+      }
+
+      // Start quiet window if we haven't already
+      if (quietWindowStart === 0 && fcpTime > 0) {
+        quietWindowStart = lastLongTaskEnd;
+      }
+
+      // Check if we've had a 5-second quiet window
+      if (
+        quietWindowStart > 0 &&
+        timeSinceLastLongTask >= QUIET_WINDOW_DURATION &&
+        now - quietWindowStart >= QUIET_WINDOW_DURATION
+      ) {
+        const tti = quietWindowStart;
+        ttiReported = true;
+
+        // Send TTI to analytics
+        trackEvent('tti', {
+          value: Math.round(tti),
+          metric_name: 'TTI',
+          metric_value: Math.round(tti),
+          page_path: window.location.pathname,
+        });
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`[Performance] TTI: ${Math.round(tti)}ms`);
+        }
+
+        // Clean up observers
+        longTaskObserver.disconnect();
+        clearInterval(checkInterval);
+      }
+    };
+
+    // Check every second for TTI
+    const checkInterval = setInterval(checkTTI, 1000);
+
+    // Fallback: Report TTI at load event if not already reported
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!ttiReported) {
+          const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+          if (perfData) {
+            const tti = perfData.domInteractive;
+            ttiReported = true;
+
+            trackEvent('tti', {
+              value: Math.round(tti),
+              metric_name: 'TTI',
+              metric_value: Math.round(tti),
+              page_path: window.location.pathname,
+              fallback: true,
+            });
+
+            if (process.env.NODE_ENV === 'development') {
+              console.log(`[Performance] TTI (fallback): ${Math.round(tti)}ms`);
+            }
+          }
+          clearInterval(checkInterval);
+          longTaskObserver.disconnect();
+        }
+      }, QUIET_WINDOW_DURATION);
+    });
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[Performance] Failed to measure TTI:', error);
     }
   }
 };
@@ -197,11 +387,135 @@ export const trackAPIPerformance = (params: {
   });
 };
 
+/**
+ * Create a performance mark for custom timing measurements
+ *
+ * Usage:
+ * markPerformance('form-submit-start');
+ * // ... user flow logic ...
+ * markPerformance('form-submit-end');
+ * measurePerformance('form-submit', 'form-submit-start', 'form-submit-end');
+ */
+export const markPerformance = (markName: string): void => {
+  if (typeof window === 'undefined' || !('performance' in window)) return;
+
+  try {
+    performance.mark(markName);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Performance] Mark created: ${markName}`);
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[Performance] Failed to create mark ${markName}:`, error);
+    }
+  }
+};
+
+/**
+ * Measure performance between two marks and send to analytics
+ *
+ * @param measureName - Name for this measurement (e.g., 'form-submit-duration')
+ * @param startMark - Name of the start mark
+ * @param endMark - Name of the end mark (optional, defaults to current time)
+ */
+export const measurePerformance = (
+  measureName: string,
+  startMark: string,
+  endMark?: string
+): number | null => {
+  if (typeof window === 'undefined' || !('performance' in window)) return null;
+
+  try {
+    // Create measurement
+    const measure = endMark
+      ? performance.measure(measureName, startMark, endMark)
+      : performance.measure(measureName, startMark);
+
+    const duration = measure.duration;
+
+    // Send to analytics if consent granted
+    if (hasAnalyticsConsent()) {
+      trackEvent('custom_measure', {
+        measure_name: measureName,
+        measure_duration: Math.round(duration),
+        page_path: window.location.pathname,
+      });
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Performance] Measurement: ${measureName} = ${Math.round(duration)}ms`);
+    }
+
+    // Clean up marks to prevent memory leaks
+    try {
+      performance.clearMarks(startMark);
+      if (endMark) performance.clearMarks(endMark);
+      performance.clearMeasures(measureName);
+    } catch {
+      // Ignore cleanup errors
+    }
+
+    return duration;
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[Performance] Failed to measure ${measureName}:`, error);
+    }
+    return null;
+  }
+};
+
+/**
+ * Track a complete user journey with automatic start/end timing
+ *
+ * Usage:
+ * const journey = trackUserJourney('checkout-flow');
+ * // ... user completes checkout ...
+ * journey.end({ success: true, items: 3 });
+ *
+ * @param journeyName - Name of the user journey to track
+ * @returns Object with end() method to complete the journey
+ */
+export const trackUserJourney = (journeyName: string) => {
+  const startMark = `${journeyName}-start`;
+  const endMark = `${journeyName}-end`;
+
+  markPerformance(startMark);
+
+  return {
+    /**
+     * End the user journey and send measurement to analytics
+     * @param metadata - Optional metadata about the journey
+     */
+    end: (metadata?: Record<string, any>) => {
+      markPerformance(endMark);
+      const duration = measurePerformance(journeyName, startMark, endMark);
+
+      // Send detailed journey event if consent granted
+      if (hasAnalyticsConsent() && duration !== null) {
+        trackEvent('user_journey', {
+          journey_name: journeyName,
+          journey_duration: Math.round(duration),
+          page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+          ...metadata,
+        });
+      }
+
+      return duration;
+    },
+  };
+};
+
 export default {
   initPerformanceTracking,
+  initLongTaskObserver,
+  measureTTI,
   trackCustomMetric,
   trackPageLoadTime,
   trackRouteChange,
   trackResourceTiming,
   trackAPIPerformance,
+  markPerformance,
+  measurePerformance,
+  trackUserJourney,
 };

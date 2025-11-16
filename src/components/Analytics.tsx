@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { isEEARegion } from '@/lib/regionDetection';
-import { initPerformanceTracking } from '@/lib/performanceTracking';
+import { initPerformanceTracking, initLongTaskObserver, measureTTI } from '@/lib/performanceTracking';
 import { initErrorTracking } from '@/lib/errorTracking';
 import { initUTMTracking } from '@/lib/utmTracking';
 import { setUserProperties } from '@/lib/analytics';
@@ -182,6 +182,8 @@ const Analytics = () => {
       // Initialize performance tracking (Core Web Vitals) if consent granted
       if (consentGranted) {
         initPerformanceTracking();
+        initLongTaskObserver();
+        measureTTI();
 
         // Set initial user properties
         if (typeof window !== 'undefined') {
