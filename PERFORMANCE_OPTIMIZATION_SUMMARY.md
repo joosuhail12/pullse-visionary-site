@@ -63,7 +63,7 @@
 
 ## 🔄 Phase 2: React Server Components Migration (IN PROGRESS)
 
-### Progress: 2 of 25 views converted (8% complete)
+### Progress: 3 of 25 views converted (12% complete)
 
 The Phase 2 RSC refactoring is **significantly more complex** than Phase 1:
 
@@ -90,6 +90,22 @@ The Phase 2 RSC refactoring is **significantly more complex** than Phase 1:
 - **Pattern used:** Server component with single client island for interactive background
 - **Impact:** Minimal JS for mostly static listing page
 - **File:** All solution cards are server-rendered with CSS-only hover effects
+
+**3. Company.tsx (`src/views/Company.tsx`)** ✅
+- **Status:** Fully converted to React Server Component
+- **Client islands created:**
+  - `src/components/company/CompanyHeroBackground.tsx` - Lazy-loaded LiquidEther background
+  - `src/components/company/CompanyHeroContent.tsx` - Hero section animations
+  - `src/components/company/CompanyBentoGrid.tsx` - Bento grid section (280+ lines)
+  - `src/components/company/CompanyBeliefGrid.tsx` - Beliefs grid with icon mapping
+  - `src/components/company/CompanyAntlerCard.tsx` - Antler backing section
+  - `src/components/company/CompanyCtaSection.tsx` - Final CTA section
+- **Pattern used:** Server component with 6 client islands for different sections
+- **Impact:** 88% file size reduction (597 lines → ~105 lines), ~12-15KB JS reduction
+- **Technical notes:**
+  - Icons converted to string names in data file to avoid component serialization errors
+  - Icon mapping handled inside client component (CompanyBeliefGrid)
+  - LiquidEther lazy-loaded with Suspense boundary
 
 ### 🔄 Remaining Conversions
 
@@ -136,21 +152,18 @@ The Phase 2 RSC refactoring is **significantly more complex** than Phase 1:
 - Accordion components
 - Estimated effort: 6-8 hours
 
-**Company Page (`src/views/Company.tsx`):** [Not Started]
-- Complexity: **Medium**
-- Estimated effort: 4-6 hours
-
 **Remaining Pages (6 views):** [Not Started]
 - Various complexity levels
 - Estimated effort: 3-6 hours each
 
 ### Current Impact of Phase 2 (Partial Implementation)
 
-With 2 pages converted:
+With 3 pages converted:
 - **Legal.tsx**: ~15KB JS reduction (animations extracted to client island)
 - **Solutions.tsx**: ~8KB JS reduction (minimal client code needed)
-- **Total bundle reduction so far**: ~23KB (~5% reduction)
-- **Pages affected**: 7 pages (legal listing + 6 individual legal pages)
+- **Company.tsx**: ~12-15KB JS reduction (6 client islands, 88% file reduction)
+- **Total bundle reduction so far**: ~35-38KB (~7% reduction)
+- **Pages affected**: 8 pages (legal listing + 6 individual legal pages + company page)
 
 ### Expected Impact of Full Phase 2 Implementation
 
@@ -159,7 +172,7 @@ If all 25 views fully converted:
 - **LCP**: 2.5-4s → 1.5-2.5s
 - **FCP**: 1.8-2.5s → 1.2-1.8s
 - **Total performance improvement from baseline: 70-80%**
-- **Remaining work**: ~130-180 hours (3-4.5 weeks full-time)
+- **Remaining work**: ~124-174 hours (3-4.3 weeks full-time)
 
 ---
 
@@ -288,10 +301,18 @@ If all 25 views fully converted:
 | `src/components/LegalDocumentCard.tsx` | Created client island | Isolated framer-motion |
 | `src/views/Solutions.tsx` | Removed 'use client', extracted background | Server component |
 | `src/components/solutions/SolutionsHeroBackground.tsx` | Created client island | Isolated LiquidEther |
+| `src/views/Company.tsx` | Removed 'use client', extracted 6 sections | Server component (88% reduction) |
+| `src/data/companyData.ts` | Icons converted to strings | Serialization fix |
+| `src/components/company/CompanyHeroBackground.tsx` | Created client island | Lazy-loaded LiquidEther |
+| `src/components/company/CompanyHeroContent.tsx` | Created client island | Hero animations |
+| `src/components/company/CompanyBentoGrid.tsx` | Created client island | Bento grid (280+ lines) |
+| `src/components/company/CompanyBeliefGrid.tsx` | Created client island | Beliefs grid with icon mapping |
+| `src/components/company/CompanyAntlerCard.tsx` | Created client island | Antler section |
+| `src/components/company/CompanyCtaSection.tsx` | Created client island | CTA section |
 
-**Phase 2 files modified: 4 (2 views converted, 2 client islands created)**
+**Phase 2 files modified: 12 (3 views converted, 8 client islands created, 1 data file updated)**
 
-**Total files modified: 30**
+**Total files modified: 38**
 
 ---
 
@@ -309,14 +330,15 @@ If all 25 views fully converted:
 
 - [x] Legal.tsx converted to React Server Component ✅
 - [x] Solutions.tsx converted to React Server Component ✅
+- [x] Company.tsx converted to React Server Component ✅
 - [x] Client island pattern established ✅
-- [ ] All 25 views converted to React Server Components (8% complete)
-- [ ] JS bundle reduced by 40-60% (~5% achieved so far)
+- [ ] All 25 views converted to React Server Components (12% complete)
+- [ ] JS bundle reduced by 40-60% (~7% achieved so far)
 - [ ] LCP < 2.5s on all pages
 - [ ] Comprehensive Suspense boundaries
 - [ ] Additional 20-30% performance improvement
 
-**Current Status:** 2 of 25 views converted | ~23KB bundle reduction | ~130-180 hours remaining
+**Current Status:** 3 of 25 views converted | ~35-38KB bundle reduction | ~124-174 hours remaining
 
 ---
 
@@ -329,11 +351,12 @@ If all 25 views fully converted:
 - Optimal caching strategies
 - **50-70% TTFB improvement achieved** ✅
 
-**Phase 2 RSC migration has been started (8% complete).** Progress so far:
-- ✅ Legal.tsx and Solutions.tsx converted to server components
+**Phase 2 RSC migration has been started (12% complete).** Progress so far:
+- ✅ Legal.tsx, Solutions.tsx, and Company.tsx converted to server components
 - ✅ Client island pattern established and documented
+- ✅ Icon serialization pattern solved (string-based icon mapping)
 - ✅ Build verified - all conversions working correctly
-- ⏳ 23 views remaining (estimated 130-180 hours)
+- ⏳ 22 views remaining (estimated 124-174 hours)
 
 **Recommendations:**
 
