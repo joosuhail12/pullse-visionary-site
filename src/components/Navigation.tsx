@@ -199,6 +199,8 @@ export function Navigation() {
                       alt="Pullse"
                       width={40}
                       height={40}
+                      sizes="40px"
+                      priority
                       className="w-10 h-10 relative z-10"
                     />
                   </motion.div>
@@ -208,6 +210,8 @@ export function Navigation() {
                     alt="Pullse"
                     width={100}
                     height={24}
+                    sizes="100px"
+                    priority
                     className="h-6 w-auto hidden sm:block relative z-10"
                   />
                 </Link>
@@ -693,8 +697,8 @@ export function Navigation() {
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-100">
                 <div className="flex items-center space-x-2">
-                  <Image src={logoIcon} alt="Pullse" width={32} height={32} className="w-8 h-8" />
-                  <Image src={logoText} alt="Pullse" width={100} height={24} className="h-6 w-auto" />
+                  <Image src={logoIcon} alt="Pullse" width={32} height={32} sizes="32px" className="w-8 h-8" />
+                  <Image src={logoText} alt="Pullse" width={100} height={24} sizes="100px" className="h-6 w-auto" />
                 </div>
                 <Dialog.Close className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
                   <X className="w-6 h-6" />

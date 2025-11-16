@@ -95,7 +95,7 @@ const Footer = () => {
                     alt="Pullse"
                     width={40}
                     height={40}
-                    priority
+                    sizes="40px"
                     className="relative transition-transform group-hover:scale-110 duration-300"
                   />
                 </div>
@@ -104,7 +104,7 @@ const Footer = () => {
                   alt="Pullse"
                   width={120}
                   height={32}
-                  priority
+                  sizes="120px"
                 />
               </Link>
 
