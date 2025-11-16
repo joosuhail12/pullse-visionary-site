@@ -54,7 +54,7 @@ const PricingFeatureTableSection = () => {
             {/* Table Header - Sticky */}
             <div className="grid grid-cols-3 gap-8 px-8 py-6 bg-gradient-to-br from-gray-50 to-white border-b border-gray-200 sticky top-0 z-20 backdrop-blur-md bg-white/95">
               <div className="flex items-center">
-                <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
                   Features
                 </span>
               </div>
@@ -95,13 +95,13 @@ const PricingFeatureTableSection = () => {
                               </p>
                             </div>
                             <div className="flex items-center gap-3 ml-4">
-                              <span className="text-xs font-medium text-gray-500 bg-white px-2.5 py-1 rounded-full border border-gray-200">
+                              <span className="text-xs font-medium text-gray-600 bg-white px-2.5 py-1 rounded-full border border-gray-200">
                                 {category.features.length} features
                               </span>
                               {isExpanded ? (
-                                <ChevronUp className="h-5 w-5 text-gray-500 transition-transform duration-300" />
+                                <ChevronUp className="h-5 w-5 text-gray-600 transition-transform duration-300" />
                               ) : (
-                                <ChevronDown className="h-5 w-5 text-gray-500 transition-transform duration-300" />
+                                <ChevronDown className="h-5 w-5 text-gray-600 transition-transform duration-300" />
                               )}
                             </div>
                           </div>
@@ -134,7 +134,7 @@ const PricingFeatureTableSection = () => {
                                       <span>{feature.name}</span>
                                       {feature.tooltip && (
                                         <div className="relative inline-block">
-                                          <AlertCircle className="h-4 w-4 text-gray-400 hover:text-primary cursor-help transition-colors" />
+                                          <AlertCircle className="h-4 w-4 text-gray-600 hover:text-primary cursor-help transition-colors" />
                                           {/* Tooltip */}
                                           <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 p-4 bg-gray-900 text-white text-sm rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-2xl">
                                             <div className="font-semibold mb-2 text-white">💡 Why this matters:</div>
@@ -241,13 +241,13 @@ const PricingFeatureTableSection = () => {
                         </p>
                       </div>
                       <div className="flex items-center gap-2 md:gap-2.5 ml-3">
-                        <span className="text-[10px] md:text-xs font-medium text-gray-500 bg-white px-1.5 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-200">
+                        <span className="text-[10px] md:text-xs font-medium text-gray-600 bg-white px-1.5 py-0.5 md:px-2 md:py-1 rounded-full border border-gray-200">
                           {category.features.length}
                         </span>
                         {isExpanded ? (
-                          <ChevronUp className="h-4 w-4 md:h-5 md:w-5 text-gray-500 flex-shrink-0 transition-transform" />
+                          <ChevronUp className="h-4 w-4 md:h-5 md:w-5 text-gray-600 flex-shrink-0 transition-transform" />
                         ) : (
-                          <ChevronDown className="h-4 w-4 md:h-5 md:w-5 text-gray-500 flex-shrink-0 transition-transform" />
+                          <ChevronDown className="h-4 w-4 md:h-5 md:w-5 text-gray-600 flex-shrink-0 transition-transform" />
                         )}
                       </div>
                     </div>

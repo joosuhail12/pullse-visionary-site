@@ -122,7 +122,7 @@ const Footer = () => {
                     </div>
                     Stay Updated
                   </h3>
-                  <p className="text-xs text-muted-foreground/80">
+                  <p className="text-xs text-muted-foreground/90">
                     Product updates, tips, and insights.
                   </p>
                 </div>
@@ -167,7 +167,7 @@ const Footer = () => {
                     <li key={link.path}>
                       <Link
                         href={link.path}
-                        className="text-xs sm:text-sm text-muted-foreground/80 hover:text-primary transition-all duration-200 inline-flex items-center group py-1 min-h-[36px]"
+                        className="text-xs sm:text-sm text-muted-foreground/90 hover:text-primary transition-all duration-200 inline-flex items-center group py-1 min-h-[36px]"
                       >
                         <span className="relative">
                           {link.name}
@@ -190,7 +190,7 @@ const Footer = () => {
 
           <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-5">
             <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
-              <p className="text-xs text-muted-foreground/70 font-medium">
+              <p className="text-xs text-muted-foreground/80 font-medium">
                 © 2025 Pullse. All rights reserved.
               </p>
               <div className="flex flex-wrap gap-1 items-center">
@@ -204,7 +204,7 @@ const Footer = () => {
                   <div key={link.href} className="flex items-center gap-1">
                     <Link
                       href={link.href}
-                      className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors px-2 py-1.5 rounded-md hover:bg-muted/50 min-h-[36px] inline-flex items-center"
+                      className="text-xs text-muted-foreground/80 hover:text-foreground transition-colors px-2 py-1.5 rounded-md hover:bg-muted/50 min-h-[36px] inline-flex items-center"
                     >
                       {link.label}
                     </Link>
@@ -219,7 +219,7 @@ const Footer = () => {
                   <span className="text-muted-foreground/30">•</span>
                   <button
                     onClick={openPreferences}
-                    className="text-xs text-muted-foreground/70 hover:text-foreground transition-colors px-2 py-1.5 rounded-md hover:bg-muted/50 min-h-[36px] inline-flex items-center"
+                    className="text-xs text-muted-foreground/80 hover:text-foreground transition-colors px-2 py-1.5 rounded-md hover:bg-muted/50 min-h-[36px] inline-flex items-center"
                   >
                     Cookie Preferences
                   </button>

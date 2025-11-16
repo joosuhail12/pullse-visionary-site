@@ -277,7 +277,7 @@ export function Navigation() {
                                         <ArrowRight className="w-4 h-4" />
                                       </motion.div>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-0.5">
+                                    <p className="text-xs text-gray-600 mt-0.5">
                                       {navigationData.platform[0].links[0].description}
                                     </p>
                                   </div>
@@ -341,7 +341,7 @@ export function Navigation() {
                                             <div className="text-sm font-semibold text-gray-900 group-hover/item:text-purple-600 transition-colors">
                                               {link.label}
                                             </div>
-                                            <div className="text-xs text-gray-500 mt-0.5">
+                                            <div className="text-xs text-gray-600 mt-0.5">
                                               {link.description}
                                             </div>
                                           </div>
@@ -404,7 +404,7 @@ export function Navigation() {
                                     <div className="text-sm font-bold text-gray-900 group-hover/featured:text-blue-600 transition-colors">
                                       {navigationData.solutions[0].label}
                                     </div>
-                                    <div className="text-xs text-gray-500 mt-0.5">
+                                    <div className="text-xs text-gray-600 mt-0.5">
                                       {navigationData.solutions[0].description}
                                     </div>
                                   </div>
@@ -453,7 +453,7 @@ export function Navigation() {
                                       <div className="text-sm font-semibold text-gray-900 group-hover/item:text-blue-600 transition-colors">
                                         {link.label}
                                       </div>
-                                      <div className="text-xs text-gray-500 mt-0.5">
+                                      <div className="text-xs text-gray-600 mt-0.5">
                                         {link.description}
                                       </div>
                                     </div>
@@ -508,7 +508,7 @@ export function Navigation() {
                                           <div className="text-sm font-semibold text-gray-900 group-hover/item:text-indigo-600 transition-colors">
                                             {link.label}
                                           </div>
-                                          <div className="text-xs text-gray-500 mt-0.5">
+                                          <div className="text-xs text-gray-600 mt-0.5">
                                             {link.description}
                                           </div>
                                         </div>
@@ -565,7 +565,7 @@ export function Navigation() {
                                           <div className="text-sm font-semibold text-gray-900 group-hover/item:text-teal-600 transition-colors">
                                             {link.label}
                                           </div>
-                                          <div className="text-xs text-gray-500 mt-0.5">
+                                          <div className="text-xs text-gray-600 mt-0.5">
                                             {link.description}
                                           </div>
                                         </div>
@@ -700,7 +700,7 @@ export function Navigation() {
                   <Image src={logoIcon} alt="Pullse" width={32} height={32} sizes="32px" className="w-8 h-8" />
                   <Image src={logoText} alt="Pullse" width={100} height={24} sizes="100px" className="h-6 w-auto" />
                 </div>
-                <Dialog.Close className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                <Dialog.Close className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 transition-colors" aria-label="Close menu">
                   <X className="w-6 h-6" />
                 </Dialog.Close>
               </div>
@@ -712,7 +712,7 @@ export function Navigation() {
                   <Accordion.Item value="platform" className="border border-gray-100 rounded-lg overflow-hidden">
                     <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
                       Platform
-                      <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      <ChevronDown className="w-4 h-4 text-gray-600 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                       <div className="px-4 pb-4 pt-2 space-y-4">
@@ -736,7 +736,7 @@ export function Navigation() {
                                     <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-purple-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
-                                      <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                      <div className="text-xs text-gray-600 mt-0.5">{link.description}</div>
                                     </div>
                                   </Link>
                                 );
@@ -752,7 +752,7 @@ export function Navigation() {
                   <Accordion.Item value="solutions" className="border border-gray-100 rounded-lg overflow-hidden">
                     <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
                       Solutions
-                      <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      <ChevronDown className="w-4 h-4 text-gray-600 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                       <div className="px-4 pb-4 pt-2 space-y-1">
@@ -768,7 +768,7 @@ export function Navigation() {
                               <Icon className="w-4 h-4 text-purple-600" />
                               <div>
                                 <div className="text-sm font-medium text-gray-900">{link.label}</div>
-                                <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                <div className="text-xs text-gray-600 mt-0.5">{link.description}</div>
                               </div>
                             </Link>
                           );
@@ -781,7 +781,7 @@ export function Navigation() {
                   <Accordion.Item value="resources" className="border border-gray-100 rounded-lg overflow-hidden">
                     <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
                       Resources
-                      <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      <ChevronDown className="w-4 h-4 text-gray-600 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                       <div className="px-4 pb-4 pt-2 space-y-4">
@@ -803,7 +803,7 @@ export function Navigation() {
                                     <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-purple-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
-                                      <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                      <div className="text-xs text-gray-600 mt-0.5">{link.description}</div>
                                     </div>
                                   </Link>
                                 );
@@ -819,7 +819,7 @@ export function Navigation() {
                   <Accordion.Item value="company" className="border border-gray-100 rounded-lg overflow-hidden">
                     <Accordion.Trigger className="flex items-center justify-between w-full px-4 py-3 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors group">
                       Company
-                      <ChevronDown className="w-4 h-4 text-gray-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      <ChevronDown className="w-4 h-4 text-gray-600 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </Accordion.Trigger>
                     <Accordion.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
                       <div className="px-4 pb-4 pt-2 space-y-4">
@@ -841,7 +841,7 @@ export function Navigation() {
                                     <Icon className="w-5 h-5 sm:w-4 sm:h-4 text-teal-600 shrink-0" />
                                     <div>
                                       <div className="text-sm font-medium text-gray-900">{link.label}</div>
-                                      <div className="text-xs text-gray-500 mt-0.5">{link.description}</div>
+                                      <div className="text-xs text-gray-600 mt-0.5">{link.description}</div>
                                     </div>
                                   </Link>
                                 );
