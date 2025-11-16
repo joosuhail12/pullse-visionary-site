@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import HomeNew from "@/views/HomeNew";
 import WebSiteSchema from "@/components/structured-data/WebSiteSchema";
 import FAQPageSchema from "@/components/structured-data/FAQPageSchema";
@@ -16,11 +17,28 @@ export const metadata = generatePageMetadata({
     "ai customer support, customer support platform, ai chatbot, support automation, omnichannel support, helpdesk software, customer service software",
 });
 
+// Loading skeleton for better perceived performance
+function HomePageSkeleton() {
+  return (
+    <div className="min-h-screen bg-gray-950">
+      <div className="animate-pulse">
+        <div className="h-16 bg-gray-900" />
+        <div className="container mx-auto px-4 py-20">
+          <div className="h-12 bg-gray-900 rounded w-3/4 mx-auto mb-4" />
+          <div className="h-6 bg-gray-900 rounded w-1/2 mx-auto" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const HomePage = () => (
   <>
     <WebSiteSchema />
     <FAQPageSchema faqs={homepageFaqs} />
-    <HomeNew />
+    <Suspense fallback={<HomePageSkeleton />}>
+      <HomeNew />
+    </Suspense>
   </>
 );
 
