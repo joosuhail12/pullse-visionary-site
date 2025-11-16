@@ -1,21 +1,14 @@
-'use client';
-
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import InteractiveHowItWorks from "@/components/InteractiveHowItWorks";
-import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
   MessageSquare,
   Workflow,
   Bot,
-  Brain,
   BarChart3,
   CheckCircle,
   CheckCircle2,
@@ -24,11 +17,6 @@ import {
   Shield,
   Users,
   Sparkles,
-  Mail,
-  MessageCircle,
-  Phone,
-  Webhook,
-  TrendingUp,
   Lock,
   ShoppingCart,
   Building2,
@@ -36,10 +24,9 @@ import {
   Star,
   Globe,
   CreditCard,
-  LayoutDashboard,
   Boxes,
+  TrendingUp,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
@@ -48,41 +35,13 @@ import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
 import analyticsScreenshot from "@/assets/analytics-screenshot.png";
 
+// Import client islands
+import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
+import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
+import ProductHeroBackground from "@/components/product/ProductHeroBackground";
+import ProductStyles from "@/components/product/ProductStyles";
+
 const Product = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Scroll progress indicator
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Intersection Observer for scroll-triggered animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    // Observe all sections with fade-in-up class
-    const elements = document.querySelectorAll('.fade-in-up');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   const coreProducts = [
     {
       id: "inbox",
@@ -253,7 +212,7 @@ const Product = () => {
       action: "AI agents cite help articles with source links"
     },
     {
-      icon: MessageCircle,
+      icon: Boxes,
       category: "Communication",
       description: "Route to channels, notify teams, create threads",
       connectors: ["Slack", "Microsoft Teams", "Discord"],
@@ -304,15 +263,13 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
+      <ProductStyles />
+      <FadeInUpObserver />
+
       <PageLiquidBackground opacity={0.35} />
 
       {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
-        <div
-          className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <ScrollProgressIndicator />
 
       <Navigation />
 
@@ -325,21 +282,7 @@ const Product = () => {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.03)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
 
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        <ProductHeroBackground />
 
         <div className="container relative mx-auto px-4">
           <div className="grid lg:grid-cols-[1.1fr,1fr] gap-16 items-center max-w-7xl mx-auto">
@@ -766,41 +709,6 @@ const Product = () => {
           </div>
         </div>
       </section>
-
-      <style jsx global>{`
-        html {
-          scroll-behavior: smooth;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .direction-rtl {
-          direction: rtl;
-        }
-
-        .direction-ltr {
-          direction: ltr;
-        }
-
-        /* Scroll-triggered animation */
-        .fade-in-up {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
 
       <Footer />
     </div>
