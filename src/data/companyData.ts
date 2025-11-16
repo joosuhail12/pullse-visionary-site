@@ -206,37 +206,37 @@ export const whatWeBelieve = {
   subtitle: "The principles that guide how we work with everyone",
   beliefs: [
     {
-      icon: Eye,
+      icon: "Eye" as const,
       title: "Radical Clarity",
       description:
         "We believe transparency builds trust, which is why every feature, every price, every decision must be explained clearly and honestly. You own your data completely, and we deal straight with everyone: customers, partners, and vendors alike.",
     },
     {
-      icon: Telescope,
+      icon: "Telescope" as const,
       title: "Think Big Picture",
       description:
         "We don't optimize for today's fragmented stack—we reimagine what entire business functions should look like when AI is foundational, not an add-on. Support is our first proof point, but the vision extends further: unified platforms that make tool sprawl obsolete by building for the system, not just solving one workflow.",
     },
     {
-      icon: Rocket,
+      icon: "Rocket" as const,
       title: "Build for the Future",
       description:
         "The best software isn't constrained by legacy architectures or yesterday's assumptions. We design for how teams will work in 2030, not 2015—with AI aggregation, agentic workflows, and future-first architecture that builds on the right foundations today.",
     },
     {
-      icon: Heart,
+      icon: "Heart" as const,
       title: "Empathy for Everyone",
       description:
         "Great software creates value for everyone it touches: the people using it, the customers they serve, and the businesses that depend on both. When we build with genuine empathy for the entire chain, support agents get better tools, customers get faster answers, teams work happier, and companies grow stronger.",
     },
     {
-      icon: Zap,
+      icon: "Zap" as const,
       title: "We Move Fast",
       description:
         "Speed isn't reckless—it's respectful. Teams struggling with broken tools deserve solutions now, not perfectly polished products years from now, which is why we ship fast, learn faster, and iterate constantly.",
     },
     {
-      icon: Shield,
+      icon: "Shield" as const,
       title: "Own the Outcome",
       description:
         "We're accountable for the results our customers achieve, not just the software we ship. When something breaks we fix it, when a customer struggles we help them succeed—because their wins are our wins, and their problems are our problems.",
