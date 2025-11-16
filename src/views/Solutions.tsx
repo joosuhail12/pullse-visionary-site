@@ -1,13 +1,10 @@
-'use client';
-
-import { lazy, Suspense } from "react";
+// Server Component - no 'use client' directive
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+import SolutionsHeroBackground from "@/components/solutions/SolutionsHeroBackground";
 import { ShoppingCart, Briefcase, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 
 const Solutions = () => {
   const solutions = [
@@ -34,21 +31,8 @@ const Solutions = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 pb-12 md:pb-20 overflow-hidden">
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        {/* Hero Liquid Ether Effect - Client Component */}
+        <SolutionsHeroBackground />
 
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-20">
