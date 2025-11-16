@@ -53,7 +53,7 @@ async function createDashboard(
   try {
     // Check if dashboard already exists
     const existingDashboards = await client.getDashboards();
-    const existing = existingDashboards.results?.find(
+    const existing = existingDashboards.find(
       (d) => d.name === dashboardConfig.name
     );
 

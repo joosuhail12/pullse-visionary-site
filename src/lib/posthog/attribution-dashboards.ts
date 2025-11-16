@@ -486,11 +486,6 @@ export const ATTRIBUTION_DASHBOARD: PostHogDashboardConfig = {
               version: 1,
             },
           ],
-          breakdownFilter: {
-            breakdown: 'utm_campaign',
-            breakdown_type: 'event',
-            breakdown_limit: 10,
-          },
           dateRange: {
             date_from: '-7d',
             date_to: null,
