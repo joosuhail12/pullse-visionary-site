@@ -276,21 +276,39 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
       },
     },
 
-    // Chart 10: Failed API Requests
+    // Chart 10: Failed API Requests by Endpoint
     {
-      name: 'Failed API Requests',
-      description: 'Table of API failures by endpoint, method, and status code',
+      name: 'Failed API Requests by Endpoint',
+      description: 'Failed API requests broken down by endpoint over the last 7 days',
       query: {
-        kind: 'EventsQuery',
-        select: [
-          'properties.api_endpoint as target',
-          'properties.api_method as verb',
-          'properties.api_status as code',
-          'count() as failures',
+        kind: 'TrendsQuery',
+        series: [
+          {
+            kind: 'EventsNode',
+            event: 'api_performance',
+            math: 'total',
+            properties: [
+              {
+                key: 'api_success',
+                value: ['false'],
+                operator: 'exact',
+                type: 'event',
+              },
+            ],
+          },
         ],
-        where: ["event = 'api_performance'", "properties.api_success = 'false'"],
-        orderBy: ['count() DESC'],
-        limit: 50,
+        breakdownFilter: {
+          breakdown: 'api_endpoint',
+          breakdown_type: 'event',
+        },
+        dateRange: {
+          date_from: '-7d',
+          date_to: null,
+        },
+        trendsFilter: {
+          display: 'ActionsBar',
+          showLegend: true,
+        },
       },
     },
 
