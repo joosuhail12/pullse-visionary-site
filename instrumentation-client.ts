@@ -121,23 +121,56 @@ const initPostHog = (): void => {
     api_host: apiHost,
     defaults: '2025-05-24', // Required: API configuration version
     person_profiles: 'identified_only', // Only create profiles for identified users
+
+    // Page Navigation Tracking
     capture_pageview: true, // Auto-capture page views
     capture_pageleave: true, // Track when users leave pages
-    autocapture: true, // Enable automatic event tracking
+    save_referrer: true, // Track referrers
+    save_campaign_params: true, // Track UTM parameters
+    disable_scroll_properties: false, // Enable scroll depth tracking
+
+    // User Interaction Autocapture
+    autocapture: {
+      capture_copied_text: true, // Track copy/cut text
+      url_ignorelist: [/\/admin/, /\/private/], // Exclude sensitive pages
+      element_attribute_ignorelist: ['data-sensitive'], // Exclude sensitive attributes
+    },
+
+    // Frustration Signal Detection
+    rageclick: true, // Detect rapid clicking (user frustration)
+    capture_dead_clicks: true, // Detect clicks with no effect
+
+    // Performance Monitoring
+    capture_performance: {
+      web_vitals: true, // Track Core Web Vitals (LCP, FCP, CLS, INP)
+      network_timing: true, // Track network performance
+      web_vitals_allowed_metrics: ['LCP', 'CLS', 'FCP', 'INP'],
+      web_vitals_delayed_flush_ms: 5000, // Batch web vitals events
+    },
+
+    // Error Tracking
+    capture_exceptions: {
+      capture_unhandled_errors: true, // Track unhandled errors
+      capture_unhandled_rejections: true, // Track promise rejections
+      capture_console_errors: false, // Don't track console.error() to avoid sensitive logs
+    },
 
     // Session Recording Configuration
+    disable_session_recording: false, // Enable session recording
     session_recording: {
       maskAllInputs: true, // Mask all input fields by default
       maskTextSelector: '[data-private], .private', // Mask elements with data-private attribute
       recordCrossOriginIframes: false, // Don't record cross-origin iframes
     },
+    enable_recording_console_log: true, // Record console logs in sessions
+
+    // Heatmap Data Collection
+    capture_heatmaps: true, // Enable heatmap data capture
 
     // Privacy Controls
     mask_all_text: false, // Don't mask all text (we want to see content)
     mask_all_element_attributes: false, // Don't mask attributes
-
-    // Performance
-    capture_performance: true, // Capture performance metrics
+    mask_personal_data_properties: true, // Mask gclid, fbclid, etc.
 
     loaded: (ph) => {
       if (process.env.NODE_ENV === 'development') {
