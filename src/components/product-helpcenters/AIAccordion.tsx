@@ -37,6 +37,7 @@ export default function AIAccordion() {
           return (
             <div key={index} className="group">
               <button
+                type="button"
                 onClick={() => setActiveTab(index)}
                 className={`w-full text-left rounded-xl border transition-all ${
                   isActive
