@@ -1,9 +1,4 @@
-'use client';
-
-import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
@@ -12,112 +7,32 @@ import Image from "next/image";
 import {
   Mail,
   MessageSquare,
-  Sparkles,
   ArrowRight,
   CheckCircle2,
-  Users,
+  Zap,
+  FileText,
+  Lightbulb,
   MessageCircle,
   AtSign,
-  Zap,
-  GitBranch,
-  Hand,
-  FileText,
-  Search,
+  Users,
   Keyboard,
   Bell,
+  Search,
   TrendingUp,
-  Lightbulb,
-  Scale,
-  RotateCw,
   Bot,
   Play,
 } from "lucide-react";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
 
-// Animated Counter Component
-const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; duration?: number; trigger?: boolean }) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (!trigger || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = Date.now();
-    const animate = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [trigger, hasStarted, end, duration]);
-
-  return <>{count}{suffix}</>;
-};
+// Import client islands
+import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
+import ProductInboxChannelsHeroBackground from "@/components/product-inbox-channels/ProductInboxChannelsHeroBackground";
+import ProductInboxChannelsHeroStats from "@/components/product-inbox-channels/ProductInboxChannelsHeroStats";
+import RoutingMethodsSelector from "@/components/product-inbox-channels/RoutingMethodsSelector";
+import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
+import ProductInboxChannelsStyles from "@/components/product-inbox-channels/ProductInboxChannelsStyles";
 
 const ProductInboxChannels = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeRouting, setActiveRouting] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const heroStatsRef = useRef<HTMLDivElement>(null);
-  const [statsAnimated, setStatsAnimated] = useState(false);
-
-  // Scroll progress indicator
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Track mouse position for magnetic effects
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Intersection Observer for scroll-triggered animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-
-            // Trigger stats animation
-            if (entry.target === heroStatsRef.current && !statsAnimated) {
-              setStatsAnimated(true);
-            }
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elements = document.querySelectorAll('.fade-in-up');
-    elements.forEach((el) => observer.observe(el));
-
-    // Observe stats section
-    if (heroStatsRef.current) {
-      observer.observe(heroStatsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [statsAnimated]);
-
   const channels = [
     {
       id: 'email',
@@ -179,48 +94,6 @@ const ProductInboxChannels = () => {
       ],
       color: 'from-cyan-500 to-teal-500',
       demo: 'Type "refund" → AI suggests refund policy article + template',
-    },
-  ];
-
-  const routingMethods = [
-    {
-      icon: Scale,
-      title: 'Load Balanced',
-      description: 'Distribute tickets evenly across your team',
-      details: [
-        'Assigns based on current agent workload',
-        'Prevents burnout and bottlenecks',
-        'Real-time capacity monitoring',
-        'Best for teams with equal skill levels',
-      ],
-      useCase: 'High-volume support with generalists',
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      icon: RotateCw,
-      title: 'Round Robin',
-      description: 'Sequential assignment to available agents',
-      details: [
-        'Fair distribution in predictable order',
-        'Respects agent status (online/offline)',
-        'Configurable agent pools',
-        'Best for steady ticket flow',
-      ],
-      useCase: 'Balanced teams with consistent availability',
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      icon: Hand,
-      title: 'Manual Assignment',
-      description: 'Human-controlled routing with smart filters',
-      details: [
-        'Managers assign based on expertise',
-        'Filter by team, skills, or availability',
-        'Override rules for VIP customers',
-        'Best for specialized support',
-      ],
-      useCase: 'Enterprise accounts requiring specific expertise',
-      color: 'from-green-500 to-emerald-500',
     },
   ];
 
@@ -324,37 +197,21 @@ const ProductInboxChannels = () => {
 
   return (
     <div className="min-h-screen">
+      <ProductInboxChannelsStyles />
+      <FadeInUpObserver />
+
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
       {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
-        <div
-          className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      <ScrollProgressIndicator />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-32 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        <ProductInboxChannelsHeroBackground />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
@@ -375,55 +232,7 @@ const ProductInboxChannels = () => {
                 </div>
 
                 {/* Stats */}
-                <div ref={heroStatsRef} className="grid grid-cols-2 gap-3 md:gap-6">
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                    <div className="relative space-y-2">
-                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent tabular-nums">
-                        <AnimatedCounter end={2} trigger={statsAnimated} duration={1500} />
-                      </div>
-                      <div className="text-sm font-semibold text-muted-foreground">channels</div>
-                      <div className="text-xs text-muted-foreground/70">Email + Live Chat</div>
-                    </div>
-                    <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  </div>
-
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                    <div className="relative space-y-2">
-                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent tabular-nums">
-                        <AnimatedCounter end={80} suffix="%" trigger={statsAnimated} duration={1800} />
-                      </div>
-                      <div className="text-sm font-semibold text-muted-foreground">automation</div>
-                      <div className="text-xs text-muted-foreground/70">Avg rate achieved</div>
-                    </div>
-                    <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                  </div>
-
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                    <div className="relative space-y-2">
-                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent tabular-nums">
-                        &lt;<AnimatedCounter end={100} trigger={statsAnimated} duration={1600} />ms
-                      </div>
-                      <div className="text-sm font-semibold text-muted-foreground">latency</div>
-                      <div className="text-xs text-muted-foreground/70">Real-time sync</div>
-                    </div>
-                    <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-green-500 animate-pulse" style={{ animationDelay: '0.4s' }} />
-                  </div>
-
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-card/60 to-card/30 p-4 md:p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:shadow-xl hover:scale-105">
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                    <div className="relative space-y-2">
-                      <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent tabular-nums">
-                        <AnimatedCounter end={3} trigger={statsAnimated} duration={1400} />
-                      </div>
-                      <div className="text-sm font-semibold text-muted-foreground">routing methods</div>
-                      <div className="text-xs text-muted-foreground/70">Assignment options</div>
-                    </div>
-                    <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-amber-500 animate-pulse" style={{ animationDelay: '0.6s' }} />
-                  </div>
-                </div>
+                <ProductInboxChannelsHeroStats />
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
@@ -602,7 +411,6 @@ const ProductInboxChannels = () => {
 
             {/* AI Feature Cards */}
             <div className="grid lg:grid-cols-2 gap-5 md:gap-6 lg:gap-8">
-              {/* AI Feature Cards */}
               {aiFeatures.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -667,73 +475,7 @@ const ProductInboxChannels = () => {
             </div>
 
             {/* Routing Cards */}
-            <div className="grid lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-8 md:mb-10 lg:mb-12">
-              {routingMethods.map((method, index) => {
-                const Icon = method.icon;
-                const isActive = activeRouting === index;
-
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setActiveRouting(index)}
-                    className={`group relative overflow-hidden rounded-3xl border transition-all duration-300 text-left fade-in-up ${
-                      isActive
-                        ? 'border-primary/40 bg-card shadow-2xl scale-105'
-                        : 'border-border/60 bg-card/60 hover:border-primary/30 hover:shadow-xl hover:scale-102'
-                    }`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 transition-opacity ${isActive ? 'opacity-10' : 'group-hover:opacity-5'}`} />
-
-                    <div className="relative p-5 md:p-6 lg:p-8 space-y-4 md:space-y-5 lg:space-y-6">
-                      {/* Icon */}
-                      <div className={`inline-flex h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 items-center justify-center rounded-2xl transition-all duration-300 ${
-                        isActive
-                          ? `bg-gradient-to-br ${method.color} shadow-lg`
-                          : 'bg-primary/10 group-hover:bg-primary/15'
-                      }`}>
-                        <Icon className={`h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 ${isActive ? 'text-background' : 'text-primary'}`} />
-                      </div>
-
-                      {/* Content */}
-                      <div className="space-y-2 md:space-y-3">
-                        <h3 className={`text-xl md:text-2xl font-bold transition-colors ${isActive ? 'text-foreground' : 'text-foreground/80'}`}>
-                          {method.title}
-                        </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                          {method.description}
-                        </p>
-                      </div>
-
-                      {/* Details */}
-                      <div className="space-y-1.5 md:space-y-2">
-                        {method.details.map((detail, dIndex) => (
-                          <div key={dIndex} className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary mt-0.5 shrink-0" />
-                            <p className="text-xs md:text-sm text-foreground/80">{detail}</p>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Use case */}
-                      <div className="pt-3 md:pt-4 border-t border-border/40">
-                        <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-primary mb-1">
-                          Best For
-                        </div>
-                        <div className="text-xs md:text-sm font-semibold text-foreground">
-                          {method.useCase}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Active indicator */}
-                    {isActive && (
-                      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${method.color}`} />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            <RoutingMethodsSelector />
           </div>
         </div>
       </section>
@@ -881,107 +623,6 @@ const ProductInboxChannels = () => {
       </section>
 
       <Footer />
-
-      <style jsx global>{`
-        html {
-          scroll-behavior: smooth;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-
-        @keyframes pulse-glow {
-          0%, 100% {
-            opacity: 1;
-            box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.3);
-          }
-          50% {
-            opacity: 0.8;
-            box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.5);
-          }
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-
-        .animate-shimmer {
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent 100%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-        }
-
-        .direction-rtl {
-          direction: rtl;
-        }
-
-        .direction-ltr {
-          direction: ltr;
-        }
-
-        .fade-in-up {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        /* Glassmorphism effect */
-        .glass-card {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Smooth transitions for all interactive elements */
-        button, a {
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: hsl(var(--background));
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: hsl(var(--primary) / 0.3);
-          border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-          background: hsl(var(--primary) / 0.5);
-        }
-      `}</style>
     </div>
   );
 };
