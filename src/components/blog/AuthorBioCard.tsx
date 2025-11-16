@@ -30,6 +30,7 @@ export default function AuthorBioCard({ author }: AuthorBioCardProps) {
               alt={author.name}
               width={120}
               height={120}
+              sizes="120px"
               className="rounded-full object-cover ring-4 ring-white/20"
             />
           ) : (

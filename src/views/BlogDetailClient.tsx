@@ -243,6 +243,7 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
                             alt={post.author.name}
                             width={64}
                             height={64}
+                            sizes="64px"
                             className="rounded-full object-cover ring-4 ring-white shadow-xl shadow-primary/20"
                           />
                           {/* Glow effect */}

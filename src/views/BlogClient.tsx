@@ -355,6 +355,7 @@ const FeaturedPostLarge = ({ post }: FeaturedPostProps) => {
                 alt={post.author.name}
                 width={32}
                 height={32}
+                sizes="32px"
                 className="rounded-full object-cover ring-1 ring-gray-200"
               />
             ) : (
@@ -638,6 +639,7 @@ const CompactCard = ({ post }: CardProps) => {
               alt={post.author!.name}
               width={32}
               height={32}
+              sizes="32px"
               className="rounded-full object-cover ring-2 ring-border/40"
             />
           ) : (

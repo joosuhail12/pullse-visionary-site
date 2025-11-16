@@ -105,6 +105,7 @@ export default function RelatedPosts({ posts, currentPostId }: RelatedPostsProps
                       alt={post.author!.name}
                       width={32}
                       height={32}
+                      sizes="32px"
                       className="rounded-full object-cover ring-2 ring-border/40"
                     />
                   ) : (
