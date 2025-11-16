@@ -140,7 +140,7 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
       query: {
         kind: 'EventsQuery',
         select: [
-          'properties.page_path as page_path',
+          'properties.page_path as path',
           'properties.attribution as attribution',
           'avg(properties.task_duration) as avg_duration',
           'count() as occurrences',
@@ -283,9 +283,9 @@ export const PERFORMANCE_DASHBOARD_CONFIG: PostHogDashboardConfig = {
       query: {
         kind: 'EventsQuery',
         select: [
-          'properties.api_endpoint as endpoint',
-          'properties.api_method as method',
-          'properties.api_status as status',
+          'properties.api_endpoint as request_endpoint',
+          'properties.api_method as http_method',
+          'properties.api_status as status_code',
           'count() as failures',
         ],
         where: ["event = 'api_performance'", "properties.api_success = 'false'"],
