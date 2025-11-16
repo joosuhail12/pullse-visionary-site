@@ -1,36 +1,28 @@
-'use client';
-
-import { useEffect, useState, useRef, lazy, Suspense } from "react";
+// Server Component - no 'use client' directive
 import Navigation from "@/components/Navigation";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
-import MagicBento from "@/components/MagicBento";
-import type { CardData } from "@/components/MagicBento";
 import Image from "next/image";
 import {
   BookOpen,
   Globe,
-  Sparkles,
   ArrowRight,
   CheckCircle2,
   Zap,
-  Play,
-  TrendingUp,
-  BarChart3,
   Palette,
   Languages,
   Wand2,
   Search,
-  Users,
   Link2,
-  Code,
-  MessageCircle,
-  GitBranch,
-  ExternalLink,
 } from "lucide-react";
+
+// Import client islands
+import ProductHelpCentersScrollProgress from "@/components/product-helpcenters/ProductHelpCentersScrollProgress";
+import ProductHelpCentersHeroBackground from "@/components/product-helpcenters/ProductHelpCentersHeroBackground";
+import ProductHelpCentersBentoSection from "@/components/product-helpcenters/ProductHelpCentersBentoSection";
+import AIAccordion from "@/components/product-helpcenters/AIAccordion";
+import AppoThemeStyles from "@/components/product-helpcenters/AppoThemeStyles";
 
 // Import Appo branding
 import appoLogo from "@/assets/appo/appo-logo.png";
@@ -39,295 +31,25 @@ import appoWordmark from "@/assets/appo/appo-wordmark.png";
 // Import Pullse logo
 import pullseLogo from "@/assets/logo-icon-purple.png";
 
-// Animated Counter Component
-const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; duration?: number; trigger?: boolean }) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (!trigger || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = Date.now();
-    const animate = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [trigger, hasStarted, end, duration]);
-
-  return <>{count}{suffix}</>;
-};
-
-// AI Accordion Component
-const AIAccordion = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const tabs = [
-    {
-      icon: Wand2,
-      title: 'AI Writing & Optimization',
-      content: 'AI co-authors articles with you. Suggests better phrasing, improves clarity, optimizes for SEO. Makes every writer sound like your best writer.',
-      color: 'from-[#F28D1B] to-[#FFB633]'
-    },
-    {
-      icon: Search,
-      title: 'Content Gap Analysis',
-      content: 'AI identifies missing content by analyzing unanswered searches and customer questions. Shows you exactly what articles to write next.',
-      color: 'from-[#FFB633] to-[#FEE3AC]'
-    },
-    {
-      icon: MessageCircle,
-      title: 'Pullse Chatbot Integration',
-      content: 'Appo plugs directly into Pullse AI chatbots. Customers ask questions, chatbot pulls instant answers from your help centers—no setup required.',
-      color: 'from-[#F28D1B] to-[#503225]'
-    }
-  ];
-
-  return (
-    <div className="space-y-3">
-      <div className="space-y-2">
-        {tabs.map((tab, index) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === index;
-
-          return (
-            <div key={index} className="group">
-              <button
-                onClick={() => setActiveTab(index)}
-                className={`w-full text-left rounded-xl border transition-all ${
-                  isActive
-                    ? 'border-[#F28D1B]/50 bg-gradient-to-r from-[#F28D1B]/15 to-[#FFB633]/5 shadow-lg'
-                    : 'border-border/40 bg-card/80 hover:border-[#F28D1B]/30 hover:bg-card'
-                }`}
-              >
-                <div className="flex items-center gap-3 p-3.5 md:p-4">
-                  <div className={`flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.color} shadow-lg transition-all ${isActive ? 'scale-110' : 'group-hover:scale-105'}`}>
-                    <Icon className="h-4.5 w-4.5 md:h-5 md:w-5 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className={`text-sm font-bold transition-colors ${isActive ? 'text-[#F28D1B]' : 'text-foreground group-hover:text-[#F28D1B]'}`}>
-                      {tab.title}
-                    </h3>
-                  </div>
-                  <div className={`text-[#F28D1B] transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}>
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </div>
-              </button>
-
-              {isActive && (
-                <div className="mt-2 rounded-xl border border-[#F28D1B]/20 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent backdrop-blur-sm p-4 md:p-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {tab.content}
-                  </p>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
 const ProductHelpCenters = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [statsAnimated, setStatsAnimated] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  // Scroll progress tracking
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const winScroll = document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = (winScroll / height) * 100;
-          setScrollProgress(scrolled);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Stats animation trigger
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !statsAnimated) {
-            setStatsAnimated(true);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [statsAnimated]);
-
-  // MagicBento Grid - Content Creation Features
-  const bentoCards: CardData[] = [
-    {
-      color: 'hsl(var(--card))',
-      title: 'Notion-Style Editor',
-      description: 'Real-time collaborative editing with slash commands, drag-and-drop blocks, and inline comments. Multiple authors, one document.',
-      label: 'Collaborative',
-      icon: MessageCircle,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'AI Writing Agents',
-      description: 'AI co-writes articles with you. Suggests better phrasing, improves clarity, optimizes for SEO and readability.',
-      label: 'AI-Powered',
-      icon: Wand2,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Rich Content Blocks',
-      description: 'Text, images, videos, code snippets, embeds, tables—all supported. Build engaging help articles with any media.',
-      label: 'Rich Media',
-      icon: Code,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Real-Time Collaboration',
-      description: "See teammates' cursors, edit simultaneously, leave inline comments, track changes. True multi-author experience.",
-      label: 'Team Editing',
-      icon: Users,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'AI Optimization',
-      description: 'AI analyzes articles for readability, suggests better headlines, identifies content gaps, and improves structure.',
-      label: 'Smart',
-      icon: Sparkles,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Version History',
-      description: 'Full revision tracking. Rollback to any version, see who changed what and when. Never lose work.',
-      label: 'Version Control',
-      icon: GitBranch,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Custom Domains',
-      description: 'Connect your own domain—help.yourcompany.com—with one click. SSL, DNS, and CDN handled automatically.',
-      label: 'Professional',
-      icon: Link2,
-    },
-  ];
-
-  // Analytics Stats
-  const stats = [
-    {
-      value: 10,
-      suffix: 'K+',
-      label: 'Monthly article views',
-      description: 'Across all help centers',
-      icon: BarChart3,
-      color: 'from-[#F28D1B] to-[#FFB633]',
-    },
-    {
-      value: 87,
-      suffix: '%',
-      label: 'Self-service resolution',
-      description: 'Customers find answers',
-      icon: TrendingUp,
-      color: 'from-[#FFB633] to-[#FEE3AC]',
-    },
-    {
-      value: 200,
-      suffix: 'ms',
-      label: 'Search speed',
-      description: 'Lightning-fast results',
-      icon: Zap,
-      color: 'from-[#FFB633] to-[#503225]',
-    },
-  ];
-
   return (
     <div className="min-h-screen appo-theme">
-      <style jsx global>{`
-        .appo-theme nav button {
-          background-color: transparent !important;
-        }
-        .appo-theme nav button:hover {
-          background-color: transparent !important;
-        }
-        .appo-theme nav button span[class*="bg-gradient"] {
-          background: linear-gradient(to right, transparent, rgb(242, 141, 27), transparent) !important;
-        }
-        .appo-theme nav a:not([href*="demo"]) {
-          background-color: transparent !important;
-        }
-        .appo-theme nav a:hover:not([href*="demo"]) {
-          background-color: transparent !important;
-        }
-        .appo-theme nav a[class*="bg-primary"] {
-          background-color: #F28D1B !important;
-        }
-        .appo-theme nav a[class*="bg-primary"]:hover {
-          background-color: #FFB633 !important;
-        }
-        .appo-theme nav a[class*="shadow-primary"] {
-          box-shadow: 0 10px 15px -3px rgba(242, 141, 27, 0.25) !important;
-        }
-        .appo-theme nav a[class*="shadow-primary"]:hover {
-          box-shadow: 0 20px 25px -5px rgba(242, 141, 27, 0.4) !important;
-        }
-      `}</style>
+      {/* Appo Theme Styles - Client Component */}
+      <AppoThemeStyles />
+
       <PageLiquidBackground opacity={0.65} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
 
-      {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
-        <div
-          className="h-full bg-gradient-to-r from-[#F28D1B] via-[#FFB633] to-[#FEE3AC] transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      {/* Scroll Progress Indicator - Client Component */}
+      <ProductHelpCentersScrollProgress />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-32 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(28_88%_53%/0.15),transparent_50%)]" />
 
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#F28D1B", "#FFB633", "#FEE3AC"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        {/* Hero Liquid Ether Effect - Client Component */}
+        <ProductHelpCentersHeroBackground />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
@@ -435,29 +157,8 @@ const ProductHelpCenters = () => {
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-5 lg:space-y-6 fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Build content that helps
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Powerful editor, AI writing assistance, and collaboration tools—everything you need to create great help articles
-              </p>
-            </div>
-
-            {/* MagicBento Grid */}
-            <div className="fade-in-up">
-              <MagicBento
-                cardData={bentoCards}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableStars={true}
-                enableTilt={false}
-                enableMagnetism={true}
-                clickEffect={true}
-                glowColor="242, 141, 27"
-              />
-            </div>
+            {/* Bento Section - Client Component */}
+            <ProductHelpCentersBentoSection />
           </div>
         </div>
       </section>
@@ -495,7 +196,7 @@ const ProductHelpCenters = () => {
                 </div>
               </div>
 
-              {/* Right: Accordion */}
+              {/* Right: Accordion - Client Component */}
               <div className="space-y-2 fade-in-up">
                 <AIAccordion />
               </div>
