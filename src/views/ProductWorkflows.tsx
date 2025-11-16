@@ -1,346 +1,38 @@
-'use client';
-
-import { useEffect, useState, useRef, lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// Server Component - no 'use client' directive
 import Navigation from "@/components/Navigation";
-
-const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
-import MagicBento from "@/components/MagicBento";
-import type { CardData } from "@/components/MagicBento";
 import Image from "next/image";
 import {
   Workflow,
   GitBranch,
-  Target,
-  MessageSquare,
-  LayoutGrid,
-  Bell,
-  RotateCw,
   ArrowRight,
   CheckCircle2,
   Zap,
   Play,
   Star,
-  TrendingUp,
-  BarChart3,
-  Users,
+  LayoutGrid,
   MessageCircle,
-  Shield,
-  Link as LinkIcon,
   Sparkles,
   Code,
-  Database,
-  Package,
-  Lock,
-  FileText,
-  AlertTriangle,
-  Lightbulb,
-  ChevronDown,
 } from "lucide-react";
+
+// Import client islands
+import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
+import ProductWorkflowsHeroBackground from "@/components/product-workflows/ProductWorkflowsHeroBackground";
+import ProductWorkflowsBentoSection from "@/components/product-workflows/ProductWorkflowsBentoSection";
+import CopilotAccordion from "@/components/product-workflows/CopilotAccordion";
+import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
+import ProductWorkflowsStyles from "@/components/product-workflows/ProductWorkflowsStyles";
 
 // Import screenshots
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
 import routingConfigScreenshot from "@/assets/screenshots/routing-config.png";
 import copilotScreenshot from "@/assets/copilot-interface-screenshot.png";
 
-// Animated Counter Component
-const AnimatedCounter = ({ end, suffix = '', duration = 2000, trigger = false }: { end: number; suffix?: string; duration?: number; trigger?: boolean }) => {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (!trigger || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = Date.now();
-    const animate = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.floor(easeOutQuart * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [trigger, hasStarted, end, duration]);
-
-  return <>{count}{suffix}</>;
-};
-
-// Copilot Accordion Component (moved outside to prevent re-renders)
-const CopilotAccordion = () => {
-  const [activeTab, setActiveTab] = useState<number | null>(null);
-
-  const tabs = [
-    {
-      icon: Code,
-      title: 'Universal Integration',
-      content: {
-        headline: '50+ pre-built connectors for popular platforms. Or register any REST/GraphQL API—AI figures out how to use it on the fly.',
-        features: [
-          { icon: CheckCircle2, text: 'Pre-built connectors for Stripe, Shopify, Salesforce, and more' },
-          { icon: Zap, text: 'AI creates custom integrations dynamically for any other API' },
-          { icon: Shield, text: 'On-demand actions when agents need them—no business logic required' }
-        ],
-        badge: { text: '50+ Integrations' },
-        example: {
-          title: 'Example Use Case',
-          description: 'Agent asks "Process refund for order #1234." AI calls your Stripe connector, executes the refund, and confirms back—or figures out your custom API on the fly if no connector exists.'
-        }
-      },
-      colors: {
-        gradient: 'from-blue-500 to-cyan-500',
-        borderActive: 'border-blue-500/50',
-        bgActive: 'from-blue-500/15 via-blue-500/10 to-cyan-500/5',
-        shadowActive: 'shadow-blue-500/20',
-        textActive: 'text-blue-500',
-        bgExpanded: 'from-blue-500/5 via-blue-500/3 to-transparent',
-        borderExpanded: 'border-blue-500/20',
-        iconGlow: 'shadow-[0_0_20px_rgba(59,130,246,0.5)]'
-      }
-    },
-    {
-      icon: Zap,
-      title: 'On-Demand Actions',
-      content: {
-        headline: 'Agents ask AI to take actions across any platform—instantly, without leaving the conversation.',
-        features: [
-          { icon: RotateCw, text: 'Process refunds, cancel subscriptions, issue credits' },
-          { icon: Database, text: 'Update CRM, check inventory, pull order history' },
-          { icon: Play, text: 'AI figures out what API calls to make in real-time' }
-        ],
-        badge: { text: 'On-Demand' },
-        example: {
-          title: 'Example Use Case',
-          description: 'Agent types "Issue $50 credit to this customer." AI calls your billing API, creates the credit, and confirms back—all in seconds.'
-        }
-      },
-      colors: {
-        gradient: 'from-amber-500 to-orange-500',
-        borderActive: 'border-amber-500/50',
-        bgActive: 'from-amber-500/15 via-amber-500/10 to-orange-500/5',
-        shadowActive: 'shadow-amber-500/20',
-        textActive: 'text-amber-500',
-        bgExpanded: 'from-amber-500/5 via-amber-500/3 to-transparent',
-        borderExpanded: 'border-amber-500/20',
-        iconGlow: 'shadow-[0_0_20px_rgba(245,158,11,0.5)]'
-      }
-    },
-    {
-      icon: Shield,
-      title: 'Control & Security',
-      content: {
-        headline: 'AI suggests, agent approves. Multi-level approval workflows for sensitive operations.',
-        features: [
-          { icon: Lock, text: 'Role-based action permissions' },
-          { icon: FileText, text: 'Full audit trail of every action' },
-          { icon: AlertTriangle, text: 'Multi-step approval for high-risk actions' }
-        ],
-        badge: { text: 'Enterprise Security' },
-        example: {
-          title: 'Example Use Case',
-          description: 'Refunds over $500 require manager approval—AI suggests, agent requests, manager approves in Slack.'
-        }
-      },
-      colors: {
-        gradient: 'from-purple-500 to-pink-500',
-        borderActive: 'border-purple-500/50',
-        bgActive: 'from-purple-500/15 via-purple-500/10 to-pink-500/5',
-        shadowActive: 'shadow-purple-500/20',
-        textActive: 'text-purple-500',
-        bgExpanded: 'from-purple-500/5 via-purple-500/3 to-transparent',
-        borderExpanded: 'border-purple-500/20',
-        iconGlow: 'shadow-[0_0_20px_rgba(168,85,247,0.5)]'
-      }
-    }
-  ];
-
-  return (
-    <div className="space-y-2 md:space-y-2.5 lg:space-y-3">
-      <div className="space-y-2 md:space-y-2.5 lg:space-y-3">
-        {tabs.map((tab, index) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === index;
-
-          return (
-            <div key={index} className="group">
-              <motion.button
-                onClick={() => setActiveTab(activeTab === index ? null : index)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className={`w-full text-left rounded-xl border transition-all ${
-                  isActive
-                    ? `${tab.colors.borderActive} bg-gradient-to-r ${tab.colors.bgActive} shadow-lg ${tab.colors.shadowActive}`
-                    : 'border-border/40 bg-card/80 hover:border-primary/30 hover:bg-card'
-                }`}
-              >
-                <div className="flex items-center gap-3 md:gap-4 p-3 md:p-3.5 lg:p-4">
-                  <motion.div
-                    className={`flex h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tab.colors.gradient} shadow-lg ${isActive ? tab.colors.iconGlow : ''}`}
-                    whileHover={{ rotate: 8, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Icon className="h-5 w-5 md:h-5.5 md:w-5.5 lg:h-6 lg:w-6 text-background" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <h3 className={`text-sm md:text-base font-bold transition-colors ${isActive ? tab.colors.textActive : 'text-foreground'}`}>
-                      {tab.title}
-                    </h3>
-                  </div>
-                  <motion.div
-                    animate={{ rotate: isActive ? 180 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                    className={isActive ? tab.colors.textActive : 'text-muted-foreground'}
-                  >
-                    <ChevronDown className="h-4 w-4 md:h-5 md:w-5" />
-                  </motion.div>
-                </div>
-              </motion.button>
-
-              <AnimatePresence mode="wait">
-                {isActive && (
-                  <motion.div
-                    key={`accordion-${index}`}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                    className={`mt-2 md:mt-2.5 lg:mt-3 rounded-2xl border backdrop-blur-xl overflow-hidden bg-gradient-to-br ${tab.colors.bgExpanded} ${tab.colors.borderExpanded}`}
-                  >
-                    <div className="p-4 md:p-5 lg:p-6 space-y-4 md:space-y-5 lg:space-y-6">
-                      {/* Headline */}
-                      <div className="flex items-start gap-2 md:gap-3">
-                        <Sparkles className={`h-4 w-4 md:h-5 md:w-5 mt-0.5 shrink-0 ${tab.colors.textActive}`} />
-                        <p className="text-xs md:text-sm text-foreground font-medium leading-relaxed">
-                          {tab.content.headline}
-                        </p>
-                      </div>
-
-                      {/* Key Features */}
-                      <div className="space-y-2 md:space-y-2.5 lg:space-y-3">
-                        {tab.content.features.map((feature, idx) => {
-                          const FeatureIcon = feature.icon;
-                          return (
-                            <div
-                              key={idx}
-                              className="flex items-center gap-2 md:gap-3 text-xs md:text-sm group/feature"
-                            >
-                              <div className={`flex h-6 w-6 md:h-6.5 md:w-6.5 lg:h-7 lg:w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tab.colors.gradient} shadow-lg group-hover/feature:scale-110 transition-transform duration-200`}>
-                                <FeatureIcon className="h-3.5 w-3.5 md:h-3.5 md:w-3.5 lg:h-4 lg:w-4 text-background" />
-                              </div>
-                              <span className="text-muted-foreground group-hover/feature:text-foreground transition-colors duration-200">
-                                {feature.text}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Example Use Case */}
-                      <div className={`rounded-xl border p-3 md:p-3.5 lg:p-4 space-y-1.5 md:space-y-2 bg-gradient-to-br ${tab.colors.bgActive} ${tab.colors.borderActive}`}>
-                        <div className="flex items-center gap-1.5 md:gap-2">
-                          <Lightbulb className={`h-3.5 w-3.5 md:h-4 md:w-4 ${tab.colors.textActive}`} />
-                          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-wider ${tab.colors.textActive}`}>
-                            {tab.content.example.title}
-                          </span>
-                        </div>
-                        <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed">
-                          {tab.content.example.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Enhanced Bottom CTA */}
-      <div className="pt-3 md:pt-4 border-t border-border/30">
-        <RouteButton
-          variant="ghost"
-          size="sm"
-          href="/product/ai-suite"
-          className={`w-full justify-between group hover:bg-gradient-to-r ${activeTab !== null ? tabs[activeTab].colors.bgActive : 'hover:bg-muted'}`}
-        >
-          <span className="flex items-center gap-1.5 md:gap-2">
-            <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
-            <span className="text-xs md:text-sm">Learn more about AI Copilot</span>
-          </span>
-          <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4 group-hover:translate-x-1 transition-transform" />
-        </RouteButton>
-      </div>
-    </div>
-  );
-};
-
 const ProductWorkflows = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Bento Grid Card Data
-  const bentoCards: CardData[] = [
-    {
-      color: 'hsl(var(--card))',
-      title: 'Never Manually Assign Tickets Again',
-      description: 'Every ticket gets routed automatically—to the right agent, at the right time, based on workload, expertise, or any criteria you choose. No more playing traffic controller.',
-      label: 'Zero Manual Work',
-      icon: Target,
-      image: routingConfigScreenshot.src,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Handle Common Requests Without Lifting a Finger',
-      description: 'Refund requests, order status, password resets—send interactive messages with buttons and forms. Customers get instant answers, you get time back.',
-      label: 'Auto-Responses That Work',
-      icon: MessageSquare,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Set It Once, Forget It Forever',
-      description: 'Weekly reports, SLA reminders, follow-up sequences—build it once, runs automatically forever. Stop doing the same thing every Monday morning.',
-      label: 'Recurring Automation',
-      icon: RotateCw,
-      image: workflowScreenshot.src,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Make Complex Decisions Automatically',
-      description: 'VIP customer? Escalate. Refund under $50? Auto-approve. Order not shipped? Different workflow. Your judgment, automated.',
-      label: 'Smart Branching',
-      icon: GitBranch,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Stop Searching for Information',
-      description: 'Pull order history from Shopify, payment info from Stripe, subscription data from your billing system—all automatically attached to the ticket.',
-      label: 'Context Auto-Loaded',
-      icon: Database,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Build Automation Without Writing Code',
-      description: 'Drag-and-drop interface makes it easy to create sophisticated workflows. Add triggers, conditions, actions, and delays—no technical skills required.',
-      label: 'Visual Builder',
-      icon: Workflow,
-    },
-    {
-      color: 'hsl(var(--card))',
-      title: 'Build Once, Deploy Everywhere',
-      description: 'Create workflow building blocks you can reuse across every automation. Update one block, it updates everywhere. Like code libraries, but no coding.',
-      label: 'Reusable Blocks',
-      icon: Package,
-    },
-  ];
-
-  // AI Copilot Connectors
+  // AI Copilot Connectors data
   const copilotConnectors = [
     {
       category: 'Payments & Billing',
@@ -369,70 +61,27 @@ const ProductWorkflows = () => {
     },
   ];
 
-  // Scroll progress indicator
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.scrollY / totalScroll) * 100;
-      setScrollProgress(currentProgress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Intersection Observer for scroll-triggered animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elements = document.querySelectorAll('.fade-in-up');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div className="min-h-screen">
+      {/* Global Styles - Client Component */}
+      <ProductWorkflowsStyles />
+
+      {/* Fade In Up Observer - Client Component */}
+      <FadeInUpObserver />
+
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* Scroll Progress Indicator */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-border/20">
-        <div
-          className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      {/* Scroll Progress Indicator - Client Component */}
+      <ScrollProgressIndicator />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
-        {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        {/* Hero Liquid Ether Effect - Client Component */}
+        <ProductWorkflowsHeroBackground />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
@@ -566,28 +215,13 @@ const ProductWorkflows = () => {
       <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-5 lg:space-y-6 fade-in-up">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
-                Everything you need to automate support
-              </h2>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                From simple routing to complex multi-step workflows—build it all with visual drag-and-drop
-              </p>
-            </div>
-
-            {/* MagicBento Grid */}
-            <div className="fade-in-up">
-              <MagicBento
-                cardData={bentoCards}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableStars={true}
-                enableTilt={false}
-                enableMagnetism={true}
-                clickEffect={true}
-              />
-            </div>
+            {/* Bento Section - Client Component */}
+            <ProductWorkflowsBentoSection
+              screenshots={{
+                routing: routingConfigScreenshot.src,
+                workflow: workflowScreenshot.src,
+              }}
+            />
           </div>
         </div>
       </section>
@@ -628,7 +262,7 @@ const ProductWorkflows = () => {
                 </div>
               </div>
 
-              {/* Right: Accordion Tabs */}
+              {/* Right: Accordion Tabs - Client Component */}
               <div className="space-y-2 md:space-y-2.5 lg:space-y-3 fade-in-up">
                 <CopilotAccordion />
               </div>
@@ -738,42 +372,6 @@ const ProductWorkflows = () => {
       </section>
 
       <Footer />
-
-      <style jsx global>{`
-        html {
-          scroll-behavior: smooth;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-
-        .fade-in-up {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-up.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
     </div>
   );
 };
