@@ -1,6 +1,8 @@
 import HomeNew from "@/views/HomeNew";
 import WebSiteSchema from "@/components/structured-data/WebSiteSchema";
+import FAQPageSchema from "@/components/structured-data/FAQPageSchema";
 import { generatePageMetadata } from "@/lib/metadata";
+import { homepageFaqs } from "@/data/homepageFaqData";
 
 export const metadata = generatePageMetadata({
   title: "Pullse - AI-Powered Customer Support Platform",
@@ -14,6 +16,7 @@ export const metadata = generatePageMetadata({
 const HomePage = () => (
   <>
     <WebSiteSchema />
+    <FAQPageSchema faqs={homepageFaqs} />
     <HomeNew />
   </>
 );

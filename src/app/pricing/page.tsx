@@ -2,6 +2,7 @@ import Pricing from "@/views/Pricing";
 import FAQPageSchema from "@/components/structured-data/FAQPageSchema";
 import OfferSchema from "@/components/structured-data/OfferSchema";
 import { generatePageMetadata } from "@/lib/metadata";
+import { faqs } from "@/data/pricingData";
 
 export const metadata = generatePageMetadata({
   title: "Pricing | Pullse - Transparent, Usage-Based Pricing",
@@ -14,7 +15,7 @@ export const metadata = generatePageMetadata({
 
 const PricingPage = () => (
   <>
-    <FAQPageSchema />
+    <FAQPageSchema faqs={faqs} />
     <OfferSchema />
     <Pricing />
   </>

@@ -14,9 +14,17 @@
  */
 
 import type { FAQPage, WithContext } from 'schema-dts';
-import { faqs } from '@/data/pricingData';
 
-export const FAQPageSchema = () => {
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface FAQPageSchemaProps {
+  faqs: FAQ[];
+}
+
+export const FAQPageSchema = ({ faqs }: FAQPageSchemaProps) => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pullse.ai';
 
   const schema: WithContext<FAQPage> = {

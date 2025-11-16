@@ -19,6 +19,13 @@ import {
 import { Button } from "@/components/ui/button";
 import RouteButton from "@/components/RouteButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { homepageFaqs } from "@/data/homepageFaqData";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VideoEmbed from "@/components/VideoEmbed";
@@ -1090,6 +1097,65 @@ const HomeNew = () => {  const pageRef = useRef<HTMLDivElement>(null);
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          FAQ Section - Answer Engine Optimization
+      ======================================== */}
+      <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Everything you need to know about Pullse and how it can transform your customer support
+              </p>
+            </div>
+
+            {/* FAQ Accordion */}
+            <div className="space-y-3 md:space-y-4">
+              {homepageFaqs.map((faq, index) => (
+                <Accordion
+                  key={index}
+                  type="single"
+                  collapsible
+                >
+                  <AccordionItem
+                    value="item-1"
+                    className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-xl md:rounded-2xl px-4 md:px-5 lg:px-6 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <AccordionTrigger className="text-left hover:no-underline py-4 md:py-5">
+                      <span className="font-semibold text-sm md:text-base text-gray-900 pr-4">
+                        {faq.question}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-700 text-xs md:text-sm leading-relaxed pb-4 md:pb-5">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              ))}
+            </div>
+
+            {/* CTA at bottom of FAQ */}
+            <div className="mt-10 md:mt-12 text-center">
+              <p className="text-sm md:text-base text-muted-foreground mb-4">
+                Still have questions?
+              </p>
+              <RouteButton
+                size="lg"
+                className="text-sm sm:text-base px-6 sm:px-8 py-6 sm:py-7 shadow-xl shadow-primary/25 min-h-[44px]"
+                href="/contact-sales"
+              >
+                Contact our team
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+              </RouteButton>
             </div>
           </div>
         </div>

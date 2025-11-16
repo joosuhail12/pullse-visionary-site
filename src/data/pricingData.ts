@@ -376,6 +376,11 @@ export const faqCategories: FAQCategory[] = [
         answer:
           'Yes. You can switch between Standard and Pro plans anytime. The main difference is that Pro includes unlimited AI profiles, unlimited help centers, and the full Auto-QA suite for quality assurance and team coaching.',
       },
+      {
+        question: 'What is the difference between Standard and Pro?',
+        answer:
+          'Standard ($49/seat/month) includes 2 AI chatbots, 1 Copilot profile, 1 help center, and basic analytics. Pro ($79/seat/month) includes unlimited AI profiles, unlimited help centers, the full Auto-QA suite with coaching and feedback tools, and advanced analytics. Both plans include unlimited conversations, all integrations, and the same inbox experience.',
+      },
     ],
   },
   {
@@ -408,6 +413,21 @@ export const faqCategories: FAQCategory[] = [
         answer:
           'Yes. Set organization-level budgets with 80% and 100% threshold alerts. Admins choose soft-warn (notify but continue) or hard-stop (pause AI actions). Full control over usage and costs.',
       },
+      {
+        question: 'Do you offer annual billing or discounts?',
+        answer:
+          'Yes. We offer annual billing with a discount compared to monthly pricing. Contact our sales team to discuss annual contracts, volume discounts, and custom enterprise pricing for larger teams. We also have a startup program offering significant discounts for eligible early-stage companies.',
+      },
+      {
+        question: 'What happens if I run out of credits?',
+        answer:
+          'When you exhaust your included monthly credits, additional credits are automatically purchased as pay-as-you-go at $0.10/credit. You can also pre-commit to credit packs at $0.08/credit for savings. Set budget caps to control spending or configure alerts to get notified before reaching your limit.',
+      },
+      {
+        question: 'What payment methods do you accept?',
+        answer:
+          'We accept all major credit cards (Visa, Mastercard, American Express) for monthly billing. For annual contracts and enterprise customers, we also accept ACH transfers and wire payments. All payments are processed securely through our payment provider.',
+      },
     ],
   },
   {
@@ -429,6 +449,11 @@ export const faqCategories: FAQCategory[] = [
         question: 'How many profiles can we create?',
         answer:
           'Standard: 2 AI chatbots + 1 Copilot profile. Pro: Unlimited chatbots and Copilot profiles. Profiles are separate AI personas with unique prompts, knowledge bases, and tool access—perfect for different teams, brands, or use cases.',
+      },
+      {
+        question: 'Does Pullse integrate with my existing tools?',
+        answer:
+          'Yes. Pullse integrates with popular tools like Stripe, Shopify, Slack, and many more through our API and webhooks. Our Copilot can execute actions across your entire tech stack. We also offer a flexible API for custom integrations. Both Standard and Pro plans include all available integrations with no additional fees.',
       },
     ],
   },
