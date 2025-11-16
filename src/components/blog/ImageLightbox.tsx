@@ -171,8 +171,8 @@ export default function ImageLightbox({
           alt={alt}
           width={1200}
           height={800}
+          sizes="90vw"
           className="h-auto w-auto max-w-full"
-          priority
         />
       </div>
 

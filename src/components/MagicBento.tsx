@@ -2,12 +2,25 @@
 
 import { useRef, useEffect, useCallback, useState } from 'react';
 import type { ReactNode, CSSProperties } from 'react';
-import { gsap } from 'gsap';
+import type { gsap as GSAPType } from 'gsap';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = '132, 0, 255';
 const MOBILE_BREAKPOINT = 768;
+
+// Hook to dynamically load GSAP
+const useGSAP = () => {
+  const [gsap, setGsap] = useState<typeof GSAPType | null>(null);
+
+  useEffect(() => {
+    import('gsap').then(({ gsap: loadedGsap }) => {
+      setGsap(() => loadedGsap);
+    });
+  }, []);
+
+  return gsap;
+};
 
 const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement('div');
@@ -72,13 +85,14 @@ const ParticleCard = ({
   clickEffect = false,
   enableMagnetism = false
 }: ParticleCardProps) => {
+  const gsap = useGSAP();
   const cardRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLElement[]>([]);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const isHoveredRef = useRef(false);
   const memoizedParticles = useRef<HTMLElement[]>([]);
   const particlesInitialized = useRef(false);
-  const magnetismAnimationRef = useRef<gsap.core.Tween | null>(null);
+  const magnetismAnimationRef = useRef<any>(null);
 
   const initializeParticles = useCallback(() => {
     if (particlesInitialized.current || !cardRef.current) return;
@@ -91,6 +105,8 @@ const ParticleCard = ({
   }, [particleCount, glowColor]);
 
   const clearAllParticles = useCallback(() => {
+    if (!gsap) return;
+
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
     magnetismAnimationRef.current?.kill();
@@ -107,10 +123,10 @@ const ParticleCard = ({
       });
     });
     particlesRef.current = [];
-  }, []);
+  }, [gsap]);
 
   const animateParticles = useCallback(() => {
-    if (!cardRef.current || !isHoveredRef.current) return;
+    if (!gsap || !cardRef.current || !isHoveredRef.current) return;
 
     if (!particlesInitialized.current) {
       initializeParticles();
@@ -118,7 +134,7 @@ const ParticleCard = ({
 
     memoizedParticles.current.forEach((particle, index) => {
       const timeoutId = setTimeout(() => {
-        if (!isHoveredRef.current || !cardRef.current) return;
+        if (!isHoveredRef.current || !cardRef.current || !gsap) return;
 
         const clone = particle.cloneNode(true) as HTMLElement;
         cardRef.current.appendChild(clone);
@@ -147,14 +163,15 @@ const ParticleCard = ({
 
       timeoutsRef.current.push(timeoutId);
     });
-  }, [initializeParticles]);
+  }, [gsap, initializeParticles]);
 
   useEffect(() => {
-    if (disableAnimations || !cardRef.current) return;
+    if (disableAnimations || !cardRef.current || !gsap) return;
 
     const element = cardRef.current;
 
     const handleMouseEnter = () => {
+      if (!gsap) return;
       isHoveredRef.current = true;
       animateParticles();
 
@@ -170,6 +187,7 @@ const ParticleCard = ({
     };
 
     const handleMouseLeave = () => {
+      if (!gsap) return;
       isHoveredRef.current = false;
       clearAllParticles();
 
@@ -193,7 +211,7 @@ const ParticleCard = ({
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!enableTilt && !enableMagnetism) return;
+      if (!gsap || (!enableTilt && !enableMagnetism)) return;
 
       const rect = element.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -228,7 +246,7 @@ const ParticleCard = ({
     };
 
     const handleClick = (e: MouseEvent) => {
-      if (!clickEffect) return;
+      if (!gsap || !clickEffect) return;
 
       const rect = element.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -285,7 +303,7 @@ const ParticleCard = ({
       element.removeEventListener('click', handleClick);
       clearAllParticles();
     };
-  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
+  }, [gsap, animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
 
   return (
     <div
@@ -313,11 +331,12 @@ const GlobalSpotlight = ({
   spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
   glowColor = DEFAULT_GLOW_COLOR
 }: GlobalSpotlightProps) => {
+  const gsap = useGSAP();
   const spotlightRef = useRef<HTMLDivElement | null>(null);
   const isInsideSection = useRef(false);
 
   useEffect(() => {
-    if (disableAnimations || !gridRef?.current || !enabled) return;
+    if (disableAnimations || !gridRef?.current || !enabled || !gsap) return;
 
     const spotlight = document.createElement('div');
     spotlight.className = 'global-spotlight';
@@ -433,7 +452,7 @@ const GlobalSpotlight = ({
       document.removeEventListener('mouseleave', handleMouseLeave);
       spotlightRef.current?.parentNode?.removeChild(spotlightRef.current);
     };
-  }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);
+  }, [gsap, gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);
 
   return null;
 };
