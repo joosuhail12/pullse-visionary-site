@@ -43,6 +43,7 @@ const TeamCard = ({ member, index }: TeamCardProps) => {
                 alt={member.name}
                 width={160}
                 height={160}
+                sizes="160px"
                 className="rounded-full relative z-10 ring-4 ring-white/50"
               />
             </div>

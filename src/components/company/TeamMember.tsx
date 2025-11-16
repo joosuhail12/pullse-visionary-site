@@ -62,6 +62,7 @@ const TeamMember = ({ member, index }: TeamMemberProps) => {
             src={member.image}
             alt={member.name}
             fill
+            sizes="(min-width: 1024px) 320px, (min-width: 768px) 45vw, 100vw"
             className="object-cover"
           />
         ) : (

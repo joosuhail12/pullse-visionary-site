@@ -43,6 +43,7 @@ export default function CompanyAntlerCard({ antler, antlerLogo }: CompanyAntlerC
                   alt="Antler"
                   width={120}
                   height={48}
+                  sizes="(min-width: 768px) 120px, 100px"
                   className="w-auto h-10 md:h-12"
                 />
               </div>

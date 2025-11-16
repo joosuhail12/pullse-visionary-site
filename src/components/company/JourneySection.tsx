@@ -70,6 +70,7 @@ const JourneySection = ({ milestones, antler }: JourneySectionProps) => {
                   alt="Antler"
                   width={140}
                   height={56}
+                  sizes="140px"
                   className="h-12 w-auto"
                 />
               </div>
