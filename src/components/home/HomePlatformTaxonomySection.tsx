@@ -1,0 +1,141 @@
+'use client';
+
+import { lazy, Suspense } from "react";
+import {
+  MessageSquare,
+  Zap,
+  Bot,
+  Sparkles,
+  Users,
+  CheckCircle2,
+  BarChart3,
+} from "lucide-react";
+import type { CardData } from "@/components/MagicBento";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
+import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
+import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import analyticsScreenshot from "@/assets/analytics-screenshot.png";
+import AIChatbotPreview from "@/components/AIChatbotPreview";
+import AIToolsPreview from "@/components/AIToolsPreview";
+import AutoQAPreview from "@/components/AutoQAPreview";
+
+const MagicBento = lazy(() => import("@/components/MagicBento"));
+
+const taxonomy: CardData[] = [
+  {
+    title: "Unified Inbox",
+    description: "One place for email & chat with SLAs, assignments, and full context.",
+    label: "Communication",
+    color: "hsl(var(--background))",
+    icon: MessageSquare,
+    image: inboxScreenshot.src,
+  },
+  {
+    title: "Workflow Automation",
+    description: "Visual routing, tagging, SLAs, escalations.",
+    label: "Automation",
+    color: "hsl(var(--background))",
+    icon: Zap,
+    image: workflowScreenshot.src,
+  },
+  {
+    title: "AI Chatbots",
+    description: "Answer questions AND take lightweight actions—refunds, lookups, updates—autonomously.",
+    label: "AI Agent",
+    color: "hsl(var(--background))",
+    icon: Bot,
+    customComponent: <AIChatbotPreview />,
+  },
+  {
+    title: "AI Copilots",
+    description: "Execute actions across your stack—refunds, updates, changes—right from the conversation.",
+    label: "Action Engine",
+    color: "hsl(var(--background))",
+    icon: Sparkles,
+    image: aiCopilotScreenshot.src,
+  },
+  {
+    title: "AI Tools",
+    description: "Refunds, plan changes, order status—with guardrails & audit trails.",
+    label: "Actions",
+    color: "hsl(var(--background))",
+    icon: Users,
+    customComponent: <AIToolsPreview />,
+  },
+  {
+    title: "Auto-QA",
+    description: "Score 100% of conversations for accuracy, empathy, policy.",
+    label: "Quality",
+    color: "hsl(var(--background))",
+    icon: CheckCircle2,
+    customComponent: <AutoQAPreview />,
+  },
+  {
+    title: "Analytics",
+    description: "Coverage by intent, actioned vs. deflected, FCR, AHT in one view.",
+    label: "Insights",
+    color: "hsl(var(--background))",
+    icon: BarChart3,
+    image: analyticsScreenshot.src,
+  },
+];
+
+const HomePlatformTaxonomySection = () => {
+  return (
+    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.04),transparent_60%)]" />
+
+      <div className="container relative mx-auto px-4">
+        <div className="mx-auto mb-12 sm:mb-16 md:mb-20 max-w-4xl text-center space-y-4 sm:space-y-6">
+          {/* Stronger headline */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight px-4">
+            Seven products. One platform. Zero integration headaches.
+          </h2>
+
+          {/* Better value prop */}
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
+            From unified inbox to AI agents to real-time analytics—everything your team needs to deliver world-class support is built in, battle-tested, and ready to deploy.
+          </p>
+
+          {/* Social proof stat */}
+          <div className="inline-flex items-center gap-3 sm:gap-4 md:gap-6 rounded-2xl border border-border/50 bg-card px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg flex-wrap justify-center">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary">7</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Products</div>
+            </div>
+            <div className="h-8 w-px bg-border/60" />
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary">1</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Login</div>
+            </div>
+            <div className="h-8 w-px bg-border/60" />
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-primary">0</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Integrations</div>
+            </div>
+          </div>
+        </div>
+
+        <Suspense fallback={
+          <div className="min-h-[400px] bg-gradient-to-b from-background via-primary/3 to-background rounded-2xl border border-border/50">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 p-4">
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="h-32 rounded-xl bg-gradient-to-br from-muted/50 to-muted/30 animate-pulse"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                />
+              ))}
+            </div>
+          </div>
+        }>
+          <MagicBento cardData={taxonomy} />
+        </Suspense>
+      </div>
+    </section>
+  );
+};
+
+export default HomePlatformTaxonomySection;

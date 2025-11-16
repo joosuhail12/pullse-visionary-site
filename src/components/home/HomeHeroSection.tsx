@@ -1,0 +1,175 @@
+'use client';
+
+import { useEffect, useRef, lazy, Suspense, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { prefersReducedMotion, getLiquidEtherResolution, getDeviceType } from "@/lib/deviceDetection";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import VideoEmbed from "@/components/VideoEmbed";
+
+const LiquidEther = lazy(() => import("@/components/LiquidEther"));
+
+let gsap: any = null;
+
+const loadGSAP = async () => {
+  if (!gsap) {
+    const module = await import("gsap");
+    gsap = module.default;
+  }
+  return { gsap };
+};
+
+const heroStats = [
+  { label: "Handled with AI", value: "80%", caption: "Intent coverage" },
+  { label: "Response time", value: "-43%", caption: "Avg. reduction" },
+  { label: "Time to launch", value: "<14 days", caption: "First automations" },
+];
+
+const HomeHeroSection = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+
+  // Device and performance detection
+  const [shouldShowLiquidEther, setShouldShowLiquidEther] = useState(false);
+  const [liquidEtherResolution, setLiquidEtherResolution] = useState(0.55);
+
+  // Detect device capabilities and motion preferences on client-side
+  useEffect(() => {
+    const hasReducedMotion = prefersReducedMotion();
+    const { isDesktop } = getDeviceType();
+    const adaptiveResolution = getLiquidEtherResolution();
+
+    // Only show on desktop without reduced motion preference
+    setShouldShowLiquidEther(isDesktop && !hasReducedMotion);
+    setLiquidEtherResolution(adaptiveResolution);
+  }, []);
+
+  useEffect(() => {
+    let ctx: { revert: () => void } | null = null;
+    let isMounted = true;
+
+    const init = async () => {
+      const { gsap } = await loadGSAP();
+      if (!isMounted) return;
+
+      ctx = gsap.context(() => {
+        if (titleRef.current) {
+          gsap.from(titleRef.current.querySelectorAll<HTMLElement>(".word"), {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.08,
+            ease: "power3.out",
+          });
+        }
+        if (descRef.current) {
+          gsap.from(descRef.current, {
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            duration: 1,
+            ease: "power3.out",
+          });
+        }
+        if (buttonsRef.current) {
+          gsap.from(buttonsRef.current.children, {
+            scale: 0.9,
+            opacity: 0,
+            delay: 0.6,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+          });
+        }
+      }, heroRef);
+    };
+
+    init();
+
+    return () => {
+      isMounted = false;
+      ctx?.revert();
+    };
+  }, []);
+
+  return (
+    <section ref={heroRef} className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-20">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background -z-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
+
+      {/* LiquidEther - Conditionally rendered on desktop without reduced motion */}
+      {shouldShowLiquidEther && (
+        <div className="absolute inset-0 -z-10 opacity-55">
+          <Suspense fallback={
+            <div className="w-full h-full bg-gradient-to-br from-[#FF00C8]/8 via-[#A805FF]/4 to-[#D3A9EA]/8 animate-pulse" />
+          }>
+            <LiquidEther
+              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
+              mouseForce={20}
+              cursorSize={110}
+              isViscous={false}
+              resolution={liquidEtherResolution}
+              autoDemo
+              autoSpeed={0.35}
+              autoIntensity={1.6}
+            />
+          </Suspense>
+        </div>
+      )}
+
+      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20">
+        <div className="grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2 items-center">
+          <div className="space-y-6 sm:space-y-8">
+            <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-foreground">
+              <span className="word inline-block">AI</span>{" "}
+              <span className="word inline-block">support</span>{" "}
+              <span className="word inline-block">that</span>{" "}
+              <span className="word inline-block">feels</span>{" "}
+              <span className="word inline-block">human,</span>{" "}
+              <span className="word inline-block">not</span>{" "}
+              <span className="word inline-block">handed</span>{" "}
+              <span className="word inline-block">off</span>
+            </h1>
+
+            <p ref={descRef} className="max-w-2xl text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
+              Pullse unifies channels, workflows, automations, and action-execution copilots so teams resolve complex intents in minutes. Execute actions across your entire stack without context switching.
+            </p>
+
+            <div ref={buttonsRef} className="flex flex-col gap-4 sm:flex-row">
+              <Button size="lg" className="px-6 py-6 text-base min-h-[44px]" asChild>
+                <Link href="/contact-sales">
+                  Book a demo
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+
+            <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
+              {heroStats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-border/60 bg-background/60 p-3 sm:p-4 backdrop-blur-sm md:backdrop-blur">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{stat.label}</p>
+                  <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.caption}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-6 bg-primary/20 blur-3xl -z-10" />
+            <div className="rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-background/70 via-background/90 to-background/70 p-1 shadow-2xl">
+              <div className="rounded-[2.3rem] overflow-hidden">
+                <VideoEmbed videoId="NItSkrvcS04" title="Pullse product intro" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HomeHeroSection;
