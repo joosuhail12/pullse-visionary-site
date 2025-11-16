@@ -2,6 +2,10 @@ import ProductAIEngine from "@/views/ProductAIEngine";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - product information changes infrequently
+export const revalidate = 86400;
+
+
 export const metadata = generatePageMetadata({
   title: "AI Engine | Pullse - Governed AI with Guardrails",
   description:

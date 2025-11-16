@@ -4,6 +4,9 @@ import FAQPageSchema from "@/components/structured-data/FAQPageSchema";
 import { generatePageMetadata } from "@/lib/metadata";
 import { homepageFaqs } from "@/data/homepageFaqData";
 
+// Revalidate every hour - marketing content changes periodically
+export const revalidate = 3600;
+
 export const metadata = generatePageMetadata({
   title: "Pullse - AI-Powered Customer Support Platform",
   description:

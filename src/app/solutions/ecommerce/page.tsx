@@ -1,6 +1,10 @@
 import SolutionEcommerce from "@/views/SolutionEcommerce";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - solution pages change infrequently
+export const revalidate = 86400;
+
+
 export const metadata = generatePageMetadata({
   title: "Solutions for Ecommerce | Pullse",
   description:

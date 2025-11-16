@@ -3,6 +3,10 @@ import { generatePageMetadata } from "@/lib/metadata";
 import FAQPageSchema from "@/components/structured-data/FAQPageSchema";
 import { faqs } from "@/data/comparisonData";
 
+// Revalidate hourly - comparison data may update
+export const revalidate = 3600;
+
+
 export const metadata = generatePageMetadata({
   title: "Compare Pullse vs Zendesk, Intercom, Freshdesk | Platform Comparison",
   description:

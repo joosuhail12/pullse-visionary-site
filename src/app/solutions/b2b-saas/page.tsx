@@ -1,6 +1,10 @@
 import SolutionSaaS from "@/views/SolutionSaaS";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - solution pages change infrequently
+export const revalidate = 86400;
+
+
 export const metadata = generatePageMetadata({
   title: "Solutions for B2B SaaS | Pullse",
   description:

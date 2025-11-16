@@ -2,6 +2,10 @@ import ProductWorkflows from "@/views/ProductWorkflows";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - product information changes infrequently
+export const revalidate = 86400;
+
+
 export const metadata = generatePageMetadata({
   title: "Visual Workflows & Automation | Pullse",
   description:

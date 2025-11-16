@@ -2,6 +2,9 @@ import ProductAISuite from "@/views/ProductAISuite";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - product information changes infrequently
+export const revalidate = 86400;
+
 export const metadata = generatePageMetadata({
   title: "AI Suite | Complete AI Platform for Support by Pullse",
   description:

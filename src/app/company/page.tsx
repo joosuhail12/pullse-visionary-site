@@ -1,6 +1,10 @@
 import Company from "@/views/Company";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - company information changes infrequently
+export const revalidate = 86400;
+
+
 export const metadata = generatePageMetadata({
   title: "About Pullse | AI-First Customer Support Platform | Antler-Backed",
   description:

@@ -4,6 +4,9 @@ import OfferSchema from "@/components/structured-data/OfferSchema";
 import { generatePageMetadata } from "@/lib/metadata";
 import { faqs } from "@/data/pricingData";
 
+// Revalidate every 30 minutes - pricing may change more frequently
+export const revalidate = 1800;
+
 export const metadata = generatePageMetadata({
   title: "Pricing | Pullse - Transparent, Usage-Based Pricing",
   description:

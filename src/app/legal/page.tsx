@@ -1,6 +1,12 @@
 import Legal from "@/views/Legal";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Edge runtime for global performance
+export const runtime = 'edge';
+// Revalidate weekly - legal documents change very infrequently
+export const revalidate = 604800;
+
+
 export const metadata = generatePageMetadata({
   title: "Legal | Pullse - Terms & Policies",
   description:

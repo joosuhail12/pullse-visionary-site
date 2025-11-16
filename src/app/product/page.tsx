@@ -1,6 +1,9 @@
 import Product from "@/views/Product";
 import { generatePageMetadata } from "@/lib/metadata";
 
+// Revalidate daily - product information changes infrequently
+export const revalidate = 86400;
+
 export const metadata = generatePageMetadata({
   title: "Product | Pullse - Complete AI-Powered Support Platform",
   description:
