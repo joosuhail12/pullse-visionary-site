@@ -25,7 +25,8 @@ export class PostHogAPIClient {
   constructor(config: PostHogClientConfig) {
     this.apiKey = config.apiKey;
     this.projectId = config.projectId;
-    this.host = config.host || 'https://us.i.posthog.com';
+    // Use API host (us.posthog.com) not ingestion host (us.i.posthog.com)
+    this.host = config.host || 'https://us.posthog.com';
   }
 
   /**
