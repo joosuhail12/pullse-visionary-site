@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "analyze": "ANALYZE=true next build --webpack",
     "posthog:create-dashboard": "tsx scripts/create-posthog-dashboard.ts"
   },
   "dependencies": {
@@ -90,6 +91,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@next/bundle-analyzer": "^16.0.3",
     "@sanity/types": "^4.11.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.19.1",
