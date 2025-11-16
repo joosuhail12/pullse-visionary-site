@@ -20,7 +20,13 @@ export interface DashboardTile {
   color?: string;
 }
 
-export type InsightQuery = TrendsQueryNode | EventsQueryNode | FunnelsQueryNode;
+export type InsightQuery = InsightVizNode;
+
+export interface InsightVizNode {
+  kind: 'InsightVizNode';
+  source: TrendsQueryNode | EventsQueryNode | FunnelsQueryNode;
+  version: number;
+}
 
 export interface TrendsQueryNode {
   kind: 'TrendsQuery';
@@ -32,6 +38,7 @@ export interface TrendsQueryNode {
   compareFilter?: CompareFilter;
   filterTestAccounts?: boolean;
   properties?: PropertyFilter[];
+  version?: number;
 }
 
 export interface EventsQueryNode {
@@ -42,6 +49,7 @@ export interface EventsQueryNode {
   limit?: number;
   offset?: number;
   dateRange?: DateRange;
+  version?: number;
 }
 
 export interface FunnelsQueryNode {
@@ -49,6 +57,7 @@ export interface FunnelsQueryNode {
   series: Series[];
   dateRange?: DateRange;
   funnelsFilter?: FunnelsFilter;
+  version?: number;
 }
 
 export interface Series {
@@ -59,6 +68,7 @@ export interface Series {
   math_property?: string;
   math_group_type_index?: number;
   properties?: PropertyFilter[];
+  version?: number;
 }
 
 export type MathType =

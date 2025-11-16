@@ -31,22 +31,28 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'LCP Average',
       description: 'Average Largest Contentful Paint (target: < 2.5s)',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_LCP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_LCP_value',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -54,22 +60,28 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'CLS Average',
       description: 'Average Cumulative Layout Shift (target: < 0.1)',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_CLS_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_CLS_value',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -77,22 +89,28 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'FCP Average',
       description: 'Average First Contentful Paint (target: < 1.8s)',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_FCP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_FCP_value',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -100,22 +118,28 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'INP Average',
       description: 'Average Interaction to Next Paint (target: < 200ms)',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_INP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_INP_value',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -124,39 +148,47 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'Web Vitals Trends',
       description: 'All Core Web Vitals metrics over time',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_LCP_value',
-            name: 'LCP (ms)',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_LCP_value',
+              name: 'LCP (ms)',
+              version: 1,
+            },
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_FCP_value',
+              name: 'FCP (ms)',
+              version: 1,
+            },
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_INP_value',
+              name: 'INP (ms)',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_FCP_value',
-            name: 'FCP (ms)',
+          interval: 'day',
+          trendsFilter: {
+            display: 'ActionsLineGraph',
+            showLegend: true,
           },
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_INP_value',
-            name: 'INP (ms)',
-          },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          version: 1,
         },
-        interval: 'day',
-        trendsFilter: {
-          display: 'ActionsLineGraph',
-          showLegend: true,
-        },
+        version: 1,
       },
     },
 
@@ -165,28 +197,34 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'Slowest Pages (LCP)',
       description: 'Top 10 pages with worst Largest Contentful Paint',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_LCP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_LCP_value',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$current_url',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$current_url',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
 
@@ -195,28 +233,34 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'Layout Shift Issues (CLS > 0.1)',
       description: 'Pages with Cumulative Layout Shift above threshold',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_CLS_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_CLS_value',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$current_url',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$current_url',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
 
@@ -225,28 +269,34 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'LCP by Device Type',
       description: 'Largest Contentful Paint comparison: Mobile vs Desktop',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_LCP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_LCP_value',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$device_type',
+            breakdown_type: 'person',
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$device_type',
-          breakdown_type: 'person',
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          interval: 'day',
+          trendsFilter: {
+            display: 'ActionsLineGraph',
+            showLegend: true,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        interval: 'day',
-        trendsFilter: {
-          display: 'ActionsLineGraph',
-          showLegend: true,
-        },
+        version: 1,
       },
     },
 
@@ -255,29 +305,35 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'LCP by Browser',
       description: 'Largest Contentful Paint by browser to identify browser-specific issues',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_LCP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_LCP_value',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$browser',
+            breakdown_type: 'event',
+            breakdown_limit: 5,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$browser',
-          breakdown_type: 'event',
-          breakdown_limit: 5,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          interval: 'day',
+          trendsFilter: {
+            display: 'ActionsLineGraph',
+            showLegend: true,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        interval: 'day',
-        trendsFilter: {
-          display: 'ActionsLineGraph',
-          showLegend: true,
-        },
+        version: 1,
       },
     },
 
@@ -286,28 +342,34 @@ export const PERFORMANCE_WEB_VITALS_DASHBOARD: PostHogDashboardConfig = {
       name: 'Page Responsiveness (INP)',
       description: 'Interaction to Next Paint by page - measures responsiveness',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$web_vitals',
-            math: 'avg',
-            math_property: '$web_vitals_INP_value',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$web_vitals',
+              math: 'avg',
+              math_property: '$web_vitals_INP_value',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$current_url',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$current_url',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
   ],
@@ -329,21 +391,27 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Total Pageviews',
       description: 'Total number of page views in the last 7 days',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'total',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'total',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -352,21 +420,27 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Unique Visitors',
       description: 'Total unique users in the last 7 days',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'dau',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'dau',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          trendsFilter: {
+            display: 'BoldNumber',
+          },
+          version: 1,
         },
-        trendsFilter: {
-          display: 'BoldNumber',
-        },
+        version: 1,
       },
     },
 
@@ -375,30 +449,37 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Pageview Trend',
       description: 'Daily pageviews and unique visitors over time',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'total',
-            name: 'Total Pageviews',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'total',
+              name: 'Total Pageviews',
+              version: 1,
+            },
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'dau',
+              name: 'Unique Visitors',
+              version: 1,
+            },
+          ],
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
           },
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'dau',
-            name: 'Unique Visitors',
+          interval: 'day',
+          trendsFilter: {
+            display: 'ActionsLineGraph',
+            showLegend: true,
           },
-        ],
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
+          version: 1,
         },
-        interval: 'day',
-        trendsFilter: {
-          display: 'ActionsLineGraph',
-          showLegend: true,
-        },
+        version: 1,
       },
     },
 
@@ -407,27 +488,33 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Most Viewed Pages',
       description: 'Top 10 most visited pages',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'total',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'total',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$current_url',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$current_url',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
 
@@ -436,28 +523,34 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Scroll Depth by Page',
       description: 'Average scroll depth percentage by page',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageleave',
-            math: 'avg',
-            math_property: '$scroll_depth_percentage',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageleave',
+              math: 'avg',
+              math_property: '$prev_pageview_max_scroll_percentage',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$current_url',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$current_url',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
 
@@ -466,27 +559,33 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Traffic Sources',
       description: 'Pageviews broken down by referrer source',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'total',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'total',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: '$referring_domain',
+            breakdown_type: 'event',
+            breakdown_limit: 10,
           },
-        ],
-        breakdownFilter: {
-          breakdown: '$referring_domain',
-          breakdown_type: 'event',
-          breakdown_limit: 10,
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsPie',
+            showLegend: true,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsPie',
-          showLegend: true,
-        },
+        version: 1,
       },
     },
 
@@ -495,26 +594,32 @@ export const USER_ENGAGEMENT_DASHBOARD: PostHogDashboardConfig = {
       name: 'Pageviews by Hour of Day',
       description: 'When users are most active during the day',
       query: {
-        kind: 'TrendsQuery',
-        series: [
-          {
-            kind: 'EventsNode',
-            event: '$pageview',
-            math: 'total',
+        kind: 'InsightVizNode',
+        source: {
+          kind: 'TrendsQuery',
+          series: [
+            {
+              kind: 'EventsNode',
+              event: '$pageview',
+              math: 'total',
+              version: 1,
+            },
+          ],
+          breakdownFilter: {
+            breakdown: 'hour',
+            breakdown_type: 'event',
           },
-        ],
-        breakdownFilter: {
-          breakdown: 'hour',
-          breakdown_type: 'event',
+          dateRange: {
+            date_from: '-7d',
+            date_to: null,
+          },
+          trendsFilter: {
+            display: 'ActionsBar',
+            showLegend: false,
+          },
+          version: 1,
         },
-        dateRange: {
-          date_from: '-7d',
-          date_to: null,
-        },
-        trendsFilter: {
-          display: 'ActionsBar',
-          showLegend: false,
-        },
+        version: 1,
       },
     },
   ],
