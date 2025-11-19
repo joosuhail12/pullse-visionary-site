@@ -26,7 +26,7 @@ import AIAccordion from "@/components/product-helpcenters/AIAccordion";
 import AppoThemeStyles from "@/components/product-helpcenters/AppoThemeStyles";
 
 // Import Appo branding
-import appoLogo from "@/assets/appo/appo-logo.png";
+import appoLogo from "@/assets/appo/appo-logo.webp";
 import appoWordmark from "@/assets/appo/appo-wordmark.png";
 
 // Import Pullse logo

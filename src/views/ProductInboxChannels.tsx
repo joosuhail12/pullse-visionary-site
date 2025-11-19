@@ -23,7 +23,7 @@ import {
   Bot,
   Play,
 } from "lucide-react";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
 
 // Import client islands
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";

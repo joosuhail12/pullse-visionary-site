@@ -42,8 +42,11 @@ const HomeHeroSection = () => {
     const { isDesktop } = getDeviceType();
     const adaptiveResolution = getLiquidEtherResolution();
 
+    // Defer LiquidEther load by 1s on desktop to improve initial page load performance
     // Only show on desktop without reduced motion preference
-    setShouldShowLiquidEther(isDesktop && !hasReducedMotion);
+    if (isDesktop && !hasReducedMotion) {
+      setTimeout(() => setShouldShowLiquidEther(true), 1000);
+    }
     setLiquidEtherResolution(adaptiveResolution);
   }, []);
 

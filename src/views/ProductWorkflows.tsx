@@ -28,7 +28,7 @@ import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
 import ProductWorkflowsStyles from "@/components/product-workflows/ProductWorkflowsStyles";
 
 // Import screenshots
-import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
+import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
 import routingConfigScreenshot from "@/assets/screenshots/routing-config.png";
 import copilotScreenshot from "@/assets/copilot-interface-screenshot.png";
 

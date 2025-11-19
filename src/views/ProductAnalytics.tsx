@@ -11,7 +11,7 @@ import ProductAnalyticsBentoSection from "@/components/product-analytics/Product
 import ProductAnalyticsFinalCTA from "@/components/product-analytics/ProductAnalyticsFinalCTA";
 
 // Import screenshot
-import analyticsScreenshot from "@/assets/analytics-screenshot.png";
+import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
 
 const ProductAnalytics = () => {
   return (

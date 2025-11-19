@@ -11,10 +11,10 @@ import {
   BarChart3,
 } from "lucide-react";
 import type { CardData } from "@/components/MagicBento";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
-import workflowScreenshot from "@/assets/workflow-automation-screenshot.png";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
+import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
-import analyticsScreenshot from "@/assets/analytics-screenshot.png";
+import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";

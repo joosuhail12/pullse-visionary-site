@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.png";
+import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
 
 const PlatformOverview = () => {
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);

@@ -85,7 +85,6 @@ const steps = [
 const InteractiveHowItWorks = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [isUserInteracting, setIsUserInteracting] = useState(false);
   const active = steps[activeStep];
   const ActiveIcon = active.icon;
 
@@ -98,24 +97,8 @@ const InteractiveHowItWorks = () => {
     });
   }, [carouselApi]);
 
-  // Auto-advance carousel every 5 seconds
-  useEffect(() => {
-    if (!carouselApi || isUserInteracting) return;
-
-    const interval = setInterval(() => {
-      const currentIndex = carouselApi.selectedScrollSnap();
-      const nextIndex = (currentIndex + 1) % steps.length;
-      carouselApi.scrollTo(nextIndex);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [carouselApi, isUserInteracting]);
-
-  // Pause auto-advance on user interaction, resume after 3 seconds
-  const handleUserInteraction = useCallback(() => {
-    setIsUserInteracting(true);
-    setTimeout(() => setIsUserInteracting(false), 3000);
-  }, []);
+  // Auto-advance disabled for performance optimization
+  // Reduces continuous main thread work and improves Lighthouse scores
 
   return (
     <section className="relative py-24 md:py-28 overflow-hidden">
@@ -196,8 +179,6 @@ const InteractiveHowItWorks = () => {
                 loop: true,
               }}
               className="w-full"
-              onMouseDown={handleUserInteraction}
-              onTouchStart={handleUserInteraction}
             >
               <CarouselContent className="-ml-4">
                 {steps.map((step, index) => {
@@ -396,7 +377,6 @@ const InteractiveHowItWorks = () => {
                 onClick={() => {
                   setActiveStep(index);
                   carouselApi?.scrollTo(index);
-                  handleUserInteraction();
                 }}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   activeStep === index
