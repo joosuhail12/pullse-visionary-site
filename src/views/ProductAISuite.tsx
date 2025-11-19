@@ -35,7 +35,7 @@ const ProductAISuite = () => {
       <ScrollProgressIndicator />
       <Navigation />
 
-      <main className="relative z-10">
+      <main id="main-content" role="main" className="relative z-10">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-24 md:pb-18 lg:pt-32 lg:pb-24 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />

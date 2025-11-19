@@ -29,7 +29,8 @@ const SolutionEcommerce = () => {
 
       <ScrollProgressIndicator />
 
-      <SolutionEcommerceHeroSection />
+      <main id="main-content" role="main">
+        <SolutionEcommerceHeroSection />
 
       <SolutionEcommerceStatsSection />
 
@@ -401,6 +402,7 @@ const SolutionEcommerce = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

@@ -24,6 +24,7 @@ const ProductAutoQA = () => {
       {/* Scroll Progress Indicator - Client Component */}
       <ScrollProgressIndicator />
 
+      <main id="main-content" role="main">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-16 md:pt-20">
         {/* Static background layers */}
@@ -163,6 +164,7 @@ const ProductAutoQA = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

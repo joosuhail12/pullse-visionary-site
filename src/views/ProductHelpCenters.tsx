@@ -40,6 +40,7 @@ const ProductHelpCenters = () => {
       <PageLiquidBackground opacity={0.65} colors={['#F28D1B', '#FFB633', '#FEE3AC']} />
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* Scroll Progress Indicator - Client Component */}
       <ProductHelpCentersScrollProgress />
 
@@ -321,6 +322,7 @@ const ProductHelpCenters = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

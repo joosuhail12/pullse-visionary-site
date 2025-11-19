@@ -21,6 +21,7 @@ export default function Legal() {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
+      <main id="main-content" role="main">
       <div className="relative pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Header - Server-rendered, no animation on server */}
@@ -54,6 +55,7 @@ export default function Legal() {
           </div>
         </div>
       </div>
+      </main>
 
       <Footer />
     </div>

@@ -273,6 +273,7 @@ const Product = () => {
 
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* Modern Hero Section */}
       <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 sm:pt-24 md:pt-40 pb-12 sm:pb-16 md:pb-32 overflow-hidden">
         {/* Enhanced gradient overlay */}
@@ -709,6 +710,7 @@ const Product = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

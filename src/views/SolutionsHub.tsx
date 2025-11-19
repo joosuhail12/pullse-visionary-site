@@ -19,7 +19,8 @@ const SolutionsHub = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      <SolutionsHubHeroSection />
+      <main id="main-content" role="main">
+        <SolutionsHubHeroSection />
 
       <SolutionsHubStatsSection />
 
@@ -151,6 +152,7 @@ const SolutionsHub = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

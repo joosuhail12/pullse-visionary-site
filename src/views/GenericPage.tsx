@@ -15,7 +15,9 @@ const GenericPage = ({ title, description }: GenericPageProps) => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
+      <main id="main-content" role="main">
       <GenericPageContent title={title} description={description} />
+      </main>
 
       <Footer />
     </div>

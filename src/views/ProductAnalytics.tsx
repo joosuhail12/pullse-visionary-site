@@ -19,6 +19,7 @@ const ProductAnalytics = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* Scroll Progress Indicator - Client Component */}
       <ScrollProgressIndicator />
 
@@ -61,6 +62,7 @@ const ProductAnalytics = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

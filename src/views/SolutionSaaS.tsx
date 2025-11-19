@@ -24,7 +24,8 @@ const SolutionSaaS = () => {
       <Navigation />
       <ScrollProgressIndicator />
 
-      <SolutionSaaSHeroSection />
+      <main id="main-content" role="main">
+        <SolutionSaaSHeroSection />
 
       <SolutionSaaSStatsSection />
 
@@ -131,6 +132,7 @@ const SolutionSaaS = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

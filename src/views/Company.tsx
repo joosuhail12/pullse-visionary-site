@@ -21,6 +21,7 @@ const Company = () => {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
+      <main id="main-content" role="main">
       {/* ========================================
           SECTION 1: HERO - Founder-Led
       ======================================== */}
@@ -100,6 +101,7 @@ const Company = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

@@ -29,8 +29,9 @@ const Solutions = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 pb-12 md:pb-20 overflow-hidden">
+      <main id="main-content" role="main">
+        {/* Hero Section */}
+        <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 md:pt-20 pb-12 md:pb-20 overflow-hidden">
         {/* Hero Liquid Ether Effect - Client Component */}
         <SolutionsHeroBackground />
 
@@ -71,6 +72,7 @@ const Solutions = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

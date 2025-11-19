@@ -15,7 +15,9 @@ export default function LegalDocument({ document }: LegalDocumentProps) {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
+      <main id="main-content" role="main">
       <LegalDocumentContent document={document} />
+      </main>
 
       <Footer />
     </div>

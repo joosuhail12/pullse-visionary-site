@@ -63,6 +63,7 @@ export default function BlogDetailClient({
       {/* Reading Progress Bar & Back to Top Button */}
       <BlogDetailReadingProgress />
 
+      <main id="main-content" role="main">
       {/* Hero Image Section - Premium Magazine Style */}
       <section className="relative isolate overflow-hidden bg-gray-50">
         {/* Hero Liquid Ether Effect */}
@@ -314,6 +315,7 @@ export default function BlogDetailClient({
           className="flex-row"
         />
       </div>
+      </main>
     </div>
   );
 }

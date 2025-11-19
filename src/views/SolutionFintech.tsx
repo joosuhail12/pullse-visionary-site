@@ -19,7 +19,8 @@ const SolutionFintech = () => {
 
       <ScrollProgressIndicator />
 
-      <SolutionFintechHeroSection />
+      <main id="main-content" role="main">
+        <SolutionFintechHeroSection />
 
       <SolutionFintechStatsSection />
 
@@ -105,6 +106,7 @@ const SolutionFintech = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

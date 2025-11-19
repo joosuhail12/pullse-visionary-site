@@ -70,6 +70,7 @@ const StartupApplication = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
+      <main id="main-content" role="main">
       <StartupApplicationHero />
 
       <StartupApplicationBenefits />
@@ -117,6 +118,7 @@ const StartupApplication = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
