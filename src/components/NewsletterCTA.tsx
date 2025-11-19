@@ -155,7 +155,11 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
     return (
       <form onSubmit={handleSubmit} className="w-full max-w-md">
         <div className="flex flex-col gap-2 sm:flex-row">
+          <label htmlFor="newsletter-email-compact" className="sr-only">
+            Email address
+          </label>
           <input
+            id="newsletter-email-compact"
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -163,6 +167,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
             onFocus={handleFormStart}
             disabled={isLoading}
             required
+            aria-required="true"
             className="flex-1 rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <button
@@ -224,38 +229,57 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               {/* Row 1: First Name + Last Name */}
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
-                <input
-                  type="text"
-                  placeholder="First name (optional)"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  onFocus={handleFormStart}
-                  disabled={isLoading}
-                  className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
-                />
-                <input
-                  type="text"
-                  placeholder="Last name (optional)"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  onFocus={handleFormStart}
-                  disabled={isLoading}
-                  className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
-                />
+                <div className="flex-1">
+                  <label htmlFor="newsletter-firstName-standard" className="sr-only">
+                    First name (optional)
+                  </label>
+                  <input
+                    id="newsletter-firstName-standard"
+                    type="text"
+                    placeholder="First name (optional)"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    onFocus={handleFormStart}
+                    disabled={isLoading}
+                    className="w-full rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label htmlFor="newsletter-lastName-standard" className="sr-only">
+                    Last name (optional)
+                  </label>
+                  <input
+                    id="newsletter-lastName-standard"
+                    type="text"
+                    placeholder="Last name (optional)"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    onFocus={handleFormStart}
+                    disabled={isLoading}
+                    className="w-full rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
+                  />
+                </div>
               </div>
 
               {/* Row 2: Email + Subscribe Button */}
               <div className="flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  placeholder="Enter your email*"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onFocus={handleFormStart}
-                  disabled={isLoading}
-                  required
-                  className="flex-1 rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
-                />
+                <div className="flex-1">
+                  <label htmlFor="newsletter-email-standard" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="newsletter-email-standard"
+                    type="email"
+                    placeholder="Enter your email*"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={handleFormStart}
+                    disabled={isLoading}
+                    required
+                    aria-required="true"
+                    className="w-full rounded-xl border border-white/40 bg-white/20 px-4 py-3.5 text-sm text-white placeholder:text-white/70 shadow-lg backdrop-blur-xl transition-all focus:border-white/60 focus:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
+                  />
+                </div>
                 <button
                   type="submit"
                   disabled={isLoading}

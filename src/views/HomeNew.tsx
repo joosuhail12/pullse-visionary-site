@@ -41,7 +41,8 @@ const HomeNew = () => {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      <HomeHeroSection />
+      <main id="main-content" role="main">
+        <HomeHeroSection />
 
       <HomeTrustSection />
 
@@ -359,6 +360,7 @@ const HomeNew = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

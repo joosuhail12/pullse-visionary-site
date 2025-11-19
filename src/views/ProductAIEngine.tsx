@@ -20,8 +20,9 @@ const ProductAIEngine = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* Hero Section - Reimagined 2025 */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
+      <main id="main-content" role="main">
+        {/* Hero Section - Reimagined 2025 */}
+        <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-20 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
         {/* Enhanced gradient mesh background */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(var(--primary-rgb),0.15),transparent_50%)]" />
@@ -41,8 +42,9 @@ const ProductAIEngine = () => {
       {/* Deployment Comparison - Chatbots & Copilots */}
       <DeploymentComparison />
 
-      {/* Final CTA - Ultra Modern */}
-      <ProductAIEngineFinalCTA />
+        {/* Final CTA - Ultra Modern */}
+        <ProductAIEngineFinalCTA />
+      </main>
 
       <Footer />
     </div>

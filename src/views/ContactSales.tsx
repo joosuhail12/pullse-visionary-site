@@ -10,7 +10,9 @@ const ContactSales = () => {
       <PageLiquidBackground opacity={0.3} />
       <Navigation />
 
-      <ContactSalesContent />
+      <main id="main-content" role="main">
+        <ContactSalesContent />
+      </main>
 
       <Footer />
     </div>

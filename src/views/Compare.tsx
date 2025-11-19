@@ -14,13 +14,15 @@ const Compare = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      <CompareHeroSection />
+      <main id="main-content" role="main">
+        <CompareHeroSection />
 
-      {/* Page Content */}
-      <div className="container mx-auto px-4 relative z-10 pt-20">
-        <CompetitorComparisonSection />
-        <CompareContentSections />
-      </div>
+        {/* Page Content */}
+        <div className="container mx-auto px-4 relative z-10 pt-20">
+          <CompetitorComparisonSection />
+          <CompareContentSections />
+        </div>
+      </main>
 
       <Footer />
     </div>

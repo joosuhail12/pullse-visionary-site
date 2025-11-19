@@ -34,8 +34,9 @@ const Pricing = () => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* SECTION 1: HERO */}
-      <PricingHeroSection />
+      <main id="main-content" role="main">
+        {/* SECTION 1: HERO */}
+        <PricingHeroSection />
 
       {/* SECTION 2: PRICING TIERS */}
       <PricingTiersSection />
@@ -167,6 +168,7 @@ const Pricing = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>
