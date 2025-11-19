@@ -87,7 +87,7 @@ const JourneySection = ({ milestones, antler }: JourneySectionProps) => {
               rel="noopener noreferrer"
               className="flex-shrink-0 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              Learn more →
+              Learn more about Antler
             </a>
           </div>
         </div>

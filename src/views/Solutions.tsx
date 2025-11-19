@@ -64,7 +64,7 @@ const Solutions = () => {
                   ))}
                 </ul>
                 <div className="flex items-center text-primary group-hover:gap-2 transition-all">
-                  <span className="font-medium">Learn more</span>
+                  <span className="font-medium">Learn more about {solution.title}</span>
                   <ArrowRight className="h-5 w-5" />
                 </div>
               </Link>

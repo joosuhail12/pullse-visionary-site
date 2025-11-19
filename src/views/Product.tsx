@@ -477,7 +477,7 @@ const Product = () => {
                         {/* CTA */}
                         <div className={`pt-4 ${!isEven ? "lg:flex lg:justify-end" : ""}`}>
                           <RouteButton href={product.link} variant="outline" className="group">
-                            Learn more
+                            Learn more about {product.title}
                             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                           </RouteButton>
                         </div>
