@@ -32,7 +32,7 @@ import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
-import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.webp";
 import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
 
 // Import client islands

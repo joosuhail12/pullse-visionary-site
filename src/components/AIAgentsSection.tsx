@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Bot, User, Zap, Database, Code, CheckCircle, MessageSquare, Sparkles, ArrowRight, TrendingUp, Clock, Activity, RefreshCw, Shield, Boxes } from 'lucide-react';
 import gsap from 'gsap';
-import copilotInterfaceScreenshot from '@/assets/copilot-interface-screenshot.png';
+import copilotInterfaceScreenshot from '@/assets/ai-copilot-profiles-page.webp';
 
 export const AIAgentsSection = () => {
   const [activeTab, setActiveTab] = useState<'bots' | 'copilots'>('bots');

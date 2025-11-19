@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import Image from "next/image";
-import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
+import aiToolsScreenshot from "@/assets/ai-tools-screenshot.webp";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   Bot,

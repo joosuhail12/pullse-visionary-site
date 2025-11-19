@@ -15,7 +15,7 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Accordion from "@radix-ui/react-accordion";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import logoIcon from "@/assets/logo-icon-purple.png";
+import logoIcon from "@/assets/pullse-logomark.svg";
 import logoText from "@/assets/logo-text-navy.png";
 
 // Navigation structure with icons - mapped to actual pages

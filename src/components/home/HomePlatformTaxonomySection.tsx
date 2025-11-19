@@ -13,7 +13,7 @@ import {
 import type { CardData } from "@/components/MagicBento";
 import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
-import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.png";
+import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.webp";
 import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";

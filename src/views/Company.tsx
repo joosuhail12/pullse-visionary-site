@@ -13,7 +13,7 @@ import {
   whatWeBelieve,
   antler,
 } from '@/data/companyData';
-import antlerLogo from '@/assets/antler-logo.png';
+import antlerLogo from '@/assets/new-images/antler-logo.png';
 
 const Company = () => {
   return (

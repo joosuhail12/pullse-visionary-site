@@ -6,7 +6,7 @@ import { Twitter, Linkedin, ArrowRight, Mail } from "lucide-react";
 import LightRays from "@/components/LightRays";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import NewsletterCTA from "@/components/NewsletterCTA";
-import logoIcon from "@/assets/logo-icon-purple.png";
+import logoIcon from "@/assets/pullse-logomark.svg";
 import logoText from "@/assets/logo-text-navy.png";
 
 const Footer = () => {

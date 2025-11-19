@@ -30,7 +30,7 @@ import appoLogo from "@/assets/appo/appo-logo.webp";
 import appoWordmark from "@/assets/appo/appo-wordmark.png";
 
 // Import Pullse logo
-import pullseLogo from "@/assets/logo-icon-purple.png";
+import pullseLogo from "@/assets/pullse-logomark.svg";
 
 const ProductHelpCenters = () => {
   return (
