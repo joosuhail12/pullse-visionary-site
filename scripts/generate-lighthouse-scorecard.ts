@@ -67,9 +67,10 @@ const parsedStrategies =
   process.env.LIGHTHOUSE_STRATEGY?.split(",")
     .map((value) => value.trim().toLowerCase())
     .filter((value): value is Strategy => value === "mobile" || value === "desktop") ?? [];
-const STRATEGIES: Strategy[] = parsedStrategies.length ? parsedStrategies : ["mobile"];
+const STRATEGIES: Strategy[] = parsedStrategies.length ? parsedStrategies : ["mobile", "desktop"];
 const OUTPUT_PATH = process.env.LIGHTHOUSE_OUTPUT_PATH || "docs/LIGHTHOUSE_SCORECARD.md";
 const REQUEST_DELAY_MS = Number(process.env.LIGHTHOUSE_REQUEST_DELAY_MS ?? "1000");
+const HYDRATION_WAIT_MS = Number(process.env.LIGHTHOUSE_HYDRATION_WAIT_MS ?? "2000");
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -82,6 +83,7 @@ const percentOrNull = (value: number | undefined | null): number | null => {
 
 async function fetchScores(url: string, strategy: Strategy): Promise<Metrics> {
   let chrome: chromeLauncher.LaunchedChrome | undefined;
+  let browser: puppeteer.Browser | undefined;
 
   try {
     // Get Puppeteer's bundled Chromium path
@@ -92,6 +94,50 @@ async function fetchScores(url: string, strategy: Strategy): Promise<Metrics> {
       chromePath,
       chromeFlags: ['--headless', '--disable-gpu', '--no-sandbox'],
     });
+
+    // Connect Puppeteer to Chrome for page control
+    const browserWSEndpoint = `http://localhost:${chrome.port}`;
+    browser = await puppeteer.connect({ browserWSEndpoint });
+
+    const page = await browser.newPage();
+
+    // Set viewport based on strategy
+    await page.setViewport({
+      width: strategy === 'mobile' ? 375 : 1350,
+      height: strategy === 'mobile' ? 667 : 940,
+      deviceScaleFactor: strategy === 'mobile' ? 2 : 1,
+      isMobile: strategy === 'mobile',
+    });
+
+    // Navigate and wait for network to be idle (allows RSC hydration to begin)
+    await page.goto(url, {
+      waitUntil: 'networkidle2', // Wait until network has 2 or fewer connections
+      timeout: 30000,
+    });
+
+    // Wait for React hydration to complete by checking for main content
+    try {
+      await page.waitForFunction(
+        () => {
+          // Check if error page is NOT present
+          const errorPage = document.getElementById('__next_error__');
+          // Check if main content IS present
+          const mainContent = document.getElementById('main-content') || document.querySelector('main');
+          return !errorPage && mainContent !== null;
+        },
+        { timeout: 10000 }
+      );
+    } catch (waitError) {
+      // If main content doesn't appear, continue anyway (might be a page without main tag)
+      console.warn(`Warning: Main content wait timed out for ${url}`);
+    }
+
+    // Extra buffer for complete hydration
+    await page.waitForTimeout(HYDRATION_WAIT_MS);
+
+    // Disconnect Puppeteer before running Lighthouse
+    await browser.disconnect();
+    browser = undefined;
 
     // Configure Lighthouse options
     const options = {
@@ -135,7 +181,14 @@ async function fetchScores(url: string, strategy: Strategy): Promise<Metrics> {
       seo: percentOrNull(categories.seo?.score),
     };
   } finally {
-    // Always clean up Chrome
+    // Always clean up browser and Chrome
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (e) {
+        // Browser might already be closed or disconnected
+      }
+    }
     if (chrome) {
       await chrome.kill();
     }
