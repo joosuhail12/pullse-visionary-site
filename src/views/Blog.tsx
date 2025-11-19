@@ -6,6 +6,7 @@ import {
   postsQuery,
 } from "@/lib/sanity/queries";
 import type { BlogCategory, BlogPostCard } from "@/types/blog";
+import BlogListingSchema from "@/components/structured-data/BlogListingSchema";
 
 export const revalidate = 3600;
 
@@ -18,11 +19,14 @@ const Blog = async () => {
     ]);
 
     return (
-      <BlogClient
-        categories={categories}
-        featuredPosts={featuredPosts}
-        posts={posts}
-      />
+      <>
+        <BlogListingSchema posts={posts} />
+        <BlogClient
+          categories={categories}
+          featuredPosts={featuredPosts}
+          posts={posts}
+        />
+      </>
     );
   } catch (error) {
     console.error("Failed to fetch blog data from Sanity:", error);

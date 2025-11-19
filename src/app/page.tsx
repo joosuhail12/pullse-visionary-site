@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata = generatePageMetadata({
   title: "Pullse - AI-Powered Customer Support Platform",
   description:
-    "Unify all customer conversations across email, chat, and API events. Automate with AI chatbots, copilots, and autonomous agents. Deliver exceptional support experiences at scale with intelligent workflows, analytics, and self-service knowledge bases.",
+    "Unify customer conversations across email, chat, and API. Automate with AI chatbots and agents. Deliver exceptional support at scale.",
   path: "/",
   keywords:
     "ai customer support, customer support platform, ai chatbot, support automation, omnichannel support, helpdesk software, customer service software",
