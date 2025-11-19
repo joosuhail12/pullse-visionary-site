@@ -1,12 +1,13 @@
-'use client';
-
-import { useEffect, useState, lazy, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { Clock, User, Home, ChevronRight, Tag, ArrowRight, Sparkles, ArrowUp } from 'lucide-react';
-
-const LiquidEther = lazy(() => import('@/components/LiquidEther'));
+import {
+  Clock,
+  User,
+  Home,
+  ChevronRight,
+  Tag,
+} from 'lucide-react';
 import { urlFor } from '@/lib/sanity/client';
 import type { BlogPost, BlogPostCard } from '@/types/blog';
 import PortableText from '@/components/blog/PortableText';
@@ -15,6 +16,8 @@ import ShareButtons from '@/components/blog/ShareButtons';
 import AuthorBioCard from '@/components/blog/AuthorBioCard';
 import RelatedPosts from '@/components/blog/RelatedPosts';
 import ArticleStructuredData from '@/components/blog/ArticleStructuredData';
+import BlogDetailReadingProgress from '@/components/blog/BlogDetailReadingProgress';
+import BlogDetailHeroBackground from '@/components/blog/BlogDetailHeroBackground';
 
 interface BlogDetailClientProps {
   post: BlogPost;
@@ -37,61 +40,12 @@ const getCategoryStyle = (color: string) => {
   return styles[color] ?? styles.blue;
 };
 
-export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: BlogDetailClientProps) {
-  const [readingProgress, setReadingProgress] = useState(0);
-  const [showProgress, setShowProgress] = useState(false);
-  const [showBackToTop, setShowBackToTop] = useState(false);
+export default function BlogDetailClient({
+  post,
+  relatedPosts,
+  canonicalUrl,
+}: BlogDetailClientProps) {
   const categoryStyle = getCategoryStyle(post.category.color);
-
-  // Reading progress calculation with debounced scroll
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const handleScroll = () => {
-      // Clear the previous timeout
-      clearTimeout(timeoutId);
-
-      // Set a new timeout to debounce the scroll event
-      timeoutId = setTimeout(() => {
-        const article = document.querySelector('article');
-        if (!article) return;
-
-        const windowHeight = window.innerHeight;
-        const documentHeight = article.clientHeight;
-        const scrollTop = window.scrollY;
-        const articleTop = article.offsetTop;
-
-        // Show progress bar after scrolling past hero
-        setShowProgress(scrollTop > windowHeight * 0.5);
-
-        // Show back to top button after scrolling down 400px
-        setShowBackToTop(scrollTop > 400);
-
-        // Calculate reading progress
-        const scrollDistance = scrollTop - articleTop + windowHeight;
-        const totalDistance = documentHeight;
-        const progress = Math.min(Math.max((scrollDistance / totalDistance) * 100, 0), 100);
-
-        setReadingProgress(progress);
-      }, 10); // 10ms debounce for smooth updates
-    };
-
-    // Initial calculation
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -106,31 +60,13 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
         Skip to content
       </a>
 
-      {/* Reading Progress Bar */}
-      <div
-        className={`fixed left-0 right-0 top-0 z-50 h-1 bg-primary transition-all duration-300 ${
-          showProgress ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ width: `${readingProgress}%` }}
-      />
+      {/* Reading Progress Bar & Back to Top Button */}
+      <BlogDetailReadingProgress />
 
       {/* Hero Image Section - Premium Magazine Style */}
       <section className="relative isolate overflow-hidden bg-gray-50">
         {/* Hero Liquid Ether Effect */}
-        <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-          <Suspense fallback={<div className="w-full h-full" />}>
-            <LiquidEther
-              colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-              mouseForce={20}
-              cursorSize={110}
-              isViscous={false}
-              resolution={0.55}
-              autoDemo
-              autoSpeed={0.35}
-              autoIntensity={1.6}
-            />
-          </Suspense>
-        </div>
+        <BlogDetailHeroBackground />
 
         {/* Container for rounded corners on desktop */}
         <div className="relative h-[60vh] md:h-[70vh] md:mx-6 lg:mx-12 md:mt-6 md:rounded-2xl md:overflow-hidden md:shadow-2xl">
@@ -145,7 +81,11 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
                 className="object-cover transition-transform duration-700 hover:scale-[1.02]"
                 quality={95}
                 placeholder="blur"
-                blurDataURL={urlFor(post.featuredImage!).width(20).height(20).blur(10).url()}
+                blurDataURL={urlFor(post.featuredImage!)
+                  .width(20)
+                  .height(20)
+                  .blur(10)
+                  .url()}
               />
 
               {/* Sophisticated gradient overlay - cinematic feel */}
@@ -165,7 +105,9 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
 
           {/* Category Badge - Premium glassmorphism */}
           <div className="absolute left-6 bottom-6 md:left-8 md:bottom-8 z-10">
-            <div className={`group inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-bold uppercase tracking-wider ${categoryStyle.text} shadow-2xl shadow-black/20 backdrop-blur-xl border border-white/60 ring-1 ring-black/5 transition-all duration-300 hover:scale-105 hover:shadow-3xl`}>
+            <div
+              className={`group inline-flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-bold uppercase tracking-wider ${categoryStyle.text} shadow-2xl shadow-black/20 backdrop-blur-xl border border-white/60 ring-1 ring-black/5 transition-all duration-300 hover:scale-105 hover:shadow-3xl`}
+            >
               <Tag className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
               {post.category.title}
             </div>
@@ -239,7 +181,10 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
                       {hasImageAsset(post.author.avatar) ? (
                         <div className="relative">
                           <Image
-                            src={urlFor(post.author.avatar!).width(64).height(64).url()}
+                            src={urlFor(post.author.avatar!)
+                              .width(64)
+                              .height(64)
+                              .url()}
                             alt={post.author.name}
                             width={64}
                             height={64}
@@ -298,7 +243,12 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
           </div>
 
           {/* Center: Article Content */}
-          <article id="article-content" className="min-w-0" role="article" aria-label="Blog post content">
+          <article
+            id="article-content"
+            className="min-w-0"
+            role="article"
+            aria-label="Blog post content"
+          >
             {post.content && post.content.length > 0 ? (
               <PortableText value={post.content} />
             ) : (
@@ -312,7 +262,9 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (
               <div className="mt-16 space-y-4">
-                <h3 className="text-lg font-bold text-foreground">Tagged with</h3>
+                <h3 className="text-lg font-bold text-foreground">
+                  Tagged with
+                </h3>
                 <div className="flex flex-wrap gap-3">
                   {post.tags.map((tag) => (
                     <span
@@ -362,20 +314,6 @@ export default function BlogDetailClient({ post, relatedPosts, canonicalUrl }: B
           className="flex-row"
         />
       </div>
-
-      {/* Back to Top Button */}
-      <button
-        type="button"
-        onClick={scrollToTop}
-        className={`fixed bottom-24 left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-card/80 text-foreground shadow-2xl shadow-primary/10 backdrop-blur-xl transition-all hover:bg-card hover:shadow-primary/30 hover:scale-110 lg:bottom-8 ${
-          showBackToTop
-            ? 'translate-y-0 opacity-100'
-            : 'pointer-events-none translate-y-4 opacity-0'
-        }`}
-        aria-label="Back to top"
-      >
-        <ArrowUp className="h-5 w-5" />
-      </button>
     </div>
   );
 }
