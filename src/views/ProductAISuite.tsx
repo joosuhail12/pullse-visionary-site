@@ -5,6 +5,7 @@ import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import Image from "next/image";
 import aiToolsScreenshot from "@/assets/ai-tools-screenshot.png";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   Bot,
   Sparkles,
@@ -31,6 +32,10 @@ const ProductAISuite = () => {
 
   return (
     <div className="min-h-screen relative bg-background text-foreground">
+      <SoftwareApplicationSchema
+        name="Pullse AI Suite"
+        description="Complete AI platform with six powerful tools for customer support - from chatbots to agent copilots, automated QA to intelligent summaries. All trained on your content, all working in harmony."
+      />
       <PageLiquidBackground opacity={0.45} />
       <ScrollProgressIndicator />
       <Navigation />

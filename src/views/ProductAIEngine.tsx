@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import InfrastructureShowcase from "@/components/InfrastructureShowcase";
 import DeploymentComparison from "@/components/DeploymentComparison";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 
 // Import client islands
 import MorphingBackgroundTracker from "@/components/product-ai-engine/MorphingBackgroundTracker";
@@ -14,6 +15,10 @@ import ProductAIEngineFinalCTA from "@/components/product-ai-engine/ProductAIEng
 const ProductAIEngine = () => {
   return (
     <div className="min-h-screen relative">
+      <SoftwareApplicationSchema
+        name="AI Engine"
+        description="Train AI models on your content to power intelligent chatbots, copilots, and automated support tools."
+      />
       {/* Morphing WebGL Background */}
       <MorphingBackgroundTracker />
 

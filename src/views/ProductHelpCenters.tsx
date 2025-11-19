@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import Image from "next/image";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   BookOpen,
   Globe,
@@ -34,6 +35,10 @@ import pullseLogo from "@/assets/logo-icon-purple.png";
 const ProductHelpCenters = () => {
   return (
     <div className="min-h-screen appo-theme">
+      <SoftwareApplicationSchema
+        name="Help Centers"
+        description="Self-service knowledge bases and documentation portals that empower customers to find answers instantly."
+      />
       {/* Appo Theme Styles - Client Component */}
       <AppoThemeStyles />
 

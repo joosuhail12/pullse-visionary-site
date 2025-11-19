@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import Image from "next/image";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   Workflow,
   GitBranch,
@@ -63,6 +64,10 @@ const ProductWorkflows = () => {
 
   return (
     <div className="min-h-screen">
+      <SoftwareApplicationSchema
+        name="Visual Workflows"
+        description="No-code automation platform for customer support. Build sophisticated routing, tagging, and action sequences with drag-and-drop interface."
+      />
       {/* Global Styles - Client Component */}
       <ProductWorkflowsStyles />
 

@@ -2,6 +2,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 
 // Import client islands
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
@@ -18,6 +19,10 @@ import { Shield, Target, TrendingUp, Users, ThumbsUp } from "lucide-react";
 const ProductAutoQA = () => {
   return (
     <div className="min-h-screen relative">
+      <SoftwareApplicationSchema
+        name="Auto-QA"
+        description="Automated quality assurance for every customer support conversation. AI-powered scoring, coaching, and feedback to improve team performance."
+      />
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 

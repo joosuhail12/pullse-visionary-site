@@ -4,6 +4,7 @@ import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import ResultCard from "@/components/ResultCard";
 import Image from "next/image";
+import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   Mail,
   MessageSquare,
@@ -197,6 +198,10 @@ const ProductInboxChannels = () => {
 
   return (
     <div className="min-h-screen">
+      <SoftwareApplicationSchema
+        name="Unified Inbox & Channels"
+        description="Centralize all customer conversations from email, chat, and webhooks into one intelligent workspace with smart routing and collaboration tools."
+      />
       <ProductInboxChannelsStyles />
       <FadeInUpObserver />
 
