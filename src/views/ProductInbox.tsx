@@ -13,15 +13,15 @@ import ProductInboxBentoGrid from "@/components/product-inbox/ProductInboxBentoG
 import AnalyticsStatsSection from "@/components/product-inbox/AnalyticsStatsSection";
 import FinalCTASection from "@/components/product-inbox/FinalCTASection";
 
-// Import screenshots
-import fullInboxScreenshot from "@/assets/screenshots/full-inbox.png";
-import aiRewritingScreenshot from "@/assets/screenshots/ai-rewriting.png";
-import multiChannelScreenshot from "@/assets/screenshots/Multi-Channel-Unified-View.png";
-import customerContextScreenshot from "@/assets/screenshots/Customer-Context-Panel.png";
-import internalCollabScreenshot from "@/assets/screenshots/internal-collaboration.png";
-import routingConfigScreenshot from "@/assets/screenshots/routing-config.png";
-import cannedResponsesScreenshot from "@/assets/screenshots/canned-responses-library.png";
-import searchFilterScreenshot from "@/assets/screenshots/search-filter.png";
+// Import screenshots - using optimized WebP versions
+import fullInboxScreenshot from "@/assets/full-inbox.webp";
+import aiRewritingScreenshot from "@/assets/ai-rewriting.webp";
+import multiChannelScreenshot from "@/assets/Multi-Channel-Unified-View.webp";
+import customerContextScreenshot from "@/assets/Customer-Context-Panel.webp";
+import internalCollabScreenshot from "@/assets/internal-collaboration.webp";
+import routingConfigScreenshot from "@/assets/routing-config.webp";
+import cannedResponsesScreenshot from "@/assets/canned-responses-library.webp";
+import searchFilterScreenshot from "@/assets/search-filter.webp";
 
 const ProductInbox = () => {
   return (
