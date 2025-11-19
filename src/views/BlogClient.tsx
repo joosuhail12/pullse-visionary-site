@@ -84,10 +84,11 @@ const BlogClient = ({ categories, featuredPosts, posts }: BlogClientProps) => {
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
 
-      {/* Featured Blog Section - only show if there are featured posts */}
-      {featuredPosts.length > 0 && (
-        <FeaturedBlogSection featuredPosts={featuredPosts} />
-      )}
+      <main id="main-content" role="main">
+        {/* Featured Blog Section - only show if there are featured posts */}
+        {featuredPosts.length > 0 && (
+          <FeaturedBlogSection featuredPosts={featuredPosts} />
+        )}
 
       {/* Newsletter CTA Section */}
       <section className="container mx-auto px-4 py-12 md:py-16">
@@ -113,8 +114,9 @@ const BlogClient = ({ categories, featuredPosts, posts }: BlogClientProps) => {
         <BlogSearchAndFilter posts={posts} />
       )}
 
-      {/* Call to Action */}
-      <CallToAction />
+        {/* Call to Action */}
+        <CallToAction />
+      </main>
 
       {/* Scroll to Top Button */}
       <BlogScrollToTop />

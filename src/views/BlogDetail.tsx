@@ -34,12 +34,15 @@ const BlogDetail = async ({ post, slug }: BlogDetailProps) => {
     <>
       <PageLiquidBackground opacity={0.45} />
       <Navigation />
-      <BlogDetailClient post={post} relatedPosts={relatedPosts} canonicalUrl={canonicalUrl} />
 
-      {/* Newsletter CTA before Footer */}
-      <div className="container mx-auto px-4 py-16">
-        <NewsletterCTA variant="standard" source="blog-detail" />
-      </div>
+      <main id="main-content" role="main">
+        <BlogDetailClient post={post} relatedPosts={relatedPosts} canonicalUrl={canonicalUrl} />
+
+        {/* Newsletter CTA before Footer */}
+        <div className="container mx-auto px-4 py-16">
+          <NewsletterCTA variant="standard" source="blog-detail" />
+        </div>
+      </main>
 
       <Footer />
     </>
