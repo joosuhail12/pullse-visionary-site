@@ -1,4 +1,6 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
+import fs from 'fs';
+import path from 'path';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -8,6 +10,32 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['three'],
+  webpack: (config, { isServer }) => {
+    // Optional: write full webpack stats for bundle deep-dive
+    if (process.env.ANALYZE_STATS === 'true') {
+      config.plugins.push({
+        apply(compiler) {
+          compiler.hooks.done.tap('StatsToJsonPlugin', (stats) => {
+            const outputDir = path.join(process.cwd(), '.next', 'analyze');
+            fs.mkdirSync(outputDir, { recursive: true });
+            const filename = isServer ? 'stats-server.json' : 'stats-client.json';
+            const payload = stats.toJson({
+              all: false,
+              assets: true,
+              chunks: true,
+              modules: true,
+              chunkModules: true,
+              entrypoints: true,
+              nestedModules: true,
+              source: false,
+            });
+            fs.writeFileSync(path.join(outputDir, filename), JSON.stringify(payload, null, 2));
+          });
+        },
+      });
+    }
+    return config;
+  },
 
   // Optimize package imports to reduce bundle size (works with Turbopack)
   experimental: {
