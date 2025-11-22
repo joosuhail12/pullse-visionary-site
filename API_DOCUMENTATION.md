@@ -689,3 +689,66 @@ curl -X GET "http://localhost:3000/api/contact-sales?page=1&limit=10" \
   -H "Authorization: Bearer your_admin_api_key_here"
 ```
 
+---
+
+## POST /api/newsletter
+
+Subscribe or update a newsletter contact (reactivates if previously unsubscribed).
+
+**Request:**
+```json
+{
+  "email": "jane@example.com",
+  "source": "blog",        // optional, default: "blog"
+  "firstName": "Jane",     // optional, max 100 chars
+  "lastName": "Doe"        // optional, max 100 chars
+}
+```
+
+**Behavior:**
+- Creates new subscriber if not found.
+- If active subscriber exists: updates name fields when provided, otherwise returns alreadySubscribed=true.
+- If unsubscribed: reactivates and clears `unsubscribed_at`.
+- Rate limit: max 3 requests/min per IP (in-memory).
+
+**Success Responses:**
+- New subscription (201):
+```json
+{ "message": "Successfully subscribed! Check your email for confirmation.", "success": true }
+```
+- Already subscribed (200):
+```json
+{ "message": "You are already subscribed to our newsletter!", "alreadySubscribed": true }
+```
+- Reactivated (200):
+```json
+{ "message": "Welcome back! Your subscription has been reactivated.", "success": true }
+```
+
+**Error Examples:**
+- 400 Zod validation error (`Invalid email address`)
+- 429 `Too many requests. Please try again later.`
+- 500 `Failed to subscribe. Please try again.`
+
+**Database Table:** `newsletter_subscribers`
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `email` | TEXT PK | lowercased, unique |
+| `first_name` | TEXT | optional |
+| `last_name` | TEXT | optional |
+| `source` | TEXT | default 'blog' |
+| `is_active` | BOOLEAN | true when subscribed |
+| `subscribed_at` | TIMESTAMPTZ | set on subscribe/reactivate |
+| `unsubscribed_at` | TIMESTAMPTZ | set when unsubscribed |
+
+---
+
+## Quick Integration Notes (Lead/Contact App)
+
+* **Auth for admin GETs:** include `Authorization: Bearer ${ADMIN_API_KEY}` for `/api/contact-sales` and `/api/startup-application`. Store the key in env on the client app and proxy via your backend if you ship a public UI.
+* **Rate limits:** Contact Sales (5/min/email, 20/min/IP), Startup Application (3/min/email), Newsletter (3/min/IP). Handle 429s with retry messaging.
+* **Duplicates:** Contact Sales blocks 1h per email; Startup Application blocks 24h; Newsletter auto-reactivates instead of blocking.
+* **Attribution:** Contact Sales accepts UTM/referrer fields; pass them through to keep lead source data.
+* **Ids for CRM:** Use `data.id` from 201 responses as your lead key when syncing to your app.
+* **Analytics (optional):** Server-side PostHog events are already emitted when `analyticsConsent` is true (Contact Sales) or for newsletter/startup flows. No extra client work required.
