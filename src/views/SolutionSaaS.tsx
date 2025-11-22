@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
 import SolutionSaaSHeroSection from "@/components/solutions/SolutionSaaSHeroSection";
-import SolutionSaaSStatsSection from "@/components/solutions/SolutionSaaSStatsSection";
 import SolutionSaaSPillarsSection from "@/components/solutions/SolutionSaaSPillarsSection";
 import SolutionSaaSIntegrationsSection from "@/components/solutions/SolutionSaaSIntegrationsSection";
 import VisualWorkflowRace from "@/components/solutions/VisualWorkflowRace";
@@ -26,8 +25,6 @@ const SolutionSaaS = () => {
 
       <main id="main-content" role="main">
         <SolutionSaaSHeroSection />
-
-      <SolutionSaaSStatsSection />
 
       <SolutionSaaSPillarsSection />
 

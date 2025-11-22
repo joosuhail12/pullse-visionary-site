@@ -14,14 +14,7 @@ import AnalyticsStatsSection from "@/components/product-inbox/AnalyticsStatsSect
 import FinalCTASection from "@/components/product-inbox/FinalCTASection";
 
 // Import screenshots - using optimized WebP versions
-import fullInboxScreenshot from "@/assets/full-inbox.webp";
-import aiRewritingScreenshot from "@/assets/ai-rewriting.webp";
-import multiChannelScreenshot from "@/assets/Multi-Channel-Unified-View.webp";
-import customerContextScreenshot from "@/assets/Customer-Context-Panel.webp";
-import internalCollabScreenshot from "@/assets/internal-collaboration.webp";
-import routingConfigScreenshot from "@/assets/routing-config.webp";
-import cannedResponsesScreenshot from "@/assets/canned-responses-library.webp";
-import searchFilterScreenshot from "@/assets/search-filter.webp";
+import fullInboxScreenshot from "@/assets/Platform-inbox-view.webp";
 
 const ProductInbox = () => {
   return (
@@ -86,17 +79,7 @@ const ProductInbox = () => {
             </div>
 
             {/* MagicBento Grid - Client Component */}
-            <ProductInboxBentoGrid
-              screenshots={{
-                multiChannel: multiChannelScreenshot.src,
-                aiRewriting: aiRewritingScreenshot.src,
-                customerContext: customerContextScreenshot.src,
-                searchFilter: searchFilterScreenshot.src,
-                routingConfig: routingConfigScreenshot.src,
-                internalCollab: internalCollabScreenshot.src,
-                cannedResponses: cannedResponsesScreenshot.src,
-              }}
-            />
+            <ProductInboxBentoGrid />
           </div>
         </div>
       </section>

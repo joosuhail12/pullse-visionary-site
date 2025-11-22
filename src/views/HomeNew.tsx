@@ -26,7 +26,7 @@ import HomePlatformTaxonomySection from "@/components/home/HomePlatformTaxonomyS
 import HomeUseCasesSection from "@/components/home/HomeUseCasesSection";
 import HomeIntegrationsSection from "@/components/home/HomeIntegrationsSection";
 
-const resources = [
+  const resources = [
   {
     title: "Manifesto",
     description: "Why we're building Pullse and our vision for AI-powered support.",
@@ -38,7 +38,7 @@ const resources = [
 const HomeNew = () => {
   return (
     <div className="min-h-screen">
-      <PageLiquidBackground opacity={0.3} />
+      <PageLiquidBackground opacity={0.6} />
       <Navigation />
 
       <main id="main-content" role="main">
@@ -305,30 +305,29 @@ const HomeNew = () => {
       {/* ========================================
           FAQ Section - Answer Engine Optimization
       ======================================== */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20">
+      <section className="py-16 md:py-20 lg:py-24 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Section Header */}
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Frequently Asked Questions
+            <div className="text-center mb-10 md:mb-14">
+              <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                FAQs
+              </p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mt-3">
+                Frequently asked questions
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to know about Pullse and how it can transform your customer support
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mt-2">
+                Everything you need to know about Pullse and how it can transform your support.
               </p>
             </div>
 
-            {/* FAQ Accordion */}
-            <div className="space-y-3 md:space-y-4">
+            {/* FAQ Accordion - two-column like other pages */}
+            <div className="grid md:grid-cols-2 gap-3 md:gap-4">
               {homepageFaqs.map((faq, index) => (
-                <Accordion
-                  key={index}
-                  type="single"
-                  collapsible
-                >
+                <Accordion key={index} type="single" collapsible>
                   <AccordionItem
                     value="item-1"
-                    className="bg-white/60 backdrop-blur-sm border border-white/60 rounded-xl md:rounded-2xl px-4 md:px-5 lg:px-6 shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-white/70 backdrop-blur-sm border border-white/60 rounded-xl md:rounded-2xl px-4 md:px-5 lg:px-6 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <AccordionTrigger className="text-left hover:no-underline py-4 md:py-5">
                       <span className="font-semibold text-sm md:text-base text-gray-900 pr-4">

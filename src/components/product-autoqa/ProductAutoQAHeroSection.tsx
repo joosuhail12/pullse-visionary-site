@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import RouteButton from '@/components/RouteButton';
-import { Play, ArrowRight, CheckCircle2, Shield } from 'lucide-react';
+import { Play, ArrowRight, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
+import autoQAHeroScreenshot from '@/assets/Auto-QA-Screenshot.webp';
 
 export default function ProductAutoQAHeroSection() {
   return (
@@ -13,9 +15,9 @@ export default function ProductAutoQAHeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
       >
-        AI-Powered QA.{" "}
+        Quality checks{" "}
         <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-          Every rep. Every time.
+          on autopilot
         </span>
       </motion.h1>
 
@@ -25,7 +27,7 @@ export default function ProductAutoQAHeroSection() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        Stop sampling 5% of conversations. AI automatically evaluates every ticket the moment it closes—identifying exact moments for improvement, suggesting better language, and tracking trends over time. Turn quality assurance into continuous coaching.
+        Score every conversation, spot gaps, and coach reps without extra tools. AI highlights the exact moments to improve and suggests better language—so QA becomes continuous coaching, not sampling.
       </motion.p>
 
       <motion.div
@@ -87,11 +89,13 @@ export default function ProductAutoQAHeroSection() {
       <div className="relative max-w-6xl mx-auto">
         <div className="absolute -inset-6 md:-inset-9 lg:-inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
         <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-1.5 sm:p-2 md:p-3 shadow-2xl backdrop-blur-xl">
-          <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl aspect-video flex items-center justify-center">
-            <div className="text-center space-y-2 p-4 md:p-6 lg:p-8">
-              <Shield className="h-10 w-10 md:h-12 md:w-12 lg:h-16 lg:w-16 text-primary/40 mx-auto" />
-              <p className="text-xs md:text-sm text-muted-foreground">Auto-QA Scorecard Interface</p>
-            </div>
+          <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl">
+            <Image
+              src={autoQAHeroScreenshot}
+              alt="Auto-QA scorecard interface"
+              className="w-full"
+              priority
+            />
           </div>
         </div>
       </div>

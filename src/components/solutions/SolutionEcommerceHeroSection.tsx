@@ -33,14 +33,14 @@ const SolutionEcommerceHeroSection = () => {
           {/* Header Content */}
           <div className="text-center space-y-8">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
-              Seasonal spikes crush your team. Every single time.
+              Handle 10x volume without 10x headcount.
               <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-3">
-                Handle 10x the volume. Zero temp hires.
+                AI that ships refunds and updates for you.
               </span>
             </h1>
 
             <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
-              AI that auto-resolves 80% of WISMO tickets, processes returns in 2 minutes, and handles every spike—holiday rushes, flash sales, product launches. Your team survives without breaking. Same agents. 10x capacity.
+              Pullse runs the busywork—WISMO, returns, order updates—so your team stays on customers. Launch in days, keep humans in control.
             </p>
 
             {/* CTA */}
@@ -52,20 +52,20 @@ const SolutionEcommerceHeroSection = () => {
             </div>
 
             {/* Trust Signals */}
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 pt-6 text-base text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>Live in 2 weeks</span>
+              <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 pt-6 text-base text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <span>Live in days, not months</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <span>No forced migrations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <span>Own your data</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>No credit card</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
-                <span>Shopify native</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -33,14 +33,14 @@ export default function SolutionSaaSHeroSection() {
           {/* Header Content */}
           <div className="text-center space-y-6 md:space-y-8">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-6xl mx-auto">
-              Your agents are switching between 10 tabs for one refund.
+              Cut the tab-hopping for every ticket.
               <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2 md:mt-3">
-                Type one sentence. Pullse handles the rest.
+                Ask once. Pullse executes the work.
               </span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground leading-relaxed max-w-4xl mx-auto font-normal">
-              AI that connects your entire stack—Stripe, Jira, Salesforce, Slack—so your agents ask in plain English and Pullse executes instantly. No more tool-hopping. No more context-switching. Just fast, accurate resolutions.
+              Pullse connects Stripe, Jira, Salesforce, Slack, and more so agents ask in plain English and actions happen—refunds, updates, merges—without leaving the conversation.
             </p>
 
             {/* CTA */}

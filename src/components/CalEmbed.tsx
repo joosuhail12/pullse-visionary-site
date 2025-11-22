@@ -3,26 +3,56 @@
 import { useEffect, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { trackEvent, trackBookAppointment } from '@/lib/analytics';
+import { useCookieConsent } from '@/contexts/CookieConsentContext';
 
 interface CalEmbedProps {
   calLink: string;
   className?: string;
+  prefill?: {
+    name?: string;
+    email?: string;
+    guests?: string[];
+    notes?: string;
+    customAnswers?: Record<string, string>;
+  };
 }
 
-export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
+export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
+  const { consent, openPreferences } = useCookieConsent();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [userInitiated, setUserInitiated] = useState(false);
   const embedRef = useRef<HTMLDivElement>(null);
-  const initializedRef = useRef(false);
   const hasTrackedLoad = useRef(false);
 
+  const shouldLoad = consent.analytics || userInitiated;
+  const prefillKey = JSON.stringify(prefill || {});
+
+  // Reset loading state when user opts to load
   useEffect(() => {
-    if (initializedRef.current || !embedRef.current) return;
+    if (userInitiated) {
+      setIsLoading(true);
+      setError(null);
+    }
+  }, [userInitiated]);
+
+  useEffect(() => {
+    if (!shouldLoad || !embedRef.current) return;
+
+    let cancelled = false;
 
     try {
       // Initialize Cal function on window if it doesn't exist
       if (typeof window !== 'undefined') {
         const w = window as any;
+
+        // Prevent duplicate listener setup across remounts
+        w.__pullseCalInitialized = w.__pullseCalInitialized || new Set();
+        const listenerKey = `inline-${calLink}-${prefillKey}`;
+        if (w.__pullseCalInitialized.has(listenerKey)) {
+          setIsLoading(false);
+          return;
+        }
 
         // Cal.com initialization pattern
         if (!w.Cal) {
@@ -38,6 +68,11 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
               const script = d.head.appendChild(d.createElement('script'));
               script.src = 'https://cal.com/embed.js';
               script.async = true;
+              script.onerror = () => {
+                if (cancelled) return;
+                setError('Failed to load booking widget. Please try again or email sales@pullse.com.');
+                setIsLoading(false);
+              };
 
               cal.loaded = true;
             }
@@ -71,6 +106,15 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
           config: {
             theme: 'light',
           },
+          prefill: prefill
+            ? {
+                name: prefill.name,
+                email: prefill.email,
+                guests: prefill.guests?.filter(Boolean),
+                notes: prefill.notes,
+                customAnswers: prefill.customAnswers,
+              }
+            : undefined,
         });
 
         // Listen for UI events
@@ -84,6 +128,7 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
           action: '__iframeReady',
           callback: () => {
             console.log('Cal.com iframe ready');
+            if (cancelled) return;
 
             // Track calendar widget load
             if (!hasTrackedLoad.current) {
@@ -93,6 +138,8 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
               });
               hasTrackedLoad.current = true;
             }
+
+            setIsLoading(false);
           },
         });
 
@@ -101,6 +148,7 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
           action: 'bookingSuccessful',
           callback: (e: any) => {
             console.log('Booking successful:', e);
+            if (cancelled) return;
 
             trackBookAppointment({
               booking_type: e?.data?.eventType?.title || 'Demo',
@@ -113,15 +161,42 @@ export function CalEmbed({ calLink, className = '' }: CalEmbedProps) {
 
         console.log('Cal.com inline embed configured');
 
-        initializedRef.current = true;
-        setIsLoading(false);
+        w.__pullseCalInitialized.add(listenerKey);
       }
     } catch (err) {
       console.error('Error initializing Cal.com embed:', err);
       setError('Failed to initialize booking widget.');
       setIsLoading(false);
     }
-  }, [calLink]);
+    return () => {
+      cancelled = true;
+    };
+  }, [calLink, shouldLoad]);
+
+  if (!shouldLoad) {
+    return (
+      <div className={`glass-elevated p-6 rounded-2xl border border-primary/10 ${className}`}>
+        <div className="space-y-3 text-center">
+          <p className="text-base font-semibold text-gray-900">Load the scheduler to pick a time</p>
+          <p className="text-sm text-gray-600">We use Cal.com for booking. Enable analytics cookies or load the widget to continue.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => setUserInitiated(true)}
+              className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:shadow-md transition"
+            >
+              Load scheduler
+            </button>
+            <button
+              onClick={openPreferences}
+              className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:border-gray-400 transition"
+            >
+              Manage cookie preferences
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (

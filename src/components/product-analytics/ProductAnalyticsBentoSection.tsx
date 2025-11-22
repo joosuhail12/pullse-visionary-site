@@ -1,68 +1,75 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import MagicBento from '@/components/MagicBento';
-import type { CardData } from '@/components/MagicBento';
+import MagicBento, { type CardData } from '@/components/MagicBento';
+import { Clock, MessageSquare, Sparkles, Target, TrendingUp, Users, Calendar } from 'lucide-react';
 import {
-  TrendingUp,
-  Target,
-  Activity,
-  Users,
-  Clock,
-  MessageSquare,
-  Calendar,
-} from 'lucide-react';
+  VolumeTrendsCard,
+  ResolutionBreakdownCard,
+  AgentPerformanceCard,
+  CustomerSatisfactionCard,
+  AIPerformanceCard,
+  ResponseTimeCard,
+  ScheduledReportsCard,
+} from './AnalyticsBentoCards';
 
 export default function ProductAnalyticsBentoSection() {
   const bentoCards: CardData[] = [
     {
       color: 'hsl(var(--card))',
       title: 'Volume & Trends',
-      description: 'Track ticket volumes over time with trend analysis. Identify patterns, forecast demand, and optimize staffing.',
+      description: 'Ticket volumes with forecasts, deflection, and peak patterns.',
       label: 'Forecasting',
       icon: TrendingUp,
+      customComponent: <VolumeTrendsCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'Resolution Breakdown',
-      description: 'Analyze resolution rates by intent, channel, agent, and time period. Understand what works and what does not.',
+      description: 'Top intents with change deltas and depth indicators.',
       label: 'Deep Dive',
       icon: Target,
+      customComponent: <ResolutionBreakdownCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'Agent Performance',
-      description: 'Individual scorecards with FCR, handle time, CSAT, and quality scores. Fair, transparent, data-driven coaching.',
+      description: 'Scorecards with FCR, CSAT, and handle times.',
       label: 'Team Metrics',
       icon: Users,
+      customComponent: <AgentPerformanceCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'Customer Satisfaction',
-      description: 'Track CSAT, NPS, and sentiment analysis across all interactions. See what drives customer happiness.',
+      description: 'CSAT, NPS, and what drives them up or down.',
       label: 'CSAT & NPS',
       icon: MessageSquare,
+      customComponent: <CustomerSatisfactionCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'AI Performance',
-      description: 'Bot accuracy, deflection rates, action success rates, and hallucination detection. Prove AI is working.',
+      description: 'Deflection, action success, and hallucination guardrails.',
       label: 'AI Metrics',
-      icon: Activity,
+      icon: Sparkles,
+      customComponent: <AIPerformanceCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'Response Time Analysis',
-      description: 'First response time, resolution time, SLA compliance. Track speed metrics that matter to customers.',
+      description: 'FRT, resolution time, SLA compliance, and QA coverage.',
       label: 'Speed Metrics',
       icon: Clock,
+      customComponent: <ResponseTimeCard />,
     },
     {
       color: 'hsl(var(--card))',
       title: 'Custom & Scheduled Reports',
-      description: 'Build custom analytics dashboards and schedule automated report delivery to stakeholders. Export data your way.',
-      label: 'Coming Soon',
+      description: 'Automated delivery for exec summaries and channel reports.',
+      label: 'Delivery',
       icon: Calendar,
+      customComponent: <ScheduledReportsCard />,
     },
   ];
 
@@ -101,7 +108,18 @@ export default function ProductAnalyticsBentoSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <MagicBento cardData={bentoCards} />
+        <MagicBento
+          cardData={bentoCards}
+          enableSpotlight={true}
+          enableStars={true}
+          enableBorderGlow={true}
+          enableTilt={false}
+          enableMagnetism={true}
+          clickEffect={true}
+          glowColor="80, 112, 255"
+          textAutoHide={false}
+          gridClassName="analytics-bento"
+        />
       </motion.div>
     </>
   );

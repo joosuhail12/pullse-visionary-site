@@ -12,26 +12,26 @@ import {
 const problemPoints = [
   {
     title: "Channels live in silos",
-    description: "Email, chat, and voice tools don't share context, leaving agents to copy-paste between tabs.",
+    description: "Email, chat, and voice don’t share context. Agents paste between tabs and customers wait.",
     icon: MessageSquare,
   },
   {
-    title: "AI experiments lack guardrails",
-    description: "Standalone bots can't talk to your systems or enforce approvals, so teams stall after pilot.",
+    title: "AI pilots stall",
+    description: "Bots can’t reach your systems or enforce approvals, so experiments never make it to production.",
     icon: Shield,
   },
   {
-    title: "Leaders can't show ROI",
-    description: "Without shared workflows and metrics, it's hard to prove the value of automation to finance.",
+    title: "Hard to prove ROI",
+    description: "Without shared workflows and metrics, it’s tough to show finance where automation saves time and money.",
     icon: BarChart3,
   },
 ];
 
 const HomeTrustSection = () => {
   return (
-    <section className="relative bg-background py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
+    <section className="relative bg-transparent py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/2 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-primary/10 to-transparent" />
 
       <div className="container relative mx-auto px-4">
         <div className="grid gap-10 sm:gap-12 md:gap-14 lg:gap-16 lg:grid-cols-[1.3fr,1fr] items-start">
@@ -39,11 +39,11 @@ const HomeTrustSection = () => {
           <div className="space-y-6 sm:space-y-8">
             {/* Punchier headline */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              One platform. Zero silos. Total control.
+              One platform. Zero silos. Humans stay in control.
             </h2>
 
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Stop stitching together disconnected tools. Pullse unifies channels, workflows, AI agents, and analytics—with security and compliance built in from day one.
+              Stop stitching together disconnected tools. Pullse unifies channels, workflows, agentic bots, and analytics—with approvals, audit trails, and security baked in from day one.
             </p>
 
             {/* Enhanced trust signals with icons */}
@@ -64,7 +64,7 @@ const HomeTrustSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-foreground">Founder-Led Support</div>
-                  <div className="text-xs text-muted-foreground">Direct access</div>
+                  <div className="text-xs text-muted-foreground">Direct access to us</div>
                 </div>
               </div>
 
@@ -74,7 +74,7 @@ const HomeTrustSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-foreground">AI Guardrails</div>
-                  <div className="text-xs text-muted-foreground">Audit trails included</div>
+                  <div className="text-xs text-muted-foreground">Approvals & audit trails</div>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ const HomeTrustSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-foreground">Backed by Antler</div>
-                  <div className="text-xs text-muted-foreground">+ Microsoft & Google</div>
+                  <div className="text-xs text-muted-foreground">Built by MSFT + Google alumni</div>
                 </div>
               </div>
             </div>

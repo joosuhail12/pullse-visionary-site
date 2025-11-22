@@ -5,12 +5,10 @@ import PageLiquidBackground from '@/components/PageLiquidBackground';
 import CompanyHeroBackground from '@/components/company/CompanyHeroBackground';
 import CompanyHeroContent from '@/components/company/CompanyHeroContent';
 import CompanyBentoGrid from '@/components/company/CompanyBentoGrid';
-import CompanyBeliefGrid from '@/components/company/CompanyBeliefGrid';
 import CompanyAntlerCard from '@/components/company/CompanyAntlerCard';
 import CompanyCtaSection from '@/components/company/CompanyCtaSection';
 import {
   cta,
-  whatWeBelieve,
   antler,
 } from '@/data/companyData';
 import antlerLogo from '@/assets/new-images/antler-logo.png';
@@ -44,7 +42,57 @@ const Company = () => {
       </section>
 
       {/* ========================================
-          SECTION 2: FOUNDER'S LETTER - Modern Bento Grid
+          SECTION 2: MISSION & WHY NOW
+      ======================================== */}
+      <section className="relative py-12 md:py-16 lg:py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background -z-10" />
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto space-y-6 md:space-y-8 text-center">
+            <div className="space-y-3">
+              <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                Our mission
+              </p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
+                Build less software, get more work done.
+              </h2>
+              <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                We’re replacing tool sprawl with agentic platforms that share one brain across your stack, so humans and AI work in the same environment and outcomes compound.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+              {[
+                {
+                  title: 'One brain, shared context',
+                  body: 'Unified architecture so agents (human + AI) see the same data, act with guardrails, and hand work off seamlessly.',
+                },
+                {
+                  title: 'Start in support, design for scale',
+                  body: 'Support is our first proof point, but the pattern—always-on agents + on-demand copilots—extends to every function.',
+                },
+                {
+                  title: 'Humans stay in control',
+                  body: 'Every action AI can take, people can too. Approvals, audit trails, and policy are built in from day one.',
+                },
+                {
+                  title: 'Speed with respect',
+                  body: 'Ship fast for teams drowning in tabs, iterate with customers, and keep the stack coherent as capabilities grow.',
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-border/60 bg-card/70 p-5 md:p-6 text-left shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          SECTION 3: FOUNDER'S LETTER - Modern Bento Grid
       ======================================== */}
       <section className="relative py-12 md:py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-background via-muted/5 to-background">
         {/* Decorative Background Elements */}
@@ -62,23 +110,60 @@ const Company = () => {
       </section>
 
       {/* ========================================
-          SECTION 3: WHAT WE BELIEVE
+          SECTION 4: TRANSPARENCY & TRUST
       ======================================== */}
-      <section className="relative py-16 md:py-24 lg:py-32">
+      <section className="relative py-12 md:py-16 lg:py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background -z-10" />
         <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Belief Grid - Client Component */}
-            <CompanyBeliefGrid
-              title={whatWeBelieve.title}
-              subtitle={whatWeBelieve.subtitle}
-              beliefs={whatWeBelieve.beliefs}
-            />
+          <div className="max-w-6xl mx-auto space-y-8">
+            <div className="text-center space-y-3">
+              <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                Radical transparency
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">How we operate, in the open</h2>
+              <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+                Clarity on pricing, data, and accountability—so you know exactly how we work with you.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+              {[
+                {
+                  title: 'Straightforward pricing',
+                  body: 'No gotchas or per-resolution surprises. Every capability is visible up front.',
+                  link: { href: '/pricing', label: 'View pricing' },
+                },
+                {
+                  title: 'Data ownership',
+                  body: 'You own your data. We explain what we collect, why, and give you controls to export or delete.',
+                  link: { href: '/legal', label: 'Security & policies' },
+                },
+                {
+                  title: 'Hands-on support',
+                  body: 'If something breaks, we fix it. If you’re stuck, we pair with you. Outcomes are the metric that matters.',
+                  link: { href: '/contact-sales', label: 'Talk to us' },
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-border/60 bg-card/70 p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">{item.body}</p>
+                  <a
+                    href={item.link.href}
+                    className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {item.link.label} →
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================
-          SECTION 4: BACKED BY ANTLER
+          SECTION 5: BACKED BY ANTLER
       ======================================== */}
       <section className="relative py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4">
@@ -90,7 +175,7 @@ const Company = () => {
       </section>
 
       {/* ========================================
-          SECTION 5: GET STARTED
+          SECTION 6: GET STARTED
       ======================================== */}
       <section className="relative py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4">

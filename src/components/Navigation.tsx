@@ -16,7 +16,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as Accordion from "@radix-ui/react-accordion";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import logoIcon from "@/assets/pullse-logomark.svg";
-import logoText from "@/assets/logo-text-navy.png";
+import logoText from "@/assets/Pullse-wordmark.svg";
 
 // Navigation structure with icons - mapped to actual pages
 const navigationData = {
@@ -109,11 +109,11 @@ export function Navigation() {
     const deltaY = e.clientY - centerY;
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    if (distance < 100) {
-      const strength = (100 - distance) / 100;
+    if (distance < 80) {
+      const strength = (80 - distance) / 80;
       setLogoPosition({
-        x: deltaX * strength * 0.3,
-        y: deltaY * strength * 0.3,
+        x: deltaX * strength * 0.15,
+        y: deltaY * strength * 0.15,
       });
     }
   };
@@ -173,26 +173,26 @@ export function Navigation() {
                   y: logoPosition.y,
                   scale: logoScale,
                 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                transition={{ type: "spring", stiffness: 120, damping: 20 }}
               >
                 <Link href="/" className="flex items-center space-x-2 group relative">
                   {/* Enhanced pulsing glow effect */}
                   <motion.div
                     className="absolute inset-0 -m-4 rounded-full blur-2xl"
                     style={{
-                      background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.3), transparent)",
+                      background: "radial-gradient(circle, rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.18), transparent)",
                     }}
                     animate={{
-                      opacity: [0, 0.7, 0],
-                      scale: [0.8, 1.3, 0.8],
+                      opacity: [0.2, 0.55, 0.2],
+                      scale: [0.9, 1.15, 0.9],
                     }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
                   />
 
                   <motion.div
-                    whileHover={{ scale: 1.05, rotate: 3 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    whileHover={{ scale: 1.03, rotate: 1.5 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
                   >
                     <Image
                       src={logoIcon}

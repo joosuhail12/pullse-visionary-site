@@ -9,32 +9,28 @@ export default function ProductAIEngineHeroContent() {
   return (
     <div className="container mx-auto px-4 md:px-6 relative">
       <div className="max-w-6xl mx-auto text-center">
-        {/* Enhanced Headline with better value prop */}
         <motion.h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 tracking-tight leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Turn support tickets into{" "}
+          Agents that{" "}
           <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-            resolved issues
+            act
           </span>
-          <span className="block mt-2">—automatically</span>
+          <span className="block mt-2">with humans in the loop</span>
         </motion.h1>
 
-        {/* Enhanced Subheadline with clearer benefits */}
         <motion.p
           className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-5 md:mb-6 leading-relaxed"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          AI that <span className="text-foreground font-bold">takes action</span>, not just suggests it.
-          Process refunds, update subscriptions, and resolve issues—with <span className="text-foreground font-bold">full governance</span> and <span className="text-foreground font-bold">zero hallucinations</span>.
+          Approve actions, track audit trails, and let Pullse execute refunds, updates, and lookups safely across your stack. No bolt-on bots—one brain, shared context, humans always in control.
         </motion.p>
 
-        {/* Single Primary CTA */}
         <motion.div
           className="flex flex-col items-center gap-3 md:gap-4 mb-10 md:mb-14 lg:mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +56,7 @@ export default function ProductAIEngineHeroContent() {
                 >
                   <Sparkles className="h-5 w-5 md:h-6 md:w-6" />
                 </motion.div>
-                See Live Demo
+                See it in action
                 <ArrowRight className="h-5 w-5 md:h-6 md:w-6 group-hover:translate-x-2 transition-transform duration-300" />
               </span>
             </RouteButton>

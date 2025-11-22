@@ -37,9 +37,9 @@ const PricingHeroSection = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold"
           >
             <span className="bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent">
-              Your entire support stack.
+              Simple plans.
               <br />
-              One platform. One price.
+              No per-resolution surprises.
             </span>
           </motion.h1>
 
@@ -49,7 +49,7 @@ const PricingHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
           >
-            Most teams pay $100K+ yearly for 10+ disconnected tools that don't talk to each other. Pullse gives you everything—tickets, chat, AI agents, QA, analytics—in one unified platform for a fraction of the cost.
+            All AI included—bots, copilots, QA, analytics, and workflows. Built for teams that need execution, not just answers, without hidden add-ons or per-resolution fees.
           </motion.p>
 
           <motion.div
@@ -63,7 +63,7 @@ const PricingHeroSection = () => {
               asChild
             >
               <Link href="/contact-sales">
-                Contact Sales
+                Pick a plan
                 <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Link>
             </Button>

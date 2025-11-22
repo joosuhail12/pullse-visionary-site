@@ -18,8 +18,12 @@ const Compare = () => {
         <CompareHeroSection />
 
         {/* Page Content */}
-        <div className="container mx-auto px-4 relative z-10 pt-20">
+        <div className="relative z-10 pt-8 md:pt-10 pb-10 md:pb-12 bg-gradient-to-b from-background via-primary/5 to-background">
           <CompetitorComparisonSection />
+        </div>
+
+        {/* Detailed Content Sections */}
+        <div className="container mx-auto px-4 relative z-10">
           <CompareContentSections />
         </div>
       </main>

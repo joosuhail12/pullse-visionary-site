@@ -15,6 +15,7 @@ import {
   trackFormComplete,
   trackFormError,
   trackGenerateLead,
+  hasAnalyticsConsent,
 } from "@/lib/analytics";
 import { trackValidationError } from "@/lib/errorTracking";
 
@@ -34,6 +35,17 @@ interface StepErrors {
   [key: string]: string;
 }
 
+interface AttributionData {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  referrer?: string;
+  landing_page?: string;
+  form_path?: string;
+}
+
 export default function ContactSalesContent() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -47,6 +59,9 @@ export default function ContactSalesContent() {
     currentSolution: "",
     message: "",
   });
+  const [analyticsConsent, setAnalyticsConsent] = useState(false);
+  const [attribution, setAttribution] = useState<AttributionData>({});
+  const [botField, setBotField] = useState("");
 
   const [errors, setErrors] = useState<StepErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,6 +78,32 @@ export default function ContactSalesContent() {
 
   const stepNames = ['Contact Info', 'Company Details', 'Project Details'];
 
+  const calPrefill = useMemo(() => {
+    const notesParts = [
+      formData.company && `Company: ${formData.company}`,
+      formData.companySize && `Size: ${formData.companySize}`,
+      formData.industry && `Industry: ${formData.industry}`,
+      formData.timeline && `Timeline: ${formData.timeline}`,
+      formData.currentSolution && `Current solution: ${formData.currentSolution}`,
+      formData.message && `Notes: ${formData.message}`,
+    ].filter(Boolean);
+
+    const customAnswers: Record<string, string> = {};
+    if (formData.company) customAnswers['Company'] = formData.company;
+    if (formData.companySize) customAnswers['Company size'] = formData.companySize;
+    if (formData.industry) customAnswers['Industry'] = formData.industry;
+    if (formData.timeline) customAnswers['Timeline'] = formData.timeline;
+    if (formData.currentSolution) customAnswers['Current solution'] = formData.currentSolution;
+    if (formData.message) customAnswers['Notes'] = formData.message;
+
+    return {
+      name: formData.name || undefined,
+      email: formData.email || undefined,
+      notes: notesParts.join('\n') || undefined,
+      customAnswers: Object.keys(customAnswers).length ? customAnswers : undefined,
+    };
+  }, [formData]);
+
   // Track form view on mount
   useEffect(() => {
     trackFormView({
@@ -70,6 +111,22 @@ export default function ContactSalesContent() {
       form_name: formName,
       form_destination: '/api/contact-sales',
     });
+    setAnalyticsConsent(hasAnalyticsConsent());
+
+    // Capture marketing attribution and referrer
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      setAttribution({
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+        utm_term: params.get('utm_term') || undefined,
+        utm_content: params.get('utm_content') || undefined,
+        referrer: document.referrer || undefined,
+        landing_page: window.location.href,
+        form_path: window.location.pathname,
+      });
+    }
   }, []);
 
   // Track step progression
@@ -142,7 +199,7 @@ export default function ContactSalesContent() {
     } else {
       setCurrentStep(prev => Math.min(prev + 1, totalSteps));
     }
-  }, [currentStep, formData, validateStep]);
+  }, [currentStep, formData, validateStep, attribution, analyticsConsent, botField]);
 
   const prevStep = useCallback(() => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
@@ -194,11 +251,11 @@ export default function ContactSalesContent() {
       : undefined;
 
     // Track form submission attempt
-    trackFormSubmit({
-      form_id: formId,
-      form_name: formName,
-      time_to_submit: timeToSubmit,
-    });
+      trackFormSubmit({
+        form_id: formId,
+        form_name: formName,
+        time_to_submit: timeToSubmit,
+      });
 
     setIsSubmitting(true);
     setApiError('');
@@ -209,7 +266,12 @@ export default function ContactSalesContent() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          attribution,
+          analyticsConsent,
+          botField,
+        }),
       });
 
       const result = await response.json();
@@ -458,6 +520,7 @@ export default function ContactSalesContent() {
                   {/* Calendar Embed */}
                   <CalEmbed
                     calLink="suhailjoo/pullse-demo"
+                    prefill={calPrefill}
                     className=""
                   />
                 </div>
@@ -573,6 +636,18 @@ export default function ContactSalesContent() {
                 <AnimatePresence mode="wait">
                   {StepContent}
                 </AnimatePresence>
+
+                {/* Honeypot field to deter bots */}
+                <input
+                  type="text"
+                  name="company_website"
+                  value={botField}
+                  onChange={(e) => setBotField(e.target.value)}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
 
                 {/* Error Message */}
                 {apiError && (

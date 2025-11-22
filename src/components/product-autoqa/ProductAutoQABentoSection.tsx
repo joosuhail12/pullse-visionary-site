@@ -11,6 +11,15 @@ import {
   AlertCircle,
   CheckCircle2,
 } from 'lucide-react';
+import {
+  CoveragePreview,
+  FeedbackPreview,
+  TrendsPreview,
+  FairnessPreview,
+  EfficiencyPreview,
+  PrecisionPreview,
+  RubricsPreview,
+} from '@/components/product-autoqa/AutoQAPreviews';
 
 export default function ProductAutoQABentoSection() {
   const bentoCards: CardData[] = [
@@ -20,6 +29,7 @@ export default function ProductAutoQABentoSection() {
       description: 'AI analyzes every ticket—not just 5%. Identify patterns, coaching opportunities, and blind spots across 100% of interactions.',
       label: '100% Coverage',
       icon: Shield,
+      customComponent: <CoveragePreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -27,6 +37,7 @@ export default function ProductAutoQABentoSection() {
       description: 'Scorecards generated the moment a ticket closes. Reps see where they excel and where to improve—before memory fades.',
       label: 'Real-Time',
       icon: MessageSquare,
+      customComponent: <FeedbackPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -34,6 +45,7 @@ export default function ProductAutoQABentoSection() {
       description: 'Every metric tracked over time. See if empathy is improving, handle time dropping, or resolution rates climbing.',
       label: 'Analytics',
       icon: TrendingUp,
+      customComponent: <TrendsPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -41,6 +53,7 @@ export default function ProductAutoQABentoSection() {
       description: 'Built-in dispute workflow. Reps can challenge any score, supervisors review and provide context. No black-box judgments.',
       label: 'Accountability',
       icon: Users,
+      customComponent: <FairnessPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -48,6 +61,7 @@ export default function ProductAutoQABentoSection() {
       description: 'Traditional QA teams sample 5-10%. Auto-QA evaluates 100%—with no extra staff, no manual reviews, no bottlenecks.',
       label: 'Efficiency',
       icon: Clock,
+      customComponent: <EfficiencyPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -55,6 +69,7 @@ export default function ProductAutoQABentoSection() {
       description: 'AI identifies the exact message where a rep could improve—with suggested rewrites. Not vague feedback. Actionable coaching.',
       label: 'Coaching',
       icon: AlertCircle,
+      customComponent: <PrecisionPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -62,6 +77,7 @@ export default function ProductAutoQABentoSection() {
       description: 'Define your own quality standards. Empathy, clarity, policy adherence, brand voice—whatever matters to your team.',
       label: 'Coming Soon',
       icon: CheckCircle2,
+      customComponent: <RubricsPreview />,
     },
   ];
 

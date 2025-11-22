@@ -1,11 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import crypto from 'crypto';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
 
 // =======================
 // Schema Validation (Zod)
 // =======================
+
+const AttributionSchema = z.object({
+  utm_source: z.string().max(200).optional(),
+  utm_medium: z.string().max(200).optional(),
+  utm_campaign: z.string().max(200).optional(),
+  utm_term: z.string().max(200).optional(),
+  utm_content: z.string().max(200).optional(),
+  referrer: z.string().max(500).optional(),
+  landing_page: z.string().max(500).optional(),
+  form_path: z.string().max(300).optional(),
+});
 
 const ContactSalesSchema = z.object({
   name: z.string().min(1, 'Name is required').max(200, 'Name too long'),
@@ -24,6 +36,9 @@ const ContactSalesSchema = z.object({
   phone: z.string().max(50, 'Phone number too long').optional().default(''),
   currentSolution: z.string().max(200, 'Current solution description too long').optional().default(''),
   message: z.string().max(2000, 'Message too long').optional().default(''),
+  attribution: AttributionSchema.optional(),
+  analyticsConsent: z.boolean().optional().default(false),
+  botField: z.string().max(200).optional().default(''),
 });
 
 type ContactSalesInput = z.infer<typeof ContactSalesSchema>;
@@ -46,6 +61,14 @@ interface ContactSalesRequest {
   status?: string;
   submitted_at?: string;
   created_at?: string;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  utm_term?: string | null;
+  utm_content?: string | null;
+  referrer?: string | null;
+  landing_page?: string | null;
+  form_path?: string | null;
 }
 
 // =======================
@@ -71,20 +94,23 @@ type ApiSuccess<T> = {
 // Rate Limiting (Simple In-Memory)
 // =======================
 
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+type RateLimitRecord = { count: number; resetAt: number };
+const rateLimitByEmail = new Map<string, RateLimitRecord>();
+const rateLimitByIp = new Map<string, RateLimitRecord>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX = 5; // 5 requests per minute (more generous than startup)
+const RATE_LIMIT_MAX_EMAIL = 5; // 5 requests per minute per email
+const RATE_LIMIT_MAX_IP = 20; // 20 requests per minute per IP
 
-function checkRateLimit(identifier: string): boolean {
+function checkRateLimit(map: Map<string, RateLimitRecord>, identifier: string, max: number): boolean {
   const now = Date.now();
-  const record = rateLimitMap.get(identifier);
+  const record = map.get(identifier);
 
   if (!record || now > record.resetAt) {
-    rateLimitMap.set(identifier, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    map.set(identifier, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
     return true;
   }
 
-  if (record.count >= RATE_LIMIT_MAX) {
+  if (record.count >= max) {
     return false;
   }
 
@@ -92,14 +118,24 @@ function checkRateLimit(identifier: string): boolean {
   return true;
 }
 
+function getClientIp(request: NextRequest): string {
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0]?.trim() || 'unknown';
+  }
+  return request.ip || 'unknown';
+}
+
 // Cleanup old entries every 5 minutes
 setInterval(() => {
   const now = Date.now();
-  for (const [key, value] of rateLimitMap.entries()) {
-    if (now > value.resetAt) {
-      rateLimitMap.delete(key);
+  [rateLimitByEmail, rateLimitByIp].forEach((map) => {
+    for (const [key, value] of map.entries()) {
+      if (now > value.resetAt) {
+        map.delete(key);
+      }
     }
-  }
+  });
 }, 5 * 60 * 1000);
 
 // =======================
@@ -153,6 +189,10 @@ function generateRequestId(): string {
   return `req_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 }
 
+function hashIdentifier(value: string): string {
+  return crypto.createHash('sha256').update(value.toLowerCase()).digest('hex');
+}
+
 // =======================
 // POST Handler
 // =======================
@@ -161,6 +201,18 @@ export async function POST(request: NextRequest) {
   const requestId = generateRequestId();
 
   try {
+    // 0. Ensure Supabase configuration is present
+    const supabaseConfigured = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+    if (!supabaseConfigured) {
+      return createErrorResponse(
+        'CONFIG_ERROR',
+        'Service temporarily unavailable. Please try again in a few minutes.',
+        503,
+        undefined,
+        requestId
+      );
+    }
+
     // 1. Check Content-Type
     const contentType = request.headers.get('content-type');
     if (!contentType?.includes('application/json')) {
@@ -200,12 +252,36 @@ export async function POST(request: NextRequest) {
     }
 
     const validatedData = validation.data;
+    const { botField = '', analyticsConsent = false } = validatedData;
+    const shouldTrackAnalytics = analyticsConsent === true;
 
-    // 4. Rate limiting (by email)
-    if (!checkRateLimit(validatedData.email)) {
+    // 3b. Basic honeypot check
+    if (botField.trim()) {
+      return createErrorResponse(
+        'SPAM_DETECTED',
+        'Request flagged as spam.',
+        400,
+        undefined,
+        requestId
+      );
+    }
+
+    // 4. Rate limiting (by email + IP)
+    const clientIp = getClientIp(request);
+    if (!checkRateLimit(rateLimitByEmail, validatedData.email, RATE_LIMIT_MAX_EMAIL)) {
       return createErrorResponse(
         'RATE_LIMIT_EXCEEDED',
         'Too many requests. Please try again in a minute.',
+        429,
+        undefined,
+        requestId
+      );
+    }
+
+    if (clientIp !== 'unknown' && !checkRateLimit(rateLimitByIp, clientIp, RATE_LIMIT_MAX_IP)) {
+      return createErrorResponse(
+        'RATE_LIMIT_EXCEEDED',
+        'Too many requests from your network. Please wait a minute and try again.',
         429,
         undefined,
         requestId
@@ -245,6 +321,10 @@ export async function POST(request: NextRequest) {
     }
 
     // 6. Prepare data for insertion
+    const attribution = validatedData.attribution || {};
+    const landingPage = attribution.landing_page?.trim() || '';
+    const formPath = attribution.form_path?.trim() || new URL(request.url).pathname;
+
     const requestData: Omit<ContactSalesRequest, 'id' | 'submitted_at' | 'created_at' | 'status'> = {
       name: validatedData.name.trim(),
       email: validatedData.email,
@@ -255,34 +335,71 @@ export async function POST(request: NextRequest) {
       phone: validatedData.phone.trim(),
       current_solution: validatedData.currentSolution.trim(),
       message: validatedData.message.trim(),
+      utm_source: attribution.utm_source?.trim() || null,
+      utm_medium: attribution.utm_medium?.trim() || null,
+      utm_campaign: attribution.utm_campaign?.trim() || null,
+      utm_term: attribution.utm_term?.trim() || null,
+      utm_content: attribution.utm_content?.trim() || null,
+      referrer: attribution.referrer?.trim() || null,
+      landing_page: landingPage || null,
+      form_path: formPath || null,
+    };
+    const baseRequestData = {
+      name: requestData.name,
+      email: requestData.email,
+      company: requestData.company,
+      company_size: requestData.company_size,
+      industry: requestData.industry,
+      timeline: requestData.timeline,
+      phone: requestData.phone,
+      current_solution: requestData.current_solution,
+      message: requestData.message,
     };
 
     // 7. Insert into Supabase
-    const { data, error } = await supabase
-      .from('contact_sales_requests')
-      .insert([requestData])
-      .select()
-      .single();
+    const attemptInsert = async (payload: any) => {
+      const { data, error } = await supabase
+        .from('contact_sales_requests')
+        .insert([payload])
+        .select()
+        .single();
+      return { data, error };
+    };
+
+    let { data, error } = await attemptInsert(requestData);
+    if (error && (error.code === '42703' || `${error.message}`.includes('column') || `${error.message}`.includes('does not exist'))) {
+      // Fallback: retry without attribution fields if DB schema hasn't been migrated yet
+      ({ data, error } = await attemptInsert(baseRequestData));
+    }
 
     if (error) {
       console.error('Supabase insert error:', error);
 
-      // Track failed submission
-      await trackServerEvent(
-        validatedData.email,
-        'form_submit_failed',
-        {
-          form_id: 'contact-sales',
-          error_code: 'DATABASE_ERROR',
-          error_message: 'Failed to submit request',
-          company: validatedData.company,
-          company_size: validatedData.companySize,
-          industry: validatedData.industry,
-          timeline: validatedData.timeline,
-          request_id: requestId,
-        }
-      );
-      await flushServerEvents();
+      // Track failed submission (if consented)
+      if (shouldTrackAnalytics) {
+        const distinctId = hashIdentifier(validatedData.email);
+        await trackServerEvent(
+          distinctId,
+          'form_submit_failed',
+          {
+            form_id: 'contact-sales',
+            error_code: 'DATABASE_ERROR',
+            error_message: 'Failed to submit request',
+            company: validatedData.company,
+            company_size: validatedData.companySize,
+            industry: validatedData.industry,
+            timeline: validatedData.timeline,
+            request_id: requestId,
+            utm_source: requestData.utm_source,
+            utm_medium: requestData.utm_medium,
+            utm_campaign: requestData.utm_campaign,
+            referrer: requestData.referrer,
+            landing_page: requestData.landing_page,
+            form_path: requestData.form_path,
+          }
+        );
+        await flushServerEvents();
+      }
 
       return createErrorResponse(
         'DATABASE_ERROR',
@@ -294,42 +411,54 @@ export async function POST(request: NextRequest) {
     }
 
     // 8. Track successful form submission (server-side)
-    await trackServerEvent(
-      validatedData.email,
-      'form_submit_success_server',
-      {
-        form_id: 'contact-sales',
-        submission_id: data.id,
+    if (shouldTrackAnalytics) {
+      const distinctId = hashIdentifier(validatedData.email);
+      const sharedProps = {
         company: validatedData.company,
         company_size: validatedData.companySize,
         industry: validatedData.industry,
         timeline: validatedData.timeline,
+        utm_source: requestData.utm_source,
+        utm_medium: requestData.utm_medium,
+        utm_campaign: requestData.utm_campaign,
+        utm_term: requestData.utm_term,
+        utm_content: requestData.utm_content,
+        referrer: requestData.referrer,
+        landing_page: requestData.landing_page,
+        form_path: requestData.form_path,
         has_phone: !!validatedData.phone,
         has_current_solution: !!validatedData.currentSolution,
         has_message: !!validatedData.message,
-        request_id: requestId,
-        value: 100, // Demo request value for conversion tracking
-      }
-    );
+      };
 
-    // Track as a conversion event
-    await trackServerEvent(
-      validatedData.email,
-      'generate_lead',
-      {
-        lead_type: 'demo_request',
-        source: 'contact_sales_form',
-        company: validatedData.company,
-        company_size: validatedData.companySize,
-        industry: validatedData.industry,
-        timeline: validatedData.timeline,
-        submission_id: data.id,
-        value: 100,
-      }
-    );
+      await trackServerEvent(
+        distinctId,
+        'form_submit_success_server',
+        {
+          form_id: 'contact-sales',
+          submission_id: data.id,
+          request_id: requestId,
+          value: 100, // Demo request value for conversion tracking
+          ...sharedProps,
+        }
+      );
 
-    // Flush events before returning
-    await flushServerEvents();
+      // Track as a conversion event
+      await trackServerEvent(
+        distinctId,
+        'generate_lead',
+        {
+          lead_type: 'demo_request',
+          source: 'contact_sales_form',
+          submission_id: data.id,
+          value: 100,
+          ...sharedProps,
+        }
+      );
+
+      // Flush events before returning
+      await flushServerEvents();
+    }
 
     // 9. Success response
     return createSuccessResponse(

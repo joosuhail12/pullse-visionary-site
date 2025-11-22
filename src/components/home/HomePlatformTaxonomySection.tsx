@@ -11,7 +11,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import type { CardData } from "@/components/MagicBento";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
+import inboxScreenshot from "@/assets/Platform-inbox-view.webp";
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
 import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.webp";
 import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
@@ -84,37 +84,29 @@ const HomePlatformTaxonomySection = () => {
   return (
     <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.04),transparent_60%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-primary/10 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.06),transparent_60%)]" />
 
       <div className="container relative mx-auto px-4">
         <div className="mx-auto mb-12 sm:mb-16 md:mb-20 max-w-4xl text-center space-y-4 sm:space-y-6">
           {/* Stronger headline */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight px-4">
-            Seven products. One platform. Zero integration headaches.
+            One platform, many superpowers
           </h2>
 
           {/* Better value prop */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
-            From unified inbox to AI agents to real-time analytics—everything your team needs to deliver world-class support is built in, battle-tested, and ready to deploy.
+            Inbox, workflows, bots, copilots, QA, and analytics share one brain. Actions fire with guardrails, and humans stay in control.
           </p>
 
-          {/* Social proof stat */}
-          <div className="inline-flex items-center gap-3 sm:gap-4 md:gap-6 rounded-2xl border border-border/50 bg-card px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg flex-wrap justify-center">
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">7</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">Products</div>
-            </div>
-            <div className="h-8 w-px bg-border/60" />
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">1</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">Login</div>
-            </div>
-            <div className="h-8 w-px bg-border/60" />
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-primary">0</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">Integrations</div>
-            </div>
+          {/* Value chip */}
+          <div className="inline-flex items-center gap-2 sm:gap-3 rounded-full border border-primary/25 bg-white/80 px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg text-sm sm:text-base font-semibold text-primary">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+              •
+            </span>
+            <span className="text-foreground">
+              Unified brain across channels — approvals, audit trails, and launch in days.
+            </span>
           </div>
         </div>
 

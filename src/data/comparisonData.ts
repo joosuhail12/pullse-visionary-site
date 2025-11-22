@@ -18,7 +18,58 @@ export interface Competitor {
   pricingNote: string;
   whenToChoose?: string;
   strengths?: string[];
+  chooseCompetitorIf?: string[];
 }
+
+export interface PullseLimitation {
+  area: string;
+  limitation: string;
+  impact: string;
+  competitorAdvantage?: string;
+}
+
+export const pullseLimitations: PullseLimitation[] = [
+  {
+    area: 'Integrations',
+    limitation: '100+ integrations vs competitors\' 300-1,700+',
+    impact: 'May require custom development for niche tools',
+    competitorAdvantage: 'Zendesk (1,700+), Freshdesk (300+)'
+  },
+  {
+    area: 'Voice Support',
+    limitation: 'Phone/voice support coming soon',
+    impact: 'Not ideal if call center is your primary channel today',
+    competitorAdvantage: 'Dixa excels at voice-first support'
+  },
+  {
+    area: 'Scale',
+    limitation: 'Optimized for teams under 100 agents',
+    impact: 'May lack some enterprise-specific features for massive teams',
+    competitorAdvantage: 'Zendesk for 100+ agent organizations'
+  },
+  {
+    area: 'Brand Recognition',
+    limitation: 'Newer platform vs 10+ year competitors',
+    impact: 'Less proven track record for risk-averse enterprises',
+    competitorAdvantage: 'Zendesk, Intercom have longer histories'
+  },
+  {
+    area: 'Proactive Messaging',
+    limitation: 'Support-focused, not marketing automation',
+    impact: 'Limited product tours, lifecycle messaging',
+    competitorAdvantage: 'Intercom for product-led growth messaging'
+  }
+];
+
+export const choosePullseIf: string[] = [
+  'You\'re a growing team (5-100 agents) wanting AI-first support',
+  'You need actions executed (refunds, lookups, updates) not just answers',
+  'You want transparent pricing without per-resolution surprise fees',
+  'You need to launch in days, not quarters',
+  'You want built-in QA, analytics, and workflows in one platform',
+  'You\'re building modern support operations from scratch or ready to modernize',
+  'You value simplicity over having 1000+ integrations you\'ll never use'
+];
 
 export const competitors: Competitor[] = [
   {
@@ -35,7 +86,16 @@ export const competitors: Competitor[] = [
     ],
     pricingNote: "Zendesk Suite Professional starts at $115/agent/month, plus $75/agent/month for Advanced AI & QA add-ons, plus $1.50 per AI resolution. Base platform with AI: $190/agent/month + variable resolution fees.",
     whenToChoose: "Choose Zendesk if you need 1000+ integrations, have enterprise-level compliance requirements, or already use their ecosystem extensively.",
-    strengths: ['1700+ integrations', 'Mature enterprise features', 'Established brand', 'Advanced reporting']
+    strengths: ['1700+ integrations', 'Mature enterprise features', 'Established brand', 'Advanced reporting'],
+    chooseCompetitorIf: [
+      'You have 100+ support agents across multiple regions/time zones',
+      'You require 500+ integrations with specialized enterprise tools',
+      'You need advanced compliance features (HIPAA, SOC2, ISO certifications at scale)',
+      'Your organization has already invested $100K+ in Zendesk ecosystem',
+      'You have a dedicated IT team to manage complex configurations',
+      'Brand recognition is critical for stakeholder buy-in',
+      'You need deeply customizable reporting dashboards for executives'
+    ]
   },
   {
     id: 'intercom',
@@ -51,7 +111,16 @@ export const competitors: Competitor[] = [
     ],
     pricingNote: "Intercom Advanced plan (with Copilot + Fin AI) starts at $132/seat/month plus $0.99 per AI resolution. Costs vary significantly with volume, making budgeting difficult.",
     whenToChoose: "Choose Intercom if you're a fast-growing SaaS company prioritizing proactive messaging over traditional support.",
-    strengths: ['Strong proactive messaging', 'SaaS-focused features', 'Conversational AI']
+    strengths: ['Strong proactive messaging', 'SaaS-focused features', 'Conversational AI'],
+    chooseCompetitorIf: [
+      'You\'re a product-led SaaS company (not service-based business)',
+      'Proactive messaging and product tours are more important than support ticket resolution',
+      'You want to blur the line between support, sales, and marketing',
+      'Your support is primarily in-app messaging (not email, phone, or external chat)',
+      'You\'re willing to pay premium pricing for brand recognition',
+      'Marketing automation and lifecycle messaging are critical to your growth',
+      'Your support volume is low enough that per-resolution fees are manageable'
+    ]
   },
   {
     id: 'freshdesk',
@@ -67,7 +136,15 @@ export const competitors: Competitor[] = [
     ],
     pricingNote: "Freshdesk AI features require Omni Enterprise plan at $104/agent/month, plus Freddy AI Copilot ($29/agent/month), Freddy AI Agent ($89/1000 sessions), and Connector Tasks ($79/5000 tasks). Real AI cost: $133+/agent/month + variable session and task costs.",
     whenToChoose: "Choose Freshdesk if you're a very small team (2-5 agents) wanting a free plan, or need basic ticketing without AI.",
-    strengths: ['Free plan available', '300+ integrations', 'Lower entry price', 'Good for basic ticketing']
+    strengths: ['Free plan available', '300+ integrations', 'Lower entry price', 'Good for basic ticketing'],
+    chooseCompetitorIf: [
+      'You have a very small team (2-5 agents) and need a free plan to get started',
+      'Basic ticketing and email support are sufficient (no AI automation needed)',
+      'You\'re extremely cost-sensitive and can\'t justify $99+/agent/month',
+      'You need simple, traditional help desk features without modern AI',
+      'Your team has minimal technical skills and needs the simplest possible interface',
+      'You don\'t expect significant growth in support volume or complexity'
+    ]
   },
   {
     id: 'dixa',
@@ -83,7 +160,16 @@ export const competitors: Competitor[] = [
     ],
     pricingNote: "Dixa Prime Plan starts at $179/seat/month base, plus $97/seat/month in required add-ons (AI Copilot $39, QA $29, Advanced Insights $29), with a 7-seat minimum. Total: $276/seat/month ($1,932/month minimum for 7 agents) + $0.40 per AI conversation + $0.05 per conversation for Auto QA.",
     whenToChoose: "Choose Dixa if you have 7+ agents and voice support is your primary channel with high call volume.",
-    strengths: ['Strong voice support', 'Unified agent desktop', 'Conversation routing', '55% automation with Mim AI']
+    strengths: ['Strong voice support', 'Unified agent desktop', 'Conversation routing', '55% automation with Mim AI'],
+    chooseCompetitorIf: [
+      'Voice/phone support is your PRIMARY channel (50%+ of total volume)',
+      'You have 7+ agents and can meet the minimum seat requirement',
+      'You need advanced call center features (IVR, call recording, quality monitoring)',
+      'Unified agent desktop for voice-first operations is critical',
+      'You handle high call volumes and need sophisticated call routing',
+      'Your team is already trained on traditional call center workflows',
+      'You need deep telephony integrations and carrier management'
+    ]
   },
 ];
 

@@ -460,10 +460,11 @@ const GlobalSpotlight = ({
 interface BentoCardGridProps {
   children: ReactNode;
   gridRef: React.RefObject<HTMLDivElement>;
+  className?: string;
 }
 
-const BentoCardGrid = ({ children, gridRef }: BentoCardGridProps) => (
-  <div className="card-grid bento-section" ref={gridRef}>
+const BentoCardGrid = ({ children, gridRef, className = '' }: BentoCardGridProps) => (
+  <div className={`card-grid bento-section ${className}`.trim()} ref={gridRef}>
     {children}
   </div>
 );
@@ -506,6 +507,7 @@ interface MagicBentoProps {
   glowColor?: string;
   clickEffect?: boolean;
   enableMagnetism?: boolean;
+  gridClassName?: string;
 }
 
 const MagicBento = ({
@@ -520,7 +522,8 @@ const MagicBento = ({
   enableTilt = false,
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
-  enableMagnetism = true
+  enableMagnetism = true,
+  gridClassName = ''
 }: MagicBentoProps) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
@@ -538,7 +541,7 @@ const MagicBento = ({
         />
       )}
 
-      <BentoCardGrid gridRef={gridRef}>
+      <BentoCardGrid gridRef={gridRef} className={gridClassName}>
         {cardData.map((card, index) => {
           const baseClassName = `card ${textAutoHide ? 'card--text-autohide' : ''} ${enableBorderGlow ? 'card--border-glow' : ''}`;
           const cardProps = {

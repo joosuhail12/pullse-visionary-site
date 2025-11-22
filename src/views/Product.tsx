@@ -21,8 +21,6 @@ import {
   ShoppingCart,
   Building2,
   Headphones,
-  Star,
-  Globe,
   CreditCard,
   Boxes,
   TrendingUp,
@@ -30,16 +28,180 @@ import {
 import AIChatbotPreview from "@/components/AIChatbotPreview";
 import AIToolsPreview from "@/components/AIToolsPreview";
 import AutoQAPreview from "@/components/AutoQAPreview";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
-import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
-import aiCopilotScreenshot from "@/assets/ai-copilot-screenshot.webp";
-import analyticsScreenshot from "@/assets/analytics-screenshot.webp";
+import heroScreenshot from "@/assets/Platform-inbox-view.webp";
 
 // Import client islands
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
 import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
 import ProductHeroBackground from "@/components/product/ProductHeroBackground";
 import ProductStyles from "@/components/product/ProductStyles";
+
+const PreviewShell = ({
+  title,
+  meta,
+  children,
+}: {
+  title: string;
+  meta?: string;
+  children: React.ReactNode;
+}) => (
+  <div className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-2xl border border-border/40 bg-white shadow-xl">
+    <div className="flex items-center justify-between border-b border-border/40 bg-gradient-to-r from-muted/40 via-white to-muted/20 px-4 py-3">
+      <div className="flex items-center gap-2">
+        <span className="h-2 w-2 rounded-full bg-primary" />
+        <span className="text-sm font-semibold text-foreground/80">{title}</span>
+      </div>
+      {meta ? (
+        <span className="rounded-full bg-primary/10 px-2 py-1 text-[11px] font-semibold text-primary">{meta}</span>
+      ) : null}
+    </div>
+    <div className="flex-1 overflow-hidden bg-gradient-to-b from-white to-muted/30 p-4">{children}</div>
+  </div>
+);
+
+const InboxPreview = () => (
+  <PreviewShell title="Unified Inbox" meta="Queue health">
+    <div className="grid h-full gap-3 sm:grid-cols-[0.55fr,0.45fr]">
+      <div className="space-y-2">
+        {[
+          { name: "Alex Chen", status: "New", intent: "Refund", time: "2m", color: "bg-blue-500" },
+          { name: "Dana Ruiz", status: "In progress", intent: "Shipping", time: "6m", color: "bg-amber-500" },
+          { name: "Nolan Patel", status: "Waiting", intent: "Account", time: "12m", color: "bg-emerald-500" },
+        ].map((item) => (
+          <div
+            key={item.name}
+            className="flex items-center justify-between rounded-xl border border-border/50 bg-white/90 px-3 py-2.5 shadow-sm"
+          >
+            <div className="flex items-center gap-2">
+              <span className={`h-2.5 w-2.5 rounded-full ${item.color}`} />
+              <div>
+                <div className="text-sm font-semibold text-foreground">{item.name}</div>
+                <div className="text-xs text-muted-foreground">
+                  {item.intent} - {item.status}
+                </div>
+              </div>
+            </div>
+            <div className="text-xs text-muted-foreground">{item.time} ago</div>
+          </div>
+        ))}
+      </div>
+      <div className="flex h-full flex-col gap-3 rounded-2xl border border-border/40 bg-white/95 p-3 shadow-sm">
+        <div className="flex items-center justify-between">
+          <div className="text-sm font-semibold text-foreground">Context</div>
+          <span className="rounded-full bg-primary/10 px-2 py-1 text-[11px] font-semibold text-primary">AI Assist</span>
+        </div>
+        <div className="rounded-xl border border-dashed border-border/60 bg-muted/30 p-3 text-xs text-muted-foreground">
+          Shopify - Order #1248 - Premium plan - CSAT 4.8<br />
+          Last interaction: Asked about refund policy.<br />
+          Suggested next: Offer instant credit, confirm address.
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-[11px] font-semibold text-foreground">
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Assign: Skilled</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Approve action</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Tag: Refund</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Note to team</span>
+        </div>
+      </div>
+    </div>
+  </PreviewShell>
+);
+
+const WorkflowPreview = () => (
+  <PreviewShell title="Workflow Builder" meta="No-code">
+    <div className="mt-1 space-y-3">
+      {[
+        { label: "Trigger: New ticket", detail: "Channel = Email" },
+        { label: "Branch: Intent", detail: "Refund / Shipping / Account" },
+        { label: "Action: Call API", detail: "GET /orders/:id" },
+        { label: "Guardrail: Approval", detail: "Refunds greater than $100" },
+      ].map((step, idx, arr) => (
+        <div
+          key={step.label}
+          className="relative flex items-start gap-3 rounded-2xl border border-border/50 bg-white/90 px-4 py-3 shadow-sm"
+        >
+          {idx < arr.length - 1 && <div className="absolute left-[14px] top-9 h-[calc(100%-18px)] w-px bg-border/60" aria-hidden />}
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-[11px] font-bold text-primary">
+            {idx + 1}
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-foreground">{step.label}</div>
+            <div className="text-xs text-muted-foreground">{step.detail}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </PreviewShell>
+);
+
+const CopilotPreview = () => (
+  <PreviewShell title="Agent Copilot" meta="In-context actions">
+    <div className="grid h-full gap-3 sm:grid-cols-[0.55fr,0.45fr]">
+      <div className="space-y-2">
+        <div className="rounded-2xl border border-border/50 bg-white/90 p-3 text-sm text-foreground shadow-sm">
+          Customer: "Can I get a refund for order 1248?"<br />
+          Copilot draft: Offers instant credit, cites policy, asks for confirmation.
+        </div>
+        <div className="flex gap-2">
+          <button className="w-full rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-xs font-semibold text-primary">
+            Insert reply
+          </button>
+          <button className="w-full rounded-lg border border-border/60 bg-muted/30 px-3 py-2 text-xs font-semibold text-foreground">
+            Adjust tone
+          </button>
+        </div>
+      </div>
+      <div className="space-y-2 rounded-2xl border border-border/50 bg-white/95 p-3 shadow-sm">
+        <div className="text-xs font-semibold text-muted-foreground">Actions</div>
+        <div className="grid grid-cols-2 gap-2 text-[11px] font-semibold text-foreground">
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Refund $25</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Credit wallet</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Update shipping</span>
+          <span className="rounded-lg border border-border/60 bg-muted/20 px-3 py-2">Escalate</span>
+        </div>
+        <div className="rounded-xl border border-dashed border-border/60 bg-muted/30 p-3 text-xs text-muted-foreground">
+          Approval required for refunds &gt; $100. Logged to audit trail.
+        </div>
+      </div>
+    </div>
+  </PreviewShell>
+);
+
+const AnalyticsPreview = () => (
+  <PreviewShell title="Automation Impact" meta="Exec-ready">
+    <div className="grid h-full gap-3 sm:grid-cols-[0.6fr,0.4fr]">
+      <div className="space-y-3">
+        <div className="h-28 rounded-xl border border-border/40 bg-gradient-to-t from-primary/15 via-white to-white p-3">
+          <div className="mb-2 text-xs font-semibold text-muted-foreground">Automation rate</div>
+          <div className="flex h-full items-end gap-2">
+            {[45, 62, 78, 82, 86].map((v, i) => (
+              <div key={i} className="flex-1 rounded-md bg-primary/30" style={{ height: `${v}%` }} />
+            ))}
+          </div>
+        </div>
+        <div className="rounded-xl border border-border/40 bg-muted/30 p-3 text-xs text-muted-foreground">
+          Coverage by intent: Refunds 82%, Shipping 68%, Account 54%. Next: automate cancellations.
+        </div>
+      </div>
+      <div className="space-y-2 rounded-2xl border border-border/40 bg-white/95 p-3 shadow-sm">
+        <div className="flex items-center justify-between text-sm font-semibold text-foreground">
+          <span>CSAT</span>
+          <span className="text-primary">4.8</span>
+        </div>
+        <div className="flex items-center justify-between text-sm font-semibold text-foreground">
+          <span>Time to first response</span>
+          <span className="text-primary">-42%</span>
+        </div>
+        <div className="flex items-center justify-between text-sm font-semibold text-foreground">
+          <span>Cost per ticket</span>
+          <span className="text-primary">-28%</span>
+        </div>
+        <div className="rounded-xl border border-dashed border-border/60 bg-muted/30 p-3 text-xs text-muted-foreground">
+          Export ready: PDF / CSV / Slack. Filters: intent, channel, team.
+        </div>
+      </div>
+    </div>
+  </PreviewShell>
+);
 
 const Product = () => {
   const coreProducts = [
@@ -48,133 +210,154 @@ const Product = () => {
       icon: MessageSquare,
       badge: "Foundation",
       title: "Unified Inbox",
-      headline: "Every conversation in one place",
+      headline: "Command center that never loses context",
       description:
-        "Centralize email, chat, and API events into a single intelligent workspace. Context-rich threads, smart assignments, and automated routing keep your team moving fast.",
+        "Bring every channel and API event into a single, action-ready workspace. Auto-route by workload and intent, keep teams from colliding, and keep customer history in the room at all times.",
       features: [
-        { label: "Omnichannel inbox", detail: "Email, chat, webhooks unified" },
-        { label: "Smart assignments", detail: "Auto-route based on workload or round robin" },
-        { label: "Collision detection", detail: "Prevent duplicate work in real-time" },
-        { label: "Collaboration tools", detail: "Internal notes, @mentions, handoffs" },
+        { label: "Omnichannel queue", detail: "Email, chat, social, and webhooks land in one stream" },
+        { label: "Live routing", detail: "Workload, skills, and intent drive assignments automatically" },
+        { label: "Collision-proof", detail: "Presence and locks stop duplicate work before it starts" },
+        { label: "Team console", detail: "Internal notes, @mentions, and handoffs stay tied to the thread" },
       ],
       link: "/product/inbox-channels",
-      image: inboxScreenshot.src,
+      customPreview: <InboxPreview />,
       gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
       accentColor: "blue",
+      actionTags: ["One queue, zero tab switching", "Context cards stay pinned", "SLA timers inline"],
+      guardrail: "Routing rules + approvals keep ownership clean",
+      impact: "Queue clarity",
     },
     {
       id: "workflows",
       icon: Workflow,
       badge: "Automation",
       title: "Visual Workflows",
-      headline: "No-code automation that scales",
+      headline: "Automations you can ship before lunch",
       description:
-        "Build sophisticated routing, tagging, and action sequences with our intuitive workflow builder. Pre-built templates get you started, full customization keeps you growing.",
+        "Design multi-step routing, tagging, and actions without code. Human approvals, testing, and versioning keep operations in control while teams move faster.",
       features: [
-        { label: "Drag-and-drop builder", detail: "Visual interface, zero coding required" },
-        { label: "Conditional logic", detail: "Branch on any ticket property or action" },
-        { label: "Multi-step sequences", detail: "Chain actions with delays and triggers" },
-        { label: "Industry templates", detail: "E-commerce, SaaS, support ops" },
+        { label: "Branch on any signal", detail: "Intent, sentiment, customer tier, or SLA state" },
+        { label: "Action blocks", detail: "Call APIs, wait, reassign, tag, and notify downstream tools" },
+        { label: "Template library", detail: "E-commerce, SaaS, and support ops blueprints ready to use" },
+        { label: "Versioning + tests", detail: "Ship safely with previews, approvals, and audit trails" },
       ],
       link: "/product/workflows-routing",
-      image: workflowScreenshot.src,
+      customPreview: <WorkflowPreview />,
       gradient: "from-purple-500/20 via-purple-500/10 to-transparent",
       accentColor: "purple",
+      actionTags: ["Drag-and-drop builder", "Versioned releases", "Human approvals baked in"],
+      guardrail: "Approvals + versioning keep ops in control",
+      impact: "Ship automations fast",
     },
     {
       id: "chatbots",
       icon: Bot,
       badge: "AI Agents",
       title: "Intelligent Chatbots",
-      headline: "Resolve 60-70% autonomously with actions",
+      headline: "Bots that actually resolve",
       description:
-        "AI agents that answer questions AND take lightweight actions for customers. Process order lookups, simple refunds, subscription changes, password resets—autonomously with proper guardrails. Not just deflection, actual resolution.",
+        "Agentic chatbots handle answers and actions with clear guardrails. They fetch order data, process simple changes, and hand off with full context when a human needs to step in.",
       features: [
-        { label: "Lightweight actions", detail: "Refunds, updates, lookups executed autonomously" },
-        { label: "Live data access", detail: "Connect to Shopify, Stripe, CRMs, custom APIs" },
-        { label: "Graceful handoff", detail: "Pass full context to human agents when needed" },
-        { label: "RAG knowledge retrieval", detail: "Cite help articles and past conversations" },
+        { label: "Actionable responses", detail: "Executes refunds, resets, and order checks autonomously" },
+        { label: "Live data retrieval", detail: "Connects to Shopify, Stripe, CRMs, and custom APIs in real time" },
+        { label: "Hallucination guardrails", detail: "Cites sources, limits scope, and logs every action" },
+        { label: "Graceful escalation", detail: "Hands off with transcript, intent, and next best actions" },
       ],
       link: "/product/ai-suite",
       customPreview: <AIChatbotPreview />,
       gradient: "from-green-500/20 via-green-500/10 to-transparent",
       accentColor: "green",
+      actionTags: ["Executes real actions", "Cites every source", "Escalates with receipts"],
+      guardrail: "Every bot action is logged and approval-ready",
+      impact: "Autonomy with receipts",
     },
     {
       id: "copilots",
       icon: Sparkles,
       badge: "AI Assistance",
       title: "Agent Copilots",
-      headline: "Execute actions across your entire stack",
+      headline: "Your reps' fast lane",
       description:
-        "On-demand action execution engine for support reps. Process refunds, update accounts, modify orders, change subscriptions—all from the conversation. No context switching, no tool sprawl. Agents trigger actions; Copilot executes them with proper controls.",
+        "AI copilots live in the inbox to draft replies, summarize threads, and execute approved actions without leaving the conversation. Reps stay in flow, customers get faster outcomes.",
       features: [
-        { label: "Action execution", detail: "Refunds, updates, modifications across your stack" },
-        { label: "Smart drafting", detail: "Context-aware responses in your brand voice" },
-        { label: "Auto-summarization", detail: "Distill long threads into actionable insights" },
-        { label: "Tone adjustment", detail: "Rewrite formal to casual, technical to simple" },
+        { label: "One-click actions", detail: "Process refunds, account edits, and plan changes inline" },
+        { label: "Smart drafts", detail: "Brand-safe replies with citations and policy awareness" },
+        { label: "Thread briefs", detail: "Summaries and intent highlights on demand" },
+        { label: "Tone + format shifts", detail: "Flip formal to casual, technical to simple instantly" },
       ],
       link: "/product/ai-suite",
-      image: aiCopilotScreenshot.src,
+      customPreview: <CopilotPreview />,
       gradient: "from-amber-500/20 via-amber-500/10 to-transparent",
       accentColor: "amber",
+      actionTags: ["Works across your stack", "Understands policy", "No copy/paste"],
+      guardrail: "Role-based actions with full audit history",
+      impact: "Agents stay in flow",
     },
     {
       id: "tools",
       icon: Zap,
       badge: "Actions",
       title: "AI Tools & Actions",
-      headline: "Execute with guardrails built in",
+      headline: "Action rails with guardrails",
       description:
-        "Connect AI to real actions—refunds, account updates, subscription changes. Approval workflows, audit trails, and role permissions ensure safety without slowing teams down.",
+        "Define reusable tools that connect to your stack. Add approvals, limits, and full audit trails so AI can act safely every single time.",
       features: [
-        { label: "Secure integrations", detail: "Encrypted credential vault, token management" },
-        { label: "Approval gates", detail: "Multi-level workflows for sensitive actions" },
-        { label: "Complete audit log", detail: "Every action timestamped and traceable" },
-        { label: "Role-based access", detail: "Granular permissions per team and action" },
+        { label: "Credential vault", detail: "Encrypted storage with rotation and scoping" },
+        { label: "Approval queues", detail: "Multi-level workflows for sensitive actions" },
+        { label: "Complete audit log", detail: "Timestamps, actor, and payloads for every execution" },
+        { label: "Role scoping", detail: "Granular permissions with rate limits and retries" },
       ],
       link: "/product/ai-engine",
       customPreview: <AIToolsPreview />,
       gradient: "from-rose-500/20 via-rose-500/10 to-transparent",
       accentColor: "rose",
+      actionTags: ["Connect any API", "Pre-flight checks", "Limits + retries included"],
+      guardrail: "Approvals, limits, and audit are defaults",
+      impact: "Safe to let AI act",
     },
     {
       id: "qa",
       icon: CheckCircle,
       badge: "Quality",
       title: "Automated QA",
-      headline: "Score 100% of conversations",
+      headline: "Quality without manual sampling",
       description:
-        "AI-powered quality assurance that evaluates every interaction for accuracy, tone, policy compliance, and resolution quality. Get coaching insights that actually help agents improve.",
+        "Score 100% of conversations automatically. Custom rubrics catch accuracy, tone, and compliance issues with coaching-ready feedback for every agent.",
       features: [
-        { label: "Custom rubrics", detail: "Define scoring criteria for your brand" },
-        { label: "Auto-scoring", detail: "Evaluate 100% of conversations, not samples" },
-        { label: "Coaching insights", detail: "Actionable feedback for each agent" },
-        { label: "Trend analysis", detail: "Spot issues before they become problems" },
+        { label: "Custom scorecards", detail: "Define rubrics that match your brand and policies" },
+        { label: "Auto-scoring coverage", detail: "Evaluate every interaction, not just samples" },
+        { label: "Coach-ready insights", detail: "Actionable feedback with citations per agent" },
+        { label: "Trend alerts", detail: "Spot emerging issues before they hit KPIs" },
       ],
       link: "/product/auto-qa",
       customPreview: <AutoQAPreview />,
       gradient: "from-indigo-500/20 via-indigo-500/10 to-transparent",
       accentColor: "indigo",
+      actionTags: ["Policy aware", "Coach-ready notes", "Noise-free alerts"],
+      guardrail: "Rubrics and sources keep scoring fair",
+      impact: "QA that scales",
     },
     {
       id: "analytics",
       icon: BarChart3,
       badge: "Insights",
       title: "Analytics & Reporting",
-      headline: "Prove ROI to leadership",
+      headline: "Exec-ready reporting in one click",
       description:
-        "Real-time dashboards that track what matters: automation rates, cost savings, CSAT, handle time, and coverage by intent. Export executive-ready reports that tell the full story.",
+        "Track automation coverage, cost savings, CSAT, handle time, and intent trends in real time. Export views leadership understands - no CSV gymnastics required.",
       features: [
-        { label: "Automation metrics", detail: "Deflection rate, coverage by intent" },
-        { label: "Cost tracking", detail: "Calculate savings vs traditional setup" },
-        { label: "Performance KPIs", detail: "CSAT, AHT, FCR, team productivity" },
-        { label: "Custom reports", detail: "Build and export reports for leadership" },
+        { label: "Automation ROI", detail: "Deflection rate, coverage by intent, and savings" },
+        { label: "Team performance", detail: "CSAT, AHT, FCR, and coaching impact" },
+        { label: "Intent coverage", detail: "See what's automated, human-only, or needs rules" },
+        { label: "Custom exports", detail: "Share exec-ready reports without spreadsheet cleanup" },
       ],
       link: "/product/analytics",
-      image: analyticsScreenshot.src,
+      customPreview: <AnalyticsPreview />,
       gradient: "from-cyan-500/20 via-cyan-500/10 to-transparent",
       accentColor: "cyan",
+      actionTags: ["Automation ROI", "Coverage by intent", "Exec-ready exports"],
+      guardrail: "Single source of truth - no CSV chaos",
+      impact: "Proof for leadership",
     },
   ];
 
@@ -232,31 +415,47 @@ const Product = () => {
   const differentiators = [
     {
       icon: Database,
-      title: "True All-in-One",
-      stat: "7 → 1",
-      description: "Not a suite of loosely connected apps. One database, one UI, one login. Your data flows seamlessly across every layer.",
-      highlight: "No integration sprawl",
+      title: "Single platform spine",
+      highlight: "One platform",
+      description: "One data model, one UI, one permissions layer. Inbox, automations, bots, QA, and analytics share the same source of truth instead of loosely stitched tools.",
+      bullets: [
+        "Shared data layer for every product",
+        "Unified actions engine across inbox, bots, workflows",
+        "Single permissions model and audit trail",
+      ],
     },
     {
       icon: Shield,
-      title: "AI You Can Trust",
-      stat: "100%",
-      description: "Every automation includes approval workflows, audit trails, and role-based permissions. AI that's safe for production from day one.",
-      highlight: "Built-in guardrails",
+      title: "Guardrails first",
+      highlight: "Safety by default",
+      description: "Approvals, audit logs, and RBAC wrap every AI action. Humans and automation follow the same controls so you can ship safely on day one.",
+      bullets: [
+        "Approvals required for sensitive actions",
+        "Complete audit log for every execution",
+        "Role-based access with least privilege",
+      ],
     },
     {
       icon: Lock,
-      title: "Enterprise Ready",
-      stat: "SOC 2",
-      description: "SOC 2 Type II controls in progress, encrypted at rest and in transit, RBAC, and complete audit trails. SSO and enhanced compliance features coming soon.",
-      highlight: "Compliance first",
+      title: "Enterprise posture",
+      highlight: "Security + compliance",
+      description: "Encryption in transit/at rest, SOC 2 in progress, and SSO on the roadmap. Built to clear security reviews without slowing deployment.",
+      bullets: [
+        "Encryption end-to-end with key rotation",
+        "SOC 2 program underway",
+        "SSO and compliance features shipping soon",
+      ],
     },
     {
       icon: Users,
-      title: "Founder Led",
-      stat: "Direct",
-      description: "Work directly with our founding team during implementation. No handoffs to junior CSMs. We're invested in your success.",
-      highlight: "White-glove service",
+      title: "Customer success partnership",
+      highlight: "Included onboarding",
+      description: "Implementation is included with a named CS lead who stays with you post-launch. Playbooks are tailored to your stack so you go live fast and stay optimized.",
+      bullets: [
+        "Implementation included (no PS fees)",
+        "Weekly checkpoints with your CS lead",
+        "Launch in weeks without forced migrations",
+      ],
     },
   ];
 
@@ -275,7 +474,7 @@ const Product = () => {
 
       <main id="main-content" role="main">
       {/* Modern Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 sm:pt-24 md:pt-40 pb-12 sm:pb-16 md:pb-32 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
         {/* Enhanced gradient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
@@ -286,113 +485,58 @@ const Product = () => {
         <ProductHeroBackground />
 
         <div className="container relative mx-auto px-4">
-          <div className="grid lg:grid-cols-[1.1fr,1fr] gap-16 items-center max-w-7xl mx-auto">
-            {/* Left: Content */}
-            <div className="space-y-6 md:space-y-10">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 backdrop-blur-sm">
-                <div className="flex h-2 w-2">
-                  <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-                </div>
-                <span className="text-xs font-semibold tracking-wide text-primary">Product Platform</span>
+          <div className="max-w-7xl mx-auto space-y-8 md:space-y-10 text-center">
+            {/* Header Content */}
+            <div className="space-y-5 md:space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight">
+                Turn every ticket into
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2">
+                  a resolved issue
+                </span>
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+                Inbox, workflows, agentic bots, copilots, and QA in one place that acts across your stack - with approvals and audit trails built in.
+              </p>
+
+              <div className="space-y-2.5 text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto">
+                {[
+                  'Executes refunds, updates, and lookups across your tools',
+                  'Humans approve every action; full audit trails',
+                  'Launch in days without forced migrations',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2 justify-center text-left mx-auto max-w-xl">
+                    <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Headline */}
-              <div className="space-y-6">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.1] tracking-tight">
-                  Support platform
-                  <span className="block text-primary">built for AI</span>
-                </h1>
-                <p className="text-base sm:text-lg md:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
-                  The only platform where inbox, workflows, AI agents, and analytics work as one. Built for teams who need control, not chaos.
-                </p>
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <RouteButton size="lg" className="text-base px-8 py-7 shadow-xl shadow-primary/20 group" href="/contact-sales">
-                  Get started
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+                <RouteButton size="lg" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-7 shadow-2xl shadow-primary/30 group" href="/contact-sales">
+                  Book a demo
+                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1" />
                 </RouteButton>
-              </div>
-
-              {/* Trust metrics */}
-              <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 pt-2 md:pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <Database className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xl md:text-2xl font-bold text-foreground">7 in 1</div>
-                    <div className="text-xs text-muted-foreground">Products unified</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <TrendingUp className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xl md:text-2xl font-bold text-foreground">80%</div>
-                    <div className="text-xs text-muted-foreground">Avg automation</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
-                    <Zap className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xl md:text-2xl font-bold text-foreground">2-4 wk</div>
-                    <div className="text-xs text-muted-foreground">To production</div>
-                  </div>
-                </div>
+                <RouteButton size="lg" variant="outline" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-7" href="/pricing">
+                  View pricing
+                </RouteButton>
               </div>
             </div>
 
-            {/* Right: Enhanced Visual */}
-            <div className="relative lg:ml-auto">
+            {/* Hero Screenshot BELOW TEXT */}
+            <div className="relative max-w-6xl mx-auto">
               {/* Glow effect */}
-              <div className="absolute -inset-8 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl" />
+              <div className="absolute -inset-12 bg-gradient-to-br from-primary/15 via-primary/8 to-transparent blur-3xl opacity-50" />
 
-              {/* Main card */}
-              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-3 shadow-2xl backdrop-blur-xl">
-                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
-                  <Image
-                    src={inboxScreenshot}
-                    alt="Pullse Platform"
-                    className="w-full"
-                    priority
-                  />
-                </div>
-              </div>
-
-              {/* Floating stat cards */}
-              <div className="absolute -left-6 top-1/4 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '0s' }}>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10">
-                      <CheckCircle className="h-5 w-5 text-green-500" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-foreground">73% deflected</div>
-                      <div className="text-xs text-muted-foreground">by AI</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-6 bottom-1/4 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10">
-                      <Star className="h-5 w-5 text-blue-500" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-foreground">4.8 CSAT</div>
-                      <div className="text-xs text-muted-foreground">avg score</div>
-                    </div>
-                  </div>
-                </div>
+              {/* Screenshot only */}
+              <div className="relative overflow-hidden rounded-[28px] border border-border/30 bg-white/90 shadow-2xl">
+                <Image
+                  src={heroScreenshot}
+                  alt="Pullse Platform"
+                  className="w-full"
+                  width={1400}
+                  height={860}
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -402,117 +546,107 @@ const Product = () => {
       {/* Interactive How It Works with Three.js */}
       <InteractiveHowItWorks />
 
-      {/* Core Products - Modern Showcase */}
-      <section className="relative py-16 md:py-24 lg:py-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-muted/10 via-transparent to-muted/10" />
+      {/* Core Products - Simplified Storytelling */}
+      <section className="relative py-16 md:py-24 lg:py-28 xl:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/20" />
+        <div className="absolute -left-24 -top-20 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-[-10%] top-10 h-96 w-96 rounded-full bg-emerald-200/15 blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.08)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.08)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-40" aria-hidden />
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16 lg:mb-24 space-y-4 md:space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Core Products</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-4xl mx-auto leading-tight">
-                Seven products that feel like one
+            <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary shadow-sm">
+                Platform capabilities
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                Seven products that behave like one.
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Each powerful alone. Unstoppable together.
+              <p className="text-lg text-muted-foreground">
+                Clear story, clear outcomes. Every card shows what it does, how it's safe, and where to go next.
               </p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {["Action-ready", "Guardrails built in", "Launch quickly"].map((chip) => (
+                  <span key={chip} className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    {chip}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            {/* Products Grid - Alternating */}
-            <div className="space-y-16 md:space-y-24 lg:space-y-32">
+            <div className="space-y-8 md:space-y-10">
               {coreProducts.map((product, index) => {
                 const Icon = product.icon;
-                const isEven = index % 2 === 0;
-
                 return (
-                  <div key={product.id} className="relative fade-in-up" style={{ transitionDelay: `${index * 100}ms` }}>
-                    <div className={`grid lg:grid-cols-2 gap-16 items-center ${!isEven ? "lg:direction-rtl" : ""}`}>
-                      {/* Content Side */}
-                      <div className={`space-y-4 md:space-y-6 lg:space-y-8 ${!isEven ? "lg:direction-ltr lg:text-right" : ""}`}>
-                        {/* Badge & Icon */}
-                        <div className={`flex items-center gap-4 ${!isEven ? "lg:flex-row-reverse lg:justify-end" : ""}`}>
-                          <div className={`flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${product.gradient} border border-${product.accentColor}-500/30 shadow-xl`}>
-                            <Icon className={`h-8 w-8 md:h-10 md:w-10 text-${product.accentColor}-500`} />
+                  <div
+                    key={product.id}
+                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/85 backdrop-blur shadow-[0_24px_60px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:-translate-y-1"
+                    style={{ transitionDelay: `${index * 60}ms` }}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`} aria-hidden />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#ffffff2e_0,transparent_50%)]" aria-hidden />
+
+                    <div className="relative grid md:grid-cols-[1.15fr,0.95fr] gap-6 md:gap-10 p-6 md:p-8">
+                      <div className="space-y-5">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/50 bg-white/85 shadow-lg">
+                              <Icon className="h-6 w-6 text-foreground" />
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{product.badge}</p>
+                              <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">{product.title}</h3>
+                              <p className="text-sm text-muted-foreground">{product.headline}</p>
+                            </div>
                           </div>
-                          <div className="text-xs font-bold uppercase tracking-wider text-primary">
-                            {product.badge}
-                          </div>
+                          <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground">
+                            {product.impact}
+                          </span>
                         </div>
 
-                        {/* Text Content */}
-                        <div className="space-y-4">
-                          <h3 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground leading-tight">
-                            {product.title}
-                          </h3>
-                          <p className="text-base sm:text-lg lg:text-xl font-semibold text-foreground/70">
-                            {product.headline}
-                          </p>
-                          <p className="text-base text-muted-foreground leading-relaxed max-w-xl">
-                            {product.description}
-                          </p>
+                        <p className="text-base text-muted-foreground leading-relaxed">{product.description}</p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {product.actionTags.map((tag) => (
+                            <span key={tag} className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-white/85 px-3 py-1.5 text-[11px] font-semibold text-foreground shadow-sm">
+                              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                              {tag}
+                            </span>
+                          ))}
                         </div>
 
-                        {/* Enhanced Features List */}
-                        <div className="space-y-2 md:space-y-3 lg:space-y-4">
-                          {product.features.map((feature, fIndex) => (
-                            <div
-                              key={fIndex}
-                              className={`group flex items-start gap-2 md:gap-3 lg:gap-4 rounded-xl border border-border/40 bg-background/60 p-3 md:p-4 transition-all hover:border-primary/40 hover:bg-primary/5 ${!isEven ? "lg:flex-row-reverse lg:text-right" : ""}`}
-                            >
-                              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 shrink-0 transition-all group-hover:scale-110 group-hover:bg-primary/20">
-                                <CheckCircle2 className="h-4 w-4 text-primary" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="text-sm font-bold text-foreground mb-1">{feature.label}</div>
-                                <div className="text-xs text-muted-foreground">{feature.detail}</div>
-                              </div>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          {product.features.slice(0, 4).map((feature) => (
+                            <div key={feature.label} className="rounded-2xl border border-white/40 bg-white/85 p-3 shadow-sm">
+                              <div className="text-sm font-semibold text-foreground">{feature.label}</div>
+                              <p className="text-xs text-muted-foreground leading-relaxed">{feature.detail}</p>
                             </div>
                           ))}
                         </div>
 
-                        {/* CTA */}
-                        <div className={`pt-4 ${!isEven ? "lg:flex lg:justify-end" : ""}`}>
-                          <RouteButton href={product.link} variant="outline" className="group">
-                            Learn more about {product.title}
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 font-semibold text-primary">
+                            {product.guardrail}
+                          </span>
+                          <RouteButton href={product.link} variant="ghost" className="group px-0 text-primary hover:text-primary/80">
+                            Explore {product.title}
+                            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                           </RouteButton>
                         </div>
                       </div>
 
-                      {/* Visual Side */}
-                      <div className={`relative ${!isEven ? "lg:direction-ltr" : ""}`}>
-                        {/* Glow */}
-                        <div className={`absolute -inset-6 bg-gradient-to-br ${product.gradient} blur-3xl opacity-20`} />
-
-                        {/* Card */}
-                        <div className="relative rounded-3xl border border-border/50 bg-card/50 p-4 shadow-2xl backdrop-blur-sm">
-                          <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
-                            {product.customPreview ? (
-                              <div className="min-h-[400px]">
-                                {product.customPreview}
-                              </div>
-                            ) : product.image ? (
-                              <Image
-                                src={product.image}
-                                alt={product.title}
-                                width={800}
-                                height={600}
-                                className="w-full"
-                              />
-                            ) : null}
+                      <div className="relative">
+                        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-white shadow-lg">
+                          <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-gradient-to-r from-muted/40 to-muted/10">
+                            <span className="text-sm font-semibold text-foreground/80">{product.title} workspace</span>
+                            <span className="text-xs font-semibold text-primary">{product.headline}</span>
                           </div>
-                        </div>
-
-                        {/* Floating badge */}
-                        <div className="absolute -top-4 -right-4 rounded-2xl border border-primary/30 bg-card/95 px-4 py-2 shadow-xl backdrop-blur-xl">
-                          <div className="flex items-center gap-2">
-                            <Star className="h-4 w-4 text-primary fill-primary" />
-                            <span className="text-xs font-bold text-foreground">Popular</span>
-                          </div>
+                          {product.customPreview ? (
+                            <div className="min-h-[280px] md:min-h-[320px] bg-white">{product.customPreview}</div>
+                          ) : product.image ? (
+                            <Image src={product.image} alt={product.title} width={900} height={620} className="w-full" />
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -532,10 +666,6 @@ const Product = () => {
           <div className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Globe className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Integrations</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
                 Execute actions across your entire business stack
               </h2>
@@ -598,54 +728,62 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Why Pullse - Modern Differentiators */}
+      {/* Why Pullse - Differentiators */}
       <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-6 fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
-                <Shield className="h-4 w-4 text-primary" />
-                <span className="text-xs font-semibold tracking-wide text-primary">Why Pullse</span>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_45%),radial-gradient(circle_at_bottom_right,hsl(var(--primary)/0.08),transparent_40%)]" />
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-7xl mx-auto space-y-12">
+            <div className="text-center space-y-4 md:space-y-6 fade-in-up">
+              <div className="inline-flex flex-wrap justify-center gap-2">
+                {["One brain, one UI", "Guardrails first", "Founder-led onboarding"].map((chip) => (
+                  <span key={chip} className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    {chip}
+                  </span>
+                ))}
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-foreground leading-tight">
                 Built different by design
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                The only platform built for AI from the ground up
+                The only platform built for AI from the ground up - action-ready, safe by default, and shipped with the founders.
               </p>
             </div>
 
-            {/* Grid */}
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid gap-4 md:gap-5 lg:grid-cols-2">
               {differentiators.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div
-                    key={index}
-                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card transition-all hover:border-primary/40 hover:shadow-2xl hover:-translate-y-1 fade-in-up"
-                    style={{ transitionDelay: `${index * 150}ms` }}
+                    key={item.title}
+                    className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-1 hover:border-primary/40"
+                    style={{ transitionDelay: `${index * 80}ms` }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-
-                    <div className="relative p-6 md:p-8 lg:p-10 space-y-4 md:space-y-5 lg:space-y-6">
-                      {/* Icon & Stat */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 transition-all group-hover:scale-110 group-hover:bg-primary/20">
-                          <Icon className="h-7 w-7 md:h-8 md:w-8 text-primary" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
+                    <div className="relative p-6 md:p-7 lg:p-8 space-y-4">
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 shadow-sm">
+                          <Icon className="h-6 w-6 text-primary" />
                         </div>
-                        <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">{item.stat}</div>
+                        <div className="space-y-1">
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+                            {item.highlight}
+                          </p>
+                          <h4 className="text-xl font-bold text-foreground">{item.title}</h4>
+                        </div>
                       </div>
-
-                      {/* Content */}
-                      <div className="space-y-3">
-                        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1">
-                          <span className="text-xs font-bold text-primary">{item.highlight}</span>
-                        </div>
-                        <h3 className="text-2xl font-bold text-foreground">{item.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                      <div className="space-y-2">
+                        {item.bullets.map((bullet) => (
+                          <div
+                            key={bullet}
+                            className="flex items-start gap-2 rounded-xl border border-border/50 bg-white/85 px-3 py-2 text-xs text-foreground"
+                          >
+                            <CheckCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{bullet}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

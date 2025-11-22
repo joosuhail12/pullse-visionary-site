@@ -181,7 +181,13 @@ export const flushServerEvents = async (): Promise<void> => {
   if (!posthog) return;
 
   try {
-    await posthog.shutdown();
+    // Flush queued events without permanently shutting down the client.
+    // shutdown() makes the singleton unusable for subsequent requests.
+    if (typeof (posthog as any).flushAsync === 'function') {
+      await (posthog as any).flushAsync();
+    } else {
+      await posthog.flush();
+    }
     if (process.env.NODE_ENV === 'development') {
       console.log('[PostHog Server] Events flushed');
     }

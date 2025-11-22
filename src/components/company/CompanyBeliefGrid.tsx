@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Eye, Telescope, Rocket, Heart, Zap, Shield } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const iconMap = {
   Eye,
@@ -35,9 +37,12 @@ export default function CompanyBeliefGrid({ title, subtitle, beliefs }: CompanyB
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-8 md:mb-12 lg:mb-16 relative z-10"
+        className="text-center mb-10 md:mb-14 lg:mb-16 relative z-10 space-y-4"
       >
-        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-5 lg:mb-6 tracking-[-0.01em]">
+        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+          From the founder’s vision letter
+        </div>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-[-0.01em]">
           <span className="bg-gradient-to-r from-gray-900 to-primary bg-clip-text text-transparent">
             {title}
           </span>
@@ -45,6 +50,31 @@ export default function CompanyBeliefGrid({ title, subtitle, beliefs }: CompanyB
         <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           {subtitle}
         </p>
+        <div className="flex flex-wrap justify-center gap-3 text-sm md:text-base text-gray-700">
+          {[
+            { label: '200-300 apps per enterprise', tone: 'primary/70' },
+            { label: '~50% shelfware', tone: 'primary/70' },
+            { label: 'Only 5% see real AI impact', tone: 'primary/70' },
+          ].map((chip) => (
+            <span
+              key={chip.label}
+              className="rounded-full border border-primary/30 bg-primary/5 px-4 py-1 font-semibold text-primary"
+            >
+              {chip.label}
+            </span>
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <Button
+            asChild
+            variant="outline"
+            className="mt-3 text-sm md:text-base border-primary/30 hover:border-primary/50"
+          >
+            <Link href="/blog/the-era-of-tool-sprawl-is-ending-here-s-what-comes-next">
+              Read the founder’s letter
+            </Link>
+          </Button>
+        </div>
       </motion.div>
 
       {/* Unified 2x3 Grid */}

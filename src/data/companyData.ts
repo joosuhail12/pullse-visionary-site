@@ -202,44 +202,44 @@ export const timeline: Milestone[] = [
 // Merged approach: combining values + why support first into unified principles
 // Story structure: Foundation (Row 1) → Execution (Row 2)
 export const whatWeBelieve = {
-  title: "What We Believe",
-  subtitle: "The principles that guide how we work with everyone",
+  title: "Principles From Our Founder’s Vision",
+  subtitle: "Drawn from “The era of tool sprawl is ending” — how we build, ship, and partner.",
   beliefs: [
     {
       icon: "Eye" as const,
-      title: "Radical Clarity",
+      title: "One Brain > 300 Tools",
       description:
-        "We believe transparency builds trust, which is why every feature, every price, every decision must be explained clearly and honestly. You own your data completely, and we deal straight with everyone: customers, partners, and vendors alike.",
+        "The stack shouldn’t be a wall of disconnected apps. We’re building agentic platforms with a unified brain — fewer, deeper systems that share context so work actually gets done.",
     },
     {
       icon: "Telescope" as const,
-      title: "Think Big Picture",
+      title: "Agentic With Humans In The Loop",
       description:
-        "We don't optimize for today's fragmented stack—we reimagine what entire business functions should look like when AI is foundational, not an add-on. Support is our first proof point, but the vision extends further: unified platforms that make tool sprawl obsolete by building for the system, not just solving one workflow.",
+        "AI reads, decides, and acts, but people keep parallel control. Every action AI can take, humans can take too — no forced automation, no black boxes.",
     },
     {
       icon: "Rocket" as const,
-      title: "Build for the Future",
+      title: "Built For Growing Teams First",
       description:
-        "The best software isn't constrained by legacy architectures or yesterday's assumptions. We design for how teams will work in 2030, not 2015—with AI aggregation, agentic workflows, and future-first architecture that builds on the right foundations today.",
+        "Enterprise-grade power with interfaces that stay simple as you scale. We start with support because smaller teams feel the pain of tool sprawl the most.",
     },
     {
       icon: "Heart" as const,
-      title: "Empathy for Everyone",
+      title: "Context Is The Moat",
       description:
-        "Great software creates value for everyone it touches: the people using it, the customers they serve, and the businesses that depend on both. When we build with genuine empathy for the entire chain, support agents get better tools, customers get faster answers, teams work happier, and companies grow stronger.",
+        "AI only works when it sees the whole picture. We design for shared context across systems so agents (human and AI) execute confidently instead of guessing.",
     },
     {
       icon: "Zap" as const,
-      title: "We Move Fast",
+      title: "Ship Fast, With Guardrails",
       description:
-        "Speed isn't reckless—it's respectful. Teams struggling with broken tools deserve solutions now, not perfectly polished products years from now, which is why we ship fast, learn faster, and iterate constantly.",
+        "Speed is respectful to teams drowning in tabs. We ship, learn, and iterate quickly — with policy checks, approvals, and audit trails baked in from day one.",
     },
     {
       icon: "Shield" as const,
-      title: "Own the Outcome",
+      title: "Own The Outcome",
       description:
-        "We're accountable for the results our customers achieve, not just the software we ship. When something breaks we fix it, when a customer struggles we help them succeed—because their wins are our wins, and their problems are our problems.",
+        "We’re accountable to the results, not just the release notes. When something breaks, we fix it. When you struggle, we get hands-on — because your wins are our wins.",
     },
   ],
 };

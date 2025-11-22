@@ -10,20 +10,15 @@ import {
   GitBranch,
   AtSign,
 } from 'lucide-react';
+import RoutingVisualization from './RoutingVisualization';
+import CollaborationHub from './CollaborationHub';
+import MultiChannelAggregator from './MultiChannelAggregator';
+import AIRewritingDemo from './AIRewritingDemo';
+import CustomerContextCard from './CustomerContextCard';
+import SmartFilterBuilder from './SmartFilterBuilder';
+import TemplateLibraryShowcase from './TemplateLibraryShowcase';
 
-interface ProductInboxBentoGridProps {
-  screenshots: {
-    multiChannel: string;
-    aiRewriting: string;
-    customerContext: string;
-    searchFilter: string;
-    routingConfig: string;
-    internalCollab: string;
-    cannedResponses: string;
-  };
-}
-
-export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBentoGridProps) {
+export default function ProductInboxBentoGrid() {
   const bentoCards: CardData[] = [
     {
       color: 'hsl(var(--card))',
@@ -31,7 +26,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Support customers across both channels from one workspace. No tab switching, no separate tools.',
       label: 'Multi-Channel',
       icon: MessageSquare,
-      image: screenshots.multiChannel,
+      customComponent: <MultiChannelAggregator />,
     },
     {
       color: 'hsl(var(--card))',
@@ -39,7 +34,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'AI rewriting, summaries, and auto-responses that make every agent superhuman.',
       label: 'AI Features',
       icon: Sparkles,
-      image: screenshots.aiRewriting,
+      customComponent: <AIRewritingDemo />,
     },
     {
       color: 'hsl(var(--card))',
@@ -47,7 +42,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Full history, custom fields, and interaction timeline in one glance.',
       label: 'Customer Data',
       icon: Users,
-      image: screenshots.customerContext,
+      customComponent: <CustomerContextCard />,
     },
     {
       color: 'hsl(var(--card))',
@@ -55,7 +50,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Find any conversation instantly with advanced filters and saved views.',
       label: 'Search',
       icon: Search,
-      image: screenshots.searchFilter,
+      customComponent: <SmartFilterBuilder />,
     },
     {
       color: 'hsl(var(--card))',
@@ -63,7 +58,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Every ticket gets auto-assigned. Load balanced, round robin, or manual control.',
       label: 'Smart Routing',
       icon: GitBranch,
-      image: screenshots.routingConfig,
+      customComponent: <RoutingVisualization />,
     },
     {
       color: 'hsl(var(--card))',
@@ -71,7 +66,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Internal notes, @mentions, and collision detection for seamless teamwork.',
       label: 'Collaboration',
       icon: AtSign,
-      image: screenshots.internalCollab,
+      customComponent: <CollaborationHub />,
     },
     {
       color: 'hsl(var(--card))',
@@ -79,7 +74,7 @@ export default function ProductInboxBentoGrid({ screenshots }: ProductInboxBento
       description: 'Pre-written templates with variables for 5x faster replies.',
       label: 'Productivity',
       icon: MessageSquare,
-      image: screenshots.cannedResponses,
+      customComponent: <TemplateLibraryShowcase />,
     },
   ];
 

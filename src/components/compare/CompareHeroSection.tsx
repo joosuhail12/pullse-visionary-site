@@ -1,130 +1,95 @@
 'use client';
 
-import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-const LiquidEther = lazy(() => import('@/components/LiquidEther'));
-
 export default function CompareHeroSection() {
   return (
-    <div className="min-h-[60vh] md:min-h-[80vh] lg:min-h-screen relative flex items-center justify-center pt-12 pb-20 md:pt-16 md:pb-28 lg:pt-20 lg:pb-32">
-      {/* Hero Liquid Ether Effect */}
-      <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
-        <Suspense fallback={<div className="w-full h-full" />}>
-          <LiquidEther
-            colors={["#FF00C8", "#A805FF", "#D3A9EA"]}
-            mouseForce={20}
-            cursorSize={110}
-            isViscous={false}
-            resolution={0.55}
-            autoDemo
-            autoSpeed={0.35}
-            autoIntensity={1.6}
-          />
-        </Suspense>
-      </div>
+    <div className="relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background min-h-[70vh] md:min-h-[80vh] lg:min-h-screen flex items-center">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(168,85,247,0.12),transparent_45%),radial-gradient(circle_at_80%_15%,rgba(236,72,153,0.12),transparent_45%)]" />
 
-      <div className="container mx-auto px-4 relative z-10 w-full">
+      <div className="container mx-auto px-4 py-16 md:py-24 lg:py-28 relative z-10 w-full flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-4xl mx-auto text-center space-y-8 md:space-y-10 lg:space-y-12"
+          className="max-w-6xl w-full grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center"
         >
-          {/* Simplified Headline with Statement + Subtext */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="space-y-4 md:space-y-5 lg:space-y-6"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tight text-black dark:text-white">
-              The First AI-Native Customer Support Platform
+          <div className="space-y-4 md:space-y-6 text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-foreground">
+              See where rivals answer—
+              <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                while Pullse finishes the work
+              </span>
             </h1>
-
-            <p className="text-base md:text-lg lg:text-xl text-gray-500 dark:text-gray-400 font-medium">
-              Built for 2024, not retrofitted from 2010
-            </p>
-          </motion.div>
-
-          {/* Concise Subheadline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-          >
-            Pullse executes actions, not just answers. Built AI-native from day one.
-          </motion.p>
-
-          {/* Enhanced CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="lg" asChild className="relative group h-12 md:h-14 px-6 md:px-8 text-sm md:text-base">
+            <div className="grid gap-3 text-base md:text-lg text-muted-foreground">
+              <p className="max-w-2xl mx-auto lg:mx-0">
+                AI that executes refunds, updates, and lookups across your stack, with humans approving every step.
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground/90">
+                One platform replaces answer-only bots and tool sprawl. See how Pullse compares side by side.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+              <Button size="lg" asChild className="h-12 md:h-13 px-6 md:px-8 text-sm md:text-base font-bold">
                 <Link href="/contact-sales">
-                  <span className="relative z-10 font-bold">Experience AI-Native Support</span>
-                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 blur-xl"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
+                  Compare now
+                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                 </Link>
               </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="lg" variant="outline" asChild className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base border-2">
+              <Button size="lg" variant="outline" asChild className="h-12 md:h-13 px-6 md:px-8 text-sm md:text-base border-2">
                 <Link href="#comparison-table">
-                  <span className="font-bold">See the Difference</span>
+                  View comparison table
                   <ChevronDown className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                 </Link>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-3 text-xs md:text-sm text-muted-foreground">
+              {['Executes across your stack', 'Humans approve every action', 'Launch in days'].map((item) => (
+                <div key={item} className="rounded-xl border border-border/50 bg-card/70 px-3 py-2 text-center">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
 
-          {/* Trust Indicators - Innovation Focused */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-muted-foreground"
-          >
-            {[
-              { icon: '⚡', text: 'Live in 10 minutes' },
-              { icon: '🧠', text: 'Learns from day one' },
-              { icon: '🔄', text: 'No migration headaches' },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-2"
-              >
-                <span className="text-base md:text-lg">
-                  {item.icon}
-                </span>
-                <span className="font-medium">{item.text}</span>
-              </div>
-            ))}
-          </motion.div>
+          <div className="rounded-2xl border border-border/50 bg-card/80 shadow-xl p-5 md:p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-semibold text-foreground">Why teams switch</p>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">Highlights</span>
+            </div>
+            <div className="grid gap-3 text-sm text-foreground">
+              {[
+                {
+                  title: 'AI that acts',
+                  body: 'Process refunds, fetch orders, update CRM records, change subscriptions—from chat or inbox.',
+                },
+                {
+                  title: 'Full suite, one price',
+                  body: 'Inbox, workflows, chatbots, copilots, QA, analytics. No per-resolution or per-session gotchas.',
+                },
+                {
+                  title: 'Ship in days',
+                  body: 'Templates + native connectors launch automations fast. No months-long migrations.',
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * idx }}
+                  className="rounded-xl border border-border/50 bg-muted/40 px-4 py-3"
+                >
+                  <p className="font-semibold text-foreground">{item.title}</p>
+                  <p className="text-muted-foreground text-sm">{item.body}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
-
-      {/* Gradient Fade Transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
     </div>
   );
 }

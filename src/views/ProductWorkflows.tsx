@@ -3,8 +3,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
-import Image from "next/image";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
+import Image from "next/image";
 import {
   Workflow,
   GitBranch,
@@ -29,8 +29,7 @@ import ProductWorkflowsStyles from "@/components/product-workflows/ProductWorkfl
 
 // Import screenshots - using optimized WebP versions
 import workflowScreenshot from "@/assets/workflow-automation-screenshot.webp";
-import routingConfigScreenshot from "@/assets/routing-config.webp";
-import copilotScreenshot from "@/assets/ai-copilot-screenshot.webp";
+import CopilotActionDemo from "@/components/product-workflows/CopilotActionDemo";
 
 const ProductWorkflows = () => {
   // AI Copilot Connectors data
@@ -150,34 +149,6 @@ const ProductWorkflows = () => {
                 </div>
               </div>
 
-              {/* Floating stat badges */}
-              <div className="absolute -left-4 top-1/4 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-4 md:p-5 shadow-xl backdrop-blur-xl animate-float">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
-                      <Zap className="h-5 w-5 md:h-6 md:w-6 text-background" />
-                    </div>
-                    <div>
-                      <div className="text-xl md:text-2xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">80%</div>
-                      <div className="text-xs text-muted-foreground">Automated</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-4 top-1/3 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-4 md:p-5 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg">
-                      <LayoutGrid className="h-5 w-5 md:h-6 md:w-6 text-background" />
-                    </div>
-                    <div>
-                      <div className="text-xl md:text-2xl font-black bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent">50+</div>
-                      <div className="text-xs text-muted-foreground">Templates</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -222,12 +193,7 @@ const ProductWorkflows = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Bento Section - Client Component */}
-            <ProductWorkflowsBentoSection
-              screenshots={{
-                routing: routingConfigScreenshot.src,
-                workflow: workflowScreenshot.src,
-              }}
-            />
+            <ProductWorkflowsBentoSection />
           </div>
         </div>
       </section>
@@ -250,22 +216,9 @@ const ProductWorkflows = () => {
 
             {/* Enhanced Layout */}
             <div className="grid lg:grid-cols-2 gap-6 md:gap-7 lg:gap-8 items-center max-w-6xl mx-auto">
-              {/* Left: Screenshot with Enhanced Frame */}
+              {/* Left: Custom Copilot UI */}
               <div className="fade-in-up">
-                <div className="relative max-w-lg mx-auto">
-                  {/* Glow Effect */}
-                  <div className="absolute -inset-3 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent blur-xl opacity-50" />
-
-                  <div className="relative rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 via-card to-card p-1.5 md:p-2 shadow-lg backdrop-blur-xl">
-                    <div className="rounded-lg overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-md">
-                      <Image
-                        src={copilotScreenshot}
-                        alt="AI Copilot Interface"
-                        className="w-full"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <CopilotActionDemo />
               </div>
 
               {/* Right: Accordion Tabs - Client Component */}

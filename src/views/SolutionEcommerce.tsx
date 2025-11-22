@@ -5,7 +5,6 @@ import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
 import SolutionEcommerceHeroSection from "@/components/solutions/SolutionEcommerceHeroSection";
-import SolutionEcommerceStatsSection from "@/components/solutions/SolutionEcommerceStatsSection";
 import SolutionEcommercePillarsSection from "@/components/solutions/SolutionEcommercePillarsSection";
 import SolutionEcommerceIntegrationsSection from "@/components/solutions/SolutionEcommerceIntegrationsSection";
 import {
@@ -31,8 +30,6 @@ const SolutionEcommerce = () => {
 
       <main id="main-content" role="main">
         <SolutionEcommerceHeroSection />
-
-      <SolutionEcommerceStatsSection />
 
       <SolutionEcommercePillarsSection />
 

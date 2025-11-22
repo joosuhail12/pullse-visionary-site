@@ -16,18 +16,26 @@ import {
   Wand2,
   Search,
   Link2,
+  History,
+  RotateCcw,
+  Clock,
 } from "lucide-react";
 
 // Import client islands
 import ProductHelpCentersScrollProgress from "@/components/product-helpcenters/ProductHelpCentersScrollProgress";
 import ProductHelpCentersHeroBackground from "@/components/product-helpcenters/ProductHelpCentersHeroBackground";
-import ProductHelpCentersBentoSection from "@/components/product-helpcenters/ProductHelpCentersBentoSection";
-import AIAccordion from "@/components/product-helpcenters/AIAccordion";
+import ContentCreationBentoGrid from "@/components/product-appo/ContentCreationBentoGrid";
+import AIShowcase from "@/components/product-helpcenters/AIShowcase";
 import AppoThemeStyles from "@/components/product-helpcenters/AppoThemeStyles";
 
 // Import Appo branding
 import appoLogo from "@/assets/appo/appo-logo.webp";
 import appoWordmark from "@/assets/appo/appo-wordmark.png";
+
+// Import Appo screenshots
+import appoHomepageScreenshot from "@/assets/appo/Appo-homepage.webp";
+import appoArticlesViewScreenshot from "@/assets/appo/appo-articles-view.webp";
+import appoArticleVersioningScreenshot from "@/assets/appo/appo-article-versioning.webp";
 
 // Import Pullse logo
 import pullseLogo from "@/assets/pullse-logomark.svg";
@@ -107,15 +115,17 @@ const ProductHelpCenters = () => {
               </div>
             </div>
 
-            {/* Hero Screenshot Placeholder */}
+            {/* Hero Screenshot */}
             <div className="relative max-w-6xl mx-auto">
               <div className="absolute -inset-12 bg-gradient-to-br from-[#F28D1B]/20 via-[#FFB633]/10 to-transparent blur-3xl opacity-60" />
               <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
-                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl aspect-video flex items-center justify-center">
-                  <div className="text-center space-y-2 p-8">
-                    <BookOpen className="h-12 w-12 md:h-14 lg:h-16 text-[#F28D1B]/40 mx-auto" />
-                    <p className="text-sm text-muted-foreground">Appo Help Center Interface</p>
-                  </div>
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl">
+                  <Image
+                    src={appoHomepageScreenshot}
+                    alt="Appo Help Center Homepage Interface"
+                    className="w-full"
+                    priority
+                  />
                 </div>
               </div>
             </div>
@@ -164,7 +174,132 @@ const ProductHelpCenters = () => {
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Bento Section - Client Component */}
-            <ProductHelpCentersBentoSection />
+            <ContentCreationBentoGrid />
+          </div>
+        </div>
+      </section>
+
+      {/* Articles Management Section */}
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-transparent to-muted/10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.08),transparent_60%)]" />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 md:space-y-5 lg:space-y-6 fade-in-up">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+                Organize content effortlessly
+              </h2>
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Powerful content management with categories, tags, search, and bulk operations
+              </p>
+            </div>
+
+            {/* Screenshot Showcase */}
+            <div className="relative max-w-6xl mx-auto fade-in-up">
+              <div className="absolute -inset-8 bg-gradient-to-br from-[#F28D1B]/15 via-[#FFB633]/8 to-transparent blur-3xl opacity-50" />
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 lg:p-4 shadow-2xl backdrop-blur-xl">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-xl">
+                  <Image
+                    src={appoArticlesViewScreenshot}
+                    alt="Appo Articles Management Interface"
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Feature Grid Below Screenshot */}
+            <div className="grid md:grid-cols-3 gap-4 md:gap-5 lg:gap-6 mt-12 md:mt-16 lg:mt-20">
+              {[
+                { icon: Search, title: 'Powerful Search', description: 'Full-text search across all articles with advanced filters' },
+                { icon: BookOpen, title: 'Category Organization', description: 'Nest categories infinitely, drag-and-drop reordering' },
+                { icon: Zap, title: 'Bulk Operations', description: 'Publish, archive, or update multiple articles at once' },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5 md:p-6 transition-all hover:border-[#F28D1B]/40 hover:shadow-xl hover:-translate-y-1 fade-in-up"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FEE3AC]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="relative space-y-3">
+                      <div className="flex h-11 w-11 md:h-12 lg:h-13 items-center justify-center rounded-xl bg-[#F28D1B]/10 border border-[#F28D1B]/20 transition-all group-hover:scale-110">
+                        <Icon className="h-5 w-5 md:h-5.5 lg:h-6 text-[#F28D1B]" />
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Version History Section */}
+      <section className="relative py-16 md:py-24 lg:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(28_88%_53%/0.08),transparent_60%)]" />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Two Column Layout */}
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+              {/* Left: Content */}
+              <div className="space-y-6 md:space-y-8 fade-in-up">
+                <div className="space-y-4 md:space-y-5">
+                  <div className="inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#F28D1B] to-[#FFB633] shadow-lg">
+                    <History className="h-6 w-6 md:h-7 md:w-7 text-background" />
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                    Never lose a revision
+                  </h2>
+                  <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                    Complete version history for every article. See what changed, when, and by whom. Roll back to any previous version with one click.
+                  </p>
+                </div>
+
+                {/* Feature List */}
+                <div className="space-y-4 md:space-y-5">
+                  {[
+                    { icon: Clock, title: 'Complete Timeline', description: 'Every edit tracked with timestamps and author info' },
+                    { icon: RotateCcw, title: 'One-Click Restore', description: 'Roll back to any version instantly' },
+                    { icon: Search, title: 'Version Comparison', description: 'See exactly what changed between versions' },
+                  ].map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={index} className="flex items-start gap-4">
+                        <div className="flex h-10 w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-xl bg-[#F28D1B]/10 border border-[#F28D1B]/20">
+                          <Icon className="h-5 w-5 md:h-5.5 md:w-5.5 text-[#F28D1B]" />
+                        </div>
+                        <div>
+                          <div className="text-base md:text-lg font-bold text-foreground">{item.title}</div>
+                          <div className="text-sm md:text-base text-muted-foreground">{item.description}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right: Screenshot */}
+              <div className="fade-in-up">
+                <div className="relative">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-[#F28D1B]/15 via-[#FFB633]/8 to-transparent blur-2xl opacity-50" />
+                  <div className="relative rounded-2xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-2.5 lg:p-3 shadow-2xl backdrop-blur-xl">
+                    <div className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-lg">
+                      <Image
+                        src={appoArticleVersioningScreenshot}
+                        alt="Appo Article Version History Interface"
+                        className="w-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -185,27 +320,8 @@ const ProductHelpCenters = () => {
               </p>
             </div>
 
-            {/* Layout */}
-            <div className="grid lg:grid-cols-2 gap-6 md:gap-7 lg:gap-8 items-center max-w-6xl mx-auto">
-              {/* Left: Screenshot Placeholder */}
-              <div className="fade-in-up">
-                <div className="relative max-w-lg mx-auto">
-                  <div className="absolute -inset-3 bg-gradient-to-br from-[#F28D1B]/20 via-[#FFB633]/10 to-transparent blur-xl opacity-50" />
-                  <div className="relative rounded-xl border border-[#F28D1B]/30 bg-gradient-to-br from-[#FEE3AC]/10 via-card to-card p-2 shadow-lg backdrop-blur-xl">
-                    <div className="rounded-lg overflow-hidden bg-gradient-to-br from-muted/30 to-muted/50 border border-border/40 shadow-md aspect-[4/3] flex items-center justify-center">
-                      <div className="text-center space-y-2 p-6">
-                        <Wand2 className="h-10 w-10 md:h-11 lg:h-12 text-[#F28D1B]/40 mx-auto" />
-                        <p className="text-xs text-muted-foreground">AI Writing Assistant Interface</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right: Accordion - Client Component */}
-              <div className="space-y-2 fade-in-up">
-                <AIAccordion />
-              </div>
+            <div className="max-w-6xl mx-auto">
+              <AIShowcase />
             </div>
           </div>
         </div>

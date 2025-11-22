@@ -23,12 +23,11 @@ import {
   Bot,
   Play,
 } from "lucide-react";
-import inboxScreenshot from "@/assets/pullse-inbox-screenshot.webp";
+import inboxScreenshot from "@/assets/Platform-inbox-view.webp";
 
 // Import client islands
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
 import ProductInboxChannelsHeroBackground from "@/components/product-inbox-channels/ProductInboxChannelsHeroBackground";
-import ProductInboxChannelsHeroStats from "@/components/product-inbox-channels/ProductInboxChannelsHeroStats";
 import RoutingMethodsSelector from "@/components/product-inbox-channels/RoutingMethodsSelector";
 import FadeInUpObserver from "@/components/product-workflows/FadeInUpObserver";
 import ProductInboxChannelsStyles from "@/components/product-inbox-channels/ProductInboxChannelsStyles";
@@ -213,7 +212,7 @@ const ProductInboxChannels = () => {
       <ScrollProgressIndicator />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-32 md:pb-20 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-16 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.1),transparent_50%)]" />
 
@@ -221,84 +220,49 @@ const ProductInboxChannels = () => {
 
         <div className="container relative mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
-              {/* Left: Content */}
-              <div className="space-y-6 md:space-y-10">
-                <div className="space-y-4 md:space-y-6">
-                  <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-foreground leading-[1.1] tracking-tight">
-                    Every conversation,
-                    <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient">
-                      one workspace
-                    </span>
-                  </h1>
+            {/* Header Content - CENTERED */}
+            <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-4 md:space-y-6 lg:space-y-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
+                Every conversation,
+                <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent mt-2">
+                  one workspace
+                </span>
+              </h1>
 
-                  <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                    Email and live chat unified in a single intelligent inbox. AI-powered rewriting, smart routing, and collaboration tools that keep your team moving fast.
-                  </p>
-                </div>
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                Email and live chat unified in a single intelligent inbox. AI-powered rewriting, smart routing, and collaboration tools that keep your team moving fast.
+              </p>
 
-                {/* Stats */}
-                <ProductInboxChannelsHeroStats />
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center">
+                <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6 shadow-xl shadow-primary/20 group">
+                  See it live
+                  <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
+                </RouteButton>
+                <RouteButton size="lg" variant="outline" href="/pricing" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6">
+                  View pricing
+                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                </RouteButton>
+              </div>
+            </div>
 
-                {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                  <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6 shadow-xl shadow-primary/20 group">
-                    See it live
-                    <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
-                  </RouteButton>
-                  <RouteButton size="lg" variant="outline" href="/pricing" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6">
-                    View pricing
-                    <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                  </RouteButton>
+            {/* Hero Screenshot - BELOW TEXT */}
+            <div className="relative max-w-6xl mx-auto">
+              {/* Glow effect */}
+              <div className="absolute -inset-12 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl opacity-60" />
+
+              {/* Main card */}
+              <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 md:p-2.5 lg:p-3 shadow-2xl backdrop-blur-xl">
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
+                  <Image
+                    src={inboxScreenshot}
+                    alt="Pullse Unified Inbox"
+                    className="w-full"
+                    priority
+                  />
                 </div>
               </div>
 
-              {/* Right: Visual */}
-              <div className="relative">
-                {/* Glow effect */}
-                <div className="absolute -inset-8 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl" />
-
-                {/* Main card */}
-                <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 md:p-3 shadow-2xl backdrop-blur-xl">
-                  <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
-                    <Image
-                      src={inboxScreenshot}
-                      alt="Pullse Unified Inbox"
-                      className="w-full"
-                      priority
-                    />
-                  </div>
-                </div>
-
-                {/* Floating badges */}
-                <div className="absolute -left-6 top-1/4 hidden lg:block">
-                  <div className="rounded-2xl border border-border/60 bg-card/95 p-3 md:p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '0s' }}>
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-primary/10">
-                        <Zap className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                      </div>
-                      <div>
-                        <div className="text-xs md:text-sm font-bold text-foreground">AI-powered</div>
-                        <div className="text-[10px] md:text-xs text-muted-foreground">Smart features</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute -right-6 bottom-1/4 hidden lg:block">
-                  <div className="rounded-2xl border border-border/60 bg-card/95 p-3 md:p-4 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-green-500/10">
-                        <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-500" />
-                      </div>
-                      <div>
-                        <div className="text-xs md:text-sm font-bold text-foreground">Real-time</div>
-                        <div className="text-[10px] md:text-xs text-muted-foreground">Instant sync</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

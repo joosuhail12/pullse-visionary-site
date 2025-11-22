@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, MeshTransmissionMaterial, Trail, Sparkles, Float, PerspectiveCamera, Environment, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { Mail, MessageSquare, Phone, Users, Bot, Zap, Clock, TrendingUp, Target, ArrowRight, Activity, CheckCircle2 } from "lucide-react";
-import logoIcon from "@/assets/logo-white.svg";
+import logoIcon from "@/assets/pullse-logomark.svg";
 
 // Optimized particle field background with smoother animation
 const ParticleField = () => {

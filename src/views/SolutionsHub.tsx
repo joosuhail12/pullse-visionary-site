@@ -8,7 +8,6 @@ import { CheckCircle2 } from "lucide-react";
 
 // Client islands
 import SolutionsHubHeroSection from "@/components/solutions-hub/SolutionsHubHeroSection";
-import SolutionsHubStatsSection from "@/components/solutions-hub/SolutionsHubStatsSection";
 import SolutionsHubPillarsSection from "@/components/solutions-hub/SolutionsHubPillarsSection";
 import SolutionsHubIndustrySolutionsSection from "@/components/solutions-hub/SolutionsHubIndustrySolutionsSection";
 import SolutionsHubIntegrationsSection from "@/components/solutions-hub/SolutionsHubIntegrationsSection";
@@ -21,8 +20,6 @@ const SolutionsHub = () => {
 
       <main id="main-content" role="main">
         <SolutionsHubHeroSection />
-
-      <SolutionsHubStatsSection />
 
       <SolutionsHubPillarsSection />
 

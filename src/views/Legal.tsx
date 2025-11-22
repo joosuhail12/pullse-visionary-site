@@ -26,10 +26,6 @@ export default function Legal() {
         <div className="container mx-auto px-4">
           {/* Header - Server-rendered, no animation on server */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
-              <Scale className="h-4 w-4" />
-              Legal Documents
-            </div>
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-6">
               Terms & Policies
             </h1>

@@ -33,14 +33,14 @@ const SolutionFintechHeroSection = () => {
           {/* Header Content */}
           <div className="text-center space-y-8">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight max-w-5xl mx-auto">
-              Risk alerts hit. Your team scrambles for 30 minutes.
+              Handle risk and support without extra headcount.
               <span className="block bg-gradient-to-r from-primary via-primary to-primary/60 bg-clip-text text-transparent animate-gradient mt-3">
-                Pullse responds in 8 seconds.
+                Pullse responds in seconds, with approvals built in.
               </span>
             </h1>
 
             <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              AI that instantly responds to fraud alerts, chargebacks, and disputes across your entire stack. No scrambling between tools. No 30-minute investigations. Just instant, orchestrated responses.
+              AI that executes playbooks for alerts, chargebacks, and disputes across your stack. Keep audit trails, approvals, and humans in control—no scrambling between tools.
             </p>
 
             {/* CTA */}

@@ -10,6 +10,14 @@ import {
   Heart,
   Shield,
 } from "lucide-react";
+import {
+  AIChatbotsPreview,
+  AICopilotPreview,
+  SentimentPreview,
+  AIRewritePreview,
+  SummaryPreview,
+  AutoQAPreview,
+} from "@/components/product-ai-suite/AIToolPreviews";
 
 export default function AIToolsBentoSection() {
   // AI Tools Bento Cards - 6 cards configured for MagicBento
@@ -20,6 +28,7 @@ export default function AIToolsBentoSection() {
       description: 'Deploy autonomous agents that answer questions AND take lightweight actions. Process refunds, order lookups, subscription changes—24/7 across every channel. Not just deflection, actual resolution.',
       label: 'Customer-Facing',
       icon: Bot,
+      customComponent: <AIChatbotsPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -27,6 +36,7 @@ export default function AIToolsBentoSection() {
       description: 'On-demand action execution across your entire stack. Process refunds, update accounts, modify subscriptions—right from the conversation. Eliminate context switching and tool sprawl.',
       label: 'Agent-Facing',
       icon: Sparkles,
+      customComponent: <AICopilotPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -34,6 +44,7 @@ export default function AIToolsBentoSection() {
       description: 'Real-time emotion tracking throughout conversations. Detect escalations early, identify coaching moments.',
       label: 'Measure What Matters',
       icon: Heart,
+      customComponent: <SentimentPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -41,6 +52,7 @@ export default function AIToolsBentoSection() {
       description: 'Transform tone instantly—formal to casual, technical to simple. Perfect brand voice compliance, every time.',
       label: 'Tone Perfection',
       icon: FileText,
+      customComponent: <AIRewritePreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -48,6 +60,7 @@ export default function AIToolsBentoSection() {
       description: 'Auto-generated summaries with key points, action items, and sentiment after every conversation.',
       label: 'Context in Seconds',
       icon: MessageSquare,
+      customComponent: <SummaryPreview />,
     },
     {
       color: 'hsl(var(--card))',
@@ -55,6 +68,7 @@ export default function AIToolsBentoSection() {
       description: 'AI evaluates 100% of conversations on quality parameters. No sampling, complete visibility into support quality.',
       label: '100% Coverage',
       icon: Shield,
+      customComponent: <AutoQAPreview />,
     },
   ];
 

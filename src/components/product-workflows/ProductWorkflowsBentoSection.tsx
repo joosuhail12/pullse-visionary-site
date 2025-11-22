@@ -11,15 +11,17 @@ import {
   Workflow,
   Package,
 } from 'lucide-react';
+import SmartRoutingBuilder from './SmartRoutingBuilder';
+import AutoResponseExamples from './AutoResponseExamples';
+import RecurringAutomationTimeline from './RecurringAutomationTimeline';
+import BranchingDecisionTree from './BranchingDecisionTree';
+import ContextIntegrationPanel from './ContextIntegrationPanel';
+import VisualWorkflowBuilder from './VisualWorkflowBuilder';
+import ReusableWorkflowBlocks from './ReusableWorkflowBlocks';
 
-interface ProductWorkflowsBentoSectionProps {
-  screenshots: {
-    routing: string;
-    workflow: string;
-  };
-}
+interface ProductWorkflowsBentoSectionProps {}
 
-export default function ProductWorkflowsBentoSection({ screenshots }: ProductWorkflowsBentoSectionProps) {
+export default function ProductWorkflowsBentoSection({}: ProductWorkflowsBentoSectionProps) {
   const bentoCards: CardData[] = [
     {
       color: 'hsl(var(--card))',
@@ -27,7 +29,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Every ticket gets routed automatically—to the right agent, at the right time, based on workload, expertise, or any criteria you choose. No more playing traffic controller.',
       label: 'Zero Manual Work',
       icon: Target,
-      image: screenshots.routing,
+      customComponent: <SmartRoutingBuilder />,
     },
     {
       color: 'hsl(var(--card))',
@@ -35,6 +37,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Refund requests, order status, password resets—send interactive messages with buttons and forms. Customers get instant answers, you get time back.',
       label: 'Auto-Responses That Work',
       icon: MessageSquare,
+      customComponent: <AutoResponseExamples />,
     },
     {
       color: 'hsl(var(--card))',
@@ -42,7 +45,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Weekly reports, SLA reminders, follow-up sequences—build it once, runs automatically forever. Stop doing the same thing every Monday morning.',
       label: 'Recurring Automation',
       icon: RotateCw,
-      image: screenshots.workflow,
+      customComponent: <RecurringAutomationTimeline />,
     },
     {
       color: 'hsl(var(--card))',
@@ -50,6 +53,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'VIP customer? Escalate. Refund under $50? Auto-approve. Order not shipped? Different workflow. Your judgment, automated.',
       label: 'Smart Branching',
       icon: GitBranch,
+      customComponent: <BranchingDecisionTree />,
     },
     {
       color: 'hsl(var(--card))',
@@ -57,6 +61,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Pull order history from Shopify, payment info from Stripe, subscription data from your billing system—all automatically attached to the ticket.',
       label: 'Context Auto-Loaded',
       icon: Database,
+      customComponent: <ContextIntegrationPanel />,
     },
     {
       color: 'hsl(var(--card))',
@@ -64,6 +69,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Drag-and-drop interface makes it easy to create sophisticated workflows. Add triggers, conditions, actions, and delays—no technical skills required.',
       label: 'Visual Builder',
       icon: Workflow,
+      customComponent: <VisualWorkflowBuilder />,
     },
     {
       color: 'hsl(var(--card))',
@@ -71,6 +77,7 @@ export default function ProductWorkflowsBentoSection({ screenshots }: ProductWor
       description: 'Create workflow building blocks you can reuse across every automation. Update one block, it updates everywhere. Like code libraries, but no coding.',
       label: 'Reusable Blocks',
       icon: Package,
+      customComponent: <ReusableWorkflowBlocks />,
     },
   ];
 

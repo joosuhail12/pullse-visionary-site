@@ -4,7 +4,7 @@ import { useEffect, useRef, lazy, Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { prefersReducedMotion, getLiquidEtherResolution, getDeviceType } from "@/lib/deviceDetection";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import VideoEmbed from "@/components/VideoEmbed";
 
@@ -20,10 +20,10 @@ const loadGSAP = async () => {
   return { gsap };
 };
 
-const heroStats = [
-  { label: "Handled with AI", value: "80%", caption: "Intent coverage" },
-  { label: "Response time", value: "-43%", caption: "Avg. reduction" },
-  { label: "Time to launch", value: "<14 days", caption: "First automations" },
+const heroChips = [
+  { label: "Live in days" },
+  { label: "No forced migrations" },
+  { label: "Own your data" },
 ];
 
 const HomeHeroSection = () => {
@@ -128,37 +128,34 @@ const HomeHeroSection = () => {
           <div className="space-y-6 sm:space-y-8">
             <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-foreground">
               <span className="word inline-block">AI</span>{" "}
-              <span className="word inline-block">support</span>{" "}
               <span className="word inline-block">that</span>{" "}
-              <span className="word inline-block">feels</span>{" "}
-              <span className="word inline-block">human,</span>{" "}
+              <span className="word inline-block">fixes</span>{" "}
+              <span className="word inline-block">customer</span>{" "}
+              <span className="word inline-block">issues,</span>{" "}
               <span className="word inline-block">not</span>{" "}
-              <span className="word inline-block">handed</span>{" "}
-              <span className="word inline-block">off</span>
+              <span className="word inline-block">just</span>{" "}
+              <span className="word inline-block">answers</span>
             </h1>
 
             <p ref={descRef} className="max-w-2xl text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Pullse unifies channels, workflows, automations, and action-execution copilots so teams resolve complex intents in minutes. Execute actions across your entire stack without context switching.
+              Pullse connects to your stack, executes refunds, updates, and lookups, and keeps humans in control. Resolve issues fast from one place—no tab hopping or bolt-on bots.
             </p>
 
             <div ref={buttonsRef} className="flex flex-col gap-4 sm:flex-row">
               <Button size="lg" className="px-6 py-6 text-base min-h-[44px]" asChild>
                 <Link href="/contact-sales">
-                  Book a demo
+                  See it in action
                   <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="px-6 py-6 text-base min-h-[44px]" asChild>
+                <Link href="/compare">
+                  How it compares
+                  <ChevronRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>
 
-            <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
-              {heroStats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-border/60 bg-background/60 p-3 sm:p-4 backdrop-blur-sm md:backdrop-blur">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{stat.label}</p>
-                  <p className="mt-2 text-2xl font-bold text-foreground">{stat.value}</p>
-                  <p className="text-xs text-muted-foreground">{stat.caption}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
           <div className="relative">

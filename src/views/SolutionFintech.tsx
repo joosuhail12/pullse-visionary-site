@@ -5,7 +5,6 @@ import RouteButton from "@/components/RouteButton";
 import RoiCalculator from "@/components/RoiCalculator";
 import ScrollProgressIndicator from "@/components/product-inbox/ScrollProgressIndicator";
 import SolutionFintechHeroSection from "@/components/solutions/SolutionFintechHeroSection";
-import SolutionFintechStatsSection from "@/components/solutions/SolutionFintechStatsSection";
 import SolutionFintechPillarsSection from "@/components/solutions/SolutionFintechPillarsSection";
 import SolutionFintechWorkflowsSection from "@/components/solutions/SolutionFintechWorkflowsSection";
 import SolutionFintechIntegrationsSection from "@/components/solutions/SolutionFintechIntegrationsSection";
@@ -21,8 +20,6 @@ const SolutionFintech = () => {
 
       <main id="main-content" role="main">
         <SolutionFintechHeroSection />
-
-      <SolutionFintechStatsSection />
 
       <SolutionFintechPillarsSection />
 

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import PageLiquidBackground from "@/components/PageLiquidBackground";
 import RouteButton from "@/components/RouteButton";
 import Image from "next/image";
-import aiToolsScreenshot from "@/assets/ai-tools-screenshot.webp";
+import aiCopilotProfiles from "@/assets/ai-copilot-profiles-page.webp";
 import SoftwareApplicationSchema from "@/components/structured-data/SoftwareApplicationSchema";
 import {
   Bot,
@@ -50,20 +50,15 @@ const ProductAISuite = () => {
 
           <div className="container mx-auto px-6 relative">
             <div className="text-center max-w-6xl mx-auto space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Complete AI Platform</span>
-              </div>
-
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[1.05] tracking-tight">
-                One AI engine.
+                Copilots and bots
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient mt-2">
-                  Six powerful tools.
+                  that do the work
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-                From customer-facing chatbots to agent copilots, automated QA to intelligent summaries. All trained on your content, all working in harmony.
+                One suite of chatbots, copilots, QA, and summaries—trained on your content, acting across your stack, with humans always in control.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
@@ -103,42 +98,14 @@ const ProductAISuite = () => {
               <div className="relative rounded-3xl border border-border/50 bg-gradient-to-br from-card/95 via-card to-card/90 p-2 sm:p-3 shadow-2xl backdrop-blur-xl">
                 <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/30 border border-border/30">
                   <Image
-                    src={aiToolsScreenshot}
-                    alt="Pullse AI Suite Dashboard"
+                    src={aiCopilotProfiles}
+                    alt="Pullse AI Copilot profiles"
                     className="w-full"
                     priority
                   />
                 </div>
               </div>
 
-              {/* Floating stat badges */}
-              <div className="absolute -left-4 top-1/4 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-5 shadow-xl backdrop-blur-xl animate-float">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 md:h-11 lg:h-12 md:w-11 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 shadow-lg">
-                      <Bot className="h-5 w-5 md:h-5.5 lg:h-6 md:w-5.5 lg:w-6 text-background" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-black bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">87%</div>
-                      <div className="text-xs text-muted-foreground">Deflection</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-4 top-1/3 hidden lg:block">
-                <div className="rounded-2xl border border-border/60 bg-card/95 p-5 shadow-xl backdrop-blur-xl animate-float" style={{ animationDelay: '1s' }}>
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 md:h-11 lg:h-12 md:w-11 lg:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-lg">
-                      <Sparkles className="h-5 w-5 md:h-5.5 lg:h-6 md:w-5.5 lg:w-6 text-background" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">100%</div>
-                      <div className="text-xs text-muted-foreground">QA Coverage</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -147,10 +114,6 @@ const ProductAISuite = () => {
         <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-b from-muted/10 to-transparent">
           <div className="container mx-auto px-6">
             <div className="text-center mb-10 md:mb-12 lg:mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Complete AI Suite</span>
-              </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-4">
                 Six tools, one platform
               </h2>
