@@ -258,6 +258,7 @@ const ProductInboxChannels = () => {
                     src={inboxScreenshot}
                     alt="Pullse Unified Inbox"
                     className="w-full"
+                    sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                     priority
                   />
                 </div>

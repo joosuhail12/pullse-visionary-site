@@ -94,6 +94,7 @@ export default function ProductAutoQAHeroSection() {
               src={autoQAHeroScreenshot}
               alt="Auto-QA scorecard interface"
               className="w-full"
+              sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
               priority
             />
           </div>

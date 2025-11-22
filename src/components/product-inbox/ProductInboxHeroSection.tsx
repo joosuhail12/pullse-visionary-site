@@ -98,6 +98,7 @@ export default function ProductInboxHeroSection({ fullInboxScreenshot }: Product
               src={fullInboxScreenshot}
               alt="Pullse Inbox Interface - Unified workspace for email and chat"
               className="w-full"
+              sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
               priority
             />
           </div>

@@ -107,6 +107,7 @@ export default function ProductAnalyticsHeroSection({ analyticsScreenshot }: Pro
               src={analyticsScreenshot}
               alt="Pullse Analytics Dashboard - Real-time support metrics and insights"
               className="w-full"
+              sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
               priority
             />
           </div>

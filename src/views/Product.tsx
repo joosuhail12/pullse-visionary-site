@@ -535,6 +535,7 @@ const Product = () => {
                   className="w-full"
                   width={1400}
                   height={860}
+                  sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                   priority
                 />
               </div>

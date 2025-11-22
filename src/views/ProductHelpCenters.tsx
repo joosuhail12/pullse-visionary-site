@@ -76,6 +76,7 @@ const ProductHelpCenters = () => {
                   alt="Appo"
                   className="h-8 md:h-9 lg:h-10 w-auto"
                   priority
+                  sizes="200px"
                 />
               </div>
 
@@ -124,6 +125,7 @@ const ProductHelpCenters = () => {
                     src={appoHomepageScreenshot}
                     alt="Appo Help Center Homepage Interface"
                     className="w-full"
+                    sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                     priority
                   />
                 </div>
@@ -204,6 +206,7 @@ const ProductHelpCenters = () => {
                     src={appoArticlesViewScreenshot}
                     alt="Appo Articles Management Interface"
                     className="w-full"
+                    sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                   />
                 </div>
               </div>
@@ -294,6 +297,7 @@ const ProductHelpCenters = () => {
                         src={appoArticleVersioningScreenshot}
                         alt="Appo Article Version History Interface"
                         className="w-full"
+                        sizes="(min-width: 1280px) 70vw, (min-width: 768px) 90vw, 100vw"
                       />
                     </div>
                   </div>
