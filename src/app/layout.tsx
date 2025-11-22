@@ -22,6 +22,14 @@ export const metadata: Metadata = {
   title: "Pullse - AI-Powered Customer Support Platform",
   description:
     "Unify all customer conversations, automate with AI, and deliver exceptional support experiences at scale with Pullse.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/logo.png", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico", "/logo.png"],
+    apple: "/logo.png",
+  },
 };
 
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
