@@ -2,8 +2,6 @@ import LegalDocument from '@/views/LegalDocument';
 import { getLegalDocument } from '@/data/legalData';
 import { generatePageMetadata } from '@/lib/metadata';
 
-// Edge runtime for global performance
-export const runtime = 'edge';
 // Revalidate weekly - legal documents change very infrequently
 export const revalidate = 604800;
 

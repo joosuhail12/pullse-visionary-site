@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import type { gsap as GSAPType } from 'gsap';
 
 interface AnimatedCounterProps {
   value: number;
@@ -23,9 +23,24 @@ export default function AnimatedCounter({
   const [hasAnimated, setHasAnimated] = useState(false);
   const counterRef = useRef<HTMLSpanElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
+  const [gsapInstance, setGsapInstance] = useState<typeof GSAPType | null>(null);
 
   useEffect(() => {
-    if (!counterRef.current || !elementRef.current) return;
+    let isMounted = true;
+
+    import('gsap').then(({ gsap }) => {
+      if (isMounted) {
+        setGsapInstance(() => gsap);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!counterRef.current || !elementRef.current || !gsapInstance) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,7 +50,7 @@ export default function AnimatedCounter({
 
             // Animate the counter
             const obj = { value: 0 };
-            gsap.to(obj, {
+            gsapInstance.to(obj, {
               value: value,
               duration: duration / 1000,
               ease: 'expo.out',
@@ -59,7 +74,7 @@ export default function AnimatedCounter({
                 const angle = (i / particleCount) * Math.PI * 2;
                 const distance = 30 + Math.random() * 20;
 
-                gsap.to(particle, {
+                gsapInstance.to(particle, {
                   x: Math.cos(angle) * distance,
                   y: Math.sin(angle) * distance,
                   opacity: 0,
@@ -85,7 +100,7 @@ export default function AnimatedCounter({
         observer.unobserve(elementRef.current);
       }
     };
-  }, [value, duration, decimals, hasAnimated]);
+  }, [value, duration, decimals, hasAnimated, gsapInstance]);
 
   return (
     <div ref={elementRef} className={`relative inline-block ${className}`}>

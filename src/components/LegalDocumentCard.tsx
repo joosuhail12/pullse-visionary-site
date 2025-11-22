@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, ArrowRight, LucideIcon } from 'lucide-react';
+import { Calendar, ArrowRight, Scale, Shield, Cookie, CheckCircle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface LegalDocumentCardProps {
@@ -12,12 +12,20 @@ interface LegalDocumentCardProps {
     description: string;
     lastUpdated: string;
   };
-  Icon: LucideIcon;
+  iconKey: 'scale' | 'shield' | 'cookie' | 'check-circle';
   index: number;
 }
 
-export default function LegalDocumentCard({ doc, Icon, index }: LegalDocumentCardProps) {
+const iconMap = {
+  scale: Scale,
+  shield: Shield,
+  cookie: Cookie,
+  'check-circle': CheckCircle,
+} as const;
+
+export default function LegalDocumentCard({ doc, iconKey, index }: LegalDocumentCardProps) {
   const lastUpdated = format(new Date(doc.lastUpdated), 'MMM d, yyyy');
+  const Icon = iconMap[iconKey];
 
   return (
     <motion.div

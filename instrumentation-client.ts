@@ -13,7 +13,7 @@
  * @see https://posthog.com/docs/libraries/next-js
  */
 
-import posthog from 'posthog-js';
+import type { PostHog } from 'posthog-js';
 
 /**
  * Generate a unique anonymous user ID
@@ -105,7 +105,25 @@ const hasAnalyticsConsent = (): boolean => {
 /**
  * Initialize PostHog with consent check
  */
-const initPostHog = (): void => {
+let posthogClient: PostHog | null = null;
+let posthogInitialized = false;
+let posthogIdentified = false;
+
+const loadPostHog = async (): Promise<PostHog | null> => {
+  try {
+    if (posthogClient) return posthogClient;
+    const { default: posthog } = await import('posthog-js');
+    posthogClient = posthog;
+    return posthogClient;
+  } catch (error) {
+    console.error('[PostHog] Failed to load client', error);
+    return null;
+  }
+};
+
+const initPostHog = async (): Promise<PostHog | null> => {
+  if (posthogInitialized) return posthogClient;
+
   const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
   const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
@@ -113,10 +131,12 @@ const initPostHog = (): void => {
     if (process.env.NODE_ENV === 'development') {
       console.warn('[PostHog] API key or host not configured');
     }
-    return;
+    return null;
   }
 
-  // Initialize PostHog
+  const posthog = await loadPostHog();
+  if (!posthog) return null;
+
   posthog.init(apiKey, {
     api_host: apiHost,
     defaults: '2025-05-24', // Required: API configuration version
@@ -178,82 +198,85 @@ const initPostHog = (): void => {
         ph.debug(); // Enable debug mode in development
       }
 
-      // Identify user for cross-session tracking
-      const userId = getUserId();
-      if (userId) {
-        ph.identify(userId);
+      if (!posthogIdentified) {
+        // Identify user for cross-session tracking
+        const userId = getUserId();
+        if (userId) {
+          ph.identify(userId);
 
-        // Set user properties
-        const utmParams = getUTMParams();
-        const visitCount = getVisitCount();
-        const referrer = document.referrer || 'direct';
-        const landingPage = window.location.pathname;
+          // Set user properties
+          const utmParams = getUTMParams();
+          const visitCount = getVisitCount();
+          const referrer = document.referrer || 'direct';
+          const landingPage = window.location.pathname;
 
-        ph.setPersonProperties({
-          device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-          browser: navigator.userAgent,
-          visit_count: visitCount,
-          referrer,
-          landing_page: visitCount === 1 ? landingPage : undefined,
-          first_visit: visitCount === 1,
-          ...utmParams,
+          ph.setPersonProperties({
+            device_type: /mobile/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+            browser: navigator.userAgent,
+            visit_count: visitCount,
+            referrer,
+            landing_page: visitCount === 1 ? landingPage : undefined,
+            first_visit: visitCount === 1,
+            ...utmParams,
+          });
+
+          if (process.env.NODE_ENV === 'development') {
+            console.log('[PostHog] User identified:', userId);
+            console.log('[PostHog] User properties set:', { visitCount, utmParams, referrer });
+          }
+        }
+
+        // Send installation verification event
+        ph.capture('posthog_installation_verified', {
+          environment: process.env.NODE_ENV || 'production',
+          timestamp: new Date().toISOString(),
+          source: 'instrumentation-client',
+          consent_granted: hasAnalyticsConsent(),
+          session_recording_enabled: true,
         });
 
         if (process.env.NODE_ENV === 'development') {
-          console.log('[PostHog] User identified:', userId);
-          console.log('[PostHog] User properties set:', { visitCount, utmParams, referrer });
+          console.log('[PostHog] Installation verification event sent');
         }
-      }
 
-      // Send installation verification event
-      ph.capture('posthog_installation_verified', {
-        environment: process.env.NODE_ENV || 'production',
-        timestamp: new Date().toISOString(),
-        source: 'instrumentation-client',
-        consent_granted: hasAnalyticsConsent(),
-        session_recording_enabled: true,
-      });
-
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[PostHog] Installation verification event sent');
+        posthogIdentified = true;
       }
     },
   });
 
-  // Check initial consent
-  if (!hasAnalyticsConsent()) {
-    posthog.opt_out_capturing();
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[PostHog] Opted out (no analytics consent)');
-    }
-  } else {
-    posthog.opt_in_capturing();
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[PostHog] Opted in (analytics consent granted)');
-    }
-  }
+  posthogInitialized = true;
+  return posthog;
+};
 
-  // Listen for consent changes
-  window.addEventListener('cookieConsentUpdated', ((event: CustomEvent) => {
-    const { analytics } = event.detail;
-
-    if (analytics) {
-      posthog.opt_in_capturing();
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[PostHog] Consent granted - opted in');
-      }
-    } else {
-      posthog.opt_out_capturing();
+const applyConsent = async (analyticsAllowed: boolean) => {
+  if (!analyticsAllowed) {
+    if (posthogInitialized && posthogClient) {
+      posthogClient.opt_out_capturing();
       if (process.env.NODE_ENV === 'development') {
         console.log('[PostHog] Consent revoked - opted out');
       }
     }
-  }) as EventListener);
+    return;
+  }
+
+  const posthog = await initPostHog();
+  if (!posthog) return;
+
+  posthog.opt_in_capturing();
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[PostHog] Opted in (analytics consent granted)');
+  }
 };
 
-// Initialize PostHog on client
+// Initialize PostHog on client when consent is present
 if (typeof window !== 'undefined') {
-  initPostHog();
+  void applyConsent(hasAnalyticsConsent());
+
+  // Listen for consent changes
+  window.addEventListener('cookieConsentUpdated', ((event: CustomEvent) => {
+    const { analytics } = event.detail || {};
+    void applyConsent(Boolean(analytics));
+  }) as EventListener);
 }
 
 export {};

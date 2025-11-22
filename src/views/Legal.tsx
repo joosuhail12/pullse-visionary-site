@@ -3,15 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PageLiquidBackground from '@/components/PageLiquidBackground';
 import LegalDocumentCard from '@/components/LegalDocumentCard';
-import { Scale, Shield, Cookie, CheckCircle } from 'lucide-react';
 import { getAllLegalDocuments } from '@/data/legalData';
-
-const iconMap = {
-  scale: Scale,
-  shield: Shield,
-  cookie: Cookie,
-  'check-circle': CheckCircle,
-};
 
 export default function Legal() {
   const documents = getAllLegalDocuments();
@@ -37,13 +29,11 @@ export default function Legal() {
           {/* Legal Documents Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {documents.map((doc, index) => {
-              const Icon = iconMap[doc.icon];
-
               return (
                 <LegalDocumentCard
                   key={doc.slug}
                   doc={doc}
-                  Icon={Icon}
+                  iconKey={doc.icon}
                   index={index}
                 />
               );

@@ -2,8 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import type { gsap as GSAPType } from 'gsap';
 import ProgressHeader from '@/components/ProgressHeader';
 import TimelineStep from '@/components/TimelineStep';
 import {
@@ -17,15 +16,12 @@ import {
   Zap,
 } from 'lucide-react';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function StickyStepperSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [isInView, setIsInView] = useState<boolean>(false);
+  const [gsapInstance, setGsapInstance] = useState<typeof GSAPType | null>(null);
+  const scrollTriggerRef = useRef<any>(null);
 
   const stepperSteps = [
     {
@@ -119,9 +115,25 @@ export default function StickyStepperSection() {
   ];
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    let isMounted = true;
+    Promise.all([import('gsap'), import('gsap/dist/ScrollTrigger')]).then(([{ gsap }, { ScrollTrigger }]) => {
+      if (!isMounted) return;
+      gsap.registerPlugin(ScrollTrigger);
+      scrollTriggerRef.current = ScrollTrigger;
+      setGsapInstance(() => gsap);
+    });
 
-    const ctx = gsap.context(() => {
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!sectionRef.current || !gsapInstance || !scrollTriggerRef.current) return;
+
+    const ScrollTrigger = scrollTriggerRef.current;
+
+    const ctx = gsapInstance.context(() => {
       // Track if section is in view
       ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -149,7 +161,7 @@ export default function StickyStepperSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [gsapInstance]);
 
   return (
     <>

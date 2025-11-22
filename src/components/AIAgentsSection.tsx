@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Bot, User, Zap, Database, Code, CheckCircle, MessageSquare, Sparkles, ArrowRight, TrendingUp, Clock, Activity, RefreshCw, Shield, Boxes } from 'lucide-react';
-import gsap from 'gsap';
+import type { gsap as GSAPType } from 'gsap';
 import copilotInterfaceScreenshot from '@/assets/ai-copilot-profiles-page.webp';
 
 export const AIAgentsSection = () => {
@@ -14,8 +14,22 @@ export const AIAgentsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const botsVisualRef = useRef<HTMLDivElement>(null);
   const copilotsVisualRef = useRef<HTMLDivElement>(null);
+  const [gsapInstance, setGsapInstance] = useState<typeof GSAPType | null>(null);
 
   const fullMessage = "Can you update my shipping address and change my plan to Pro?";
+
+  useEffect(() => {
+    let isMounted = true;
+    import('gsap').then(({ gsap }) => {
+      if (isMounted) {
+        setGsapInstance(() => gsap);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (activeTab === 'bots') {
@@ -44,21 +58,23 @@ export const AIAgentsSection = () => {
   }, []);
 
   useEffect(() => {
+    if (!gsapInstance) return;
+
     if (botsVisualRef.current && activeTab === 'bots') {
-      gsap.fromTo(
+      gsapInstance.fromTo(
         botsVisualRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
       );
     }
     if (copilotsVisualRef.current && activeTab === 'copilots') {
-      gsap.fromTo(
+      gsapInstance.fromTo(
         copilotsVisualRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
       );
     }
-  }, [activeTab]);
+  }, [activeTab, gsapInstance]);
 
   const apiActions = [
     { icon: Code, label: 'Update Shipping', color: 'text-blue-400', api: 'shipment.updateAddress()', time: '124ms' },
