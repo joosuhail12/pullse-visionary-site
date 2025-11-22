@@ -12,7 +12,14 @@ export const metadata = generatePageMetadata({
   title: 'Cookie Policy | Pullse',
   description: 'How Pullse uses cookies and similar tracking technologies on our platform.',
   path: '/legal/cookies',
-  keywords: 'cookie policy, cookies, tracking technologies, web tracking, analytics',
+  keywords: [
+    'cookie policy',
+    'cookies',
+    'tracking technologies',
+    'web tracking',
+    'analytics cookies',
+    'consent management',
+  ],
 });
 
 export default function CookiesPage() {

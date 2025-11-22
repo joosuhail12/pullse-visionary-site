@@ -11,8 +11,16 @@ export const metadata = generatePageMetadata({
   description:
     "Real-time dashboards, custom reports, and ROI tracking. Turn support data into strategic decisions with Pullse Analytics.",
   path: "/product/analytics",
-  keywords:
-    "analytics, support analytics, customer service analytics, reporting, dashboards, roi tracking, support metrics",
+  keywords: [
+    "support analytics",
+    "customer service reporting",
+    "csat tracking",
+    "sla monitoring",
+    "support dashboards",
+    "agent performance metrics",
+    "automation impact analytics",
+    "deflection rate reporting",
+  ],
 });
 
 const AnalyticsPage = () => (

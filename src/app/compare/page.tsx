@@ -12,8 +12,17 @@ export const metadata = generatePageMetadata({
   description:
     "See how Pullse compares to Zendesk, Intercom, Freshdesk, Dixa, and Gladly. Compare AI features, pricing, ease of use, and more.",
   path: "/compare",
-  keywords:
-    "compare, vs zendesk, vs intercom, vs freshdesk, vs dixa, vs gladly, comparison, alternatives",
+  keywords: [
+    "zendesk alternative",
+    "intercom alternative",
+    "freshdesk alternative",
+    "helpdesk comparison",
+    "ai support platform comparison",
+    "pullse vs zendesk",
+    "pullse vs intercom",
+    "pullse vs freshdesk",
+    "customer support platform alternatives",
+  ],
 });
 
 const ComparePage = () => (

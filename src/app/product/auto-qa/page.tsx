@@ -11,8 +11,16 @@ export const metadata = generatePageMetadata({
   description:
     "AI analyzes 100% of conversations—bot and human—with moment-level feedback, trend analysis, and structured coaching workflows. Turn QA into continuous improvement.",
   path: "/product/auto-qa",
-  keywords:
-    "auto qa, quality assurance, ai qa, conversation analysis, coaching, feedback management, customer service qa, support quality, performance tracking",
+  keywords: [
+    "support quality assurance",
+    "ai qa for support",
+    "conversation analysis",
+    "agent coaching workflows",
+    "support quality scoring",
+    "feedback management",
+    "customer service qa automation",
+    "performance tracking support",
+  ],
 });
 
 const AutoQAPage = () => (

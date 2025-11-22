@@ -22,7 +22,7 @@ interface PageMetadataParams {
   path?: string;
   image?: string;
   type?: "website" | "article";
-  keywords?: string;
+  keywords?: string | string[];
 }
 
 /**
@@ -45,16 +45,70 @@ export function generatePageMetadata({
   keywords,
 }: PageMetadataParams): Metadata {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.pullse.ai";
-  const url = `${baseUrl}${path}`;
+  const normalizedPath = path?.endsWith("/") && path !== "/" ? path.slice(0, -1) : path;
+  const url = `${baseUrl}${normalizedPath || ""}`;
   const imageUrl = image.startsWith("http") ? image : `${baseUrl}${image}`;
+
+  const defaultKeywords = [
+    "Pullse",
+    "AI customer support platform",
+    "AI helpdesk software",
+    "customer service automation",
+    "omnichannel support",
+    "AI chatbot for support",
+    "support ticket automation",
+  ];
+
+  const pathKeywords: Record<string, string[]> = {
+    "/": ["unified inbox", "AI support platform", "customer support AI", "automated support workflows"],
+    "/product": ["support automation platform", "AI agent copilot", "AI support suite", "multichannel inbox"],
+    "/product/analytics": ["support analytics", "customer support reporting", "AI insights", "support dashboards"],
+    "/product/appo": ["knowledge base", "self-serve support", "AI documentation", "faq automation"],
+    "/product/ai-suite": ["AI support suite", "autonomous support agents", "AI workflows"],
+    "/product/ai-engine": ["AI routing", "LLM support automation", "support AI engine"],
+    "/product/inbox-channels": ["omnichannel inbox", "email chat voice sms support", "support channels"],
+    "/product/auto-qa": ["support QA", "quality assurance automation", "ticket qa"],
+    "/product/workflows-routing": ["support routing", "triage automation", "workflow automation"],
+    "/pricing": ["support pricing", "AI support pricing", "usage based pricing", "helpdesk cost"],
+    "/contact-sales": ["book demo", "contact sales", "schedule demo", "customer support demo"],
+    "/company": ["about pullse", "team", "careers"],
+    "/solutions": ["customer support solutions", "industry support automation"],
+    "/solutions/b2b-saas": ["b2b saas support", "saas helpdesk automation", "saas customer service"],
+    "/solutions/fintech": ["fintech support", "banking customer service", "fintech helpdesk automation"],
+    "/solutions/ecommerce": ["ecommerce customer service", "shopify support automation", "ecommerce helpdesk ai"],
+    "/apply/startup": ["startup program", "startup credits", "early stage support", "founder perks"],
+    "/compare": ["zendesk alternative", "intercom alternative", "helpdesk comparison", "pullse vs"],
+    "/blog": ["customer support blog", "ai support guides", "support best practices"],
+    "/legal": ["legal", "policies"],
+    "/legal/privacy": ["privacy policy", "data protection", "gdpr", "ccpa"],
+    "/legal/terms": ["terms of service", "tos"],
+    "/legal/data-processing": ["data processing agreement", "dpa", "subprocessors"],
+    "/legal/cookies": ["cookie policy", "cookies"],
+    "/legal/acceptable-use": ["acceptable use policy", "aup"],
+  };
+
+  const suppliedKeywords: string[] =
+    typeof keywords === "string"
+      ? keywords.split(",").map((k) => k.trim()).filter(Boolean)
+      : Array.isArray(keywords)
+        ? keywords
+        : [];
+
+  const mergedKeywords = Array.from(
+    new Set([
+      ...defaultKeywords,
+      ...(normalizedPath && pathKeywords[normalizedPath] ? pathKeywords[normalizedPath] : []),
+      ...suppliedKeywords,
+    ])
+  );
 
   return {
     title,
     description,
-    keywords,
+    keywords: mergedKeywords,
     metadataBase: new URL(baseUrl),
     alternates: {
-      canonical: path,
+      canonical: normalizedPath || "/",
     },
     openGraph: {
       type,

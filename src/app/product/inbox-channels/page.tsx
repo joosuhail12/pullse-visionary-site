@@ -11,8 +11,16 @@ export const metadata = generatePageMetadata({
   description:
     "Unify all customer conversations—email, chat, social, and phone—in one intelligent inbox. Smart routing, team collaboration, and AI assistance built-in.",
   path: "/product/inbox-channels",
-  keywords:
-    "omnichannel inbox, unified inbox, customer conversations, email management, chat platform, social media support, team collaboration",
+  keywords: [
+    "omnichannel inbox",
+    "unified customer conversations",
+    "email and chat support",
+    "voice and sms support",
+    "social media support",
+    "support routing",
+    "team collaboration for support",
+    "ai assisted inbox",
+  ],
 });
 
 const ProductInboxPage = () => (

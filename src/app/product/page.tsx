@@ -9,8 +9,16 @@ export const metadata = generatePageMetadata({
   description:
     "Explore Pullse's complete suite of AI-powered customer support tools. Unified inbox, AI chatbots, copilots, workflows, analytics, auto-QA, and help centers—all in one platform.",
   path: "/product",
-  keywords:
-    "product features, customer support software, ai support tools, support platform features, helpdesk features",
+  keywords: [
+    "ai support platform",
+    "customer support software",
+    "support automation tools",
+    "omnichannel inbox",
+    "agent copilot",
+    "ai workflows",
+    "helpdesk features",
+    "customer experience automation",
+  ],
 });
 
 const ProductPage = () => <Product />;

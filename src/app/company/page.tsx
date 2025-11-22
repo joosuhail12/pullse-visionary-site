@@ -10,8 +10,15 @@ export const metadata = generatePageMetadata({
   description:
     "We're building the customer support platform we wish existed. Antler-backed, AI-native, transparent pricing. Meet our team and join our journey.",
   path: "/company",
-  keywords:
-    "about pullse, company, team, antler, startup, ai-first, mission, vision",
+  keywords: [
+    "about pullse",
+    "pullse team",
+    "antler backed startup",
+    "ai first company",
+    "customer support startup",
+    "mission and vision",
+    "careers at pullse",
+  ],
 });
 
 const CompanyPage = () => <Company />;

@@ -6,8 +6,15 @@ export const metadata = generatePageMetadata({
   description:
     "Join Pullse's startup program: 50% off for early-stage companies. Less than 3 years old, ≤$2M ARR or ≤$5M raised. Apply now.",
   path: '/apply/startup',
-  keywords:
-    'startup program, startup discount, early stage, 50% off, startup pricing, new company discount',
+  keywords: [
+    'startup program',
+    'startup discount',
+    'early stage support',
+    '50% off software',
+    'startup pricing',
+    'founder perks',
+    'startup credits',
+  ],
 });
 
 export default function StartupApplicationPage() {

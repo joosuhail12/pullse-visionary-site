@@ -10,8 +10,14 @@ export const metadata = generatePageMetadata({
   description:
     "AI-powered customer support tailored to B2B SaaS, E-commerce, and Fintech teams. Choose the solution built for your industry's unique challenges.",
   path: "/solutions",
-  keywords:
-    "industry solutions, saas support, ecommerce support, fintech support, customer support solutions",
+  keywords: [
+    "customer support solutions",
+    "industry support automation",
+    "saas customer support",
+    "ecommerce customer service",
+    "fintech support",
+    "industry helpdesk",
+  ],
 });
 
 const SolutionsPage = () => <SolutionsHub />;

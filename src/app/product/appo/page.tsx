@@ -11,8 +11,16 @@ export const metadata = generatePageMetadata({
   description:
     "Create beautiful, AI-powered help centers with Appo. White-labeled, multilingual knowledge bases with content gap analysis and native Pullse integration.",
   path: "/product/appo",
-  keywords:
-    "Appo, help center software, knowledge base, white label, multilingual, AI writing, content gap analysis, self-service, ticket deflection",
+  keywords: [
+    "help center software",
+    "ai knowledge base",
+    "white label help center",
+    "multilingual self-service",
+    "content gap analysis",
+    "faq automation",
+    "ticket deflection",
+    "support documentation platform",
+  ],
 });
 
 const AppoPage = () => (

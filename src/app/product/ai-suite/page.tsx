@@ -10,8 +10,17 @@ export const metadata = generatePageMetadata({
   description:
     "Six AI-powered tools working together—chatbots, copilots, QA, summaries, sentiment analysis, and rewriting. All trained on your content, all learning from every conversation.",
   path: "/product/ai-suite",
-  keywords:
-    "ai suite, ai chatbots, ai copilots, customer support ai, agent assistance, auto qa, conversation summaries, sentiment analysis, ai platform, support automation, intelligent support",
+  keywords: [
+    "ai support suite",
+    "ai chatbots for support",
+    "agent copilot",
+    "support automation platform",
+    "auto qa for support",
+    "conversation summaries",
+    "sentiment analysis support",
+    "ai rewriting",
+    "autonomous support agents",
+  ],
 });
 
 const AISuitePage = () => (

@@ -11,8 +11,17 @@ export const metadata = generatePageMetadata({
   description:
     "From intent to safe action in seconds. Classification, retrieval, planning, execution, and QA—all governed and logged. Built on NIST AI RMF and OWASP best practices.",
   path: "/product/ai-engine",
-  keywords:
-    "ai engine, governed ai, ai guardrails, ai safety, nist ai rmf, owasp ai, secure ai, responsible ai",
+  keywords: [
+    "ai routing engine",
+    "ai orchestration",
+    "governed ai",
+    "ai guardrails",
+    "ai safety",
+    "nist ai rmf",
+    "owasp ai",
+    "secure ai actions",
+    "responsible ai for support",
+  ],
 });
 
 const AIEnginePage = () => (

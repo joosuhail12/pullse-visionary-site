@@ -11,8 +11,15 @@ export const metadata = generatePageMetadata({
   description:
     "Build sophisticated automation with drag-and-drop workflows. No coding required. Smart routing, conditional logic, and 50+ templates.",
   path: "/product/workflows-routing",
-  keywords:
-    "workflow automation, visual workflow builder, no-code automation, ticket routing, support automation, drag-and-drop workflows",
+  keywords: [
+    "support workflow automation",
+    "visual workflow builder",
+    "no-code support automation",
+    "ticket routing rules",
+    "conditional logic support",
+    "support macros",
+    "automation templates",
+  ],
 });
 
 const WorkflowsPage = () => (

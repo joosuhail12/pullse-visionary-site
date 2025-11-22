@@ -10,8 +10,15 @@ export const metadata = generatePageMetadata({
   description:
     "Built with compliance controls and audit trails. SOC 2 Type II in progress. Orchestrates fraud prevention workflows, automates KYC, and handles disputes across your entire stack. Reduce risk response time by 67%.",
   path: "/solutions/fintech",
-  keywords:
-    "fintech support, financial services support, fraud prevention, kyc automation, compliance, dispute management, soc 2",
+  keywords: [
+    "fintech customer support",
+    "financial services support",
+    "fraud prevention workflows",
+    "kyc automation",
+    "pci and soc2 support",
+    "dispute management",
+    "compliance ready support",
+  ],
 });
 
 const FintechSolutionsPage = () => <SolutionFintech />;

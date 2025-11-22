@@ -12,7 +12,13 @@ export const metadata = generatePageMetadata({
   title: 'Terms of Service | Pullse',
   description: 'User agreement and terms of use for Pullse AI-powered customer support platform.',
   path: '/legal/terms',
-  keywords: 'terms of service, user agreement, terms and conditions, legal terms',
+  keywords: [
+    'terms of service',
+    'user agreement',
+    'terms and conditions',
+    'platform terms',
+    'legal terms',
+  ],
 });
 
 export default function TermsPage() {

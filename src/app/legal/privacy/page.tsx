@@ -12,7 +12,14 @@ export const metadata = generatePageMetadata({
   title: 'Privacy Policy | Pullse',
   description: 'How Pullse collects, uses, and protects your personal information.',
   path: '/legal/privacy',
-  keywords: 'privacy policy, data protection, personal information, gdpr, privacy',
+  keywords: [
+    'privacy policy',
+    'data protection',
+    'personal information',
+    'gdpr compliance',
+    'ccpa',
+    'security and privacy',
+  ],
 });
 
 export default function PrivacyPage() {

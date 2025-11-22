@@ -12,7 +12,14 @@ export const metadata = generatePageMetadata({
   title: 'Data Processing Agreement (DPA) | Pullse',
   description: 'Terms governing the processing of personal data under GDPR and other data protection laws.',
   path: '/legal/data-processing',
-  keywords: 'dpa, data processing agreement, gdpr, data protection, personal data processing',
+  keywords: [
+    'data processing agreement',
+    'dpa',
+    'gdpr compliance',
+    'data protection',
+    'personal data processing',
+    'processor obligations',
+  ],
 });
 
 export default function DataProcessingPage() {

@@ -12,7 +12,14 @@ export const metadata = generatePageMetadata({
   description:
     "Read our terms of service, privacy policy, cookie policy, and acceptable use policy.",
   path: "/legal",
-  keywords: "legal, terms of service, privacy policy, cookie policy, acceptable use policy",
+  keywords: [
+    "legal",
+    "terms of service",
+    "privacy policy",
+    "cookie policy",
+    "acceptable use policy",
+    "data processing agreement",
+  ],
 });
 
 const LegalPage = () => <Legal />;

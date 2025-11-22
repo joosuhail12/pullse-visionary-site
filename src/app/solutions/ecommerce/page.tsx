@@ -10,8 +10,15 @@ export const metadata = generatePageMetadata({
   description:
     "Order management, shipping tracking, and automated returns in one place. Handle Black Friday volume without breaking a sweat. Reduce WISMO tickets by 58%.",
   path: "/solutions/ecommerce",
-  keywords:
-    "ecommerce support, order management, shipping tracking, returns automation, wismo, black friday support",
+  keywords: [
+    "ecommerce customer service",
+    "order management automation",
+    "shipping tracking support",
+    "returns automation",
+    "wismo reduction",
+    "peak season support",
+    "shopify support automation",
+  ],
 });
 
 const EcommerceSolutionsPage = () => <SolutionEcommerce />;

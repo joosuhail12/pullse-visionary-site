@@ -13,8 +13,15 @@ export const metadata = generatePageMetadata({
   description:
     "Simple, transparent pricing for AI-powered customer support. Standard plan at $49/seat and Pro plan at $79/seat. Pay only for AI actions you use. No hidden fees, no per-resolution charges. Includes free startup program for eligible companies.",
   path: "/pricing",
-  keywords:
-    "pricing, customer support pricing, ai support cost, helpdesk pricing, support platform pricing, startup program",
+  keywords: [
+    "ai support pricing",
+    "customer support pricing",
+    "helpdesk pricing",
+    "usage based pricing",
+    "per seat pricing",
+    "ai action pricing",
+    "startup credits",
+  ],
 });
 
 function PricingSkeleton() {

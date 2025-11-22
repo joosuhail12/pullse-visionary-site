@@ -10,8 +10,15 @@ export const metadata = generatePageMetadata({
   description:
     "Purpose-built for SaaS teams who need account context, usage data, and proactive churn prevention. Reduce churn by 28% and accelerate trial-to-paid by 42%.",
   path: "/solutions/b2b-saas",
-  keywords:
-    "saas support, b2b saas, churn prevention, saas customer success, trial conversion, account management",
+  keywords: [
+    "b2b saas support",
+    "saas helpdesk automation",
+    "saas customer success",
+    "churn prevention",
+    "usage based support",
+    "trial to paid conversion",
+    "account management support",
+  ],
 });
 
 const B2BSaasPage = () => <SolutionSaaS />;

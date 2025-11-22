@@ -12,7 +12,13 @@ export const metadata = generatePageMetadata({
   title: 'Acceptable Use Policy | Pullse',
   description: 'Rules and guidelines for using Pullse services responsibly and legally.',
   path: '/legal/acceptable-use',
-  keywords: 'acceptable use policy, usage guidelines, service rules, prohibited activities',
+  keywords: [
+    'acceptable use policy',
+    'usage guidelines',
+    'service rules',
+    'prohibited activities',
+    'security requirements',
+  ],
 });
 
 export default function AcceptableUsePage() {

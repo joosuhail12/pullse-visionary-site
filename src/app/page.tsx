@@ -13,8 +13,17 @@ export const metadata = generatePageMetadata({
   description:
     "Unify customer conversations across email, chat, and API. Automate with AI chatbots and agents. Deliver exceptional support at scale.",
   path: "/",
-  keywords:
-    "ai customer support, customer support platform, ai chatbot, support automation, omnichannel support, helpdesk software, customer service software",
+  keywords: [
+    "ai customer support platform",
+    "ai helpdesk software",
+    "autonomous support agents",
+    "customer service automation",
+    "omnichannel support",
+    "ai chatbot for customer service",
+    "customer support workflows",
+    "support ticket deflection",
+    "llm customer support",
+  ],
 });
 
 // Loading skeleton for better perceived performance
