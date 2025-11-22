@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { trackEvent, trackBookAppointment } from '@/lib/analytics';
 import { useCookieConsent } from '@/contexts/CookieConsentContext';
@@ -26,7 +26,43 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
   const hasTrackedLoad = useRef(false);
 
   const shouldLoad = consent.analytics || userInitiated;
-  const prefillKey = JSON.stringify(prefill || {});
+  const sanitizedPrefill = useMemo(() => {
+    if (!prefill) return undefined;
+
+    const guests = prefill.guests
+      ?.map((guest) => guest?.trim())
+      .filter(Boolean);
+
+    const customAnswers = prefill.customAnswers
+      ? Object.fromEntries(
+          Object.entries(prefill.customAnswers)
+            .map(([key, value]) => [key.trim(), value.trim()])
+            .filter(([, value]) => Boolean(value))
+        )
+      : undefined;
+
+    const hasCustomAnswers = customAnswers && Object.keys(customAnswers).length > 0;
+
+    const cleaned = {
+      name: prefill.name?.trim() || undefined,
+      email: prefill.email?.trim() || undefined,
+      guests: guests?.length ? guests : undefined,
+      notes: prefill.notes?.trim() || undefined,
+      customAnswers: hasCustomAnswers ? customAnswers : undefined,
+    };
+
+    return Object.values(cleaned).some(Boolean) ? cleaned : undefined;
+  }, [prefill]);
+
+  const prefillKey = JSON.stringify(sanitizedPrefill || {});
+
+  const timeZone = useMemo(() => {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch {
+      return undefined;
+    }
+  }, []);
 
   // Reset loading state when user opts to load
   useEffect(() => {
@@ -39,20 +75,18 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
   useEffect(() => {
     if (!shouldLoad || !embedRef.current) return;
 
+    setIsLoading(true);
+    setError(null);
+
     let cancelled = false;
+
+    // Clear any previous iframe so we can mount a fresh instance with the latest prefill data
+    embedRef.current.innerHTML = '';
 
     try {
       // Initialize Cal function on window if it doesn't exist
       if (typeof window !== 'undefined') {
         const w = window as any;
-
-        // Prevent duplicate listener setup across remounts
-        w.__pullseCalInitialized = w.__pullseCalInitialized || new Set();
-        const listenerKey = `inline-${calLink}-${prefillKey}`;
-        if (w.__pullseCalInitialized.has(listenerKey)) {
-          setIsLoading(false);
-          return;
-        }
 
         // Cal.com initialization pattern
         if (!w.Cal) {
@@ -105,14 +139,15 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
           calLink: calLink,
           config: {
             theme: 'light',
+            ...(timeZone ? { timezone: timeZone } : {}),
           },
-          prefill: prefill
+          prefill: sanitizedPrefill
             ? {
-                name: prefill.name,
-                email: prefill.email,
-                guests: prefill.guests?.filter(Boolean),
-                notes: prefill.notes,
-                customAnswers: prefill.customAnswers,
+                name: sanitizedPrefill.name,
+                email: sanitizedPrefill.email,
+                guests: sanitizedPrefill.guests,
+                notes: sanitizedPrefill.notes,
+                customAnswers: sanitizedPrefill.customAnswers,
               }
             : undefined,
         });
@@ -160,8 +195,6 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
         });
 
         console.log('Cal.com inline embed configured');
-
-        w.__pullseCalInitialized.add(listenerKey);
       }
     } catch (err) {
       console.error('Error initializing Cal.com embed:', err);
@@ -171,7 +204,7 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
     return () => {
       cancelled = true;
     };
-  }, [calLink, shouldLoad]);
+  }, [calLink, shouldLoad, prefillKey, timeZone, sanitizedPrefill]);
 
   if (!shouldLoad) {
     return (

@@ -75,6 +75,7 @@ export default function ContactSalesContent() {
   const formStartTime = useRef<number | null>(null);
   const formId = 'contact-sales-form';
   const formName = 'Contact Sales (Demo Request)';
+  const bookingSectionRef = useRef<HTMLDivElement | null>(null);
 
   const stepNames = ['Contact Info', 'Company Details', 'Project Details'];
 
@@ -84,6 +85,7 @@ export default function ContactSalesContent() {
       formData.companySize && `Size: ${formData.companySize}`,
       formData.industry && `Industry: ${formData.industry}`,
       formData.timeline && `Timeline: ${formData.timeline}`,
+      formData.phone && `Phone: ${formData.phone}`,
       formData.currentSolution && `Current solution: ${formData.currentSolution}`,
       formData.message && `Notes: ${formData.message}`,
     ].filter(Boolean);
@@ -93,6 +95,7 @@ export default function ContactSalesContent() {
     if (formData.companySize) customAnswers['Company size'] = formData.companySize;
     if (formData.industry) customAnswers['Industry'] = formData.industry;
     if (formData.timeline) customAnswers['Timeline'] = formData.timeline;
+    if (formData.phone) customAnswers['Phone'] = formData.phone;
     if (formData.currentSolution) customAnswers['Current solution'] = formData.currentSolution;
     if (formData.message) customAnswers['Notes'] = formData.message;
 
@@ -103,6 +106,8 @@ export default function ContactSalesContent() {
       customAnswers: Object.keys(customAnswers).length ? customAnswers : undefined,
     };
   }, [formData]);
+
+  const calEmbedKey = useMemo(() => JSON.stringify(calPrefill || {}), [calPrefill]);
 
   // Track form view on mount
   useEffect(() => {
@@ -140,6 +145,12 @@ export default function ContactSalesContent() {
       });
     }
   }, [currentStep]);
+
+  useEffect(() => {
+    if (isSubmitted && bookingSectionRef.current) {
+      bookingSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [isSubmitted]);
 
   // Track form start on first interaction
   const handleFormStart = useCallback(() => {
@@ -508,17 +519,41 @@ export default function ContactSalesContent() {
               </p>
 
               {/* Cal.com Integration Section */}
-              <div className="mt-10 pt-6 sm:mt-16 sm:pt-8 border-t border-gray-200">
+              <div ref={bookingSectionRef} className="mt-10 pt-6 sm:mt-16 sm:pt-8 border-t border-gray-200">
                 <div className="max-w-3xl mx-auto">
                   <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
                     Book a time
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">
-                    Schedule a meeting with our team
+                    We pre-filled your details from the form. Pick a slot and hit confirm.
                   </p>
+
+                  <div className="glass-elevated p-4 sm:p-5 rounded-xl border border-primary/10 mb-6 sm:mb-8 text-left">
+                    <p className="text-sm font-semibold text-gray-900 mb-3">Details we'll send with your booking</p>
+                    <div className="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+                      <div>
+                        <p className="text-gray-500">Name</p>
+                        <p className="font-semibold">{formData.name || '—'}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Email</p>
+                        <p className="font-semibold break-all">{formData.email || '—'}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Company</p>
+                        <p className="font-semibold">{formData.company || '—'}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Timeline</p>
+                        <p className="font-semibold">{formData.timeline || '—'}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-3">You can tweak these inside the scheduler before confirming.</p>
+                  </div>
 
                   {/* Calendar Embed */}
                   <CalEmbed
+                    key={calEmbedKey}
                     calLink="suhailjoo/pullse-demo"
                     prefill={calPrefill}
                     className=""
