@@ -644,8 +644,6 @@ const Product = () => {
                           </div>
                           {product.customPreview ? (
                             <div className="min-h-[280px] md:min-h-[320px] bg-white">{product.customPreview}</div>
-                          ) : product.image ? (
-                            <Image src={product.image} alt={product.title} width={900} height={620} className="w-full" />
                           ) : null}
                         </div>
                       </div>

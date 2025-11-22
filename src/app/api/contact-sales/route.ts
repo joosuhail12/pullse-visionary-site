@@ -123,7 +123,8 @@ function getClientIp(request: NextRequest): string {
   if (forwardedFor) {
     return forwardedFor.split(',')[0]?.trim() || 'unknown';
   }
-  return request.ip || 'unknown';
+  const realIp = request.headers.get('x-real-ip');
+  return realIp || 'unknown';
 }
 
 // Cleanup old entries every 5 minutes
