@@ -52,7 +52,7 @@ const SolutionEcommerceIntegrationsSection = () => {
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{integration.name}</h3>
-                      <p className="text-xs text-muted-foreground mb-3">{integration.description}</p>
+                      <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{integration.description}</p>
                       <div className="flex items-center gap-2 text-xs font-semibold text-primary group-hover:scale-105 transition-transform duration-300 origin-left">
                         <CheckCircle2 className="h-3.5 w-3.5 group-hover:scale-110 transition-transform duration-300" />
                         <span>{integration.benefit}</span>

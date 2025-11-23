@@ -81,7 +81,7 @@ export default function CompetitorComparisonSection() {
   const switchReasons = currentCompetitor?.whySwitch.slice(0, 2) ?? [];
 
   return (
-    <section className="relative py-10 md:py-12 overflow-hidden">
+    <section className="relative py-10 sm:py-12 md:py-14 overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-primary/5 to-background" />
       <div className="absolute -z-10 left-[-8%] top-10 h-64 w-64 rounded-full bg-primary/15 blur-3xl opacity-70" />
       <div className="absolute -z-10 right-[-6%] bottom-10 h-72 w-72 rounded-full bg-fuchsia-400/10 blur-3xl opacity-70" />
@@ -89,10 +89,10 @@ export default function CompetitorComparisonSection() {
       <div className="container mx-auto px-4 max-w-6xl relative space-y-6">
         <div className="text-center space-y-2">
           <Badge className="bg-primary/10 text-primary border-primary/40">Actionable AI vs legacy bots</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">
             Pullse executes. {currentCompetitor?.name || 'Competitors'} answer.
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
             One-screen snapshot: Pullse completes actions in-chat; others mostly provide answers.
           </p>
         </div>
@@ -120,7 +120,7 @@ export default function CompetitorComparisonSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.24 }}
-            className="rounded-3xl border border-border/60 bg-card/95 shadow-2xl p-4 md:p-5 space-y-4"
+            className="rounded-3xl border border-border/60 bg-card/95 shadow-2xl p-4 sm:p-5 md:p-6 space-y-4"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="space-y-1">
@@ -141,7 +141,7 @@ export default function CompetitorComparisonSection() {
             </div>
 
             <div className="grid gap-3 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="rounded-2xl border border-border/60 bg-gradient-to-br from-primary/10 via-background to-background shadow-inner p-4 md:p-5 space-y-3">
+              <div className="rounded-2xl border border-border/60 bg-gradient-to-br from-primary/10 via-background to-background shadow-inner p-4 sm:p-5 md:p-6 space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1.5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">Pullse</p>
@@ -185,7 +185,7 @@ export default function CompetitorComparisonSection() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-border/60 bg-card/90 p-4 md:p-5 space-y-3">
+              <div className="rounded-2xl border border-border/60 bg-card/90 p-4 sm:p-5 md:p-6 space-y-3">
                 <div className="flex items-start justify-between gap-3 flex-wrap">
                   <div className="space-y-1.5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">

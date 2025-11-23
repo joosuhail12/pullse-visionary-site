@@ -35,7 +35,7 @@ const SolutionSaaS = () => {
       <SolutionSaaSIntegrationsSection />
 
       {/* ROI Calculator Section */}
-      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32 overflow-hidden">
+      <section className="relative py-14 md:py-18 lg:py-22 xl:py-28 overflow-hidden">
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl">
             {/* Header */}
@@ -49,7 +49,7 @@ const SolutionSaaS = () => {
             </div>
 
             {/* Calculator Card */}
-            <div className="relative overflow-hidden rounded-[28px] border-2 border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-8 md:p-12 shadow-2xl backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-[28px] border-2 border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-6 sm:p-8 md:p-12 shadow-2xl backdrop-blur-sm">
               <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
               <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
 
@@ -62,7 +62,7 @@ const SolutionSaaS = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
+      <section className="relative py-14 md:py-18 lg:py-22 xl:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
@@ -71,13 +71,13 @@ const SolutionSaaS = () => {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--primary)/0.1),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-              <div className="relative p-12 lg:p-16 z-10">
+              <div className="relative p-8 sm:p-10 lg:p-14 z-10">
                 <div className="text-center space-y-10">
                   <div className="space-y-6">
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                       Transform your support team today
                     </h2>
-                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
                       Connect your stack and start executing actions instantly. Just ask—our AI handles the rest across your entire tech stack.
                     </p>
                   </div>

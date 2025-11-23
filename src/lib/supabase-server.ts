@@ -45,6 +45,14 @@ export interface StartupApplication {
   customer_status: string;
   current_tools: string;
   use_case: string;
+   utm_source?: string | null;
+   utm_medium?: string | null;
+   utm_campaign?: string | null;
+   utm_term?: string | null;
+   utm_content?: string | null;
+   referrer?: string | null;
+   landing_page?: string | null;
+   form_path?: string | null;
   status?: string;
   submitted_at?: string;
   created_at?: string;

@@ -99,7 +99,7 @@ const HomeHeroSection = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-20">
+    <section ref={heroRef} className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-24 md:pt-28">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background -z-20" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--primary)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary)/0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-20" />
 

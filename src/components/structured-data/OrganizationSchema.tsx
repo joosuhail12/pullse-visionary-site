@@ -60,7 +60,9 @@ export const OrganizationSchema = () => {
 
   return (
     <script
+      key="organization-schema"
       type="application/ld+json"
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );

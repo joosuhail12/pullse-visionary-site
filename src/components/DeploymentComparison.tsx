@@ -21,7 +21,7 @@ import { cn } from '@/lib/utils';
 
 export default function DeploymentComparison() {
   return (
-    <section className="relative py-32 overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
+    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
       {/* Background - Match Outcomes section */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--primary-rgb),0.08),transparent_60%)]" />
 
@@ -61,7 +61,7 @@ export default function DeploymentComparison() {
             </motion.div>
 
             <motion.h2
-              className="text-5xl sm:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
+              className="text-3xl sm:text-5xl lg:text-7xl font-black text-foreground mb-8 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -74,7 +74,7 @@ export default function DeploymentComparison() {
             </motion.h2>
 
             <motion.p
-              className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
+              className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

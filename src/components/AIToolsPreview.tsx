@@ -4,7 +4,7 @@ const AIToolsPreview = () => {
   return (
     <div className="w-full h-full flex flex-col bg-gradient-to-br from-background to-muted/30 rounded-lg overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 bg-primary/5 border-b border-primary/10 flex items-center gap-2">
+      <div className="px-3 sm:px-4 py-2.5 sm:py-3 bg-primary/5 border-b border-primary/10 flex items-center gap-2">
         <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
           <Sparkles className="w-4 h-4 text-primary-foreground" />
         </div>
@@ -15,7 +15,7 @@ const AIToolsPreview = () => {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 grid grid-cols-2 gap-3 p-3">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 sm:p-4">
         {/* Original Text */}
         <div className="flex flex-col space-y-2">
           <div className="flex items-center gap-2">
@@ -76,16 +76,16 @@ const AIToolsPreview = () => {
       </div>
 
       {/* Stats Footer */}
-      <div className="px-4 py-2 bg-primary/5 border-t border-primary/10 grid grid-cols-3 gap-2 text-center">
-        <div>
+      <div className="px-3 sm:px-4 py-2 bg-primary/5 border-t border-primary/10 grid grid-cols-2 sm:grid-cols-3 gap-2 text-center">
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-primary">847</div>
           <div className="text-[10px] text-muted-foreground">Rewrites Today</div>
         </div>
-        <div>
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-accent-teal">12</div>
           <div className="text-[10px] text-muted-foreground">Tone Styles</div>
         </div>
-        <div>
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-accent-green">98%</div>
           <div className="text-[10px] text-muted-foreground">Accuracy</div>
         </div>

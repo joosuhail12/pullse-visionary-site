@@ -6,7 +6,7 @@ import { ArrowRight, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 export default function ProductAIEngineFinalCTA() {
   return (
-    <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-14 md:py-20 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
 
       {/* Animated background gradients */}
@@ -17,20 +17,20 @@ export default function ProductAIEngineFinalCTA() {
 
       <div className="container mx-auto px-4 md:px-6 relative">
         <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-8 md:p-12 lg:p-16 shadow-2xl text-center overflow-hidden">
+          <div className="relative rounded-3xl border border-primary/30 bg-gradient-to-br from-card/50 via-background/30 to-card/50 backdrop-blur-2xl p-7 md:p-12 lg:p-14 shadow-2xl text-center overflow-hidden">
             {/* Background glow */}
             <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/30 via-purple-600/30 to-indigo-600/30 opacity-50 blur-2xl" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
 
             <div className="relative">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 md:mb-7 lg:mb-8 leading-tight">
                 Ready to see it{" "}
                 <span className="bg-gradient-to-r from-primary via-purple-500 to-indigo-500 bg-clip-text text-transparent">
                   in action?
                 </span>
               </h2>
 
-              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 md:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
                 Book a technical walkthrough and see how Pullse handles <span className="font-bold text-foreground">your specific use cases</span> with governed AI.
               </p>
 

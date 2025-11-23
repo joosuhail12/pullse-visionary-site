@@ -1,7 +1,7 @@
 'use client';
 
 import { CalEmbed } from "@/components/CalEmbed";
-import { Calendar, Mail, MessageSquare, Check, Loader2, Send, ArrowRight, ArrowLeft } from "lucide-react";
+import { Calendar, Check, Loader2, Send, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -237,6 +237,18 @@ export default function ContactSalesContent() {
     });
   }, [handleFormStart]);
 
+  const handleQuickSelect = useCallback((name: keyof FormData, value: string) => {
+    handleFormStart();
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => {
+      if (prev[name]) {
+        const { [name]: _, ...rest } = prev;
+        return rest;
+      }
+      return prev;
+    });
+  }, [handleFormStart]);
+
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -340,10 +352,10 @@ export default function ContactSalesContent() {
   }, [currentStep, formData, validateStep]);
 
   const benefits = [
-    "30-minute personalized demo",
-    "Discover how Pullse fits your workflow",
-    "Get answers to all your questions",
-    "No commitment required",
+    "30-minute tailored walkthrough",
+    "Live examples based on your stack",
+    "Automation plan and next steps",
+    "Security & governance reviewed",
   ];
 
   // Memoized step component
@@ -368,6 +380,14 @@ export default function ContactSalesContent() {
             label: "Company Size",
             type: "select",
             required: true,
+            helper: "Helps us tailor pricing and ramp recommendations.",
+            quickOptions: [
+              { value: "1-10", label: "1-10" },
+              { value: "11-50", label: "11-50" },
+              { value: "51-200", label: "51-200" },
+              { value: "201-500", label: "200-500" },
+              { value: "500+", label: "500+" },
+            ],
             options: [
               { value: "", label: "Select company size" },
               { value: "1-10", label: "1-10 employees" },
@@ -382,6 +402,7 @@ export default function ContactSalesContent() {
             label: "Industry",
             type: "select",
             required: true,
+            helper: "Pick the closest fit. We’ll tailor the demo accordingly.",
             options: [
               { value: "", label: "Select industry" },
               { value: "B2B SaaS", label: "B2B SaaS" },
@@ -402,6 +423,13 @@ export default function ContactSalesContent() {
             label: "Implementation Timeline",
             type: "select",
             required: true,
+            helper: "Helps us plan the right rollout milestones.",
+            quickOptions: [
+              { value: "Immediate", label: "Immediate" },
+              { value: "Near-term", label: "1-3 months" },
+              { value: "Exploring", label: "3-6 months" },
+              { value: "Planning", label: "6+ months" },
+            ],
             options: [
               { value: "", label: "When are you looking to implement?" },
               { value: "Immediate", label: "Immediate (Within 1 month)" },
@@ -444,21 +472,47 @@ export default function ContactSalesContent() {
                 {!field.required && <span className="text-gray-400 text-xs font-normal ml-1">(Optional)</span>}
               </label>
 
-              {field.type === 'select' ? (
-                <select
-                  name={field.name}
-                  value={formData[field.name as keyof FormData]}
-                  onChange={handleChange}
-                  className={`glass-elevated w-full px-5 h-14 rounded-xl text-base font-medium focus:outline-none transition-all duration-300 hover:shadow-lg ${
-                    errors[field.name]
-                      ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
-                      : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
-                  }`}
-                >
-                  {field.options?.map(opt => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+              {field.helper && (
+                <p className="text-xs text-gray-500 mb-2">{field.helper}</p>
+              )}
+
+              {field.quickOptions && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {field.quickOptions.map((opt) => (
+                    <button
+                      type="button"
+                      key={opt.value}
+                      onClick={() => handleQuickSelect(field.name as keyof FormData, opt.value)}
+                      className={`px-3 py-1.5 rounded-lg border text-sm font-semibold transition-all ${
+                        formData[field.name as keyof FormData] === opt.value
+                          ? 'border-primary bg-primary/10 text-primary shadow-sm'
+                          : 'border-border text-gray-700 hover:border-primary/50'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
                   ))}
-                </select>
+                </div>
+              )}
+
+              {field.type === 'select' ? (
+                <div className="relative">
+                  <select
+                    name={field.name}
+                    value={formData[field.name as keyof FormData]}
+                    onChange={handleChange}
+                    className={`glass-elevated w-full px-5 h-14 rounded-xl text-base font-medium focus:outline-none appearance-none transition-all duration-300 hover:shadow-lg ${
+                      errors[field.name]
+                        ? 'border-red-400 ring-2 ring-red-200 bg-red-50/30'
+                        : 'border-primary/20 focus:ring-4 focus:ring-primary/20 focus:border-primary/40'
+                    }`}
+                  >
+                    {field.options?.map(opt => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+                </div>
               ) : field.type === 'textarea' ? (
                 <Textarea
                   name={field.name}
@@ -493,7 +547,7 @@ export default function ContactSalesContent() {
         </div>
       </motion.div>
     );
-  }, [currentStep, formData, errors, handleChange]);
+  }, [currentStep, formData, errors, handleChange, handleQuickSelect]);
 
   // Success state with Cal.com integration
   if (isSubmitted) {
@@ -613,25 +667,30 @@ export default function ContactSalesContent() {
               </div>
 
               <div className="glass-gradient p-5 sm:p-7 rounded-2xl sm:rounded-3xl space-y-4 sm:space-y-5 border-2 border-primary/10 shadow-xl">
-                <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" strokeWidth={2} />
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center shadow-lg">
+                    <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-primary" strokeWidth={2} />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-base sm:text-lg">Email Us</p>
-                    <p className="text-sm sm:text-base text-primary font-medium">sales@pullse.com</p>
+                    <p className="font-bold text-gray-900 text-base sm:text-lg">What to expect next</p>
+                    <p className="text-sm sm:text-base text-gray-600 font-medium">We’ll reply within one business day with a tailored agenda.</p>
                   </div>
                 </div>
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-                <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
-                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg">
-                    <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" strokeWidth={2} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 text-base sm:text-lg">Live Chat</p>
-                    <p className="text-sm sm:text-base text-gray-600 font-medium">Available 9am-6pm EST</p>
-                  </div>
-                </div>
+                <ul className="space-y-2 text-sm sm:text-base text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <span>Prepped demo that mirrors your workflows</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <span>Security, approvals, and audit trails covered</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-primary mt-0.5" />
+                    <span>Clear next steps and rollout plan</span>
+                  </li>
+                </ul>
               </div>
             </div>
 

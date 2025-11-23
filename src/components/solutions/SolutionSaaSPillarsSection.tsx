@@ -103,7 +103,7 @@ export default function SolutionSaaSPillarsSection() {
                       {pillar.features.map((feature, fIndex) => (
                         <div key={fIndex} className="flex items-start gap-2 md:gap-3">
                           <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary mt-0.5 shrink-0" />
-                          <p className="text-xs md:text-sm text-foreground/80">{feature}</p>
+                          <p className="text-xs md:text-sm text-foreground/80 leading-relaxed">{feature}</p>
                         </div>
                       ))}
                     </div>

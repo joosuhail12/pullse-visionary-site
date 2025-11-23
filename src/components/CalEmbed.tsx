@@ -56,6 +56,25 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
 
   const prefillKey = JSON.stringify(sanitizedPrefill || {});
 
+  const calLinkWithPrefill = useMemo(() => {
+    if (!sanitizedPrefill) return calLink;
+
+    const params = new URLSearchParams();
+    if (sanitizedPrefill.name) params.set('name', sanitizedPrefill.name);
+    if (sanitizedPrefill.email) params.set('email', sanitizedPrefill.email);
+    if (sanitizedPrefill.notes) params.set('notes', sanitizedPrefill.notes);
+    if (sanitizedPrefill.guests?.length) params.set('guests', sanitizedPrefill.guests.join(','));
+
+    if (sanitizedPrefill.customAnswers) {
+      Object.entries(sanitizedPrefill.customAnswers).forEach(([key, value]) => {
+        params.set(`custom_${key}`, value);
+      });
+    }
+
+    const qs = params.toString();
+    return qs ? `${calLink}?${qs}` : calLink;
+  }, [calLink, sanitizedPrefill]);
+
   const timeZone = useMemo(() => {
     try {
       return Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -136,7 +155,7 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
         // Setup inline embed
         w.Cal('inline', {
           elementOrSelector: embedRef.current,
-          calLink: calLink,
+          calLink: calLinkWithPrefill,
           config: {
             theme: 'light',
             ...(timeZone ? { timezone: timeZone } : {}),
@@ -191,6 +210,27 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
               calendar_provider: 'cal.com',
               value: 200, // High-value conversion
             } as any);
+
+            // Send booking details to backend for webhook handling
+            const payload = {
+              name: sanitizedPrefill?.name || e?.data?.name,
+              email: sanitizedPrefill?.email || e?.data?.email,
+              event_title: e?.data?.eventType?.title,
+              start_time: e?.data?.startTime,
+              end_time: e?.data?.endTime,
+              timezone: e?.data?.timeZone,
+              location: e?.data?.location,
+              meeting_url: e?.data?.meetingUrl,
+              notes: sanitizedPrefill?.notes,
+              custom_answers: sanitizedPrefill?.customAnswers,
+              raw: e?.data,
+            };
+
+            fetch('/api/contact-sales/booking', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            }).catch((err) => console.error('Booking webhook send failed', err));
           },
         });
 

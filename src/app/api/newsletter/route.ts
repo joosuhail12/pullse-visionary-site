@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
+import { sendWebhook } from '@/lib/webhook';
 
 // =======================
 // Schema Validation (Zod)
@@ -12,6 +13,16 @@ const NewsletterSchema = z.object({
   source: z.string().max(50, 'Source too long').optional().default('blog'),
   firstName: z.string().max(100, 'First name too long').trim().optional(),
   lastName: z.string().max(100, 'Last name too long').trim().optional(),
+  attribution: z.object({
+    utm_source: z.string().optional(),
+    utm_medium: z.string().optional(),
+    utm_campaign: z.string().optional(),
+    utm_term: z.string().optional(),
+    utm_content: z.string().optional(),
+    referrer: z.string().optional(),
+    landing_page: z.string().url().optional(),
+    form_path: z.string().optional(),
+  }).optional(),
 });
 
 type NewsletterInput = z.infer<typeof NewsletterSchema>;
@@ -28,6 +39,14 @@ interface NewsletterSubscriber {
   last_name?: string;
   subscribed_at?: string;
   is_active?: boolean;
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_campaign?: string | null;
+  utm_term?: string | null;
+  utm_content?: string | null;
+  referrer?: string | null;
+  landing_page?: string | null;
+  form_path?: string | null;
 }
 
 // =======================
@@ -71,6 +90,20 @@ export async function POST(request: NextRequest) {
     // Parse and validate request body
     const body = await request.json();
     const validatedData: NewsletterInput = NewsletterSchema.parse(body);
+    const attribution = validatedData.attribution || {};
+    const landingPage = attribution.landing_page?.trim() || '';
+    const formPath = attribution.form_path?.trim() || request.nextUrl.pathname;
+    const attributionFields: Partial<NewsletterSubscriber> = {
+      utm_source: attribution.utm_source?.trim() || null,
+      utm_medium: attribution.utm_medium?.trim() || null,
+      utm_campaign: attribution.utm_campaign?.trim() || null,
+      utm_term: attribution.utm_term?.trim() || null,
+      utm_content: attribution.utm_content?.trim() || null,
+      referrer: attribution.referrer?.trim() || null,
+      landing_page: landingPage || null,
+      form_path: formPath || null,
+    };
+    const hasAttribution = Object.values(attributionFields).some((value) => Boolean(value));
 
     // Get Supabase client
     const supabase = getSupabaseServer();
@@ -92,17 +125,18 @@ export async function POST(request: NextRequest) {
 
     // If email exists and is active
     if (existing && existing.is_active) {
-      // Check if user is providing new name data
+      // Check if user is providing new name data or attribution
       const hasNewData = validatedData.firstName || validatedData.lastName;
 
-      if (hasNewData) {
+      if (hasNewData || hasAttribution) {
         // Build update object with only provided fields
         const updateData: Partial<NewsletterSubscriber> = {};
 
         if (validatedData.firstName) updateData.first_name = validatedData.firstName;
         if (validatedData.lastName) updateData.last_name = validatedData.lastName;
+        if (hasAttribution) Object.assign(updateData, attributionFields);
 
-        // Update the existing record with new name fields
+        // Update the existing record with new data
         const { error: updateError } = await supabase
           .from('newsletter_subscribers')
           .update(updateData)
@@ -128,14 +162,24 @@ export async function POST(request: NextRequest) {
         );
         await flushServerEvents();
 
-        return NextResponse.json(
+        const responseBody = {
+          message: 'Your subscription details have been updated!',
+          updated: true,
+          success: true
+        };
+
+        await sendWebhook(
+          process.env.NEWSLETTER_WEBHOOK_URL,
+          'newsletter_updated',
           {
-            message: 'Your subscription details have been updated!',
-            updated: true,
-            success: true
-          },
-          { status: 200 }
+            email: validatedData.email,
+            first_name: validatedData.firstName,
+            last_name: validatedData.lastName,
+            attribution: hasAttribution ? attributionFields : undefined,
+          }
         );
+
+        return NextResponse.json(responseBody, { status: 200 });
       }
 
       // No new data provided, just return already subscribed
@@ -158,6 +202,7 @@ export async function POST(request: NextRequest) {
 
       if (validatedData.firstName) updateData.first_name = validatedData.firstName;
       if (validatedData.lastName) updateData.last_name = validatedData.lastName;
+      if (hasAttribution) Object.assign(updateData, attributionFields);
 
       const { error: updateError } = await supabase
         .from('newsletter_subscribers')
@@ -196,13 +241,24 @@ export async function POST(request: NextRequest) {
       );
       await flushServerEvents();
 
-      return NextResponse.json(
+      const responseBody = {
+        message: 'Welcome back! Your subscription has been reactivated.',
+        success: true
+      };
+
+      await sendWebhook(
+        process.env.NEWSLETTER_WEBHOOK_URL,
+        'newsletter_reactivated',
         {
-          message: 'Welcome back! Your subscription has been reactivated.',
-          success: true
-        },
-        { status: 200 }
+          email: validatedData.email,
+          first_name: validatedData.firstName,
+          last_name: validatedData.lastName,
+          source: validatedData.source,
+          attribution: hasAttribution ? attributionFields : undefined,
+        }
       );
+
+      return NextResponse.json(responseBody, { status: 200 });
     }
 
     // Insert new subscriber
@@ -213,6 +269,7 @@ export async function POST(request: NextRequest) {
 
     if (validatedData.firstName) subscriberData.first_name = validatedData.firstName;
     if (validatedData.lastName) subscriberData.last_name = validatedData.lastName;
+    if (hasAttribution) Object.assign(subscriberData, attributionFields);
 
     const { error: insertError } = await supabase
       .from('newsletter_subscribers')
@@ -262,6 +319,18 @@ export async function POST(request: NextRequest) {
     );
 
     await flushServerEvents();
+
+    await sendWebhook(
+      process.env.NEWSLETTER_WEBHOOK_URL,
+      'newsletter_subscribed',
+      {
+        email: validatedData.email,
+        first_name: validatedData.firstName,
+        last_name: validatedData.lastName,
+        source: validatedData.source,
+        attribution: hasAttribution ? attributionFields : undefined,
+      }
+    );
 
     // Success response
     return NextResponse.json(

@@ -27,7 +27,7 @@ const ProductInbox = () => {
       <ScrollProgressIndicator />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-32 pb-24 overflow-hidden">
+      <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center pt-24 md:pt-28 lg:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.15),transparent_50%)]" />
 
@@ -53,7 +53,7 @@ const ProductInbox = () => {
       </section>
 
       {/* AI Features Section */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.08),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">
@@ -65,7 +65,7 @@ const ProductInbox = () => {
       </section>
 
       {/* Features Bento Grid Section */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Header - Server Rendered */}
@@ -85,7 +85,7 @@ const ProductInbox = () => {
       </section>
 
       {/* Analytics & Results Section */}
-      <section className="relative py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
+      <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-muted/10 via-muted/5 to-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* Analytics Stats - Client Component */}
@@ -95,7 +95,7 @@ const ProductInbox = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-32">
+      <section className="relative py-16 md:py-24 lg:py-32">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.15),transparent_60%)]" />
 
         <div className="container relative mx-auto px-4">

@@ -34,21 +34,21 @@ const SolutionEcommerce = () => {
       <SolutionEcommercePillarsSection />
 
       {/* Core E-commerce Workflows Section */}
-      <section className="relative py-16 md:py-20 lg:py-24 xl:py-32">
+      <section className="relative py-14 md:py-18 lg:py-22 xl:py-28">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             {/* WISMO Featured Workflow - 62% of all tickets */}
-            <div className="mb-16">
-              <div className="relative overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-blue-500/5 via-card to-cyan-500/5 p-10 md:p-12">
+            <div className="mb-12 sm:mb-14 md:mb-16">
+              <div className="relative overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-blue-500/5 via-card to-cyan-500/5 p-6 sm:p-8 md:p-12">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_50%)]" />
 
-                <div className="relative space-y-8">
+                <div className="relative space-y-6 sm:space-y-8">
                   {/* Scenario */}
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground mb-3 sm:mb-4">
                       WISMO Ticket Elimination
                     </h3>
-                    <div className="rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm p-6">
+                    <div className="rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm p-4 sm:p-6">
                       <div className="flex items-start gap-4 mb-4">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/30 shrink-0">
                           <MessageSquare className="h-5 w-5 text-blue-600" />
@@ -69,9 +69,9 @@ const SolutionEcommerce = () => {
                   </div>
 
                   {/* Before/After Split */}
-                  <div className="grid lg:grid-cols-2 gap-6">
+                  <div className="grid lg:grid-cols-2 gap-5 sm:gap-6">
                     {/* Traditional Way */}
-                    <div className="rounded-2xl border-2 border-destructive/40 bg-gradient-to-br from-destructive/5 to-transparent p-6">
+                    <div className="rounded-2xl border-2 border-destructive/40 bg-gradient-to-br from-destructive/5 to-transparent p-5 sm:p-6">
                       <div className="flex items-center gap-3 mb-6">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-destructive/20 border border-destructive/40">
                           <AlertTriangle className="h-5 w-5 text-destructive" />
@@ -108,7 +108,7 @@ const SolutionEcommerce = () => {
                     </div>
 
                     {/* Pullse Way */}
-                    <div className="rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/10 to-transparent p-6">
+                    <div className="rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/10 to-transparent p-5 sm:p-6">
                       <div className="flex items-center gap-3 mb-6">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 shadow-md">
                           <Zap className="h-5 w-5 text-background" />

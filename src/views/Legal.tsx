@@ -14,14 +14,14 @@ export default function Legal() {
       <Navigation />
 
       <main id="main-content" role="main">
-      <div className="relative pt-24 pb-16">
+      <div className="relative pt-18 md:pt-22 pb-12 md:pb-16">
         <div className="container mx-auto px-4">
           {/* Header - Server-rendered, no animation on server */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-6">
+          <div className="text-center mb-12 md:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-primary to-purple-600 bg-clip-text text-transparent mb-4 md:mb-6">
               Terms & Policies
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Read our terms of service, privacy policy, and other legal documents to understand how we protect and serve you.
             </p>
           </div>

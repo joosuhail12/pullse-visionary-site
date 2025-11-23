@@ -126,7 +126,7 @@ export function Navigation() {
     <>
       {/* Floating Navigation Container */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8"
+        className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 lg:px-8 pt-[env(safe-area-inset-top)]"
         style={{
           paddingTop: navPadding,
         }}
@@ -161,7 +161,7 @@ export function Navigation() {
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
           </motion.div>
 
-          <nav className="relative px-6 py-4">
+          <nav className="relative px-3 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center justify-between">
               {/* Logo with magnetic effect */}
               <motion.div

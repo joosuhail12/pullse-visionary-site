@@ -85,16 +85,16 @@ const AIChatbotPreview = () => {
       </div>
 
       {/* Stats Footer */}
-      <div className="px-4 py-2 bg-primary/5 border-t border-primary/10 grid grid-cols-3 gap-2 text-center">
-        <div>
+      <div className="px-3 sm:px-4 py-2 bg-primary/5 border-t border-primary/10 grid grid-cols-2 sm:grid-cols-3 gap-2 text-center">
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-primary">1,247</div>
           <div className="text-[10px] text-muted-foreground">Conversations</div>
         </div>
-        <div>
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-accent-green">18s</div>
           <div className="text-[10px] text-muted-foreground">Avg Response</div>
         </div>
-        <div>
+        <div className="space-y-0.5">
           <div className="text-xs font-bold text-accent-teal">24/7</div>
           <div className="text-[10px] text-muted-foreground">Availability</div>
         </div>

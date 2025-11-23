@@ -26,7 +26,7 @@ export default function CompareContentSections() {
     <div className="relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background opacity-70 pointer-events-none" />
       <div className="absolute inset-x-0 top-6 h-28 bg-gradient-to-b from-white/40 via-white/10 to-transparent blur-3xl opacity-50 pointer-events-none" />
-      <div className="relative space-y-12 md:space-y-14 lg:space-y-16">
+      <div className="relative space-y-10 md:space-y-14 lg:space-y-16">
 
       {/* Comparison Table */}
       <motion.div
@@ -42,7 +42,7 @@ export default function CompareContentSections() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-3 md:mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4"
           >
             Feature Comparison
           </motion.h2>
@@ -68,7 +68,7 @@ export default function CompareContentSections() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-6xl mx-auto glass-strong p-5 md:p-7 lg:p-8 rounded-3xl shadow-lg"
+        className="max-w-6xl mx-auto glass-strong p-4 sm:p-6 md:p-7 lg:p-8 rounded-3xl shadow-lg"
       >
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-3">
@@ -97,7 +97,7 @@ export default function CompareContentSections() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="glass-strong p-4 md:p-5 rounded-xl md:rounded-2xl relative overflow-hidden group cursor-default"
+                className="glass-strong p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl relative overflow-hidden group cursor-default"
               >
                 {/* Gradient hover effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -8,7 +8,7 @@ const LiquidEther = lazy(() => import("@/components/LiquidEther"));
 
 export default function SolutionSaaSHeroSection() {
   return (
-    <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-16 md:pt-20">
+    <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center overflow-hidden pt-20 md:pt-24">
       {/* Hero Liquid Ether Effect */}
       <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
         <Suspense fallback={<div className="w-full h-full" />}>
@@ -45,7 +45,7 @@ export default function SolutionSaaSHeroSection() {
 
             {/* CTA */}
             <div className="pt-4 md:pt-6">
-              <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 shadow-xl shadow-primary/20 group">
+              <RouteButton size="lg" href="/contact-sales" className="text-sm md:text-base px-6 py-4 md:px-8 md:py-5 lg:px-10 lg:py-6 shadow-xl shadow-primary/20 group w-full sm:w-auto">
                 Book a demo
                 <Play className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:scale-110 transition-transform" />
               </RouteButton>

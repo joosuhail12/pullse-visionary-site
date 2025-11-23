@@ -54,7 +54,7 @@ const HomeNew = () => {
       <HomeUseCasesSection />
 
       {/* Enhanced ROI Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-14 sm:py-18 md:py-22 lg:py-30 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.04),transparent_70%)]" />
 
@@ -65,13 +65,13 @@ const HomeNew = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
                 See your potential savings
               </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Industry benchmarks show 60-75% cost reduction potential with AI automation. Calculate your team's potential impact.
               </p>
             </div>
 
             {/* Calculator Card with enhanced styling */}
-            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-card to-card/90 p-5 sm:p-7 md:p-10 lg:p-12 shadow-2xl backdrop-blur-sm">
               {/* Decorative gradient */}
               <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/15 blur-3xl" />
 
@@ -126,7 +126,7 @@ const HomeNew = () => {
       <HomeIntegrationsSection />
 
       {/* Optimized Final CTA - Split Layout */}
-      <section className="relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-32">
+      <section className="relative overflow-hidden py-14 sm:py-18 md:py-22 lg:py-30">
         {/* Enhanced background */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/3 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.04),transparent_70%)]" />

@@ -140,7 +140,7 @@ const FeaturedBlogSection = ({ featuredPosts }: FeaturedBlogSectionProps) => {
   if (!primaryPost) return null;
 
   return (
-    <section className="relative isolate overflow-hidden py-20 md:py-28">
+    <section className="relative isolate overflow-hidden py-14 md:py-20">
       {/* Hero Liquid Ether Effect */}
       <BlogHeroBackground />
 
@@ -182,7 +182,7 @@ const FeaturedPostLarge = ({ post }: FeaturedPostProps) => {
       className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg shadow-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-black/8"
     >
       {/* Image - No overlay, full visibility */}
-      <div className="relative h-[400px] overflow-hidden bg-muted md:h-[500px]">
+      <div className="relative h-[260px] sm:h-[340px] md:h-[460px] overflow-hidden bg-muted">
         {hasImageAsset(post.featuredImage) ? (
           <>
             <Image

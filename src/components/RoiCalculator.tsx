@@ -221,31 +221,31 @@ const RoiCalculator = () => {
       </div>
 
       {/* Compact Savings Summary */}
-      <div className="rounded-2xl border border-primary/40 bg-gradient-to-r from-primary/10 to-primary/5 p-6">
-        <div className="flex flex-col md:flex-row items-center gap-6">
+      <div className="rounded-2xl border border-primary/40 bg-gradient-to-r from-primary/10 to-primary/5 p-6 sm:p-7">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
           <div className="text-center md:text-left">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-2">
               <TrendingDown className="h-3 w-3" />
               Total Savings
             </div>
-            <div className="text-5xl font-bold text-primary mb-1">{formatCurrency(savings)}</div>
+            <div className="text-4xl sm:text-5xl font-bold text-primary mb-1">{formatCurrency(savings)}</div>
             <p className="text-xs text-muted-foreground">per month ({savingsPercentage.toFixed(0)}% savings)</p>
             <p className="text-sm font-semibold text-primary mt-2">{formatCurrency(savings * 12)}/year</p>
           </div>
 
           <div className="h-px md:h-12 md:w-px bg-border/40 w-full md:w-auto" />
 
-          <div className="grid grid-cols-3 gap-4 flex-1">
-            <div className="text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 flex-1 w-full">
+            <div className="text-center space-y-1.5">
               <div className="text-2xl font-bold text-foreground">{repsSaved}</div>
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Fewer Reps</div>
             </div>
-            <div className="text-center">
+            <div className="text-center space-y-1.5">
               <div className="text-2xl font-bold text-foreground">{formatNumber(pullse.automatedTickets)}</div>
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Automated</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary">+50%</div>
+            <div className="text-center space-y-1.5">
+              <div className="text-2xl font-bold text-primary leading-tight">+50%</div>
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Auto Increase</div>
             </div>
           </div>

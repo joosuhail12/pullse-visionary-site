@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer, type StartupApplication } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
+import { sendWebhook } from '@/lib/webhook';
 
 // =======================
 // Schema Validation (Zod)
@@ -27,6 +28,16 @@ const StartupApplicationSchema = z.object({
   // Optional fields
   currentTools: z.string().max(1000, 'Current tools description too long').optional().default(''),
   useCase: z.string().max(2000, 'Use case description too long').optional().default(''),
+  attribution: z.object({
+    utm_source: z.string().optional(),
+    utm_medium: z.string().optional(),
+    utm_campaign: z.string().optional(),
+    utm_term: z.string().optional(),
+    utm_content: z.string().optional(),
+    referrer: z.string().optional(),
+    landing_page: z.string().url().optional(),
+    form_path: z.string().optional(),
+  }).optional(),
 });
 
 type StartupApplicationInput = z.infer<typeof StartupApplicationSchema>;
@@ -228,6 +239,10 @@ export async function POST(request: NextRequest) {
     }
 
     // 6. Prepare data for insertion
+    const attribution = validatedData.attribution || {};
+    const landingPage = attribution.landing_page?.trim() || '';
+    const formPath = attribution.form_path?.trim() || new URL(request.url).pathname;
+
     const applicationData: Omit<StartupApplication, 'id' | 'submitted_at' | 'created_at' | 'status'> = {
       company_name: validatedData.companyName.trim(),
       website: validatedData.website.trim(),
@@ -239,6 +254,14 @@ export async function POST(request: NextRequest) {
       customer_status: validatedData.customerStatus,
       current_tools: validatedData.currentTools.trim(),
       use_case: validatedData.useCase.trim(),
+      utm_source: attribution.utm_source?.trim() || null,
+      utm_medium: attribution.utm_medium?.trim() || null,
+      utm_campaign: attribution.utm_campaign?.trim() || null,
+      utm_term: attribution.utm_term?.trim() || null,
+      utm_content: attribution.utm_content?.trim() || null,
+      referrer: attribution.referrer?.trim() || null,
+      landing_page: landingPage || null,
+      form_path: formPath || null,
     };
 
     // 7. Insert into Supabase
@@ -313,7 +336,18 @@ export async function POST(request: NextRequest) {
     // Flush events before returning
     await flushServerEvents();
 
-    // 9. Success response
+    // 9. Fire webhook (non-blocking)
+    await sendWebhook(
+      process.env.STARTUP_APPLICATION_WEBHOOK_URL,
+      'startup_application_submitted',
+      {
+        application_id: data.id,
+        request_id: requestId,
+        payload: applicationData,
+      }
+    );
+
+    // 10. Success response
     return createSuccessResponse(
       {
         id: data.id,

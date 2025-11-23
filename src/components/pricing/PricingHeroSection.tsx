@@ -11,7 +11,7 @@ const LiquidEther = lazy(() => import('@/components/LiquidEther'));
 
 const PricingHeroSection = () => {
   return (
-    <section className="relative min-h-[60vh] md:min-h-[80vh] lg:min-h-screen flex items-center justify-center pt-16 md:pt-20">
+    <section className="relative min-h-[55vh] md:min-h-[75vh] lg:min-h-screen flex items-center justify-center pt-14 md:pt-18">
       {/* Hero Liquid Ether Effect */}
       <div className="absolute inset-0 -z-10 opacity-70 hidden md:block">
         <Suspense fallback={<div className="w-full h-full" />}>

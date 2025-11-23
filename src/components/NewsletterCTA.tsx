@@ -17,12 +17,24 @@ interface NewsletterCTAProps {
   source: 'footer' | 'blog-listing' | 'blog-detail';
 }
 
+interface AttributionData {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  referrer?: string;
+  landing_page?: string;
+  form_path?: string;
+}
+
 export default function NewsletterCTA({ variant = 'standard', source }: NewsletterCTAProps) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [attribution, setAttribution] = useState<AttributionData>({});
 
   // Tracking state
   const hasTrackedStart = useRef(false);
@@ -37,6 +49,20 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
       form_name: formName,
       form_destination: '/api/newsletter',
     });
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      setAttribution({
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+        utm_term: params.get('utm_term') || undefined,
+        utm_content: params.get('utm_content') || undefined,
+        referrer: document.referrer || undefined,
+        landing_page: window.location.href,
+        form_path: window.location.pathname,
+      });
+    }
   }, [formId, formName]);
 
   // Track form start on first interaction
@@ -104,6 +130,7 @@ export default function NewsletterCTA({ variant = 'standard', source }: Newslett
           firstName: variant === 'standard' ? firstName.trim() || undefined : undefined,
           lastName: variant === 'standard' ? lastName.trim() || undefined : undefined,
           source,
+          attribution,
         }),
       });
 

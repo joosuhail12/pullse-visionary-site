@@ -34,6 +34,17 @@ interface StepErrors {
   [key: string]: string;
 }
 
+interface AttributionData {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  referrer?: string;
+  landing_page?: string;
+  form_path?: string;
+}
+
 const StartupApplicationForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -53,6 +64,7 @@ const StartupApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [apiError, setApiError] = useState<string>('');
+  const [attribution, setAttribution] = useState<AttributionData>({});
 
   const totalSteps = 3;
 
@@ -70,6 +82,20 @@ const StartupApplicationForm = () => {
       form_name: formName,
       form_destination: '/api/startup-application',
     });
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      setAttribution({
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+        utm_term: params.get('utm_term') || undefined,
+        utm_content: params.get('utm_content') || undefined,
+        referrer: document.referrer || undefined,
+        landing_page: window.location.href,
+        form_path: window.location.pathname,
+      });
+    }
   }, []);
 
   // Track step progression
@@ -224,7 +250,7 @@ const StartupApplicationForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, attribution }),
       });
 
       const result = await response.json();
@@ -280,7 +306,7 @@ const StartupApplicationForm = () => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [currentStep, formData, validateStep]);
+  }, [attribution, currentStep, formData, validateStep]);
 
   // Memoized step component
   const StepContent = useMemo(() => {

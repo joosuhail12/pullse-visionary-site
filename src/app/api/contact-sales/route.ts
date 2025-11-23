@@ -3,6 +3,7 @@ import { z } from 'zod';
 import crypto from 'crypto';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
+import { sendWebhook } from '@/lib/webhook';
 
 // =======================
 // Schema Validation (Zod)
@@ -461,7 +462,18 @@ export async function POST(request: NextRequest) {
       await flushServerEvents();
     }
 
-    // 9. Success response
+    // 9. Fire webhook (non-blocking)
+    await sendWebhook(
+      process.env.CONTACT_SALES_WEBHOOK_URL,
+      'contact_sales_submitted',
+      {
+        submission_id: data.id,
+        request_id: requestId,
+        payload: requestData,
+      }
+    );
+
+    // 10. Success response
     return createSuccessResponse(
       {
         id: data.id,
