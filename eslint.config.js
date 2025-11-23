@@ -8,7 +8,7 @@ export default tseslint.config(
   { ignores: ["dist", ".next"] },
   ...tseslint.configs.recommended,
   js.configs.recommended,
-  nextPlugin.flatConfig.coreWebVitals,
+  nextPlugin.configs["core-web-vitals"],
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {

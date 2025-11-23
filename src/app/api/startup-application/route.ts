@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer, type StartupApplication } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
-import { sendWebhook } from '@/lib/webhook';
+import { sendWebhook, WEBHOOK_INGEST_URL } from '@/lib/webhook';
 
 // =======================
 // Schema Validation (Zod)
@@ -338,13 +338,14 @@ export async function POST(request: NextRequest) {
 
     // 9. Fire webhook (non-blocking)
     await sendWebhook(
-      process.env.STARTUP_APPLICATION_WEBHOOK_URL,
+      WEBHOOK_INGEST_URL,
       'startup_application_submitted',
       {
         application_id: data.id,
         request_id: requestId,
         payload: applicationData,
-      }
+      },
+      { type: 'startup_application' }
     );
 
     // 10. Success response

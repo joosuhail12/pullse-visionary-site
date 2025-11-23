@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
-import { sendWebhook } from '@/lib/webhook';
+import { sendWebhook, WEBHOOK_INGEST_URL } from '@/lib/webhook';
 
 // =======================
 // Schema Validation (Zod)
@@ -169,14 +169,15 @@ export async function POST(request: NextRequest) {
         };
 
         await sendWebhook(
-          process.env.NEWSLETTER_WEBHOOK_URL,
+          WEBHOOK_INGEST_URL,
           'newsletter_updated',
           {
             email: validatedData.email,
             first_name: validatedData.firstName,
             last_name: validatedData.lastName,
             attribution: hasAttribution ? attributionFields : undefined,
-          }
+          },
+          { type: 'newsletter_signup' }
         );
 
         return NextResponse.json(responseBody, { status: 200 });
@@ -247,7 +248,7 @@ export async function POST(request: NextRequest) {
       };
 
       await sendWebhook(
-        process.env.NEWSLETTER_WEBHOOK_URL,
+        WEBHOOK_INGEST_URL,
         'newsletter_reactivated',
         {
           email: validatedData.email,
@@ -255,7 +256,8 @@ export async function POST(request: NextRequest) {
           last_name: validatedData.lastName,
           source: validatedData.source,
           attribution: hasAttribution ? attributionFields : undefined,
-        }
+        },
+        { type: 'newsletter_signup' }
       );
 
       return NextResponse.json(responseBody, { status: 200 });
@@ -321,7 +323,7 @@ export async function POST(request: NextRequest) {
     await flushServerEvents();
 
     await sendWebhook(
-      process.env.NEWSLETTER_WEBHOOK_URL,
+      WEBHOOK_INGEST_URL,
       'newsletter_subscribed',
       {
         email: validatedData.email,
@@ -329,7 +331,8 @@ export async function POST(request: NextRequest) {
         last_name: validatedData.lastName,
         source: validatedData.source,
         attribution: hasAttribution ? attributionFields : undefined,
-      }
+      },
+      { type: 'newsletter_signup' }
     );
 
     // Success response

@@ -440,6 +440,27 @@ Consider adding email notifications on successful submissions:
 - [x] No sensitive data in error responses
 - [x] Request size limits (handled by Next.js default 4MB limit)
 
+## Webhook Configuration
+
+All outbound webhook events (contact sales form, demo meeting bookings, startup applications, and newsletter signups) are POSTed to `https://chimera.getpullse.com/api/webhooks/ingest`. You can override the destination globally with `WEBHOOK_INGEST_URL`, but the default should be used in almost every case.
+
+Each request includes:
+- `X-Webhook-Type`: one of `contact_sales`, `demo_meeting`, `startup_application`, `newsletter_signup`
+- `X-Webhook-Signature-Version`: currently `v1`
+- `X-Webhook-Signature`: HMAC-SHA256 of the raw JSON body using the channel-specific secret (hex encoded)
+
+Set the shared signing secret once per environment via the Vercel CLI or dashboard:
+
+```
+vercel env add WEBHOOK_INGEST_SECRET
+```
+
+(Optional) You can override the secret for any specific webhook call by passing a `secret` option to `sendWebhook`, but the global value covers every current use case.
+
+Downstream services must recompute the HMAC with the matching secret and compare it to `X-Webhook-Signature` before trusting the payload.
+
+The JSON payload is always shaped as `{ "event": string, "payload": unknown }`, and the `event` string matches the event names used inside the application (e.g., `newsletter_subscribed`, `contact_sales_booking`).
+
 ## Future Enhancements
 
 1. **Webhook Support**

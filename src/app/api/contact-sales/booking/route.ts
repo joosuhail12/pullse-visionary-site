@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { sendWebhook } from '@/lib/webhook';
+import { sendWebhook, WEBHOOK_INGEST_URL } from '@/lib/webhook';
 
 const BookingSchema = z.object({
   submission_id: z.string().uuid().optional(),
@@ -23,9 +23,10 @@ export async function POST(request: NextRequest) {
     const validated = BookingSchema.parse(body);
 
     await sendWebhook(
-      process.env.CONTACT_SALES_BOOKING_WEBHOOK_URL || process.env.CONTACT_SALES_WEBHOOK_URL,
+      WEBHOOK_INGEST_URL,
       'contact_sales_booking',
-      validated
+      validated,
+      { type: 'demo_meeting' }
     );
 
     return NextResponse.json({ success: true });
