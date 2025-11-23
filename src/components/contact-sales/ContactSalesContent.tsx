@@ -330,6 +330,7 @@ export default function ContactSalesContent() {
         timeline: formData.timeline,
       } as any);
 
+      setSubmissionId(result.data?.id || null);
       setIsSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
@@ -607,9 +608,10 @@ export default function ContactSalesContent() {
 
                   {/* Calendar Embed */}
                   <CalEmbed
-                    key={calEmbedKey}
+                    key={`${calEmbedKey}-${submissionId || 'pending'}`}
                     calLink="suhailjoo/pullse-demo"
                     prefill={calPrefill}
+                    submissionId={submissionId || undefined}
                     className=""
                   />
                 </div>

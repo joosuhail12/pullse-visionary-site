@@ -15,9 +15,10 @@ interface CalEmbedProps {
     notes?: string;
     customAnswers?: Record<string, string>;
   };
+  submissionId?: string;
 }
 
-export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
+export function CalEmbed({ calLink, className = '', prefill, submissionId }: CalEmbedProps) {
   const { consent, openPreferences } = useCookieConsent();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -213,6 +214,7 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
 
             // Send booking details to backend for webhook handling
             const payload = {
+              submission_id: submissionId,
               name: sanitizedPrefill?.name || e?.data?.name,
               email: sanitizedPrefill?.email || e?.data?.email,
               event_title: e?.data?.eventType?.title,

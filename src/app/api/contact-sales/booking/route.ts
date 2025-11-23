@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { sendWebhook } from '@/lib/webhook';
 
 const BookingSchema = z.object({
+  submission_id: z.string().uuid().optional(),
   name: z.string().min(1, 'Name is required').max(200, 'Name too long').optional(),
   email: z.string().email('Invalid email').optional(),
   event_title: z.string().optional(),
