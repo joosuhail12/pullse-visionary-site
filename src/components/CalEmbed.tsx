@@ -67,7 +67,7 @@ export function CalEmbed({ calLink, className = '', prefill }: CalEmbedProps) {
 
     if (sanitizedPrefill.customAnswers) {
       Object.entries(sanitizedPrefill.customAnswers).forEach(([key, value]) => {
-        params.set(`custom_${key}`, value);
+        params.set(`custom_${key}`, String(value));
       });
     }
 
