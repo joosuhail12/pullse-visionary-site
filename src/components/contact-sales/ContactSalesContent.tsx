@@ -66,6 +66,7 @@ export default function ContactSalesContent() {
   const [errors, setErrors] = useState<StepErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [apiError, setApiError] = useState<string>('');
 
   const totalSteps = 3;
