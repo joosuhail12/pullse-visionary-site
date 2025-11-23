@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import type { ReactNode } from "react";
 import Providers from "./providers";
@@ -12,8 +11,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "@/components/MagicBento.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -77,7 +74,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
         </>
       )}
     </head>
-    <body className={inter.className} suppressHydrationWarning>
+    <body className="font-sans" suppressHydrationWarning>
       <OrganizationSchema />
       <Providers>{children}</Providers>
       <Analytics />
