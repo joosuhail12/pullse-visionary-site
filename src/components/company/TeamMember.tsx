@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, X } from 'lucide-react';
 import { type TeamMember as TeamMemberType } from '@/data/companyData';
 
 interface TeamMemberProps {
@@ -108,9 +108,9 @@ const TeamMember = ({ member, index }: TeamMemberProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center transition-colors group"
-                aria-label={`${member.name} on Twitter`}
+                aria-label={`${member.name} on X (formerly Twitter)`}
               >
-                <Twitter className="w-5 h-5 text-gray-600 group-hover:text-purple-600 transition-colors" />
+                <X className="w-5 h-5 text-gray-600 group-hover:text-purple-600 transition-colors" />
               </a>
             )}
           </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Twitter, Linkedin, ArrowRight, Mail } from "lucide-react";
+import { X, Linkedin, ArrowRight, Mail } from "lucide-react";
 import LightRays from "@/components/LightRays";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import NewsletterCTA from "@/components/NewsletterCTA";
@@ -137,10 +137,10 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative p-2.5 rounded-xl bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 md:hover:scale-110 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                  aria-label="Twitter"
+                  aria-label="X (formerly Twitter)"
                 >
                   <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/5 transition-colors" />
-                  <Twitter className="h-5 w-5 sm:h-6 sm:w-6 relative" />
+                  <X className="h-5 w-5 sm:h-6 sm:w-6 relative" />
                 </a>
                 <a
                   href="https://linkedin.com"

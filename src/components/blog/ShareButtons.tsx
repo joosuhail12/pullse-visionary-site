@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Twitter, Linkedin, Link2, Check } from 'lucide-react';
+import { X, Linkedin, Link2, Check } from 'lucide-react';
 
 interface ShareButtonsProps {
   title: string;
@@ -41,10 +41,10 @@ export default function ShareButtons({ title, url, className = '' }: ShareButton
       <button
         type="button"
         onClick={shareOnTwitter}
-        aria-label="Share on Twitter"
-        className="group flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-card/60 text-muted-foreground shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#1DA1F2]/40 hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2] hover:shadow-xl hover:shadow-[#1DA1F2]/20"
+        aria-label="Share on X (formerly Twitter)"
+        className="group flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-card/60 text-muted-foreground shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-[#000000]/40 hover:bg-[#000000]/10 hover:text-[#000000] hover:shadow-xl hover:shadow-[#000000]/20 dark:hover:border-[#FFFFFF]/40 dark:hover:bg-[#FFFFFF]/10 dark:hover:text-[#FFFFFF] dark:hover:shadow-[#FFFFFF]/20"
       >
-        <Twitter className="h-5 w-5" />
+        <X className="h-5 w-5" />
       </button>
 
       <button
