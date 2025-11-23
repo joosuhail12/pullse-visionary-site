@@ -46,7 +46,7 @@ export const OrganizationSchema = () => {
 
     // Social media (placeholders - can be updated when actual URLs available)
     sameAs: [
-      'https://twitter.com/pullse',
+      'https://x.com/pullse_ai',
       'https://linkedin.com/company/pullse',
     ],
 

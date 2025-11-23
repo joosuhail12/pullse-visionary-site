@@ -191,7 +191,7 @@ We're onboarding early design partners to refine the product before public launc
 ---
 
 **Follow our journey:**
-- [Twitter/X](https://twitter.com/pullse_ai)
+- [Twitter/X](https://x.com/pullse_ai)
 - [LinkedIn](https://linkedin.com/company/pullse)
 - [GitHub](https://github.com/pullse) (open-source SDKs coming soon)
 - [Blog](https://www.pullse.ai/blog)

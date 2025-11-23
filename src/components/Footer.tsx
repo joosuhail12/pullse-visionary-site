@@ -133,7 +133,7 @@ const Footer = () => {
               {/* Social Links */}
               <div className="flex gap-2 sm:gap-3 pt-1 sm:pt-2">
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/pullse_ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative p-2.5 rounded-xl bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 md:hover:scale-110 min-h-[44px] min-w-[44px] flex items-center justify-center"
