@@ -469,6 +469,15 @@ export async function POST(request: NextRequest) {
       {
         submission_id: data.id,
         request_id: requestId,
+        id: data.id,
+        name: validatedData.name,
+        email: validatedData.email,
+        company: validatedData.company,
+        company_size: validatedData.companySize,
+        phone: validatedData.phone,
+        timeline: validatedData.timeline,
+        message: validatedData.message,
+        industry: validatedData.industry,
         payload: requestData,
       },
       { type: 'contact_sales' }
