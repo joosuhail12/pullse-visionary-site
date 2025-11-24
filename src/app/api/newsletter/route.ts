@@ -175,6 +175,7 @@ export async function POST(request: NextRequest) {
             email: validatedData.email,
             first_name: validatedData.firstName,
             last_name: validatedData.lastName,
+            source: validatedData.source,
             attribution: hasAttribution ? attributionFields : undefined,
           },
           { type: 'newsletter_signup' }

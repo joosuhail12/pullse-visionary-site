@@ -343,7 +343,7 @@ export async function POST(request: NextRequest) {
       {
         application_id: data.id,
         request_id: requestId,
-        payload: applicationData,
+        ...applicationData,
       },
       { type: 'startup_application' }
     );

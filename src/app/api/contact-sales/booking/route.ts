@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     await sendWebhook(
       WEBHOOK_INGEST_URL,
       'contact_sales_booking',
-      validated,
+      { ...validated },
       { type: 'demo_meeting' }
     );
 
