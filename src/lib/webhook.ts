@@ -30,7 +30,14 @@ export async function sendWebhook(
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
-  const body = JSON.stringify({ event, payload });
+  const bodyPayload: Record<string, unknown> = {
+    event,
+    payload,
+  };
+  if (options.type) {
+    bodyPayload.type = options.type;
+  }
+  const body = JSON.stringify(bodyPayload);
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'X-Event-Type': event,
@@ -49,12 +56,18 @@ export async function sendWebhook(
   }
 
   try {
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers,
       body,
       signal: controller.signal,
     });
+    if (!response.ok) {
+      const responseText = await response.text().catch(() => '');
+      console.error(
+        `Webhook (${event}) responded with ${response.status}: ${response.statusText} ${responseText}`,
+      );
+    }
   } catch (error) {
     console.error(`Webhook (${event}) failed:`, error);
   } finally {

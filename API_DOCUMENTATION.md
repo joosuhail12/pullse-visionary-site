@@ -459,7 +459,7 @@ vercel env add WEBHOOK_INGEST_SECRET
 
 Downstream services must recompute the HMAC with the matching secret and compare it to `X-Webhook-Signature` before trusting the payload.
 
-The JSON payload is always shaped as `{ "event": string, "payload": unknown }`, and the `event` string matches the event names used inside the application (e.g., `newsletter_subscribed`, `contact_sales_booking`).
+The JSON payload now includes the channel `type`: `{ "event": string, "type": "contact_sales" | "demo_meeting" | "startup_application" | "newsletter_signup", "payload": unknown }`. The `event` string matches the event names used inside the application (e.g., `newsletter_subscribed`, `contact_sales_booking`).
 
 ## Future Enhancements
 
