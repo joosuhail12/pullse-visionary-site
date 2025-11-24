@@ -463,22 +463,26 @@ export async function POST(request: NextRequest) {
     }
 
     // 9. Fire webhook (non-blocking)
+    const legacyPayload = {
+      ...requestData,
+      id: data.id,
+      name: validatedData.name,
+      email: validatedData.email,
+      company: validatedData.company,
+      company_size: validatedData.companySize,
+      phone: validatedData.phone,
+      timeline: validatedData.timeline,
+      message: validatedData.message,
+      industry: validatedData.industry,
+    };
+
     await sendWebhook(
       WEBHOOK_INGEST_URL,
       'contact_sales_submitted',
       {
         submission_id: data.id,
         request_id: requestId,
-        id: data.id,
-        name: validatedData.name,
-        email: validatedData.email,
-        company: validatedData.company,
-        company_size: validatedData.companySize,
-        phone: validatedData.phone,
-        timeline: validatedData.timeline,
-        message: validatedData.message,
-        industry: validatedData.industry,
-        payload: requestData,
+        payload: legacyPayload,
       },
       { type: 'contact_sales' }
     );
