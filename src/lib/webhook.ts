@@ -7,7 +7,7 @@ export type WebhookType =
   | 'newsletter_signup';
 
 export const WEBHOOK_INGEST_URL =
-  process.env.WEBHOOK_INGEST_URL || 'https://chimera.getpullse.com/api/webhook/ingest';
+  process.env.WEBHOOK_INGEST_URL || 'https://chimera.getpullse.com/api/webhooks/ingest';
 export const WEBHOOK_INGEST_SECRET = process.env.WEBHOOK_INGEST_SECRET;
 
 interface SendWebhookOptions {

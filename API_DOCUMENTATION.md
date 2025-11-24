@@ -442,7 +442,7 @@ Consider adding email notifications on successful submissions:
 
 ## Webhook Configuration
 
-All outbound webhook events (contact sales form, demo meeting bookings, startup applications, and newsletter signups) are POSTed to `https://chimera.getpullse.com/api/webhook/ingest`. You can override the destination globally with `WEBHOOK_INGEST_URL`, but the default should be used in almost every case.
+All outbound webhook events (contact sales form, demo meeting bookings, startup applications, and newsletter signups) are POSTed to `https://chimera.getpullse.com/api/webhooks/ingest`. You can override the destination globally with `WEBHOOK_INGEST_URL`, but the default should be used in almost every case.
 
 Each request includes:
 - `X-Webhook-Type`: one of `contact_sales`, `demo_meeting`, `startup_application`, `newsletter_signup`
