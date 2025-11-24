@@ -30,14 +30,15 @@ export async function sendWebhook(
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
-  const bodyPayload: Record<string, unknown> = {
-    event,
-    payload,
-  };
-  if (options.type) {
-    bodyPayload.type = options.type;
-  }
-  const body = JSON.stringify(bodyPayload);
+  const base: Record<string, unknown> = { event };
+  if (options.type) base.type = options.type;
+
+  const normalizedPayload =
+    payload && typeof payload === 'object' && !Array.isArray(payload)
+      ? (payload as Record<string, unknown>)
+      : { payload };
+
+  const body = JSON.stringify({ ...base, ...normalizedPayload });
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     'X-Event-Type': event,
