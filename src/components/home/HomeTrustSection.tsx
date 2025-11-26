@@ -84,7 +84,7 @@ const HomeTrustSection = () => {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-foreground">Backed by Antler</div>
-                  <div className="text-xs text-muted-foreground">Built by MSFT + Google alumni</div>
+                  <div className="text-xs text-muted-foreground">Part of Microsoft + Google startup programs</div>
                 </div>
               </div>
             </div>
