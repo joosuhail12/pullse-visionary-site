@@ -134,7 +134,7 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.posthog.com https://cal.com https://cdn.jsdelivr.net",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https://cdn.sanity.io https://*.youtube.com https://*.ytimg.com",
+              "img-src 'self' data: blob: https://cdn.sanity.io https://*.youtube.com https://*.ytimg.com https://api.producthunt.com",
               "font-src 'self' data:",
               "connect-src 'self' https://*.supabase.co https://*.posthog.com https://www.googletagmanager.com https://*.google-analytics.com https://cal.com https://chimera.getpullse.com",
               "frame-src 'self' https://www.youtube.com https://cal.com",

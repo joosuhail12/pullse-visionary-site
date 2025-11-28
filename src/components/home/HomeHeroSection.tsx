@@ -156,6 +156,23 @@ const HomeHeroSection = () => {
               </Button>
             </div>
 
+            {/* Product Hunt Badge */}
+            <div className="pt-4">
+              <a
+                href="https://www.producthunt.com/products/pullse?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-pullse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block transition-transform hover:scale-105"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1043096&theme=light&t=1764315820809"
+                  alt="Pullse - The execution-first support platform. Humans + AI together. | Product Hunt"
+                  width={250}
+                  height={54}
+                  className="h-auto"
+                />
+              </a>
+            </div>
           </div>
 
           <div className="relative">
