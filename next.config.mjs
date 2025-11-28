@@ -137,7 +137,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https://cdn.sanity.io https://*.youtube.com https://*.ytimg.com https://api.producthunt.com",
               "font-src 'self' data:",
               "connect-src 'self' https://*.supabase.co https://*.posthog.com https://www.googletagmanager.com https://*.google-analytics.com https://cal.com https://chimera.getpullse.com",
-              "frame-src 'self' https://www.youtube.com https://cal.com",
+              "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://cal.com",
               "media-src 'self' https://cdn.sanity.io",
               "object-src 'none'",
               "base-uri 'self'",
