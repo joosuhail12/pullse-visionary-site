@@ -127,18 +127,18 @@ const HomeHeroSection = () => {
         <div className="grid gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2 items-center">
           <div className="space-y-6 sm:space-y-8">
             <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-foreground">
-              <span className="word inline-block">AI</span>{" "}
+              <span className="word inline-block">The</span>{" "}
+              <span className="word inline-block">support</span>{" "}
+              <span className="word inline-block">platform</span>{" "}
               <span className="word inline-block">that</span>{" "}
-              <span className="word inline-block">fixes</span>{" "}
-              <span className="word inline-block">customer</span>{" "}
-              <span className="word inline-block">issues,</span>{" "}
+              <span className="word inline-block">executes,</span>{" "}
               <span className="word inline-block">not</span>{" "}
               <span className="word inline-block">just</span>{" "}
-              <span className="word inline-block">answers</span>
+              <span className="word inline-block">deflects</span>
             </h1>
 
             <p ref={descRef} className="max-w-2xl text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Pullse connects to your stack, executes refunds, updates, and lookups, and keeps humans in control. Resolve issues fast from one place—no tab hopping or bolt-on bots.
+              Stop bolting AI onto broken workflows. Pullse unifies your inbox, connects to your tools, and lets AI take real action—with human approval when it matters.
             </p>
 
             <div ref={buttonsRef} className="flex flex-col gap-4 sm:flex-row">
