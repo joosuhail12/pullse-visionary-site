@@ -6,9 +6,13 @@ export type WebhookType =
   | 'startup_application'
   | 'newsletter_signup';
 
-export const WEBHOOK_INGEST_URL =
-  process.env.WEBHOOK_INGEST_URL || 'https://chimera.getpullse.com/api/webhooks/ingest';
+export const WEBHOOK_INGEST_URL = process.env.WEBHOOK_INGEST_URL;
 export const WEBHOOK_INGEST_SECRET = process.env.WEBHOOK_INGEST_SECRET;
+
+// Warn in production if webhook URL is not configured
+if (!WEBHOOK_INGEST_URL && typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
+  console.warn('[Webhook] WEBHOOK_INGEST_URL not configured - webhooks will be disabled');
+}
 
 interface SendWebhookOptions {
   secret?: string;

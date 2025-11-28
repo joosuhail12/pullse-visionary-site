@@ -6,15 +6,14 @@ const BookingSchema = z.object({
   submission_id: z.string().uuid().optional(),
   name: z.string().min(1, 'Name is required').max(200, 'Name too long').optional(),
   email: z.string().email('Invalid email').optional(),
-  event_title: z.string().optional(),
-  start_time: z.string().optional(),
-  end_time: z.string().optional(),
-  timezone: z.string().optional(),
-  location: z.string().optional(),
-  meeting_url: z.string().optional(),
-  notes: z.string().optional(),
-  custom_answers: z.record(z.string()).optional(),
-  raw: z.any().optional(),
+  event_title: z.string().max(500, 'Event title too long').optional(),
+  start_time: z.string().datetime().optional(),
+  end_time: z.string().datetime().optional(),
+  timezone: z.string().max(100, 'Timezone too long').optional(),
+  location: z.string().max(500, 'Location too long').optional(),
+  meeting_url: z.string().url('Invalid meeting URL').optional(),
+  notes: z.string().max(2000, 'Notes too long').optional(),
+  custom_answers: z.record(z.string(), z.string().max(500, 'Answer too long')).optional(),
 });
 
 export async function POST(request: NextRequest) {

@@ -24,6 +24,9 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Environment files - never commit secrets
+.env
 .env*.local
 
 # Playwright

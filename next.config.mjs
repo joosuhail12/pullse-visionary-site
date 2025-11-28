@@ -128,6 +128,32 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.posthog.com https://cal.com https://cdn.jsdelivr.net",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://cdn.sanity.io https://*.youtube.com https://*.ytimg.com",
+              "font-src 'self' data:",
+              "connect-src 'self' https://*.supabase.co https://*.posthog.com https://www.googletagmanager.com https://*.google-analytics.com https://cal.com https://chimera.getpullse.com",
+              "frame-src 'self' https://www.youtube.com https://cal.com",
+              "media-src 'self' https://cdn.sanity.io",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+              "upgrade-insecure-requests",
+            ].join('; '),
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
         ],
       },
     ];

@@ -11,6 +11,16 @@ interface CodeBlockProps {
   highlightLines?: number[];
 }
 
+/** Escape HTML entities to prevent XSS in fallback rendering */
+const escapeHtml = (str: string): string => {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 export default function CodeBlock({
   code,
   language = 'typescript',
@@ -41,8 +51,8 @@ export default function CodeBlock({
         setHighlightedHtml(html);
       } catch (error) {
         console.error('Failed to highlight code:', error);
-        // Fallback to plain code
-        setHighlightedHtml(`<pre><code>${code}</code></pre>`);
+        // Fallback to plain code with HTML escaping to prevent XSS
+        setHighlightedHtml(`<pre><code>${escapeHtml(code)}</code></pre>`);
       } finally {
         setIsLoading(false);
       }

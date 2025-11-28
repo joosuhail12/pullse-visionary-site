@@ -317,7 +317,7 @@ export async function POST(request: NextRequest) {
         'DUPLICATE_SUBMISSION',
         'You have already submitted a request recently. Please wait an hour before submitting again.',
         409,
-        { existingRequestId: existingRequests[0].id },
+        undefined,
         requestId
       );
     }
@@ -518,6 +518,19 @@ export async function POST(request: NextRequest) {
 }
 
 // =======================
+// Admin Auth Helper
+// =======================
+
+/** Timing-safe comparison to prevent timing attacks on API key verification */
+function verifyAdminKey(authHeader: string | null, expectedKey: string | undefined): boolean {
+  if (!expectedKey || !authHeader) return false;
+  if (!authHeader.startsWith('Bearer ')) return false;
+  const providedKey = authHeader.slice(7); // Remove 'Bearer ' prefix
+  if (providedKey.length !== expectedKey.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(providedKey), Buffer.from(expectedKey));
+}
+
+// =======================
 // GET Handler (Admin Only)
 // =======================
 
@@ -525,11 +538,11 @@ export async function GET(request: NextRequest) {
   const requestId = generateRequestId();
 
   try {
-    // 1. Check for admin authentication
+    // 1. Check for admin authentication using timing-safe comparison
     const authHeader = request.headers.get('authorization');
     const adminKey = process.env.ADMIN_API_KEY;
 
-    if (!adminKey || authHeader !== `Bearer ${adminKey}`) {
+    if (!verifyAdminKey(authHeader, adminKey)) {
       return createErrorResponse(
         'UNAUTHORIZED',
         'Authentication required',

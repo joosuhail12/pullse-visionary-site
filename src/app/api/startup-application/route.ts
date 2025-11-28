@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import crypto from 'crypto';
 import { getSupabaseServer, type StartupApplication } from '@/lib/supabase-server';
 import { trackServerEvent, flushServerEvents } from '@/lib/posthog-server';
 import { sendWebhook, WEBHOOK_INGEST_URL } from '@/lib/webhook';
@@ -233,7 +234,7 @@ export async function POST(request: NextRequest) {
         'DUPLICATE_SUBMISSION',
         'You have already submitted an application recently. Please wait 24 hours before submitting again.',
         409,
-        { existingApplicationId: existingApplications[0].id },
+        undefined,
         requestId
       );
     }
@@ -372,6 +373,19 @@ export async function POST(request: NextRequest) {
 }
 
 // =======================
+// Admin Auth Helper
+// =======================
+
+/** Timing-safe comparison to prevent timing attacks on API key verification */
+function verifyAdminKey(authHeader: string | null, expectedKey: string | undefined): boolean {
+  if (!expectedKey || !authHeader) return false;
+  if (!authHeader.startsWith('Bearer ')) return false;
+  const providedKey = authHeader.slice(7); // Remove 'Bearer ' prefix
+  if (providedKey.length !== expectedKey.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(providedKey), Buffer.from(expectedKey));
+}
+
+// =======================
 // GET Handler (Admin Only)
 // =======================
 
@@ -379,12 +393,11 @@ export async function GET(request: NextRequest) {
   const requestId = generateRequestId();
 
   try {
-    // 1. Check for admin authentication
-    // TODO: Replace with proper authentication (e.g., NextAuth, API key, etc.)
+    // 1. Check for admin authentication using timing-safe comparison
     const authHeader = request.headers.get('authorization');
     const adminKey = process.env.ADMIN_API_KEY;
 
-    if (!adminKey || authHeader !== `Bearer ${adminKey}`) {
+    if (!verifyAdminKey(authHeader, adminKey)) {
       return createErrorResponse(
         'UNAUTHORIZED',
         'Authentication required',

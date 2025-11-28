@@ -367,13 +367,22 @@ export async function POST(request: NextRequest) {
 // OPTIONS Handler (CORS)
 // =======================
 
-export async function OPTIONS() {
+const ALLOWED_ORIGINS = [
+  'https://www.pullse.ai',
+  'https://pullse.ai',
+  process.env.NEXT_PUBLIC_SITE_URL,
+].filter(Boolean) as string[];
+
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin') || '';
+  const isAllowed = ALLOWED_ORIGINS.includes(origin) || process.env.NODE_ENV === 'development';
+
   return NextResponse.json(
     {},
     {
       status: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': isAllowed ? origin : (ALLOWED_ORIGINS[0] || ''),
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
